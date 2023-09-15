@@ -15,7 +15,8 @@ from ebooklib import epub
 class FileRenamer(QWidget):
     def __init__(self):
         super().__init__()
-
+        
+        self.setWindowTitle("Ebook Renamer: PDF/EPUB")
         grid = QGridLayout()
 
         self.field_counter = {}
@@ -56,6 +57,7 @@ class FileRenamer(QWidget):
 
         self.dropArea = QLabel("Arraste e solte arquivos aqui.")
         self.dropArea.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.dropArea.setMinimumHeight(50)
         self.dropArea.setStyleSheet("border: 2px solid gray")
         grid.addWidget(self.dropArea, 2, 0, 1, 3)
         
@@ -69,7 +71,7 @@ class FileRenamer(QWidget):
             self.check_boxes[field] = check
             grid.addWidget(check, i + 3, 0)
 
-            info_box = QLineEdit("Info será mostrada aqui")  # QLineEdit para mostrar as informações
+            info_box = QLineEdit(" ")  # QLineEdit para mostrar as informações
             info_box.setEnabled(False)
             self.info_boxes[field] = info_box
             grid.addWidget(info_box, i + 3, 1)  # Adiciona ao mesmo row do checkbox, mas na coluna 1
@@ -170,6 +172,7 @@ class FileRenamer(QWidget):
                 total_pages = len(reader.pages)
 
                 publisher_found = False
+                publisher = None
 
                 for page_num in range(total_pages):
                     print (f"Page {page_num + 1} of {total_pages}")
@@ -177,9 +180,40 @@ class FileRenamer(QWidget):
                         break
 
                     text_page = reader.pages[page_num].extract_text()
+                    # publisher = re.search(r'Published by (.+?)\n', text_page)         # regex original
+                    
+                    #bloco de debug e limitações
+                    #print(f"{text_page}")
+                    if page_num == 10:          # na pratica limita aqui o numero de pagians escaneadas por questoes de desempenho
+                        break                   
+                    
+                    publisher_found = False
+                    publisher_str = "Unknown"
+                    match_publisher1 = re.search(
+                        r'Published by (.+?)\n', text_page)
+                    match_publisher2 = re.search(
+                        r'A JOHN (.+?), INC., PUBLICATION', text_page)
 
-                    # Busca por Packt
-                    publisher = re.search(r'Published by (.+?)\n', text_page)
+                    if match_publisher1:
+                        publisher_match = match_publisher1
+                        publisher_str = match_publisher1.group(1)
+                    elif match_publisher2:
+                        publisher_match = match_publisher2
+                        publisher_str = match_publisher2.group(1)
+
+                    print(f"Editora encontrada: {publisher_str}")
+
+                    # Extrair informações adicionais se Packt ou O'Reilly for o editor
+                    if "Packt" in publisher_str:
+                        # Código para extrair informações adicionais
+                        publisher_found = True
+                    elif "O'Reilly" in publisher_str:
+                        # Código para extrair informações adicionais
+                        publisher_found = True
+
+
+
+
                     if publisher:
                         publisher_name = publisher.group(1)
                         info['Publisher'] = publisher_name
