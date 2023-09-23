@@ -197,6 +197,7 @@ class FileRenamer(QWidget):
             del self.field_counter[field]
 
     def extract_info_from_pdf(self, pdf_path):
+        # Inicializa o dicionário de informações com valores "Desconhecidos"
         info = {
             "ISBN": "Unknown",
             "Title": "Unknown",
@@ -204,110 +205,72 @@ class FileRenamer(QWidget):
             "Publisher": "Unknown",
             "Author": "Unknown",
         }
+        # Variáveis de captura
         name, isbn, year, publisher, author = None, None, None, None, None
 
         try:
+            # Abre o arquivo PDF
             with open(pdf_path, "rb") as f:
                 reader = PyPDF2.PdfReader(f)
                 total_pages = len(reader.pages)
 
+                # Loop para varrer as páginas do PDF e encontrar a editora (publisher)
                 publisher_found = False
-                publisher = None
-
                 for page_num in range(total_pages):
-                    print(f"Page {page_num + 1} of {total_pages}")
                     if publisher_found:
                         break
 
                     text_page = reader.pages[page_num].extract_text()
-                    # publisher = re.search(r'Published by (.+?)\n', text_page)         # regex original
 
-                    # bloco de debug e limitações
-                    # print(f"{text_page}")
-                    if (
-                        page_num == 10
-                    ):  # na pratica limita aqui o numero de pagians escaneadas por questoes de desempenho
+                    if page_num == 10:
                         break
 
                     publisher_found = False
                     publisher_str = "Unknown"
                     match_publisher1 = re.search(r"Published by (.+?)\n", text_page)
-                    match_publisher2 = re.search(
-                        r"A JOHN (.+?), INC., PUBLICATION", text_page
-                    )
+                    match_publisher2 = re.search(r"A JOHN (.+?), INC., PUBLICATION", text_page)
 
+                    # Lógica para determinar o publisher
                     if match_publisher1:
-                        publisher_match = match_publisher1
                         publisher_str = match_publisher1.group(1)
                     elif match_publisher2:
-                        publisher_match = match_publisher2
                         publisher_str = match_publisher2.group(1)
 
-                    print(f"Editora encontrada: {publisher_str}")
-
-                    # Extrair informações adicionais se Packt ou O'Reilly for o editor
                     if "Packt" in publisher_str:
-                        # Código para extrair informações adicionais
+                        # Código para extrair informações para publicações da Packt
+                        name = re.search(r"(.+?)\n", text_page)
+                        isbn = re.search(r"ISBN (\d{3}-\d{1,5}-\d{1,7}-\d{1,7}-\d{1})", text_page)
+                        year = re.search(r"Copyright \u00A9 (\d{4})", text_page)
+                        publisher = re.search(r"Published by (.+?)\n", text_page)
+                        author = re.search(r"([^\n]+)\nBIRMINGHAM - MUMBAI", text_page)
                         publisher_found = True
+
                     elif "O'Reilly" in publisher_str:
-                        # Código para extrair informações adicionais
+                        # Código para extrair informações para publicações da O'Reilly
+                        name = re.search(r"^([^\n]+)", text_page)
+                        isbn = re.search(r"ISBN[:\s-]*?(\d{3}-\d{1,5}-\d{1,7}-\d{1,7}-\d{1})",text_page,)
+                        year = re.search(r"Copyright \u00A9 (\d{4})", text_page)
+                        publisher = re.search(r"published by ([\w\s’]+) Media,",text_page,re.IGNORECASE,)
+                        author = re.search(r"\b\d{4}\b\s+([\w\s]+)[.,]", text_page)
                         publisher_found = True
 
-                    if publisher:
-                        publisher_name = publisher.group(1)
-                        info["Publisher"] = publisher_name
-
-                        if "Packt" in publisher_name:
-                            name = re.search(r"(.+?)\n", text_page)
-                            isbn = re.search(
-                                r"ISBN (\d{3}-\d{1,5}-\d{1,7}-\d{1,7}-\d{1})", text_page
-                            )
-                            year = re.search(r"Copyright \u00A9 (\d{4})", text_page)
-                            publisher = re.search(r"Published by (.+?)\n", text_page)
-                            author = re.search(
-                                r"([^\n]+)\nBIRMINGHAM - MUMBAI", text_page
-                            )
-                            publisher_found = True
-                            break
-
-                    # Busca por O'Reilly
-                    publisher = re.search(
-                        r"published by ([\w\s’]+) Media,", text_page, re.IGNORECASE
-                    )
-                    if publisher:
-                        publisher_name = publisher.group(1)
-                        info["Publisher"] = publisher_name
-
-                        if "O’Reilly" in publisher_name:
-                            name = re.search(r"^([^\n]+)", text_page)
-                            isbn = re.search(
-                                r"ISBN[:\s-]*?(\d{3}-\d{1,5}-\d{1,7}-\d{1,7}-\d{1})",
-                                text_page,
-                            )
-                            year = re.search(r"Copyright \u00A9 (\d{4})", text_page)
-                            publisher = re.search(
-                                r"published by ([\w\s’]+) Media,",
-                                text_page,
-                                re.IGNORECASE,
-                            )
-                            author = re.search(r"\b\d{4}\b\s+([\w\s]+)[.,]", text_page)
-
-                            publisher_found = True
-                            break
-
-                if not publisher_found:
-                    pass
-
-            info["Title"] = name.group(1) if name else "Unknown"
-            info["ISBN"] = isbn.group(1) if isbn else "Unknown"
-            info["Year"] = year.group(1) if year else "Unknown"
-            info["Publisher"] = publisher.group(1) if publisher else "Unknown"
-            info["Author"] = author.group(1) if author else "Unknown"
+                # Atualiza o dicionário de informações se os dados foram encontrados
+                if name:
+                    info["Title"] = name.group(1)
+                if isbn:
+                    info["ISBN"] = isbn.group(1)
+                if year:
+                    info["Year"] = year.group(1)
+                if publisher:
+                    info["Publisher"] = publisher.group(1)
+                if author:
+                    info["Author"] = author.group(1)
 
         except Exception as e:
             print(f"Ocorreu um erro: {e}")
 
         return info
+
 
     def extract_info_from_epub(self, epub_path):
         book = epub.read_epub(epub_path)
