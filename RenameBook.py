@@ -1,4 +1,16 @@
-from PyQt6.QtWidgets import QApplication, QWidget, QFileDialog, QVBoxLayout, QPushButton, QLabel, QCheckBox, QSpinBox, QGridLayout, QMessageBox, QLineEdit
+from PyQt6.QtWidgets import (
+    QApplication,
+    QWidget,
+    QFileDialog,
+    QVBoxLayout,
+    QPushButton,
+    QLabel,
+    QCheckBox,
+    QSpinBox,
+    QGridLayout,
+    QMessageBox,
+    QLineEdit,
+)
 from PyQt6.QtCore import Qt, QDir
 from PyQt6.QtGui import QDragEnterEvent, QDragLeaveEvent, QDropEvent
 from functools import partial
@@ -11,11 +23,10 @@ import PyPDF2
 from ebooklib import epub
 
 
-
 class FileRenamer(QWidget):
     def __init__(self):
         super().__init__()
-        
+
         self.setWindowTitle("Ebook Renamer: PDF/EPUB")
         grid = QGridLayout()
 
@@ -25,11 +36,11 @@ class FileRenamer(QWidget):
         self.info = {}
 
         self.key_to_display = {
-            'Year': 'Ano',
-            'ISBN': 'ISBN',
-            'Author': 'Autor',
-            'Publisher': 'Editora',
-            'Title': 'Título'
+            "Year": "Ano",
+            "ISBN": "ISBN",
+            "Author": "Autor",
+            "Publisher": "Editora",
+            "Title": "Título",
         }
 
         self.label = QLabel("Selecione um arquivo (PDF/EPUB) para renomear.")
@@ -60,9 +71,9 @@ class FileRenamer(QWidget):
         self.dropArea.setMinimumHeight(50)
         self.dropArea.setStyleSheet("border: 2px solid gray")
         grid.addWidget(self.dropArea, 2, 0, 1, 3)
-        
+
         self.info_boxes = {}  # Dicionário para guardar os QLineEdit
-        self.create_check_boxes(grid, ['Year', 'ISBN', 'Author', 'Publisher', 'Title'])
+        self.create_check_boxes(grid, ["Year", "ISBN", "Author", "Publisher", "Title"])
 
     def create_check_boxes(self, grid, fields):
         for i, field in enumerate(fields):
@@ -74,8 +85,10 @@ class FileRenamer(QWidget):
             info_box = QLineEdit(" ")  # QLineEdit para mostrar as informações
             info_box.setEnabled(False)
             self.info_boxes[field] = info_box
-            grid.addWidget(info_box, i + 3, 1)  # Adiciona ao mesmo row do checkbox, mas na coluna 1
-            
+            grid.addWidget(
+                info_box, i + 3, 1
+            )  # Adiciona ao mesmo row do checkbox, mas na coluna 1
+
     def dragEnterEvent(self, event: QDragEnterEvent):
         if event.mimeData().hasUrls():
             event.accept()
@@ -90,12 +103,19 @@ class FileRenamer(QWidget):
         for url in event.mimeData().urls():
             file_paths.append(str(QDir.toNativeSeparators(url.toLocalFile())))
         self.selected_files = file_paths
-        self.label.setText("Arquivo(s) selecionado(s) via arrastar e soltar: " + ", ".join(file_paths))
+        self.label.setText(
+            "Arquivo(s) selecionado(s) via arrastar e soltar: " + ", ".join(file_paths)
+        )
         self.confirm_btn.setEnabled(True)
         self.updatePreview()
 
     def openFileNameDialog(self):
-        files, _ = QFileDialog.getOpenFileNames(self, "Selecione um ou mais arquivos", "", "PDF Files (*.pdf);;EPUB Files (*.epub)")
+        files, _ = QFileDialog.getOpenFileNames(
+            self,
+            "Selecione um ou mais arquivos",
+            "",
+            "PDF Files (*.pdf);;EPUB Files (*.epub)",
+        )
         if files:
             self.selected_files = files
             self.label.setText("Arquivo(s) selecionado(s): " + ", ".join(files))
@@ -106,16 +126,24 @@ class FileRenamer(QWidget):
         if self.selected_files:
             first_file = self.selected_files[0]
             ext = os.path.splitext(first_file)[1]
-            if ext == '.pdf':
-                self.info = self.extract_info_from_pdf(first_file)  # Atualizando self.info
-            elif ext == '.epub':
-                self.info = self.extract_info_from_epub(first_file)  # Atualizando self.info
+            if ext == ".pdf":
+                self.info = self.extract_info_from_pdf(
+                    first_file
+                )  # Atualizando self.info
+            elif ext == ".epub":
+                self.info = self.extract_info_from_epub(
+                    first_file
+                )  # Atualizando self.info
             else:
                 self.info = {}
-            preview_text = ', '.join([f"{self.key_to_display[k]}: {v}" for k, v in self.info.items()])
+            preview_text = ", ".join(
+                [f"{self.key_to_display[k]}: {v}" for k, v in self.info.items()]
+            )
             # Preenche os QLineEdit com as informações
             for field, box in self.info_boxes.items():
-                box.setText(self.info.get(field, 'Não disponível'))  # Utilizando self.info
+                box.setText(
+                    self.info.get(field, "Não disponível")
+                )  # Utilizando self.info
 
     def executeRenaming(self):
         if not self.selected_files:
@@ -123,27 +151,35 @@ class FileRenamer(QWidget):
 
         for selected_file in self.selected_files:
             ext = os.path.splitext(selected_file)[1]
-            if ext == '.pdf':
+            if ext == ".pdf":
                 info = self.extract_info_from_pdf(selected_file)
-            elif ext == '.epub':
+            elif ext == ".epub":
                 info = self.extract_info_from_epub(selected_file)
             else:
                 info = {}
             new_file_name = self.generateNewName(info)
-            new_file_path = os.path.join(os.path.dirname(selected_file), new_file_name + ext)
+            new_file_path = os.path.join(
+                os.path.dirname(selected_file), new_file_name + ext
+            )
             if self.copy_check.isChecked():
                 shutil.copy(selected_file, new_file_path)
             else:
                 os.rename(selected_file, new_file_path)
-        
+
         self.confirm_btn.setEnabled(False)
         self.selected_files = []
         self.label.setText("Renomeação concluída.")
 
     def generateNewName(self, info):
-        sorted_keys = sorted(self.check_boxes.keys(), key=lambda x: self.order_spinboxes[x].value())
-        elements = [info.get(key, 'Unknown') for key in sorted_keys if self.check_boxes[key].isChecked()]
-        return '_'.join(elements)
+        sorted_keys = sorted(
+            self.check_boxes.keys(), key=lambda x: self.order_spinboxes[x].value()
+        )
+        elements = [
+            info.get(key, "Unknown")
+            for key in sorted_keys
+            if self.check_boxes[key].isChecked()
+        ]
+        return "_".join(elements)
 
     def handleAutoNumbering(self, state, field, spinbox):
         if state == Qt.CheckState.Checked:
@@ -159,15 +195,19 @@ class FileRenamer(QWidget):
                     self.order_spinboxes[key].setValue(value - 1)
                     self.field_counter[key] -= 1
             del self.field_counter[field]
-        
 
     def extract_info_from_pdf(self, pdf_path):
-        info = {'ISBN': 'Unknown', 'Title': 'Unknown', 'Year': 'Unknown',
-            'Publisher': 'Unknown', 'Author': 'Unknown'}
+        info = {
+            "ISBN": "Unknown",
+            "Title": "Unknown",
+            "Year": "Unknown",
+            "Publisher": "Unknown",
+            "Author": "Unknown",
+        }
         name, isbn, year, publisher, author = None, None, None, None, None
-        
+
         try:
-            with open(pdf_path, 'rb') as f:
+            with open(pdf_path, "rb") as f:
                 reader = PyPDF2.PdfReader(f)
                 total_pages = len(reader.pages)
 
@@ -175,24 +215,26 @@ class FileRenamer(QWidget):
                 publisher = None
 
                 for page_num in range(total_pages):
-                    print (f"Page {page_num + 1} of {total_pages}")
+                    print(f"Page {page_num + 1} of {total_pages}")
                     if publisher_found:
                         break
 
                     text_page = reader.pages[page_num].extract_text()
                     # publisher = re.search(r'Published by (.+?)\n', text_page)         # regex original
-                    
-                    #bloco de debug e limitações
-                    #print(f"{text_page}")
-                    if page_num == 10:          # na pratica limita aqui o numero de pagians escaneadas por questoes de desempenho
-                        break                   
-                    
+
+                    # bloco de debug e limitações
+                    # print(f"{text_page}")
+                    if (
+                        page_num == 10
+                    ):  # na pratica limita aqui o numero de pagians escaneadas por questoes de desempenho
+                        break
+
                     publisher_found = False
                     publisher_str = "Unknown"
-                    match_publisher1 = re.search(
-                        r'Published by (.+?)\n', text_page)
+                    match_publisher1 = re.search(r"Published by (.+?)\n", text_page)
                     match_publisher2 = re.search(
-                        r'A JOHN (.+?), INC., PUBLICATION', text_page)
+                        r"A JOHN (.+?), INC., PUBLICATION", text_page
+                    )
 
                     if match_publisher1:
                         publisher_match = match_publisher1
@@ -211,53 +253,57 @@ class FileRenamer(QWidget):
                         # Código para extrair informações adicionais
                         publisher_found = True
 
-
-
-
                     if publisher:
                         publisher_name = publisher.group(1)
-                        info['Publisher'] = publisher_name
+                        info["Publisher"] = publisher_name
 
                         if "Packt" in publisher_name:
-                            name = re.search(r'(.+?)\n', text_page)
+                            name = re.search(r"(.+?)\n", text_page)
                             isbn = re.search(
-                                r'ISBN (\d{3}-\d{1,5}-\d{1,7}-\d{1,7}-\d{1})', text_page)
-                            year = re.search(
-                                r'Copyright \u00A9 (\d{4})', text_page)
-                            publisher = re.search(
-                                r'Published by (.+?)\n', text_page)
+                                r"ISBN (\d{3}-\d{1,5}-\d{1,7}-\d{1,7}-\d{1})", text_page
+                            )
+                            year = re.search(r"Copyright \u00A9 (\d{4})", text_page)
+                            publisher = re.search(r"Published by (.+?)\n", text_page)
                             author = re.search(
-                                r'([^\n]+)\nBIRMINGHAM - MUMBAI', text_page)
+                                r"([^\n]+)\nBIRMINGHAM - MUMBAI", text_page
+                            )
                             publisher_found = True
                             break
 
                     # Busca por O'Reilly
                     publisher = re.search(
-                        r'published by ([\w\s’]+) Media,', text_page, re.IGNORECASE)
+                        r"published by ([\w\s’]+) Media,", text_page, re.IGNORECASE
+                    )
                     if publisher:
                         publisher_name = publisher.group(1)
-                        info['Publisher'] = publisher_name
-                        
+                        info["Publisher"] = publisher_name
+
                         if "O’Reilly" in publisher_name:
-                            name = re.search(r'^([^\n]+)', text_page)
-                            isbn = re.search(r'ISBN[:\s-]*?(\d{3}-\d{1,5}-\d{1,7}-\d{1,7}-\d{1})', text_page)
-                            year = re.search(r'Copyright \u00A9 (\d{4})', text_page)
-                            publisher = re.search(r'published by ([\w\s’]+) Media,', text_page, re.IGNORECASE)
-                            author = re.search(r'\b\d{4}\b\s+([\w\s]+)[.,]', text_page)
+                            name = re.search(r"^([^\n]+)", text_page)
+                            isbn = re.search(
+                                r"ISBN[:\s-]*?(\d{3}-\d{1,5}-\d{1,7}-\d{1,7}-\d{1})",
+                                text_page,
+                            )
+                            year = re.search(r"Copyright \u00A9 (\d{4})", text_page)
+                            publisher = re.search(
+                                r"published by ([\w\s’]+) Media,",
+                                text_page,
+                                re.IGNORECASE,
+                            )
+                            author = re.search(r"\b\d{4}\b\s+([\w\s]+)[.,]", text_page)
 
                             publisher_found = True
                             break
-                        
+
                 if not publisher_found:
                     pass
-                
-            info['Title'] = name.group(1) if name else 'Unknown'
-            info['ISBN'] = isbn.group(1) if isbn else 'Unknown'
-            info['Year'] = year.group(1) if year else 'Unknown'
-            info['Publisher'] = publisher.group(
-                1) if publisher else 'Unknown'
-            info['Author'] = author.group(1) if author else 'Unknown'
-                    
+
+            info["Title"] = name.group(1) if name else "Unknown"
+            info["ISBN"] = isbn.group(1) if isbn else "Unknown"
+            info["Year"] = year.group(1) if year else "Unknown"
+            info["Publisher"] = publisher.group(1) if publisher else "Unknown"
+            info["Author"] = author.group(1) if author else "Unknown"
+
         except Exception as e:
             print(f"Ocorreu um erro: {e}")
 
@@ -266,16 +312,29 @@ class FileRenamer(QWidget):
     def extract_info_from_epub(self, epub_path):
         book = epub.read_epub(epub_path)
         return {
-            'Year': str(book.get_metadata('DC', 'date')[0])[:4] if book.get_metadata('DC', 'date') else 'Unknown',
-            'ISBN': str(book.get_metadata('DC', 'identifier')[0]) if book.get_metadata('DC', 'identifier') else 'Unknown',
-            'Author': ', '.join([str(author) for author in book.get_metadata('DC', 'creator')]) if book.get_metadata('DC', 'creator') else 'Unknown',
-            'Publisher': str(book.get_metadata('DC', 'publisher')[0]) if book.get_metadata('DC', 'publisher') else 'Unknown',
-            'Title': str(book.get_metadata('DC', 'title')[0]) if book.get_metadata('DC', 'title') else 'Unknown'
+            "Year": str(book.get_metadata("DC", "date")[0])[:4]
+            if book.get_metadata("DC", "date")
+            else "Unknown",
+            "ISBN": str(book.get_metadata("DC", "identifier")[0])
+            if book.get_metadata("DC", "identifier")
+            else "Unknown",
+            "Author": ", ".join(
+                [str(author) for author in book.get_metadata("DC", "creator")]
+            )
+            if book.get_metadata("DC", "creator")
+            else "Unknown",
+            "Publisher": str(book.get_metadata("DC", "publisher")[0])
+            if book.get_metadata("DC", "publisher")
+            else "Unknown",
+            "Title": str(book.get_metadata("DC", "title")[0])
+            if book.get_metadata("DC", "title")
+            else "Unknown",
         }
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     app = QApplication(sys.argv)
-    app.setStyle('Fusion')
+    app.setStyle("Fusion")
     fr = FileRenamer()
     fr.show()
     sys.exit(app.exec())
