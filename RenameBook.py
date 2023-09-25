@@ -184,28 +184,33 @@ class FileRenamer(QWidget):
                     
                     #bloco de debug e limitações
                     #print(f"{text_page}")
-                    if page_num == 10:          # na pratica limita aqui o numero de pagians escaneadas por questoes de desempenho
+                    if page_num == 10:          # na pratica limita aqui o numero de paginas escaneadas por questoes de desempenho
                         break                   
                     
                     publisher_found = False
                     publisher_str = "Unknown"
-                    match_publisher1 = re.search(
+                    match_packt = re.search(
                         r'Published by (.+?)\n', text_page)
-                    match_publisher2 = re.search(
+                    match_oreilly = re.search(
                         r'A JOHN (.+?), INC., PUBLICATION', text_page)
 
-                    if match_publisher1:
-                        publisher_match = match_publisher1
-                        publisher_str = match_publisher1.group(1)
-                    elif match_publisher2:
-                        publisher_match = match_publisher2
-                        publisher_str = match_publisher2.group(1)
+                    if match_packt:
+                        publisher_match = match_packt
+                        publisher_str = match_packt.group(1)
+                    elif match_oreilly:
+                        publisher_match = match_oreilly
+                        publisher_str = match_oreilly.group(1)
 
                     print(f"Editora encontrada: {publisher_str}")
 
                     # Extrair informações adicionais se Packt ou O'Reilly for o editor
                     if "Packt" in publisher_str:
                         # Código para extrair informações adicionais
+                        name = re.search(r'(.+?)\n', text_page)
+                        isbn = re.search(r'ISBN (\d{3}-\d{1,5}-\d{1,7}-\d{1,7}-\d{1})', text_page)
+                        year = re.search(r'Copyright \u00A9 (\d{4})', text_page)
+                        publisher = re.search(r'Published by (.+?)\n', text_page)
+                        author = re.search(r'([^\n]+)\nBIRMINGHAM - MUMBAI', text_page)
                         publisher_found = True
                     elif "O'Reilly" in publisher_str:
                         # Código para extrair informações adicionais
@@ -213,7 +218,7 @@ class FileRenamer(QWidget):
 
 
 
-
+                    '''
                     if publisher:
                         publisher_name = publisher.group(1)
                         info['Publisher'] = publisher_name
@@ -247,7 +252,7 @@ class FileRenamer(QWidget):
 
                             publisher_found = True
                             break
-                        
+                    '''    
                 if not publisher_found:
                     pass
                 
