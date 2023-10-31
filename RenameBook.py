@@ -221,6 +221,7 @@ class FileRenamer(QWidget):
         publisher_str, detail_patterns = None, None
         for pattern, publisher in publisher_patterns:
             match = re.search(pattern, text_page)
+            print
             if match:
                 publisher_str = match.group(1)
                 detail_patterns = packt_patterns if publisher == 'Packt' else oreilly_patterns
