@@ -254,7 +254,7 @@ class FileRenamer(QWidget):
 
                     text_page = reader.pages[page_num].extract_text()
                     #extracted_info = self.extract_book_details(text_page)
-                    extracted_info = fr.extract_book_details(text_page)
+                    extracted_info = self.extract_book_details(text_page)
                     if extracted_info:
                         publisher_found = True
                         info.update(extracted_info)
