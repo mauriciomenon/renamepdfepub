@@ -202,7 +202,7 @@ class FileRenamer(QWidget):
         publisher_patterns = [
             (r"Published by (.+?)\n", 'Packt'),
             (r"A JOHN (.+?), INC., PUBLICATION", 'Pearson'),
-            (r"published by ([\w\s’]+) Media,", 'OReilly')
+            (r"(?i)published by ([\w\s’]+) Media,", 'OReilly')
         ]
         packt_patterns = {
             "Title": r"(.+?)\n",
