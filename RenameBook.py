@@ -212,12 +212,14 @@ class FileRenamer(QWidget):
             "Author": r"([^\n]+)\nBIRMINGHAM - MUMBAI",
         }
         oreilly_patterns = {
-            "Title": r"^([^\n]+)",
-            "ISBN": r"ISBN[:\s-]*?(\d{3}-\d{1,5}-\d{1,7}-\d{1,7}-\d{1})",
-            "Year": r"Copyright \u00A9 (\d{4})",
-            "Publisher": r"published by ([\w\s’]+) Media,",
-            "Author": r"\b\d{4}\b\s+([\w\s]+)[.,]",
+            "Title": r"^\s*([^\n]+)\n",  # Looks for the first non-empty line as the title.
+            "ISBN": r"ISBN[-\s]?(?:\d{3}-?\d{10}|\d{9}[\dX])",  # Matches ISBN-10 or ISBN-13 formats.
+            "Year": r"(?:©|Copyright)\s*(\d{4})",  # Searches for copyright followed by a four-digit year.
+            "Publisher": r"(?<=by\s)([\w\s]+)(?=Inc|Media)",  # Finds the publisher name ending with 'Inc' or 'Media'.
+            "Author": r"(?<=by\s)([\w\s,]+)(?=\n|and)",  # Captures author name(s) following 'by', ending with a newline or 'and'.
         }
+
+
         publisher_str, detail_patterns = None, None
         for pattern, publisher in publisher_patterns:
             match = re.search(pattern, text_page)
@@ -232,6 +234,7 @@ class FileRenamer(QWidget):
                 if match:
                     book_info[key] = match.group(1)
         return book_info
+
 
     def extract_info_from_pdf(self, pdf_path):
         info = {
