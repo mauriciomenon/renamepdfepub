@@ -196,13 +196,13 @@ class FileRenamer(QWidget):
                     self.field_counter[key] -= 1
             del self.field_counter[field]
 
-
     def extract_book_details(self, text_page):
         book_info = {}
         publisher_patterns = [
-            (r"Published by (.+?)\n", 'Packt'),
-            (r"A JOHN (.+?), INC., PUBLICATION", 'Pearson'),
-            (r"(?i)published by ([\w\s’]+) Media,", 'OReilly')
+            (r"Published by (.+?)\n", "Packt"),
+            (r"A JOHN (.+?), INC., PUBLICATION", "Pearson"),
+            # (r"(?i)published by ([\w\s’]+) Media,", 'OReilly')
+            (r"(?i)published by ([\w\s’]+) Media", "OReilly"),
         ]
         packt_patterns = {
             "Title": r"(.+?)\n",
@@ -219,30 +219,28 @@ class FileRenamer(QWidget):
             "Author": r"(?<=by\s)[\s\S]+?(?=\n|and)",  
         }
 
-
-        publisher_str, detail_patterns = None, None
-        for pattern, publisher in publisher_patterns:
-            match = re.search(pattern, text_page)
-            print
-            if match:
-                publisher_str = match.group(1)
-                detail_patterns = packt_patterns if publisher == 'Packt' else oreilly_patterns
-                break
-        if publisher_str and detail_patterns:
-            for key, pattern in detail_patterns.items():
+        if text_page:
+            publisher_str, detail_patterns = None, None
+            for pattern, publisher in publisher_patterns:
                 match = re.search(pattern, text_page)
                 if match:
-                    book_info[key] = match.group(1)
+                    publisher_str = match.group(1)
+                    detail_patterns = packt_patterns if publisher == 'Packt' else oreilly_patterns
+                    break
+            if publisher_str and detail_patterns:
+                for key, pattern in detail_patterns.items():
+                    match = re.search(pattern, text_page)
+                    if match:
+                        book_info[key] = match.group(1)
         return book_info
-
 
     def extract_info_from_pdf(self, pdf_path):
         info = {
-            "ISBN": "Unknown",
-            "Title": "Unknown",
-            "Year": "Unknown",
-            "Publisher": "Unknown",
-            "Author": "Unknown",
+            "ISBN": "",
+            "Title": "",
+            "Year": "",
+            "Publisher": "",
+            "Author": "",
         }
 
         try:
@@ -254,9 +252,7 @@ class FileRenamer(QWidget):
                 for page_num in range(total_pages):
                     if publisher_found:
                         continue  # Usar `break` aqui se não for necessário processar outras páginas
-
                     text_page = reader.pages[page_num].extract_text()
-                    #extracted_info = self.extract_book_details(text_page)
                     extracted_info = self.extract_book_details(text_page)
                     if extracted_info:
                         publisher_found = True
@@ -266,8 +262,6 @@ class FileRenamer(QWidget):
             print(f"Ocorreu um erro: {e}")
 
         return info
-
-
 
     def extract_info_from_epub(self, epub_path):
         book = epub.read_epub(epub_path)
