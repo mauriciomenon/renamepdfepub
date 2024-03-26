@@ -196,14 +196,12 @@ class FileRenamer(QWidget):
                     self.field_counter[key] -= 1
             del self.field_counter[field]
 
-    def extract_book_details(self, text_page):
+    """def extract_book_details(self, text_page):
         book_info = {}
         publisher_patterns = [
-            #  (r"Published by (.+?)\n", "Packt"),
             (r"^Published by Packt\\b", "Packt"),
             (r"A JOHN (.+?), INC., PUBLICATION", "Pearson"),
-            # (r"(?i)published by ([\w\s’]+) Media,", 'OReilly')
-            (r"(?i)published by ([\w\s’]+) Media", "OReilly"),
+            (r"(?i)Published by O'Reilly Media,? Inc\.?", "OReilly"),
         ]
         packt_patterns = {
             "Title": r"(.+?)\n",
@@ -213,13 +211,12 @@ class FileRenamer(QWidget):
             "Author": r"([^\n]+)\nBIRMINGHAM - MUMBAI",
         }
         oreilly_patterns = {
-            "Title": r"(?i)^\s*(?:[\d\s-]*\[.*?\])?\s*([^\n]+?)\s*$(?=\s*\n\s*(?:by |Copyright))",  
-            "ISBN": r"(?:ISBN[-\s]?)?(?:978|979)[-]?(?:\d{1,5}[-]?\d{1,7}[-]?\d{1,6}[-]?\d|isbn=\d{9}[\dX])",
-            "Year": r"(?:©|Copyright|Published|Edition|Printed)\D*((?:19|20)\d{2})", 
-            "Publisher": r"(?<=by\s)[\w\s]*\bO[\w’']*Reilly\b(?=\sInc\.?|\sMedia)",  
-            "Author": r"(?<=by\s)[\s\S]+?(?=\n|and)",  
+            "Title": r"(?i)^\s*(?:[\d\s-]*\[.*?\])??\s*([^\n]+?)\s*$(?=\s*\n\s*(?:by |Copyright))",
+            "ISBN": r"(?:ISBN[-\s]?)?(?:978|979)[-]?([\d]+)[-]?([\d]+)[-]?([\d]+)[-]?([\d])",
+            "Year": r"(?:©|Copyright|Published|Edition|Printed)\D*((?:19|20)(\d{2}))",
+            "Publisher": r"(?<=by\s)[\w\s]*\bO[\w'']*Reilly\b",
+            "Author": r"(?<=by\s)[\s\S]+?(?=\n|and)",
         }
-
         pearson_patterns = {}
 
         if text_page:
@@ -231,7 +228,7 @@ class FileRenamer(QWidget):
                         publisher_str = match.group(1)
                     else:
                         publisher_str = match.group()
-                        
+
                     if publisher == 'Packt':
                         detail_patterns = packt_patterns
                     elif publisher == 'Pearson':
@@ -239,11 +236,42 @@ class FileRenamer(QWidget):
                     elif publisher == 'OReilly':
                         detail_patterns = oreilly_patterns
                     break
+
             if publisher_str and detail_patterns:
                 for key, pattern in detail_patterns.items():
                     match = re.search(pattern, text_page)
                     if match:
-                        book_info[key] = match.group(1)
+                        if "(" in pattern:
+                            book_info[key] = match.group(1)
+                        else:
+                            book_info[key] = match.group()
+
+        return book_info"""
+
+    def extract_book_details(self, text_page):
+        book_info = {}
+
+        # Check for O'Reilly Media
+        if "O'Reilly Media" in text_page or "OReilly Media" in text_page:
+            publisher = "OReilly"
+            lines = text_page.split("\n")
+            for line in lines:
+                # Extract title
+                if line.strip().endswith("Edition"):
+                    book_info["Title"] = line.strip()
+                # Extract ISBN
+                if line.strip().startswith("ISBN:"):
+                    book_info["ISBN"] = line.strip().split(":")[1].strip()
+                # Extract year
+                if "Copyright" in line:
+                    year_str = line.split("Copyright")[1].strip()
+                    year_str = year_str.split()[0]
+                    book_info["Year"] = year_str.strip("©")
+                # Extract author
+                if line.strip().startswith("by "):
+                    book_info["Author"] = line.strip().split("by ")[1]
+            book_info["Publisher"] = "O'Reilly Media"
+
         return book_info
 
     def extract_info_from_pdf(self, pdf_path):
@@ -261,14 +289,21 @@ class FileRenamer(QWidget):
                 total_pages = len(reader.pages)
                 publisher_found = False
 
-                for page_num in range(total_pages):
+                for page_num in range(10):
+                    if page_num >= total_pages:
+                        break    
                     if publisher_found:
-                        continue  # Usar `break` aqui se não for necessário processar outras páginas
+                        break
+                        #continue  # Usar `break` aqui se não for necessário processar outras páginas
+
                     text_page = reader.pages[page_num].extract_text()
+                    print(f"Page {page_num + 1}:\n{text_page}\n")
                     extracted_info = self.extract_book_details(text_page)
+
                     if extracted_info:
                         publisher_found = True
                         info.update(extracted_info)
+                        break #sair se publisher found
 
         except Exception as e:
             print(f"Ocorreu um erro: {e}")
