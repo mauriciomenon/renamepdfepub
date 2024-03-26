@@ -199,7 +199,8 @@ class FileRenamer(QWidget):
     def extract_book_details(self, text_page):
         book_info = {}
         publisher_patterns = [
-            (r"Published by (.+?)\n", "Packt"),
+            #  (r"Published by (.+?)\n", "Packt"),
+            (r"^Published by Packt\\b", "Packt"),
             (r"A JOHN (.+?), INC., PUBLICATION", "Pearson"),
             # (r"(?i)published by ([\w\s’]+) Media,", 'OReilly')
             (r"(?i)published by ([\w\s’]+) Media", "OReilly"),
@@ -219,13 +220,24 @@ class FileRenamer(QWidget):
             "Author": r"(?<=by\s)[\s\S]+?(?=\n|and)",  
         }
 
+        pearson_patterns = {}
+
         if text_page:
             publisher_str, detail_patterns = None, None
             for pattern, publisher in publisher_patterns:
                 match = re.search(pattern, text_page)
                 if match:
-                    publisher_str = match.group(1)
-                    detail_patterns = packt_patterns if publisher == 'Packt' else oreilly_patterns
+                    if "(" in pattern:
+                        publisher_str = match.group(1)
+                    else:
+                        publisher_str = match.group()
+                        
+                    if publisher == 'Packt':
+                        detail_patterns = packt_patterns
+                    elif publisher == 'Pearson':
+                        detail_patterns = pearson_patterns
+                    elif publisher == 'OReilly':
+                        detail_patterns = oreilly_patterns
                     break
             if publisher_str and detail_patterns:
                 for key, pattern in detail_patterns.items():
