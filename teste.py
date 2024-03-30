@@ -251,28 +251,57 @@ class FileRenamer(QWidget):
     def extract_book_details(self, text_page):
         book_info = {}
 
-        # Check for O'Reilly Media
-        if "O'Reilly Media" in text_page or "OReilly Media" in text_page:
-            publisher = "OReilly"
-            lines = text_page.split("\n")
-            for line in lines:
-                # Extract title
-                if line.strip().endswith("Edition"):
-                    book_info["Title"] = line.strip()
-                # Extract ISBN
-                if line.strip().startswith("ISBN:"):
-                    book_info["ISBN"] = line.strip().split(":")[1].strip()
-                # Extract year
-                if "Copyright" in line:
-                    year_str = line.split("Copyright")[1].strip()
-                    year_str = year_str.split()[0]
-                    book_info["Year"] = year_str.strip("©")
-                # Extract author
-                if line.strip().startswith("by "):
-                    book_info["Author"] = line.strip().split("by ")[1]
-            book_info["Publisher"] = "O'Reilly Media"
+        publisher_patterns = [
+                (r"Publi333333shed by (.+?)\\n", 'Packt'),
+                (r"A JOHN333333 (.+?), INC., PUBLICATION", 'Pearson'),
+                (r"Published by O['']?(Reilly)", 'OReilly') 
+            ]
 
+        packt_patterns = {
+                "Title": r"(.+?)\\n",
+                "ISBN": r"ISBN (\\d{3}-\\d{1,5}-\\d{1,7}-\\d{1,7}-\\d{1})",
+                "Year": r"Copyright \\u00A9 (\\d{4})",
+                "Publisher": r"Published by (.+?)\\n",
+                "Author": r"(\[^\\n\]+)\\nBIRMINGHAM - MUMBAI",
+            }
+
+        oreilly_patterns = {
+            "Title": r"(?P<title>.+?)\nby ",  # Adjusted title pattern
+            "ISBN": r"ISBN[:\s-]*?(\d{3}-\d{1,5}-\d{1,7}-\d{1,7}-\d{1})",  # Simplified ISBN pattern
+            "Year": r"Copyright © (\d{4})",  # Adjusted for the copyright symbol
+            "Publisher": r"O['']?(Reilly)",  # Capture only the 'OReilly' part
+            "Author": r"by (.+)",  # Simplified author extraction
+        }
+
+        publisher_str, detail_patterns = None, None
+
+        for pattern, publisher in self.publisher_patterns:
+            match = re.search(pattern, text_page, re.MULTILINE)
+            print(f"match: {match}")
+            print(f"pattern: {pattern}")
+            print(f"publisher: {publisher}")
+            if match:
+                if publisher == "OReilly":
+                    # Prepending "O" to ensure the publisher string is "OReilly"
+                    publisher_str = "O" + match.group(1)
+                else:
+                    publisher_str = match.group(1)
+                detail_patterns = self.packt_patterns if publisher == 'Packt' else self.oreilly_patterns
+                break
+        else:
+            return book_info  # Return empty dict if no publisher match
+
+        for key, pattern in detail_patterns.items():
+            match = re.search(pattern, text_page, re.MULTILINE)
+            if match:
+                book_info[key] = match.group(1)
+
+        print(f"Publisher string: {publisher_str}")
+        
+        book_info["Publisher"] = publisher_str
+        
         return book_info
+        
 
     def extract_info_from_pdf(self, pdf_path):
         info = {
