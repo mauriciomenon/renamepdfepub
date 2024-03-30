@@ -97,7 +97,10 @@ class FileRenamer(QWidget):
             "Publisher": r"(?<=by\s)([\w\s]+)(?=Inc|Media)",
             "Author": r"(?<=by\s)([\w\s,]+)(?=\n|and)",
         }
-
+        
+        self.start_page = 0  # Início da varredura do pdf
+        self.end_page = 10  # Fim da varredura do pdf
+        
     def create_check_boxes(self, grid, fields):
         for i, field in enumerate(fields):
             check = QCheckBox(self.key_to_display[field])
@@ -266,14 +269,15 @@ class FileRenamer(QWidget):
             with open(pdf_path, "rb") as f:
                 reader = PyPDF2.PdfReader(f)
                 total_pages = len(reader.pages)
-                max_pages_to_read = min(10, total_pages) #10 paginas escaneadas
+                # Assegura que o end_page não ultrapasse o número total de páginas
+                end_page = min(self.end_page, total_pages)
 
-                for page_num in range(max_pages_to_read):
+                for page_num in range(self.start_page, end_page):
                     text_page = reader.pages[page_num].extract_text()
                     extracted_info = self.extract_book_details(text_page)
+                    # Atualiza 'info' se informações forem encontradas, mas continua a varredura
                     if extracted_info:
                         info.update(extracted_info)
-                        break
 
         except Exception as e:
             print(f"Ocorreu um erro: {e}")
