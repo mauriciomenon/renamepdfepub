@@ -74,6 +74,29 @@ class FileRenamer(QWidget):
 
         self.info_boxes = {}  # Dicionário para guardar os QLineEdit
         self.create_check_boxes(grid, ["Year", "ISBN", "Author", "Publisher", "Title"])
+        
+        # Padrões do editor e padrões de detalhes do livro agora são atributos da instância
+        self.publisher_patterns = [
+            (r"999Published by (.+?)\n", 'Packt'),
+            (r"999A JOHN (.+?), INC., PUBLICATION", 'Pearson'),
+            (r"Published by O['’]?Reilly", 'OReilly')  # Updated to match variations of O'Reilly
+        ]   
+
+        self.packt_patterns = {
+            "Title": r"(.+?)\n",
+            "ISBN": r"ISBN (\d{3}-\d{1,5}-\d{1,7}-\d{1,7}-\d{1})",
+            "Year": r"Copyright \u00A9 (\d{4})",
+            "Publisher": r"Published by (.+?)\n",
+            "Author": r"([^\n]+)\nBIRMINGHAM - MUMBAI",
+        }
+
+        self.oreilly_patterns = {
+            "Title": r"^\s*([^\n]+)\n",
+            "ISBN": r"ISBN[-\s]?(?:\d{3}-?\d{10}|\d{9}[\dX])",
+            "Year": r"(?:©|Copyright)\s*(\d{4})",
+            "Publisher": r"(?<=by\s)([\w\s]+)(?=Inc|Media)",
+            "Author": r"(?<=by\s)([\w\s,]+)(?=\n|and)",
+        }
 
     def create_check_boxes(self, grid, fields):
         for i, field in enumerate(fields):
@@ -196,148 +219,67 @@ class FileRenamer(QWidget):
                     self.field_counter[key] -= 1
             del self.field_counter[field]
 
-    """def extract_book_details(self, text_page):
-        book_info = {}
-        publisher_patterns = [
-            (r"^Published by Packt\\b", "Packt"),
-            (r"A JOHN (.+?), INC., PUBLICATION", "Pearson"),
-            (r"(?i)Published by O'Reilly Media,? Inc\.?", "OReilly"),
-        ]
-        packt_patterns = {
-            "Title": r"(.+?)\n",
-            "ISBN": r"ISBN (\d{3}-\d{1,5}-\d{1,7}-\d{1,7}-\d{1})",
-            "Year": r"Copyright \u00A9 (\d{4})",
-            "Publisher": r"Published by (.+?)\n",
-            "Author": r"([^\n]+)\nBIRMINGHAM - MUMBAI",
-        }
-        oreilly_patterns = {
-            "Title": r"(?i)^\s*(?:[\d\s-]*\[.*?\])??\s*([^\n]+?)\s*$(?=\s*\n\s*(?:by |Copyright))",
-            "ISBN": r"(?:ISBN[-\s]?)?(?:978|979)[-]?([\d]+)[-]?([\d]+)[-]?([\d]+)[-]?([\d])",
-            "Year": r"(?:©|Copyright|Published|Edition|Printed)\D*((?:19|20)(\d{2}))",
-            "Publisher": r"(?<=by\s)[\w\s]*\bO[\w'']*Reilly\b",
-            "Author": r"(?<=by\s)[\s\S]+?(?=\n|and)",
-        }
-        pearson_patterns = {}
 
-        if text_page:
-            publisher_str, detail_patterns = None, None
-            for pattern, publisher in publisher_patterns:
-                match = re.search(pattern, text_page)
-                if match:
-                    if "(" in pattern:
-                        publisher_str = match.group(1)
-                    else:
-                        publisher_str = match.group()
 
-                    if publisher == 'Packt':
-                        detail_patterns = packt_patterns
-                    elif publisher == 'Pearson':
-                        detail_patterns = pearson_patterns
-                    elif publisher == 'OReilly':
-                        detail_patterns = oreilly_patterns
-                    break
+    def extract_PublisherDetails(self, text_page):
+        for pattern, publisher in self.publisher_patterns:
+            match = re.search(pattern, text_page, re.MULTILINE)
+            if match:
+                # Define detail_patterns com base no editor identificado
+                if publisher == 'Packt':
+                    detail_patterns = self.packt_patterns
+                elif publisher == 'OReilly':
+                    detail_patterns = self.oreilly_patterns
+                # Adicione condições similares para outros editores aqui
+                else:
+                    detail_patterns = None  # Caso padrão se o editor não tiver padrões específicos definidos
 
-            if publisher_str and detail_patterns:
-                for key, pattern in detail_patterns.items():
-                    match = re.search(pattern, text_page)
-                    if match:
-                        if "(" in pattern:
-                            book_info[key] = match.group(1)
-                        else:
-                            book_info[key] = match.group()
+                return publisher, detail_patterns
 
-        return book_info"""
+        # Retorna None, None se nenhuma correspondência com editoras conhecidas for encontrada
+        return None, None
 
     def extract_book_details(self, text_page):
         book_info = {}
+        publisher, detail_patterns = self.extract_PublisherDetails(text_page)
 
-        publisher_patterns = [
-                (r"Publi333333shed by (.+?)\\n", 'Packt'),
-                (r"A JOHN333333 (.+?), INC., PUBLICATION", 'Pearson'),
-                (r"Published by O['']?(Reilly)", 'OReilly') 
-            ]
-
-        packt_patterns = {
-                "Title": r"(.+?)\\n",
-                "ISBN": r"ISBN (\\d{3}-\\d{1,5}-\\d{1,7}-\\d{1,7}-\\d{1})",
-                "Year": r"Copyright \\u00A9 (\\d{4})",
-                "Publisher": r"Published by (.+?)\\n",
-                "Author": r"(\[^\\n\]+)\\nBIRMINGHAM - MUMBAI",
-            }
-
-        oreilly_patterns = {
-            "Title": r"(?P<title>.+?)\nby ",  # Adjusted title pattern
-            "ISBN": r"ISBN[:\s-]*?(\d{3}-\d{1,5}-\d{1,7}-\d{1,7}-\d{1})",  # Simplified ISBN pattern
-            "Year": r"Copyright © (\d{4})",  # Adjusted for the copyright symbol
-            "Publisher": r"O['']?(Reilly)",  # Capture only the 'OReilly' part
-            "Author": r"by (.+)",  # Simplified author extraction
-        }
-
-        publisher_str, detail_patterns = None, None
-
-        for pattern, publisher in self.publisher_patterns:
-            match = re.search(pattern, text_page, re.MULTILINE)
-            print(f"match: {match}")
-            print(f"pattern: {pattern}")
-            print(f"publisher: {publisher}")
-            if match:
-                if publisher == "OReilly":
-                    # Prepending "O" to ensure the publisher string is "OReilly"
-                    publisher_str = "O" + match.group(1)
-                else:
-                    publisher_str = match.group(1)
-                detail_patterns = self.packt_patterns if publisher == 'Packt' else self.oreilly_patterns
-                break
-        else:
-            return book_info  # Return empty dict if no publisher match
+        if not detail_patterns:
+            return book_info  # Retorna um dicionário vazio se nenhum editor for encontrado
 
         for key, pattern in detail_patterns.items():
             match = re.search(pattern, text_page, re.MULTILINE)
             if match:
                 book_info[key] = match.group(1)
 
-        print(f"Publisher string: {publisher_str}")
-        
-        book_info["Publisher"] = publisher_str
-        
+        if publisher:
+            book_info["Publisher"] = publisher
+
         return book_info
-        
+
 
     def extract_info_from_pdf(self, pdf_path):
         info = {
-            "ISBN": "",
-            "Title": "",
-            "Year": "",
-            "Publisher": "",
-            "Author": "",
+            "ISBN": "", "Title": "", "Year": "","Publisher": "", "Author": "",
         }
 
         try:
             with open(pdf_path, "rb") as f:
                 reader = PyPDF2.PdfReader(f)
                 total_pages = len(reader.pages)
-                publisher_found = False
+                max_pages_to_read = min(10, total_pages) #10 paginas escaneadas
 
-                for page_num in range(10):
-                    if page_num >= total_pages:
-                        break    
-                    if publisher_found:
-                        break
-                        #continue  # Usar `break` aqui se não for necessário processar outras páginas
-
+                for page_num in range(max_pages_to_read):
                     text_page = reader.pages[page_num].extract_text()
-                    print(f"Page {page_num + 1}:\n{text_page}\n")
                     extracted_info = self.extract_book_details(text_page)
-
                     if extracted_info:
-                        publisher_found = True
                         info.update(extracted_info)
-                        break #sair se publisher found
+                        break
 
         except Exception as e:
             print(f"Ocorreu um erro: {e}")
 
         return info
+
 
     def extract_info_from_epub(self, epub_path):
         book = epub.read_epub(epub_path)
