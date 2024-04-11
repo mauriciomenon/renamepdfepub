@@ -36,11 +36,11 @@ class FileRenamer(QWidget):
         self.info = {}
 
         self.key_to_display = {
+            "Title": "Título",
+            "Author": "Autor",
             "Year": "Ano",
             "ISBN": "ISBN",
-            "Author": "Autor",
             "Publisher": "Editora",
-            "Title": "Título",
         }
 
         self.label = QLabel("Selecione um arquivo (PDF/EPUB) para renomear.")
@@ -73,7 +73,7 @@ class FileRenamer(QWidget):
         grid.addWidget(self.dropArea, 2, 0, 1, 3)
 
         self.info_boxes = {}  # Dicionário para guardar os QLineEdit
-        self.create_check_boxes(grid, ["Year", "ISBN", "Author", "Publisher", "Title"])
+        self.create_check_boxes(grid, ["Title","Author","Year","ISBN","Publisher"])
         
         # Padrões do editor e padrões de detalhes do livro agora são atributos da instância
         self.publisher_patterns = [
@@ -84,18 +84,23 @@ class FileRenamer(QWidget):
 
         self.packt_patterns = {
             "Title": r"(.+?)\n",
-            "ISBN": r"ISBN (\d{3}-\d{1,5}-\d{1,7}-\d{1,7}-\d{1})",
-            "Year": r"Copyright \u00A9 (\d{4})",
-            "Publisher": r"Published by (.+?)\n",
             "Author": r"([^\n]+)\nBIRMINGHAM - MUMBAI",
+            "Year": r"Copyright \u00A9 (\d{4})",
+            "ISBN": r"ISBN (\d{3}-\d{1,5}-\d{1,7}-\d{1,7}-\d{1})",
+            "Publisher": r"Published by (.+?)\n",
+
         }
 
         self.oreilly_patterns = {
-            "Title": r"^\s*([^\n]+)\n",
-            "ISBN": r"ISBN[-\s]?(?:\d{3}-?\d{10}|\d{9}[\dX])",
-            "Year": r"(?:©|Copyright)\s*(\d{4})",
-            "Publisher": r"(?<=by\s)([\w\s]+)(?=Inc|Media)",
+            "Title": r"^\s*([\w\s-]+)\n",
             "Author": r"(?<=by\s)([\w\s,]+)(?=\n|and)",
+            "Year": r"(?:©|Copyright)\s*(\d{4})",
+            "ISBN": r"ISBN(?:-13)?:?\s*(\d{3}-?\d{1,5}-?\d{1,7}-?\d{1,7}-?\d{1})",
+            #"Title": r"^\s*([^\n]+)\n",
+            #"Author": r"(?<=by\s)([\w\s,]+)(?=\n|and)",
+            #"Year": r"(?:©|Copyright)\s*(\d{4})",
+            #"ISBN": r"ISBN[-\s]?(?:\d{3}-?\d{10}|\d{9}[\dX])",
+            #"Publisher": r"(?<=by\s)([\w\s]+)(?=Inc|Media)", # funciona mas na e mais necessario
         }
         
         self.start_page = 0  # Início da varredura do pdf
@@ -262,7 +267,7 @@ class FileRenamer(QWidget):
 
     def extract_info_from_pdf(self, pdf_path):
         info = {
-            "ISBN": "", "Title": "", "Year": "","Publisher": "", "Author": "",
+            "Title": "", "Author": "", "Year": "","ISBN": "", "Publisher": "", 
         }
 
         try:
