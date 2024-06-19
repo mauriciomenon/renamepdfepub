@@ -79,15 +79,16 @@ class PDFToTextOrRTFConverter(QWidget):
             QMessageBox.critical(self, "Erro", f"Erro ao converter o arquivo: {e}")
 
     def save_rtf(self, text_content, output_file):
+        # Ensure the text content is properly encoded for RTF format
         rtf_content = (
             r"{\rtf1\ansi\deff0"
             r"{\fonttbl{\f0 Courier;}}"
             r"\viewkind4\uc1\pard\f0\fs20"
-            + text_content.replace('\n', r'\par ') +
+            + text_content.replace('\n', r'\par ').encode('latin-1', 'replace').decode('latin-1') +
             r"}"
         )
 
-        with open(output_file, 'w', encoding='utf-8') as out_f:
+        with open(output_file, 'w', encoding='latin-1') as out_f:
             out_f.write(rtf_content)
 
 if __name__ == "__main__":
