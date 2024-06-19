@@ -13,6 +13,9 @@ import sys
 import os
 import PyPDF2
 
+MAX_FILE_SIZE_MB = 100  # Limite de tamanho de arquivo em MB
+MAX_PAGES = 300  # Limite de número de páginas
+
 class PDFToTextOrRTFConverter(QWidget):
     def __init__(self):
         super().__init__()
@@ -49,10 +52,18 @@ class PDFToTextOrRTFConverter(QWidget):
             "PDF Files (*.pdf)"
         )
         if file:
+            if self.is_file_too_large(file):
+                QMessageBox.warning(self, "Erro", f"O arquivo selecionado é muito grande. O tamanho máximo permitido é {MAX_FILE_SIZE_MB} MB.")
+                return
+
             self.selected_file = file
             self.label.setText(f"Arquivo selecionado: {file}")
             self.convert_btn.setEnabled(True)
             self.convert_btn_rtf.setEnabled(True)
+
+    def is_file_too_large(self, file_path):
+        file_size_mb = os.path.getsize(file_path) / (1024 * 1024)
+        return file_size_mb > MAX_FILE_SIZE_MB
 
     def convertFile(self, output_format):
         if not hasattr(self, 'selected_file'):
@@ -62,8 +73,12 @@ class PDFToTextOrRTFConverter(QWidget):
         try:
             with open(self.selected_file, "rb") as f:
                 reader = PyPDF2.PdfReader(f)
+                if len(reader.pages) > MAX_PAGES:
+                    QMessageBox.warning(self, "Erro", f"O arquivo selecionado tem muitas páginas. O número máximo permitido é {MAX_PAGES}.")
+                    return
+                
                 text_content = ""
-                for page in reader.pages:
+                for page in reader.pages[:MAX_PAGES]:
                     text_content += page.extract_text()
             
             output_file = os.path.splitext(self.selected_file)[0] + f".{output_format}"
