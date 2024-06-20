@@ -13,8 +13,8 @@ import sys
 import os
 import PyPDF2
 
-MAX_FILE_SIZE_MB = 100  # Limite de tamanho de arquivo em MB
-MAX_PAGES = 300  # Limite de número de páginas
+MAX_FILE_SIZE_MB = 150  # Limite de tamanho de arquivo em MB
+MAX_PAGES = 1000  # Limite de número de páginas
 
 class PDFToTextOrRTFConverter(QWidget):
     def __init__(self):
