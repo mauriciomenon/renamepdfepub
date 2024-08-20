@@ -1,7 +1,7 @@
 from PyQt6.QtWidgets import QApplication, QWidget, QFileDialog, QVBoxLayout, QPushButton, QLabel, QCheckBox, QSpinBox, QGridLayout, QMessageBox, QLineEdit
 from PyQt6.QtCore import Qt, QDir
 from PyQt6.QtGui import QDragEnterEvent, QDragLeaveEvent, QDropEvent
-from googleapiclient.discovery import build
+import requests
 import sys
 import os
 import shutil
@@ -110,8 +110,10 @@ class FileRenamer(QWidget):
             if self.info.get('ISBN', 'Unknown') != 'Unknown':
                 google_info = self.get_info_from_google_books(self.info['ISBN'])
                 self.info.update(google_info)
+            elif self.info.get('Title', 'Unknown') != 'Unknown':
+                google_info = self.get_info_from_google_books(self.info['Title'])
+                self.info.update(google_info)
 
-            preview_text = ', '.join([f"{self.key_to_display[k]}: {v}" for k, v in self.info.items()])
             # Preenche os QLineEdit com as informações
             for field, box in self.info_boxes.items():
                 box.setText(self.info.get(field, 'Não disponível'))  # Utilizando self.info
@@ -131,6 +133,9 @@ class FileRenamer(QWidget):
 
             if info.get('ISBN', 'Unknown') != 'Unknown':
                 google_info = self.get_info_from_google_books(info['ISBN'])
+                info.update(google_info)
+            elif info.get('Title', 'Unknown') != 'Unknown':
+                google_info = self.get_info_from_google_books(info['Title'])
                 info.update(google_info)
 
             new_file_name = self.generateNewName(info)
@@ -177,26 +182,31 @@ class FileRenamer(QWidget):
             'Title': str(book.get_metadata('DC', 'title')[0]) if book.get_metadata('DC', 'title') else 'Unknown'
         }
 
-    def get_info_from_google_books(self, isbn):
-        service = build('books', 'v1', developerKey='YOUR_API_KEY')  # Insira sua API Key aqui
-        request = service.volumes().list(q='isbn:' + isbn)
-        response = request.execute()
+    def get_info_from_google_books(self, identifier):
+        # Consultar a API do Google Books sem chave de API
+        if identifier.isdigit():
+            url = f"https://www.googleapis.com/books/v1/volumes?q=isbn:{identifier}"
+        else:
+            url = f"https://www.googleapis.com/books/v1/volumes?q=intitle:{identifier}"
 
-        book_info = {
+        response = requests.get(url)
+        book_info = response.json()
+
+        info = {
             'Title': 'Unknown',
             'Author': 'Unknown',
             'Publisher': 'Unknown',
             'Year': 'Unknown'
         }
 
-        if 'items' in response:
-            volume_info = response['items'][0]['volumeInfo']
-            book_info['Title'] = volume_info.get('title', 'Unknown')
-            book_info['Author'] = ', '.join(volume_info.get('authors', ['Unknown']))
-            book_info['Publisher'] = volume_info.get('publisher', 'Unknown')
-            book_info['Year'] = volume_info.get('publishedDate', 'Unknown')[:4]
+        if 'items' in book_info:
+            volume_info = book_info['items'][0]['volumeInfo']
+            info['Title'] = volume_info.get('title', 'Unknown')
+            info['Author'] = ', '.join(volume_info.get('authors', ['Unknown']))
+            info['Publisher'] = volume_info.get('publisher', 'Unknown')
+            info['Year'] = volume_info.get('publishedDate', 'Unknown')[:4]
 
-        return book_info
+        return info
 
 
 if __name__ == '__main__':
