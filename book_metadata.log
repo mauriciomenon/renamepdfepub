@@ -1,0 +1,159 @@
+2024-10-27 11:02:13,893 - INFO - Encontrados 2027 arquivos PDF para processar
+2024-10-27 11:02:13,893 - INFO - Processing: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-10-27 11:02:13,893 - INFO - Processing: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-10-27 11:02:13,893 - INFO - Processing: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-10-27 11:02:13,894 - INFO - Processing: /Users/menon/Downloads/EDR_ADMIN_2304_B2_LG.pdf
+2024-10-27 11:02:14,335 - WARNING - No ISBN found in: /Users/menon/Downloads/EDR_ADMIN_2304_B2_LG.pdf
+2024-10-27 11:02:14,335 - INFO - Processing: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-10-27 11:02:14,335 - WARNING - Sem metadados: /Users/menon/Downloads/EDR_ADMIN_2304_B2_LG.pdf
+2024-10-27 11:02:14,472 - WARNING - No ISBN found in: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-10-27 11:02:14,486 - INFO - Processing: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-10-27 11:02:14,487 - WARNING - Sem metadados: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-10-27 11:02:14,663 - INFO - Processing: /Users/menon/Downloads/bashcookbook.pdf
+2024-10-27 11:02:14,663 - INFO - Sucesso: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-10-27 11:02:14,697 - INFO - Processing: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-10-27 11:02:14,697 - INFO - Sucesso: /Users/menon/Downloads/bashcookbook.pdf
+2024-10-27 11:02:14,718 - WARNING - No ISBN found in: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-10-27 11:02:14,718 - INFO - Processing: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-10-27 11:02:14,718 - WARNING - Sem metadados: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-10-27 11:02:14,760 - INFO - Processing: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-10-27 11:02:14,760 - INFO - Sucesso: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-10-27 11:02:14,860 - INFO - Processing: /Users/menon/Downloads/EDR_ADMIN_2304_B1_SG.pdf
+2024-10-27 11:02:14,860 - INFO - Sucesso: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-10-27 11:02:15,361 - WARNING - No ISBN found in: /Users/menon/Downloads/EDR_ADMIN_2304_B1_SG.pdf
+2024-10-27 11:02:15,361 - INFO - Processing: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-10-27 11:02:15,361 - WARNING - Sem metadados: /Users/menon/Downloads/EDR_ADMIN_2304_B1_SG.pdf
+2024-10-27 11:02:15,427 - INFO - Processing: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-10-27 11:02:15,427 - INFO - Sucesso: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-10-27 11:02:15,504 - INFO - Processing: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-10-27 11:02:15,504 - INFO - Sucesso: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-10-27 11:02:23,341 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Deep Learning By Example.pdf
+2024-10-27 11:02:23,342 - WARNING - Sem metadados: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-10-27 11:02:24,126 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Deep Learning with PyTorch_01.pdf
+2024-10-27 11:02:24,126 - INFO - Sucesso: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-10-27 11:02:24,334 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
+2024-10-27 11:02:24,564 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
+2024-10-27 11:02:26,413 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Mastering Reinforcement Learning with Python.pdf
+2024-10-27 11:02:26,426 - INFO - Sucesso: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-10-27 11:02:27,669 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
+2024-10-27 11:02:28,827 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Deep Learning with TensorFlow 2 and Keras - Second Edition.pdf
+2024-10-27 11:02:28,834 - INFO - Sucesso: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Mastering Reinforcement Learning with Python.pdf
+2024-10-27 11:02:28,903 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Hands-On Neural Networks with Keras.pdf
+2024-10-27 11:02:28,916 - WARNING - Sem metadados: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-10-27 11:02:39,865 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Data Engineering with Python.pdf
+2024-10-27 11:02:39,877 - INFO - Sucesso: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Deep Learning with TensorFlow 2 and Keras - Second Edition.pdf
+2024-10-27 11:02:41,691 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Hands-On Deep Learning with Apache Spark.pdf
+2024-10-27 11:02:41,704 - INFO - Sucesso: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Deep Learning with PyTorch_01.pdf
+2024-10-27 11:02:45,587 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Scalable Data Streaming with Amazon Kinesis.pdf
+2024-10-27 11:02:45,594 - INFO - Sucesso: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Data Engineering with Python.pdf
+2024-10-27 11:02:46,768 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Serverless Analytics with Amazon Athena.pdf
+2024-10-27 11:02:46,774 - INFO - Sucesso: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Scalable Data Streaming with Amazon Kinesis.pdf
+2024-10-27 11:02:48,599 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Hands-On Artificial Intelligence for Banking.pdf
+2024-10-27 11:02:48,605 - INFO - Sucesso: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Serverless Analytics with Amazon Athena.pdf
+2024-10-27 11:02:49,084 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Mastering Defensive Security.pdf
+2024-10-27 11:02:49,090 - INFO - Sucesso: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Hands-On Neural Networks with Keras.pdf
+2024-10-27 11:02:49,460 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
+2024-10-27 11:02:50,792 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/TensorFlow Deep Learning Projects.pdf
+2024-10-27 11:02:50,805 - INFO - Sucesso: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Deep Learning By Example.pdf
+2024-10-27 11:02:52,161 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
+2024-10-27 11:02:54,997 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
+2024-10-27 11:02:56,207 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Infosec Strategies and Best Practices.pdf
+2024-10-27 11:02:56,218 - INFO - Sucesso: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Mastering Defensive Security.pdf
+2024-10-27 11:02:57,382 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Agile Machine Learning with DataRobot.pdf
+2024-10-27 11:02:57,396 - INFO - Sucesso: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Hands-On Artificial Intelligence for Banking.pdf
+2024-10-27 11:02:58,673 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Data Processing with Optimus.pdf
+2024-10-27 11:02:58,679 - INFO - Sucesso: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Agile Machine Learning with DataRobot.pdf
+2024-10-27 11:02:59,289 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
+2024-10-27 11:03:00,466 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Hands-On Deep Learning for IoT.pdf
+2024-10-27 11:03:00,485 - WARNING - Sem metadados: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Infosec Strategies and Best Practices.pdf
+2024-10-27 11:03:06,725 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Python Deep Learning Projects.pdf
+2024-10-27 11:03:07,472 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/PyTorch Deep Learning Hands-On.pdf
+2024-10-27 11:03:09,258 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Engineering MLOps.pdf
+2024-10-27 11:03:11,045 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Deep Learning Essentials.pdf
+2024-10-27 11:03:11,424 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Optimizing Databricks Workloads.pdf
+2024-10-27 11:31:05,061 - INFO - Encontrados 14 arquivos PDF para processar
+2024-10-27 11:31:05,063 - INFO - Processing: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-10-27 11:31:05,063 - INFO - Processing: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-10-27 11:31:05,063 - INFO - Processing: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-10-27 11:31:05,063 - INFO - Processing: /Users/menon/Downloads/EDR_ADMIN_2304_B2_LG.pdf
+2024-10-27 11:31:05,535 - WARNING - No ISBN found in: /Users/menon/Downloads/EDR_ADMIN_2304_B2_LG.pdf
+2024-10-27 11:31:05,541 - INFO - Processing: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-10-27 11:31:05,541 - WARNING - Sem metadados: /Users/menon/Downloads/EDR_ADMIN_2304_B2_LG.pdf
+2024-10-27 11:31:05,747 - WARNING - No ISBN found in: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-10-27 11:31:05,753 - INFO - Processing: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-10-27 11:31:05,759 - WARNING - Sem metadados: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-10-27 11:31:05,790 - INFO - Processing: /Users/menon/Downloads/bashcookbook.pdf
+2024-10-27 11:31:05,790 - INFO - Sucesso: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-10-27 11:31:05,822 - INFO - Processing: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-10-27 11:31:05,822 - INFO - Sucesso: /Users/menon/Downloads/bashcookbook.pdf
+2024-10-27 11:31:05,841 - WARNING - No ISBN found in: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-10-27 11:31:05,841 - INFO - Processing: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-10-27 11:31:05,841 - WARNING - Sem metadados: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-10-27 11:31:05,875 - INFO - Processing: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-10-27 11:31:05,875 - INFO - Sucesso: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-10-27 11:31:05,938 - INFO - Processing: /Users/menon/Downloads/EDR_ADMIN_2304_B1_SG.pdf
+2024-10-27 11:31:05,938 - INFO - Sucesso: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-10-27 11:31:06,450 - WARNING - No ISBN found in: /Users/menon/Downloads/EDR_ADMIN_2304_B1_SG.pdf
+2024-10-27 11:31:06,450 - INFO - Processing: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-10-27 11:31:06,450 - WARNING - Sem metadados: /Users/menon/Downloads/EDR_ADMIN_2304_B1_SG.pdf
+2024-10-27 11:31:06,483 - INFO - Processing: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-10-27 11:31:06,484 - INFO - Sucesso: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-10-27 11:31:06,560 - INFO - Processing: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-10-27 11:31:06,560 - INFO - Sucesso: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-10-27 11:31:16,381 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
+2024-10-27 11:31:16,381 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
+2024-10-27 11:31:16,402 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
+2024-10-27 11:31:16,403 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
+2024-10-27 11:31:17,533 - INFO - Sucesso: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-10-27 11:31:17,544 - WARNING - Sem metadados: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-10-27 11:31:18,471 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
+2024-10-27 11:31:18,477 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
+2024-10-27 11:31:19,776 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
+2024-10-27 11:31:19,780 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
+2024-10-27 11:31:21,189 - INFO - Sucesso: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-10-27 11:31:22,034 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
+2024-10-27 11:31:23,354 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
+2024-10-27 11:31:25,410 - WARNING - Sem metadados: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-10-27 11:42:10,760 - INFO - Encontrados 14 arquivos PDF para processar
+2024-10-27 11:42:10,760 - INFO - Processing: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-10-27 11:42:10,760 - INFO - Processing: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-10-27 11:42:10,760 - INFO - Processing: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-10-27 11:42:10,760 - INFO - Processing: /Users/menon/Downloads/EDR_ADMIN_2304_B2_LG.pdf
+2024-10-27 11:42:11,193 - WARNING - No ISBN found in: /Users/menon/Downloads/EDR_ADMIN_2304_B2_LG.pdf
+2024-10-27 11:42:11,204 - INFO - Processing: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-10-27 11:42:11,211 - WARNING - Sem metadados: /Users/menon/Downloads/EDR_ADMIN_2304_B2_LG.pdf
+2024-10-27 11:42:11,381 - WARNING - No ISBN found in: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-10-27 11:42:11,387 - INFO - Processing: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-10-27 11:42:11,400 - WARNING - Sem metadados: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-10-27 11:42:11,545 - INFO - Processing: /Users/menon/Downloads/bashcookbook.pdf
+2024-10-27 11:42:11,545 - INFO - Sucesso: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-10-27 11:42:11,580 - INFO - Processing: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-10-27 11:42:11,580 - INFO - Sucesso: /Users/menon/Downloads/bashcookbook.pdf
+2024-10-27 11:42:11,600 - WARNING - No ISBN found in: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-10-27 11:42:11,600 - INFO - Processing: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-10-27 11:42:11,600 - WARNING - Sem metadados: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-10-27 11:42:11,640 - INFO - Processing: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-10-27 11:42:11,640 - INFO - Sucesso: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-10-27 11:42:11,704 - INFO - Processing: /Users/menon/Downloads/EDR_ADMIN_2304_B1_SG.pdf
+2024-10-27 11:42:11,704 - INFO - Sucesso: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-10-27 11:42:12,220 - WARNING - No ISBN found in: /Users/menon/Downloads/EDR_ADMIN_2304_B1_SG.pdf
+2024-10-27 11:42:12,220 - INFO - Processing: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-10-27 11:42:12,220 - WARNING - Sem metadados: /Users/menon/Downloads/EDR_ADMIN_2304_B1_SG.pdf
+2024-10-27 11:42:12,256 - INFO - Processing: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-10-27 11:42:12,256 - INFO - Sucesso: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-10-27 11:42:12,332 - INFO - Processing: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-10-27 11:42:12,332 - INFO - Sucesso: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-10-27 11:42:22,028 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
+2024-10-27 11:42:22,035 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
+2024-10-27 11:42:22,035 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
+2024-10-27 11:42:22,041 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
+2024-10-27 11:42:23,284 - INFO - Sucesso: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-10-27 11:42:23,296 - WARNING - Sem metadados: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-10-27 11:42:24,197 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
+2024-10-27 11:42:24,208 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
+2024-10-27 11:42:25,862 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
+2024-10-27 11:42:25,871 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
+2024-10-27 11:42:27,411 - INFO - Sucesso: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-10-27 11:42:28,430 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
+2024-10-27 11:42:29,761 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
+2024-10-27 11:42:30,832 - WARNING - Sem metadados: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
