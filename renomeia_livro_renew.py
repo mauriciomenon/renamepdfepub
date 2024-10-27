@@ -18,8 +18,45 @@ from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 from tqdm import tqdm
 from concurrent.futures import ThreadPoolExecutor
-import argparse  
+import argparse
 import sys
+import time
+
+# Configurações de editoras e padrões
+BRAZILIAN_PUBLISHERS = {
+    'casa do codigo': {
+        'pattern': r'Casa do [cC]ódigo.*?ISBN[:\s]*(97[89][-\s]*(?:\d[-\s]*){9}\d)',
+        'confidence_boost': 0.1
+    },
+    'novatec': {
+        'pattern': r'Novatec\s+Editora.*?ISBN[:\s]*(97[89][-\s]*(?:\d[-\s]*){9}\d)',
+        'confidence_boost': 0.1
+    },
+    'alta books': {
+        'pattern': r'Alta\s+Books.*?ISBN[:\s]*(97[89][-\s]*(?:\d[-\s]*){9}\d)',
+        'confidence_boost': 0.1
+    }
+}
+
+INTERNATIONAL_PUBLISHERS = {
+    'packt': {
+        'pattern': r'Packt\s+Publishing.*?ISBN[:\s]*(97[89][-\s]*(?:\d[-\s]*){9}\d)',
+        'confidence_boost': 0.1,
+        'corrupted_chars': {'@': '9', '>': '7', '?': '8', '_': '-'}
+    },
+    'oreilly': {
+        'pattern': r"O'Reilly\s+Media.*?ISBN[:\s]*(97[89][-\s]*(?:\d[-\s]*){9}\d)",
+        'confidence_boost': 0.1
+    },
+    'wiley': {
+        'pattern': r'(?:John\s+)?Wiley\s+&\s+Sons.*?ISBN[:\s]*(97[89][-\s]*(?:\d[-\s]*){9}\d)',
+        'confidence_boost': 0.1
+    },
+    'apress': {
+        'pattern': r'Apress.*?ISBN[:\s]*(97[89][-\s]*(?:\d[-\s]*){9}\d)',
+        'confidence_boost': 0.1
+    }
+}
 
 @dataclass
 class BookMetadata:
@@ -32,7 +69,7 @@ class BookMetadata:
     confidence_score: float = 0.0
     source: str = "unknown"
     file_path: Optional[str] = None
-
+    
 class MetadataCache:
     def __init__(self, db_path: str = "metadata_cache.db"):
         self.db_path = db_path
@@ -44,47 +81,75 @@ class MetadataCache:
                 CREATE TABLE IF NOT EXISTS metadata_cache (
                     isbn TEXT PRIMARY KEY,
                     metadata_json TEXT,
-                    timestamp INTEGER
+                    timestamp INTEGER,
+                    publisher TEXT,
+                    confidence_score REAL
                 )
             """)
 
     def get(self, isbn: str) -> Optional[Dict]:
         with sqlite3.connect(self.db_path) as conn:
-            result = conn.execute(
-                "SELECT metadata_json FROM metadata_cache WHERE isbn = ?", 
-                (isbn,)
+            result = conn.execute("""
+                SELECT metadata_json 
+                FROM metadata_cache 
+                WHERE isbn = ? AND timestamp > ?
+                """, 
+                (isbn, int(time.time()) - 30*24*60*60)  # 30 dias de cache
             ).fetchone()
             return json.loads(result[0]) if result else None
 
     def set(self, isbn: str, metadata: Dict):
         with sqlite3.connect(self.db_path) as conn:
             conn.execute(
-                "INSERT OR REPLACE INTO metadata_cache (isbn, metadata_json, timestamp) VALUES (?, ?, ?)",
-                (isbn, json.dumps(metadata), int(time.time()))
+                """INSERT OR REPLACE INTO metadata_cache 
+                   (isbn, metadata_json, timestamp, publisher, confidence_score) 
+                   VALUES (?, ?, ?, ?, ?)""",
+                (isbn, json.dumps(metadata), int(time.time()),
+                 metadata.get('publisher', 'unknown'),
+                 metadata.get('confidence_score', 0.0))
             )
-
+            
 class ISBNExtractor:
     def __init__(self):
         self.isbn_patterns = [
-            # Padrões comuns de ISBN
+            # Padrões básicos de ISBN
             r'ISBN(?:-13)?:?\s*(978[\d-]+)',
             r'ISBN(?:-10)?:?\s*([\dX-]{10,})',
             r'978[\d-]{10,}',
             r'[\dX-]{10,13}',
-            # Padrões específicos por editora
-            r'O\'Reilly Media(?:.*?)ISBN(?:[^0-9]*)([\dX-]{10,})',
-            r'Apress(?:.*?)ISBN(?:[^0-9]*)([\dX-]{10,})',
-            r'No Starch Press(?:.*?)ISBN(?:[^0-9]*)([\dX-]{10,})',
-            r'Pearson(?:.*?)ISBN(?:[^0-9]*)([\dX-]{10,})',
-            r'Wiley(?:.*?)ISBN(?:[^0-9]*)([\dX-]{10,})',
-            # Padrões mais agressivos
-            r'97[89][\d-]{10,}',
-            r'\b[\dX]{10}\b',
-            r'\b97[89]\d{10}\b'
+            
+            # Padrões avançados
+            r'ISBN(?:[\s-]*(?:Impresso|PDF|EPUB|MOBI)?:?)?\s*(97[89][-\s]*(?:\d[-\s]*){9}\d)',
+            r'DOI:.*?ISBN:\s*(97[89][-\s]*(?:\d[-\s]*){9}\d)',
+            
+            # Padrão para múltiplos ISBNs (pega o primeiro)
+            r'ISBN(?:s)?:?\s*(97[89][-\s]*(?:\d[-\s]*){9}\d)(?:\s*(?:(?:e|E)bk|EPUB|MOBI|PDF|Impresso)?)',
         ]
         
+        # Adiciona padrões de editoras
+        self.isbn_patterns.extend([pub['pattern'] for pub in BRAZILIAN_PUBLISHERS.values()])
+        self.isbn_patterns.extend([pub['pattern'] for pub in INTERNATIONAL_PUBLISHERS.values()])
+
     def normalize_isbn(self, isbn: str) -> str:
         return re.sub(r'[^0-9X]', '', isbn.upper())
+
+    def identify_publisher(self, text: str) -> Tuple[str, float]:
+        """Identifica a editora e retorna boost de confiança."""
+        text_lower = text.lower()
+        
+        for publisher, info in {**BRAZILIAN_PUBLISHERS, **INTERNATIONAL_PUBLISHERS}.items():
+            if re.search(info['pattern'], text, re.IGNORECASE):
+                return publisher, info['confidence_boost']
+        
+        return "unknown", 0.0
+
+    def clean_corrupted_isbn(self, isbn: str, publisher: str) -> str:
+        """Limpa ISBNs com caracteres corrompidos."""
+        if publisher in INTERNATIONAL_PUBLISHERS and 'corrupted_chars' in INTERNATIONAL_PUBLISHERS[publisher]:
+            chars = INTERNATIONAL_PUBLISHERS[publisher]['corrupted_chars']
+            for corrupt, clean in chars.items():
+                isbn = isbn.replace(corrupt, clean)
+        return isbn
 
     def validate_isbn_10(self, isbn: str) -> bool:
         if len(isbn) != 10:
@@ -138,13 +203,16 @@ class ISBNExtractor:
         return prefix + str(check)
 
     def extract_from_text(self, text: str) -> Set[str]:
+        """Extrai todos os ISBNs possíveis do texto."""
         found_isbns = set()
+        publisher, confidence_boost = self.identify_publisher(text)
         
         for pattern in self.isbn_patterns:
             matches = re.finditer(pattern, text, re.IGNORECASE)
             for match in matches:
                 isbn = match.group(1) if '(' in pattern else match.group()
                 isbn = self.normalize_isbn(isbn)
+                isbn = self.clean_corrupted_isbn(isbn, publisher)
                 
                 if self.validate_isbn_10(isbn):
                     found_isbns.add(isbn)
@@ -153,23 +221,27 @@ class ISBNExtractor:
                         found_isbns.add(isbn13)
                 elif self.validate_isbn_13(isbn):
                     found_isbns.add(isbn)
-                    
+        
         return found_isbns
-
+    
 class MetadataFetcher:
     def __init__(self, isbndb_api_key: Optional[str] = None):
         self.cache = MetadataCache()
         self.session = requests.Session()
-        self.isbndb_api_key = isbndb_api_key  # Opcional
+        self.isbndb_api_key = isbndb_api_key
         
-        # Configuração de retry
+        # Configuração de retry mais robusta
         retry_strategy = Retry(
             total=5,
             backoff_factor=0.5,
             status_forcelist=[429, 500, 502, 503, 504],
-            allowed_methods=["HEAD", "GET", "OPTIONS"]
+            allowed_methods=["HEAD", "GET", "OPTIONS", "POST"]
         )
-        adapter = HTTPAdapter(max_retries=retry_strategy, pool_connections=100, pool_maxsize=100)
+        adapter = HTTPAdapter(
+            max_retries=retry_strategy,
+            pool_connections=100,
+            pool_maxsize=100
+        )
         self.session.mount("http://", adapter)
         self.session.mount("https://", adapter)
         
@@ -177,31 +249,8 @@ class MetadataFetcher:
             'User-Agent': 'Mozilla/5.0 (compatible; BookMetadataBot/1.0)'
         })
 
-        # Lista das APIs disponíveis e seus requisitos
-        self.api_info = {
-            'google_books': {
-                'requires_auth': False,
-                'is_active': True,
-                'base_url': 'https://www.googleapis.com/books/v1'
-            },
-            'openlibrary': {
-                'requires_auth': False,
-                'is_active': True,
-                'base_url': 'https://openlibrary.org/api'
-            },
-            'worldcat_classify': {  # API gratuita do WorldCat
-                'requires_auth': False,
-                'is_active': True,
-                'base_url': 'https://classify.oclc.org/classify2'
-            },
-            'isbndb': {
-                'requires_auth': True,
-                'is_active': bool(isbndb_api_key),
-                'base_url': 'https://api2.isbndb.com'
-            }
-        }
-
     def fetch_google_books(self, isbn: str) -> Optional[BookMetadata]:
+        """Busca na API do Google Books global."""
         try:
             url = f"https://www.googleapis.com/books/v1/volumes?q=isbn:{isbn}"
             response = self.session.get(url, timeout=10)
@@ -224,6 +273,38 @@ class MetadataFetcher:
             )
         except Exception as e:
             logging.error(f"Google Books API error: {str(e)}")
+            return None
+
+    def fetch_google_books_br(self, isbn: str) -> Optional[BookMetadata]:
+        """Busca na API do Google Books com filtro para Brasil."""
+        try:
+            url = f"https://www.googleapis.com/books/v1/volumes"
+            params = {
+                'q': f'isbn:{isbn}',
+                'country': 'BR',
+                'langRestrict': 'pt'
+            }
+            
+            response = self.session.get(url, params=params, timeout=10)
+            data = response.json()
+            
+            if 'items' not in data:
+                return None
+                
+            book_info = data['items'][0]['volumeInfo']
+            
+            return BookMetadata(
+                title=book_info.get('title', 'Unknown'),
+                authors=book_info.get('authors', ['Unknown']),
+                publisher=book_info.get('publisher', 'Unknown'),
+                published_date=book_info.get('publishedDate', 'Unknown'),
+                isbn_13=isbn if len(isbn) == 13 else None,
+                isbn_10=isbn if len(isbn) == 10 else None,
+                confidence_score=0.9,
+                source='google_books_br'
+            )
+        except Exception as e:
+            logging.error(f"Google Books BR API error: {str(e)}")
             return None
 
     def fetch_openlibrary(self, isbn: str) -> Optional[BookMetadata]:
@@ -254,7 +335,6 @@ class MetadataFetcher:
     def fetch_worldcat(self, isbn: str) -> Optional[BookMetadata]:
         """Busca metadados do WorldCat com melhor tratamento de erros."""
         try:
-            # Tenta primeiro HTTPS
             urls = [
                 f"https://classify.oclc.org/classify2/Classify?isbn={isbn}&summary=true",
                 f"http://classify.oclc.org/classify2/Classify?isbn={isbn}&summary=true"
@@ -278,7 +358,6 @@ class MetadataFetcher:
             if work is None:
                 return None
                 
-            # Extrai mais dados quando disponíveis
             authors = []
             author_element = work.get('author', '')
             if ' and ' in author_element:
@@ -302,52 +381,93 @@ class MetadataFetcher:
             logging.error(f"WorldCat API error for ISBN {isbn}: {str(e)}")
             return None
 
+    def fetch_mercado_editorial(self, isbn: str) -> Optional[BookMetadata]:
+        """Busca na API do Mercado Editorial Brasileiro."""
+        try:
+            url = f"https://api.mercadoeditorial.org/api/v1.2/book?isbn={isbn}"
+            response = self.session.get(url, timeout=10)
+            
+            if response.status_code != 200:
+                return None
+                
+            data = response.json()
+            if not data.get('books'):
+                return None
+                
+            book = data['books'][0]
+            
+            return BookMetadata(
+                title=book.get('title', 'Unknown'),
+                authors=book.get('authors', []),
+                publisher=book.get('publisher', 'Unknown'),
+                published_date=book.get('published_date', 'Unknown'),
+                isbn_13=isbn if len(isbn) == 13 else None,
+                isbn_10=isbn if len(isbn) == 10 else None,
+                confidence_score=0.85,
+                source='mercado_editorial'
+            )
+        except Exception as e:
+            logging.error(f"Mercado Editorial API error: {str(e)}")
+            return None
+
     def fetch_metadata(self, isbn: str) -> Optional[BookMetadata]:
-        """Busca metadados usando múltiplas fontes com fallback inteligente."""
+        """Busca metadados usando múltiplas fontes com lógica melhorada."""
+        # Verifica cache
         cached = self.cache.get(isbn)
         if cached:
             return BookMetadata(**cached)
-            
-        # Define os fetchers ativos e suas prioridades
+        
+        # Detecta se é ISBN brasileiro
+        is_brazilian = any(isbn.startswith(prefix) for prefix in ['97865', '97885', '65', '85'])
+        
+        # Define ordem das APIs baseado na origem do ISBN
         fetchers = []
-        if self.api_info['google_books']['is_active']:
-            fetchers.append((self.fetch_google_books, 10))
-        if self.api_info['openlibrary']['is_active']:
-            fetchers.append((self.fetch_openlibrary, 8))
-        if self.api_info['worldcat_classify']['is_active']:
-            fetchers.append((self.fetch_worldcat, 15))
-        if self.api_info['isbndb']['is_active']:
-            fetchers.append((self.fetch_isbndb, 10))
+        if is_brazilian:
+            fetchers.extend([
+                (self.fetch_google_books_br, 10),
+                (self.fetch_mercado_editorial, 9)
+            ])
+            
+        # Adiciona APIs internacionais
+        fetchers.extend([
+            (self.fetch_google_books, 7),
+            (self.fetch_openlibrary, 6),
+            (self.fetch_worldcat, 5)
+        ])
         
         best_metadata = None
         highest_confidence = 0
         errors = []
         
-        for fetcher, timeout in fetchers:
+        for fetcher, priority in fetchers:
             try:
                 metadata = fetcher(isbn)
-                if metadata and metadata.confidence_score > highest_confidence:
-                    best_metadata = metadata
-                    highest_confidence = metadata.confidence_score
-                    if highest_confidence > 0.9:
-                        break
+                if metadata:
+                    # Ajusta confiança baseado na prioridade
+                    metadata.confidence_score *= (priority / 10)
+                    
+                    if metadata.confidence_score > highest_confidence:
+                        best_metadata = metadata
+                        highest_confidence = metadata.confidence_score
+                        
+                        # Se encontrou com alta confiança, para
+                        if highest_confidence > 0.9:
+                            break
             except Exception as e:
                 errors.append(f"{fetcher.__name__}: {str(e)}")
                 continue
-        
-        if not best_metadata and errors:
-            logging.warning(f"Falha em todas as APIs para ISBN {isbn}. Erros: {'; '.join(errors)}")
         
         if best_metadata:
             self.cache.set(isbn, asdict(best_metadata))
             
         return best_metadata
-
+    
 class PDFProcessor:
     def __init__(self):
         self.isbn_extractor = ISBNExtractor()
         
     def extract_text_from_pdf(self, pdf_path: str, max_pages: int = 10) -> str:
+        """Extrai texto das primeiras páginas do PDF."""
         try:
             with open(pdf_path, 'rb') as file:
                 reader = PyPDF2.PdfReader(file)
@@ -363,6 +483,7 @@ class PDFProcessor:
             return ""
 
     def extract_metadata_from_pdf(self, pdf_path: str) -> Dict:
+        """Extrai metadados internos do PDF."""
         try:
             with open(pdf_path, 'rb') as file:
                 reader = PyPDF2.PdfReader(file)
@@ -370,10 +491,9 @@ class PDFProcessor:
         except Exception as e:
             logging.error(f"Error extracting PDF metadata from {pdf_path}: {str(e)}")
             return {}
-        
+
 class BookMetadataExtractor:
     def __init__(self, isbndb_api_key: Optional[str] = None):
-        # Inicialização dos componentes principais
         self.isbn_extractor = ISBNExtractor()
         self.metadata_fetcher = MetadataFetcher(isbndb_api_key=isbndb_api_key)
         self.pdf_processor = PDFProcessor()
@@ -494,6 +614,7 @@ class BookMetadataExtractor:
                 print(f"   Tentativas de API: {len(api_attempts)}")
                 if api_attempts:
                     print(f"   Ordem de tentativas: {' -> '.join(api_attempts)}")
+                print(f"   Arquivo: {Path(book.file_path).name}")
         
         # Arquivos que falharam
         print("\n6. ARQUIVOS COM FALHA")
@@ -509,7 +630,6 @@ class BookMetadataExtractor:
                     print(f"  Erros: {runtime_stats['api_errors'][failed]}")
         
         print("\n" + "="*80)
-
 
     def process_directory(self, directory_path: str, subdirs: Optional[List[str]] = None, 
                          recursive: bool = False, max_workers: int = 4) -> List[BookMetadata]:
@@ -570,72 +690,7 @@ class BookMetadataExtractor:
         self.print_detailed_report(results, runtime_stats)
                     
         return results
-
-    def generate_report(self, results: List[BookMetadata], output_file: str) -> Dict:
-        """Gera um relatório detalhado em JSON com os resultados."""
-        report = {
-            'summary': {
-                'total_files_processed': len(results),
-                'successful_extractions': sum(1 for r in results if r is not None),
-                'failed_extractions': sum(1 for r in results if r is None),
-                'sources_used': dict(Counter(r.source for r in results if r is not None)),
-                'average_confidence': sum(r.confidence_score for r in results if r is not None) / 
-                                   len([r for r in results if r is not None]) if results else 0,
-                'publishers': dict(Counter(r.publisher for r in results if r is not None))
-            },
-            'books': [asdict(r) for r in results if r is not None]
-        }
-        
-        # Adiciona estatísticas por editora
-        publishers_stats = {}
-        for r in results:
-            if r and r.publisher not in ['Unknown', '']:
-                if r.publisher not in publishers_stats:
-                    publishers_stats[r.publisher] = {
-                        'count': 0,
-                        'avg_confidence': 0,
-                        'successful_extractions': 0
-                    }
-                stats = publishers_stats[r.publisher]
-                stats['count'] += 1
-                stats['avg_confidence'] += r.confidence_score
-                stats['successful_extractions'] += 1
-        
-        # Calcula médias
-        for pub_stats in publishers_stats.values():
-            if pub_stats['count'] > 0:
-                pub_stats['avg_confidence'] /= pub_stats['count']
-        
-        report['summary']['publisher_stats'] = publishers_stats
-        
-        # Salva o relatório
-        with open(output_file, 'w', encoding='utf-8') as f:
-            json.dump(report, f, ensure_ascii=False, indent=2)
-            
-        return report
-
-    def suggest_filename(self, metadata: BookMetadata) -> str:
-        """Sugere um nome de arquivo baseado nos metadados."""
-        def clean_string(s: str) -> str:
-            # Remove caracteres inválidos para nome de arquivo
-            s = unicodedata.normalize('NFKD', s)
-            s = s.encode('ASCII', 'ignore').decode('ASCII')
-            s = re.sub(r'[^\w\s-]', '', s)
-            return s.strip()
-        
-        title = clean_string(metadata.title)
-        # Limita a 2 autores para o nome do arquivo
-        authors = clean_string(', '.join(metadata.authors[:2]))
-        # Extrai o ano da data de publicação
-        year = metadata.published_date.split('-')[0] if '-' in metadata.published_date else metadata.published_date
-        
-        # Limita o tamanho do nome do arquivo
-        max_title_length = 50
-        if len(title) > max_title_length:
-            title = title[:max_title_length] + '...'
-        
-        return f"{title} - {authors} ({year}).pdf"
-
+    
 def main():
     parser = argparse.ArgumentParser(
         description='Extrai metadados de livros PDF e opcionalmente renomeia os arquivos',
@@ -645,48 +700,58 @@ Exemplos de uso:
   # Processar apenas o diretório atual:
   %(prog)s "/Users/menon/Downloads"
   
-  # Processar incluindo subdiretórios:
+  # Processar diretório e subdiretórios:
   %(prog)s "/Users/menon/Downloads" -r
   
   # Processar e renomear arquivos:
   %(prog)s "/Users/menon/Downloads" --rename
   
-  # Processar com mais threads e verbose:
+  # Processar com mais threads e detalhes:
   %(prog)s "/Users/menon/Downloads" -t 8 -v
   
-  # Processar subdiretórios específicos:
+  # Processar diretórios específicos:
   %(prog)s "/Users/menon/Downloads" --subdirs "Machine Learning,Python Books"
   
-  # Exemplo completo com todas as opções:
-  %(prog)s "/Users/menon/Downloads" -r -t 8 --rename -v -o "relatorio.json"
+  # Comando completo:
+  %(prog)s "/Users/menon/Downloads" -r -t 8 --rename -v -k "sua_chave_isbndb" -o "relatorio.json"
+  
+  # Exemplos com diretórios reais:
+  %(prog)s "/Users/menon/Downloads/LEARN YOU SOME CODE BY NO STARCH"
+  %(prog)s "/Users/menon/Downloads/machine Learning Oreilly"
+
+Observações:
+  - Por padrão, processa apenas o diretório especificado (sem subdiretórios)
+  - Use -r para processar todos os subdiretórios
+  - Use --subdirs para processar apenas subdiretórios específicos
+  - A chave ISBNdb é opcional e pode ser colocada em qualquer posição do comando
 """)
     
     parser.add_argument('directory', 
-                       help='Diretório contendo os arquivos PDF (ex: /Users/menon/Downloads)')
+                       help='Diretório contendo os arquivos PDF')
     parser.add_argument('-r', '--recursive',
                        action='store_true',
                        help='Processa subdiretórios recursivamente')
     parser.add_argument('--subdirs',
-                       help='Lista de subdiretórios específicos separados por vírgula')
+                       help='Lista de subdiretórios específicos (separados por vírgula)')
     parser.add_argument('-o', '--output',
                        default='book_metadata_report.json',
-                       help='Arquivo JSON de saída para resultados (padrão: %(default)s)')
+                       help='Arquivo JSON de saída (padrão: %(default)s)')
     parser.add_argument('-t', '--threads',
                        type=int,
                        default=4,
-                       help='Número de threads para processamento paralelo (padrão: %(default)s)')
+                       help='Número de threads para processamento (padrão: %(default)s)')
     parser.add_argument('--rename',
                        action='store_true',
-                       help='Renomeia arquivos baseado nos metadados encontrados')
+                       help='Renomeia arquivos com base nos metadados')
     parser.add_argument('-v', '--verbose',
                        action='store_true',
-                       help='Mostra informações detalhadas durante o processamento')
+                       help='Mostra informações detalhadas')
     parser.add_argument('--log-file',
                        default='book_metadata.log',
                        help='Arquivo de log (padrão: %(default)s)')
     parser.add_argument('-k', '--isbndb-key',
                        help='Chave da API ISBNdb (opcional)')
-
+    
     # Se nenhum argumento foi fornecido, mostra a ajuda
     if len(sys.argv) == 1:
         parser.print_help()
@@ -706,27 +771,74 @@ Exemplos de uso:
         handlers=log_handlers
     )
     
-    # Inicializa o extrator com configurações opcionais
-    extractor = BookMetadataExtractor(isbndb_api_key=args.isbndb_key)
+    # Converte subdiretórios em lista se especificados
+    subdirs = args.subdirs.split(',') if args.subdirs else None
     
-    print(f"\nProcessando PDFs em: {args.directory}")
-    
-    # Modifica a lógica de subdiretórios
-    subdirs = None
-    if args.subdirs:
-        subdirs = args.subdirs.split(',')
-        print(f"Subdiretórios específicos: {', '.join(subdirs)}")
-    elif args.recursive:
-        print("Modo recursivo: processando todos os subdiretórios")
-    else:
-        print("Modo não-recursivo: processando apenas o diretório principal")
-    
-    results = extractor.process_directory(
-        args.directory,
-        subdirs=subdirs,
-        recursive=args.recursive,
-        max_workers=args.threads
-    )
+    try:
+        # Inicializa o extrator
+        extractor = BookMetadataExtractor(isbndb_api_key=args.isbndb_key)
+        
+        print(f"\nProcessando PDFs em: {args.directory}")
+        if args.recursive:
+            print("Modo recursivo: processando todos os subdiretórios")
+        elif subdirs:
+            print(f"Processando subdiretórios específicos: {', '.join(subdirs)}")
+        else:
+            print("Modo não-recursivo: processando apenas o diretório principal")
+        
+        # Processa os arquivos
+        results = extractor.process_directory(
+            args.directory,
+            subdirs=subdirs,
+            recursive=args.recursive,
+            max_workers=args.threads
+        )
+        
+        # Gera relatório JSON
+        if results:
+            report = {
+                'summary': {
+                    'total_processed': len(results),
+                    'successful': len([r for r in results if r is not None]),
+                    'timestamp': time.strftime('%Y-%m-%d %H:%M:%S')
+                },
+                'books': [asdict(r) for r in results if r is not None]
+            }
+            
+            with open(args.output, 'w', encoding='utf-8') as f:
+                json.dump(report, f, ensure_ascii=False, indent=2)
+            print(f"\nRelatório JSON salvo em: {args.output}")
+        
+        # Renomeia arquivos se solicitado
+        if args.rename and results:
+            print("\nRenomeando arquivos...")
+            for metadata in results:
+                if metadata and metadata.file_path:
+                    old_path = Path(metadata.file_path)
+                    new_name = extractor.suggest_filename(metadata)
+                    new_path = old_path.parent / new_name
+                    
+                    try:
+                        if new_path.exists():
+                            print(f"Arquivo já existe, pulando: {new_name}")
+                            continue
+                            
+                        old_path.rename(new_path)
+                        print(f"Renomeado: {old_path.name} -> {new_name}")
+                    except Exception as e:
+                        print(f"Erro ao renomear {old_path.name}: {str(e)}")
+        
+        print(f"\nLog salvo em: {args.log_file}")
+        
+    except KeyboardInterrupt:
+        print("\nProcessamento interrompido pelo usuário.")
+        sys.exit(1)
+    except Exception as e:
+        print(f"\nErro durante o processamento: {str(e)}")
+        if args.verbose:
+            import traceback
+            traceback.print_exc()
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()
