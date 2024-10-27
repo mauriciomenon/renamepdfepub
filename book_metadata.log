@@ -157,3 +157,29 @@
 2024-10-27 11:42:28,430 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
 2024-10-27 11:42:29,761 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
 2024-10-27 11:42:30,832 - WARNING - Sem metadados: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-10-27 14:54:38,542 - INFO - Encontrados 14 arquivos PDF para processar
+2024-10-27 14:54:38,543 - INFO - Processing: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-10-27 14:54:38,543 - INFO - Processing: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-10-27 14:54:38,543 - INFO - Processing: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-10-27 14:54:38,543 - INFO - Processing: /Users/menon/Downloads/EDR_ADMIN_2304_B2_LG.pdf
+2024-10-27 14:54:38,942 - INFO - Processing: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-10-27 14:54:38,942 - WARNING - Sem metadados: /Users/menon/Downloads/EDR_ADMIN_2304_B2_LG.pdf
+2024-10-27 14:54:39,133 - INFO - Processing: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-10-27 14:54:39,139 - WARNING - Sem metadados: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-10-27 14:54:39,268 - INFO - Processing: /Users/menon/Downloads/bashcookbook.pdf
+2024-10-27 14:54:39,268 - INFO - Sucesso: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-10-27 14:54:39,305 - INFO - Processing: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-10-27 14:54:39,305 - INFO - Sucesso: /Users/menon/Downloads/bashcookbook.pdf
+2024-10-27 14:54:47,339 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
+2024-10-27 14:54:47,362 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
+2024-10-27 14:54:47,363 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
+2024-10-27 14:54:47,373 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
+2024-10-27 14:54:48,490 - INFO - Processing: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-10-27 14:54:48,551 - INFO - Processing: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-10-27 14:54:48,623 - INFO - Processing: /Users/menon/Downloads/EDR_ADMIN_2304_B1_SG.pdf
+2024-10-27 14:54:49,136 - INFO - Processing: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-10-27 14:54:49,170 - INFO - Processing: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-10-27 14:54:49,252 - INFO - Processing: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-10-27 14:54:49,450 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
+2024-10-27 14:54:49,465 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
+2024-10-27 14:54:49,670 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj

@@ -22,6 +22,58 @@ import argparse
 import sys
 import time
 
+class DependencyManager:
+    def __init__(self):
+        self.available_extractors = {
+            'pypdf2': True,  # Já sabemos que está disponível pois é requisito
+            'pdfplumber': False,
+            'pdfminer': False,
+            'tesseract': False,
+            'pdf2image': False
+        }
+        self._check_dependencies()
+    
+    def _check_dependencies(self):
+        """Verifica quais dependências estão disponíveis."""
+        # Verifica pdfplumber
+        try:
+            import pdfplumber
+            self.available_extractors['pdfplumber'] = True
+        except ImportError:
+            logging.debug("pdfplumber não está instalado. Usando alternativas.")
+
+        # Verifica pdfminer
+        try:
+            from pdfminer.high_level import extract_text
+            self.available_extractors['pdfminer'] = True
+        except ImportError:
+            logging.debug("pdfminer.six não está instalado. Usando alternativas.")
+
+        # Verifica Tesseract
+        try:
+            import pytesseract
+            pytesseract.get_tesseract_version()
+            self.available_extractors['tesseract'] = True
+        except:
+            logging.debug("Tesseract OCR não está instalado/configurado.")
+
+        # Verifica pdf2image
+        try:
+            import pdf2image
+            self.available_extractors['pdf2image'] = True
+        except ImportError:
+            logging.debug("pdf2image não está instalado.")
+
+    def get_available_extractors(self) -> List[str]:
+        """Retorna lista de extractors disponíveis."""
+        return [k for k, v in self.available_extractors.items() if v]
+
+    @property
+    def has_ocr_support(self) -> bool:
+        """Verifica se o suporte a OCR está disponível."""
+        return self.available_extractors['tesseract'] and self.available_extractors['pdf2image']
+
+
 # Configurações de editoras e padrões
 BRAZILIAN_PUBLISHERS = {
     'casa do codigo': {
@@ -201,6 +253,53 @@ class ISBNExtractor:
                 
         check = (10 - (total % 10)) % 10
         return prefix + str(check)
+    
+    def extract_publisher_specific(self, text: str, publisher: str) -> Set[str]:
+        """Extrai ISBNs usando técnicas específicas por editora."""
+        found_isbns = set()
+        
+        if publisher == 'casa do codigo':
+            # Padrão específico para Casa do Código
+            patterns = [
+                r'ISBN[:\s]*(?:Impresso e PDF:|PDF:)?\s*(97[89][-\s]*(?:\d[-\s]*){9}\d)',
+                r'ISBN[:\s]*(?:EPUB:|MOBI:)?\s*(97[89][-\s]*(?:\d[-\s]*){9}\d)'
+            ]
+        elif publisher == 'packt':
+            # Padrão específico para Packt, incluindo caracteres corrompidos
+            patterns = [
+                r'ISBN[:\s]*[@>?]*(97[89][-\s]*(?:[\d@>?][-\s]*){9}[\d@>?])',
+                r'ISBN[:\s]*([9@][7>][\d@>?]{11})'
+            ]
+        elif publisher == 'wiley':
+            # Padrão específico para Wiley, pegando múltiplos ISBNs
+            patterns = [
+                r'ISBN:\s*(97[89][-\s]*(?:\d[-\s]*){9}\d)(?:\s*\(.*?\))?',
+                r'ISBN-13:\s*(97[89][-\s]*(?:\d[-\s]*){9}\d)',
+                r'Print ISBN:\s*(97[89][-\s]*(?:\d[-\s]*){9}\d)'
+            ]
+        else:
+            # Padrões genéricos mais agressivos para outras editoras
+            patterns = [
+                r'(?:ISBN[-:]?)?\s*(97[89][-\s]*(?:\d[-\s]*){9}\d)',
+                r'(?:ISBN[-:]?)?\s*([\dX][-\s]*){10,13}'
+            ]
+        
+        for pattern in patterns:
+            matches = re.finditer(pattern, text, re.IGNORECASE)
+            for match in matches:
+                isbn = match.group(1) if '(' in pattern else match.group()
+                isbn = self.normalize_isbn(isbn)
+                isbn = self.clean_corrupted_isbn(isbn, publisher)
+                
+                if self.validate_isbn_10(isbn):
+                    found_isbns.add(isbn)
+                    isbn13 = self.isbn_10_to_13(isbn)
+                    if isbn13:
+                        found_isbns.add(isbn13)
+                elif self.validate_isbn_13(isbn):
+                    found_isbns.add(isbn)
+        
+        return found_isbns
 
     def extract_from_text(self, text: str) -> Set[str]:
         """Extrai todos os ISBNs possíveis do texto."""
@@ -465,32 +564,139 @@ class MetadataFetcher:
 class PDFProcessor:
     def __init__(self):
         self.isbn_extractor = ISBNExtractor()
+        self.advanced_extractor = AdvancedTextExtractor()
+        logging.info(f"Extractores disponíveis: {', '.join(self.advanced_extractor.dependency_manager.get_available_extractors())}")
+        if self.advanced_extractor.dependency_manager.has_ocr_support:
+            logging.info("Suporte a OCR está disponível")
         
     def extract_text_from_pdf(self, pdf_path: str, max_pages: int = 10) -> str:
         """Extrai texto das primeiras páginas do PDF."""
+        logging.info(f"Iniciando extração de texto de: {pdf_path}")
+        text = ""
+        
+        # Tenta PyPDF2 primeiro (método original)
         try:
             with open(pdf_path, 'rb') as file:
                 reader = PyPDF2.PdfReader(file)
                 pages_to_check = min(max_pages, len(reader.pages))
-                
-                text = ""
                 for page_num in range(pages_to_check):
                     text += reader.pages[page_num].extract_text() + "\n"
-                    
-                return text
         except Exception as e:
-            logging.error(f"Error extracting text from PDF {pdf_path}: {str(e)}")
+            logging.debug(f"Erro na extração com PyPDF2: {str(e)}")
+
+        # Se não conseguiu texto suficiente, tenta pdfplumber
+        if not text or len(text.strip()) < 100:
+            try:
+                import pdfplumber
+                with pdfplumber.open(pdf_path) as pdf:
+                    pages_to_check = min(max_pages, len(pdf.pages))
+                    text = ""
+                    for page in pdf.pages[:pages_to_check]:
+                        text += page.extract_text() + "\n"
+            except Exception as e:
+                logging.debug(f"Erro na extração com pdfplumber: {str(e)}")
+
+        # Se ainda não tem texto suficiente, tenta pdfminer
+        if not text or len(text.strip()) < 100:
+            try:
+                from pdfminer.high_level import extract_text as pdfminer_extract
+                text = pdfminer_extract(pdf_path, maxpages=max_pages)
+            except Exception as e:
+                logging.debug(f"Erro na extração com pdfminer: {str(e)}")
+
+        # Se ainda não tem texto e OCR está disponível, tenta Tesseract
+        if (not text or len(text.strip()) < 100):
+            try:
+                import pytesseract
+                from pdf2image import convert_from_path
+                
+                images = convert_from_path(pdf_path, last_page=max_pages)
+                ocr_text = ""
+                for image in images:
+                    ocr_text += pytesseract.image_to_string(image) + "\n"
+                    
+                if ocr_text.strip():
+                    text = ocr_text
+            except Exception as e:
+                logging.debug(f"Erro na extração com OCR: {str(e)}")
+
+        # Limpa o texto
+        text = self._clean_text(text)
+        
+        # Verifica se é um manual
+        if self._is_manual_or_documentation(text):
+            logging.info(f"Arquivo identificado como manual/documentação: {pdf_path}")
             return ""
+            
+        return text
 
     def extract_metadata_from_pdf(self, pdf_path: str) -> Dict:
         """Extrai metadados internos do PDF."""
+        logging.info(f"Extraindo metadados de: {pdf_path}")
         try:
             with open(pdf_path, 'rb') as file:
                 reader = PyPDF2.PdfReader(file)
-                return reader.metadata if reader.metadata else {}
+                metadata = reader.metadata if reader.metadata else {}
+                
+                if 'ISBN' in metadata:
+                    isbn = re.sub(r'[^0-9X]', '', metadata['ISBN'].upper())
+                    if not (self.advanced_extractor._validate_isbn_10(isbn) or 
+                           self.advanced_extractor._validate_isbn_13(isbn)):
+                        logging.warning(f"ISBN inválido encontrado nos metadados: {isbn}")
+                        del metadata['ISBN']
+                    else:
+                        logging.info(f"ISBN válido encontrado nos metadados: {isbn}")
+                        
+                return metadata
         except Exception as e:
-            logging.error(f"Error extracting PDF metadata from {pdf_path}: {str(e)}")
+            logging.error(f"Erro ao extrair metadados de {pdf_path}: {str(e)}")
             return {}
+        
+    def _clean_text(self, text: str) -> str:
+        """Limpa e normaliza o texto extraído."""
+        if not text:
+            return ""
+            
+        # Remove caracteres de controle
+        text = ''.join(char for char in text if unicodedata.category(char)[0] != 'C')
+        
+        # Normaliza espaços
+        text = re.sub(r'\s+', ' ', text)
+        
+        # Correções comuns de OCR para números
+        ocr_replacements = {
+            'l': '1', 'I': '1', 'O': '0', 'o': '0',
+            'S': '5', 'Z': '2', 'B': '8', 'G': '6'
+        }
+        
+        def replace_in_numbers(match):
+            number = match.group()
+            for old, new in ocr_replacements.items():
+                number = number.replace(old, new)
+            return number
+        
+        # Aplica correções em potenciais ISBNs
+        text = re.sub(r'(?:ISBN[-:]?\s*)?(?:[0-9A-Za-z-]{10,})', replace_in_numbers, text)
+        
+        return text.strip()
+
+    def _is_manual_or_documentation(self, text: str) -> bool:
+        """Verifica se o texto parece ser de um manual."""
+        patterns = [
+            r'manual\s+de\s+\w+',
+            r'student\s+guide',
+            r'training\s+manual',
+            r'documentation',
+            r'confidential\s+and\s+proprietary',
+            r'©.*training',
+            r'course\s+materials?'
+        ]
+        
+        text_lower = text.lower()
+        
+        # Se encontrar 2 ou mais padrões, considera como manual
+        matches = sum(1 for pattern in patterns if re.search(pattern, text_lower))
+        return matches >= 2
 
 class BookMetadataExtractor:
     def __init__(self, isbndb_api_key: Optional[str] = None):
@@ -498,7 +704,6 @@ class BookMetadataExtractor:
         self.metadata_fetcher = MetadataFetcher(isbndb_api_key=isbndb_api_key)
         self.pdf_processor = PDFProcessor()
         
-        # Configuração de logging
         logging.basicConfig(
             level=logging.INFO,
             format='%(asctime)s - %(levelname)s - %(message)s',
@@ -509,31 +714,41 @@ class BookMetadataExtractor:
         )
 
     def process_single_file(self, pdf_path: str, runtime_stats: Dict) -> Optional[BookMetadata]:
-        """Processa um único arquivo PDF com estatísticas."""
         start_time = time.time()
         logging.info(f"Processing: {pdf_path}")
         
         runtime_stats['processed_files'].append(pdf_path)
+        runtime_stats['failure_details'][pdf_path] = {}
+        details = runtime_stats['failure_details'][pdf_path]
         
         # Extrai texto do PDF
         text = self.pdf_processor.extract_text_from_pdf(pdf_path)
         
+        # Limpa o texto para amostra (remove linhas em branco múltiplas)
+        clean_text = re.sub(r'\n\s*\n', '\n', text[:500])
+        details['extracted_text_sample'] = clean_text
+        
+        # Detecta editora
+        publisher, confidence = self.isbn_extractor.identify_publisher(text)
+        details['detected_publisher'] = publisher
+        
         # Extrai metadados internos do PDF
         pdf_metadata = self.pdf_processor.extract_metadata_from_pdf(pdf_path)
         
-        # Encontra todos os ISBNs possíveis
+        # Encontra ISBNs
         isbns = self.isbn_extractor.extract_from_text(text)
-        
-        # Adiciona ISBNs dos metadados do PDF se existirem
         if pdf_metadata.get('ISBN'):
             isbns.add(self.isbn_extractor.normalize_isbn(pdf_metadata['ISBN']))
-            
+        
         if not isbns:
-            logging.warning(f"No ISBN found in: {pdf_path}")
-            runtime_stats['isbn_not_found'].append(pdf_path)
+            runtime_stats['isbn_extraction_failed'].append(pdf_path)
+            details['status'] = 'ISBN não encontrado no arquivo'
             return None
-            
-        # Tenta obter metadados para cada ISBN encontrado
+        
+        details['found_isbns'] = list(isbns)
+        details['status'] = 'ISBNs encontrados mas falha na busca online'
+        
+        # Tenta obter metadados
         best_metadata = None
         highest_confidence = 0
         runtime_stats['api_attempts'][pdf_path] = []
@@ -544,111 +759,187 @@ class BookMetadataExtractor:
                 metadata = self.metadata_fetcher.fetch_metadata(isbn)
                 if metadata:
                     runtime_stats['api_attempts'][pdf_path].append(metadata.source)
+                    if publisher != "unknown" and publisher.lower() in metadata.publisher.lower():
+                        metadata.confidence_score += 0.1
                     if metadata.confidence_score > highest_confidence:
                         metadata.file_path = str(pdf_path)
                         best_metadata = metadata
                         highest_confidence = metadata.confidence_score
             except Exception as e:
-                runtime_stats['api_errors'][pdf_path].append(str(e))
-                runtime_stats['api_failures'].append(pdf_path)
-                
+                runtime_stats['api_errors'][pdf_path].append(f"ISBN {isbn}: {str(e)}")
+        
         runtime_stats['processing_times'].append(time.time() - start_time)
+        
+        if best_metadata:
+            details['status'] = 'Sucesso'
+        else:
+            runtime_stats['api_failures'].append(pdf_path)
+            
         return best_metadata
+
+    def generate_report(self, results: List[BookMetadata], output_file: str) -> Dict:
+        """Gera um relatório detalhado em JSON com os resultados."""
+        report = {
+            'summary': {
+                'total_files_processed': len(results),
+                'successful_extractions': sum(1 for r in results if r is not None),
+                'failed_extractions': sum(1 for r in results if r is None),
+                'sources_used': dict(Counter(r.source for r in results if r is not None)),
+                'timestamp': time.strftime('%Y-%m-%d %H:%M:%S'),
+                'publishers': dict(Counter(r.publisher for r in results if r is not None))
+            },
+            'books': [asdict(r) for r in results if r is not None]
+        }
+        
+        # Salva o relatório
+        with open(output_file, 'w', encoding='utf-8') as f:
+            json.dump(report, f, ensure_ascii=False, indent=2)
+            
+        return report
+
+    def suggest_filename(self, metadata: BookMetadata) -> str:
+        """Sugere um nome de arquivo baseado nos metadados."""
+        def clean_string(s: str) -> str:
+            s = unicodedata.normalize('NFKD', s)
+            s = s.encode('ASCII', 'ignore').decode('ASCII')
+            s = re.sub(r'[^\w\s-]', '', s)
+            return s.strip()
+        
+        title = clean_string(metadata.title)
+        authors = clean_string(', '.join(metadata.authors[:2]))
+        year = metadata.published_date.split('-')[0] if '-' in metadata.published_date else metadata.published_date
+        
+        max_title_length = 50
+        if len(title) > max_title_length:
+            title = title[:max_title_length] + '...'
+        
+        return f"{title} - {authors} ({year}).pdf"
 
     def print_detailed_report(self, results: List[BookMetadata], runtime_stats: Dict):
         """Imprime um relatório detalhado dos resultados."""
-        total_files = len(runtime_stats['processed_files'])
-        successful = len([r for r in results if r is not None])
-        failed = total_files - successful
-        
-        print("\n" + "="*80)
-        print("RELATÓRIO DE PROCESSAMENTO DE PDFs")
-        print("="*80)
-        
-        # Estatísticas gerais
-        print("\n1. ESTATÍSTICAS GERAIS")
-        print("-"*40)
-        print(f"Total de arquivos processados: {total_files}")
-        print(f"Extrações bem-sucedidas: {successful} ({(successful/total_files*100):.1f}%)")
-        print(f"Extrações falhas: {failed} ({(failed/total_files*100):.1f}%)")
-        
-        # Estatísticas por API
-        print("\n2. RESULTADOS POR SERVIÇO")
-        print("-"*40)
-        api_stats = Counter(r.source for r in results if r is not None)
-        total_successful = sum(api_stats.values())
-        for api, count in api_stats.most_common():
-            print(f"{api:15}: {count:3} sucessos ({count/total_successful*100:.1f}%)")
-        
-        # Detalhes das falhas
-        print("\n3. ANÁLISE DE FALHAS")
-        print("-"*40)
-        isbn_not_found = len(runtime_stats.get('isbn_not_found', []))
-        api_failures = len(runtime_stats.get('api_failures', []))
-        print(f"ISBNs não encontrados: {isbn_not_found}")
-        print(f"Falhas de API: {api_failures}")
-        
-        # Tempos de processamento
-        print("\n4. PERFORMANCE")
-        print("-"*40)
-        if 'processing_times' in runtime_stats:
-            times = runtime_stats['processing_times']
-            print(f"Tempo médio por arquivo: {sum(times)/len(times):.2f}s")
-            print(f"Arquivo mais rápido: {min(times):.2f}s")
-            print(f"Arquivo mais lento: {max(times):.2f}s")
-        
-        # Livros processados com sucesso
-        print("\n5. LIVROS PROCESSADOS COM SUCESSO")
-        print("-"*40)
-        for idx, book in enumerate(results, 1):
-            if book:
-                api_attempts = runtime_stats['api_attempts'].get(book.file_path, [])
-                print(f"\n{idx}. {book.title}")
-                print(f"   Autores: {', '.join(book.authors)}")
-                print(f"   Editora: {book.publisher}")
-                print(f"   Data: {book.published_date}")
-                print(f"   ISBN-10: {book.isbn_10 or 'N/A'}")
-                print(f"   ISBN-13: {book.isbn_13 or 'N/A'}")
-                print(f"   Confiança: {book.confidence_score:.2f}")
-                print(f"   Fonte: {book.source}")
-                print(f"   Tentativas de API: {len(api_attempts)}")
-                if api_attempts:
-                    print(f"   Ordem de tentativas: {' -> '.join(api_attempts)}")
-                print(f"   Arquivo: {Path(book.file_path).name}")
-        
-        # Arquivos que falharam
-        print("\n6. ARQUIVOS COM FALHA")
-        print("-"*40)
-        failed_files = set(runtime_stats['processed_files']) - set(b.file_path for b in results if b)
-        for failed in failed_files:
-            print(f"✗ {Path(failed).name}")
-            if failed in runtime_stats.get('isbn_not_found', []):
-                print("  Motivo: ISBN não encontrado")
-            elif failed in runtime_stats.get('api_failures', []):
-                print("  Motivo: Falhas nas APIs")
-                if failed in runtime_stats['api_errors']:
-                    print(f"  Erros: {runtime_stats['api_errors'][failed]}")
-        
-        print("\n" + "="*80)
+        try:
+            # Contagens corretas
+            total_files = len(runtime_stats['processed_files'])
+            successful_results = [r for r in results if r is not None]
+            successful = len(successful_results)
+            failed = total_files - successful  # Agora failed é um número, não um caminho
+
+            print("\n" + "="*80)
+            print("RELATÓRIO DE PROCESSAMENTO DE PDFs")
+            print("="*80)
+            
+            # Análise detalhada de falhas (primeiro por ser mais importante)
+            print("\n1. ANÁLISE DETALHADA DE FALHAS")
+            print("-"*40)
+            failed_files = set(runtime_stats['processed_files']) - set(b.file_path for b in successful_results)
+            
+            if failed_files:
+                for failed_file in sorted(failed_files):
+                    filename = Path(failed_file).name
+                    details = runtime_stats['failure_details'].get(failed_file, {})
+                    print(f"\n✗ {filename}")
+                    
+                    # ISBNs encontrados
+                    if 'found_isbns' in details and details['found_isbns']:
+                        print(f"  ISBNs encontrados: {', '.join(details['found_isbns'])}")
+                    
+                    # Status de falha
+                    if failed_file in runtime_stats.get('isbn_extraction_failed', []):
+                        print("  Status: ISBN não encontrado no arquivo")
+                        if 'extracted_text_sample' in details:
+                            cleaned_sample = details['extracted_text_sample'].strip()
+                            if cleaned_sample:
+                                print(f"  Amostra do texto: {cleaned_sample}")
+                    
+                    # Editora detectada
+                    publisher = details.get('detected_publisher')
+                    if publisher and publisher != 'unknown':
+                        print(f"  Editora detectada: {publisher}")
+                        print("  FALHA CRÍTICA: Editora conhecida sem metadados")
+                    
+                    # Erros de API
+                    if failed_file in runtime_stats.get('api_failures', []):
+                        errors = runtime_stats['api_errors'].get(failed_file, [])
+                        if errors:
+                            print("  Erros de API:")
+                            for error in errors:
+                                print(f"    - {error}")
+            else:
+                print("\nNenhuma falha encontrada!")
+            
+            # Livros processados com sucesso
+            print("\n2. LIVROS PROCESSADOS COM SUCESSO")
+            print("-"*40)
+            if successful > 0:
+                for idx, book in enumerate(sorted(successful_results, key=lambda x: x.file_path), 1):
+                    print(f"\n{idx}. {book.title}")
+                    print(f"   Arquivo: {Path(book.file_path).name}")
+                    print(f"   Autores: {', '.join(book.authors)}")
+                    print(f"   Editora: {book.publisher}")
+                    print(f"   Data: {book.published_date}")
+                    print(f"   ISBN-13: {book.isbn_13 or 'N/A'}")
+                    print(f"   ISBN-10: {book.isbn_10 or 'N/A'}")
+                    print(f"   Confiança: {book.confidence_score:.2f}")
+                    print(f"   Fonte: {book.source}")
+            else:
+                print("\nNenhum livro processado com sucesso.")
+
+            # Estatísticas gerais
+            print("\n3. ESTATÍSTICAS GERAIS")
+            print("-"*40)
+            
+            # Cálculos com números, não strings
+            success_rate = (successful / total_files * 100) if total_files > 0 else 0
+            failure_rate = (failed / total_files * 100) if total_files > 0 else 0
+            
+            print(f"Total de arquivos processados: {total_files}")
+            print(f"Extrações bem-sucedidas: {successful} ({success_rate:.1f}%)")
+            print(f"Extrações falhas: {failed} ({failure_rate:.1f}%)")
+            
+            # Estatísticas por serviço
+            if successful > 0:
+                print("\n4. ESTATÍSTICAS POR SERVIÇO")
+                print("-"*40)
+                api_stats = Counter(r.source for r in successful_results)
+                for api, count in api_stats.most_common():
+                    service_rate = (count / successful * 100)
+                    print(f"{api:15}: {count:3} sucessos ({service_rate:.1f}%)")
+                
+                # Performance
+                if runtime_stats['processing_times']:
+                    print("\n5. PERFORMANCE")
+                    print("-"*40)
+                    times = runtime_stats['processing_times']
+                    avg_time = sum(times) / len(times)
+                    print(f"Tempo médio por arquivo: {avg_time:.2f}s")
+                    print(f"Arquivo mais rápido: {min(times):.2f}s")
+                    print(f"Arquivo mais lento: {max(times):.2f}s")
+            
+            print("\n" + "="*80)
+
+        except Exception as e:
+            logging.error(f"Erro ao gerar relatório: {str(e)}")
+            import traceback
+            logging.error(traceback.format_exc())
+            # Continua a execução mesmo com erro no relatório
 
     def process_directory(self, directory_path: str, subdirs: Optional[List[str]] = None, 
                          recursive: bool = False, max_workers: int = 4) -> List[BookMetadata]:
-        """Processa PDFs em um diretório com estatísticas detalhadas."""
         directory = Path(directory_path)
         pdf_files = []
         
-        # Inicializa estatísticas de runtime
         runtime_stats = {
             'processed_files': [],
             'isbn_not_found': [],
+            'isbn_extraction_failed': [],
             'api_failures': [],
             'processing_times': [],
             'api_attempts': {},
-            'api_errors': {}
+            'api_errors': {},
+            'failure_details': {}
         }
         
         if subdirs:
-            # Processa apenas os subdiretórios especificados
             for subdir in subdirs:
                 subdir_path = directory / subdir
                 if subdir_path.exists():
@@ -656,10 +947,8 @@ class BookMetadataExtractor:
                 else:
                     logging.warning(f"Subdiretório não encontrado: {subdir_path}")
         elif recursive:
-            # Processa recursivamente
             pdf_files = list(directory.glob('**/*.pdf'))
         else:
-            # Processa apenas o diretório atual
             pdf_files = list(directory.glob('*.pdf'))
         
         logging.info(f"Encontrados {len(pdf_files)} arquivos PDF para processar")
@@ -686,10 +975,331 @@ class BookMetadataExtractor:
                     finally:
                         pbar.update(1)
         
-        # Imprime relatório detalhado
-        self.print_detailed_report(results, runtime_stats)
-                    
+        try:
+            self.print_detailed_report(results, runtime_stats)
+        except Exception as e:
+            logging.error(f"Erro ao gerar relatório: {str(e)}")
+            
         return results
+    
+class AdvancedTextExtractor:
+    def __init__(self):
+        self.dependency_manager = DependencyManager()
+        self.manual_patterns = [
+            'manual', 'guide', 'documentation', 'student guide',
+            'workbook', 'handbook', 'reference', 'training',
+            'lesson', 'tutorial', 'lab guide', 'exercise book',
+            'student workbook', 'course material', 'training kit',
+            'quick reference', 'user guide', 'getting started'
+        ]
+        
+        # Padrões expandidos de ISBN
+        self.expanded_isbn_patterns = [
+            # Padrões para ISBN-13 em diferentes formatos
+            r'ISBN(?:-13)?[:\s]*(?:97[89][-\s]*(?:\d[-\s]*){9}\d)',
+            r'97[89](?:[-\s]*\d){10}',
+            r'97[89]\d{10}',
+            
+            # Padrões para ISBN-10
+            r'ISBN(?:-10)?[:\s]*(?:\d[-\s]*){9}[\dXx]',
+            r'(?:\d[-\s]*){9}[\dXx]',
+            
+            # Padrões específicos para livros técnicos
+            r'ISBN(?:[\s-]*(?:Print|eBook|Digital|Paperback|Hardcover)?:?)?\s*(97[89][-\s]*(?:\d[-\s]*){9}\d)',
+            r'ISBN\s*(?:Number|No|#)?[:.]?\s*(97[89][-\s]*(?:\d[-\s]*){9}\d)',
+            
+            # Padrões para múltiplos formatos
+            r'(?:Print(?:/|\\)?Digital)?\s*ISBN:\s*(97[89][-\s]*(?:\d[-\s]*){9}\d)',
+            r'(?:eBook|Digital|Online)\s*ISBN:\s*(97[89][-\s]*(?:\d[-\s]*){9}\d)',
+            
+            # Padrões específicos de editoras
+            r'Apress\s+ISBN[-:]?\s*(97[89][-\s]*(?:\d[-\s]*){9}\d)',
+            r"O'Reilly\s+ISBN[-:]?\s*(97[89][-\s]*(?:\d[-\s]*){9}\d)",
+            r'Packt\s+ISBN[-:]?\s*(97[89][-\s]*(?:\d[-\s]*){9}\d)',
+            r'Manning\s+ISBN[-:]?\s*(97[89][-\s]*(?:\d[-\s]*){9}\d)',
+            r'Wiley\s+ISBN[-:]?\s*(97[89][-\s]*(?:\d[-\s]*){9}\d)',
+            
+            # Padrões para casos especiais
+            r'ISBN[-:]?\s*(?:book|print|ebook)?\s*(97[89]\d{10})',
+            r'ISBN[-:]?\s*(?:book|print|ebook)?\s*(97[89][-\s]\d{1,5}[-\s]\d{1,7}[-\s]\d{1,6}[-\s]\d)',
+        ]
+        
+        # Caracteres comumente confundidos em OCR
+        self.ocr_replacements = {
+            'l': '1', 'I': '1', 'O': '0', 'o': '0',
+            'S': '5', 'Z': '2', 'B': '8', 'G': '6',
+            'q': '9', 'g': '9', 'z': '2', 'A': '4',
+            'T': '7', 'Y': '7', 'U': '0', 'D': '0'
+        }
+
+    def extract_text(self, pdf_path: str, max_pages: int = 10) -> Tuple[str, bool]:
+        """
+        Extrai texto do PDF usando múltiplos métodos disponíveis.
+        Retorna uma tupla (texto, é_manual).
+        """
+        text = ""
+        methods_tried = []
+        extractors_available = self.dependency_manager.get_available_extractors()
+
+        if not extractors_available:
+            logging.error("Nenhum extrator de PDF disponível. Instale pelo menos uma biblioteca de extração.")
+            return "", False
+
+        # Primeira tentativa: PyPDF2
+        if 'pypdf2' in extractors_available:
+            try:
+                with open(pdf_path, 'rb') as file:
+                    reader = PyPDF2.PdfReader(file)
+                    pages_to_check = min(max_pages, len(reader.pages))
+                    
+                    for page_num in range(pages_to_check):
+                        text += reader.pages[page_num].extract_text() + "\n"
+                        
+                    if text.strip():
+                        methods_tried.append('pypdf2')
+                        
+                    # Verifica qualidade do texto
+                    if text and not self._is_text_garbage(text):
+                        logging.info("Texto extraído com sucesso usando PyPDF2")
+                        text = self._clean_text(text)
+                        return text, self._is_manual_or_documentation(text)
+            except Exception as e:
+                logging.debug(f"PyPDF2 extraction failed: {str(e)}")
+
+        # Segunda tentativa: pdfplumber
+        if 'pdfplumber' in extractors_available:
+            try:
+                import pdfplumber
+                with pdfplumber.open(pdf_path) as pdf:
+                    pages_to_check = min(max_pages, len(pdf.pages))
+                    text = ""
+                    for page in pdf.pages[:pages_to_check]:
+                        text += page.extract_text() + "\n"
+                        
+                    if text.strip():
+                        methods_tried.append('pdfplumber')
+                        
+                    # Verifica qualidade do texto
+                    if text and not self._is_text_garbage(text):
+                        logging.info("Texto extraído com sucesso usando pdfplumber")
+                        text = self._clean_text(text)
+                        return text, self._is_manual_or_documentation(text)
+            except Exception as e:
+                logging.debug(f"pdfplumber extraction failed: {str(e)}")
+
+        # Terceira tentativa: pdfminer
+        if 'pdfminer' in extractors_available:
+            try:
+                from pdfminer.high_level import extract_text as pdfminer_extract
+                text = pdfminer_extract(pdf_path, maxpages=max_pages)
+                if text.strip():
+                    methods_tried.append('pdfminer')
+                    
+                # Verifica qualidade do texto
+                if text and not self._is_text_garbage(text):
+                    logging.info("Texto extraído com sucesso usando pdfminer")
+                    text = self._clean_text(text)
+                    return text, self._is_manual_or_documentation(text)
+            except Exception as e:
+                logging.debug(f"pdfminer extraction failed: {str(e)}")
+
+        # Última tentativa: OCR com Tesseract
+        if self.dependency_manager.has_ocr_support:
+            try:
+                import pytesseract
+                from pdf2image import convert_from_path
+                
+                images = convert_from_path(pdf_path, last_page=max_pages)
+                text = ""
+                for image in images:
+                    text += pytesseract.image_to_string(image) + "\n"
+                    
+                if text.strip():
+                    methods_tried.append('tesseract')
+                    
+                # Verifica qualidade do texto
+                if text and not self._is_text_garbage(text):
+                    logging.info("Texto extraído com sucesso usando Tesseract OCR")
+                    text = self._clean_text(text)
+                    return text, self._is_manual_or_documentation(text)
+            except Exception as e:
+                logging.debug(f"Tesseract OCR failed: {str(e)}")
+
+        if not text.strip():
+            logging.warning(f"Nenhum método de extração teve sucesso")
+            if methods_tried:
+                logging.info(f"Métodos tentados: {', '.join(methods_tried)}")
+            return "", False
+
+        # Se chegou aqui, usa o melhor texto que conseguiu
+        text = self._clean_text(text)
+        is_manual = self._is_manual_or_documentation(text)
+        logging.info(f"Texto extraído usando: {', '.join(methods_tried)}")
+        return text, is_manual
+
+    def _is_text_garbage(self, text: str) -> bool:
+        """
+        Verifica se o texto extraído parece ser lixo ou está muito corrompido.
+        """
+        if not text:
+            return True
+            
+        # Remove espaços em branco e caracteres especiais para análise
+        clean_text = ''.join(c for c in text if c.isalnum())
+        
+        # Texto muito curto
+        if len(clean_text) < 50:
+            return True
+            
+        # Alta proporção de caracteres especiais
+        special_chars = sum(1 for c in text if not c.isalnum() and not c.isspace())
+        if len(text) > 0 and special_chars / len(text) > 0.4:
+            return True
+            
+        # Sequências longas de caracteres idênticos
+        if any(c * 8 in text for c in set(text)):
+            return True
+            
+        # Baixa variabilidade de caracteres
+        unique_chars = len(set(clean_text))
+        if len(clean_text) > 0 and unique_chars / len(clean_text) < 0.1:
+            return True
+            
+        return False
+
+    def _clean_text(self, text: str) -> str:
+        """Limpa e normaliza o texto extraído."""
+        import unicodedata
+        
+        # Remove caracteres de controle
+        text = ''.join(char for char in text if unicodedata.category(char)[0] != 'C')
+        
+        # Normaliza espaços e quebras de linha
+        text = re.sub(r'\s+', ' ', text)
+        
+        # Aplica correções apenas em sequências que parecem números
+        def replace_in_numbers(match):
+            number = match.group()
+            for old, new in self.ocr_replacements.items():
+                if old in number:
+                    number = number.replace(old, new)
+            return number
+            
+        # Aplica correções apenas em potenciais ISBNs
+        isbn_pattern = r'(?:ISBN[-:]?\s*)?(?:[0-9A-Za-z-]{10,})'
+        text = re.sub(isbn_pattern, replace_in_numbers, text)
+        
+        return text.strip()
+    
+    def _is_manual_or_documentation(self, text: str) -> bool:
+        """
+        Verifica se o texto parece ser de um manual ou documentação.
+        Retorna True se for manual/documentação, False caso contrário.
+        """
+        text_lower = text.lower()
+        
+        # Verifica padrões de manuais
+        if any(pattern in text_lower for pattern in self.manual_patterns):
+            # Verifica por indicadores adicionais
+            if re.search(r'(chapter|lesson|module|training|exercise)\s+\d+', text_lower):
+                return True
+            if re.search(r'student\s+guide|instructor\s+manual|training\s+material', text_lower):
+                return True
+            if re.search(r'lab\s+\d+|appendix\s+[a-z]|unit\s+\d+', text_lower):
+                return True
+                
+        # Verifica estrutura típica de manuais
+        content_indicators = [
+            r'table\s+of\s+contents',
+            r'learning\s+objectives',
+            r'course\s+overview',
+            r'prerequisites',
+            r'©\s*\d{4}.*\s+training',
+            r'©\s*\d{4}.*\s+documentation',
+            r'all\s+rights\s+reserved.*training',
+            r'confidential\s+and\s+proprietary'
+        ]
+        
+        if sum(1 for pattern in content_indicators if re.search(pattern, text_lower)) >= 2:
+            return True
+            
+        return False
+
+    def find_isbns(self, text: str) -> Set[str]:
+        """Encontra ISBNs usando padrões expandidos."""
+        isbns = set()
+        
+        for pattern in self.expanded_isbn_patterns:
+            matches = re.finditer(pattern, text, re.IGNORECASE)
+            for match in matches:
+                isbn = match.group(1) if '(' in pattern else match.group()
+                isbn = re.sub(r'[^0-9X]', '', isbn.upper())
+                
+                if len(isbn) == 10:
+                    if self._validate_isbn_10(isbn):
+                        isbns.add(isbn)
+                        isbn13 = self._convert_isbn10_to_13(isbn)
+                        if isbn13:
+                            isbns.add(isbn13)
+                elif len(isbn) == 13:
+                    if self._validate_isbn_13(isbn):
+                        isbns.add(isbn)
+                        
+        return isbns
+    
+    def _validate_isbn_10(self, isbn: str) -> bool:
+        """Valida ISBN-10."""
+        if len(isbn) != 10:
+            return False
+            
+        try:
+            total = 0
+            for i in range(9):
+                total += int(isbn[i]) * (10 - i)
+                
+            if isbn[9] == 'X':
+                total += 10
+            else:
+                total += int(isbn[9])
+                
+            return total % 11 == 0
+        except:
+            return False
+            
+    def _validate_isbn_13(self, isbn: str) -> bool:
+        """Valida ISBN-13."""
+        if len(isbn) != 13:
+            return False
+            
+        try:
+            total = 0
+            for i in range(12):
+                if i % 2 == 0:
+                    total += int(isbn[i])
+                else:
+                    total += int(isbn[i]) * 3
+                    
+            check = (10 - (total % 10)) % 10
+            return check == int(isbn[12])
+        except:
+            return False
+            
+    def _convert_isbn10_to_13(self, isbn10: str) -> Optional[str]:
+        """Converte ISBN-10 para ISBN-13."""
+        if len(isbn10) != 10:
+            return None
+            
+        prefix = "978" + isbn10[:-1]
+        total = 0
+        
+        for i in range(12):
+            if i % 2 == 0:
+                total += int(prefix[i])
+            else:
+                total += int(prefix[i]) * 3
+                
+        check = (10 - (total % 10)) % 10
+        return prefix + str(check)
     
 def main():
     parser = argparse.ArgumentParser(
