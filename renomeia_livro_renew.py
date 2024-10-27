@@ -19,7 +19,6 @@ class BookMetadataExtractor:
         try:
             with open(pdf_path, 'rb') as file:
                 reader = PyPDF2.PdfReader(file)
-                # Examina apenas as primeiras páginas para eficiência
                 pages_to_check = min(5, len(reader.pages))
                 
                 for page_num in range(pages_to_check):
@@ -41,9 +40,7 @@ class BookMetadataExtractor:
     def is_valid_isbn(self, isbn):
         """Validação básica de ISBN."""
         isbn = re.sub(r'[^0-9X]', '', isbn)
-        if len(isbn) not in [10, 13]:
-            return False
-        return True
+        return len(isbn) in [10, 13]
 
     def get_metadata_from_google_books(self, isbn):
         """Consulta a API do Google Books usando ISBN."""
@@ -85,12 +82,14 @@ class BookMetadataExtractor:
             print(f"Erro na consulta à Open Library: {str(e)}")
         return None
 
-    def process_directory(self, directory_path):
+    def process_directory(self, directory_path, include_subdirs):
         """Processa todos os PDFs em um diretório."""
         results = []
         directory = Path(directory_path)
         
-        for pdf_path in directory.glob('**/*.pdf'):
+        pdf_pattern = '**/*.pdf' if include_subdirs else '*.pdf'
+        
+        for pdf_path in directory.glob(pdf_pattern):
             print(f"\nProcessando: {pdf_path}")
             
             isbn = self.extract_isbn_from_pdf(pdf_path)
@@ -110,12 +109,17 @@ class BookMetadataExtractor:
             if metadata:
                 metadata['file_path'] = str(pdf_path)
                 results.append(metadata)
-                print(f"Metadados encontrados para: {metadata['title']}")
+                
+                # Exibe informações completas na tela
+                print(f"Metadados encontrados:\n"
+                      f"  Título: {metadata['title']}\n"
+                      f"  Autor(es): {', '.join(metadata['authors'])}\n"
+                      f"  Editora: {metadata['publisher']}\n"
+                      f"  Ano de Publicação: {metadata['publishedDate']}\n")
             else:
                 print(f"Não foi possível encontrar metadados para ISBN: {isbn}")
             
-            # Evita sobrecarregar as APIs
-            time.sleep(1)
+            time.sleep(1)  # Evita sobrecarregar as APIs
         
         return results
 
@@ -127,13 +131,11 @@ class BookMetadataExtractor:
 def main():
     extractor = BookMetadataExtractor()
     
-    # Diretório com seus PDFs
     directory_path = input("Digite o caminho do diretório com os PDFs: ")
+    include_subdirs = input("Incluir subdiretórios? (s/n): ").strip().lower() == 's'
     
-    # Processa os arquivos
-    results = extractor.process_directory(directory_path)
+    results = extractor.process_directory(directory_path, include_subdirs)
     
-    # Salva os resultados
     output_file = "book_metadata_results.json"
     extractor.save_results(results, output_file)
     
