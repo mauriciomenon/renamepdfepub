@@ -73,7 +73,6 @@ class DependencyManager:
         """Verifica se o suporte a OCR está disponível."""
         return self.available_extractors['tesseract'] and self.available_extractors['pdf2image']
 
-
 # Configurações de editoras e padrões
 BRAZILIAN_PUBLISHERS = {
     'casa do codigo': {
@@ -434,27 +433,27 @@ class MetadataFetcher:
     def fetch_worldcat(self, isbn: str) -> Optional[BookMetadata]:
         """Busca metadados do WorldCat com melhor tratamento de erros."""
         try:
-            urls = [
-                f"https://classify.oclc.org/classify2/Classify?isbn={isbn}&summary=true",
-                f"http://classify.oclc.org/classify2/Classify?isbn={isbn}&summary=true"
-            ]
+            base_url = "https://classify.oclc.org/classify2/Classify"
+            params = {
+                'isbn': isbn,
+                'summary': 'true'
+            }
             
-            response = None
-            for url in urls:
-                try:
-                    response = self.session.get(url, timeout=15)
-                    if response.status_code == 200:
-                        break
-                except:
-                    continue
-            
-            if not response or response.status_code != 200:
+            logging.info(f"Tentando WorldCat com ISBN {isbn}")
+            try:
+                response = self.session.get(base_url, params=params, timeout=15)
+                if response.status_code != 200:
+                    logging.warning(f"WorldCat retornou status {response.status_code}")
+                    return None
+            except Exception as e:
+                logging.error(f"Erro na requisição WorldCat: {str(e)}")
                 return None
-                
+                    
             root = ET.fromstring(response.content)
             work = root.find('.//work')
             
             if work is None:
+                logging.info("WorldCat não encontrou informações do livro")
                 return None
                 
             authors = []
@@ -466,7 +465,7 @@ class MetadataFetcher:
             else:
                 authors = [author_element]
                 
-            return BookMetadata(
+            metadata = BookMetadata(
                 title=work.get('title', 'Unknown'),
                 authors=authors,
                 publisher=work.get('publisher', 'Unknown'),
@@ -476,6 +475,10 @@ class MetadataFetcher:
                 confidence_score=0.75,
                 source='worldcat'
             )
+            
+            logging.info(f"WorldCat retornou metadados para {metadata.title}")
+            return metadata
+                
         except Exception as e:
             logging.error(f"WorldCat API error for ISBN {isbn}: {str(e)}")
             return None
@@ -514,34 +517,42 @@ class MetadataFetcher:
         # Verifica cache
         cached = self.cache.get(isbn)
         if cached:
+            logging.info(f"Cache hit para ISBN {isbn}")
             return BookMetadata(**cached)
         
         # Detecta se é ISBN brasileiro
         is_brazilian = any(isbn.startswith(prefix) for prefix in ['97865', '97885', '65', '85'])
+        logging.info(f"ISBN {isbn} {'é' if is_brazilian else 'não é'} brasileiro")
         
         # Define ordem das APIs baseado na origem do ISBN
         fetchers = []
         if is_brazilian:
             fetchers.extend([
-                (self.fetch_google_books_br, 10),
-                (self.fetch_mercado_editorial, 9)
+                (self.fetch_google_books_br, 10, "Google Books BR"),
+                (self.fetch_mercado_editorial, 9, "Mercado Editorial")
             ])
-            
+            logging.info("Adicionadas APIs brasileiras à sequência")
+                
         # Adiciona APIs internacionais
         fetchers.extend([
-            (self.fetch_google_books, 7),
-            (self.fetch_openlibrary, 6),
-            (self.fetch_worldcat, 5)
+            (self.fetch_google_books, 7, "Google Books Global"),
+            (self.fetch_openlibrary, 6, "Open Library"),
+            (self.fetch_worldcat, 5, "WorldCat")
         ])
         
         best_metadata = None
         highest_confidence = 0
         errors = []
+        attempted_apis = []
         
-        for fetcher, priority in fetchers:
+        logging.info(f"Iniciando busca de metadados para ISBN {isbn}")
+        for fetcher, priority, name in fetchers:
             try:
+                logging.info(f"Tentando {name}...")
+                attempted_apis.append(name)
                 metadata = fetcher(isbn)
                 if metadata:
+                    logging.info(f"Sucesso com {name}")
                     # Ajusta confiança baseado na prioridade
                     metadata.confidence_score *= (priority / 10)
                     
@@ -551,64 +562,90 @@ class MetadataFetcher:
                         
                         # Se encontrou com alta confiança, para
                         if highest_confidence > 0.9:
+                            logging.info(f"Encontrado resultado com alta confiança em {name}")
                             break
+                else:
+                    logging.info(f"{name} não retornou resultados")
             except Exception as e:
-                errors.append(f"{fetcher.__name__}: {str(e)}")
+                error_msg = f"{name}: {str(e)}"
+                logging.error(error_msg)
+                errors.append(error_msg)
                 continue
         
         if best_metadata:
+            logging.info(f"Metadados encontrados com confiança {highest_confidence:.2f}")
             self.cache.set(isbn, asdict(best_metadata))
-            
+        else:
+            logging.warning(f"Nenhum resultado encontrado após tentar {', '.join(attempted_apis)}")
+            if errors:
+                logging.error(f"Erros encontrados: {', '.join(errors)}")
+                
         return best_metadata
     
 class PDFProcessor:
     def __init__(self):
         self.isbn_extractor = ISBNExtractor()
-        self.advanced_extractor = AdvancedTextExtractor()
-        logging.info(f"Extractores disponíveis: {', '.join(self.advanced_extractor.dependency_manager.get_available_extractors())}")
-        if self.advanced_extractor.dependency_manager.has_ocr_support:
+        self.dependency_manager = DependencyManager()
+        logging.info(f"Extractores disponíveis: {', '.join(self.dependency_manager.get_available_extractors())}")
+        if self.dependency_manager.has_ocr_support:
             logging.info("Suporte a OCR está disponível")
         
-    def extract_text_from_pdf(self, pdf_path: str, max_pages: int = 10) -> str:
+    def extract_text_from_pdf(self, pdf_path: str, max_pages: int = 10) -> Tuple[str, List[str]]:
         """Extrai texto das primeiras páginas do PDF."""
         logging.info(f"Iniciando extração de texto de: {pdf_path}")
         text = ""
+        methods_tried = []
+        methods_succeeded = []
+        
+        # Sequência original de tentativas
         
         # Tenta PyPDF2 primeiro (método original)
         try:
             with open(pdf_path, 'rb') as file:
                 reader = PyPDF2.PdfReader(file)
                 pages_to_check = min(max_pages, len(reader.pages))
+                methods_tried.append("PyPDF2")
                 for page_num in range(pages_to_check):
                     text += reader.pages[page_num].extract_text() + "\n"
+                if text.strip():
+                    methods_succeeded.append("PyPDF2")
         except Exception as e:
             logging.debug(f"Erro na extração com PyPDF2: {str(e)}")
 
-        # Se não conseguiu texto suficiente, tenta pdfplumber
-        if not text or len(text.strip()) < 100:
+        # Se não conseguiu texto suficiente, tenta pdfplumber (se disponível)
+        if (not text or len(text.strip()) < 100) and 'pdfplumber' in self.dependency_manager.get_available_extractors():
             try:
                 import pdfplumber
+                methods_tried.append("pdfplumber")
                 with pdfplumber.open(pdf_path) as pdf:
                     pages_to_check = min(max_pages, len(pdf.pages))
-                    text = ""
+                    plumber_text = ""
                     for page in pdf.pages[:pages_to_check]:
-                        text += page.extract_text() + "\n"
+                        plumber_text += page.extract_text() + "\n"
+                    if plumber_text.strip():
+                        text = plumber_text
+                        methods_succeeded.append("pdfplumber")
             except Exception as e:
                 logging.debug(f"Erro na extração com pdfplumber: {str(e)}")
 
-        # Se ainda não tem texto suficiente, tenta pdfminer
-        if not text or len(text.strip()) < 100:
+        # Se ainda não tem texto suficiente, tenta pdfminer (se disponível)
+        if (not text or len(text.strip()) < 100) and 'pdfminer' in self.dependency_manager.get_available_extractors():
             try:
                 from pdfminer.high_level import extract_text as pdfminer_extract
-                text = pdfminer_extract(pdf_path, maxpages=max_pages)
+                methods_tried.append("pdfminer")
+                miner_text = pdfminer_extract(pdf_path, maxpages=max_pages)
+                if miner_text.strip():
+                    text = miner_text
+                    methods_succeeded.append("pdfminer")
             except Exception as e:
                 logging.debug(f"Erro na extração com pdfminer: {str(e)}")
 
         # Se ainda não tem texto e OCR está disponível, tenta Tesseract
-        if (not text or len(text.strip()) < 100):
+        if (not text or len(text.strip()) < 100) and self.dependency_manager.has_ocr_support:
             try:
                 import pytesseract
                 from pdf2image import convert_from_path
+                methods_tried.append("OCR (Tesseract)")
                 
                 images = convert_from_path(pdf_path, last_page=max_pages)
                 ocr_text = ""
@@ -617,8 +654,24 @@ class PDFProcessor:
                     
                 if ocr_text.strip():
                     text = ocr_text
+                    methods_succeeded.append("OCR (Tesseract)")
             except Exception as e:
                 logging.debug(f"Erro na extração com OCR: {str(e)}")
+
+        # Se após todas as tentativas ainda não tiver texto adequado, usa o AdvancedTextExtractor
+        if not text or len(text.strip()) < 100:
+            logging.info("Tentando extração avançada após falha dos métodos convencionais")
+            advanced_extractor = AdvancedTextExtractor()
+            advanced_text, is_manual = advanced_extractor.extract_text(pdf_path, max_pages)
+            
+            if is_manual:
+                logging.info(f"Arquivo identificado como manual/documentação via extração avançada: {pdf_path}")
+                return "", methods_tried + ["advanced_extraction"]
+                
+            if advanced_text:
+                text = advanced_text
+                methods_tried.append("advanced_extraction")
+                methods_succeeded.append("advanced_extraction")
 
         # Limpa o texto
         text = self._clean_text(text)
@@ -626,32 +679,13 @@ class PDFProcessor:
         # Verifica se é um manual
         if self._is_manual_or_documentation(text):
             logging.info(f"Arquivo identificado como manual/documentação: {pdf_path}")
-            return ""
+            return "", methods_tried
             
-        return text
-
-    def extract_metadata_from_pdf(self, pdf_path: str) -> Dict:
-        """Extrai metadados internos do PDF."""
-        logging.info(f"Extraindo metadados de: {pdf_path}")
-        try:
-            with open(pdf_path, 'rb') as file:
-                reader = PyPDF2.PdfReader(file)
-                metadata = reader.metadata if reader.metadata else {}
-                
-                if 'ISBN' in metadata:
-                    isbn = re.sub(r'[^0-9X]', '', metadata['ISBN'].upper())
-                    if not (self.advanced_extractor._validate_isbn_10(isbn) or 
-                           self.advanced_extractor._validate_isbn_13(isbn)):
-                        logging.warning(f"ISBN inválido encontrado nos metadados: {isbn}")
-                        del metadata['ISBN']
-                    else:
-                        logging.info(f"ISBN válido encontrado nos metadados: {isbn}")
-                        
-                return metadata
-        except Exception as e:
-            logging.error(f"Erro ao extrair metadados de {pdf_path}: {str(e)}")
-            return {}
+        logging.info(f"Métodos tentados: {', '.join(methods_tried)}")
+        logging.info(f"Métodos bem-sucedidos: {', '.join(methods_succeeded)}")
         
+        return text, methods_tried
+
     def _clean_text(self, text: str) -> str:
         """Limpa e normaliza o texto extraído."""
         if not text:
@@ -663,10 +697,12 @@ class PDFProcessor:
         # Normaliza espaços
         text = re.sub(r'\s+', ' ', text)
         
-        # Correções comuns de OCR para números
+        # Correções mais abrangentes para OCR e texto corrompido
         ocr_replacements = {
             'l': '1', 'I': '1', 'O': '0', 'o': '0',
-            'S': '5', 'Z': '2', 'B': '8', 'G': '6'
+            'S': '5', 'Z': '2', 'B': '8', 'G': '6',
+            '+': '7', '@': '9', '>': '7', '?': '8',
+            'd': 'fi', '00': '11', '#': '8'
         }
         
         def replace_in_numbers(match):
@@ -685,18 +721,51 @@ class PDFProcessor:
         patterns = [
             r'manual\s+de\s+\w+',
             r'student\s+guide',
+            r'lab\s+guide',
             r'training\s+manual',
             r'documentation',
             r'confidential\s+and\s+proprietary',
             r'©.*training',
-            r'course\s+materials?'
+            r'course\s+materials?',
+            r'trellix.*student\s+guide',
+            r'trellix.*lab\s+guide',
+            r'education\s+services',
+            r'trellix.*documentation',
+            r'student\s+workbook',
+            r'training\s+kit'
         ]
         
         text_lower = text.lower()
         
+        # Verifica o nome do arquivo também
+        if any(x in text_lower for x in ['_sg.pdf', '_lg.pdf']):
+            return True
+        
         # Se encontrar 2 ou mais padrões, considera como manual
         matches = sum(1 for pattern in patterns if re.search(pattern, text_lower))
         return matches >= 2
+
+    def extract_metadata_from_pdf(self, pdf_path: str) -> Dict:
+        """Extrai metadados internos do PDF."""
+        logging.info(f"Extraindo metadados de: {pdf_path}")
+        try:
+            with open(pdf_path, 'rb') as file:
+                reader = PyPDF2.PdfReader(file)
+                metadata = reader.metadata if reader.metadata else {}
+                
+                if 'ISBN' in metadata:
+                    isbn = re.sub(r'[^0-9X]', '', metadata['ISBN'].upper())
+                    if not (self.isbn_extractor.validate_isbn_10(isbn) or 
+                           self.isbn_extractor.validate_isbn_13(isbn)):
+                        logging.warning(f"ISBN inválido encontrado nos metadados: {isbn}")
+                        del metadata['ISBN']
+                    else:
+                        logging.info(f"ISBN válido encontrado nos metadados: {isbn}")
+                        
+                return metadata
+        except Exception as e:
+            logging.error(f"Erro ao extrair metadados de {pdf_path}: {str(e)}")
+            return {}
 
 class BookMetadataExtractor:
     def __init__(self, isbndb_api_key: Optional[str] = None):
@@ -722,9 +791,10 @@ class BookMetadataExtractor:
         details = runtime_stats['failure_details'][pdf_path]
         
         # Extrai texto do PDF
-        text = self.pdf_processor.extract_text_from_pdf(pdf_path)
+        text, extraction_methods = self.pdf_processor.extract_text_from_pdf(pdf_path)
+        details['extraction_methods'] = extraction_methods
         
-        # Limpa o texto para amostra (remove linhas em branco múltiplas)
+        # Limpa o texto para amostra
         clean_text = re.sub(r'\n\s*\n', '\n', text[:500])
         details['extracted_text_sample'] = clean_text
         
@@ -743,59 +813,53 @@ class BookMetadataExtractor:
         if not isbns:
             runtime_stats['isbn_extraction_failed'].append(pdf_path)
             details['status'] = 'ISBN não encontrado no arquivo'
+            details['extraction_attempts'] = extraction_methods
             return None
         
         details['found_isbns'] = list(isbns)
         details['status'] = 'ISBNs encontrados mas falha na busca online'
+        details['api_attempts'] = []
         
-        # Tenta obter metadados
-        best_metadata = None
-        highest_confidence = 0
-        runtime_stats['api_attempts'][pdf_path] = []
-        runtime_stats['api_errors'][pdf_path] = []
-        
+        # Tenta obter metadados usando o primeiro ISBN válido que corresponder
+        metadata_found = False
         for isbn in isbns:
             try:
                 metadata = self.metadata_fetcher.fetch_metadata(isbn)
                 if metadata:
-                    runtime_stats['api_attempts'][pdf_path].append(metadata.source)
+                    details['api_attempts'].append(metadata.source)
                     if publisher != "unknown" and publisher.lower() in metadata.publisher.lower():
                         metadata.confidence_score += 0.1
-                    if metadata.confidence_score > highest_confidence:
-                        metadata.file_path = str(pdf_path)
-                        best_metadata = metadata
-                        highest_confidence = metadata.confidence_score
+                    metadata.file_path = str(pdf_path)
+                    runtime_stats['processing_times'].append(time.time() - start_time)
+                    details['status'] = 'Sucesso'
+                    return metadata  # Retorna assim que encontrar o primeiro ISBN válido
             except Exception as e:
                 runtime_stats['api_errors'][pdf_path].append(f"ISBN {isbn}: {str(e)}")
         
+        # Se chegou aqui, nenhum ISBN funcionou
         runtime_stats['processing_times'].append(time.time() - start_time)
-        
-        if best_metadata:
-            details['status'] = 'Sucesso'
-        else:
-            runtime_stats['api_failures'].append(pdf_path)
-            
-        return best_metadata
-
+        runtime_stats['api_failures'].append(pdf_path)
+        return None
+    
     def generate_report(self, results: List[BookMetadata], output_file: str) -> Dict:
-        """Gera um relatório detalhado em JSON com os resultados."""
-        report = {
-            'summary': {
-                'total_files_processed': len(results),
-                'successful_extractions': sum(1 for r in results if r is not None),
-                'failed_extractions': sum(1 for r in results if r is None),
-                'sources_used': dict(Counter(r.source for r in results if r is not None)),
-                'timestamp': time.strftime('%Y-%m-%d %H:%M:%S'),
-                'publishers': dict(Counter(r.publisher for r in results if r is not None))
-            },
-            'books': [asdict(r) for r in results if r is not None]
-        }
-        
-        # Salva o relatório
-        with open(output_file, 'w', encoding='utf-8') as f:
-            json.dump(report, f, ensure_ascii=False, indent=2)
+            """Gera um relatório detalhado em JSON com os resultados."""
+            report = {
+                'summary': {
+                    'total_files_processed': len(results),
+                    'successful_extractions': sum(1 for r in results if r is not None),
+                    'failed_extractions': sum(1 for r in results if r is None),
+                    'sources_used': dict(Counter(r.source for r in results if r is not None)),
+                    'timestamp': time.strftime('%Y-%m-%d %H:%M:%S'),
+                    'publishers': dict(Counter(r.publisher for r in results if r is not None))
+                },
+                'books': [asdict(r) for r in results if r is not None]
+            }
             
-        return report
+            # Salva o relatório
+            with open(output_file, 'w', encoding='utf-8') as f:
+                json.dump(report, f, ensure_ascii=False, indent=2)
+                
+            return report
 
     def suggest_filename(self, metadata: BookMetadata) -> str:
         """Sugere um nome de arquivo baseado nos metadados."""
@@ -818,11 +882,10 @@ class BookMetadataExtractor:
     def print_detailed_report(self, results: List[BookMetadata], runtime_stats: Dict):
         """Imprime um relatório detalhado dos resultados."""
         try:
-            # Contagens corretas
             total_files = len(runtime_stats['processed_files'])
             successful_results = [r for r in results if r is not None]
             successful = len(successful_results)
-            failed = total_files - successful  # Agora failed é um número, não um caminho
+            failed = total_files - successful
 
             print("\n" + "="*80)
             print("RELATÓRIO DE PROCESSAMENTO DE PDFs")
@@ -839,9 +902,25 @@ class BookMetadataExtractor:
                     details = runtime_stats['failure_details'].get(failed_file, {})
                     print(f"\n✗ {filename}")
                     
+                    # Métodos de extração tentados
+                    if 'extraction_methods' in details:
+                        print(f"  Métodos de extração tentados: {', '.join(details['extraction_methods'])}")
+                    
                     # ISBNs encontrados
                     if 'found_isbns' in details and details['found_isbns']:
                         print(f"  ISBNs encontrados: {', '.join(details['found_isbns'])}")
+                    
+                    # APIs tentadas
+                    if 'api_attempts' in details:
+                        print(f"  APIs tentadas: {', '.join(details['api_attempts'])}")
+                    
+                    # Erros de API detalhados
+                    if failed_file in runtime_stats.get('api_failures', []):
+                        errors = runtime_stats['api_errors'].get(failed_file, [])
+                        if errors:
+                            print("  Erros detalhados:")
+                            for error in errors:
+                                print(f"    - {error}")
                     
                     # Status de falha
                     if failed_file in runtime_stats.get('isbn_extraction_failed', []):
@@ -856,18 +935,10 @@ class BookMetadataExtractor:
                     if publisher and publisher != 'unknown':
                         print(f"  Editora detectada: {publisher}")
                         print("  FALHA CRÍTICA: Editora conhecida sem metadados")
-                    
-                    # Erros de API
-                    if failed_file in runtime_stats.get('api_failures', []):
-                        errors = runtime_stats['api_errors'].get(failed_file, [])
-                        if errors:
-                            print("  Erros de API:")
-                            for error in errors:
-                                print(f"    - {error}")
             else:
                 print("\nNenhuma falha encontrada!")
             
-            # Livros processados com sucesso
+            # Resto do relatório (mantido igual)
             print("\n2. LIVROS PROCESSADOS COM SUCESSO")
             print("-"*40)
             if successful > 0:
@@ -884,11 +955,9 @@ class BookMetadataExtractor:
             else:
                 print("\nNenhum livro processado com sucesso.")
 
-            # Estatísticas gerais
             print("\n3. ESTATÍSTICAS GERAIS")
             print("-"*40)
             
-            # Cálculos com números, não strings
             success_rate = (successful / total_files * 100) if total_files > 0 else 0
             failure_rate = (failed / total_files * 100) if total_files > 0 else 0
             
@@ -896,7 +965,6 @@ class BookMetadataExtractor:
             print(f"Extrações bem-sucedidas: {successful} ({success_rate:.1f}%)")
             print(f"Extrações falhas: {failed} ({failure_rate:.1f}%)")
             
-            # Estatísticas por serviço
             if successful > 0:
                 print("\n4. ESTATÍSTICAS POR SERVIÇO")
                 print("-"*40)
@@ -905,7 +973,6 @@ class BookMetadataExtractor:
                     service_rate = (count / successful * 100)
                     print(f"{api:15}: {count:3} sucessos ({service_rate:.1f}%)")
                 
-                # Performance
                 if runtime_stats['processing_times']:
                     print("\n5. PERFORMANCE")
                     print("-"*40)
@@ -921,7 +988,6 @@ class BookMetadataExtractor:
             logging.error(f"Erro ao gerar relatório: {str(e)}")
             import traceback
             logging.error(traceback.format_exc())
-            # Continua a execução mesmo com erro no relatório
 
     def process_directory(self, directory_path: str, subdirs: Optional[List[str]] = None, 
                          recursive: bool = False, max_workers: int = 4) -> List[BookMetadata]:
