@@ -519,32 +519,25 @@ class MetadataFetcher:
         if cached:
             logging.info(f"Cache hit para ISBN {isbn}")
             return BookMetadata(**cached)
-        
+
         # Detecta se é ISBN brasileiro
         is_brazilian = any(isbn.startswith(prefix) for prefix in ['97865', '97885', '65', '85'])
         logging.info(f"ISBN {isbn} {'é' if is_brazilian else 'não é'} brasileiro")
-        
-        # Define ordem das APIs baseado na origem do ISBN
-        fetchers = []
-        if is_brazilian:
-            fetchers.extend([
-                (self.fetch_google_books_br, 10, "Google Books BR"),
-                (self.fetch_mercado_editorial, 9, "Mercado Editorial")
-            ])
-            logging.info("Adicionadas APIs brasileiras à sequência")
-                
-        # Adiciona APIs internacionais
-        fetchers.extend([
-            (self.fetch_google_books, 7, "Google Books Global"),
-            (self.fetch_openlibrary, 6, "Open Library"),
-            (self.fetch_worldcat, 5, "WorldCat")
-        ])
-        
+
+        # Define ordem das APIs
+        fetchers = [
+            (self.fetch_google_books, 10, "Google Books Global"),
+            (self.fetch_google_books_br, 10, "Google Books BR"),
+            (self.fetch_openlibrary, 8, "Open Library"),
+            (self.fetch_worldcat, 7, "WorldCat"),
+            (self.fetch_mercado_editorial, 9, "Mercado Editorial")
+        ]
+
         best_metadata = None
         highest_confidence = 0
         errors = []
         attempted_apis = []
-        
+
         logging.info(f"Iniciando busca de metadados para ISBN {isbn}")
         for fetcher, priority, name in fetchers:
             try:
@@ -555,11 +548,9 @@ class MetadataFetcher:
                     logging.info(f"Sucesso com {name}")
                     # Ajusta confiança baseado na prioridade
                     metadata.confidence_score *= (priority / 10)
-                    
                     if metadata.confidence_score > highest_confidence:
                         best_metadata = metadata
                         highest_confidence = metadata.confidence_score
-                        
                         # Se encontrou com alta confiança, para
                         if highest_confidence > 0.9:
                             logging.info(f"Encontrado resultado com alta confiança em {name}")
@@ -571,7 +562,7 @@ class MetadataFetcher:
                 logging.error(error_msg)
                 errors.append(error_msg)
                 continue
-        
+
         if best_metadata:
             logging.info(f"Metadados encontrados com confiança {highest_confidence:.2f}")
             self.cache.set(isbn, asdict(best_metadata))
@@ -579,9 +570,9 @@ class MetadataFetcher:
             logging.warning(f"Nenhum resultado encontrado após tentar {', '.join(attempted_apis)}")
             if errors:
                 logging.error(f"Erros encontrados: {', '.join(errors)}")
-                
+
         return best_metadata
-    
+
 class PDFProcessor:
     def __init__(self):
         self.isbn_extractor = ISBNExtractor()
