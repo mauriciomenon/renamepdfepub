@@ -512,6 +512,60 @@ class MetadataFetcher:
             logging.error(f"Mercado Editorial API error: {str(e)}")
             return None
 
+    def fetch_ebook_de(self, isbn: str) -> Optional[BookMetadata]:
+        """Busca metadados na API da Ebook.de."""
+        try:
+            url = f"https://www.ebook.de/de/product/{isbn}"
+            response = self.session.get(url, timeout=10)
+            data = response.json()
+            
+            if 'title' not in data:
+                return None
+                
+            return BookMetadata(
+                title=data.get('title', 'Unknown'),
+                authors=data.get('authors', ['Unknown']),
+                publisher=data.get('publisher', 'Unknown'),
+                published_date=data.get('published_date', 'Unknown'),
+                isbn_13=isbn if len(isbn) == 13 else None,
+                isbn_10=isbn if len(isbn) == 10 else None,
+                confidence_score=0.8,
+                source='ebook_de'
+            )
+        except Exception as e:
+            logging.error(f"Ebook.de API error: {str(e)}")
+            return None
+
+    def fetch_ottobib(self, isbn: str) -> Optional[BookMetadata]:
+        """Busca metadados na API do Ottobib."""
+        try:
+            url = f"https://www.ottobib.com/isbn/{isbn}/bibtex"
+            response = self.session.get(url, timeout=10)
+            data = response.text
+            
+            if not data:
+                return None
+                
+            # Extrair metadados do formato BibTeX
+            title = re.search(r'title\s*=\s*"(.*?)"', data)
+            authors = re.findall(r'author\s*=\s*"(.*?)"', data)
+            publisher = re.search(r'publisher\s*=\s*"(.*?)"', data)
+            published_date = re.search(r'year\s*=\s*"(.*?)"', data)
+            
+            return BookMetadata(
+                title=title.group(1) if title else 'Unknown',
+                authors=[author.strip() for author in authors],
+                publisher=publisher.group(1) if publisher else 'Unknown',
+                published_date=published_date.group(1) if published_date else 'Unknown',
+                isbn_13=isbn if len(isbn) == 13 else None,
+                isbn_10=isbn if len(isbn) == 10 else None,
+                confidence_score=0.7,
+                source='ottobib'
+            )
+        except Exception as e:
+            logging.error(f"Ottobib API error: {str(e)}")
+            return None
+
     def fetch_metadata(self, isbn: str) -> Optional[BookMetadata]:
         """Busca metadados usando múltiplas fontes com lógica melhorada."""
         # Verifica cache
@@ -524,14 +578,24 @@ class MetadataFetcher:
         is_brazilian = any(isbn.startswith(prefix) for prefix in ['97865', '97885', '65', '85'])
         logging.info(f"ISBN {isbn} {'é' if is_brazilian else 'não é'} brasileiro")
 
-        # Define ordem das APIs
-        fetchers = [
-            (self.fetch_google_books, 10, "Google Books Global"),
-            (self.fetch_google_books_br, 10, "Google Books BR"),
-            (self.fetch_openlibrary, 8, "Open Library"),
-            (self.fetch_worldcat, 7, "WorldCat"),
-            (self.fetch_mercado_editorial, 9, "Mercado Editorial")
-        ]
+        # Define ordem das APIs baseado na origem do ISBN
+        fetchers = []
+        if is_brazilian:
+            fetchers.extend([
+                (self.fetch_google_books_br, 8, "Google Books BR"),
+                (self.fetch_mercado_editorial, 9, "Mercado Editorial"),
+                (self.fetch_ebook_de, 7, "Ebook.de"),
+                (self.fetch_ottobib, 6, "Ottobib")
+            ])
+            logging.info("Adicionadas APIs brasileiras à sequência")
+        else:
+            fetchers.extend([
+                (self.fetch_google_books, 10, "Google Books Global"),
+                (self.fetch_openlibrary, 8, "Open Library"),
+                (self.fetch_worldcat, 7, "WorldCat"),
+                (self.fetch_ebook_de, 7, "Ebook.de"),
+                (self.fetch_ottobib, 6, "Ottobib")
+            ])
 
         best_metadata = None
         highest_confidence = 0
