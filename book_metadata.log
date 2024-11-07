@@ -1,185 +1,879 @@
-2024-10-27 11:02:13,893 - INFO - Encontrados 2027 arquivos PDF para processar
-2024-10-27 11:02:13,893 - INFO - Processing: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
-2024-10-27 11:02:13,893 - INFO - Processing: /Users/menon/Downloads/python ciencia 00002cd9.pdf
-2024-10-27 11:02:13,893 - INFO - Processing: /Users/menon/Downloads/bugbountybootcamp.pdf
-2024-10-27 11:02:13,894 - INFO - Processing: /Users/menon/Downloads/EDR_ADMIN_2304_B2_LG.pdf
-2024-10-27 11:02:14,335 - WARNING - No ISBN found in: /Users/menon/Downloads/EDR_ADMIN_2304_B2_LG.pdf
-2024-10-27 11:02:14,335 - INFO - Processing: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
-2024-10-27 11:02:14,335 - WARNING - Sem metadados: /Users/menon/Downloads/EDR_ADMIN_2304_B2_LG.pdf
-2024-10-27 11:02:14,472 - WARNING - No ISBN found in: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
-2024-10-27 11:02:14,486 - INFO - Processing: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
-2024-10-27 11:02:14,487 - WARNING - Sem metadados: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
-2024-10-27 11:02:14,663 - INFO - Processing: /Users/menon/Downloads/bashcookbook.pdf
-2024-10-27 11:02:14,663 - INFO - Sucesso: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
-2024-10-27 11:02:14,697 - INFO - Processing: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
-2024-10-27 11:02:14,697 - INFO - Sucesso: /Users/menon/Downloads/bashcookbook.pdf
-2024-10-27 11:02:14,718 - WARNING - No ISBN found in: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
-2024-10-27 11:02:14,718 - INFO - Processing: /Users/menon/Downloads/javaperformance2ndedition.pdf
-2024-10-27 11:02:14,718 - WARNING - Sem metadados: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
-2024-10-27 11:02:14,760 - INFO - Processing: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
-2024-10-27 11:02:14,760 - INFO - Sucesso: /Users/menon/Downloads/javaperformance2ndedition.pdf
-2024-10-27 11:02:14,860 - INFO - Processing: /Users/menon/Downloads/EDR_ADMIN_2304_B1_SG.pdf
-2024-10-27 11:02:14,860 - INFO - Sucesso: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
-2024-10-27 11:02:15,361 - WARNING - No ISBN found in: /Users/menon/Downloads/EDR_ADMIN_2304_B1_SG.pdf
-2024-10-27 11:02:15,361 - INFO - Processing: /Users/menon/Downloads/hardwarehackinghandbook.pdf
-2024-10-27 11:02:15,361 - WARNING - Sem metadados: /Users/menon/Downloads/EDR_ADMIN_2304_B1_SG.pdf
-2024-10-27 11:02:15,427 - INFO - Processing: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
-2024-10-27 11:02:15,427 - INFO - Sucesso: /Users/menon/Downloads/hardwarehackinghandbook.pdf
-2024-10-27 11:02:15,504 - INFO - Processing: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
-2024-10-27 11:02:15,504 - INFO - Sucesso: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
-2024-10-27 11:02:23,341 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Deep Learning By Example.pdf
-2024-10-27 11:02:23,342 - WARNING - Sem metadados: /Users/menon/Downloads/python ciencia 00002cd9.pdf
-2024-10-27 11:02:24,126 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Deep Learning with PyTorch_01.pdf
-2024-10-27 11:02:24,126 - INFO - Sucesso: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
-2024-10-27 11:02:24,334 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
-2024-10-27 11:02:24,564 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
-2024-10-27 11:02:26,413 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Mastering Reinforcement Learning with Python.pdf
-2024-10-27 11:02:26,426 - INFO - Sucesso: /Users/menon/Downloads/bugbountybootcamp.pdf
-2024-10-27 11:02:27,669 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
-2024-10-27 11:02:28,827 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Deep Learning with TensorFlow 2 and Keras - Second Edition.pdf
-2024-10-27 11:02:28,834 - INFO - Sucesso: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Mastering Reinforcement Learning with Python.pdf
-2024-10-27 11:02:28,903 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Hands-On Neural Networks with Keras.pdf
-2024-10-27 11:02:28,916 - WARNING - Sem metadados: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
-2024-10-27 11:02:39,865 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Data Engineering with Python.pdf
-2024-10-27 11:02:39,877 - INFO - Sucesso: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Deep Learning with TensorFlow 2 and Keras - Second Edition.pdf
-2024-10-27 11:02:41,691 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Hands-On Deep Learning with Apache Spark.pdf
-2024-10-27 11:02:41,704 - INFO - Sucesso: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Deep Learning with PyTorch_01.pdf
-2024-10-27 11:02:45,587 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Scalable Data Streaming with Amazon Kinesis.pdf
-2024-10-27 11:02:45,594 - INFO - Sucesso: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Data Engineering with Python.pdf
-2024-10-27 11:02:46,768 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Serverless Analytics with Amazon Athena.pdf
-2024-10-27 11:02:46,774 - INFO - Sucesso: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Scalable Data Streaming with Amazon Kinesis.pdf
-2024-10-27 11:02:48,599 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Hands-On Artificial Intelligence for Banking.pdf
-2024-10-27 11:02:48,605 - INFO - Sucesso: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Serverless Analytics with Amazon Athena.pdf
-2024-10-27 11:02:49,084 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Mastering Defensive Security.pdf
-2024-10-27 11:02:49,090 - INFO - Sucesso: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Hands-On Neural Networks with Keras.pdf
-2024-10-27 11:02:49,460 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
-2024-10-27 11:02:50,792 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/TensorFlow Deep Learning Projects.pdf
-2024-10-27 11:02:50,805 - INFO - Sucesso: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Deep Learning By Example.pdf
-2024-10-27 11:02:52,161 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
-2024-10-27 11:02:54,997 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
-2024-10-27 11:02:56,207 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Infosec Strategies and Best Practices.pdf
-2024-10-27 11:02:56,218 - INFO - Sucesso: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Mastering Defensive Security.pdf
-2024-10-27 11:02:57,382 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Agile Machine Learning with DataRobot.pdf
-2024-10-27 11:02:57,396 - INFO - Sucesso: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Hands-On Artificial Intelligence for Banking.pdf
-2024-10-27 11:02:58,673 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Data Processing with Optimus.pdf
-2024-10-27 11:02:58,679 - INFO - Sucesso: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Agile Machine Learning with DataRobot.pdf
-2024-10-27 11:02:59,289 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
-2024-10-27 11:03:00,466 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Hands-On Deep Learning for IoT.pdf
-2024-10-27 11:03:00,485 - WARNING - Sem metadados: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Infosec Strategies and Best Practices.pdf
-2024-10-27 11:03:06,725 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Python Deep Learning Projects.pdf
-2024-10-27 11:03:07,472 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/PyTorch Deep Learning Hands-On.pdf
-2024-10-27 11:03:09,258 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Engineering MLOps.pdf
-2024-10-27 11:03:11,045 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Deep Learning Essentials.pdf
-2024-10-27 11:03:11,424 - INFO - Processing: /Users/menon/Downloads/Machine Learning & Big Data Bundle 2nd Edition/Optimizing Databricks Workloads.pdf
-2024-10-27 11:31:05,061 - INFO - Encontrados 14 arquivos PDF para processar
-2024-10-27 11:31:05,063 - INFO - Processing: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
-2024-10-27 11:31:05,063 - INFO - Processing: /Users/menon/Downloads/python ciencia 00002cd9.pdf
-2024-10-27 11:31:05,063 - INFO - Processing: /Users/menon/Downloads/bugbountybootcamp.pdf
-2024-10-27 11:31:05,063 - INFO - Processing: /Users/menon/Downloads/EDR_ADMIN_2304_B2_LG.pdf
-2024-10-27 11:31:05,535 - WARNING - No ISBN found in: /Users/menon/Downloads/EDR_ADMIN_2304_B2_LG.pdf
-2024-10-27 11:31:05,541 - INFO - Processing: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
-2024-10-27 11:31:05,541 - WARNING - Sem metadados: /Users/menon/Downloads/EDR_ADMIN_2304_B2_LG.pdf
-2024-10-27 11:31:05,747 - WARNING - No ISBN found in: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
-2024-10-27 11:31:05,753 - INFO - Processing: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
-2024-10-27 11:31:05,759 - WARNING - Sem metadados: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
-2024-10-27 11:31:05,790 - INFO - Processing: /Users/menon/Downloads/bashcookbook.pdf
-2024-10-27 11:31:05,790 - INFO - Sucesso: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
-2024-10-27 11:31:05,822 - INFO - Processing: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
-2024-10-27 11:31:05,822 - INFO - Sucesso: /Users/menon/Downloads/bashcookbook.pdf
-2024-10-27 11:31:05,841 - WARNING - No ISBN found in: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
-2024-10-27 11:31:05,841 - INFO - Processing: /Users/menon/Downloads/javaperformance2ndedition.pdf
-2024-10-27 11:31:05,841 - WARNING - Sem metadados: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
-2024-10-27 11:31:05,875 - INFO - Processing: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
-2024-10-27 11:31:05,875 - INFO - Sucesso: /Users/menon/Downloads/javaperformance2ndedition.pdf
-2024-10-27 11:31:05,938 - INFO - Processing: /Users/menon/Downloads/EDR_ADMIN_2304_B1_SG.pdf
-2024-10-27 11:31:05,938 - INFO - Sucesso: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
-2024-10-27 11:31:06,450 - WARNING - No ISBN found in: /Users/menon/Downloads/EDR_ADMIN_2304_B1_SG.pdf
-2024-10-27 11:31:06,450 - INFO - Processing: /Users/menon/Downloads/hardwarehackinghandbook.pdf
-2024-10-27 11:31:06,450 - WARNING - Sem metadados: /Users/menon/Downloads/EDR_ADMIN_2304_B1_SG.pdf
-2024-10-27 11:31:06,483 - INFO - Processing: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
-2024-10-27 11:31:06,484 - INFO - Sucesso: /Users/menon/Downloads/hardwarehackinghandbook.pdf
-2024-10-27 11:31:06,560 - INFO - Processing: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
-2024-10-27 11:31:06,560 - INFO - Sucesso: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
-2024-10-27 11:31:16,381 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
-2024-10-27 11:31:16,381 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
-2024-10-27 11:31:16,402 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
-2024-10-27 11:31:16,403 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
-2024-10-27 11:31:17,533 - INFO - Sucesso: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
-2024-10-27 11:31:17,544 - WARNING - Sem metadados: /Users/menon/Downloads/python ciencia 00002cd9.pdf
-2024-10-27 11:31:18,471 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
-2024-10-27 11:31:18,477 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
-2024-10-27 11:31:19,776 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
-2024-10-27 11:31:19,780 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
-2024-10-27 11:31:21,189 - INFO - Sucesso: /Users/menon/Downloads/bugbountybootcamp.pdf
-2024-10-27 11:31:22,034 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
-2024-10-27 11:31:23,354 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
-2024-10-27 11:31:25,410 - WARNING - Sem metadados: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
-2024-10-27 11:42:10,760 - INFO - Encontrados 14 arquivos PDF para processar
-2024-10-27 11:42:10,760 - INFO - Processing: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
-2024-10-27 11:42:10,760 - INFO - Processing: /Users/menon/Downloads/python ciencia 00002cd9.pdf
-2024-10-27 11:42:10,760 - INFO - Processing: /Users/menon/Downloads/bugbountybootcamp.pdf
-2024-10-27 11:42:10,760 - INFO - Processing: /Users/menon/Downloads/EDR_ADMIN_2304_B2_LG.pdf
-2024-10-27 11:42:11,193 - WARNING - No ISBN found in: /Users/menon/Downloads/EDR_ADMIN_2304_B2_LG.pdf
-2024-10-27 11:42:11,204 - INFO - Processing: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
-2024-10-27 11:42:11,211 - WARNING - Sem metadados: /Users/menon/Downloads/EDR_ADMIN_2304_B2_LG.pdf
-2024-10-27 11:42:11,381 - WARNING - No ISBN found in: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
-2024-10-27 11:42:11,387 - INFO - Processing: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
-2024-10-27 11:42:11,400 - WARNING - Sem metadados: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
-2024-10-27 11:42:11,545 - INFO - Processing: /Users/menon/Downloads/bashcookbook.pdf
-2024-10-27 11:42:11,545 - INFO - Sucesso: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
-2024-10-27 11:42:11,580 - INFO - Processing: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
-2024-10-27 11:42:11,580 - INFO - Sucesso: /Users/menon/Downloads/bashcookbook.pdf
-2024-10-27 11:42:11,600 - WARNING - No ISBN found in: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
-2024-10-27 11:42:11,600 - INFO - Processing: /Users/menon/Downloads/javaperformance2ndedition.pdf
-2024-10-27 11:42:11,600 - WARNING - Sem metadados: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
-2024-10-27 11:42:11,640 - INFO - Processing: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
-2024-10-27 11:42:11,640 - INFO - Sucesso: /Users/menon/Downloads/javaperformance2ndedition.pdf
-2024-10-27 11:42:11,704 - INFO - Processing: /Users/menon/Downloads/EDR_ADMIN_2304_B1_SG.pdf
-2024-10-27 11:42:11,704 - INFO - Sucesso: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
-2024-10-27 11:42:12,220 - WARNING - No ISBN found in: /Users/menon/Downloads/EDR_ADMIN_2304_B1_SG.pdf
-2024-10-27 11:42:12,220 - INFO - Processing: /Users/menon/Downloads/hardwarehackinghandbook.pdf
-2024-10-27 11:42:12,220 - WARNING - Sem metadados: /Users/menon/Downloads/EDR_ADMIN_2304_B1_SG.pdf
-2024-10-27 11:42:12,256 - INFO - Processing: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
-2024-10-27 11:42:12,256 - INFO - Sucesso: /Users/menon/Downloads/hardwarehackinghandbook.pdf
-2024-10-27 11:42:12,332 - INFO - Processing: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
-2024-10-27 11:42:12,332 - INFO - Sucesso: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
-2024-10-27 11:42:22,028 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
-2024-10-27 11:42:22,035 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
-2024-10-27 11:42:22,035 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
-2024-10-27 11:42:22,041 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
-2024-10-27 11:42:23,284 - INFO - Sucesso: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
-2024-10-27 11:42:23,296 - WARNING - Sem metadados: /Users/menon/Downloads/python ciencia 00002cd9.pdf
-2024-10-27 11:42:24,197 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
-2024-10-27 11:42:24,208 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
-2024-10-27 11:42:25,862 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
-2024-10-27 11:42:25,871 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
-2024-10-27 11:42:27,411 - INFO - Sucesso: /Users/menon/Downloads/bugbountybootcamp.pdf
-2024-10-27 11:42:28,430 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
-2024-10-27 11:42:29,761 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
-2024-10-27 11:42:30,832 - WARNING - Sem metadados: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
-2024-10-27 14:54:38,542 - INFO - Encontrados 14 arquivos PDF para processar
-2024-10-27 14:54:38,543 - INFO - Processing: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
-2024-10-27 14:54:38,543 - INFO - Processing: /Users/menon/Downloads/python ciencia 00002cd9.pdf
-2024-10-27 14:54:38,543 - INFO - Processing: /Users/menon/Downloads/bugbountybootcamp.pdf
-2024-10-27 14:54:38,543 - INFO - Processing: /Users/menon/Downloads/EDR_ADMIN_2304_B2_LG.pdf
-2024-10-27 14:54:38,942 - INFO - Processing: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
-2024-10-27 14:54:38,942 - WARNING - Sem metadados: /Users/menon/Downloads/EDR_ADMIN_2304_B2_LG.pdf
-2024-10-27 14:54:39,133 - INFO - Processing: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
-2024-10-27 14:54:39,139 - WARNING - Sem metadados: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
-2024-10-27 14:54:39,268 - INFO - Processing: /Users/menon/Downloads/bashcookbook.pdf
-2024-10-27 14:54:39,268 - INFO - Sucesso: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
-2024-10-27 14:54:39,305 - INFO - Processing: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
-2024-10-27 14:54:39,305 - INFO - Sucesso: /Users/menon/Downloads/bashcookbook.pdf
-2024-10-27 14:54:47,339 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
-2024-10-27 14:54:47,362 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
-2024-10-27 14:54:47,363 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
-2024-10-27 14:54:47,373 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
-2024-10-27 14:54:48,490 - INFO - Processing: /Users/menon/Downloads/javaperformance2ndedition.pdf
-2024-10-27 14:54:48,551 - INFO - Processing: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
-2024-10-27 14:54:48,623 - INFO - Processing: /Users/menon/Downloads/EDR_ADMIN_2304_B1_SG.pdf
-2024-10-27 14:54:49,136 - INFO - Processing: /Users/menon/Downloads/hardwarehackinghandbook.pdf
-2024-10-27 14:54:49,170 - INFO - Processing: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
-2024-10-27 14:54:49,252 - INFO - Processing: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
-2024-10-27 14:54:49,450 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
-2024-10-27 14:54:49,465 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
-2024-10-27 14:54:49,670 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
+2024-11-04 00:18:56,381 - INFO - Extractores disponíveis: pypdf2, pdfplumber, pdfminer, tesseract, pdf2image
+2024-11-04 00:18:56,381 - INFO - Suporte a OCR está disponível
+2024-11-04 00:18:56,382 - INFO - Encontrados 12 arquivos PDF para processar
+2024-11-04 00:18:56,382 - INFO - Processing: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-11-04 00:18:56,382 - INFO - Processing: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-11-04 00:18:56,382 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-11-04 00:18:56,382 - INFO - Processing: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-11-04 00:18:56,382 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-11-04 00:18:56,382 - INFO - Processing: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-11-04 00:18:56,383 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-11-04 00:18:56,383 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-11-04 00:18:56,408 - INFO - Métodos tentados: PyPDF2
+2024-11-04 00:18:56,409 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-04 00:18:56,410 - INFO - Extraindo metadados de: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-11-04 00:18:56,430 - INFO - ISBN 9786586110364 é brasileiro
+2024-11-04 00:18:56,440 - INFO - Iniciando busca de metadados para ISBN 9786586110364
+2024-11-04 00:18:56,441 - INFO - Tentando Mercado Editorial...
+2024-11-04 00:18:56,471 - INFO - Métodos tentados: PyPDF2
+2024-11-04 00:18:56,471 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-04 00:18:56,484 - INFO - Extraindo metadados de: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-11-04 00:18:56,517 - INFO - Métodos tentados: PyPDF2
+2024-11-04 00:18:56,518 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-04 00:18:56,518 - INFO - Extraindo metadados de: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-11-04 00:18:56,520 - INFO - Processing: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-11-04 00:18:56,520 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-11-04 00:18:56,527 - INFO - ISBN 9781718501 não é brasileiro
+2024-11-04 00:18:56,528 - INFO - Iniciando busca de metadados para ISBN 9781718501
+2024-11-04 00:18:56,529 - INFO - Tentando Google Books Global...
+2024-11-04 00:18:56,530 - WARNING - Sem metadados: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-11-04 00:18:56,546 - INFO - Métodos tentados: PyPDF2
+2024-11-04 00:18:56,546 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-04 00:18:56,547 - INFO - Extraindo metadados de: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-11-04 00:18:56,549 - INFO - ISBN 9781119895220 não é brasileiro
+2024-11-04 00:18:56,549 - INFO - Iniciando busca de metadados para ISBN 9781119895220
+2024-11-04 00:18:56,550 - INFO - Tentando Google Books Global...
+2024-11-04 00:18:56,735 - INFO - Mercado Editorial não retornou resultados
+2024-11-04 00:18:56,743 - INFO - Tentando Google Books BR...
+2024-11-04 00:18:56,871 - INFO - Métodos tentados: PyPDF2
+2024-11-04 00:18:56,872 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-04 00:18:56,873 - INFO - Extraindo metadados de: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-11-04 00:18:56,881 - INFO - ISBN 9786586593181 é brasileiro
+2024-11-04 00:18:56,881 - INFO - Iniciando busca de metadados para ISBN 9786586593181
+2024-11-04 00:18:56,881 - INFO - Tentando Mercado Editorial...
+2024-11-04 00:18:57,007 - INFO - Google Books Global não retornou resultados
+2024-11-04 00:18:57,008 - INFO - Tentando Open Library...
+2024-11-04 00:18:57,016 - INFO - Mercado Editorial não retornou resultados
+2024-11-04 00:18:57,016 - INFO - Google Books Global não retornou resultados
+2024-11-04 00:18:57,017 - INFO - Tentando Google Books BR...
+2024-11-04 00:18:57,017 - INFO - Tentando Open Library...
+2024-11-04 00:18:57,245 - INFO - Google Books BR não retornou resultados
+2024-11-04 00:18:57,245 - INFO - Tentando Open Library...
+2024-11-04 00:18:57,316 - INFO - Google Books BR não retornou resultados
+2024-11-04 00:18:57,317 - INFO - Tentando Open Library...
+2024-11-04 00:18:57,889 - INFO - Sucesso com Open Library
+2024-11-04 00:18:57,889 - INFO - Tentando WorldCat...
+2024-11-04 00:18:57,889 - INFO - Tentando WorldCat com ISBN 9781119895220
+2024-11-04 00:18:57,907 - INFO - Open Library não retornou resultados
+2024-11-04 00:18:57,908 - INFO - Tentando WorldCat...
+2024-11-04 00:18:57,908 - INFO - Tentando WorldCat com ISBN 9781718501
+2024-11-04 00:18:58,008 - ERROR - Erro na requisição WorldCat: Exceeded 0 redirects.
+2024-11-04 00:18:58,009 - INFO - WorldCat não retornou resultados
+2024-11-04 00:18:58,009 - INFO - Tentando Ebook.de...
+2024-11-04 00:18:58,034 - ERROR - Erro na requisição WorldCat: Exceeded 0 redirects.
+2024-11-04 00:18:58,034 - INFO - WorldCat não retornou resultados
+2024-11-04 00:18:58,035 - INFO - Tentando Ebook.de...
+2024-11-04 00:18:58,125 - INFO - Open Library não retornou resultados
+2024-11-04 00:18:58,126 - INFO - Tentando Google Books Global...
+2024-11-04 00:18:58,201 - INFO - Open Library não retornou resultados
+2024-11-04 00:18:58,201 - INFO - Tentando Google Books Global...
+2024-11-04 00:18:58,467 - INFO - Google Books Global não retornou resultados
+2024-11-04 00:18:58,467 - INFO - Tentando WorldCat...
+2024-11-04 00:18:58,467 - INFO - Tentando WorldCat com ISBN 9786586110364
+2024-11-04 00:18:58,489 - INFO - Google Books Global não retornou resultados
+2024-11-04 00:18:58,489 - INFO - Tentando WorldCat...
+2024-11-04 00:18:58,489 - INFO - Tentando WorldCat com ISBN 9786586593181
+2024-11-04 00:18:58,588 - ERROR - Erro na requisição WorldCat: Exceeded 0 redirects.
+2024-11-04 00:18:58,589 - INFO - WorldCat não retornou resultados
+2024-11-04 00:18:58,590 - INFO - Tentando Ebook.de...
+2024-11-04 00:18:58,614 - ERROR - Erro na requisição WorldCat: Exceeded 0 redirects.
+2024-11-04 00:18:58,615 - INFO - WorldCat não retornou resultados
+2024-11-04 00:18:58,615 - INFO - Tentando Ebook.de...
+2024-11-04 00:38:06,826 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))': /de/tools/isbn2bibtex/9781718501
+2024-11-04 00:38:06,943 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))': /de/tools/isbn2bibtex/9781119895220
+2024-11-04 00:38:07,421 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))': /de/tools/isbn2bibtex/9786586593181
+2024-11-04 00:38:07,422 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))': /de/tools/isbn2bibtex/9786586110364
+2024-11-04 00:42:09,949 - ERROR - Ebook.de API error: HTTPSConnectionPool(host='www.ebook.de', port=443): Max retries exceeded with url: /de/tools/isbn2bibtex/9781119895220 (Caused by ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response')))
+2024-11-04 00:42:09,950 - ERROR - Ebook.de API error: HTTPSConnectionPool(host='www.ebook.de', port=443): Max retries exceeded with url: /de/tools/isbn2bibtex/9781718501 (Caused by ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response')))
+2024-11-04 00:42:09,951 - INFO - Ebook.de não retornou resultados
+2024-11-04 00:42:09,951 - INFO - Ebook.de não retornou resultados
+2024-11-04 00:42:09,951 - INFO - Tentando Google Books BR...
+2024-11-04 00:42:09,951 - INFO - Tentando Google Books BR...
+2024-11-04 00:42:10,333 - WARNING - Retrying (Retry(total=9, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))': /books/v1/volumes?q=isbn%3A9781119895220&country=BR&langRestrict=pt
+2024-11-04 00:42:10,334 - WARNING - Retrying (Retry(total=9, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))': /books/v1/volumes?q=isbn%3A9781718501&country=BR&langRestrict=pt
+2024-11-04 00:42:12,136 - ERROR - Ebook.de API error: HTTPSConnectionPool(host='www.ebook.de', port=443): Max retries exceeded with url: /de/tools/isbn2bibtex/9786586110364 (Caused by ResponseError('too many 404 error responses'))
+2024-11-04 00:42:12,136 - INFO - Ebook.de não retornou resultados
+2024-11-04 00:42:12,137 - INFO - Tentando Zbib.org...
+2024-11-04 00:42:12,140 - ERROR - Ebook.de API error: HTTPSConnectionPool(host='www.ebook.de', port=443): Max retries exceeded with url: /de/tools/isbn2bibtex/9786586593181 (Caused by ResponseError('too many 404 error responses'))
+2024-11-04 00:42:12,140 - INFO - Ebook.de não retornou resultados
+2024-11-04 00:42:12,140 - INFO - Tentando Zbib.org...
+2024-11-04 00:42:12,801 - INFO - Google Books BR não retornou resultados
+2024-11-04 00:42:12,801 - INFO - Tentando Mercado Editorial...
+2024-11-04 00:42:12,806 - INFO - Google Books BR não retornou resultados
+2024-11-04 00:42:12,806 - INFO - Tentando Mercado Editorial...
+2024-11-04 00:42:12,860 - WARNING - Retrying (Retry(total=9, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))': /api/v1.2/book?isbn=9781718501
+2024-11-04 00:42:13,096 - INFO - Mercado Editorial não retornou resultados
+2024-11-04 00:42:13,096 - INFO - Mercado Editorial não retornou resultados
+2024-11-04 00:42:13,097 - INFO - Tentando Zbib.org...
+2024-11-04 00:42:13,097 - INFO - Tentando Zbib.org...
+2024-11-04 00:50:22,199 - ERROR - Zbib API error: HTTPSConnectionPool(host='zbib.org', port=443): Max retries exceeded with url: /api/v1/search?q=9786586110364 (Caused by ResponseError('too many 404 error responses'))
+2024-11-04 00:50:22,202 - ERROR - Zbib API error: HTTPSConnectionPool(host='zbib.org', port=443): Max retries exceeded with url: /api/v1/search?q=9781119895220 (Caused by ResponseError('too many 404 error responses'))
+2024-11-04 00:50:22,203 - ERROR - Zbib API error: HTTPSConnectionPool(host='zbib.org', port=443): Max retries exceeded with url: /api/v1/search?q=9786586593181 (Caused by ResponseError('too many 404 error responses'))
+2024-11-04 00:50:22,206 - ERROR - Zbib API error: HTTPSConnectionPool(host='zbib.org', port=443): Max retries exceeded with url: /api/v1/search?q=9781718501 (Caused by ResponseError('too many 404 error responses'))
+2024-11-04 00:50:22,207 - INFO - Zbib.org não retornou resultados
+2024-11-04 00:50:22,207 - INFO - Zbib.org não retornou resultados
+2024-11-04 00:50:22,208 - INFO - Zbib.org não retornou resultados
+2024-11-04 00:50:22,208 - INFO - Zbib.org não retornou resultados
+2024-11-04 00:50:22,208 - INFO - Tentando MyBib.com...
+2024-11-04 00:50:22,208 - INFO - Tentando MyBib.com...
+2024-11-04 00:50:22,208 - INFO - Tentando MyBib.com...
+2024-11-04 00:50:22,208 - INFO - Tentando MyBib.com...
+2024-11-04 00:58:30,965 - ERROR - MyBib API error: HTTPSConnectionPool(host='www.mybib.com', port=443): Max retries exceeded with url: /api/v1/references?q=9781718501 (Caused by ResponseError('too many 404 error responses'))
+2024-11-04 00:58:30,968 - ERROR - MyBib API error: HTTPSConnectionPool(host='www.mybib.com', port=443): Max retries exceeded with url: /api/v1/references?q=9781119895220 (Caused by ResponseError('too many 404 error responses'))
+2024-11-04 00:58:30,969 - ERROR - MyBib API error: HTTPSConnectionPool(host='www.mybib.com', port=443): Max retries exceeded with url: /api/v1/references?q=9786586110364 (Caused by ResponseError('too many 404 error responses'))
+2024-11-04 00:58:30,970 - INFO - MyBib.com não retornou resultados
+2024-11-04 00:58:30,971 - INFO - MyBib.com não retornou resultados
+2024-11-04 00:58:30,971 - ERROR - MyBib API error: HTTPSConnectionPool(host='www.mybib.com', port=443): Max retries exceeded with url: /api/v1/references?q=9786586593181 (Caused by ResponseError('too many 404 error responses'))
+2024-11-04 00:58:30,972 - INFO - MyBib.com não retornou resultados
+2024-11-04 00:58:30,972 - WARNING - Nenhum resultado encontrado após tentar Google Books Global, Open Library, WorldCat, Ebook.de, Google Books BR, Mercado Editorial, Zbib.org, MyBib.com
+2024-11-04 00:58:30,973 - INFO - Metadados encontrados com confiança 0.72
+2024-11-04 00:58:30,973 - INFO - MyBib.com não retornou resultados
+2024-11-04 00:58:30,973 - WARNING - Nenhum resultado encontrado após tentar Mercado Editorial, Google Books BR, Open Library, Google Books Global, WorldCat, Ebook.de, Zbib.org, MyBib.com
+2024-11-04 00:58:30,976 - WARNING - Nenhum resultado encontrado após tentar Mercado Editorial, Google Books BR, Open Library, Google Books Global, WorldCat, Ebook.de, Zbib.org, MyBib.com
+2024-11-04 00:58:30,977 - INFO - Processing: /Users/menon/Downloads/bashcookbook.pdf
+2024-11-04 00:58:30,977 - WARNING - Sem metadados: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-11-04 00:58:30,978 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/bashcookbook.pdf
+2024-11-04 00:58:31,012 - INFO - ISBN 9786586110340 é brasileiro
+2024-11-04 00:58:31,015 - INFO - Iniciando busca de metadados para ISBN 9786586110340
+2024-11-04 00:58:31,023 - INFO - Tentando Mercado Editorial...
+2024-11-04 00:58:31,026 - INFO - ISBN 9781718501546 não é brasileiro
+2024-11-04 00:58:31,040 - INFO - Iniciando busca de metadados para ISBN 9781718501546
+2024-11-04 00:58:31,050 - INFO - Métodos tentados: PyPDF2
+2024-11-04 00:58:31,050 - INFO - Tentando Google Books Global...
+2024-11-04 00:58:31,050 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-04 00:58:31,051 - INFO - Extraindo metadados de: /Users/menon/Downloads/bashcookbook.pdf
+2024-11-04 00:58:31,053 - INFO - Processing: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-11-04 00:58:31,053 - INFO - Sucesso: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-11-04 00:58:31,053 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-11-04 00:58:31,054 - INFO - ISBN 9781491975336 não é brasileiro
+2024-11-04 00:58:31,054 - INFO - Iniciando busca de metadados para ISBN 9781491975336
+2024-11-04 00:58:31,054 - INFO - Tentando Google Books Global...
+2024-11-04 00:58:31,073 - INFO - Métodos tentados: PyPDF2
+2024-11-04 00:58:31,074 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-04 00:58:31,074 - INFO - Extraindo metadados de: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-11-04 00:58:31,076 - INFO - ISBN 9781394158485 não é brasileiro
+2024-11-04 00:58:31,076 - INFO - Iniciando busca de metadados para ISBN 9781394158485
+2024-11-04 00:58:31,076 - INFO - Tentando Google Books Global...
+2024-11-04 00:58:31,302 - WARNING - Retrying (Retry(total=9, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))': /books/v1/volumes?q=isbn:9781394158485
+2024-11-04 00:58:31,624 - INFO - Mercado Editorial não retornou resultados
+2024-11-04 00:58:31,624 - INFO - Tentando Google Books BR...
+2024-11-04 00:58:31,810 - INFO - Google Books Global não retornou resultados
+2024-11-04 00:58:31,810 - INFO - Google Books Global não retornou resultados
+2024-11-04 00:58:31,810 - INFO - Tentando Open Library...
+2024-11-04 00:58:31,811 - INFO - Tentando Open Library...
+2024-11-04 00:58:31,910 - INFO - Sucesso com Google Books Global
+2024-11-04 00:58:31,910 - INFO - Tentando Open Library...
+2024-11-04 00:58:32,056 - INFO - Google Books BR não retornou resultados
+2024-11-04 00:58:32,056 - INFO - Tentando Open Library...
+2024-11-04 00:58:33,111 - INFO - Sucesso com Open Library
+2024-11-04 00:58:33,111 - INFO - Tentando WorldCat...
+2024-11-04 00:58:33,111 - INFO - Tentando WorldCat com ISBN 9781491975336
+2024-11-04 00:58:33,113 - INFO - Sucesso com Open Library
+2024-11-04 00:58:33,113 - INFO - Tentando WorldCat...
+2024-11-04 00:58:33,115 - INFO - Tentando WorldCat com ISBN 9781394158485
+2024-11-04 00:58:33,149 - INFO - Open Library não retornou resultados
+2024-11-04 00:58:33,149 - INFO - Tentando Google Books Global...
+2024-11-04 00:58:33,163 - INFO - Sucesso com Open Library
+2024-11-04 00:58:33,163 - INFO - Tentando WorldCat...
+2024-11-04 00:58:33,163 - INFO - Tentando WorldCat com ISBN 9781718501546
+2024-11-04 00:58:33,307 - ERROR - Erro na requisição WorldCat: Exceeded 0 redirects.
+2024-11-04 00:58:33,308 - ERROR - Erro na requisição WorldCat: Exceeded 0 redirects.
+2024-11-04 00:58:33,309 - ERROR - Erro na requisição WorldCat: Exceeded 0 redirects.
+2024-11-04 00:58:33,310 - INFO - WorldCat não retornou resultados
+2024-11-04 00:58:33,310 - INFO - WorldCat não retornou resultados
+2024-11-04 00:58:33,311 - INFO - Tentando Ebook.de...
+2024-11-04 00:58:33,311 - INFO - WorldCat não retornou resultados
+2024-11-04 00:58:33,311 - INFO - Tentando Ebook.de...
+2024-11-04 00:58:33,311 - INFO - Tentando Ebook.de...
+2024-11-04 00:58:33,456 - INFO - Google Books Global não retornou resultados
+2024-11-04 00:58:33,456 - INFO - Tentando WorldCat...
+2024-11-04 00:58:33,456 - INFO - Tentando WorldCat com ISBN 9786586110340
+2024-11-04 00:58:33,573 - ERROR - Erro na requisição WorldCat: Exceeded 0 redirects.
+2024-11-04 00:58:33,574 - INFO - WorldCat não retornou resultados
+2024-11-04 00:58:33,574 - INFO - Tentando Ebook.de...
+2024-11-04 01:06:46,850 - ERROR - Ebook.de API error: HTTPSConnectionPool(host='www.ebook.de', port=443): Max retries exceeded with url: /de/tools/isbn2bibtex/9781394158485 (Caused by ResponseError('too many 502 error responses'))
+2024-11-04 01:06:46,851 - ERROR - Ebook.de API error: HTTPSConnectionPool(host='www.ebook.de', port=443): Max retries exceeded with url: /de/tools/isbn2bibtex/9786586110340 (Caused by ResponseError('too many 502 error responses'))
+2024-11-04 01:06:46,852 - ERROR - Ebook.de API error: HTTPSConnectionPool(host='www.ebook.de', port=443): Max retries exceeded with url: /de/tools/isbn2bibtex/9781718501546 (Caused by ResponseError('too many 502 error responses'))
+2024-11-04 01:06:46,852 - ERROR - Ebook.de API error: HTTPSConnectionPool(host='www.ebook.de', port=443): Max retries exceeded with url: /de/tools/isbn2bibtex/9781491975336 (Caused by ResponseError('too many 502 error responses'))
+2024-11-04 01:06:46,853 - INFO - Ebook.de não retornou resultados
+2024-11-04 01:06:46,854 - INFO - Ebook.de não retornou resultados
+2024-11-04 01:06:46,854 - INFO - Ebook.de não retornou resultados
+2024-11-04 01:06:46,854 - INFO - Ebook.de não retornou resultados
+2024-11-04 01:06:46,854 - INFO - Tentando Google Books BR...
+2024-11-04 01:06:46,861 - INFO - Tentando Zbib.org...
+2024-11-04 01:06:46,862 - INFO - Tentando Google Books BR...
+2024-11-04 01:06:46,862 - INFO - Tentando Google Books BR...
+2024-11-04 01:06:47,766 - INFO - Google Books BR não retornou resultados
+2024-11-04 01:06:47,766 - INFO - Tentando Mercado Editorial...
+2024-11-04 01:06:48,245 - INFO - Mercado Editorial não retornou resultados
+2024-11-04 01:06:48,246 - INFO - Tentando Zbib.org...
+2024-11-04 01:06:48,433 - INFO - Google Books BR não retornou resultados
+2024-11-04 01:06:48,434 - INFO - Tentando Mercado Editorial...
+2024-11-04 01:06:48,472 - INFO - Google Books BR não retornou resultados
+2024-11-04 01:06:48,473 - INFO - Tentando Mercado Editorial...
+2024-11-04 01:06:48,618 - INFO - Mercado Editorial não retornou resultados
+2024-11-04 01:06:48,619 - INFO - Tentando Zbib.org...
+2024-11-04 01:06:48,757 - INFO - Mercado Editorial não retornou resultados
+2024-11-04 01:06:48,757 - INFO - Tentando Zbib.org...
+2024-11-04 01:14:56,955 - ERROR - Zbib API error: HTTPSConnectionPool(host='zbib.org', port=443): Max retries exceeded with url: /api/v1/search?q=9786586110340 (Caused by ResponseError('too many 404 error responses'))
+2024-11-04 01:14:56,956 - ERROR - Zbib API error: HTTPSConnectionPool(host='zbib.org', port=443): Max retries exceeded with url: /api/v1/search?q=9781491975336 (Caused by ResponseError('too many 404 error responses'))
+2024-11-04 01:14:56,957 - ERROR - Zbib API error: HTTPSConnectionPool(host='zbib.org', port=443): Max retries exceeded with url: /api/v1/search?q=9781394158485 (Caused by ResponseError('too many 404 error responses'))
+2024-11-04 01:14:56,958 - ERROR - Zbib API error: HTTPSConnectionPool(host='zbib.org', port=443): Max retries exceeded with url: /api/v1/search?q=9781718501546 (Caused by ResponseError('too many 404 error responses'))
+2024-11-04 01:14:56,959 - INFO - Zbib.org não retornou resultados
+2024-11-04 01:14:56,959 - INFO - Zbib.org não retornou resultados
+2024-11-04 01:14:56,960 - INFO - Zbib.org não retornou resultados
+2024-11-04 01:14:56,960 - INFO - Zbib.org não retornou resultados
+2024-11-04 01:14:56,960 - INFO - Tentando MyBib.com...
+2024-11-04 01:14:56,960 - INFO - Tentando MyBib.com...
+2024-11-04 01:14:56,961 - INFO - Tentando MyBib.com...
+2024-11-04 01:14:56,961 - INFO - Tentando MyBib.com...
+2024-11-04 01:14:57,008 - WARNING - Retrying (Retry(total=9, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))': /api/v1/references?q=9786586110340
+2024-11-04 01:14:57,009 - WARNING - Retrying (Retry(total=9, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))': /api/v1/references?q=9781491975336
+2024-11-04 01:14:57,009 - WARNING - Retrying (Retry(total=9, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))': /api/v1/references?q=9781394158485
+2024-11-04 01:14:57,009 - WARNING - Retrying (Retry(total=9, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))': /api/v1/references?q=9781718501546
+2024-11-04 01:23:05,283 - ERROR - MyBib API error: HTTPSConnectionPool(host='www.mybib.com', port=443): Max retries exceeded with url: /api/v1/references?q=9781394158485 (Caused by ResponseError('too many 404 error responses'))
+2024-11-04 01:23:05,285 - ERROR - MyBib API error: HTTPSConnectionPool(host='www.mybib.com', port=443): Max retries exceeded with url: /api/v1/references?q=9781718501546 (Caused by ResponseError('too many 404 error responses'))
+2024-11-04 01:23:05,286 - INFO - MyBib.com não retornou resultados
+2024-11-04 01:23:05,286 - INFO - MyBib.com não retornou resultados
+2024-11-04 01:23:05,288 - INFO - Metadados encontrados com confiança 0.72
+2024-11-04 01:23:05,288 - INFO - Metadados encontrados com confiança 0.90
+2024-11-04 01:23:05,296 - INFO - Processing: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-11-04 01:23:05,296 - INFO - Sucesso: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-11-04 01:23:05,297 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-11-04 01:23:05,301 - INFO - Processing: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-11-04 01:23:05,301 - INFO - Sucesso: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-11-04 01:23:05,301 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-11-04 01:23:05,420 - INFO - Métodos tentados: PyPDF2
+2024-11-04 01:23:05,420 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-04 01:23:05,524 - INFO - Extraindo metadados de: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-11-04 01:23:05,537 - INFO - Métodos tentados: PyPDF2
+2024-11-04 01:23:05,537 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-04 01:23:05,538 - INFO - Extraindo metadados de: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-11-04 01:23:05,541 - INFO - ISBN 9781492056119 não é brasileiro
+2024-11-04 01:23:05,541 - INFO - Iniciando busca de metadados para ISBN 9781492056119
+2024-11-04 01:23:05,541 - INFO - Tentando Google Books Global...
+2024-11-04 01:23:05,542 - INFO - ISBN 9781098109158 não é brasileiro
+2024-11-04 01:23:05,542 - INFO - Iniciando busca de metadados para ISBN 9781098109158
+2024-11-04 01:23:05,542 - INFO - Tentando Google Books Global...
+2024-11-04 01:23:05,885 - ERROR - MyBib API error: HTTPSConnectionPool(host='www.mybib.com', port=443): Max retries exceeded with url: /api/v1/references?q=9786586110340 (Caused by ResponseError('too many 404 error responses'))
+2024-11-04 01:23:05,886 - ERROR - MyBib API error: HTTPSConnectionPool(host='www.mybib.com', port=443): Max retries exceeded with url: /api/v1/references?q=9781491975336 (Caused by ResponseError('too many 404 error responses'))
+2024-11-04 01:23:05,887 - INFO - MyBib.com não retornou resultados
+2024-11-04 01:23:05,888 - INFO - MyBib.com não retornou resultados
+2024-11-04 01:23:05,888 - WARNING - Nenhum resultado encontrado após tentar Mercado Editorial, Google Books BR, Open Library, Google Books Global, WorldCat, Ebook.de, Zbib.org, MyBib.com
+2024-11-04 01:23:05,888 - INFO - Metadados encontrados com confiança 0.72
+2024-11-04 01:23:05,890 - INFO - ISBN 9786586110357 é brasileiro
+2024-11-04 01:23:05,890 - INFO - Iniciando busca de metadados para ISBN 9786586110357
+2024-11-04 01:23:05,890 - INFO - Tentando Mercado Editorial...
+2024-11-04 01:23:05,892 - INFO - Processing: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-11-04 01:23:05,893 - INFO - Sucesso: /Users/menon/Downloads/bashcookbook.pdf
+2024-11-04 01:23:05,893 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-11-04 01:23:05,956 - INFO - Métodos tentados: PyPDF2
+2024-11-04 01:23:05,956 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-04 01:23:05,956 - INFO - Extraindo metadados de: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-11-04 01:23:05,958 - INFO - ISBN 9781593278748 não é brasileiro
+2024-11-04 01:23:05,958 - INFO - Iniciando busca de metadados para ISBN 9781593278748
+2024-11-04 01:23:05,958 - INFO - Tentando Google Books Global...
+2024-11-04 01:23:06,375 - INFO - Google Books Global não retornou resultados
+2024-11-04 01:23:06,375 - INFO - Tentando Open Library...
+2024-11-04 01:23:06,510 - INFO - Mercado Editorial não retornou resultados
+2024-11-04 01:23:06,510 - INFO - Tentando Google Books BR...
+2024-11-04 01:23:06,750 - INFO - Sucesso com Google Books Global
+2024-11-04 01:23:06,751 - INFO - Tentando Open Library...
+2024-11-04 01:23:06,833 - INFO - Google Books BR não retornou resultados
+2024-11-04 01:23:06,834 - INFO - Tentando Open Library...
+2024-11-04 01:23:07,133 - INFO - Sucesso com Google Books Global
+2024-11-04 01:23:07,134 - INFO - Tentando Open Library...
+2024-11-04 01:23:07,342 - INFO - Sucesso com Open Library
+2024-11-04 01:23:07,342 - INFO - Tentando WorldCat...
+2024-11-04 01:23:07,342 - INFO - Tentando WorldCat com ISBN 9781492056119
+2024-11-04 01:23:07,498 - ERROR - Erro na requisição WorldCat: Exceeded 0 redirects.
+2024-11-04 01:23:07,499 - INFO - WorldCat não retornou resultados
+2024-11-04 01:23:07,499 - INFO - Tentando Ebook.de...
+2024-11-04 01:23:07,683 - INFO - Sucesso com Open Library
+2024-11-04 01:23:07,683 - INFO - Tentando WorldCat...
+2024-11-04 01:23:07,684 - INFO - Tentando WorldCat com ISBN 9781593278748
+2024-11-04 01:23:07,732 - INFO - Open Library não retornou resultados
+2024-11-04 01:23:07,732 - INFO - Tentando Google Books Global...
+2024-11-04 01:23:07,797 - ERROR - Erro na requisição WorldCat: Exceeded 0 redirects.
+2024-11-04 01:23:07,797 - INFO - WorldCat não retornou resultados
+2024-11-04 01:23:07,798 - INFO - Tentando Ebook.de...
+2024-11-04 01:23:08,018 - INFO - Sucesso com Open Library
+2024-11-04 01:23:08,019 - INFO - Tentando WorldCat...
+2024-11-04 01:23:08,019 - INFO - Tentando WorldCat com ISBN 9781098109158
+2024-11-04 01:23:08,053 - INFO - Google Books Global não retornou resultados
+2024-11-04 01:23:08,054 - INFO - Tentando WorldCat...
+2024-11-04 01:23:08,054 - INFO - Tentando WorldCat com ISBN 9786586110357
+2024-11-04 01:23:08,135 - ERROR - Erro na requisição WorldCat: Exceeded 0 redirects.
+2024-11-04 01:23:08,136 - INFO - WorldCat não retornou resultados
+2024-11-04 01:23:08,136 - INFO - Tentando Ebook.de...
+2024-11-04 01:23:08,174 - ERROR - Erro na requisição WorldCat: Exceeded 0 redirects.
+2024-11-04 01:23:08,175 - INFO - WorldCat não retornou resultados
+2024-11-04 01:23:08,175 - INFO - Tentando Ebook.de...
+2024-11-04 01:29:17,810 - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /de/tools/isbn2bibtex/9781098109158
+2024-11-04 01:29:17,812 - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /de/tools/isbn2bibtex/9781593278748
+2024-11-04 01:29:17,812 - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /de/tools/isbn2bibtex/9781492056119
+2024-11-04 01:29:17,812 - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /de/tools/isbn2bibtex/9786586110357
+2024-11-04 01:31:19,883 - ERROR - Ebook.de API error: HTTPSConnectionPool(host='www.ebook.de', port=443): Max retries exceeded with url: /de/tools/isbn2bibtex/9786586110357 (Caused by ResponseError('too many 502 error responses'))
+2024-11-04 01:31:19,884 - ERROR - Ebook.de API error: HTTPSConnectionPool(host='www.ebook.de', port=443): Max retries exceeded with url: /de/tools/isbn2bibtex/9781492056119 (Caused by ResponseError('too many 502 error responses'))
+2024-11-04 01:31:19,885 - ERROR - Ebook.de API error: HTTPSConnectionPool(host='www.ebook.de', port=443): Max retries exceeded with url: /de/tools/isbn2bibtex/9781098109158 (Caused by ResponseError('too many 502 error responses'))
+2024-11-04 01:31:19,886 - ERROR - Ebook.de API error: HTTPSConnectionPool(host='www.ebook.de', port=443): Max retries exceeded with url: /de/tools/isbn2bibtex/9781593278748 (Caused by ResponseError('too many 502 error responses'))
+2024-11-04 01:31:19,886 - INFO - Ebook.de não retornou resultados
+2024-11-04 01:31:19,886 - INFO - Ebook.de não retornou resultados
+2024-11-04 01:31:19,887 - INFO - Ebook.de não retornou resultados
+2024-11-04 01:31:19,887 - INFO - Ebook.de não retornou resultados
+2024-11-04 01:31:19,887 - INFO - Tentando Zbib.org...
+2024-11-04 01:31:19,887 - INFO - Tentando Google Books BR...
+2024-11-04 01:31:19,887 - INFO - Tentando Google Books BR...
+2024-11-04 01:31:19,887 - INFO - Tentando Google Books BR...
+2024-11-04 01:31:20,371 - INFO - Google Books BR não retornou resultados
+2024-11-04 01:31:20,371 - INFO - Tentando Mercado Editorial...
+2024-11-04 01:31:20,376 - INFO - Google Books BR não retornou resultados
+2024-11-04 01:31:20,377 - INFO - Tentando Mercado Editorial...
+2024-11-04 01:31:20,377 - INFO - Google Books BR não retornou resultados
+2024-11-04 01:31:20,378 - INFO - Tentando Mercado Editorial...
+2024-11-04 01:31:20,673 - INFO - Mercado Editorial não retornou resultados
+2024-11-04 01:31:20,674 - INFO - Tentando Zbib.org...
+2024-11-04 01:31:20,798 - INFO - Mercado Editorial não retornou resultados
+2024-11-04 01:31:20,798 - INFO - Tentando Zbib.org...
+2024-11-04 01:31:20,957 - INFO - Mercado Editorial não retornou resultados
+2024-11-04 01:31:20,958 - INFO - Tentando Zbib.org...
+2024-11-04 01:39:30,178 - ERROR - Zbib API error: HTTPSConnectionPool(host='zbib.org', port=443): Max retries exceeded with url: /api/v1/search?q=9781492056119 (Caused by ResponseError('too many 404 error responses'))
+2024-11-04 01:39:30,180 - ERROR - Zbib API error: HTTPSConnectionPool(host='zbib.org', port=443): Max retries exceeded with url: /api/v1/search?q=9781098109158 (Caused by ResponseError('too many 404 error responses'))
+2024-11-04 01:39:30,181 - ERROR - Zbib API error: HTTPSConnectionPool(host='zbib.org', port=443): Max retries exceeded with url: /api/v1/search?q=9786586110357 (Caused by ResponseError('too many 404 error responses'))
+2024-11-04 01:39:30,182 - ERROR - Zbib API error: HTTPSConnectionPool(host='zbib.org', port=443): Max retries exceeded with url: /api/v1/search?q=9781593278748 (Caused by ResponseError('too many 404 error responses'))
+2024-11-04 01:39:30,183 - INFO - Zbib.org não retornou resultados
+2024-11-04 01:39:30,183 - INFO - Zbib.org não retornou resultados
+2024-11-04 01:39:30,184 - INFO - Zbib.org não retornou resultados
+2024-11-04 01:39:30,184 - INFO - Zbib.org não retornou resultados
+2024-11-04 01:39:30,184 - INFO - Tentando MyBib.com...
+2024-11-04 01:39:30,185 - INFO - Tentando MyBib.com...
+2024-11-04 01:39:30,185 - INFO - Tentando MyBib.com...
+2024-11-04 01:39:30,185 - INFO - Tentando MyBib.com...
+2024-11-04 01:39:30,231 - WARNING - Retrying (Retry(total=9, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))': /api/v1/references?q=9781492056119
+2024-11-04 01:39:30,231 - WARNING - Retrying (Retry(total=9, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))': /api/v1/references?q=9781593278748
+2024-11-04 01:39:30,232 - WARNING - Retrying (Retry(total=9, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))': /api/v1/references?q=9786586110357
+2024-11-04 01:39:30,232 - WARNING - Retrying (Retry(total=9, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))': /api/v1/references?q=9781098109158
+2024-11-04 01:47:38,879 - ERROR - MyBib API error: HTTPSConnectionPool(host='www.mybib.com', port=443): Max retries exceeded with url: /api/v1/references?q=9781593278748 (Caused by ResponseError('too many 404 error responses'))
+2024-11-04 01:47:38,880 - ERROR - MyBib API error: HTTPSConnectionPool(host='www.mybib.com', port=443): Max retries exceeded with url: /api/v1/references?q=9781098109158 (Caused by ResponseError('too many 404 error responses'))
+2024-11-04 01:47:38,881 - ERROR - MyBib API error: HTTPSConnectionPool(host='www.mybib.com', port=443): Max retries exceeded with url: /api/v1/references?q=9786586110357 (Caused by ResponseError('too many 404 error responses'))
+2024-11-04 01:47:38,883 - ERROR - MyBib API error: HTTPSConnectionPool(host='www.mybib.com', port=443): Max retries exceeded with url: /api/v1/references?q=9781492056119 (Caused by ResponseError('too many 404 error responses'))
+2024-11-04 01:47:38,884 - INFO - MyBib.com não retornou resultados
+2024-11-04 01:47:38,884 - INFO - MyBib.com não retornou resultados
+2024-11-04 01:47:38,885 - INFO - MyBib.com não retornou resultados
+2024-11-04 01:47:38,885 - INFO - MyBib.com não retornou resultados
+2024-11-04 01:47:38,887 - INFO - Metadados encontrados com confiança 0.90
+2024-11-04 01:47:38,887 - INFO - Metadados encontrados com confiança 0.90
+2024-11-04 01:47:38,887 - WARNING - Nenhum resultado encontrado após tentar Mercado Editorial, Google Books BR, Open Library, Google Books Global, WorldCat, Ebook.de, Zbib.org, MyBib.com
+2024-11-04 01:47:38,887 - INFO - Metadados encontrados com confiança 0.72
+2024-11-04 01:47:38,890 - INFO - Processing: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-11-04 01:47:38,891 - WARNING - Sem metadados: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-11-04 01:47:38,891 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-11-04 01:47:38,894 - INFO - Processing: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-11-04 01:47:38,894 - INFO - Sucesso: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-11-04 01:47:38,895 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-11-04 01:47:38,896 - INFO - Sucesso: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-11-04 01:47:38,899 - INFO - Sucesso: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-11-04 01:47:39,066 - INFO - Métodos tentados: PyPDF2
+2024-11-04 01:47:39,066 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-04 01:47:39,067 - INFO - Extraindo metadados de: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-11-04 01:47:39,072 - INFO - ISBN 9781803237015 não é brasileiro
+2024-11-04 01:47:39,072 - INFO - Iniciando busca de metadados para ISBN 9781803237015
+2024-11-04 01:47:39,072 - INFO - Tentando Google Books Global...
+2024-11-04 01:47:39,249 - INFO - Métodos tentados: PyPDF2
+2024-11-04 01:47:39,249 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-04 01:47:39,250 - INFO - Extraindo metadados de: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-11-04 01:47:39,255 - INFO - ISBN 9788575227510 é brasileiro
+2024-11-04 01:47:39,255 - INFO - Iniciando busca de metadados para ISBN 9788575227510
+2024-11-04 01:47:39,255 - INFO - Tentando Mercado Editorial...
+2024-11-04 01:47:39,538 - INFO - Mercado Editorial não retornou resultados
+2024-11-04 01:47:39,538 - INFO - Tentando Google Books BR...
+2024-11-04 01:47:39,690 - INFO - Sucesso com Google Books Global
+2024-11-04 01:47:39,690 - INFO - Tentando Open Library...
+2024-11-04 01:47:40,636 - INFO - Google Books BR não retornou resultados
+2024-11-04 01:47:40,637 - INFO - Tentando Open Library...
+2024-11-04 01:47:41,506 - INFO - Sucesso com Open Library
+2024-11-04 01:47:41,507 - INFO - Tentando WorldCat...
+2024-11-04 01:47:41,507 - INFO - Tentando WorldCat com ISBN 9781803237015
+2024-11-04 01:47:42,022 - INFO - Open Library não retornou resultados
+2024-11-04 01:47:42,023 - INFO - Tentando Google Books Global...
+2024-11-04 01:47:42,190 - ERROR - Erro na requisição WorldCat: Exceeded 0 redirects.
+2024-11-04 01:47:42,193 - INFO - WorldCat não retornou resultados
+2024-11-04 01:47:42,193 - INFO - Tentando Ebook.de...
+2024-11-04 01:47:42,795 - INFO - Google Books Global não retornou resultados
+2024-11-04 01:47:42,796 - INFO - Tentando WorldCat...
+2024-11-04 01:47:42,796 - INFO - Tentando WorldCat com ISBN 9788575227510
+2024-11-04 01:47:43,150 - ERROR - Erro na requisição WorldCat: Exceeded 0 redirects.
+2024-11-04 01:47:43,150 - INFO - WorldCat não retornou resultados
+2024-11-04 01:47:43,151 - INFO - Tentando Ebook.de...
+2024-11-04 01:55:53,671 - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /de/tools/isbn2bibtex/9781803237015
+2024-11-04 01:55:53,674 - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /de/tools/isbn2bibtex/9788575227510
+2024-11-04 01:55:55,067 - ERROR - Ebook.de API error: HTTPSConnectionPool(host='www.ebook.de', port=443): Max retries exceeded with url: /de/tools/isbn2bibtex/9788575227510 (Caused by ResponseError('too many 404 error responses'))
+2024-11-04 01:55:55,069 - ERROR - Ebook.de API error: HTTPSConnectionPool(host='www.ebook.de', port=443): Max retries exceeded with url: /de/tools/isbn2bibtex/9781803237015 (Caused by ResponseError('too many 404 error responses'))
+2024-11-04 01:55:55,069 - INFO - Ebook.de não retornou resultados
+2024-11-04 01:55:55,070 - INFO - Ebook.de não retornou resultados
+2024-11-04 01:55:55,070 - INFO - Tentando Zbib.org...
+2024-11-04 01:55:55,070 - INFO - Tentando Google Books BR...
+2024-11-04 01:55:56,297 - INFO - Google Books BR não retornou resultados
+2024-11-04 01:55:56,297 - INFO - Tentando Mercado Editorial...
+2024-11-04 01:55:56,597 - INFO - Mercado Editorial não retornou resultados
+2024-11-04 01:55:56,597 - INFO - Tentando Zbib.org...
+2024-11-04 02:04:05,056 - ERROR - Zbib API error: HTTPSConnectionPool(host='zbib.org', port=443): Max retries exceeded with url: /api/v1/search?q=9788575227510 (Caused by ResponseError('too many 404 error responses'))
+2024-11-04 02:04:05,058 - ERROR - Zbib API error: HTTPSConnectionPool(host='zbib.org', port=443): Max retries exceeded with url: /api/v1/search?q=9781803237015 (Caused by ResponseError('too many 404 error responses'))
+2024-11-04 02:04:05,061 - INFO - Zbib.org não retornou resultados
+2024-11-04 02:04:05,061 - INFO - Zbib.org não retornou resultados
+2024-11-04 02:04:05,062 - INFO - Tentando MyBib.com...
+2024-11-04 02:04:05,062 - INFO - Tentando MyBib.com...
+2024-11-04 02:04:05,112 - WARNING - Retrying (Retry(total=9, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))': /api/v1/references?q=9781803237015
+2024-11-04 02:04:05,113 - WARNING - Retrying (Retry(total=9, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))': /api/v1/references?q=9788575227510
+2024-11-04 02:12:13,042 - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))': /api/v1/references?q=9788575227510
+2024-11-04 02:12:13,300 - ERROR - MyBib API error: HTTPSConnectionPool(host='www.mybib.com', port=443): Max retries exceeded with url: /api/v1/references?q=9788575227510 (Caused by ResponseError('too many 404 error responses'))
+2024-11-04 02:12:13,300 - INFO - MyBib.com não retornou resultados
+2024-11-04 02:12:13,301 - WARNING - Nenhum resultado encontrado após tentar Mercado Editorial, Google Books BR, Open Library, Google Books Global, WorldCat, Ebook.de, Zbib.org, MyBib.com
+2024-11-04 02:12:13,309 - INFO - ISBN 9781491957660 não é brasileiro
+2024-11-04 02:12:13,309 - INFO - Iniciando busca de metadados para ISBN 9781491957660
+2024-11-04 02:12:13,309 - INFO - Tentando Google Books Global...
+2024-11-04 02:12:13,706 - ERROR - MyBib API error: HTTPSConnectionPool(host='www.mybib.com', port=443): Max retries exceeded with url: /api/v1/references?q=9781803237015 (Caused by ResponseError('too many 404 error responses'))
+2024-11-04 02:12:13,707 - INFO - MyBib.com não retornou resultados
+2024-11-04 02:12:13,707 - INFO - Metadados encontrados com confiança 0.90
+2024-11-04 02:12:13,712 - INFO - Sucesso: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-11-04 02:12:13,873 - INFO - Sucesso com Google Books Global
+2024-11-04 02:12:13,873 - INFO - Tentando Open Library...
+2024-11-04 02:12:15,161 - INFO - Sucesso com Open Library
+2024-11-04 02:12:15,161 - INFO - Tentando WorldCat...
+2024-11-04 02:12:15,161 - INFO - Tentando WorldCat com ISBN 9781491957660
+2024-11-04 02:12:15,351 - ERROR - Erro na requisição WorldCat: Exceeded 0 redirects.
+2024-11-04 02:12:15,352 - INFO - WorldCat não retornou resultados
+2024-11-04 02:12:15,353 - INFO - Tentando Ebook.de...
+2024-11-04 02:20:26,380 - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /de/tools/isbn2bibtex/9781491957660
+2024-11-04 02:20:27,643 - ERROR - Ebook.de API error: HTTPSConnectionPool(host='www.ebook.de', port=443): Max retries exceeded with url: /de/tools/isbn2bibtex/9781491957660 (Caused by ResponseError('too many 404 error responses'))
+2024-11-04 02:20:27,644 - INFO - Ebook.de não retornou resultados
+2024-11-04 02:20:27,644 - INFO - Tentando Google Books BR...
+2024-11-04 02:20:28,127 - INFO - Google Books BR não retornou resultados
+2024-11-04 02:20:28,128 - INFO - Tentando Mercado Editorial...
+2024-11-04 02:20:28,429 - INFO - Mercado Editorial não retornou resultados
+2024-11-04 02:20:28,430 - INFO - Tentando Zbib.org...
+2024-11-04 02:28:38,225 - ERROR - Zbib API error: HTTPSConnectionPool(host='zbib.org', port=443): Max retries exceeded with url: /api/v1/search?q=9781491957660 (Caused by ResponseError('too many 404 error responses'))
+2024-11-04 02:28:38,227 - INFO - Zbib.org não retornou resultados
+2024-11-04 02:28:38,227 - INFO - Tentando MyBib.com...
+2024-11-04 02:28:38,410 - WARNING - Retrying (Retry(total=9, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))': /api/v1/references?q=9781491957660
+2024-11-04 02:36:47,014 - ERROR - MyBib API error: HTTPSConnectionPool(host='www.mybib.com', port=443): Max retries exceeded with url: /api/v1/references?q=9781491957660 (Caused by ResponseError('too many 404 error responses'))
+2024-11-04 02:36:47,017 - INFO - MyBib.com não retornou resultados
+2024-11-04 02:36:47,019 - INFO - Metadados encontrados com confiança 0.90
+2024-11-04 02:36:47,026 - INFO - Sucesso: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-11-06 21:25:38,699 - INFO - Extractores disponíveis: pypdf2, pdfplumber, pdfminer, tesseract, pdf2image
+2024-11-06 21:25:38,700 - INFO - Suporte a OCR está disponível
+2024-11-06 21:25:38,727 - INFO - Encontrados 12 arquivos PDF para processar
+2024-11-06 21:25:38,727 - INFO - Processing: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-11-06 21:25:38,727 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-11-06 21:25:38,728 - INFO - Processing: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-11-06 21:25:38,728 - INFO - Processing: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-11-06 21:25:38,728 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-11-06 21:25:38,728 - INFO - Processing: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-11-06 21:25:38,728 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-11-06 21:25:38,729 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-11-06 21:25:38,773 - INFO - Métodos tentados: PyPDF2
+2024-11-06 21:25:38,774 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-06 21:25:38,775 - INFO - Extraindo metadados de: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-11-06 21:25:38,832 - INFO - ISBN 9786586110357 é brasileiro
+2024-11-06 21:25:38,836 - INFO - Iniciando busca de metadados para ISBN 9786586110357
+2024-11-06 21:25:38,853 - INFO - Tentando Mercado Editorial...
+2024-11-06 21:25:38,885 - INFO - Métodos tentados: PyPDF2
+2024-11-06 21:25:38,891 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-06 21:25:38,912 - INFO - Extraindo metadados de: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-11-06 21:25:38,940 - INFO - Métodos tentados: PyPDF2
+2024-11-06 21:25:38,941 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-06 21:25:38,941 - INFO - Extraindo metadados de: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-11-06 21:25:38,944 - INFO - Processing: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-11-06 21:25:38,944 - WARNING - Sem metadados: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-11-06 21:25:38,944 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-11-06 21:25:38,946 - INFO - ISBN 9781718501553 não é brasileiro
+2024-11-06 21:25:38,946 - INFO - Iniciando busca de metadados para ISBN 9781718501553
+2024-11-06 21:25:38,946 - INFO - Tentando Google Books Global...
+2024-11-06 21:25:38,977 - INFO - Métodos tentados: PyPDF2
+2024-11-06 21:25:38,977 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-06 21:25:38,978 - INFO - Extraindo metadados de: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-11-06 21:25:38,980 - INFO - ISBN 9781119895213 não é brasileiro
+2024-11-06 21:25:38,980 - INFO - Iniciando busca de metadados para ISBN 9781119895213
+2024-11-06 21:25:38,980 - INFO - Tentando Google Books Global...
+2024-11-06 21:25:39,285 - INFO - Métodos tentados: PyPDF2
+2024-11-06 21:25:39,285 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-06 21:25:39,286 - INFO - Extraindo metadados de: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-11-06 21:25:39,295 - INFO - ISBN 9786586593181 é brasileiro
+2024-11-06 21:25:39,295 - INFO - Iniciando busca de metadados para ISBN 9786586593181
+2024-11-06 21:25:39,295 - INFO - Tentando Mercado Editorial...
+2024-11-06 21:25:39,585 - INFO - Sucesso com Google Books Global
+2024-11-06 21:25:39,586 - INFO - Sucesso com Google Books Global
+2024-11-06 21:25:39,586 - INFO - Tentando Open Library...
+2024-11-06 21:25:39,586 - INFO - Tentando Open Library...
+2024-11-06 21:25:40,123 - INFO - Mercado Editorial não retornou resultados
+2024-11-06 21:25:40,123 - INFO - Tentando Google Books BR...
+2024-11-06 21:25:40,266 - INFO - Mercado Editorial não retornou resultados
+2024-11-06 21:25:40,266 - INFO - Tentando Google Books BR...
+2024-11-06 21:25:40,481 - INFO - Google Books BR não retornou resultados
+2024-11-06 21:25:40,482 - INFO - Tentando Open Library...
+2024-11-06 21:25:40,554 - INFO - Open Library não retornou resultados
+2024-11-06 21:25:40,554 - INFO - Tentando WorldCat...
+2024-11-06 21:25:40,554 - INFO - Tentando WorldCat com ISBN 9781718501553
+2024-11-06 21:25:40,582 - INFO - Sucesso com Open Library
+2024-11-06 21:25:40,583 - INFO - Tentando WorldCat...
+2024-11-06 21:25:40,583 - INFO - Tentando WorldCat com ISBN 9781119895213
+2024-11-06 21:25:40,618 - INFO - Google Books BR não retornou resultados
+2024-11-06 21:25:40,618 - INFO - Tentando Open Library...
+2024-11-06 21:25:40,751 - ERROR - Erro na requisição WorldCat: Exceeded 0 redirects.
+2024-11-06 21:25:40,752 - ERROR - Erro na requisição WorldCat: Exceeded 0 redirects.
+2024-11-06 21:25:40,753 - INFO - WorldCat não retornou resultados
+2024-11-06 21:25:40,753 - INFO - WorldCat não retornou resultados
+2024-11-06 21:25:40,753 - INFO - Tentando Ebook.de...
+2024-11-06 21:25:40,754 - INFO - Tentando Ebook.de...
+2024-11-06 21:25:40,884 - INFO - Open Library não retornou resultados
+2024-11-06 21:25:40,884 - INFO - Tentando Google Books Global...
+2024-11-06 21:25:41,272 - INFO - Google Books Global não retornou resultados
+2024-11-06 21:25:41,272 - INFO - Tentando WorldCat...
+2024-11-06 21:25:41,272 - INFO - Tentando WorldCat com ISBN 9786586593181
+2024-11-06 21:25:41,359 - INFO - Open Library não retornou resultados
+2024-11-06 21:25:41,360 - INFO - Tentando Google Books Global...
+2024-11-06 21:25:41,391 - ERROR - Erro na requisição WorldCat: Exceeded 0 redirects.
+2024-11-06 21:25:41,392 - INFO - WorldCat não retornou resultados
+2024-11-06 21:25:41,392 - INFO - Tentando Ebook.de...
+2024-11-06 21:25:41,731 - INFO - Google Books Global não retornou resultados
+2024-11-06 21:25:41,731 - INFO - Tentando WorldCat...
+2024-11-06 21:25:41,731 - INFO - Tentando WorldCat com ISBN 9786586110357
+2024-11-06 21:25:41,861 - ERROR - Erro na requisição WorldCat: Exceeded 0 redirects.
+2024-11-06 21:25:41,862 - INFO - WorldCat não retornou resultados
+2024-11-06 21:25:41,862 - INFO - Tentando Ebook.de...
+2024-11-06 21:33:52,876 - ERROR - Ebook.de API error: HTTPSConnectionPool(host='www.ebook.de', port=443): Max retries exceeded with url: /de/tools/isbn2bibtex/9781718501553 (Caused by ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response')))
+2024-11-06 21:33:52,875 - ERROR - Ebook.de API error: HTTPSConnectionPool(host='www.ebook.de', port=443): Max retries exceeded with url: /de/tools/isbn2bibtex/9786586593181 (Caused by ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response')))
+2024-11-06 21:33:52,889 - INFO - Ebook.de não retornou resultados
+2024-11-06 21:33:52,890 - INFO - Ebook.de não retornou resultados
+2024-11-06 21:33:52,891 - INFO - Tentando Zbib.org...
+2024-11-06 21:33:52,891 - INFO - Tentando Google Books BR...
+2024-11-06 21:33:53,200 - ERROR - Ebook.de API error: HTTPSConnectionPool(host='www.ebook.de', port=443): Max retries exceeded with url: /de/tools/isbn2bibtex/9781119895213 (Caused by ResponseError('too many 404 error responses'))
+2024-11-06 21:33:53,204 - INFO - Ebook.de não retornou resultados
+2024-11-06 21:33:53,205 - INFO - Tentando Google Books BR...
+2024-11-06 21:33:53,726 - ERROR - Ebook.de API error: HTTPSConnectionPool(host='www.ebook.de', port=443): Max retries exceeded with url: /de/tools/isbn2bibtex/9786586110357 (Caused by ResponseError('too many 404 error responses'))
+2024-11-06 21:33:53,726 - INFO - Ebook.de não retornou resultados
+2024-11-06 21:33:53,727 - INFO - Tentando Zbib.org...
+2024-11-06 21:33:53,903 - INFO - Google Books BR não retornou resultados
+2024-11-06 21:33:53,903 - INFO - Tentando Mercado Editorial...
+2024-11-06 21:33:53,916 - INFO - Google Books BR não retornou resultados
+2024-11-06 21:33:53,916 - INFO - Tentando Mercado Editorial...
+2024-11-06 21:33:54,510 - INFO - Mercado Editorial não retornou resultados
+2024-11-06 21:33:54,510 - INFO - Tentando Zbib.org...
+2024-11-06 21:33:55,489 - INFO - Mercado Editorial não retornou resultados
+2024-11-06 21:33:55,490 - INFO - Tentando Zbib.org...
+2024-11-06 21:42:03,856 - ERROR - Zbib API error: HTTPSConnectionPool(host='zbib.org', port=443): Max retries exceeded with url: /api/v1/search?q=9781119895213 (Caused by ResponseError('too many 404 error responses'))
+2024-11-06 21:42:03,860 - ERROR - Zbib API error: HTTPSConnectionPool(host='zbib.org', port=443): Max retries exceeded with url: /api/v1/search?q=9786586110357 (Caused by ResponseError('too many 404 error responses'))
+2024-11-06 21:42:03,860 - ERROR - Zbib API error: HTTPSConnectionPool(host='zbib.org', port=443): Max retries exceeded with url: /api/v1/search?q=9781718501553 (Caused by ResponseError('too many 404 error responses'))
+2024-11-06 21:42:03,860 - ERROR - Zbib API error: HTTPSConnectionPool(host='zbib.org', port=443): Max retries exceeded with url: /api/v1/search?q=9786586593181 (Caused by ResponseError('too many 404 error responses'))
+2024-11-06 21:42:03,862 - INFO - Zbib.org não retornou resultados
+2024-11-06 21:42:03,862 - INFO - Zbib.org não retornou resultados
+2024-11-06 21:42:03,863 - INFO - Zbib.org não retornou resultados
+2024-11-06 21:42:03,863 - INFO - Zbib.org não retornou resultados
+2024-11-06 21:42:03,863 - INFO - Tentando MyBib.com...
+2024-11-06 21:42:03,863 - INFO - Tentando MyBib.com...
+2024-11-06 21:42:03,867 - INFO - Tentando MyBib.com...
+2024-11-06 21:42:03,867 - INFO - Tentando MyBib.com...
+2024-11-06 21:50:13,126 - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))': /api/v1/references?q=9786586110357
+2024-11-06 21:50:13,305 - ERROR - MyBib API error: HTTPSConnectionPool(host='www.mybib.com', port=443): Max retries exceeded with url: /api/v1/references?q=9781718501553 (Caused by ResponseError('too many 404 error responses'))
+2024-11-06 21:50:13,307 - INFO - MyBib.com não retornou resultados
+2024-11-06 21:50:13,309 - INFO - Metadados encontrados com confiança 0.90
+2024-11-06 21:50:13,331 - INFO - Processing: /Users/menon/Downloads/bashcookbook.pdf
+2024-11-06 21:50:13,333 - INFO - Sucesso: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-11-06 21:50:13,333 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/bashcookbook.pdf
+2024-11-06 21:50:13,411 - INFO - Métodos tentados: PyPDF2
+2024-11-06 21:50:13,411 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-06 21:50:13,412 - INFO - Extraindo metadados de: /Users/menon/Downloads/bashcookbook.pdf
+2024-11-06 21:50:13,415 - INFO - Cache hit para ISBN 9781491975336
+2024-11-06 21:50:13,415 - INFO - Processing: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-11-06 21:50:13,415 - INFO - Sucesso: /Users/menon/Downloads/bashcookbook.pdf
+2024-11-06 21:50:13,415 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-11-06 21:50:13,434 - INFO - Métodos tentados: PyPDF2
+2024-11-06 21:50:13,434 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-06 21:50:13,435 - INFO - Extraindo metadados de: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-11-06 21:50:13,436 - INFO - ISBN 9781394158508 não é brasileiro
+2024-11-06 21:50:13,436 - INFO - Iniciando busca de metadados para ISBN 9781394158508
+2024-11-06 21:50:13,436 - INFO - Tentando Google Books Global...
+2024-11-06 21:50:13,445 - ERROR - MyBib API error: HTTPSConnectionPool(host='www.mybib.com', port=443): Max retries exceeded with url: /api/v1/references?q=9781119895213 (Caused by ResponseError('too many 404 error responses'))
+2024-11-06 21:50:13,445 - INFO - MyBib.com não retornou resultados
+2024-11-06 21:50:13,445 - INFO - Metadados encontrados com confiança 0.90
+2024-11-06 21:50:13,446 - INFO - Processing: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-11-06 21:50:13,446 - INFO - Sucesso: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-11-06 21:50:13,446 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-11-06 21:50:13,484 - INFO - Métodos tentados: PyPDF2
+2024-11-06 21:50:13,485 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-06 21:50:13,486 - INFO - Extraindo metadados de: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-11-06 21:50:13,489 - INFO - Cache hit para ISBN 9781492056119
+2024-11-06 21:50:13,489 - INFO - Processing: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-11-06 21:50:13,489 - INFO - Sucesso: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-11-06 21:50:13,489 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-11-06 21:50:13,562 - INFO - Métodos tentados: PyPDF2
+2024-11-06 21:50:13,562 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-06 21:50:13,563 - INFO - Extraindo metadados de: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-11-06 21:50:13,565 - INFO - Cache hit para ISBN 9781098109158
+2024-11-06 21:50:13,565 - INFO - Processing: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-11-06 21:50:13,565 - INFO - Sucesso: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-11-06 21:50:13,565 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-11-06 21:50:13,725 - INFO - Métodos tentados: PyPDF2
+2024-11-06 21:50:13,725 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-06 21:50:13,725 - INFO - Extraindo metadados de: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-11-06 21:50:13,727 - INFO - Cache hit para ISBN 9781593278748
+2024-11-06 21:50:13,727 - INFO - Processing: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-11-06 21:50:13,727 - INFO - Sucesso: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-11-06 21:50:13,727 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-11-06 21:50:13,803 - INFO - Métodos tentados: PyPDF2
+2024-11-06 21:50:13,803 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-06 21:50:13,804 - INFO - Extraindo metadados de: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-11-06 21:50:13,807 - INFO - Cache hit para ISBN 9781803237015
+2024-11-06 21:50:13,807 - INFO - Processing: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-11-06 21:50:13,807 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-11-06 21:50:13,807 - INFO - Sucesso: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-11-06 21:50:13,987 - INFO - Métodos tentados: PyPDF2
+2024-11-06 21:50:13,987 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-06 21:50:13,987 - INFO - Extraindo metadados de: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-11-06 21:50:13,992 - INFO - ISBN 9788575227510 é brasileiro
+2024-11-06 21:50:13,992 - INFO - Iniciando busca de metadados para ISBN 9788575227510
+2024-11-06 21:50:13,992 - INFO - Tentando Mercado Editorial...
+2024-11-06 21:50:13,997 - ERROR - MyBib API error: HTTPSConnectionPool(host='www.mybib.com', port=443): Max retries exceeded with url: /api/v1/references?q=9786586110357 (Caused by ResponseError('too many 404 error responses'))
+2024-11-06 21:50:13,997 - INFO - MyBib.com não retornou resultados
+2024-11-06 21:50:13,997 - WARNING - Nenhum resultado encontrado após tentar Mercado Editorial, Google Books BR, Open Library, Google Books Global, WorldCat, Ebook.de, Zbib.org, MyBib.com
+2024-11-06 21:50:13,998 - INFO - ISBN 9786586110364 é brasileiro
+2024-11-06 21:50:13,998 - INFO - Iniciando busca de metadados para ISBN 9786586110364
+2024-11-06 21:50:13,998 - INFO - Tentando Mercado Editorial...
+2024-11-06 21:50:14,074 - INFO - Google Books Global não retornou resultados
+2024-11-06 21:50:14,074 - INFO - Tentando Open Library...
+2024-11-06 21:50:14,309 - INFO - Mercado Editorial não retornou resultados
+2024-11-06 21:50:14,309 - INFO - Tentando Google Books BR...
+2024-11-06 21:50:14,418 - ERROR - MyBib API error: HTTPSConnectionPool(host='www.mybib.com', port=443): Max retries exceeded with url: /api/v1/references?q=9786586593181 (Caused by ResponseError('too many 404 error responses'))
+2024-11-06 21:50:14,418 - INFO - MyBib.com não retornou resultados
+2024-11-06 21:50:14,419 - WARNING - Nenhum resultado encontrado após tentar Mercado Editorial, Google Books BR, Open Library, Google Books Global, WorldCat, Ebook.de, Zbib.org, MyBib.com
+2024-11-06 21:50:14,419 - WARNING - Sem metadados: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-11-06 21:50:14,677 - INFO - Google Books BR não retornou resultados
+2024-11-06 21:50:14,677 - INFO - Tentando Open Library...
+2024-11-06 21:50:14,954 - INFO - Mercado Editorial não retornou resultados
+2024-11-06 21:50:14,954 - INFO - Tentando Google Books BR...
+2024-11-06 21:50:15,264 - INFO - Sucesso com Open Library
+2024-11-06 21:50:15,264 - INFO - Tentando WorldCat...
+2024-11-06 21:50:15,264 - INFO - Tentando WorldCat com ISBN 9781394158508
+2024-11-06 21:50:15,309 - INFO - Google Books BR não retornou resultados
+2024-11-06 21:50:15,310 - INFO - Tentando Open Library...
+2024-11-06 21:50:15,445 - ERROR - Erro na requisição WorldCat: Exceeded 0 redirects.
+2024-11-06 21:50:15,446 - INFO - WorldCat não retornou resultados
+2024-11-06 21:50:15,446 - INFO - Tentando Ebook.de...
+2024-11-06 21:50:15,567 - INFO - Open Library não retornou resultados
+2024-11-06 21:50:15,567 - INFO - Tentando Google Books Global...
+2024-11-06 21:50:15,585 - INFO - Open Library não retornou resultados
+2024-11-06 21:50:15,585 - INFO - Tentando Google Books Global...
+2024-11-06 21:50:15,910 - INFO - Google Books Global não retornou resultados
+2024-11-06 21:50:15,910 - INFO - Tentando WorldCat...
+2024-11-06 21:50:15,910 - INFO - Tentando WorldCat com ISBN 9788575227510
+2024-11-06 21:50:16,045 - INFO - Google Books Global não retornou resultados
+2024-11-06 21:50:16,046 - INFO - Tentando WorldCat...
+2024-11-06 21:50:16,046 - INFO - Tentando WorldCat com ISBN 9786586110364
+2024-11-06 21:50:16,054 - ERROR - Erro na requisição WorldCat: Exceeded 0 redirects.
+2024-11-06 21:50:16,055 - INFO - WorldCat não retornou resultados
+2024-11-06 21:50:16,055 - INFO - Tentando Ebook.de...
+2024-11-06 21:50:16,176 - ERROR - Erro na requisição WorldCat: Exceeded 0 redirects.
+2024-11-06 21:50:16,177 - INFO - WorldCat não retornou resultados
+2024-11-06 21:50:16,177 - INFO - Tentando Ebook.de...
+2024-11-06 21:56:25,874 - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /de/tools/isbn2bibtex/9781394158508
+2024-11-06 21:56:25,879 - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /de/tools/isbn2bibtex/9786586110364
+2024-11-06 21:56:25,879 - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /de/tools/isbn2bibtex/9788575227510
+2024-11-06 21:58:27,528 - ERROR - Ebook.de API error: HTTPSConnectionPool(host='www.ebook.de', port=443): Max retries exceeded with url: /de/tools/isbn2bibtex/9788575227510 (Caused by ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response')))
+2024-11-06 21:58:27,546 - INFO - Ebook.de não retornou resultados
+2024-11-06 21:58:27,547 - INFO - Tentando Zbib.org...
+2024-11-06 21:58:27,534 - ERROR - Ebook.de API error: HTTPSConnectionPool(host='www.ebook.de', port=443): Max retries exceeded with url: /de/tools/isbn2bibtex/9781394158508 (Caused by ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response')))
+2024-11-06 21:58:27,551 - ERROR - Ebook.de API error: HTTPSConnectionPool(host='www.ebook.de', port=443): Max retries exceeded with url: /de/tools/isbn2bibtex/9786586110364 (Caused by ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response')))
+2024-11-06 21:58:27,552 - INFO - Ebook.de não retornou resultados
+2024-11-06 21:58:27,559 - INFO - Ebook.de não retornou resultados
+2024-11-06 21:58:27,560 - INFO - Tentando Google Books BR...
+2024-11-06 21:58:27,560 - INFO - Tentando Zbib.org...
+2024-11-06 21:58:28,155 - INFO - Google Books BR não retornou resultados
+2024-11-06 21:58:28,155 - INFO - Tentando Mercado Editorial...
+2024-11-06 21:58:29,161 - INFO - Mercado Editorial não retornou resultados
+2024-11-06 21:58:29,162 - INFO - Tentando Zbib.org...
+2024-11-06 22:06:37,415 - ERROR - Zbib API error: HTTPSConnectionPool(host='zbib.org', port=443): Max retries exceeded with url: /api/v1/search?q=9788575227510 (Caused by ResponseError('too many 404 error responses'))
+2024-11-06 22:06:37,417 - ERROR - Zbib API error: HTTPSConnectionPool(host='zbib.org', port=443): Max retries exceeded with url: /api/v1/search?q=9786586110364 (Caused by ResponseError('too many 404 error responses'))
+2024-11-06 22:06:37,418 - ERROR - Zbib API error: HTTPSConnectionPool(host='zbib.org', port=443): Max retries exceeded with url: /api/v1/search?q=9781394158508 (Caused by ResponseError('too many 404 error responses'))
+2024-11-06 22:06:37,419 - INFO - Zbib.org não retornou resultados
+2024-11-06 22:06:37,419 - INFO - Zbib.org não retornou resultados
+2024-11-06 22:06:37,419 - INFO - Zbib.org não retornou resultados
+2024-11-06 22:06:37,419 - INFO - Tentando MyBib.com...
+2024-11-06 22:06:37,419 - INFO - Tentando MyBib.com...
+2024-11-06 22:06:37,420 - INFO - Tentando MyBib.com...
+2024-11-06 22:06:37,486 - WARNING - Retrying (Retry(total=9, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))': /api/v1/references?q=9788575227510
+2024-11-06 22:06:37,488 - WARNING - Retrying (Retry(total=9, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))': /api/v1/references?q=9786586110364
+2024-11-06 22:06:37,488 - WARNING - Retrying (Retry(total=9, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))': /api/v1/references?q=9781394158508
+2024-11-06 22:14:47,924 - INFO - Extractores disponíveis: pypdf2, pdfplumber, pdfminer, tesseract, pdf2image
+2024-11-06 22:14:47,924 - INFO - Suporte a OCR está disponível
+2024-11-06 22:14:47,925 - INFO - Encontrados 12 arquivos PDF para processar
+2024-11-06 22:14:47,925 - INFO - Processing: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-11-06 22:14:47,925 - INFO - Processing: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-11-06 22:14:47,925 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-11-06 22:14:47,925 - INFO - Processing: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-11-06 22:14:47,926 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-11-06 22:14:47,926 - INFO - Processing: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-11-06 22:14:47,926 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-11-06 22:14:47,926 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-11-06 22:14:47,953 - INFO - Métodos tentados: PyPDF2
+2024-11-06 22:14:47,953 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-06 22:14:47,955 - INFO - Extraindo metadados de: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-11-06 22:14:48,035 - INFO - Métodos tentados: PyPDF2
+2024-11-06 22:14:48,035 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-06 22:14:48,035 - INFO - Extraindo metadados de: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-11-06 22:14:48,048 - INFO - Métodos tentados: PyPDF2
+2024-11-06 22:14:48,049 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-06 22:14:48,049 - INFO - Extraindo metadados de: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-11-06 22:14:48,051 - INFO - Processing: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-11-06 22:14:48,051 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-11-06 22:14:48,056 - WARNING - Sem metadados: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-11-06 22:14:48,091 - INFO - Métodos tentados: PyPDF2
+2024-11-06 22:14:48,092 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-06 22:14:48,092 - INFO - Extraindo metadados de: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-11-06 22:14:48,399 - INFO - Métodos tentados: PyPDF2
+2024-11-06 22:14:48,399 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-06 22:14:48,400 - INFO - Extraindo metadados de: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-11-06 22:14:48,819 - INFO - Processing: /Users/menon/Downloads/bashcookbook.pdf
+2024-11-06 22:14:48,819 - INFO - Sucesso: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-11-06 22:14:48,819 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/bashcookbook.pdf
+2024-11-06 22:14:48,877 - INFO - Métodos tentados: PyPDF2
+2024-11-06 22:14:48,877 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-06 22:14:48,878 - INFO - Extraindo metadados de: /Users/menon/Downloads/bashcookbook.pdf
+2024-11-06 22:14:48,881 - INFO - Processing: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-11-06 22:14:48,881 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-11-06 22:14:48,881 - INFO - Sucesso: /Users/menon/Downloads/bashcookbook.pdf
+2024-11-06 22:14:48,902 - INFO - Métodos tentados: PyPDF2
+2024-11-06 22:14:48,903 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-06 22:14:48,903 - INFO - Extraindo metadados de: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-11-06 22:14:50,100 - INFO - Processing: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-11-06 22:14:50,100 - INFO - Sucesso: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-11-06 22:14:50,101 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-11-06 22:14:50,167 - INFO - Métodos tentados: PyPDF2
+2024-11-06 22:14:50,167 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-06 22:14:50,167 - INFO - Extraindo metadados de: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-11-06 22:14:50,169 - INFO - Processing: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-11-06 22:14:50,169 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-11-06 22:14:50,169 - INFO - Sucesso: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-11-06 22:14:50,235 - INFO - Métodos tentados: PyPDF2
+2024-11-06 22:14:50,235 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-06 22:14:50,236 - INFO - Extraindo metadados de: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-11-06 22:14:50,238 - INFO - Processing: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-11-06 22:14:50,238 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-11-06 22:14:50,238 - INFO - Sucesso: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-11-06 22:14:50,268 - INFO - Métodos tentados: PyPDF2
+2024-11-06 22:14:50,268 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-06 22:14:50,269 - INFO - Extraindo metadados de: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-11-06 22:14:50,702 - INFO - Processing: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-11-06 22:14:50,703 - INFO - Sucesso: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-11-06 22:14:50,703 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-11-06 22:14:50,824 - INFO - Métodos tentados: PyPDF2
+2024-11-06 22:14:50,824 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-06 22:14:50,825 - INFO - Extraindo metadados de: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-11-06 22:14:50,827 - INFO - Processing: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-11-06 22:14:50,827 - INFO - Sucesso: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-11-06 22:14:50,827 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-11-06 22:14:51,004 - INFO - Métodos tentados: PyPDF2
+2024-11-06 22:14:51,004 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-06 22:14:51,005 - INFO - Extraindo metadados de: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-11-06 22:14:51,010 - INFO - Sucesso: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-11-06 22:14:51,910 - INFO - Sucesso: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-11-06 22:14:52,330 - INFO - Sucesso: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-11-06 22:14:52,901 - INFO - Sucesso: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-11-06 22:15:31,983 - INFO - Extractores disponíveis: pypdf2, pdfplumber, pdfminer, tesseract, pdf2image
+2024-11-06 22:15:31,984 - INFO - Suporte a OCR está disponível
+2024-11-06 22:15:31,985 - INFO - Encontrados 12 arquivos PDF para processar
+2024-11-06 22:15:31,985 - INFO - Processing: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-11-06 22:15:31,985 - INFO - Processing: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-11-06 22:15:31,985 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-11-06 22:15:31,985 - INFO - Processing: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-11-06 22:15:31,985 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-11-06 22:15:31,985 - INFO - Processing: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-11-06 22:15:31,985 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-11-06 22:15:31,986 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-11-06 22:15:32,012 - INFO - Métodos tentados: PyPDF2
+2024-11-06 22:15:32,012 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-06 22:15:32,013 - INFO - Extraindo metadados de: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-11-06 22:15:32,043 - INFO - ISBN 9786586110340 é brasileiro
+2024-11-06 22:15:32,046 - INFO - Iniciando busca de metadados para ISBN 9786586110340
+2024-11-06 22:15:32,047 - INFO - Tentando Mercado Editorial...
+2024-11-06 22:15:32,090 - INFO - Métodos tentados: PyPDF2
+2024-11-06 22:15:32,090 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-06 22:15:32,092 - INFO - Extraindo metadados de: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-11-06 22:15:32,120 - INFO - Métodos tentados: PyPDF2
+2024-11-06 22:15:32,124 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-06 22:15:32,124 - INFO - Extraindo metadados de: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-11-06 22:15:32,131 - INFO - Processing: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-11-06 22:15:32,131 - WARNING - Sem metadados: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-11-06 22:15:32,131 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-11-06 22:15:32,133 - INFO - Cache hit para ISBN 9781718501546
+2024-11-06 22:15:32,133 - INFO - Processing: /Users/menon/Downloads/bashcookbook.pdf
+2024-11-06 22:15:32,133 - INFO - Sucesso: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-11-06 22:15:32,133 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/bashcookbook.pdf
+2024-11-06 22:15:32,156 - INFO - Métodos tentados: PyPDF2
+2024-11-06 22:15:32,162 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-06 22:15:32,162 - INFO - Extraindo metadados de: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-11-06 22:15:32,178 - INFO - Métodos tentados: PyPDF2
+2024-11-06 22:15:32,178 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-06 22:15:32,179 - INFO - Extraindo metadados de: /Users/menon/Downloads/bashcookbook.pdf
+2024-11-06 22:15:32,179 - INFO - Cache hit para ISBN 9781119895213
+2024-11-06 22:15:32,179 - INFO - Processing: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-11-06 22:15:32,179 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-11-06 22:15:32,179 - INFO - Sucesso: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-11-06 22:15:32,181 - INFO - Cache hit para ISBN 9781491975336
+2024-11-06 22:15:32,181 - INFO - Processing: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-11-06 22:15:32,182 - INFO - Sucesso: /Users/menon/Downloads/bashcookbook.pdf
+2024-11-06 22:15:32,182 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-11-06 22:15:32,204 - INFO - Métodos tentados: PyPDF2
+2024-11-06 22:15:32,204 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-06 22:15:32,204 - INFO - Extraindo metadados de: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-11-06 22:15:32,232 - INFO - Métodos tentados: PyPDF2
+2024-11-06 22:15:32,232 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-06 22:15:32,232 - INFO - Cache hit para ISBN 9781394158508
+2024-11-06 22:15:32,232 - INFO - Extraindo metadados de: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-11-06 22:15:32,232 - INFO - Processing: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-11-06 22:15:32,232 - INFO - Sucesso: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-11-06 22:15:32,233 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-11-06 22:15:32,235 - INFO - Cache hit para ISBN 9781492056119
+2024-11-06 22:15:32,235 - INFO - Processing: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-11-06 22:15:32,235 - INFO - Sucesso: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-11-06 22:15:32,235 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-11-06 22:15:32,318 - INFO - Métodos tentados: PyPDF2
+2024-11-06 22:15:32,322 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-06 22:15:32,323 - INFO - Extraindo metadados de: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-11-06 22:15:32,327 - INFO - Métodos tentados: PyPDF2
+2024-11-06 22:15:32,327 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-06 22:15:32,328 - INFO - Extraindo metadados de: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-11-06 22:15:32,331 - INFO - Cache hit para ISBN 9781098109158
+2024-11-06 22:15:32,331 - INFO - Cache hit para ISBN 9781593278748
+2024-11-06 22:15:32,331 - INFO - Processing: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-11-06 22:15:32,332 - INFO - Sucesso: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-11-06 22:15:32,332 - INFO - Processing: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-11-06 22:15:32,332 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-11-06 22:15:32,332 - INFO - Sucesso: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-11-06 22:15:32,332 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-11-06 22:15:32,420 - INFO - Métodos tentados: PyPDF2
+2024-11-06 22:15:32,420 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-06 22:15:32,421 - INFO - Extraindo metadados de: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-11-06 22:15:32,430 - INFO - Cache hit para ISBN 9781803237015
+2024-11-06 22:15:32,431 - INFO - Sucesso: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-11-06 22:15:32,770 - INFO - Métodos tentados: PyPDF2
+2024-11-06 22:15:32,770 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-06 22:15:32,771 - INFO - Extraindo metadados de: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-11-06 22:15:32,855 - INFO - Cache hit para ISBN 9786586593181
+2024-11-06 22:15:32,868 - INFO - Sucesso: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-11-06 22:15:32,913 - INFO - Métodos tentados: PyPDF2
+2024-11-06 22:15:32,913 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-06 22:15:32,914 - INFO - Extraindo metadados de: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-11-06 22:15:32,919 - INFO - Cache hit para ISBN 9781491957660
+2024-11-06 22:15:32,919 - INFO - Sucesso: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-11-06 22:15:33,146 - INFO - Mercado Editorial não retornou resultados
+2024-11-06 22:15:33,146 - INFO - Tentando Google Books BR...
+2024-11-06 22:15:33,762 - INFO - Google Books BR não retornou resultados
+2024-11-06 22:15:33,763 - INFO - Tentando Open Library...
+2024-11-06 22:15:34,678 - INFO - Open Library não retornou resultados
+2024-11-06 22:15:34,679 - INFO - Tentando Google Books Global...
+2024-11-06 22:15:35,089 - INFO - Google Books Global não retornou resultados
+2024-11-06 22:15:35,089 - INFO - Tentando WorldCat...
+2024-11-06 22:15:35,089 - INFO - Tentando WorldCat com ISBN 9786586110340
+2024-11-06 22:15:35,309 - ERROR - Erro na requisição WorldCat: Exceeded 0 redirects.
+2024-11-06 22:15:35,311 - INFO - WorldCat não retornou resultados
+2024-11-06 22:15:35,311 - INFO - Tentando Ebook.de...
