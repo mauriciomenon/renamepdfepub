@@ -2,9 +2,22 @@
   "summary": {
     "total_processed": 11,
     "successful": 11,
-    "timestamp": "2024-11-06 22:14:52"
+    "timestamp": "2024-11-06 22:49:34"
   },
   "books": [
+    {
+      "title": "Unknown",
+      "authors": [
+        "Unknown"
+      ],
+      "publisher": "Unknown",
+      "published_date": "Unknown",
+      "isbn_10": null,
+      "isbn_13": "9789781718502",
+      "confidence_score": 0.44999999999999996,
+      "source": "worldcat",
+      "file_path": "/Users/menon/Downloads/bugbountybootcamp.pdf"
+    },
     {
       "title": "The Active Defender",
       "authors": [
@@ -83,8 +96,8 @@
       "publisher": "No Starch Press",
       "published_date": "2021-12-21",
       "isbn_10": null,
-      "isbn_13": "9781593278755",
-      "confidence_score": 0.7200000000000001,
+      "isbn_13": "9781593278748",
+      "confidence_score": 0.9,
       "source": "google_books",
       "file_path": "/Users/menon/Downloads/hardwarehackinghandbook.pdf"
     },
@@ -102,6 +115,19 @@
       "confidence_score": 0.9,
       "source": "google_books",
       "file_path": "/Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf"
+    },
+    {
+      "title": "Unknown",
+      "authors": [
+        "Unknown"
+      ],
+      "publisher": "Unknown",
+      "published_date": "Unknown",
+      "isbn_10": null,
+      "isbn_13": "9786586593181",
+      "confidence_score": 0.44999999999999996,
+      "source": "worldcat",
+      "file_path": "/Users/menon/Downloads/python ciencia 00002cd9.pdf"
     },
     {
       "title": "Python for Data Analysis",
@@ -124,36 +150,10 @@
       "publisher": "Unknown",
       "published_date": "Unknown",
       "isbn_10": null,
-      "isbn_13": "9789781718502",
-      "confidence_score": 0.44999999999999996,
-      "source": "worldcat",
-      "file_path": "/Users/menon/Downloads/bugbountybootcamp.pdf"
-    },
-    {
-      "title": "Unknown",
-      "authors": [
-        "Unknown"
-      ],
-      "publisher": "Unknown",
-      "published_date": "Unknown",
-      "isbn_10": null,
-      "isbn_13": "9786586110357",
+      "isbn_13": "9786586110364",
       "confidence_score": 0.44999999999999996,
       "source": "worldcat",
       "file_path": "/Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf"
-    },
-    {
-      "title": "Unknown",
-      "authors": [
-        "Unknown"
-      ],
-      "publisher": "Unknown",
-      "published_date": "Unknown",
-      "isbn_10": null,
-      "isbn_13": "9786586593181",
-      "confidence_score": 0.44999999999999996,
-      "source": "worldcat",
-      "file_path": "/Users/menon/Downloads/python ciencia 00002cd9.pdf"
     }
   ]
 }

@@ -21,6 +21,8 @@ from concurrent.futures import ThreadPoolExecutor
 import argparse
 import sys
 import time
+import pdfplumber
+import pytesseract
 
 class DependencyManager:
     def __init__(self):
@@ -226,6 +228,175 @@ class ISBNExtractor:
         self.isbn_patterns.extend([pub['pattern'] for pub in BRAZILIAN_PUBLISHERS.values()])
         self.isbn_patterns.extend([pub['pattern'] for pub in INTERNATIONAL_PUBLISHERS.values()])
 
+        # Mapeamento para corrigir caracteres corrompidos
+        self.char_corrections = {
+            # Caracteres básicos corrompidos
+            '+': 'H', '2': 'O', 'Q': 'O', 'd': 'cl', '11': 'll',
+            '1': 'l', '0': 'o', '@': 'a', '#': 'B', '$': 'S',
+            
+            # Caracteres específicos do caso mencionado
+            'dF': 'cf', 'WL': 'ti', 'QWH': 'nte', 'LJHQFH': 'ligence',
+            'DQGV': 'ands', 'UWL': 'rti', 'FLDO': 'ficial',
+            
+            # Correções para números em ISBNs
+            'O': '0', 'l': '1', 'I': '1', 'i': '1',
+            'S': '5', 'Z': '2', 'B': '8', 'G': '6',
+            'q': '9', 'g': '9', 'A': '4'
+        }
+
+    def _try_extract_with_pdfplumber(self, pdf_path: str, max_pages: int = 10) -> str:
+        """Tenta extrair texto usando pdfplumber."""
+        try:
+            import pdfplumber
+            with pdfplumber.open(pdf_path) as pdf:
+                text = ""
+                pages_to_check = min(max_pages, len(pdf.pages))
+                for page in pdf.pages[:pages_to_check]:
+                    text += page.extract_text() or ""
+                return text
+        except Exception as e:
+            logging.debug(f"pdfplumber extraction failed: {str(e)}")
+            return ""
+
+    def _try_extract_with_tesseract(self, pdf_path: str, max_pages: int = 5) -> str:
+        """Tenta extrair texto usando Tesseract OCR."""
+        try:
+            import pytesseract
+            from pdf2image import convert_from_path
+            
+            images = convert_from_path(pdf_path, first_page=1, last_page=max_pages)
+            text = ""
+            for image in images:
+                text += pytesseract.image_to_string(image) or ""
+            return text
+        except Exception as e:
+            logging.debug(f"Tesseract OCR failed: {str(e)}")
+            return ""
+
+    def _clean_corrupted_text(self, text: str) -> str:
+        """Limpa texto corrompido usando o mapeamento de caracteres."""
+        # Primeira passada: correção de palavras comuns
+        common_words = {
+            'DQGV2Q': 'Hands-On',
+            'UWLdFLDO': 'rtificial',
+            ',QWH11LJHQFH': 'Intelligence',
+            '1RU': 'for',
+            '%DQNLQJ': 'Banking'
+        }
+        
+        for corrupt, clean in common_words.items():
+            text = text.replace(corrupt, clean)
+        
+        # Segunda passada: correção caractere por caractere
+        for corrupt, clean in self.char_corrections.items():
+            text = text.replace(corrupt, clean)
+            
+        return text
+
+    def _is_text_corrupted(self, text: str) -> bool:
+        """Verifica se o texto está corrompido."""
+        if not text:
+            return True
+            
+        # Verifica proporção de caracteres especiais
+        special_chars = sum(1 for c in text if not c.isalnum() and not c.isspace())
+        if len(text) > 0 and special_chars / len(text) > 0.3:
+            return True
+            
+        # Verifica se tem muitas sequências maiúsculas incomuns
+        uppercase_sequences = re.findall(r'[A-Z]{4,}', text)
+        if len(uppercase_sequences) > len(text.split()) / 4:
+            return True
+            
+        return False
+
+    def extract_from_text(self, text: str, source_path: str = None) -> Set[str]:
+        """Extrai todos os ISBNs possíveis do texto."""
+        found_isbns = set()
+        original_text = text
+        
+        # Identifica editora para ajustes específicos
+        publisher, confidence_boost = self.identify_publisher(text)
+        logging.debug(f"Identified publisher: {publisher}")
+        
+        # Se o texto parece corrompido, tenta limpá-lo
+        if self._is_text_corrupted(text):
+            logging.info("Texto corrompido detectado, aplicando limpeza...")
+            text = self._clean_corrupted_text(text)
+            
+            # Se ainda não encontrou ISBNs e temos o caminho do arquivo, tenta métodos alternativos
+            if source_path and not found_isbns:
+                logging.info("Tentando métodos alternativos de extração...")
+                
+                # Tenta pdfplumber
+                plumber_text = self._try_extract_with_pdfplumber(source_path)
+                if plumber_text:
+                    logging.info("Texto extraído com pdfplumber, procurando ISBNs...")
+                    found_isbns.update(self._extract_with_patterns(plumber_text, publisher))
+                
+                # Se ainda não encontrou, tenta OCR
+                if not found_isbns:
+                    ocr_text = self._try_extract_with_tesseract(source_path)
+                    if ocr_text:
+                        logging.info("Texto extraído com OCR, procurando ISBNs...")
+                        found_isbns.update(self._extract_with_patterns(ocr_text, publisher))
+        
+        # Busca ISBNs no texto (original ou limpo)
+        found_isbns.update(self._extract_with_patterns(text, publisher))
+        
+        # Se encontrou ISBNs, registra sucesso
+        if found_isbns:
+            logging.info(f"ISBNs encontrados: {found_isbns}")
+            return found_isbns
+        
+        # Se não encontrou nada, tenta extrações específicas por editora
+        publisher_isbns = self.extract_publisher_specific(original_text, publisher)
+        if publisher_isbns:
+            logging.info(f"ISBNs encontrados usando extração específica da editora: {publisher_isbns}")
+            found_isbns.update(publisher_isbns)
+        
+        return found_isbns
+
+    def _extract_with_patterns(self, text: str, publisher: str) -> Set[str]:
+        """Extrai ISBNs usando os padrões definidos."""
+        found_isbns = set()
+        
+        for pattern in self.isbn_patterns:
+            matches = re.finditer(pattern, text, re.IGNORECASE)
+            for match in matches:
+                isbn = match.group(1) if '(' in pattern else match.group()
+                isbn = self.normalize_isbn(isbn)
+                isbn = self.clean_corrupted_isbn(isbn, publisher)
+                
+                if self.validate_isbn_10(isbn):
+                    found_isbns.add(isbn)
+                    isbn13 = self.isbn_10_to_13(isbn)
+                    if isbn13:
+                        found_isbns.add(isbn13)
+                elif self.validate_isbn_13(isbn):
+                    found_isbns.add(isbn)
+        
+        return found_isbns
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        # Adiciona padrões de editoras
+        self.isbn_patterns.extend([pub['pattern'] for pub in BRAZILIAN_PUBLISHERS.values()])
+        self.isbn_patterns.extend([pub['pattern'] for pub in INTERNATIONAL_PUBLISHERS.values()])
+
     def normalize_isbn(self, isbn: str) -> str:
         return re.sub(r'[^0-9X]', '', isbn.upper())
 
@@ -345,30 +516,6 @@ class ISBNExtractor:
         
         return found_isbns
 
-    def extract_from_text(self, text: str) -> Set[str]:
-        """Extrai todos os ISBNs possíveis do texto."""
-        found_isbns = set()
-        publisher, confidence_boost = self.identify_publisher(text)
-        
-        logging.debug(f"Identified publisher: {publisher}")
-        
-        for pattern in self.isbn_patterns:
-            matches = re.finditer(pattern, text, re.IGNORECASE)
-            for match in matches:
-                isbn = match.group(1) if '(' in pattern else match.group()
-                isbn = self.normalize_isbn(isbn)
-                isbn = self.clean_corrupted_isbn(isbn, publisher)
-                logging.debug(f"Found ISBN: {isbn}")
-                
-                if self.validate_isbn_10(isbn):
-                    found_isbns.add(isbn)
-                    isbn13 = self.isbn_10_to_13(isbn)
-                    if isbn13:
-                        found_isbns.add(isbn13)
-                elif self.validate_isbn_13(isbn):
-                    found_isbns.add(isbn)
-        
-        return found_isbns
 
 class MetadataFetcher:
     def __init__(self, isbndb_api_key: Optional[str] = None):
