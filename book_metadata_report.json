@@ -2,7 +2,7 @@
   "summary": {
     "total_processed": 11,
     "successful": 11,
-    "timestamp": "2024-11-10 08:20:46"
+    "timestamp": "2024-11-10 09:54:46"
   },
   "books": [
     {
@@ -13,35 +13,35 @@
       "publisher": "Unknown",
       "published_date": "Unknown",
       "isbn_10": null,
-      "isbn_13": "9786586110357",
+      "isbn_13": "9786586110364",
       "confidence_score": 0.44999999999999996,
       "source": "worldcat",
       "file_path": "/Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf"
     },
     {
-      "title": "Unknown",
+      "title": "Bug Bounty Bootcamp",
       "authors": [
-        "Unknown"
+        "Vickie Li"
       ],
-      "publisher": "Unknown",
-      "published_date": "Unknown",
+      "publisher": "No Starch Press",
+      "published_date": "2021-11-16",
       "isbn_10": null,
-      "isbn_13": "9789781718502",
-      "confidence_score": 0.44999999999999996,
-      "source": "worldcat",
+      "isbn_13": "9781718501553",
+      "confidence_score": 0.9,
+      "source": "google_books",
       "file_path": "/Users/menon/Downloads/bugbountybootcamp.pdf"
     },
     {
-      "title": "Active Defender",
+      "title": "The Active Defender",
       "authors": [
-        "Catherine J. Ullman"
+        "Dr. Catherine J. Ullman"
       ],
-      "publisher": "Wiley & Sons, Incorporated, John",
-      "published_date": "2023",
+      "publisher": "John Wiley & Sons",
+      "published_date": "2023-06-20",
       "isbn_10": null,
-      "isbn_13": "9781119895220",
+      "isbn_13": "9781119895237",
       "confidence_score": 0.7200000000000001,
-      "source": "openlibrary",
+      "source": "google_books",
       "file_path": "/Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf"
     },
     {
@@ -64,12 +64,12 @@
         "Chris Hughes",
         "Tony Turner"
       ],
-      "publisher": "Wiley & Sons, Limited, John",
-      "published_date": "2023",
+      "publisher": "John Wiley & Sons",
+      "published_date": "2023-05-03",
       "isbn_10": null,
-      "isbn_13": "9781394158485",
+      "isbn_13": "9781394158492",
       "confidence_score": 0.8200000000000001,
-      "source": "openlibrary",
+      "source": "google_books",
       "file_path": "/Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf"
     },
     {
@@ -84,20 +84,6 @@
       "confidence_score": 0.7200000000000001,
       "source": "openlibrary",
       "file_path": "/Users/menon/Downloads/javaperformance2ndedition.pdf"
-    },
-    {
-      "title": "The Hardware Hacking Handbook",
-      "authors": [
-        "Jasper van Woudenberg",
-        "Colin O'Flynn"
-      ],
-      "publisher": "No Starch Press",
-      "published_date": "2021-12-21",
-      "isbn_10": null,
-      "isbn_13": "9781593278755",
-      "confidence_score": 0.7200000000000001,
-      "source": "google_books",
-      "file_path": "/Users/menon/Downloads/hardwarehackinghandbook.pdf"
     },
     {
       "title": "Ansible: Up and Running",
@@ -115,6 +101,20 @@
       "file_path": "/Users/menon/Downloads/ansible_upandrunning3rdedition.pdf"
     },
     {
+      "title": "The Hardware Hacking Handbook",
+      "authors": [
+        "Jasper van Woudenberg",
+        "Colin O'Flynn"
+      ],
+      "publisher": "No Starch Press",
+      "published_date": "2021-12-21",
+      "isbn_10": null,
+      "isbn_13": "9781593278748",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/hardwarehackinghandbook.pdf"
+    },
+    {
       "title": "Applied Machine Learning and High-Performance Computing on AWS",
       "authors": [
         "Mani Khanuja",
@@ -130,16 +130,16 @@
       "file_path": "/Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf"
     },
     {
-      "title": "Unknown",
+      "title": "Python for Data Analysis",
       "authors": [
-        "Unknown"
+        "Wes McKinney"
       ],
-      "publisher": "Unknown",
-      "published_date": "Unknown",
+      "publisher": "O'Reilly Media",
+      "published_date": "2017-10",
       "isbn_10": null,
-      "isbn_13": "9788575227510",
-      "confidence_score": 0.44999999999999996,
-      "source": "worldcat",
+      "isbn_13": "9781491957660",
+      "confidence_score": 0.9,
+      "source": "google_books",
       "file_path": "/Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf"
     },
     {

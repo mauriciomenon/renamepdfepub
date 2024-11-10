@@ -312,16 +312,7 @@ class ISBNExtractor:
         return False
 
     def extract_from_text(self, text: str, source_path: str = None) -> Set[str]:
-        """
-        Extrai todos os ISBNs possíveis do texto, incluindo tratamento especial para DRM da Packt.
-        
-        Args:
-            text (str): Texto para extrair ISBNs
-            source_path (str, optional): Caminho do arquivo fonte para métodos alternativos
-            
-        Returns:
-            Set[str]: Conjunto de ISBNs encontrados
-        """
+        """Extrai todos os ISBNs possíveis do texto."""
         found_isbns = set()
         original_text = text
         
@@ -329,24 +320,33 @@ class ISBNExtractor:
         publisher, confidence_boost = self.identify_publisher(text)
         logging.debug(f"Identified publisher: {publisher}")
         
-        # Verifica especificamente por DRM da Packt primeiro
-        if publisher == 'packt' and self.packt_handler.is_packt_drm(text):
-            logging.info("DRM da Packt detectado, iniciando processo específico de extração...")
-            
-            # Tenta extrair ISBN diretamente do texto com DRM
-            packt_isbn = self.packt_handler.extract_isbn_from_drm(original_text)
-            if packt_isbn:
-                logging.info(f"ISBN extraído diretamente do texto com DRM: {packt_isbn}")
-                found_isbns.add(packt_isbn)
-                return found_isbns
-            
-            # Se não conseguiu extrair diretamente, decodifica o texto
-            text = self.packt_handler.decode_packt_text(text)
-            logging.info("Texto decodificado do DRM da Packt")
-        
         # Se o texto parece corrompido (não necessariamente DRM da Packt)
-        elif self._is_text_corrupted(text):
-            logging.info("Texto corrompido detectado, aplicando limpeza...")
+        if self._is_text_corrupted(text):
+            logging.info("Texto corrompido detectado")
+            
+        # Verifica se é DRM da Packt
+        is_drm = False
+        if publisher == 'packt':
+            is_drm = self.packt_handler.is_packt_drm(text)
+            logging.info(f"É DRM Packt? {is_drm}")
+            
+            if is_drm:
+                logging.info("Detectado DRM Packt, iniciando decodificação...")
+                # Tenta extrair ISBN diretamente do texto com DRM
+                packt_isbn = self.packt_handler.extract_isbn_from_drm(original_text)
+                if packt_isbn:
+                    logging.info(f"ISBN extraído diretamente do DRM: {packt_isbn}")
+                    found_isbns.add(packt_isbn)
+                    return found_isbns
+                    
+                logging.info("Tentando decodificar texto com DRM...")
+                text = self.packt_handler.decode_packt_text(text)
+                logging.info(f"Texto decodificado: {text[:200]}...")
+            else:
+                logging.info("Texto corrompido mas não é DRM Packt, aplicando limpeza genérica...")
+                text = self._clean_corrupted_text(text)
+        else:
+            logging.info("Não é Packt, aplicando limpeza genérica...")
             text = self._clean_corrupted_text(text)
             
             # Se ainda não encontrou ISBNs e temos o caminho do arquivo, tenta métodos alternativos
@@ -379,7 +379,7 @@ class ISBNExtractor:
         
         # Se não encontrou nada, tenta extrações específicas por editora
         if publisher == 'packt':
-            # Tenta padrões específicos da Packt mesmo em texto não-DRM
+            # Tenta padrões específicos da Packt
             publisher_isbns = set()
             for pattern in self.packt_handler.packt_isbn_patterns:
                 matches = re.finditer(pattern, original_text)
@@ -1787,58 +1787,84 @@ class PacktDRMHandler:
             r'P[@4]ckt',
             r'[?@]ublishing',
             r'B[1Il]{2}rmingham',
-            r'B[1Il]rm[1Il]ngham'
+            r'B[1Il]rm[1Il]ngham',
+            # Novos padrões específicos do seu caso
+            r'\+DQGV2Q',                   # "Hands-On" embaralhado
+            r'%,50,1*+$0',                # "BIRMINGHAM" embaralhado
+            r'080%$,',                    # "MUMBAI" embaralhado
+            r'$UWLdFLDO',                 # "Artificial" embaralhado
+            r',QWH11LJHQFH',             # "Intelligence" embaralhado
+            r'1RU%DQNLQJ',               # "for Banking" embaralhado
+            r'[+](?:[A-Z0-9]{2}){3,}'     # Sequências longas típicas do DRM
         ]
         
-        # Mapeamento de caracteres embaralhados específicos da Packt
+        # Atualiza o mapeamento com caracteres específicos do caso
         self.packt_char_map = {
-            '@': 'a',
-            '?': 'p',
-            '>': '7',
-            '<': '4',
-            '#': '8',
-            '$': '5',
-            '_': '-',
-            '|': 'l',
-            '1': 'i',
-            'I': 'i',
-            'l': 'i',
-            '0': 'o',
-            'O': 'o',
-            '4': 'a',
-            '8': 'B',
-            '7': 'T',
-            '5': 'S',
-            'Q': 'O',
-            'Z': '2',
-            'Y': '7'
+            # Caracteres básicos
+            '@': 'a', '?': 'p', '>': '7', '<': '4', '#': '8',
+            '$': 'A', '_': '-', '|': 'l', '1': 'i', 'I': 'i',
+            'l': 'i', '0': 'o', 'O': 'o', '4': 'a', '8': 'B',
+            '7': 'T', '5': 'S', 'Q': 'n', 'Z': '2', 'Y': '7',
+            
+            # Caracteres específicos do seu caso
+            '+': 'H',      # em "+DQGV2Q"
+            'D': 'a',      # em "DQGV"
+            'Q': 'n',      # em "DQGV"
+            'V': 's',      # em "DQGV"
+            'W': 't',      # comum em palavras técnicas
+            'U': 'r',      # comum em palavras técnicas
+            'd': 'fi',     # em "Artificial"
+            '11': 'll',    # em "Intelligence"
+            '%': 'B',      # em "BIRMINGHAM"
+            ',': 'I',      # em palavras maiúsculas
+            'F': 'c'       # em várias palavras
         }
         
-        # Padrões de ISBN específicos da Packt com DRM
+        # Atualiza os padrões de ISBN com os padrões específicos do caso
         self.packt_isbn_patterns = [
             r'ISBN\s*[@>?]*(97[89][-\s]*(?:[\d@>?][-\s]*){9}[\d@>?])',
             r'ISBN[-:]?\s*([9@][7>][\d@>?]{11})',
-            r'[@>?]*(97[89][-\s]*(?:[\d@>?][-\s]*){9}[\d@>?])'
+            r'[@>?]*(97[89][-\s]*(?:[\d@>?][-\s]*){9}[\d@>?])',
+            # Adiciona padrão específico visto no seu caso
+            r'ISBN\s+978-[0-9]-[0-9]{5}-[0-9]{3}-[0-9]',
+            r'978-[0-9]-[0-9]{5}-[0-9]{3}-[0-9]'
         ]
 
     def is_packt_drm(self, text: str) -> bool:
         """Detecta se o texto tem DRM da Packt"""
+        # Adiciona log para debug
+        logging.debug(f"Verificando DRM em texto: {text[:200]}")
+        
         # Verifica padrões típicos de DRM da Packt
-        if any(re.search(pattern, text) for pattern in self.packt_drm_patterns):
-            return True
-            
+        for pattern in self.packt_drm_patterns:
+            if re.search(pattern, text):
+                logging.debug(f"Encontrado padrão DRM: {pattern}")
+                return True
+        
         # Verifica alta ocorrência de caracteres especiais típicos
-        special_chars = '@?>#$_|'
+        special_chars = set('@?>#$_|+DQVW')  # Adicionados caracteres do seu caso
         char_count = sum(text.count(c) for c in special_chars)
         text_len = len(text)
         
-        if text_len > 0 and char_count / text_len > 0.02:  # Mais de 2% são caracteres especiais
-            return True
-            
-        # Verifica padrões de ISBN embaralhados
-        if any(re.search(pattern, text) for pattern in self.packt_isbn_patterns):
-            return True
-            
+        if text_len > 0:
+            ratio = char_count / text_len
+            logging.debug(f"Proporção de caracteres especiais: {ratio}")
+            if ratio > 0.02:  # Mais de 2% são caracteres especiais
+                return True
+        
+        # Verifica sequências específicas do seu caso
+        special_sequences = [
+            '+DQGV2Q',
+            '$UWLdFLDO',
+            ',QWH11LJHQFH',
+            '%,50,1*+$0'
+        ]
+        
+        for seq in special_sequences:
+            if seq in text:
+                logging.debug(f"Encontrada sequência especial: {seq}")
+                return True
+                
         return False
 
     def decode_packt_text(self, text: str) -> str:

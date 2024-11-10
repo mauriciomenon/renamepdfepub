@@ -16313,3 +16313,491 @@
 2024-11-10 08:20:46,005 - INFO - Sucesso: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
 2024-11-10 08:20:46,012 - INFO - ISBNs encontrados: {'9786586593181'}
 2024-11-10 08:20:46,012 - INFO - Sucesso: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-11-10 08:43:19,914 - INFO - Extractores disponíveis: pypdf2, pdfplumber, pdfminer, tesseract, pdf2image
+2024-11-10 08:43:19,914 - INFO - Suporte a OCR está disponível
+2024-11-10 08:43:19,915 - INFO - Encontrados 12 arquivos PDF para processar
+2024-11-10 08:43:19,915 - INFO - Processing: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-11-10 08:43:19,915 - INFO - Processing: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-11-10 08:43:19,915 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-11-10 08:43:19,915 - INFO - Processing: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-11-10 08:43:19,915 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-11-10 08:43:19,915 - INFO - Processing: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-11-10 08:43:19,915 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-11-10 08:43:19,916 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-11-10 08:43:19,942 - INFO - Métodos tentados: PyPDF2
+2024-11-10 08:43:19,942 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 08:43:19,943 - INFO - Extraindo metadados de: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-11-10 08:43:19,946 - INFO - ISBNs encontrados: {'9786586110357', '9786586110340', '9786586110364'}
+2024-11-10 08:43:19,963 - INFO - Processing: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-11-10 08:43:19,969 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-11-10 08:43:20,016 - INFO - Sucesso: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-11-10 08:43:20,018 - INFO - Métodos tentados: PyPDF2
+2024-11-10 08:43:20,030 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 08:43:20,040 - INFO - Métodos tentados: PyPDF2
+2024-11-10 08:43:20,041 - INFO - Extraindo metadados de: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-11-10 08:43:20,041 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 08:43:20,043 - INFO - Extraindo metadados de: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-11-10 08:43:20,061 - INFO - Texto corrompido detectado, aplicando limpeza...
+2024-11-10 08:43:20,063 - INFO - Tentando padrões mais agressivos de extração...
+2024-11-10 08:43:20,064 - INFO - Processing: /Users/menon/Downloads/bashcookbook.pdf
+2024-11-10 08:43:20,064 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/bashcookbook.pdf
+2024-11-10 08:43:20,070 - WARNING - Sem metadados: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-11-10 08:43:20,075 - INFO - ISBNs encontrados: {'9781718501', '9781718501546', '9781718501553', '9789781718502'}
+2024-11-10 08:43:20,076 - INFO - Métodos tentados: PyPDF2
+2024-11-10 08:43:20,076 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 08:43:20,077 - INFO - Extraindo metadados de: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-11-10 08:43:20,079 - INFO - ISBNs encontrados: {'9781119895237', '9781119895213', '9781119895220'}
+2024-11-10 08:43:20,079 - INFO - Processing: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-11-10 08:43:20,079 - INFO - Sucesso: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-11-10 08:43:20,079 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-11-10 08:43:20,080 - INFO - Processing: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-11-10 08:43:20,080 - INFO - Sucesso: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-11-10 08:43:20,080 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-11-10 08:43:20,116 - INFO - Métodos tentados: PyPDF2
+2024-11-10 08:43:20,121 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 08:43:20,121 - INFO - Extraindo metadados de: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-11-10 08:43:20,128 - INFO - Métodos tentados: PyPDF2
+2024-11-10 08:43:20,128 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 08:43:20,128 - INFO - Extraindo metadados de: /Users/menon/Downloads/bashcookbook.pdf
+2024-11-10 08:43:20,130 - INFO - ISBNs encontrados: {'9781394158508', '9781394158492', '9781394158485'}
+2024-11-10 08:43:20,132 - INFO - ISBNs encontrados: {'9781491975336'}
+2024-11-10 08:43:20,133 - INFO - Processing: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-11-10 08:43:20,133 - INFO - Sucesso: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-11-10 08:43:20,133 - INFO - Processing: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-11-10 08:43:20,133 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-11-10 08:43:20,138 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-11-10 08:43:20,139 - INFO - Sucesso: /Users/menon/Downloads/bashcookbook.pdf
+2024-11-10 08:43:20,159 - INFO - Métodos tentados: PyPDF2
+2024-11-10 08:43:20,159 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 08:43:20,160 - INFO - Extraindo metadados de: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-11-10 08:43:20,163 - INFO - ISBNs encontrados: {'9781492056119'}
+2024-11-10 08:43:20,164 - INFO - Processing: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-11-10 08:43:20,165 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-11-10 08:43:20,165 - INFO - Sucesso: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-11-10 08:43:20,227 - INFO - Métodos tentados: PyPDF2
+2024-11-10 08:43:20,228 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 08:43:20,228 - INFO - Extraindo metadados de: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-11-10 08:43:20,260 - INFO - Métodos tentados: PyPDF2
+2024-11-10 08:43:20,260 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 08:43:20,260 - INFO - Extraindo metadados de: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-11-10 08:43:20,262 - INFO - ISBNs encontrados: {'9781593278748', '9781593278755'}
+2024-11-10 08:43:20,287 - INFO - Processing: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-11-10 08:43:20,287 - INFO - Sucesso: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-11-10 08:43:20,288 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-11-10 08:43:20,291 - INFO - ISBNs encontrados: {'9781098109158'}
+2024-11-10 08:43:20,314 - INFO - Sucesso: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-11-10 08:43:20,331 - INFO - Métodos tentados: PyPDF2
+2024-11-10 08:43:20,331 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 08:43:20,332 - INFO - Extraindo metadados de: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-11-10 08:43:20,335 - INFO - ISBNs encontrados: {'9781803237015'}
+2024-11-10 08:43:20,338 - INFO - Sucesso: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-11-10 08:43:20,706 - INFO - Métodos tentados: PyPDF2
+2024-11-10 08:43:20,706 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 08:43:20,707 - INFO - Extraindo metadados de: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-11-10 08:43:20,831 - INFO - Métodos tentados: PyPDF2
+2024-11-10 08:43:20,831 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 08:43:20,832 - INFO - Extraindo metadados de: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-11-10 08:43:20,836 - INFO - ISBNs encontrados: {'9786586593181'}
+2024-11-10 08:43:20,841 - INFO - ISBNs encontrados: {'9788575227510', '9781491957660'}
+2024-11-10 08:43:20,842 - INFO - Sucesso: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-11-10 08:43:20,842 - INFO - Sucesso: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-11-10 08:58:24,605 - INFO - Extractores disponíveis: pypdf2, pdfplumber, pdfminer, tesseract, pdf2image
+2024-11-10 08:58:24,606 - INFO - Suporte a OCR está disponível
+2024-11-10 08:58:24,607 - INFO - Encontrados 12 arquivos PDF para processar
+2024-11-10 08:58:24,607 - INFO - Processing: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-11-10 08:58:24,607 - INFO - Processing: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-11-10 08:58:24,607 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-11-10 08:58:24,607 - INFO - Processing: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-11-10 08:58:24,607 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-11-10 08:58:24,607 - INFO - Processing: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-11-10 08:58:24,607 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-11-10 08:58:24,608 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-11-10 08:58:24,634 - INFO - Métodos tentados: PyPDF2
+2024-11-10 08:58:24,634 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 08:58:24,635 - INFO - Extraindo metadados de: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-11-10 08:58:24,669 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 08:58:24,671 - INFO - ISBNs encontrados usando extração específica da editora: {'9786586110364', '9786586110340', '9786586110357'}
+2024-11-10 08:58:24,677 - INFO - Processing: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-11-10 08:58:24,688 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-11-10 08:58:24,709 - INFO - Métodos tentados: PyPDF2
+2024-11-10 08:58:24,710 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 08:58:24,716 - INFO - Extraindo metadados de: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-11-10 08:58:24,723 - INFO - Métodos tentados: PyPDF2
+2024-11-10 08:58:24,723 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 08:58:24,724 - INFO - Extraindo metadados de: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-11-10 08:58:24,730 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 08:58:24,732 - INFO - ISBNs encontrados usando extração específica da editora: {'9781718501553', '9781718501546'}
+2024-11-10 08:58:24,734 - INFO - Texto corrompido detectado
+2024-11-10 08:58:24,734 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 08:58:24,738 - INFO - Tentando padrões mais agressivos de extração...
+2024-11-10 08:58:24,738 - INFO - Processing: /Users/menon/Downloads/bashcookbook.pdf
+2024-11-10 08:58:24,738 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/bashcookbook.pdf
+2024-11-10 08:58:24,741 - INFO - Processing: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-11-10 08:58:24,741 - WARNING - Sem metadados: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-11-10 08:58:24,741 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-11-10 08:58:24,742 - INFO - Sucesso: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-11-10 08:58:24,743 - INFO - Sucesso: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-11-10 08:58:24,775 - INFO - Métodos tentados: PyPDF2
+2024-11-10 08:58:24,775 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 08:58:24,777 - INFO - Extraindo metadados de: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-11-10 08:58:24,779 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 08:58:24,780 - INFO - ISBNs encontrados usando extração específica da editora: {'9781119895213', '9781119895237', '9781119895220'}
+2024-11-10 08:58:24,781 - INFO - Processing: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-11-10 08:58:24,781 - INFO - Sucesso: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-11-10 08:58:24,782 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-11-10 08:58:24,808 - INFO - Métodos tentados: PyPDF2
+2024-11-10 08:58:24,808 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 08:58:24,808 - INFO - Extraindo metadados de: /Users/menon/Downloads/bashcookbook.pdf
+2024-11-10 08:58:24,820 - INFO - Métodos tentados: PyPDF2
+2024-11-10 08:58:24,820 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 08:58:24,820 - INFO - Extraindo metadados de: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-11-10 08:58:24,821 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 08:58:24,822 - INFO - ISBNs encontrados usando extração específica da editora: {'9781394158485', '9781394158492', '9781394158508'}
+2024-11-10 08:58:24,823 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 08:58:24,824 - INFO - ISBNs encontrados: {'9781491975336'}
+2024-11-10 08:58:24,825 - INFO - Processing: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-11-10 08:58:24,825 - INFO - Processing: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-11-10 08:58:24,825 - INFO - Sucesso: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-11-10 08:58:24,825 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-11-10 08:58:24,825 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-11-10 08:58:24,825 - INFO - Sucesso: /Users/menon/Downloads/bashcookbook.pdf
+2024-11-10 08:58:24,868 - INFO - Métodos tentados: PyPDF2
+2024-11-10 08:58:24,878 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 08:58:24,885 - INFO - Extraindo metadados de: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-11-10 08:58:24,921 - INFO - Métodos tentados: PyPDF2
+2024-11-10 08:58:24,921 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 08:58:24,927 - INFO - Extraindo metadados de: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-11-10 08:58:24,934 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 08:58:24,936 - INFO - ISBNs encontrados usando extração específica da editora: {'9781492056119'}
+2024-11-10 08:58:24,951 - INFO - Métodos tentados: PyPDF2
+2024-11-10 08:58:24,951 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 08:58:24,951 - INFO - Extraindo metadados de: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-11-10 08:58:24,952 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 08:58:24,953 - INFO - ISBNs encontrados usando extração específica da editora: {'9781593278755', '9781593278748'}
+2024-11-10 08:58:24,953 - INFO - Processing: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-11-10 08:58:24,953 - INFO - Sucesso: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-11-10 08:58:24,954 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-11-10 08:58:24,954 - INFO - Processing: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-11-10 08:58:24,955 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 08:58:24,955 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-11-10 08:58:24,955 - INFO - Sucesso: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-11-10 08:58:24,958 - INFO - ISBNs encontrados usando extração específica da editora: {'9781098109158'}
+2024-11-10 08:58:24,960 - INFO - Sucesso: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-11-10 08:58:25,045 - INFO - Métodos tentados: PyPDF2
+2024-11-10 08:58:25,045 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 08:58:25,047 - INFO - Extraindo metadados de: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-11-10 08:58:25,051 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 08:58:25,054 - INFO - ISBNs encontrados usando extração específica da editora: {'9781803237015'}
+2024-11-10 08:58:25,055 - INFO - Sucesso: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-11-10 08:58:25,417 - INFO - Métodos tentados: PyPDF2
+2024-11-10 08:58:25,417 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 08:58:25,418 - INFO - Extraindo metadados de: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-11-10 08:58:25,537 - INFO - Métodos tentados: PyPDF2
+2024-11-10 08:58:25,537 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 08:58:25,537 - INFO - Extraindo metadados de: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-11-10 08:58:25,542 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 08:58:25,543 - INFO - ISBNs encontrados usando extração específica da editora: {'9788575227510', '9781491957660'}
+2024-11-10 08:58:25,546 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 08:58:25,549 - INFO - ISBNs encontrados: {'9786586593181'}
+2024-11-10 08:58:25,549 - INFO - Sucesso: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-11-10 08:58:25,549 - INFO - Sucesso: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-11-10 09:02:51,052 - INFO - Extractores disponíveis: pypdf2, pdfplumber, pdfminer, tesseract, pdf2image
+2024-11-10 09:02:51,052 - INFO - Suporte a OCR está disponível
+2024-11-10 09:02:51,053 - INFO - Encontrados 12 arquivos PDF para processar
+2024-11-10 09:02:51,053 - INFO - Processing: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-11-10 09:02:51,053 - INFO - Processing: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-11-10 09:02:51,053 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-11-10 09:02:51,053 - INFO - Processing: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-11-10 09:02:51,053 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-11-10 09:02:51,053 - INFO - Processing: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-11-10 09:02:51,054 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-11-10 09:02:51,054 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-11-10 09:02:51,080 - INFO - Métodos tentados: PyPDF2
+2024-11-10 09:02:51,080 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 09:02:51,083 - INFO - Extraindo metadados de: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-11-10 09:02:51,116 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 09:02:51,118 - INFO - ISBNs encontrados usando extração específica da editora: {'9786586110340', '9786586110357', '9786586110364'}
+2024-11-10 09:02:51,134 - INFO - Processing: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-11-10 09:02:51,134 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-11-10 09:02:51,154 - INFO - Métodos tentados: PyPDF2
+2024-11-10 09:02:51,155 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 09:02:51,159 - INFO - Extraindo metadados de: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-11-10 09:02:51,193 - INFO - Métodos tentados: PyPDF2
+2024-11-10 09:02:51,195 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 09:02:51,196 - INFO - Texto corrompido detectado
+2024-11-10 09:02:51,196 - INFO - Sucesso: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-11-10 09:02:51,196 - INFO - Extraindo metadados de: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-11-10 09:02:51,196 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 09:02:51,198 - INFO - Tentando padrões mais agressivos de extração...
+2024-11-10 09:02:51,199 - INFO - Processing: /Users/menon/Downloads/bashcookbook.pdf
+2024-11-10 09:02:51,199 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/bashcookbook.pdf
+2024-11-10 09:02:51,200 - WARNING - Sem metadados: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-11-10 09:02:51,201 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 09:02:51,203 - INFO - ISBNs encontrados usando extração específica da editora: {'9781718501546', '9781718501553'}
+2024-11-10 09:02:51,205 - INFO - Processing: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-11-10 09:02:51,205 - INFO - Sucesso: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-11-10 09:02:51,207 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-11-10 09:02:51,221 - INFO - Métodos tentados: PyPDF2
+2024-11-10 09:02:51,221 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 09:02:51,222 - INFO - Extraindo metadados de: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-11-10 09:02:51,223 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 09:02:51,225 - INFO - ISBNs encontrados usando extração específica da editora: {'9781119895220', '9781119895213', '9781119895237'}
+2024-11-10 09:02:51,227 - INFO - Processing: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-11-10 09:02:51,228 - INFO - Sucesso: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-11-10 09:02:51,228 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-11-10 09:02:51,252 - INFO - Métodos tentados: PyPDF2
+2024-11-10 09:02:51,252 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 09:02:51,252 - INFO - Extraindo metadados de: /Users/menon/Downloads/bashcookbook.pdf
+2024-11-10 09:02:51,265 - INFO - Métodos tentados: PyPDF2
+2024-11-10 09:02:51,265 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 09:02:51,265 - INFO - Extraindo metadados de: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-11-10 09:02:51,267 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 09:02:51,268 - INFO - ISBNs encontrados usando extração específica da editora: {'9781394158492', '9781394158485', '9781394158508'}
+2024-11-10 09:02:51,269 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 09:02:51,270 - INFO - ISBNs encontrados: {'9781491975336'}
+2024-11-10 09:02:51,270 - INFO - Processing: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-11-10 09:02:51,270 - INFO - Sucesso: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-11-10 09:02:51,270 - INFO - Processing: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-11-10 09:02:51,270 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-11-10 09:02:51,271 - INFO - Sucesso: /Users/menon/Downloads/bashcookbook.pdf
+2024-11-10 09:02:51,272 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-11-10 09:02:51,312 - INFO - Métodos tentados: PyPDF2
+2024-11-10 09:02:51,312 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 09:02:51,313 - INFO - Extraindo metadados de: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-11-10 09:02:51,320 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 09:02:51,321 - INFO - ISBNs encontrados usando extração específica da editora: {'9781492056119'}
+2024-11-10 09:02:51,360 - INFO - Processing: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-11-10 09:02:51,361 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-11-10 09:02:51,361 - INFO - Sucesso: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-11-10 09:02:51,370 - INFO - Métodos tentados: PyPDF2
+2024-11-10 09:02:51,370 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 09:02:51,371 - INFO - Extraindo metadados de: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-11-10 09:02:51,377 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 09:02:51,378 - INFO - ISBNs encontrados usando extração específica da editora: {'9781593278755', '9781593278748'}
+2024-11-10 09:02:51,400 - INFO - Métodos tentados: PyPDF2
+2024-11-10 09:02:51,400 - INFO - Processing: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-11-10 09:02:51,400 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 09:02:51,400 - INFO - Sucesso: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-11-10 09:02:51,400 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-11-10 09:02:51,401 - INFO - Extraindo metadados de: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-11-10 09:02:51,403 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 09:02:51,405 - INFO - ISBNs encontrados usando extração específica da editora: {'9781098109158'}
+2024-11-10 09:02:51,409 - INFO - Sucesso: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-11-10 09:02:51,486 - INFO - Métodos tentados: PyPDF2
+2024-11-10 09:02:51,487 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 09:02:51,488 - INFO - Extraindo metadados de: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-11-10 09:02:51,491 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 09:02:51,494 - INFO - ISBNs encontrados usando extração específica da editora: {'9781803237015'}
+2024-11-10 09:02:51,495 - INFO - Sucesso: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-11-10 09:02:51,966 - INFO - Métodos tentados: PyPDF2
+2024-11-10 09:02:51,973 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 09:02:51,973 - INFO - Métodos tentados: PyPDF2
+2024-11-10 09:02:51,974 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 09:02:51,974 - INFO - Extraindo metadados de: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-11-10 09:02:51,975 - INFO - Extraindo metadados de: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-11-10 09:02:51,980 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 09:02:51,981 - INFO - ISBNs encontrados usando extração específica da editora: {'9781491957660', '9788575227510'}
+2024-11-10 09:02:51,982 - INFO - Sucesso: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-11-10 09:02:51,987 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 09:02:51,990 - INFO - ISBNs encontrados: {'9786586593181'}
+2024-11-10 09:02:51,990 - INFO - Sucesso: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-11-10 09:23:08,007 - INFO - Extractores disponíveis: pypdf2, pdfplumber, pdfminer, tesseract, pdf2image
+2024-11-10 09:23:08,007 - INFO - Suporte a OCR está disponível
+2024-11-10 09:23:08,009 - INFO - Encontrados 12 arquivos PDF para processar
+2024-11-10 09:23:08,009 - INFO - Processing: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-11-10 09:23:08,009 - INFO - Processing: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-11-10 09:23:08,009 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-11-10 09:23:08,009 - INFO - Processing: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-11-10 09:23:08,009 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-11-10 09:23:08,009 - INFO - Processing: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-11-10 09:23:08,009 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-11-10 09:23:08,010 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-11-10 09:23:08,037 - INFO - Métodos tentados: PyPDF2
+2024-11-10 09:23:08,037 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 09:23:08,038 - INFO - Extraindo metadados de: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-11-10 09:23:08,042 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 09:23:08,043 - INFO - ISBNs encontrados usando extração específica da editora: {'9786586110364', '9786586110357', '9786586110340'}
+2024-11-10 09:23:08,070 - INFO - Processing: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-11-10 09:23:08,072 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-11-10 09:23:08,101 - INFO - Métodos tentados: PyPDF2
+2024-11-10 09:23:08,101 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 09:23:08,102 - INFO - Extraindo metadados de: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-11-10 09:23:08,132 - INFO - Métodos tentados: PyPDF2
+2024-11-10 09:23:08,132 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 09:23:08,133 - INFO - Extraindo metadados de: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-11-10 09:23:08,135 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 09:23:08,137 - INFO - ISBNs encontrados usando extração específica da editora: {'9781718501546', '9781718501553'}
+2024-11-10 09:23:08,140 - INFO - Texto corrompido detectado
+2024-11-10 09:23:08,141 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 09:23:08,146 - INFO - Tentando padrões mais agressivos de extração...
+2024-11-10 09:23:08,147 - INFO - Processing: /Users/menon/Downloads/bashcookbook.pdf
+2024-11-10 09:23:08,147 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/bashcookbook.pdf
+2024-11-10 09:23:08,169 - WARNING - Sem metadados: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-11-10 09:23:08,169 - INFO - Processing: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-11-10 09:23:08,169 - INFO - Sucesso: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-11-10 09:23:08,170 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-11-10 09:23:08,170 - INFO - Sucesso: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-11-10 09:23:08,180 - INFO - Métodos tentados: PyPDF2
+2024-11-10 09:23:08,180 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 09:23:08,181 - INFO - Extraindo metadados de: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-11-10 09:23:08,182 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 09:23:08,183 - INFO - ISBNs encontrados usando extração específica da editora: {'9781119895213', '9781119895237', '9781119895220'}
+2024-11-10 09:23:08,184 - INFO - Processing: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-11-10 09:23:08,184 - INFO - Sucesso: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-11-10 09:23:08,184 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-11-10 09:23:08,212 - INFO - Métodos tentados: PyPDF2
+2024-11-10 09:23:08,213 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 09:23:08,219 - INFO - Extraindo metadados de: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-11-10 09:23:08,253 - INFO - Métodos tentados: PyPDF2
+2024-11-10 09:23:08,254 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 09:23:08,254 - INFO - Extraindo metadados de: /Users/menon/Downloads/bashcookbook.pdf
+2024-11-10 09:23:08,261 - INFO - Métodos tentados: PyPDF2
+2024-11-10 09:23:08,261 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 09:23:08,261 - INFO - Extraindo metadados de: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-11-10 09:23:08,263 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 09:23:08,264 - INFO - ISBNs encontrados: {'9781491975336'}
+2024-11-10 09:23:08,265 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 09:23:08,267 - INFO - ISBNs encontrados usando extração específica da editora: {'9781492056119'}
+2024-11-10 09:23:08,268 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 09:23:08,269 - INFO - ISBNs encontrados usando extração específica da editora: {'9781394158492', '9781394158508', '9781394158485'}
+2024-11-10 09:23:08,269 - INFO - Processing: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-11-10 09:23:08,269 - INFO - Sucesso: /Users/menon/Downloads/bashcookbook.pdf
+2024-11-10 09:23:08,269 - INFO - Processing: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-11-10 09:23:08,269 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-11-10 09:23:08,269 - INFO - Processing: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-11-10 09:23:08,269 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-11-10 09:23:08,269 - INFO - Sucesso: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-11-10 09:23:08,269 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-11-10 09:23:08,270 - INFO - Sucesso: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-11-10 09:23:08,376 - INFO - Métodos tentados: PyPDF2
+2024-11-10 09:23:08,383 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 09:23:08,383 - INFO - Extraindo metadados de: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-11-10 09:23:08,415 - INFO - Métodos tentados: PyPDF2
+2024-11-10 09:23:08,416 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 09:23:08,417 - INFO - Extraindo metadados de: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-11-10 09:23:08,440 - INFO - Métodos tentados: PyPDF2
+2024-11-10 09:23:08,440 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 09:23:08,441 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 09:23:08,442 - INFO - Extraindo metadados de: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-11-10 09:23:08,443 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 09:23:08,444 - INFO - ISBNs encontrados usando extração específica da editora: {'9781593278755', '9781593278748'}
+2024-11-10 09:23:08,447 - INFO - ISBNs encontrados usando extração específica da editora: {'9781098109158'}
+2024-11-10 09:23:08,449 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 09:23:08,451 - INFO - ISBNs encontrados usando extração específica da editora: {'9781803237015'}
+2024-11-10 09:23:08,452 - INFO - Processing: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-11-10 09:23:08,452 - INFO - Sucesso: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-11-10 09:23:08,452 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-11-10 09:23:08,452 - INFO - Sucesso: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-11-10 09:23:08,452 - INFO - Sucesso: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-11-10 09:23:08,837 - INFO - Métodos tentados: PyPDF2
+2024-11-10 09:23:08,837 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 09:23:08,839 - INFO - Extraindo metadados de: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-11-10 09:23:08,965 - INFO - Métodos tentados: PyPDF2
+2024-11-10 09:23:08,966 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 09:23:08,966 - INFO - Extraindo metadados de: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-11-10 09:23:08,968 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 09:23:08,971 - INFO - ISBNs encontrados: {'9786586593181'}
+2024-11-10 09:23:08,975 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 09:23:08,976 - INFO - ISBNs encontrados usando extração específica da editora: {'9788575227510', '9781491957660'}
+2024-11-10 09:23:08,977 - INFO - Sucesso: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-11-10 09:23:08,977 - INFO - Sucesso: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-11-10 09:54:46,005 - INFO - Extractores disponíveis: pypdf2, pdfplumber, pdfminer, tesseract, pdf2image
+2024-11-10 09:54:46,007 - INFO - Suporte a OCR está disponível
+2024-11-10 09:54:46,008 - INFO - Encontrados 12 arquivos PDF para processar
+2024-11-10 09:54:46,008 - INFO - Processing: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-11-10 09:54:46,008 - INFO - Processing: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-11-10 09:54:46,008 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-11-10 09:54:46,008 - INFO - Processing: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-11-10 09:54:46,008 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-11-10 09:54:46,008 - INFO - Processing: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-11-10 09:54:46,008 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-11-10 09:54:46,008 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-11-10 09:54:46,038 - INFO - Métodos tentados: PyPDF2
+2024-11-10 09:54:46,038 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 09:54:46,039 - INFO - Extraindo metadados de: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-11-10 09:54:46,055 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 09:54:46,063 - INFO - ISBNs encontrados usando extração específica da editora: {'9786586110364', '9786586110357', '9786586110340'}
+2024-11-10 09:54:46,090 - INFO - Processing: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-11-10 09:54:46,090 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-11-10 09:54:46,114 - INFO - Métodos tentados: PyPDF2
+2024-11-10 09:54:46,127 - INFO - Sucesso: /Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-11-10 09:54:46,151 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 09:54:46,158 - INFO - Métodos tentados: PyPDF2
+2024-11-10 09:54:46,159 - INFO - Extraindo metadados de: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-11-10 09:54:46,159 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 09:54:46,159 - INFO - Extraindo metadados de: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-11-10 09:54:46,161 - INFO - Texto corrompido detectado
+2024-11-10 09:54:46,161 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 09:54:46,163 - INFO - Tentando padrões mais agressivos de extração...
+2024-11-10 09:54:46,164 - INFO - Processing: /Users/menon/Downloads/bashcookbook.pdf
+2024-11-10 09:54:46,164 - WARNING - Sem metadados: /Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf
+2024-11-10 09:54:46,164 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/bashcookbook.pdf
+2024-11-10 09:54:46,166 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 09:54:46,168 - INFO - ISBNs encontrados usando extração específica da editora: {'9781718501553', '9781718501546'}
+2024-11-10 09:54:46,170 - INFO - Processing: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-11-10 09:54:46,170 - INFO - Sucesso: /Users/menon/Downloads/bugbountybootcamp.pdf
+2024-11-10 09:54:46,170 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-11-10 09:54:46,186 - INFO - Métodos tentados: PyPDF2
+2024-11-10 09:54:46,187 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 09:54:46,187 - INFO - Extraindo metadados de: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-11-10 09:54:46,189 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 09:54:46,190 - INFO - ISBNs encontrados usando extração específica da editora: {'9781119895237', '9781119895220', '9781119895213'}
+2024-11-10 09:54:46,194 - INFO - Processing: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-11-10 09:54:46,194 - INFO - Sucesso: /Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf
+2024-11-10 09:54:46,194 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-11-10 09:54:46,216 - INFO - Métodos tentados: PyPDF2
+2024-11-10 09:54:46,216 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 09:54:46,218 - INFO - Extraindo metadados de: /Users/menon/Downloads/bashcookbook.pdf
+2024-11-10 09:54:46,233 - INFO - Métodos tentados: PyPDF2
+2024-11-10 09:54:46,233 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 09:54:46,234 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 09:54:46,234 - INFO - Extraindo metadados de: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-11-10 09:54:46,236 - INFO - ISBNs encontrados: {'9781491975336'}
+2024-11-10 09:54:46,240 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 09:54:46,240 - INFO - Processing: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-11-10 09:54:46,241 - INFO - ISBNs encontrados usando extração específica da editora: {'9781394158492', '9781394158508', '9781394158485'}
+2024-11-10 09:54:46,241 - INFO - Sucesso: /Users/menon/Downloads/bashcookbook.pdf
+2024-11-10 09:54:46,241 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-11-10 09:54:46,242 - INFO - Processing: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-11-10 09:54:46,242 - INFO - Sucesso: /Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf
+2024-11-10 09:54:46,242 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-11-10 09:54:46,275 - INFO - Métodos tentados: PyPDF2
+2024-11-10 09:54:46,276 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 09:54:46,277 - INFO - Extraindo metadados de: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-11-10 09:54:46,281 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 09:54:46,283 - INFO - ISBNs encontrados usando extração específica da editora: {'9781492056119'}
+2024-11-10 09:54:46,288 - INFO - Processing: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-11-10 09:54:46,289 - INFO - Sucesso: /Users/menon/Downloads/javaperformance2ndedition.pdf
+2024-11-10 09:54:46,289 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-11-10 09:54:46,345 - INFO - Métodos tentados: PyPDF2
+2024-11-10 09:54:46,354 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 09:54:46,354 - INFO - Extraindo metadados de: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-11-10 09:54:46,366 - INFO - Métodos tentados: PyPDF2
+2024-11-10 09:54:46,367 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 09:54:46,367 - INFO - Extraindo metadados de: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-11-10 09:54:46,369 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 09:54:46,372 - INFO - ISBNs encontrados usando extração específica da editora: {'9781098109158'}
+2024-11-10 09:54:46,373 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 09:54:46,374 - INFO - ISBNs encontrados usando extração específica da editora: {'9781593278748', '9781593278755'}
+2024-11-10 09:54:46,374 - INFO - Processing: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-11-10 09:54:46,374 - INFO - Sucesso: /Users/menon/Downloads/ansible_upandrunning3rdedition.pdf
+2024-11-10 09:54:46,375 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-11-10 09:54:46,378 - INFO - Sucesso: /Users/menon/Downloads/hardwarehackinghandbook.pdf
+2024-11-10 09:54:46,453 - INFO - Métodos tentados: PyPDF2
+2024-11-10 09:54:46,453 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 09:54:46,454 - INFO - Extraindo metadados de: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-11-10 09:54:46,457 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 09:54:46,460 - INFO - ISBNs encontrados usando extração específica da editora: {'9781803237015'}
+2024-11-10 09:54:46,462 - INFO - Sucesso: /Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf
+2024-11-10 09:54:46,834 - INFO - Métodos tentados: PyPDF2
+2024-11-10 09:54:46,834 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 09:54:46,835 - INFO - Extraindo metadados de: /Users/menon/Downloads/python ciencia 00002cd9.pdf
+2024-11-10 09:54:46,961 - INFO - Métodos tentados: PyPDF2
+2024-11-10 09:54:46,961 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-10 09:54:46,962 - INFO - Extraindo metadados de: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-11-10 09:54:46,967 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 09:54:46,968 - INFO - ISBNs encontrados usando extração específica da editora: {'9781491957660', '9788575227510'}
+2024-11-10 09:54:46,970 - INFO - Não é Packt, aplicando limpeza genérica...
+2024-11-10 09:54:46,973 - INFO - ISBNs encontrados: {'9786586593181'}
+2024-11-10 09:54:46,973 - INFO - Sucesso: /Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-11-10 09:54:46,973 - INFO - Sucesso: /Users/menon/Downloads/python ciencia 00002cd9.pdf
