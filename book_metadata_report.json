@@ -2,9 +2,22 @@
   "summary": {
     "total_processed": 11,
     "successful": 11,
-    "timestamp": "2024-11-06 22:49:34"
+    "timestamp": "2024-11-10 08:20:46"
   },
   "books": [
+    {
+      "title": "Unknown",
+      "authors": [
+        "Unknown"
+      ],
+      "publisher": "Unknown",
+      "published_date": "Unknown",
+      "isbn_10": null,
+      "isbn_13": "9786586110357",
+      "confidence_score": 0.44999999999999996,
+      "source": "worldcat",
+      "file_path": "/Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf"
+    },
     {
       "title": "Unknown",
       "authors": [
@@ -19,16 +32,16 @@
       "file_path": "/Users/menon/Downloads/bugbountybootcamp.pdf"
     },
     {
-      "title": "The Active Defender",
+      "title": "Active Defender",
       "authors": [
-        "Dr. Catherine J. Ullman"
+        "Catherine J. Ullman"
       ],
-      "publisher": "John Wiley & Sons",
-      "published_date": "2023-06-20",
+      "publisher": "Wiley & Sons, Incorporated, John",
+      "published_date": "2023",
       "isbn_10": null,
-      "isbn_13": "9781119895237",
+      "isbn_13": "9781119895220",
       "confidence_score": 0.7200000000000001,
-      "source": "google_books",
+      "source": "openlibrary",
       "file_path": "/Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf"
     },
     {
@@ -51,11 +64,11 @@
         "Chris Hughes",
         "Tony Turner"
       ],
-      "publisher": "Wiley & Sons, Incorporated, John",
+      "publisher": "Wiley & Sons, Limited, John",
       "published_date": "2023",
       "isbn_10": null,
-      "isbn_13": "9781394158508",
-      "confidence_score": 0.6599999999999999,
+      "isbn_13": "9781394158485",
+      "confidence_score": 0.8200000000000001,
       "source": "openlibrary",
       "file_path": "/Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf"
     },
@@ -73,6 +86,20 @@
       "file_path": "/Users/menon/Downloads/javaperformance2ndedition.pdf"
     },
     {
+      "title": "The Hardware Hacking Handbook",
+      "authors": [
+        "Jasper van Woudenberg",
+        "Colin O'Flynn"
+      ],
+      "publisher": "No Starch Press",
+      "published_date": "2021-12-21",
+      "isbn_10": null,
+      "isbn_13": "9781593278755",
+      "confidence_score": 0.7200000000000001,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/hardwarehackinghandbook.pdf"
+    },
+    {
       "title": "Ansible: Up and Running",
       "authors": [
         "Bas Meijer",
@@ -86,20 +113,6 @@
       "confidence_score": 0.9,
       "source": "google_books",
       "file_path": "/Users/menon/Downloads/ansible_upandrunning3rdedition.pdf"
-    },
-    {
-      "title": "The Hardware Hacking Handbook",
-      "authors": [
-        "Jasper van Woudenberg",
-        "Colin O'Flynn"
-      ],
-      "publisher": "No Starch Press",
-      "published_date": "2021-12-21",
-      "isbn_10": null,
-      "isbn_13": "9781593278748",
-      "confidence_score": 0.9,
-      "source": "google_books",
-      "file_path": "/Users/menon/Downloads/hardwarehackinghandbook.pdf"
     },
     {
       "title": "Applied Machine Learning and High-Performance Computing on AWS",
@@ -124,22 +137,9 @@
       "publisher": "Unknown",
       "published_date": "Unknown",
       "isbn_10": null,
-      "isbn_13": "9786586593181",
+      "isbn_13": "9788575227510",
       "confidence_score": 0.44999999999999996,
       "source": "worldcat",
-      "file_path": "/Users/menon/Downloads/python ciencia 00002cd9.pdf"
-    },
-    {
-      "title": "Python for Data Analysis",
-      "authors": [
-        "Wes McKinney"
-      ],
-      "publisher": "O'Reilly Media",
-      "published_date": "2017-10",
-      "isbn_10": null,
-      "isbn_13": "9781491957660",
-      "confidence_score": 0.9,
-      "source": "google_books",
       "file_path": "/Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf"
     },
     {
@@ -150,10 +150,10 @@
       "publisher": "Unknown",
       "published_date": "Unknown",
       "isbn_10": null,
-      "isbn_13": "9786586110364",
+      "isbn_13": "9786586593181",
       "confidence_score": 0.44999999999999996,
       "source": "worldcat",
-      "file_path": "/Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf"
+      "file_path": "/Users/menon/Downloads/python ciencia 00002cd9.pdf"
     }
   ]
 }

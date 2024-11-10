@@ -209,6 +209,7 @@ class MetadataCache:
 
 class ISBNExtractor:
     def __init__(self):
+        self.packt_handler = PacktDRMHandler()
         self.isbn_patterns = [
             # Padrões básicos de ISBN
             r'ISBN(?:-13)?:?\s*(978[\d-]+)',
@@ -228,7 +229,7 @@ class ISBNExtractor:
         self.isbn_patterns.extend([pub['pattern'] for pub in BRAZILIAN_PUBLISHERS.values()])
         self.isbn_patterns.extend([pub['pattern'] for pub in INTERNATIONAL_PUBLISHERS.values()])
 
-        # Mapeamento para corrigir caracteres corrompidos (geral)
+        # Mapeamento para corrigir caracteres corrompidos
         self.char_corrections = {
             # Caracteres básicos corrompidos
             '+': 'H', '2': 'O', 'Q': 'O', 'd': 'cl', '11': 'll',
@@ -243,74 +244,6 @@ class ISBNExtractor:
             'S': '5', 'Z': '2', 'B': '8', 'G': '6',
             'q': '9', 'g': '9', 'A': '4'
         }
-
-        # Mapeamento específico para PDFs da Packt
-        self.packt_char_map = {
-            # Cabeçalho típico
-            '+DQGV2Q': 'Hands-On',
-            'UWLdFLDO': 'rtificial',
-            ',QWH': 'Inte',
-            'OOLJHQFH': 'lligence',
-            'IRU': 'for',
-            '%DQNLQJ': 'Banking',
-            
-            # Locais
-            '%,50,1*+$0': 'BIRMINGHAM',
-            '080%$,': 'MUMBAI',
-            
-            # Copyright e texto legal
-            '+,5.%#$0': 'Copyright',
-            '`.!/!.2! ': ' Reserved',
-            '`.%#$0/': ' Rights',
-            
-            # Caracteres especiais frequentes
-            '`': '',
-            "'": '',
-            '"': '',
-            '\n': ' ',
-            
-            # Correções específicas para ISBN da Packt
-            '@': '9',
-            '>': '7',
-            '?': '8',
-            '_': '-'
-        }
-
-    def _is_packt_pdf(self, text: str) -> bool:
-        """
-        Detecta se é um PDF da Packt com proteção típica.
-        Retorna True se encontrar padrões característicos da Packt.
-        """
-        packt_patterns = [
-            r'\+DQGV2Q',              # "Hands-On" codificado
-            r'%,50,1*+$0',            # "BIRMINGHAM" codificado
-            r'\+,5.%#\$0',            # "Copyright" codificado
-            r'080%$,',                # "MUMBAI" codificado
-            r'`.!/!.2! ',            # "Reserved" codificado
-            r'`.%#$0/',              # "Rights" codificado
-            r'\$0`©`\d{4}`'          # Padrão de copyright da Packt
-        ]
-        
-        matches = sum(1 for pattern in packt_patterns if re.search(pattern, text))
-        return matches >= 2  # Considera Packt se encontrar 2 ou mais padrões
-
-
-    def _clean_packt_text(self, text: str) -> str:
-        """
-        Limpa texto específico de PDFs da Packt com proteção.
-        Aplica substituições conhecidas e retorna o texto limpo.
-        """
-        cleaned_text = text
-        
-        # Primeira passada: substituições de palavras completas
-        for corrupted, clean in self.packt_char_map.items():
-            cleaned_text = cleaned_text.replace(corrupted, clean)
-        
-        # Segunda passada: correções gerais
-        cleaned_text = cleaned_text.replace('`', '')
-        cleaned_text = re.sub(r'\s+', ' ', cleaned_text)
-        
-        return cleaned_text.strip()
 
     def _try_extract_with_pdfplumber(self, pdf_path: str, max_pages: int = 10) -> str:
         """Tenta extrair texto usando pdfplumber."""
@@ -343,12 +276,6 @@ class ISBNExtractor:
 
     def _clean_corrupted_text(self, text: str) -> str:
         """Limpa texto corrompido usando o mapeamento de caracteres."""
-        # Verifica primeiro se é um PDF da Packt
-        if self._is_packt_pdf(text):
-            logging.info("Detectado PDF da Packt com proteção, aplicando limpeza específica")
-            return self._clean_packt_text(text)
-        
-        # Se não for Packt, usa limpeza padrão
         # Primeira passada: correção de palavras comuns
         common_words = {
             'DQGV2Q': 'Hands-On',
@@ -372,10 +299,6 @@ class ISBNExtractor:
         if not text:
             return True
             
-        # Verifica se é um PDF da Packt protegido
-        if self._is_packt_pdf(text):
-            return True
-            
         # Verifica proporção de caracteres especiais
         special_chars = sum(1 for c in text if not c.isalnum() and not c.isspace())
         if len(text) > 0 and special_chars / len(text) > 0.3:
@@ -388,48 +311,17 @@ class ISBNExtractor:
             
         return False
 
-    def _extract_with_patterns(self, text: str, publisher: str) -> Set[str]:
-        """Extrai ISBNs usando os padrões definidos."""
-        found_isbns = set()
-        
-        # Se for da Packt, inclui padrões específicos
-        if publisher == 'packt' or self._is_packt_pdf(text):
-            packt_patterns = [
-                r'ISBN[:\s]*[@>?]*(97[89][-\s]*(?:[\d@>?][-\s]*){9}[\d@>?])',
-                r'ISBN[:\s]*([9@][7>][\d@>?]{11})',
-                r'([9@][7>][\d@>?]{11})',  # Formato mais agressivo para Packt
-                r'ISBN[:\s]*(.{13})'  # Qualquer sequência de 13 caracteres após ISBN
-            ]
-            for pattern in packt_patterns:
-                matches = re.finditer(pattern, text, re.IGNORECASE)
-                for match in matches:
-                    isbn = match.group(1) if '(' in pattern else match.group()
-                    isbn = self.normalize_isbn(isbn)
-                    isbn = self.clean_corrupted_isbn(isbn, 'packt')  # Força limpeza específica da Packt
-                    
-                    if self.validate_isbn_13(isbn):
-                        found_isbns.add(isbn)
-        
-        # Continua com os padrões normais
-        for pattern in self.isbn_patterns:
-            matches = re.finditer(pattern, text, re.IGNORECASE)
-            for match in matches:
-                isbn = match.group(1) if '(' in pattern else match.group()
-                isbn = self.normalize_isbn(isbn)
-                isbn = self.clean_corrupted_isbn(isbn, publisher)
-                
-                if self.validate_isbn_10(isbn):
-                    found_isbns.add(isbn)
-                    isbn13 = self.isbn_10_to_13(isbn)
-                    if isbn13:
-                        found_isbns.add(isbn13)
-                elif self.validate_isbn_13(isbn):
-                    found_isbns.add(isbn)
-        
-        return found_isbns
-
     def extract_from_text(self, text: str, source_path: str = None) -> Set[str]:
-        """Extrai todos os ISBNs possíveis do texto."""
+        """
+        Extrai todos os ISBNs possíveis do texto, incluindo tratamento especial para DRM da Packt.
+        
+        Args:
+            text (str): Texto para extrair ISBNs
+            source_path (str, optional): Caminho do arquivo fonte para métodos alternativos
+            
+        Returns:
+            Set[str]: Conjunto de ISBNs encontrados
+        """
         found_isbns = set()
         original_text = text
         
@@ -437,8 +329,23 @@ class ISBNExtractor:
         publisher, confidence_boost = self.identify_publisher(text)
         logging.debug(f"Identified publisher: {publisher}")
         
-        # Se o texto parece corrompido, tenta limpá-lo
-        if self._is_text_corrupted(text):
+        # Verifica especificamente por DRM da Packt primeiro
+        if publisher == 'packt' and self.packt_handler.is_packt_drm(text):
+            logging.info("DRM da Packt detectado, iniciando processo específico de extração...")
+            
+            # Tenta extrair ISBN diretamente do texto com DRM
+            packt_isbn = self.packt_handler.extract_isbn_from_drm(original_text)
+            if packt_isbn:
+                logging.info(f"ISBN extraído diretamente do texto com DRM: {packt_isbn}")
+                found_isbns.add(packt_isbn)
+                return found_isbns
+            
+            # Se não conseguiu extrair diretamente, decodifica o texto
+            text = self.packt_handler.decode_packt_text(text)
+            logging.info("Texto decodificado do DRM da Packt")
+        
+        # Se o texto parece corrompido (não necessariamente DRM da Packt)
+        elif self._is_text_corrupted(text):
             logging.info("Texto corrompido detectado, aplicando limpeza...")
             text = self._clean_corrupted_text(text)
             
@@ -457,6 +364,9 @@ class ISBNExtractor:
                     ocr_text = self._try_extract_with_tesseract(source_path)
                     if ocr_text:
                         logging.info("Texto extraído com OCR, procurando ISBNs...")
+                        # Para Packt, aplica decodificação mesmo no texto OCR
+                        if publisher == 'packt' and self.packt_handler.is_packt_drm(ocr_text):
+                            ocr_text = self.packt_handler.decode_packt_text(ocr_text)
                         found_isbns.update(self._extract_with_patterns(ocr_text, publisher))
         
         # Busca ISBNs no texto (original ou limpo)
@@ -468,15 +378,87 @@ class ISBNExtractor:
             return found_isbns
         
         # Se não encontrou nada, tenta extrações específicas por editora
-        publisher_isbns = self.extract_publisher_specific(original_text, publisher)
-        if publisher_isbns:
-            logging.info(f"ISBNs encontrados usando extração específica da editora: {publisher_isbns}")
-            found_isbns.update(publisher_isbns)
+        if publisher == 'packt':
+            # Tenta padrões específicos da Packt mesmo em texto não-DRM
+            publisher_isbns = set()
+            for pattern in self.packt_handler.packt_isbn_patterns:
+                matches = re.finditer(pattern, original_text)
+                for match in matches:
+                    isbn = match.group(1) if match.groups() else match.group(0)
+                    isbn = self.packt_handler.decode_packt_text(isbn)
+                    isbn = self.normalize_isbn(isbn)
+                    if self.validate_isbn_13(isbn):
+                        publisher_isbns.add(isbn)
+            
+            if publisher_isbns:
+                logging.info(f"ISBNs encontrados usando extração específica Packt: {publisher_isbns}")
+                found_isbns.update(publisher_isbns)
+        else:
+            # Para outras editoras, usa extração específica padrão
+            publisher_isbns = self.extract_publisher_specific(original_text, publisher)
+            if publisher_isbns:
+                logging.info(f"ISBNs encontrados usando extração específica da editora: {publisher_isbns}")
+                found_isbns.update(publisher_isbns)
+        
+        # Se mesmo assim não encontrou nada, tenta uma última vez com padrões mais agressivos
+        if not found_isbns:
+            logging.info("Tentando padrões mais agressivos de extração...")
+            aggressive_patterns = [
+                r'(?:97[89]|isbn)[^A-Za-z]{0,10}(?:\d[-\s]*){9,12}[\dXx]',
+                r'(?:\d[-\s]*){9}[\dXx]',
+                r'97[89]\d{10}'
+            ]
+            
+            for pattern in aggressive_patterns:
+                matches = re.finditer(pattern, text, re.IGNORECASE)
+                for match in matches:
+                    isbn = self.normalize_isbn(match.group())
+                    if self.validate_isbn_13(isbn) or self.validate_isbn_10(isbn):
+                        found_isbns.add(isbn)
         
         return found_isbns
 
+    def _extract_with_patterns(self, text: str, publisher: str) -> Set[str]:
+        """Extrai ISBNs usando os padrões definidos."""
+        found_isbns = set()
+        
+        for pattern in self.isbn_patterns:
+            matches = re.finditer(pattern, text, re.IGNORECASE)
+            for match in matches:
+                isbn = match.group(1) if '(' in pattern else match.group()
+                isbn = self.normalize_isbn(isbn)
+                isbn = self.clean_corrupted_isbn(isbn, publisher)
+                
+                if self.validate_isbn_10(isbn):
+                    found_isbns.add(isbn)
+                    isbn13 = self.isbn_10_to_13(isbn)
+                    if isbn13:
+                        found_isbns.add(isbn13)
+                elif self.validate_isbn_13(isbn):
+                    found_isbns.add(isbn)
+        
+        return found_isbns
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        # Adiciona padrões de editoras
+        self.isbn_patterns.extend([pub['pattern'] for pub in BRAZILIAN_PUBLISHERS.values()])
+        self.isbn_patterns.extend([pub['pattern'] for pub in INTERNATIONAL_PUBLISHERS.values()])
+
     def normalize_isbn(self, isbn: str) -> str:
-        """Normaliza um ISBN removendo caracteres não numéricos."""
         return re.sub(r'[^0-9X]', '', isbn.upper())
 
     def identify_publisher(self, text: str) -> Tuple[str, float]:
@@ -489,6 +471,20 @@ class ISBNExtractor:
         
         return "unknown", 0.0
 
+    # Adicionar um novo método para verificação prévia de DRM
+    def check_for_packt_drm(self, text: str) -> bool:
+        """Verifica se o texto tem características de DRM da Packt antes de qualquer processamento."""
+        drm_indicators = [
+            r'\+DQGV2Q',              # "Hands-On" embaralhado
+            r'%,50,1*+$0',            # "BIRMINGHAM" embaralhado
+            r'080%$,',                # "MUMBAI" embaralhado
+            r'[+](?:[A-Z0-9]{2}){3,}' # Sequências longas de caracteres embaralhados
+        ]
+        
+        # Se encontrar qualquer um dos indicadores, considera como DRM
+        return any(re.search(pattern, text, re.IGNORECASE) for pattern in drm_indicators)
+
+
     def clean_corrupted_isbn(self, isbn: str, publisher: str) -> str:
         """Limpa ISBNs com caracteres corrompidos."""
         if publisher in INTERNATIONAL_PUBLISHERS and 'corrupted_chars' in INTERNATIONAL_PUBLISHERS[publisher]:
@@ -498,7 +494,6 @@ class ISBNExtractor:
         return isbn
 
     def validate_isbn_10(self, isbn: str) -> bool:
-        """Valida um ISBN-10."""
         if len(isbn) != 10:
             return False
         
@@ -517,7 +512,6 @@ class ISBNExtractor:
             return False
 
     def validate_isbn_13(self, isbn: str) -> bool:
-        """Valida um ISBN-13."""
         if len(isbn) != 13:
             return False
         
@@ -534,8 +528,7 @@ class ISBNExtractor:
         except:
             return False
 
-    def isbn_10_to_13(self, isbn10: str) -> Optional[str]:
-        """Converte ISBN-10 para ISBN-13."""
+    def isbn_10_to_13(self, isbn10: str) -> str:
         if len(isbn10) != 10:
             return None
             
@@ -550,28 +543,32 @@ class ISBNExtractor:
                 
         check = (10 - (total % 10)) % 10
         return prefix + str(check)
-
+    
     def extract_publisher_specific(self, text: str, publisher: str) -> Set[str]:
         """Extrai ISBNs usando técnicas específicas por editora."""
         found_isbns = set()
         
         if publisher == 'casa do codigo':
+            # Padrão específico para Casa do Código
             patterns = [
                 r'ISBN[:\s]*(?:Impresso e PDF:|PDF:)?\s*(97[89][-\s]*(?:\d[-\s]*){9}\d)',
                 r'ISBN[:\s]*(?:EPUB:|MOBI:)?\s*(97[89][-\s]*(?:\d[-\s]*){9}\d)'
             ]
         elif publisher == 'packt':
+            # Padrão específico para Packt, incluindo caracteres corrompidos
             patterns = [
                 r'ISBN[:\s]*[@>?]*(97[89][-\s]*(?:[\d@>?][-\s]*){9}[\d@>?])',
                 r'ISBN[:\s]*([9@][7>][\d@>?]{11})'
             ]
         elif publisher == 'wiley':
+            # Padrão específico para Wiley, pegando múltiplos ISBNs
             patterns = [
                 r'ISBN:\s*(97[89][-\s]*(?:\d[-\s]*){9}\d)(?:\s*\(.*?\))?',
                 r'ISBN-13:\s*(97[89][-\s]*(?:\d[-\s]*){9}\d)',
                 r'Print ISBN:\s*(97[89][-\s]*(?:\d[-\s]*){9}\d)'
             ]
         else:
+            # Padrões genéricos mais agressivos para outras editoras
             patterns = [
                 r'(?:ISBN[-:]?)?\s*(97[89][-\s]*(?:\d[-\s]*){9}\d)',
                 r'(?:ISBN[-:]?)?\s*([\dX][-\s]*){10,13}'
@@ -593,6 +590,7 @@ class ISBNExtractor:
                     found_isbns.add(isbn)
         
         return found_isbns
+
 
 class MetadataFetcher:
     def __init__(self, isbndb_api_key: Optional[str] = None):
@@ -882,40 +880,85 @@ class MetadataFetcher:
             
         is_brazilian = any(isbn.startswith(prefix) for prefix in ['97865', '97885', '65', '85'])
         
-        # Define ordem prioritária mas mantem única tentativa por serviço
+        # Sistema de pontuação base por fonte
+        base_scores = {
+            'google_books': 0.8,       # Melhor fonte geral
+            'google_books_br': 0.8,    # Boa para livros brasileiros
+            'mercado_editorial': 0.7, # Boa para livros brasileiros
+            'openlibrary': 0.6,        # Fonte confiável mas pode ter dados incompletos
+            'worldcat': 0.3,           # Baixa confiança - frequentemente incompleto
+            'zbib': 0.3,               # Fonte secundária
+            'mybib': 0.3,              # Fonte secundária
+            'ebook_de': 0.5            # Fonte secundária
+        }
+        
+        # Ajustes de pontuação baseados em metadados
+        def calculate_confidence(metadata: BookMetadata) -> float:
+            score = base_scores.get(metadata.source, 0.2)
+            
+            # Penaliza dados desconhecidos
+            if metadata.title == 'Unknown':
+                score -= 0.15
+            if metadata.authors == ['Unknown']:
+                score -= 0.1
+            if metadata.publisher == 'Unknown':
+                score -= 0.1
+            if metadata.published_date == 'Unknown':
+                score -= 0.05
+                
+            # Bônus para dados completos
+            if all(x not in [None, 'Unknown', ['Unknown']] for x in [
+                metadata.title, metadata.authors, metadata.publisher, 
+                metadata.published_date]):
+                score += 0.15
+                
+            # Bônus para fontes preferenciais por região
+            if is_brazilian and metadata.source in ['google_books_br', 'mercado_editorial']:
+                score += 0.1
+                
+            return max(0.1, min(1.0, score))  # Mantém entre 0.1 e 1.0
+
+        # Lista ordenada de fetchers
         fetchers = []
         if is_brazilian:
-            # Alta prioridade BR
             fetchers.extend([
-                (self.fetch_mercado_editorial, 10),
-                (self.fetch_google_books_br, 9),
+                (self.fetch_mercado_editorial, "Mercado Editorial"),
+                (self.fetch_google_books_br, "Google Books BR"),
             ])
         
-        # Adiciona fetchers comuns
         fetchers.extend([
-            (self.fetch_google_books, 8),
-            (self.fetch_openlibrary, 7),
-            (self.fetch_worldcat, 6),
-            (self.fetch_zbib, 5),
-            (self.fetch_mybib, 4)
+            (self.fetch_google_books, "Google Books"),
+            (self.fetch_openlibrary, "Open Library"),
+            (self.fetch_worldcat, "WorldCat"),
+            (self.fetch_zbib, "ZBib"),
+            (self.fetch_mybib, "MyBib")
         ])
         
-        # Tenta cada fetcher uma única vez
-        processed = set()
-        for fetcher, priority in fetchers:
-            if fetcher.__name__ not in processed:
-                try:
-                    metadata = fetcher(isbn)
-                    if metadata:
-                        metadata.confidence_score *= (priority / 10)
-                        self.cache.set(asdict(metadata))
-                        return metadata
-                except Exception as e:
-                    logging.error(f"Error with {fetcher.__name__}: {str(e)}")
-                finally:
-                    processed.add(fetcher.__name__)
+        # Tenta cada fetcher e guarda tentativas para relatório
+        metadata = None
+        attempts = []
+        
+        for fetcher, name in fetchers:
+            try:
+                result = fetcher(isbn)
+                if result:
+                    result.confidence_score = calculate_confidence(result)
+                    attempts.append(f"{name}: {result.confidence_score:.2f}")
                     
-        return None
+                    # Atualiza metadata se encontrou resultado melhor
+                    if not metadata or result.confidence_score > metadata.confidence_score:
+                        metadata = result
+            except Exception as e:
+                attempts.append(f"{name}: erro ({str(e)})")
+        
+        if metadata:
+            metadata.notes = f"Tentativas: {'; '.join(attempts)}"
+            if metadata.confidence_score < 0.5:
+                logging.warning(f"Metadados de baixa confiança ({metadata.confidence_score:.2f}) para ISBN {isbn}")
+                logging.warning(f"Tentativas: {'; '.join(attempts)}")
+            self.cache.set(asdict(metadata))
+            
+        return metadata
 
 class PDFProcessor:
     def __init__(self):
@@ -930,31 +973,25 @@ class PDFProcessor:
         logging.info(f"Iniciando extração de texto de: {pdf_path}")
         text = ""
         methods_tried = []
-        pypdf_failed = False
+        methods_succeeded = []
         
-        # Tenta PyPDF2 primeiro
+        # Sequência original de tentativas
+        
+        # Tenta PyPDF2 primeiro (método original)
         try:
             with open(pdf_path, 'rb') as file:
                 reader = PyPDF2.PdfReader(file)
                 pages_to_check = min(max_pages, len(reader.pages))
                 methods_tried.append("PyPDF2")
                 for page_num in range(pages_to_check):
-                    try:
-                        page_text = reader.pages[page_num].extract_text()
-                        if page_text:
-                            text += page_text + "\n"
-                    except Exception as e:
-                        logging.debug(f"Erro na página {page_num} com PyPDF2: {str(e)}")
-                        pypdf_failed = True
-                        text = ""
-                        break
+                    text += reader.pages[page_num].extract_text() + "\n"
+                if text.strip():
+                    methods_succeeded.append("PyPDF2")
         except Exception as e:
             logging.debug(f"Erro na extração com PyPDF2: {str(e)}")
-            pypdf_failed = True
-            text = ""
 
-        # Se texto estiver vazio ou PyPDF2 falhou, tenta pdfplumber
-        if (not text.strip() or pypdf_failed) and 'pdfplumber' in self.dependency_manager.get_available_extractors():
+        # Se não conseguiu texto suficiente, tenta pdfplumber (se disponível)
+        if (not text or len(text.strip()) < 100) and 'pdfplumber' in self.dependency_manager.get_available_extractors():
             try:
                 import pdfplumber
                 methods_tried.append("pdfplumber")
@@ -962,29 +999,27 @@ class PDFProcessor:
                     pages_to_check = min(max_pages, len(pdf.pages))
                     plumber_text = ""
                     for page in pdf.pages[:pages_to_check]:
-                        page_text = page.extract_text()
-                        if page_text:
-                            plumber_text += page_text + "\n"
+                        plumber_text += page.extract_text() + "\n"
                     if plumber_text.strip():
                         text = plumber_text
-                        logging.info("Texto extraído com sucesso via pdfplumber")
+                        methods_succeeded.append("pdfplumber")
             except Exception as e:
                 logging.debug(f"Erro na extração com pdfplumber: {str(e)}")
 
-        # Se ainda não tem texto, tenta pdfminer
-        if not text.strip() and 'pdfminer' in self.dependency_manager.get_available_extractors():
+        # Se ainda não tem texto suficiente, tenta pdfminer (se disponível)
+        if (not text or len(text.strip()) < 100) and 'pdfminer' in self.dependency_manager.get_available_extractors():
             try:
                 from pdfminer.high_level import extract_text as pdfminer_extract
                 methods_tried.append("pdfminer")
                 miner_text = pdfminer_extract(pdf_path, maxpages=max_pages)
                 if miner_text.strip():
                     text = miner_text
-                    logging.info("Texto extraído com sucesso via pdfminer")
+                    methods_succeeded.append("pdfminer")
             except Exception as e:
                 logging.debug(f"Erro na extração com pdfminer: {str(e)}")
 
         # Se ainda não tem texto e OCR está disponível, tenta Tesseract
-        if not text.strip() and self.dependency_manager.has_ocr_support:
+        if (not text or len(text.strip()) < 100) and self.dependency_manager.has_ocr_support:
             try:
                 import pytesseract
                 from pdf2image import convert_from_path
@@ -993,24 +1028,41 @@ class PDFProcessor:
                 images = convert_from_path(pdf_path, last_page=max_pages)
                 ocr_text = ""
                 for image in images:
-                    page_text = pytesseract.image_to_string(image)
-                    if page_text:
-                        ocr_text += page_text + "\n"
-                        
+                    ocr_text += pytesseract.image_to_string(image) + "\n"
+                    
                 if ocr_text.strip():
                     text = ocr_text
-                    logging.info("Texto extraído com sucesso via OCR")
+                    methods_succeeded.append("OCR (Tesseract)")
             except Exception as e:
                 logging.debug(f"Erro na extração com OCR: {str(e)}")
 
-        # Se não conseguiu extrair texto
-        if not text.strip():
-            logging.warning(f"Nenhum método de extração teve sucesso para {pdf_path}")
-            if methods_tried:
-                logging.info(f"Métodos tentados: {', '.join(methods_tried)}")
-            return "", methods_tried
+        # Se após todas as tentativas ainda não tiver texto adequado, usa o AdvancedTextExtractor
+        if not text or len(text.strip()) < 100:
+            logging.info("Tentando extração avançada após falha dos métodos convencionais")
+            advanced_extractor = AdvancedTextExtractor()
+            advanced_text, is_manual = advanced_extractor.extract_text(pdf_path, max_pages)
+            
+            if is_manual:
+                logging.info(f"Arquivo identificado como manual/documentação via extração avançada: {pdf_path}")
+                return "", methods_tried + ["advanced_extraction"]
+                
+            if advanced_text:
+                text = advanced_text
+                methods_tried.append("advanced_extraction")
+                methods_succeeded.append("advanced_extraction")
 
-        return text.strip(), methods_tried
+        # Limpa o texto
+        text = self._clean_text(text)
+        
+        # Verifica se é um manual
+        if self._is_manual_or_documentation(text):
+            logging.info(f"Arquivo identificado como manual/documentação: {pdf_path}")
+            return "", methods_tried
+            
+        logging.info(f"Métodos tentados: {', '.join(methods_tried)}")
+        logging.info(f"Métodos bem-sucedidos: {', '.join(methods_succeeded)}")
+        
+        return text, methods_tried
 
     def _clean_text(self, text: str) -> str:
         """Limpa e normaliza o texto extraído."""
@@ -1073,25 +1125,25 @@ class PDFProcessor:
 
     def extract_metadata_from_pdf(self, pdf_path: str) -> Dict:
         """Extrai metadados internos do PDF."""
+        logging.info(f"Extraindo metadados de: {pdf_path}")
         try:
             with open(pdf_path, 'rb') as file:
                 reader = PyPDF2.PdfReader(file)
-                try:
-                    metadata = reader.metadata if reader.metadata else {}
-                except Exception as e:
-                    logging.debug(f"Erro ao ler metadados: {str(e)}")
-                    return {}
-
-                if metadata and 'ISBN' in metadata:
+                metadata = reader.metadata if reader.metadata else {}
+                
+                if 'ISBN' in metadata:
                     isbn = re.sub(r'[^0-9X]', '', metadata['ISBN'].upper())
                     if not (self.isbn_extractor.validate_isbn_10(isbn) or 
-                        self.isbn_extractor.validate_isbn_13(isbn)):
+                           self.isbn_extractor.validate_isbn_13(isbn)):
+                        logging.warning(f"ISBN inválido encontrado nos metadados: {isbn}")
                         del metadata['ISBN']
+                    else:
+                        logging.info(f"ISBN válido encontrado nos metadados: {isbn}")
+                        
                 return metadata
         except Exception as e:
-            logging.debug(f"Erro ao abrir PDF: {str(e)}")
+            logging.error(f"Erro ao extrair metadados de {pdf_path}: {str(e)}")
             return {}
-
 
 class BookMetadataExtractor:
     def __init__(self, isbndb_api_key: Optional[str] = None):
@@ -1114,63 +1166,47 @@ class BookMetadataExtractor:
         
         runtime_stats['processed_files'].append(pdf_path)
         runtime_stats['failure_details'][pdf_path] = {}
-        runtime_stats['api_errors'][pdf_path] = []
+        runtime_stats['api_errors'][pdf_path] = []  # Inicializa lista de erros
         details = runtime_stats['failure_details'][pdf_path]
         
         try:
-            # Tentativas sequenciais de extração
-            text = ""
-            methods_tried = []
+            # Extrai texto do PDF
+            text, extraction_methods = self.pdf_processor.extract_text_from_pdf(pdf_path)
+            details['extraction_methods'] = extraction_methods
             
-            # 1. Primeira tentativa: pdfplumber
-            if not text and 'pdfplumber' in self.pdf_processor.dependency_manager.get_available_extractors():
-                try:
-                    logging.info(f"Tentando extração com pdfplumber")
-                    methods_tried.append("pdfplumber")
-                    text = self.pdf_processor._try_extract_with_pdfplumber(pdf_path)
-                    if text and len(text.strip()) > 100:
-                        logging.info("Texto extraído com sucesso via pdfplumber")
-                except Exception as e:
-                    logging.debug(f"Erro na extração com pdfplumber: {str(e)}")
-
-            # 2. Segunda tentativa: pdfminer se pdfplumber falhou
-            if not text and 'pdfminer' in self.pdf_processor.dependency_manager.get_available_extractors():
-                try:
-                    logging.info(f"Tentando extração com pdfminer")
-                    methods_tried.append("pdfminer")
-                    from pdfminer.high_level import extract_text
-                    text = extract_text(pdf_path, maxpages=10)
-                    if text and len(text.strip()) > 100:
-                        logging.info("Texto extraído com sucesso via pdfminer")
-                except Exception as e:
-                    logging.debug(f"Erro na extração com pdfminer: {str(e)}")
-
-            # Se ainda não tem texto, limpa a memória do resultado anterior
+            # Se não conseguiu extrair texto
             if not text:
-                text = ""
-
-            # Se ainda não tem texto ou texto muito curto
-            if not text or len(text.strip()) < 100:
                 runtime_stats['isbn_extraction_failed'].append(pdf_path)
                 details['status'] = 'Falha na extração de texto'
-                details['extraction_methods'] = methods_tried
                 return None
-
-            # Detecta editora e procura ISBNs
+            
+            # Limpa o texto para amostra
+            clean_text = re.sub(r'\n\s*\n', '\n', text[:500])
+            details['extracted_text_sample'] = clean_text
+            
+            # Detecta editora
             publisher, confidence = self.isbn_extractor.identify_publisher(text)
             details['detected_publisher'] = publisher
-            isbns = self.isbn_extractor.extract_from_text(text, pdf_path)
-
+            
+            # Extrai metadados internos do PDF
+            pdf_metadata = self.pdf_processor.extract_metadata_from_pdf(pdf_path)
+            
+            # Encontra ISBNs
+            isbns = self.isbn_extractor.extract_from_text(text)
+            if pdf_metadata.get('ISBN'):
+                isbns.add(self.isbn_extractor.normalize_isbn(pdf_metadata['ISBN']))
+            
             if not isbns:
                 runtime_stats['isbn_extraction_failed'].append(pdf_path)
                 details['status'] = 'ISBN não encontrado no arquivo'
-                details['extraction_attempts'] = methods_tried
+                details['extraction_attempts'] = extraction_methods
                 return None
-
+            
             details['found_isbns'] = list(isbns)
+            details['status'] = 'ISBNs encontrados mas falha na busca online'
             details['api_attempts'] = []
-
-            # Tenta obter metadados
+            
+            # Tenta obter metadados usando o primeiro ISBN válido que corresponder
             for isbn in isbns:
                 try:
                     metadata = self.metadata_fetcher.fetch_metadata(isbn)
@@ -1183,18 +1219,24 @@ class BookMetadataExtractor:
                         details['status'] = 'Sucesso'
                         return metadata
                 except Exception as e:
-                    logging.debug(f"Erro com ISBN {isbn}: {str(e)}")
+                    error_msg = f"ISBN {isbn}: {str(e)}"
+                    runtime_stats['api_errors'][pdf_path].append(error_msg)
+                    logging.error(error_msg)
                     continue
-
+            
             runtime_stats['processing_times'].append(time.time() - start_time)
             runtime_stats['api_failures'].append(pdf_path)
             return None
-
+            
         except Exception as e:
-            logging.debug(f"Erro processando {pdf_path}: {str(e)}")
+            error_msg = f"{pdf_path}: {str(e)}"
+            runtime_stats['api_errors'][pdf_path].append(error_msg)
+            logging.error(error_msg)
+            details['status'] = f'Erro: {str(e)}'
             runtime_stats['processing_times'].append(time.time() - start_time)
             return None
 
+    
     def generate_report(self, results: List[BookMetadata], output_file: str) -> Dict:
             """Gera um relatório detalhado em JSON com os resultados."""
             report = {
@@ -1306,6 +1348,9 @@ class BookMetadataExtractor:
                     print(f"   ISBN-10: {book.isbn_10 or 'N/A'}")
                     print(f"   Confiança: {book.confidence_score:.2f}")
                     print(f"   Fonte: {book.source}")
+                    # Detalhes de tentativas para baixa confiança
+                    if hasattr(book, 'notes') and book.confidence_score < 0.5:
+                        print(f"   Detalhes: {book.notes}")
             else:
                 print("\nNenhum livro processado com sucesso.")
 
@@ -1733,6 +1778,102 @@ def rescan_and_update(self):
         # Atualiza o registro apenas se a nova pontuação de confiança for maior
         if new_metadata and new_metadata['confidence_score'] > metadata['confidence_score']:
             self.update(new_metadata)   
+    
+class PacktDRMHandler:
+    def __init__(self):
+        # Padrões típicos de texto embaralhado da Packt
+        self.packt_drm_patterns = [
+            r'P@ckt\s+Publ[1i]sh[1i]ng',
+            r'P[@4]ckt',
+            r'[?@]ublishing',
+            r'B[1Il]{2}rmingham',
+            r'B[1Il]rm[1Il]ngham'
+        ]
+        
+        # Mapeamento de caracteres embaralhados específicos da Packt
+        self.packt_char_map = {
+            '@': 'a',
+            '?': 'p',
+            '>': '7',
+            '<': '4',
+            '#': '8',
+            '$': '5',
+            '_': '-',
+            '|': 'l',
+            '1': 'i',
+            'I': 'i',
+            'l': 'i',
+            '0': 'o',
+            'O': 'o',
+            '4': 'a',
+            '8': 'B',
+            '7': 'T',
+            '5': 'S',
+            'Q': 'O',
+            'Z': '2',
+            'Y': '7'
+        }
+        
+        # Padrões de ISBN específicos da Packt com DRM
+        self.packt_isbn_patterns = [
+            r'ISBN\s*[@>?]*(97[89][-\s]*(?:[\d@>?][-\s]*){9}[\d@>?])',
+            r'ISBN[-:]?\s*([9@][7>][\d@>?]{11})',
+            r'[@>?]*(97[89][-\s]*(?:[\d@>?][-\s]*){9}[\d@>?])'
+        ]
+
+    def is_packt_drm(self, text: str) -> bool:
+        """Detecta se o texto tem DRM da Packt"""
+        # Verifica padrões típicos de DRM da Packt
+        if any(re.search(pattern, text) for pattern in self.packt_drm_patterns):
+            return True
+            
+        # Verifica alta ocorrência de caracteres especiais típicos
+        special_chars = '@?>#$_|'
+        char_count = sum(text.count(c) for c in special_chars)
+        text_len = len(text)
+        
+        if text_len > 0 and char_count / text_len > 0.02:  # Mais de 2% são caracteres especiais
+            return True
+            
+        # Verifica padrões de ISBN embaralhados
+        if any(re.search(pattern, text) for pattern in self.packt_isbn_patterns):
+            return True
+            
+        return False
+
+    def decode_packt_text(self, text: str) -> str:
+        """Decodifica texto com DRM da Packt"""
+        decoded = text
+        
+        # Substitui caracteres embaralhados
+        for drm_char, real_char in self.packt_char_map.items():
+            decoded = decoded.replace(drm_char, real_char)
+            
+        # Correção específica para ISBNs
+        def fix_isbn(match):
+            isbn = match.group(1) if match.groups() else match.group(0)
+            for drm_char, real_char in self.packt_char_map.items():
+                isbn = isbn.replace(drm_char, real_char)
+            return f"ISBN {isbn}"
+            
+        for pattern in self.packt_isbn_patterns:
+            decoded = re.sub(pattern, fix_isbn, decoded)
+            
+        return decoded
+
+    def extract_isbn_from_drm(self, text: str) -> Optional[str]:
+        """Extrai ISBN de texto com DRM da Packt"""
+        for pattern in self.packt_isbn_patterns:
+            match = re.search(pattern, text)
+            if match:
+                isbn = match.group(1) if match.groups() else match.group(0)
+                # Limpa o ISBN
+                isbn = ''.join(self.packt_char_map.get(c, c) for c in isbn)
+                # Remove caracteres não numéricos
+                isbn = re.sub(r'[^0-9]', '', isbn)
+                if len(isbn) == 13 and isbn.startswith('978'):
+                    return isbn
+        return None    
     
 def main():
     parser = argparse.ArgumentParser(
