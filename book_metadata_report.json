@@ -2,22 +2,9 @@
   "summary": {
     "total_processed": 11,
     "successful": 11,
-    "timestamp": "2024-11-10 09:54:46"
+    "timestamp": "2024-11-11 00:30:10"
   },
   "books": [
-    {
-      "title": "Unknown",
-      "authors": [
-        "Unknown"
-      ],
-      "publisher": "Unknown",
-      "published_date": "Unknown",
-      "isbn_10": null,
-      "isbn_13": "9786586110364",
-      "confidence_score": 0.44999999999999996,
-      "source": "worldcat",
-      "file_path": "/Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf"
-    },
     {
       "title": "Bug Bounty Bootcamp",
       "authors": [
@@ -27,22 +14,9 @@
       "published_date": "2021-11-16",
       "isbn_10": null,
       "isbn_13": "9781718501553",
-      "confidence_score": 0.9,
+      "confidence_score": 0.865,
       "source": "google_books",
       "file_path": "/Users/menon/Downloads/bugbountybootcamp.pdf"
-    },
-    {
-      "title": "The Active Defender",
-      "authors": [
-        "Dr. Catherine J. Ullman"
-      ],
-      "publisher": "John Wiley & Sons",
-      "published_date": "2023-06-20",
-      "isbn_10": null,
-      "isbn_13": "9781119895237",
-      "confidence_score": 0.7200000000000001,
-      "source": "google_books",
-      "file_path": "/Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf"
     },
     {
       "title": "bash Cookbook",
@@ -54,9 +28,35 @@
       "published_date": "Nov 03, 2017",
       "isbn_10": null,
       "isbn_13": "9781491975336",
-      "confidence_score": 0.7200000000000001,
+      "confidence_score": 0.7400000000000001,
       "source": "openlibrary",
       "file_path": "/Users/menon/Downloads/bashcookbook.pdf"
+    },
+    {
+      "title": "Unknown",
+      "authors": [
+        "Unknown"
+      ],
+      "publisher": "Unknown",
+      "published_date": "Unknown",
+      "isbn_10": null,
+      "isbn_13": "9786586593181",
+      "confidence_score": 0.6249999999999999,
+      "source": "worldcat",
+      "file_path": "/Users/menon/Downloads/python ciencia 00002cd9.pdf"
+    },
+    {
+      "title": "Java Performance",
+      "authors": [
+        "Scott Oaks"
+      ],
+      "publisher": "O'Reilly Media, Incorporated",
+      "published_date": "2020",
+      "isbn_10": null,
+      "isbn_13": "9781492056119",
+      "confidence_score": 0.7400000000000001,
+      "source": "openlibrary",
+      "file_path": "/Users/menon/Downloads/javaperformance2ndedition.pdf"
     },
     {
       "title": "Software Transparency",
@@ -68,22 +68,36 @@
       "published_date": "2023-05-03",
       "isbn_10": null,
       "isbn_13": "9781394158492",
-      "confidence_score": 0.8200000000000001,
+      "confidence_score": 0.965,
       "source": "google_books",
       "file_path": "/Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf"
     },
     {
-      "title": "Java Performance",
+      "title": "The Hardware Hacking Handbook",
       "authors": [
-        "Scott Oaks"
+        "Jasper van Woudenberg",
+        "Colin O'Flynn"
       ],
-      "publisher": "O'Reilly Media, Incorporated",
-      "published_date": "2020",
+      "publisher": "No Starch Press",
+      "published_date": "2021-12-21",
       "isbn_10": null,
-      "isbn_13": "9781492056119",
-      "confidence_score": 0.7200000000000001,
-      "source": "openlibrary",
-      "file_path": "/Users/menon/Downloads/javaperformance2ndedition.pdf"
+      "isbn_13": "9781593278748",
+      "confidence_score": 0.865,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/hardwarehackinghandbook.pdf"
+    },
+    {
+      "title": "The Active Defender",
+      "authors": [
+        "Dr. Catherine J. Ullman"
+      ],
+      "publisher": "Wiley",
+      "published_date": "2023-07-25",
+      "isbn_10": null,
+      "isbn_13": "9781119895213",
+      "confidence_score": 0.965,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf"
     },
     {
       "title": "Ansible: Up and Running",
@@ -96,23 +110,22 @@
       "published_date": "2022-09-30",
       "isbn_10": null,
       "isbn_13": "9781098109158",
-      "confidence_score": 0.9,
+      "confidence_score": 0.865,
       "source": "google_books",
       "file_path": "/Users/menon/Downloads/ansible_upandrunning3rdedition.pdf"
     },
     {
-      "title": "The Hardware Hacking Handbook",
+      "title": "Unknown",
       "authors": [
-        "Jasper van Woudenberg",
-        "Colin O'Flynn"
+        "Unknown"
       ],
-      "publisher": "No Starch Press",
-      "published_date": "2021-12-21",
+      "publisher": "Unknown",
+      "published_date": "Unknown",
       "isbn_10": null,
-      "isbn_13": "9781593278748",
-      "confidence_score": 0.9,
-      "source": "google_books",
-      "file_path": "/Users/menon/Downloads/hardwarehackinghandbook.pdf"
+      "isbn_13": "9786586110357",
+      "confidence_score": 0.6249999999999999,
+      "source": "worldcat",
+      "file_path": "/Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf"
     },
     {
       "title": "Applied Machine Learning and High-Performance Computing on AWS",
@@ -125,7 +138,7 @@
       "published_date": "2022-12-30",
       "isbn_10": null,
       "isbn_13": "9781803237015",
-      "confidence_score": 0.9,
+      "confidence_score": 0.865,
       "source": "google_books",
       "file_path": "/Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf"
     },
@@ -138,22 +151,9 @@
       "published_date": "2017-10",
       "isbn_10": null,
       "isbn_13": "9781491957660",
-      "confidence_score": 0.9,
+      "confidence_score": 0.865,
       "source": "google_books",
       "file_path": "/Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf"
-    },
-    {
-      "title": "Unknown",
-      "authors": [
-        "Unknown"
-      ],
-      "publisher": "Unknown",
-      "published_date": "Unknown",
-      "isbn_10": null,
-      "isbn_13": "9786586593181",
-      "confidence_score": 0.44999999999999996,
-      "source": "worldcat",
-      "file_path": "/Users/menon/Downloads/python ciencia 00002cd9.pdf"
     }
   ]
 }
