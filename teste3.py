@@ -479,6 +479,327 @@ class ISBNAPITester:
                 error=str(e)
             )
 
+    def test_cbl(self, isbn: str) -> APITestResult:
+        """Testa API da Câmara Brasileira do Livro."""
+        start_time = time.time()
+        try:
+            response = self.http_client.get(
+                f"https://isbn.cbl.org.br/api/isbn/{isbn}",
+                timeout=10
+            )
+            data = response.json()
+            
+            if response.status_code == 200:
+                metadata = {
+                    'title': data.get('title'),
+                    'authors': data.get('authors', []),
+                    'publisher': data.get('publisher'),
+                    'publishedDate': data.get('published_date'),
+                    'isbn': isbn,
+                    'edition': data.get('edition'),
+                    'format': data.get('format'),
+                    'language': 'pt-BR'
+                }
+                return APITestResult(
+                    api_name="CBL",
+                    response_time=time.time() - start_time,
+                    success=True,
+                    metadata=metadata,
+                    http_status=response.status_code,
+                    raw_response=data
+                )
+
+            return APITestResult(
+                api_name="CBL",
+                response_time=time.time() - start_time,
+                success=False,
+                metadata=None,
+                error="No results found",
+                http_status=response.status_code
+            )
+        except Exception as e:
+            return APITestResult(
+                api_name="CBL",
+                response_time=time.time() - start_time,
+                success=False,
+                metadata=None,
+                error=str(e)
+            )
+
+    def test_mercado_editorial(self, isbn: str) -> APITestResult:
+        """Testa API do Mercado Editorial."""
+        start_time = time.time()
+        try:
+            response = self.http_client.get(
+                f"https://api.mercadoeditorial.org/api/v1.2/book",
+                params={'isbn': isbn},
+                timeout=10
+            )
+            data = response.json()
+            
+            if data.get('books'):
+                book = data['books'][0]
+                metadata = {
+                    'title': book.get('title'),
+                    'authors': book.get('authors', []),
+                    'publisher': book.get('publisher'),
+                    'publishedDate': book.get('published_date'),
+                    'isbn': isbn,
+                    'price': book.get('price'),
+                    'language': book.get('language', 'pt-BR'),
+                    'binding': book.get('binding')
+                }
+                return APITestResult(
+                    api_name="Mercado Editorial",
+                    response_time=time.time() - start_time,
+                    success=True,
+                    metadata=metadata,
+                    http_status=response.status_code,
+                    raw_response=data
+                )
+
+            return APITestResult(
+                api_name="Mercado Editorial",
+                response_time=time.time() - start_time,
+                success=False,
+                metadata=None,
+                error="No results found",
+                http_status=response.status_code
+            )
+        except Exception as e:
+            return APITestResult(
+                api_name="Mercado Editorial",
+                response_time=time.time() - start_time,
+                success=False,
+                metadata=None,
+                error=str(e)
+            )
+
+    def test_manning(self, isbn: str) -> APITestResult:
+        """Testa API da Manning Publications."""
+        if 'manning' not in self.api_keys:
+            return APITestResult(
+                api_name="Manning",
+                response_time=0,
+                success=False,
+                metadata=None,
+                error="API key not provided",
+                requires_key=True
+            )
+
+        start_time = time.time()
+        try:
+            response = self.http_client.get(
+                f"https://www.manning.com/api/books/isbn/{isbn}",
+                headers={'Authorization': f"Bearer {self.api_keys['manning']}"},
+                timeout=10
+            )
+            data = response.json()
+            
+            if 'book' in data:
+                book = data['book']
+                metadata = {
+                    'title': book.get('title'),
+                    'authors': book.get('authors', []),
+                    'publisher': "Manning Publications",
+                    'publishedDate': book.get('publicationDate'),
+                    'isbn': isbn,
+                    'pages': book.get('pageCount'),
+                    'topics': book.get('topics', []),
+                    'meap': book.get('isMeap', False)
+                }
+                return APITestResult(
+                    api_name="Manning",
+                    response_time=time.time() - start_time,
+                    success=True,
+                    metadata=metadata,
+                    http_status=response.status_code,
+                    raw_response=data
+                )
+
+            return APITestResult(
+                api_name="Manning",
+                response_time=time.time() - start_time,
+                success=False,
+                metadata=None,
+                error="No results found",
+                http_status=response.status_code
+            )
+        except Exception as e:
+            return APITestResult(
+                api_name="Manning",
+                response_time=time.time() - start_time,
+                success=False,
+                metadata=None,
+                error=str(e)
+            )
+
+    def test_packt(self, isbn: str) -> APITestResult:
+        """Testa API da Packt Publishing."""
+        if 'packt' not in self.api_keys:
+            return APITestResult(
+                api_name="Packt",
+                response_time=0,
+                success=False,
+                metadata=None,
+                error="API key not provided",
+                requires_key=True
+            )
+
+        start_time = time.time()
+        try:
+            response = self.http_client.get(
+                f"https://api.packtpub.com/products/isbn/{isbn}",
+                headers={'Authorization': f"Bearer {self.api_keys['packt']}"},
+                timeout=10
+            )
+            data = response.json()
+            
+            if data.get('data'):
+                book = data['data']
+                metadata = {
+                    'title': book.get('title'),
+                    'authors': book.get('authors', []),
+                    'publisher': "Packt Publishing",
+                    'publishedDate': book.get('publicationDate'),
+                    'isbn': isbn,
+                    'pages': book.get('pageCount'),
+                    'topics': book.get('topics', []),
+                    'format': book.get('productType')
+                }
+                return APITestResult(
+                    api_name="Packt",
+                    response_time=time.time() - start_time,
+                    success=True,
+                    metadata=metadata,
+                    http_status=response.status_code,
+                    raw_response=data
+                )
+
+            return APITestResult(
+                api_name="Packt",
+                response_time=time.time() - start_time,
+                success=False,
+                metadata=None,
+                error="No results found",
+                http_status=response.status_code
+            )
+        except Exception as e:
+            return APITestResult(
+                api_name="Packt",
+                response_time=time.time() - start_time,
+                success=False,
+                metadata=None,
+                error=str(e)
+            )
+
+
+    def test_oreilly(self, isbn: str) -> APITestResult:
+        """Testa API da O'Reilly."""
+        start_time = time.time()
+        try:
+            response = self.http_client.get(
+                f"https://learning.oreilly.com/api/v2/book/isbn/{isbn}/",
+                headers={'Authorization': f"Bearer {self.api_keys.get('oreilly', '')}"} if 'oreilly' in self.api_keys else {},
+                timeout=10
+            )
+            data = response.json()
+            
+            if 'title' in data:
+                metadata = {
+                    'title': data.get('title'),
+                    'authors': data.get('authors', []),
+                    'publisher': data.get('publisher', "O'Reilly Media"),
+                    'publishedDate': data.get('issued'),
+                    'isbn': isbn,
+                    'topics': data.get('topics', []),
+                    'format': data.get('format'),
+                    'url': data.get('canonical_url')
+                }
+                return APITestResult(
+                    api_name="O'Reilly",
+                    response_time=time.time() - start_time,
+                    success=True,
+                    metadata=metadata,
+                    http_status=response.status_code,
+                    raw_response=data
+                )
+
+            return APITestResult(
+                api_name="O'Reilly",
+                response_time=time.time() - start_time,
+                success=False,
+                metadata=None,
+                error="No results found"
+            )
+        except Exception as e:
+            return APITestResult(
+                api_name="O'Reilly",
+                response_time=time.time() - start_time,
+                success=False,
+                metadata=None,
+                error=str(e)
+            )
+
+    def test_pearson(self, isbn: str) -> APITestResult:
+        """Testa API da Pearson."""
+        if 'pearson' not in self.api_keys:
+            return APITestResult(
+                api_name="Pearson",
+                response_time=0,
+                success=False,
+                metadata=None,
+                error="API key not provided",
+                requires_key=True
+            )
+
+        start_time = time.time()
+        try:
+            response = self.http_client.get(
+                f"https://api.pearson.com/v1/books",
+                params={'isbn': isbn},
+                headers={'Authorization': f"Bearer {self.api_keys['pearson']}"},
+                timeout=10
+            )
+            data = response.json()
+            
+            if data.get('results'):
+                book = data['results'][0]
+                metadata = {
+                    'title': book.get('title'),
+                    'authors': book.get('authors', []),
+                    'publisher': 'Pearson',
+                    'publishedDate': book.get('publicationDate'),
+                    'isbn': isbn,
+                    'edition': book.get('edition'),
+                    'language': book.get('language'),
+                    'subjects': book.get('subjects', [])
+                }
+                return APITestResult(
+                    api_name="Pearson",
+                    response_time=time.time() - start_time,
+                    success=True,
+                    metadata=metadata,
+                    http_status=response.status_code,
+                    raw_response=data
+                )
+
+            return APITestResult(
+                api_name="Pearson",
+                response_time=time.time() - start_time,
+                success=False,
+                metadata=None,
+                error="No results found"
+            )
+        except Exception as e:
+            return APITestResult(
+                api_name="Pearson",
+                response_time=time.time() - start_time,
+                success=False,
+                metadata=None,
+                error=str(e)
+            )
+
     def test_springer(self, isbn: str) -> APITestResult:
         """Testa a API da Springer."""
         if 'springer' not in self.api_keys:
