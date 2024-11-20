@@ -3,7 +3,7 @@
     "isbn": "9781449355739",
     "total_apis_tested": 15,
     "successful_apis": 8,
-    "total_time": 19.816762924194336,
+    "total_time": 15.911876440048218,
     "fastest_api": "isbnlib_isbn13",
     "confidence_scores": {
       "title": 1.0,
@@ -14,7 +14,7 @@
     "results": [
       {
         "api_name": "isbnlib_default",
-        "response_time": 3.5044827461242676,
+        "response_time": 2.460541248321533,
         "success": false,
         "metadata": null,
         "error": "No results found",
@@ -22,7 +22,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,
@@ -30,7 +30,7 @@
       },
       {
         "api_name": "isbnlib_mask",
-        "response_time": 0.00011086463928222656,
+        "response_time": 0.0001201629638671875,
         "success": true,
         "metadata": {
           "result": "978-1-4493-5573-9"
@@ -40,7 +40,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,
@@ -58,7 +58,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,
@@ -66,7 +66,7 @@
       },
       {
         "api_name": "isbnlib_desc",
-        "response_time": 0.43526601791381836,
+        "response_time": 0.5110499858856201,
         "success": true,
         "metadata": {
           "result": ""
@@ -76,7 +76,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,
@@ -84,7 +84,7 @@
       },
       {
         "api_name": "isbnlib_classify",
-        "response_time": 3.9868781566619873,
+        "response_time": 0.8936069011688232,
         "success": false,
         "metadata": null,
         "error": "No results found",
@@ -92,7 +92,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,
@@ -100,7 +100,7 @@
       },
       {
         "api_name": "isbnlib_editions",
-        "response_time": 4.487989187240601,
+        "response_time": 2.494497060775757,
         "success": true,
         "metadata": {
           "results": [
@@ -112,7 +112,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,
@@ -120,7 +120,7 @@
       },
       {
         "api_name": "isbnlib_goom",
-        "response_time": 0.7019650936126709,
+        "response_time": 1.4313929080963135,
         "success": true,
         "metadata": {
           "results": [
@@ -235,7 +235,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,
@@ -243,7 +243,7 @@
       },
       {
         "api_name": "isbnlib_doi2tex",
-        "response_time": 1.7070410251617432,
+        "response_time": 0.9504270553588867,
         "success": false,
         "metadata": null,
         "error": "No results found",
@@ -251,7 +251,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,
@@ -259,7 +259,7 @@
       },
       {
         "api_name": "isbnlib_isbn10",
-        "response_time": 0.00016188621520996094,
+        "response_time": 0.0001361370086669922,
         "success": true,
         "metadata": {
           "result": "1449355730"
@@ -269,7 +269,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,
@@ -277,7 +277,7 @@
       },
       {
         "api_name": "isbnlib_isbn13",
-        "response_time": 2.8133392333984375e-05,
+        "response_time": 1.0013580322265625e-05,
         "success": true,
         "metadata": {
           "result": "9781449355739"
@@ -287,7 +287,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,
@@ -295,7 +295,7 @@
       },
       {
         "api_name": "Google Books",
-        "response_time": 0.4354817867279053,
+        "response_time": 0.43010997772216797,
         "success": false,
         "metadata": null,
         "error": "No results found",
@@ -303,7 +303,23 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
+        "confidence_score": 0.0,
+        "raw_response": null,
+        "rate_limit_info": null,
+        "response_headers": null
+      },
+      {
+        "api_name": "WorldCat",
+        "response_time": 1.1895580291748047,
+        "success": false,
+        "metadata": null,
+        "error": "404 Client Error: Not Found for url: https://www.oclc.org/en/jfkdsj",
+        "http_status": null,
+        "requires_key": false,
+        "api_type": "unknown",
+        "retry_count": 0,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,
@@ -311,7 +327,7 @@
       },
       {
         "api_name": "Springer",
-        "response_time": 0.9325718879699707,
+        "response_time": 1.4938240051269531,
         "success": false,
         "metadata": null,
         "error": "403 Client Error: Forbidden for url: https://api.springernature.com/metadata/book/isbn/9781449355739",
@@ -319,7 +335,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,
@@ -327,7 +343,7 @@
       },
       {
         "api_name": "Open Library",
-        "response_time": 0.9490070343017578,
+        "response_time": 1.8460578918457031,
         "success": true,
         "metadata": {
           "title": "Learning Python",
@@ -439,7 +455,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": {
           "ISBN:9781449355739": {
@@ -594,24 +610,8 @@
         "response_headers": null
       },
       {
-        "api_name": "WorldCat",
-        "response_time": 0.9851000308990479,
-        "success": false,
-        "metadata": null,
-        "error": "404 Client Error: Not Found for url: https://www.oclc.org/en/jfkdsj",
-        "http_status": null,
-        "requires_key": false,
-        "api_type": "unknown",
-        "retry_count": 0,
-        "cache_hit": false,
-        "confidence_score": 0.0,
-        "raw_response": null,
-        "rate_limit_info": null,
-        "response_headers": null
-      },
-      {
         "api_name": "CrossRef",
-        "response_time": 1.6906349658966064,
+        "response_time": 2.210500955581665,
         "success": false,
         "metadata": null,
         "error": "No results found",
@@ -619,7 +619,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,
@@ -637,7 +637,7 @@
     "isbn": "9781617294136",
     "total_apis_tested": 15,
     "successful_apis": 10,
-    "total_time": 8.792799472808838,
+    "total_time": 11.589349746704102,
     "fastest_api": "isbnlib_isbn13",
     "confidence_scores": {
       "title": 0.5,
@@ -648,7 +648,7 @@
     "results": [
       {
         "api_name": "isbnlib_default",
-        "response_time": 0.5189411640167236,
+        "response_time": 0.5962929725646973,
         "success": true,
         "metadata": {
           "ISBN-13": "9781617294136",
@@ -665,7 +665,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,
@@ -673,7 +673,7 @@
       },
       {
         "api_name": "isbnlib_mask",
-        "response_time": 5.8650970458984375e-05,
+        "response_time": 7.915496826171875e-05,
         "success": true,
         "metadata": {
           "result": "978-1-61729-413-6"
@@ -683,7 +683,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,
@@ -691,7 +691,7 @@
       },
       {
         "api_name": "isbnlib_info",
-        "response_time": 2.4080276489257812e-05,
+        "response_time": 2.8848648071289062e-05,
         "success": true,
         "metadata": {
           "result": "English language"
@@ -701,7 +701,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,
@@ -709,7 +709,7 @@
       },
       {
         "api_name": "isbnlib_desc",
-        "response_time": 0.5121397972106934,
+        "response_time": 0.6292970180511475,
         "success": true,
         "metadata": {
           "result": "Summary Securing DevOps explores how the techniques of DevOps and security\nshould be applied together to make cloud services safer. This introductory\nbook reviews the latest practices used in securing web applications and\ntheir infrastructure and teaches you techniques to integrate security\ndirectly into your product. You'll also learn the core concepts of DevOps,\nsuch as continuous integration, continuous delivery, and infrastructure as\na service. Purchase of the print book includes a free eBook in PDF, Kindle,\nand ePub formats from Manning Publications. About the Technology An\napplication running in the cloud can benefit from incredible efficiencies,\nbut they come with unique security threats too. A DevOps team's highest\npriority is understanding those risks and hardening the system against\nthem. About the Book Securing DevOps teaches you the essential techniques\nto secure your cloud services. Using compelling case studies, it shows you\nhow to build security into automated testing, continuous delivery, and\nother core DevOps processes. This experience-rich book is filled with\nmission-critical strategies to protect web applications against attacks,\ndeter fraud attempts, and make your services safer when operating at scale.\nYou'll also learn to identify, assess, and secure the unique\nvulnerabilities posed by cloud deployments and automation tools commonly\nused in modern infrastructures. What's inside An approach to continuous\nsecurity Implementing test-driven security in DevOps Security techniques\nfor cloud services Watching for fraud and responding to incidents Security\ntesting and risk assessment About the Reader Readers should be comfortable\nwith Linux and standard DevOps practices like CI, CD, and unit testing.\nAbout the Author Julien Vehent is a security architect and DevOps advocate.\nHe leads the Firefox Operations Security team at Mozilla, and is\nresponsible for the security of Firefox's high-traffic cloud services and\npublic websites. Table of Contents Securing DevOps PART 1 - Case study:\napplying layers of security to a simple DevOps pipeline Building a\nbarebones DevOps pipeline Security layer 1: protecting web applications\nSecurity layer 2: protecting cloud infrastructures Security layer 3:\nsecuring communications Security layer 4: securing the delivery pipeline\nPART 2 - Watching for anomalies and protecting services against attacks\nCollecting and storing logs Analyzing logs for fraud and attacks Detecting\nintrusions The Caribbean breach: a case study in incident response PART 3 -\nMaturing DevOps security Assessing risks Testing security Continuous\nsecurity"
@@ -719,7 +719,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,
@@ -727,7 +727,7 @@
       },
       {
         "api_name": "isbnlib_classify",
-        "response_time": 0.816035270690918,
+        "response_time": 0.7924110889434814,
         "success": false,
         "metadata": null,
         "error": "No results found",
@@ -735,7 +735,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,
@@ -743,7 +743,7 @@
       },
       {
         "api_name": "isbnlib_editions",
-        "response_time": 2.2378931045532227,
+        "response_time": 2.3796591758728027,
         "success": true,
         "metadata": {
           "results": [
@@ -755,7 +755,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,
@@ -763,7 +763,7 @@
       },
       {
         "api_name": "isbnlib_goom",
-        "response_time": 0.6934449672698975,
+        "response_time": 0.7133681774139404,
         "success": true,
         "metadata": {
           "results": [
@@ -786,17 +786,6 @@
               "Publisher": "Simon and Schuster",
               "Year": "2021",
               "Language": "en"
-            },
-            {
-              "ISBN-13": "9788575224694",
-              "Title": "Amazon Web Services em ação",
-              "Authors": [
-                "Andreas Wittig",
-                "Michael Wittig"
-              ],
-              "Publisher": "Novatec Editora",
-              "Year": "2015",
-              "Language": "pt"
             }
           ]
         },
@@ -805,7 +794,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,
@@ -813,7 +802,7 @@
       },
       {
         "api_name": "isbnlib_doi2tex",
-        "response_time": 0.6630880832672119,
+        "response_time": 0.9541549682617188,
         "success": false,
         "metadata": null,
         "error": "No results found",
@@ -821,7 +810,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,
@@ -829,7 +818,7 @@
       },
       {
         "api_name": "isbnlib_isbn10",
-        "response_time": 0.00010776519775390625,
+        "response_time": 9.393692016601562e-05,
         "success": true,
         "metadata": {
           "result": "1617294136"
@@ -839,7 +828,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,
@@ -857,7 +846,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,
@@ -865,7 +854,7 @@
       },
       {
         "api_name": "Springer",
-        "response_time": 0.2297992706298828,
+        "response_time": 0.22570300102233887,
         "success": false,
         "metadata": null,
         "error": "403 Client Error: Forbidden for url: https://api.springernature.com/metadata/book/isbn/9781617294136",
@@ -873,7 +862,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,
@@ -881,7 +870,7 @@
       },
       {
         "api_name": "Open Library",
-        "response_time": 0.29277706146240234,
+        "response_time": 0.30214405059814453,
         "success": true,
         "metadata": {
           "title": "Securing DevOps: Security in the Cloud",
@@ -912,7 +901,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": {
           "ISBN:9781617294136": {
@@ -974,7 +963,7 @@
       },
       {
         "api_name": "Google Books",
-        "response_time": 0.41545796394348145,
+        "response_time": 0.4676799774169922,
         "success": true,
         "metadata": {
           "title": "Securing DevOps",
@@ -995,7 +984,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": {
           "kind": "books#volumes",
@@ -1004,7 +993,7 @@
             {
               "kind": "books#volume",
               "id": "-Z7ZAQAACAAJ",
-              "etag": "zoZjbFmUJwY",
+              "etag": "m4Bnceq6nGg",
               "selfLink": "https://www.googleapis.com/books/v1/volumes/-Z7ZAQAACAAJ",
               "volumeInfo": {
                 "title": "Securing DevOps",
@@ -1082,7 +1071,7 @@
           "Content-Type": "application/json; charset=UTF-8",
           "Vary": "Origin, X-Origin, Referer",
           "Content-Encoding": "gzip",
-          "Date": "Mon, 18 Nov 2024 03:40:08 GMT",
+          "Date": "Wed, 20 Nov 2024 02:11:02 GMT",
           "Server": "ESF",
           "Cache-Control": "private",
           "X-XSS-Protection": "0",
@@ -1094,7 +1083,7 @@
       },
       {
         "api_name": "WorldCat",
-        "response_time": 0.9139001369476318,
+        "response_time": 0.9437761306762695,
         "success": false,
         "metadata": null,
         "error": "404 Client Error: Not Found for url: https://www.oclc.org/en/jfkdsj",
@@ -1102,7 +1091,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,
@@ -1110,7 +1099,7 @@
       },
       {
         "api_name": "CrossRef",
-        "response_time": 1.499122142791748,
+        "response_time": 3.584651231765747,
         "success": false,
         "metadata": null,
         "error": "No results found",
@@ -1118,7 +1107,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,
@@ -1136,7 +1125,7 @@
     "isbn": "9780134685991",
     "total_apis_tested": 15,
     "successful_apis": 8,
-    "total_time": 11.64289116859436,
+    "total_time": 13.18954062461853,
     "fastest_api": "isbnlib_isbn13",
     "confidence_scores": {
       "title": 1.0,
@@ -1147,7 +1136,7 @@
     "results": [
       {
         "api_name": "isbnlib_default",
-        "response_time": 2.7617721557617188,
+        "response_time": 2.2139477729797363,
         "success": false,
         "metadata": null,
         "error": "No results found",
@@ -1155,7 +1144,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,
@@ -1163,7 +1152,7 @@
       },
       {
         "api_name": "isbnlib_mask",
-        "response_time": 8.177757263183594e-05,
+        "response_time": 0.00012493133544921875,
         "success": true,
         "metadata": {
           "result": "978-0-13-468599-1"
@@ -1173,7 +1162,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,
@@ -1181,7 +1170,7 @@
       },
       {
         "api_name": "isbnlib_info",
-        "response_time": 3.4809112548828125e-05,
+        "response_time": 3.790855407714844e-05,
         "success": true,
         "metadata": {
           "result": "English language"
@@ -1191,7 +1180,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,
@@ -1199,7 +1188,7 @@
       },
       {
         "api_name": "isbnlib_desc",
-        "response_time": 0.4239070415496826,
+        "response_time": 0.5153670310974121,
         "success": true,
         "metadata": {
           "result": ""
@@ -1209,7 +1198,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,
@@ -1217,7 +1206,7 @@
       },
       {
         "api_name": "isbnlib_classify",
-        "response_time": 0.8245429992675781,
+        "response_time": 0.8086850643157959,
         "success": false,
         "metadata": null,
         "error": "No results found",
@@ -1225,7 +1214,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,
@@ -1233,7 +1222,7 @@
       },
       {
         "api_name": "isbnlib_editions",
-        "response_time": 3.874447822570801,
+        "response_time": 2.673811912536621,
         "success": true,
         "metadata": {
           "results": [
@@ -1245,7 +1234,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,
@@ -1253,7 +1242,7 @@
       },
       {
         "api_name": "isbnlib_goom",
-        "response_time": 0.6233830451965332,
+        "response_time": 0.6078922748565674,
         "success": true,
         "metadata": {
           "results": [
@@ -1284,7 +1273,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,
@@ -1292,7 +1281,7 @@
       },
       {
         "api_name": "isbnlib_doi2tex",
-        "response_time": 0.6811697483062744,
+        "response_time": 0.9696371555328369,
         "success": false,
         "metadata": null,
         "error": "No results found",
@@ -1300,7 +1289,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,
@@ -1308,7 +1297,7 @@
       },
       {
         "api_name": "isbnlib_isbn10",
-        "response_time": 0.00015282630920410156,
+        "response_time": 0.00010514259338378906,
         "success": true,
         "metadata": {
           "result": "0134685997"
@@ -1318,7 +1307,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,
@@ -1326,7 +1315,7 @@
       },
       {
         "api_name": "isbnlib_isbn13",
-        "response_time": 1.1920928955078125e-05,
+        "response_time": 1.0013580322265625e-05,
         "success": true,
         "metadata": {
           "result": "9780134685991"
@@ -1336,7 +1325,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,
@@ -1344,7 +1333,7 @@
       },
       {
         "api_name": "Springer",
-        "response_time": 0.22981977462768555,
+        "response_time": 0.2230081558227539,
         "success": false,
         "metadata": null,
         "error": "403 Client Error: Forbidden for url: https://api.springernature.com/metadata/book/isbn/9780134685991",
@@ -1352,7 +1341,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,
@@ -1360,7 +1349,7 @@
       },
       {
         "api_name": "Open Library",
-        "response_time": 0.2835850715637207,
+        "response_time": 0.2875542640686035,
         "success": true,
         "metadata": {
           "title": "Effective Java",
@@ -1415,7 +1404,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": {
           "ISBN:9780134685991": {
@@ -1501,7 +1490,7 @@
       },
       {
         "api_name": "Google Books",
-        "response_time": 0.301069974899292,
+        "response_time": 0.33383822441101074,
         "success": false,
         "metadata": null,
         "error": "No results found",
@@ -1509,23 +1498,7 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
-        "confidence_score": 0.0,
-        "raw_response": null,
-        "rate_limit_info": null,
-        "response_headers": null
-      },
-      {
-        "api_name": "CrossRef",
-        "response_time": 0.6998200416564941,
-        "success": false,
-        "metadata": null,
-        "error": "No results found",
-        "http_status": 200,
-        "requires_key": false,
-        "api_type": "unknown",
-        "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,
@@ -1533,7 +1506,7 @@
       },
       {
         "api_name": "WorldCat",
-        "response_time": 0.9390921592712402,
+        "response_time": 0.9169197082519531,
         "success": false,
         "metadata": null,
         "error": "404 Client Error: Not Found for url: https://www.oclc.org/en/jfkdsj",
@@ -1541,7 +1514,23 @@
         "requires_key": false,
         "api_type": "unknown",
         "retry_count": 0,
-        "cache_hit": false,
+        "cache_hit": true,
+        "confidence_score": 0.0,
+        "raw_response": null,
+        "rate_limit_info": null,
+        "response_headers": null
+      },
+      {
+        "api_name": "CrossRef",
+        "response_time": 3.638601064682007,
+        "success": false,
+        "metadata": null,
+        "error": "No results found",
+        "http_status": 200,
+        "requires_key": false,
+        "api_type": "unknown",
+        "retry_count": 0,
+        "cache_hit": true,
         "confidence_score": 0.0,
         "raw_response": null,
         "rate_limit_info": null,

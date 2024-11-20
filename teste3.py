@@ -543,29 +543,47 @@ class ISBNAPITester:
     def test_all_apis(self, isbn: str) -> List[APITestResult]:
         """Testa todas as APIs disponíveis para um ISBN."""
         # Primeiro, verifica o cache
-        # Primeiro, verifica o cache
         cached_results = self.cache.get(isbn)
         if cached_results:
             results = []
             for r in cached_results:
-                # Remove cache_hit se existir no dicionário
                 r_copy = r.copy()
                 r_copy.pop('cache_hit', None)
-                
-                # Cria novo APITestResult com cache_hit=True
-                result = APITestResult(
-                    **r_copy,
-                    cache_hit=True
-                )
+                result = APITestResult(**r_copy, cache_hit=True)
                 results.append(result)
             return results
 
+        # Lista completa de APIs para testar
         apis = [
+            # APIs sem chave
             (self.test_google_books, "Google Books", False),
             (self.test_open_library, "OpenLibrary", False),
             (self.test_worldcat, "WorldCat", False),
             (self.test_crossref, "CrossRef", False),
+            
+            # APIs do seu código original
+            (self.test_cbl, "CBL", False),  # Câmara Brasileira do Livro
+            (self.test_mercado_editorial, "Mercado Editorial", False),
+            (self.test_google_books_br, "Google Books BR", False),
+            (self.test_zbib, "ZBib", False),
+            (self.test_mybib, "MyBib", False),
+            (self.test_ebook_de, "Ebook.de", False),
+            
+            # APIs técnicas/acadêmicas
             (self.test_springer, "Springer", True),
+            (self.test_oreilly, "O'Reilly", True),
+            (self.test_internet_archive, "Internet Archive", False),
+            (self.test_loc, "Library of Congress", False),
+            
+            # APIs adicionais para livros técnicos
+            (self.test_manning, "Manning", True),
+            (self.test_packt, "Packt", True),
+            (self.test_apress, "Apress", True),
+            
+            # APIs de bibliotecas
+            (self.test_british_library, "British Library", True),
+            (self.test_deutsche_nb, "Deutsche Nationalbibliothek", True),
+            (self.test_hathitrust, "HathiTrust", False)
         ]
         
         # Adiciona resultados do isbnlib
@@ -877,9 +895,26 @@ def main():
     """Função principal para demonstração e teste."""
     # Lista de ISBNs para testar
     test_isbns = [
-        "9781449355739",  # Learning Python
-        "9781617294136",  # Spring Boot in Action
+        # Brasileiros
+        "9786586057485",  # Casa do Código - Entendendo Algoritmos
+        "9788575228289",  # Novatec - Python e Django
+        "9788550800653",  # Alta Books - Docker
+        
+        # No Starch Press
+        "9781718502666",  # The Rust Programming Language
+        "9781593279288",  # Python Crash Course
+        
+        # O'Reilly
+        "9781492056355",  # Fluent Python
+        "9781492051367",  # Designing Data-Intensive Applications
+        
+        # Pearson
         "9780134685991",  # Effective Java
+        
+        # Wiley
+        "9781119775553",  # AWS Certified Solutions Architect
+        "9781118951309"   # Software Architecture in Practice
+        
     ]
 
     # Configuração de APIs (adicione suas chaves aqui)
