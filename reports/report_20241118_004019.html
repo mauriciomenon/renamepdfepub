@@ -1,0 +1,591 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>ISBN API Test Results</title>
+            <style>
+                body { font-family: Arial, sans-serif; margin: 20px; max-width: 1200px; margin: 0 auto; }
+                .card { background: #fff; border-radius: 8px; padding: 20px; margin: 10px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+                .success { color: green; }
+                .failure { color: red; }
+                table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+                th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+                th { background: #f5f5f5; }
+                .metadata { background: #f8f9fa; padding: 10px; border-radius: 4px; }
+            </style>
+        </head>
+        <body>
+            <h1>ISBN API Test Results</h1>
+            <p>Generated: 2024-11-18 00:40:19</p>
+
+            <div class="card">
+                <h2>Summary</h2>
+                <table>
+                    <tr><th>Total Tests</th><td>3</td></tr>
+                    <tr><th>Successful Tests</th><td>3 (100.0%)</td></tr>
+                </table>
+            </div>
+
+            <div class="card">
+                <h2>API Performance</h2>
+                <table>
+                    <tr>
+                        <th>API</th>
+                        <th>Success Rate</th>
+                        <th>Avg Response Time</th>
+                        <th>Errors</th>
+                    </tr>
+        
+                    <tr>
+                        <td>isbnlib_default</td>
+                        <td>33.3%</td>
+                        <td>0.519s</td>
+                        <td>2</td>
+                    </tr>
+            
+                    <tr>
+                        <td>isbnlib_mask</td>
+                        <td>100.0%</td>
+                        <td>0.000s</td>
+                        <td>0</td>
+                    </tr>
+            
+                    <tr>
+                        <td>isbnlib_info</td>
+                        <td>100.0%</td>
+                        <td>0.000s</td>
+                        <td>0</td>
+                    </tr>
+            
+                    <tr>
+                        <td>isbnlib_desc</td>
+                        <td>100.0%</td>
+                        <td>0.457s</td>
+                        <td>0</td>
+                    </tr>
+            
+                    <tr>
+                        <td>isbnlib_classify</td>
+                        <td>0.0%</td>
+                        <td>0.000s</td>
+                        <td>3</td>
+                    </tr>
+            
+                    <tr>
+                        <td>isbnlib_editions</td>
+                        <td>100.0%</td>
+                        <td>3.533s</td>
+                        <td>0</td>
+                    </tr>
+            
+                    <tr>
+                        <td>isbnlib_goom</td>
+                        <td>100.0%</td>
+                        <td>0.673s</td>
+                        <td>0</td>
+                    </tr>
+            
+                    <tr>
+                        <td>isbnlib_doi2tex</td>
+                        <td>0.0%</td>
+                        <td>0.000s</td>
+                        <td>3</td>
+                    </tr>
+            
+                    <tr>
+                        <td>isbnlib_isbn10</td>
+                        <td>100.0%</td>
+                        <td>0.000s</td>
+                        <td>0</td>
+                    </tr>
+            
+                    <tr>
+                        <td>isbnlib_isbn13</td>
+                        <td>100.0%</td>
+                        <td>0.000s</td>
+                        <td>0</td>
+                    </tr>
+            
+                    <tr>
+                        <td>Google Books</td>
+                        <td>33.3%</td>
+                        <td>0.415s</td>
+                        <td>2</td>
+                    </tr>
+            
+                    <tr>
+                        <td>Springer</td>
+                        <td>0.0%</td>
+                        <td>0.000s</td>
+                        <td>3</td>
+                    </tr>
+            
+                    <tr>
+                        <td>Open Library</td>
+                        <td>100.0%</td>
+                        <td>0.508s</td>
+                        <td>0</td>
+                    </tr>
+            
+                    <tr>
+                        <td>WorldCat</td>
+                        <td>0.0%</td>
+                        <td>0.000s</td>
+                        <td>3</td>
+                    </tr>
+            
+                    <tr>
+                        <td>CrossRef</td>
+                        <td>0.0%</td>
+                        <td>0.000s</td>
+                        <td>3</td>
+                    </tr>
+            
+                </table>
+            </div>
+
+            <div class="card">
+                <h2>Detailed Results</h2>
+        
+                <div class="metadata">
+                    <h3>ISBN: 9781449355739</h3>
+                    <table>
+                        <tr>
+                            <th>API</th>
+                            <th>Status</th>
+                            <th>Time</th>
+                            <th>Metadata</th>
+                            <th>Error</th>
+                        </tr>
+            
+                        <tr>
+                            <td>isbnlib_default</td>
+                            <td class="failure">✗</td>
+                            <td>3.504s</td>
+                            <td></td>
+                            <td>No results found</td>
+                        </tr>
+                
+                        <tr>
+                            <td>isbnlib_mask</td>
+                            <td class="success">✓</td>
+                            <td>0.000s</td>
+                            <td><ul><li><strong>result:</strong> 978-1-4493-5573-9</li></ul></td>
+                            <td>None</td>
+                        </tr>
+                
+                        <tr>
+                            <td>isbnlib_info</td>
+                            <td class="success">✓</td>
+                            <td>0.000s</td>
+                            <td><ul><li><strong>result:</strong> English language</li></ul></td>
+                            <td>None</td>
+                        </tr>
+                
+                        <tr>
+                            <td>isbnlib_desc</td>
+                            <td class="success">✓</td>
+                            <td>0.435s</td>
+                            <td><ul><li><strong>result:</strong> </li></ul></td>
+                            <td>None</td>
+                        </tr>
+                
+                        <tr>
+                            <td>isbnlib_classify</td>
+                            <td class="failure">✗</td>
+                            <td>3.987s</td>
+                            <td></td>
+                            <td>No results found</td>
+                        </tr>
+                
+                        <tr>
+                            <td>isbnlib_editions</td>
+                            <td class="success">✓</td>
+                            <td>4.488s</td>
+                            <td><ul><li><strong>results:</strong> 9781449355739</li></ul></td>
+                            <td>None</td>
+                        </tr>
+                
+                        <tr>
+                            <td>isbnlib_goom</td>
+                            <td class="success">✓</td>
+                            <td>0.702s</td>
+                            <td><ul><li><strong>results:</strong> {'ISBN-13': '9788577800131', 'Title': 'Aprendendo Python, 2.ed', 'Authors': ['M. Lutz', 'DAVID ASCHER'], 'Publisher': '', 'Year': '2007', 'Language': 'pt'}, {'ISBN-13': '9788575223321', 'Title': 'Python Cookbook', 'Authors': ['Brian K. Jones', 'David Beazley'], 'Publisher': 'Novatec Editora', 'Year': '2013', 'Language': 'pt'}, {'ISBN-13': '9781449355692', 'Title': 'Learning Python', 'Authors': ['Mark Lutz'], 'Publisher': '"O\'Reilly Media, Inc."', 'Year': '2013', 'Language': 'en'}, {'ISBN-13': '9788575224489', 'Title': 'Ensine seus filhos a programar', 'Authors': ['Bryson Payne'], 'Publisher': 'Novatec Editora', 'Year': '2015', 'Language': 'pt'}, {'ISBN-13': '9788575226476', 'Title': 'Python para análise de dados', 'Authors': ['Wes McKinney'], 'Publisher': 'Novatec Editora', 'Year': '', 'Language': 'pt'}, {'ISBN-13': '9788575224625', 'Title': 'Python fluente', 'Authors': ['Luciano Ramalho'], 'Publisher': 'Novatec Editora', 'Year': '2015', 'Language': 'pt'}, {'ISBN-13': '9788575224465', 'Title': 'Automatize tarefas maçantes com Python', 'Authors': ['Al Sweigart'], 'Publisher': 'Novatec Editora', 'Year': '2015', 'Language': 'pt'}, {'ISBN-13': '9788575227688', 'Title': 'TDD com Python', 'Authors': ['Harry J.W. Percival'], 'Publisher': 'Novatec Editora', 'Year': '2019', 'Language': 'pt'}, {'ISBN-13': '9788575225080', 'Title': 'Pense em Python', 'Authors': ['Allen B. Downey'], 'Publisher': 'Novatec Editora', 'Year': '2016', 'Language': 'pt'}, {'ISBN-13': '9788521211525', 'Title': 'Arduino para robótica', 'Authors': ['John-David Warren', 'Josh Adams', 'Harald Molle'], 'Publisher': 'Editora Blucher', 'Year': '2019', 'Language': 'pt'}</li></ul></td>
+                            <td>None</td>
+                        </tr>
+                
+                        <tr>
+                            <td>isbnlib_doi2tex</td>
+                            <td class="failure">✗</td>
+                            <td>1.707s</td>
+                            <td></td>
+                            <td>No results found</td>
+                        </tr>
+                
+                        <tr>
+                            <td>isbnlib_isbn10</td>
+                            <td class="success">✓</td>
+                            <td>0.000s</td>
+                            <td><ul><li><strong>result:</strong> 1449355730</li></ul></td>
+                            <td>None</td>
+                        </tr>
+                
+                        <tr>
+                            <td>isbnlib_isbn13</td>
+                            <td class="success">✓</td>
+                            <td>0.000s</td>
+                            <td><ul><li><strong>result:</strong> 9781449355739</li></ul></td>
+                            <td>None</td>
+                        </tr>
+                
+                        <tr>
+                            <td>Google Books</td>
+                            <td class="failure">✗</td>
+                            <td>0.435s</td>
+                            <td></td>
+                            <td>No results found</td>
+                        </tr>
+                
+                        <tr>
+                            <td>Springer</td>
+                            <td class="failure">✗</td>
+                            <td>0.933s</td>
+                            <td></td>
+                            <td>403 Client Error: Forbidden for url: https://api.springernature.com/metadata/book/isbn/9781449355739</td>
+                        </tr>
+                
+                        <tr>
+                            <td>Open Library</td>
+                            <td class="success">✓</td>
+                            <td>0.949s</td>
+                            <td><ul><li><strong>title:</strong> Learning Python</li><li><strong>authors:</strong> Mark Lutz, David Ascher</li><li><strong>publisher:</strong> O'Reilly Media</li><li><strong>publishedDate:</strong> 2013</li><li><strong>isbn:</strong> 9781449355739</li><li><strong>pages:</strong> 1540</li><li><strong>subjects:</strong> {'name': 'Python (Langage de programmation)', 'url': 'https://openlibrary.org/subjects/python_(langage_de_programmation)'}, {'name': 'Python (linguagem de programação)', 'url': 'https://openlibrary.org/subjects/python_(linguagem_de_programação)'}, {'name': 'Python (Computer program language)', 'url': 'https://openlibrary.org/subjects/python_(computer_program_language)'}, {'name': 'Python (Lenguaje de programación de computadores)', 'url': 'https://openlibrary.org/subjects/python_(lenguaje_de_programación_de_computadores)'}, {'name': 'Langage à objets', 'url': 'https://openlibrary.org/subjects/langage_à_objets'}, {'name': 'Python (programmeertaal)', 'url': 'https://openlibrary.org/subjects/python_(programmeertaal)'}, {'name': 'Object-oriented programming (Computer science)', 'url': 'https://openlibrary.org/subjects/object-oriented_programming_(computer_science)'}, {'name': 'Python (Computer language)', 'url': 'https://openlibrary.org/subjects/python_(computer_language)'}, {'name': 'Interpréteur', 'url': 'https://openlibrary.org/subjects/interpréteur'}, {'name': 'Python', 'url': 'https://openlibrary.org/subjects/python'}, {'name': 'COMPUTERS', 'url': 'https://openlibrary.org/subjects/computers'}, {'name': 'Programming Languages', 'url': 'https://openlibrary.org/subjects/programming_languages'}, {'name': 'Engineering & Applied Sciences', 'url': 'https://openlibrary.org/subjects/engineering_&_applied_sciences'}, {'name': 'Computer Science', 'url': 'https://openlibrary.org/subjects/computer_science'}, {'name': 'General', 'url': 'https://openlibrary.org/subjects/general'}, {'name': 'Reference', 'url': 'https://openlibrary.org/subjects/reference'}, {'name': 'Games', 'url': 'https://openlibrary.org/subjects/games'}, {'name': 'Com051360', 'url': 'https://openlibrary.org/subjects/com051360'}, {'name': 'Cs.cmp_sc.app_sw', 'url': 'https://openlibrary.org/subjects/cs.cmp_sc.app_sw'}, {'name': 'Cs.cmp_sc.prog_lang', 'url': 'https://openlibrary.org/subjects/cs.cmp_sc.prog_lang'}, {'name': 'Professional, career & trade -> computer science -> programming languages (jr/sr)', 'url': 'https://openlibrary.org/subjects/professional,_career_&_trade_->_computer_science_->_programming_languages_(jr/sr)'}, {'name': 'Professional, career & trade -> computer science -> general', 'url': 'https://openlibrary.org/subjects/professional,_career_&_trade_->_computer_science_->_general'}, {'name': 'Professional, career & trade -> computer science -> python', 'url': 'https://openlibrary.org/subjects/professional,_career_&_trade_->_computer_science_->_python'}</li></ul></td>
+                            <td>None</td>
+                        </tr>
+                
+                        <tr>
+                            <td>WorldCat</td>
+                            <td class="failure">✗</td>
+                            <td>0.985s</td>
+                            <td></td>
+                            <td>404 Client Error: Not Found for url: https://www.oclc.org/en/jfkdsj</td>
+                        </tr>
+                
+                        <tr>
+                            <td>CrossRef</td>
+                            <td class="failure">✗</td>
+                            <td>1.691s</td>
+                            <td></td>
+                            <td>No results found</td>
+                        </tr>
+                
+                    </table>
+                </div>
+            
+                <div class="metadata">
+                    <h3>ISBN: 9781617294136</h3>
+                    <table>
+                        <tr>
+                            <th>API</th>
+                            <th>Status</th>
+                            <th>Time</th>
+                            <th>Metadata</th>
+                            <th>Error</th>
+                        </tr>
+            
+                        <tr>
+                            <td>isbnlib_default</td>
+                            <td class="success">✓</td>
+                            <td>0.519s</td>
+                            <td><ul><li><strong>ISBN-13:</strong> 9781617294136</li><li><strong>Title:</strong> Securing DevOps - Security In The Cloud</li><li><strong>Authors:</strong> Julien Vehent</li><li><strong>Publisher:</strong> Manning</li><li><strong>Year:</strong> 2018</li><li><strong>Language:</strong> en</li></ul></td>
+                            <td>None</td>
+                        </tr>
+                
+                        <tr>
+                            <td>isbnlib_mask</td>
+                            <td class="success">✓</td>
+                            <td>0.000s</td>
+                            <td><ul><li><strong>result:</strong> 978-1-61729-413-6</li></ul></td>
+                            <td>None</td>
+                        </tr>
+                
+                        <tr>
+                            <td>isbnlib_info</td>
+                            <td class="success">✓</td>
+                            <td>0.000s</td>
+                            <td><ul><li><strong>result:</strong> English language</li></ul></td>
+                            <td>None</td>
+                        </tr>
+                
+                        <tr>
+                            <td>isbnlib_desc</td>
+                            <td class="success">✓</td>
+                            <td>0.512s</td>
+                            <td><ul><li><strong>result:</strong> Summary Securing DevOps explores how the techniques of DevOps and security
+should be applied together to make cloud services safer. This introductory
+book reviews the latest practices used in securing web applications and
+their infrastructure and teaches you techniques to integrate security
+directly into your product. You'll also learn the core concepts of DevOps,
+such as continuous integration, continuous delivery, and infrastructure as
+a service. Purchase of the print book includes a free eBook in PDF, Kindle,
+and ePub formats from Manning Publications. About the Technology An
+application running in the cloud can benefit from incredible efficiencies,
+but they come with unique security threats too. A DevOps team's highest
+priority is understanding those risks and hardening the system against
+them. About the Book Securing DevOps teaches you the essential techniques
+to secure your cloud services. Using compelling case studies, it shows you
+how to build security into automated testing, continuous delivery, and
+other core DevOps processes. This experience-rich book is filled with
+mission-critical strategies to protect web applications against attacks,
+deter fraud attempts, and make your services safer when operating at scale.
+You'll also learn to identify, assess, and secure the unique
+vulnerabilities posed by cloud deployments and automation tools commonly
+used in modern infrastructures. What's inside An approach to continuous
+security Implementing test-driven security in DevOps Security techniques
+for cloud services Watching for fraud and responding to incidents Security
+testing and risk assessment About the Reader Readers should be comfortable
+with Linux and standard DevOps practices like CI, CD, and unit testing.
+About the Author Julien Vehent is a security architect and DevOps advocate.
+He leads the Firefox Operations Security team at Mozilla, and is
+responsible for the security of Firefox's high-traffic cloud services and
+public websites. Table of Contents Securing DevOps PART 1 - Case study:
+applying layers of security to a simple DevOps pipeline Building a
+barebones DevOps pipeline Security layer 1: protecting web applications
+Security layer 2: protecting cloud infrastructures Security layer 3:
+securing communications Security layer 4: securing the delivery pipeline
+PART 2 - Watching for anomalies and protecting services against attacks
+Collecting and storing logs Analyzing logs for fraud and attacks Detecting
+intrusions The Caribbean breach: a case study in incident response PART 3 -
+Maturing DevOps security Assessing risks Testing security Continuous
+security</li></ul></td>
+                            <td>None</td>
+                        </tr>
+                
+                        <tr>
+                            <td>isbnlib_classify</td>
+                            <td class="failure">✗</td>
+                            <td>0.816s</td>
+                            <td></td>
+                            <td>No results found</td>
+                        </tr>
+                
+                        <tr>
+                            <td>isbnlib_editions</td>
+                            <td class="success">✓</td>
+                            <td>2.238s</td>
+                            <td><ul><li><strong>results:</strong> 9781617294136</li></ul></td>
+                            <td>None</td>
+                        </tr>
+                
+                        <tr>
+                            <td>isbnlib_goom</td>
+                            <td class="success">✓</td>
+                            <td>0.693s</td>
+                            <td><ul><li><strong>results:</strong> {'ISBN-13': '9781638355991', 'Title': 'Securing DevOps', 'Authors': ['Julien Vehent'], 'Publisher': 'Simon and Schuster', 'Year': '2018', 'Language': 'en'}, {'ISBN-13': '9781638356479', 'Title': 'Software Telemetry', 'Authors': ['Jamie Riedesel'], 'Publisher': 'Simon and Schuster', 'Year': '2021', 'Language': 'en'}, {'ISBN-13': '9788575224694', 'Title': 'Amazon Web Services em ação', 'Authors': ['Andreas Wittig', 'Michael Wittig'], 'Publisher': 'Novatec Editora', 'Year': '2015', 'Language': 'pt'}</li></ul></td>
+                            <td>None</td>
+                        </tr>
+                
+                        <tr>
+                            <td>isbnlib_doi2tex</td>
+                            <td class="failure">✗</td>
+                            <td>0.663s</td>
+                            <td></td>
+                            <td>No results found</td>
+                        </tr>
+                
+                        <tr>
+                            <td>isbnlib_isbn10</td>
+                            <td class="success">✓</td>
+                            <td>0.000s</td>
+                            <td><ul><li><strong>result:</strong> 1617294136</li></ul></td>
+                            <td>None</td>
+                        </tr>
+                
+                        <tr>
+                            <td>isbnlib_isbn13</td>
+                            <td class="success">✓</td>
+                            <td>0.000s</td>
+                            <td><ul><li><strong>result:</strong> 9781617294136</li></ul></td>
+                            <td>None</td>
+                        </tr>
+                
+                        <tr>
+                            <td>Springer</td>
+                            <td class="failure">✗</td>
+                            <td>0.230s</td>
+                            <td></td>
+                            <td>403 Client Error: Forbidden for url: https://api.springernature.com/metadata/book/isbn/9781617294136</td>
+                        </tr>
+                
+                        <tr>
+                            <td>Open Library</td>
+                            <td class="success">✓</td>
+                            <td>0.293s</td>
+                            <td><ul><li><strong>title:</strong> Securing DevOps: Security in the Cloud</li><li><strong>authors:</strong> Julien Vehent</li><li><strong>publisher:</strong> Manning Publications</li><li><strong>publishedDate:</strong> Aug 24, 2018</li><li><strong>isbn:</strong> 9781617294136</li><li><strong>pages:</strong> 384</li><li><strong>subjects:</strong> {'name': 'Computer software, development', 'url': 'https://openlibrary.org/subjects/computer_software,_development'}, {'name': 'Web services', 'url': 'https://openlibrary.org/subjects/web_services'}, {'name': 'Computer security', 'url': 'https://openlibrary.org/subjects/computer_security'}</li></ul></td>
+                            <td>None</td>
+                        </tr>
+                
+                        <tr>
+                            <td>Google Books</td>
+                            <td class="success">✓</td>
+                            <td>0.415s</td>
+                            <td><ul><li><strong>title:</strong> Securing DevOps</li><li><strong>authors:</strong> Julien Vehent</li><li><strong>publisher:</strong> Manning</li><li><strong>publishedDate:</strong> 2018-08-24</li><li><strong>isbn:</strong> 9781617294136</li><li><strong>language:</strong> en</li><li><strong>pageCount:</strong> 0</li><li><strong>categories:</strong> Computers</li></ul></td>
+                            <td>None</td>
+                        </tr>
+                
+                        <tr>
+                            <td>WorldCat</td>
+                            <td class="failure">✗</td>
+                            <td>0.914s</td>
+                            <td></td>
+                            <td>404 Client Error: Not Found for url: https://www.oclc.org/en/jfkdsj</td>
+                        </tr>
+                
+                        <tr>
+                            <td>CrossRef</td>
+                            <td class="failure">✗</td>
+                            <td>1.499s</td>
+                            <td></td>
+                            <td>No results found</td>
+                        </tr>
+                
+                    </table>
+                </div>
+            
+                <div class="metadata">
+                    <h3>ISBN: 9780134685991</h3>
+                    <table>
+                        <tr>
+                            <th>API</th>
+                            <th>Status</th>
+                            <th>Time</th>
+                            <th>Metadata</th>
+                            <th>Error</th>
+                        </tr>
+            
+                        <tr>
+                            <td>isbnlib_default</td>
+                            <td class="failure">✗</td>
+                            <td>2.762s</td>
+                            <td></td>
+                            <td>No results found</td>
+                        </tr>
+                
+                        <tr>
+                            <td>isbnlib_mask</td>
+                            <td class="success">✓</td>
+                            <td>0.000s</td>
+                            <td><ul><li><strong>result:</strong> 978-0-13-468599-1</li></ul></td>
+                            <td>None</td>
+                        </tr>
+                
+                        <tr>
+                            <td>isbnlib_info</td>
+                            <td class="success">✓</td>
+                            <td>0.000s</td>
+                            <td><ul><li><strong>result:</strong> English language</li></ul></td>
+                            <td>None</td>
+                        </tr>
+                
+                        <tr>
+                            <td>isbnlib_desc</td>
+                            <td class="success">✓</td>
+                            <td>0.424s</td>
+                            <td><ul><li><strong>result:</strong> </li></ul></td>
+                            <td>None</td>
+                        </tr>
+                
+                        <tr>
+                            <td>isbnlib_classify</td>
+                            <td class="failure">✗</td>
+                            <td>0.825s</td>
+                            <td></td>
+                            <td>No results found</td>
+                        </tr>
+                
+                        <tr>
+                            <td>isbnlib_editions</td>
+                            <td class="success">✓</td>
+                            <td>3.874s</td>
+                            <td><ul><li><strong>results:</strong> 9780134685991</li></ul></td>
+                            <td>None</td>
+                        </tr>
+                
+                        <tr>
+                            <td>isbnlib_goom</td>
+                            <td class="success">✓</td>
+                            <td>0.623s</td>
+                            <td><ul><li><strong>results:</strong> {'ISBN-13': '9789892345673', 'Title': 'Stranger Things - Nova Iorque sob Trevas', 'Authors': ['Adam Christopher'], 'Publisher': 'Leya', 'Year': '2019', 'Language': 'pt'}, {'ISBN-13': '9788595080508', 'Title': 'O inimigo do povo', 'Authors': ['Jim Acosta'], 'Publisher': 'HARLEQUIN', 'Year': '2019', 'Language': 'pt'}</li></ul></td>
+                            <td>None</td>
+                        </tr>
+                
+                        <tr>
+                            <td>isbnlib_doi2tex</td>
+                            <td class="failure">✗</td>
+                            <td>0.681s</td>
+                            <td></td>
+                            <td>No results found</td>
+                        </tr>
+                
+                        <tr>
+                            <td>isbnlib_isbn10</td>
+                            <td class="success">✓</td>
+                            <td>0.000s</td>
+                            <td><ul><li><strong>result:</strong> 0134685997</li></ul></td>
+                            <td>None</td>
+                        </tr>
+                
+                        <tr>
+                            <td>isbnlib_isbn13</td>
+                            <td class="success">✓</td>
+                            <td>0.000s</td>
+                            <td><ul><li><strong>result:</strong> 9780134685991</li></ul></td>
+                            <td>None</td>
+                        </tr>
+                
+                        <tr>
+                            <td>Springer</td>
+                            <td class="failure">✗</td>
+                            <td>0.230s</td>
+                            <td></td>
+                            <td>403 Client Error: Forbidden for url: https://api.springernature.com/metadata/book/isbn/9780134685991</td>
+                        </tr>
+                
+                        <tr>
+                            <td>Open Library</td>
+                            <td class="success">✓</td>
+                            <td>0.284s</td>
+                            <td><ul><li><strong>title:</strong> Effective Java</li><li><strong>authors:</strong> Joshua Bloch</li><li><strong>publisher:</strong> Addison-Wesley Professional</li><li><strong>publishedDate:</strong> December 27, 2017</li><li><strong>isbn:</strong> 9780134685991</li><li><strong>pages:</strong> 416</li><li><strong>subjects:</strong> {'name': 'Java (Computer program language)', 'url': 'https://openlibrary.org/subjects/java_(computer_program_language)'}, {'name': 'Object-oriented programming (Computer science)', 'url': 'https://openlibrary.org/subjects/object-oriented_programming_(computer_science)'}, {'name': 'Java 2.', 'url': 'https://openlibrary.org/subjects/java_2.'}, {'name': 'Java yu yan', 'url': 'https://openlibrary.org/subjects/java_yu_yan'}, {'name': 'Cheng xu she ji', 'url': 'https://openlibrary.org/subjects/cheng_xu_she_ji'}, {'name': 'Qa76.73.j38', 'url': 'https://openlibrary.org/subjects/qa76.73.j38'}, {'name': 'Qa76.73.j38 b57 2001', 'url': 'https://openlibrary.org/subjects/qa76.73.j38_b57_2001'}, {'name': '005.13/3', 'url': 'https://openlibrary.org/subjects/005.13/3'}, {'name': 'Literary collections', 'url': 'https://openlibrary.org/subjects/literary_collections'}</li></ul></td>
+                            <td>None</td>
+                        </tr>
+                
+                        <tr>
+                            <td>Google Books</td>
+                            <td class="failure">✗</td>
+                            <td>0.301s</td>
+                            <td></td>
+                            <td>No results found</td>
+                        </tr>
+                
+                        <tr>
+                            <td>CrossRef</td>
+                            <td class="failure">✗</td>
+                            <td>0.700s</td>
+                            <td></td>
+                            <td>No results found</td>
+                        </tr>
+                
+                        <tr>
+                            <td>WorldCat</td>
+                            <td class="failure">✗</td>
+                            <td>0.939s</td>
+                            <td></td>
+                            <td>404 Client Error: Not Found for url: https://www.oclc.org/en/jfkdsj</td>
+                        </tr>
+                
+                    </table>
+                </div>
+            
+            </div>
+        </body>
+        </html>
+        

@@ -1,0 +1,73 @@
+2024-11-17 22:38:17,676 - INFO - Iniciando testes para ISBN: 9781449355739
+2024-11-17 22:38:21,287 - INFO - Total de APIs testadas: 6
+2024-11-17 22:38:21,295 - INFO - APIs bem-sucedidas: 1
+2024-11-17 22:38:21,297 - INFO - Relatórios gerados com sucesso:
+2024-11-17 22:38:21,298 - INFO - HTML: reports/isbn_report_9781449355739_20241117_223821.html
+2024-11-17 22:38:21,298 - INFO - JSON: reports/isbn_report_9781449355739_20241117_223821.json
+2024-11-17 22:38:21,298 - INFO - Iniciando testes para ISBN: 9781617294136
+2024-11-17 22:38:21,531 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
+2024-11-17 22:38:22,406 - INFO - Total de APIs testadas: 6
+2024-11-17 22:38:22,407 - INFO - APIs bem-sucedidas: 2
+2024-11-17 22:38:22,409 - INFO - Relatórios gerados com sucesso:
+2024-11-17 22:38:22,409 - INFO - HTML: reports/isbn_report_9781617294136_20241117_223822.html
+2024-11-17 22:38:22,410 - INFO - JSON: reports/isbn_report_9781617294136_20241117_223822.json
+2024-11-17 22:38:22,410 - INFO - Iniciando testes para ISBN: 9780134685991
+2024-11-17 22:38:22,620 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
+2024-11-17 22:38:23,576 - INFO - Total de APIs testadas: 6
+2024-11-17 22:38:23,577 - INFO - APIs bem-sucedidas: 1
+2024-11-17 22:38:23,579 - INFO - Relatórios gerados com sucesso:
+2024-11-17 22:38:23,579 - INFO - HTML: reports/isbn_report_9780134685991_20241117_223823.html
+2024-11-17 22:38:23,579 - INFO - JSON: reports/isbn_report_9780134685991_20241117_223823.json
+2024-11-18 00:22:00,747 - INFO - Iniciando testes para ISBN: 9781449355739
+2024-11-18 00:22:06,067 - INFO - Total de APIs testadas: 6
+2024-11-18 00:22:06,068 - INFO - APIs bem-sucedidas: 1
+2024-11-18 00:22:06,071 - INFO - Relatórios gerados com sucesso:
+2024-11-18 00:22:06,071 - INFO - HTML: reports/isbn_report_9781449355739_20241118_002206.html
+2024-11-18 00:22:06,071 - INFO - JSON: reports/isbn_report_9781449355739_20241118_002206.json
+2024-11-18 00:22:06,071 - INFO - Iniciando testes para ISBN: 9781617294136
+2024-11-18 00:22:06,287 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
+2024-11-18 00:22:08,254 - INFO - Total de APIs testadas: 6
+2024-11-18 00:22:08,255 - INFO - APIs bem-sucedidas: 2
+2024-11-18 00:22:08,258 - INFO - Relatórios gerados com sucesso:
+2024-11-18 00:22:08,258 - INFO - HTML: reports/isbn_report_9781617294136_20241118_002208.html
+2024-11-18 00:22:08,258 - INFO - JSON: reports/isbn_report_9781617294136_20241118_002208.json
+2024-11-18 00:22:08,259 - INFO - Iniciando testes para ISBN: 9780134685991
+2024-11-18 00:22:08,468 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /en/jfkdsj
+2024-11-18 00:22:10,462 - INFO - Total de APIs testadas: 6
+2024-11-18 00:22:10,462 - INFO - APIs bem-sucedidas: 1
+2024-11-18 00:22:10,464 - INFO - Relatórios gerados com sucesso:
+2024-11-18 00:22:10,464 - INFO - HTML: reports/isbn_report_9780134685991_20241118_002210.html
+2024-11-18 00:22:10,465 - INFO - JSON: reports/isbn_report_9780134685991_20241118_002210.json
+2024-11-18 00:33:31,279 - ERROR - Erro processando ISBN 9781449355739: module 'isbnlib' has no attribute 'ext'
+2024-11-18 00:33:31,280 - ERROR - Erro processando ISBN 9781617294136: module 'isbnlib' has no attribute 'ext'
+2024-11-18 00:33:31,280 - ERROR - Erro processando ISBN 9780134685991: module 'isbnlib' has no attribute 'ext'
+2024-11-18 00:38:03,768 - ERROR - Erro processando ISBN 9781449355739: module 'isbnlib' has no attribute 'registry'
+2024-11-18 00:38:03,768 - ERROR - Erro processando ISBN 9781617294136: module 'isbnlib' has no attribute 'registry'
+2024-11-18 00:38:03,769 - ERROR - Erro processando ISBN 9780134685991: module 'isbnlib' has no attribute 'registry'
+2024-11-18 00:39:54,087 - CRITICAL - ISBNLibHTTPError for http://classify.oclc.org/classify2/Classify?isbn=9781449355739&maxRecs=1 with code 404 [Not Found]
+2024-11-18 00:39:56,307 - CRITICAL - ISBNLibHTTPError for http://www.librarything.com/api/thingISBN/9781449355739 with code 403 [Forbidden]
+2024-11-18 00:39:58,579 - ERROR - Some error on editions 'merge' service for 9781449355739!
+2024-11-18 00:40:00,985 - CRITICAL - ISBNLibHTTPError for http://dx.doi.org/9781449355739 with code 400 [Bad Request]
+2024-11-18 00:40:04,535 - CRITICAL - ISBNLibHTTPError for http://classify.oclc.org/classify2/Classify?isbn=9781617294136&maxRecs=1 with code 404 [Not Found]
+2024-11-18 00:40:05,497 - CRITICAL - ISBNLibHTTPError for http://www.librarything.com/api/thingISBN/9781617294136 with code 403 [Forbidden]
+2024-11-18 00:40:06,776 - ERROR - Some error on editions 'merge' service for 9781617294136!
+2024-11-18 00:40:08,130 - CRITICAL - ISBNLibHTTPError for http://dx.doi.org/9781617294136 with code 400 [Bad Request]
+2024-11-18 00:40:13,649 - CRITICAL - ISBNLibHTTPError for http://classify.oclc.org/classify2/Classify?isbn=9780134685991&maxRecs=1 with code 404 [Not Found]
+2024-11-18 00:40:15,940 - CRITICAL - ISBNLibHTTPError for http://www.librarything.com/api/thingISBN/9780134685991 with code 403 [Forbidden]
+2024-11-18 00:40:17,527 - ERROR - Some error on editions 'merge' service for 9780134685991!
+2024-11-18 00:40:18,828 - CRITICAL - ISBNLibHTTPError for http://dx.doi.org/9780134685991 with code 400 [Bad Request]
+2024-11-18 00:48:36,566 - ERROR - Erro processando ISBN 9781449355739: __main__.APITestResult() got multiple values for keyword argument 'cache_hit'
+2024-11-18 00:48:36,566 - ERROR - Erro processando ISBN 9781617294136: __main__.APITestResult() got multiple values for keyword argument 'cache_hit'
+2024-11-18 00:48:36,566 - ERROR - Erro processando ISBN 9780134685991: __main__.APITestResult() got multiple values for keyword argument 'cache_hit'
+2024-11-19 23:10:48,875 - CRITICAL - ISBNLibHTTPError for http://classify.oclc.org/classify2/Classify?isbn=9781449355739&maxRecs=1 with code 404 [Not Found]
+2024-11-19 23:10:49,948 - CRITICAL - ISBNLibHTTPError for http://www.librarything.com/api/thingISBN/9781449355739 with code 403 [Forbidden]
+2024-11-19 23:10:51,373 - ERROR - Some error on editions 'merge' service for 9781449355739!
+2024-11-19 23:10:53,752 - CRITICAL - ISBNLibHTTPError for http://dx.doi.org/9781449355739 with code 400 [Bad Request]
+2024-11-19 23:10:57,993 - CRITICAL - ISBNLibHTTPError for http://classify.oclc.org/classify2/Classify?isbn=9781617294136&maxRecs=1 with code 404 [Not Found]
+2024-11-19 23:10:58,967 - CRITICAL - ISBNLibHTTPError for http://www.librarything.com/api/thingISBN/9781617294136 with code 403 [Forbidden]
+2024-11-19 23:11:00,376 - ERROR - Some error on editions 'merge' service for 9781617294136!
+2024-11-19 23:11:02,042 - CRITICAL - ISBNLibHTTPError for http://dx.doi.org/9781617294136 with code 400 [Bad Request]
+2024-11-19 23:11:09,171 - CRITICAL - ISBNLibHTTPError for http://classify.oclc.org/classify2/Classify?isbn=9780134685991&maxRecs=1 with code 404 [Not Found]
+2024-11-19 23:11:10,356 - CRITICAL - ISBNLibHTTPError for http://www.librarything.com/api/thingISBN/9780134685991 with code 403 [Forbidden]
+2024-11-19 23:11:11,849 - ERROR - Some error on editions 'merge' service for 9780134685991!
+2024-11-19 23:11:13,423 - CRITICAL - ISBNLibHTTPError for http://dx.doi.org/9780134685991 with code 400 [Bad Request]
