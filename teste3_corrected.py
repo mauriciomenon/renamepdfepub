@@ -19,7 +19,7 @@ from tqdm import tqdm
 
 # Configuração de logging
 logging.basicConfig(
-    level=logging.INFO,
+    level=logging.DEBUG,  # Mude para INFO ou DEBUG
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
         logging.StreamHandler(),
@@ -124,20 +124,25 @@ class Cache:
             try:
                 with open(self.cache_file, 'r') as f:
                     cache = json.load(f)
-                # Remove entradas expiradas
                 current_time = time.time()
-                cache = {
-                    k: v for k, v in cache.items()
-                    if current_time - v.get('timestamp', 0) < self.ttl
-                }
-                return cache
+                cleaned_cache = {}
+                for k, v in cache.items():
+                    if current_time - v.get('timestamp', 0) < self.ttl:
+                        cleaned_cache[k] = v
+                return cleaned_cache
             except:
                 return {}
         return {}
 
     def _save_cache(self):
         with open(self.cache_file, 'w') as f:
-            json.dump(self.cache, f)
+            # Convert data to JSON-serializable format
+            cache_data = {}
+            for k, v in self.cache.items():
+                if isinstance(v.get('data'), (list, tuple)):
+                    v['data'] = list(v['data'])
+                cache_data[k] = v
+            json.dump(cache_data, f)
 
     def get(self, key: str) -> Optional[Dict]:
         if key in self.cache:
@@ -327,44 +332,44 @@ class ISBNAPITester:
         }
 
         for provider_name, provider_func in providers.items():
-            start_time = time.time()
+            start_time = time.perf_counter()  # Usando perf_counter para maior precisão
             try:
-                metadata = None
-                
-                # Trata diferentes tipos de retorno
+                result = None
                 try:
                     data = provider_func(isbn)
+                    # Convertendo todos os resultados para formato consistente
                     if isinstance(data, dict):
-                        metadata = data
+                        result = {'metadata': data}
                     elif isinstance(data, str):
-                        metadata = {'result': data}
-                    elif isinstance(data, list):
-                        metadata = {'results': data}
+                        result = {'formatted': data}
+                    elif isinstance(data, (list, tuple)):
+                        result = {'editions': tuple(str(x) for x in data)}  # Convertendo para tuple
                     elif data is not None:
-                        metadata = {'data': str(data)}
-                except Exception as specific_error:
-                    metadata = None
-                    error = str(specific_error)
-                
-                if metadata:
+                        result = {'value': str(data)}
+                except Exception as e:
+                    logging.debug(f"Provedor {provider_name} falhou para ISBN {isbn}: {str(e)}")
+                    result = None
+
+                if result:
                     results.append(APITestResult(
                         api_name=provider_name,
-                        response_time=time.time() - start_time,
+                        response_time=time.perf_counter() - start_time,
                         success=True,
-                        metadata=metadata
+                        metadata=result
                     ))
                 else:
                     results.append(APITestResult(
                         api_name=provider_name,
-                        response_time=time.time() - start_time,
+                        response_time=time.perf_counter() - start_time,
                         success=False,
                         metadata=None,
                         error="No results found"
                     ))
+                    
             except Exception as e:
                 results.append(APITestResult(
                     api_name=provider_name,
-                    response_time=time.time() - start_time,
+                    response_time=time.perf_counter() - start_time,
                     success=False,
                     metadata=None,
                     error=str(e)
@@ -1427,33 +1432,72 @@ class ISBNAPITester:
 
     def process_results(self, isbn: str, results: List[APITestResult]) -> Dict:
         """Processa e consolida resultados dos testes."""
-        successful_results = [r for r in results if r.success]
-        
-        summary = {
-            'isbn': isbn,
-            'total_apis_tested': len(results),
-            'successful_apis': len(successful_results),
-            'total_time': sum(r.response_time for r in results),
-            'fastest_api': min(results, key=lambda x: x.response_time if x.response_time > 0 else float('inf')).api_name,
-            'confidence_scores': self._evaluate_confidence(results),
-            'results': [asdict(r) for r in results]
-        }
+        try:
+            # Garante que results é uma lista
+            if not isinstance(results, list):
+                results = [results] if results is not None else []
+            
+            # Filtra resultados válidos
+            valid_results = [r for r in results if isinstance(r, APITestResult)]
+            successful_results = [r for r in valid_results if r.success]
+            
+            # Cria sumário básico
+            summary = {
+                'isbn': isbn,
+                'total_apis_tested': len(valid_results),
+                'successful_apis': len(successful_results),
+                'total_time': sum(r.response_time for r in valid_results),
+                'results': []
+            }
+            
+            # Encontra a API mais rápida
+            if successful_results:
+                fastest_api = min(successful_results, key=lambda x: x.response_time if x.response_time > 0 else float('inf'))
+                summary['fastest_api'] = fastest_api.api_name
+                summary['best_response_time'] = fastest_api.response_time
+            else:
+                summary['fastest_api'] = 'N/A'
+                summary['best_response_time'] = 0
+            
+            # Processa resultados individuais
+            for r in valid_results:
+                try:
+                    result_dict = {
+                        'api_name': r.api_name,
+                        'success': r.success,
+                        'response_time': r.response_time,
+                        'error': r.error,
+                        'metadata': r.metadata
+                    }
+                    
+                    # Converte listas para tuples nos metadados
+                    if result_dict['metadata']:
+                        result_dict['metadata'] = self._convert_lists_to_tuples(result_dict['metadata'])
+                    
+                    summary['results'].append(result_dict)
+                except Exception as e:
+                    logging.warning(f"Erro processando resultado individual para {isbn}: {str(e)}")
+            
+            return summary
+            
+        except Exception as e:
+            logging.error(f"Erro processando resultados para ISBN {isbn}: {str(e)}")
+            return {
+                'isbn': isbn,
+                'error': str(e),
+                'success': False,
+                'results': []
+            }
 
-        # Tenta consolidar metadados
-        if successful_results:
-            consolidated = {}
-            for field in ['title', 'authors', 'publisher', 'publishedDate']:
-                values = [r.metadata.get(field) for r in successful_results if r.metadata and r.metadata.get(field)]
-                if values:
-                    if isinstance(values[0], list):
-                        # Para campos que são listas (como autores)
-                        all_values = [item for sublist in values for item in sublist]
-                        consolidated[field] = Counter(all_values).most_common(1)[0][0]
-                    else:
-                        consolidated[field] = Counter(values).most_common(1)[0][0]
-            summary['consolidated_metadata'] = consolidated
-
-        return summary
+    def _convert_lists_to_tuples(self, data):
+        """Converte recursivamente todas as listas para tuples em um dicionário."""
+        if isinstance(data, dict):
+            return {k: self._convert_lists_to_tuples(v) for k, v in data.items()}
+        elif isinstance(data, list):
+            return tuple(self._convert_lists_to_tuples(x) for x in data)
+        elif isinstance(data, tuple):
+            return tuple(self._convert_lists_to_tuples(x) for x in data)
+        return data
 
     def run_tests(self, isbn: str) -> dict:
         """Executa testes para um ISBN e retorna resultados processados."""
@@ -1498,14 +1542,15 @@ class ISBNAPITester:
         return str(html_file), str(json_file)
 
     def _generate_html_report(self, results: List[dict], output_file: Path):
-        """Gera relatório HTML detalhado."""
+        """Gera relatório HTML detalhado com layout simplificado."""
         # Coleta estatísticas
         total_tests = len(results)
         total_apis = len(API_REQUIREMENTS)
         successful_tests = sum(1 for r in results if r.get('successful_apis', 0) > 0)
         failed_tests = total_tests - successful_tests
+        success_percentage = (successful_tests/total_tests*100) if total_tests > 0 else 0
         
-        # Estatísticas por API
+        # Coleta estatísticas por API
         api_stats = {}
         publisher_stats = self._collect_publisher_stats(results)
         country_stats = self._collect_country_stats(results)
@@ -1545,24 +1590,182 @@ class ISBNAPITester:
                 if api_result.get('cache_hit'):
                     stats['cache_hits'] += 1
 
-        # Calcula médias e porcentagens
-        for stats in api_stats.values():
-            if stats['success'] > 0:
-                stats['avg_time'] /= stats['success']
-            stats['success_rate'] = (stats['success'] / stats['total'] * 100) if stats['total'] > 0 else 0
-            stats['failure_rate'] = (stats['failure'] / stats['total'] * 100) if stats['total'] > 0 else 0
-            stats['cache_hit_rate'] = (stats['cache_hits'] / stats['total'] * 100) if stats['total'] > 0 else 0
+        current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        
+        # Gera o HTML - Usando formatação explícita
+        html_content = f"""<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ISBN API Test Results</title>
+        <style>
+            body {{
+                font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+                line-height: 1.5;
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 20px;
+                background: #f8f9fa;
+                color: #333;
+            }}
+            h1, h2, h3 {{ 
+                margin-top: 2em;
+                color: #2c3e50;
+            }}
+            section {{
+                background: white;
+                padding: 20px;
+                margin: 20px 0;
+                border-radius: 8px;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            }}
+            table {{
+                width: 100%;
+                border-collapse: collapse;
+                margin: 1em 0;
+            }}
+            th, td {{
+                padding: 12px;
+                border: 1px solid #ddd;
+                text-align: left;
+            }}
+            th {{
+                background: #f8f9fa;
+            }}
+            tr:hover {{
+                background: #f8f9fa;
+            }}
+            .success {{ color: #28a745; }}
+            .warning {{ color: #ffc107; }}
+            .failure {{ color: #dc3545; }}
+            .error-box {{
+                background: #fff5f5;
+                padding: 15px;
+                margin: 10px 0;
+                border-left: 4px solid #dc3545;
+            }}
+        </style>
+    </head>
+    <body>
+        <h1>ISBN API Test Results</h1>
+        <p>Generated: {current_time}</p>
 
-        # Gera HTML
-        html_content = self._generate_html_header()
-        html_content += self._generate_summary_section(total_tests, successful_tests, failed_tests, total_apis)
-        html_content += self._generate_api_performance_section(api_stats)
-        html_content += self._generate_publisher_section(publisher_stats)
-        html_content += self._generate_country_section(country_stats)
-        html_content += self._generate_detailed_results_section(results)
-        html_content += self._generate_error_analysis_section(api_stats)
-        html_content += "</body></html>"
+        <section>
+            <h2>Overview</h2>
+            <table>
+                <tr>
+                    <th>Total Tests</th>
+                    <td>{total_tests}</td>
+                </tr>
+                <tr>
+                    <th>Successful Tests</th>
+                    <td class="success">{successful_tests}</td>
+                </tr>
+                <tr>
+                    <th>Failed Tests</th>
+                    <td class="failure">{failed_tests}</td>
+                </tr>
+                <tr>
+                    <th>Success Rate</th>
+                    <td>{success_percentage:.1f}%</td>
+                </tr>
+                <tr>
+                    <th>Total APIs</th>
+                    <td>{total_apis}</td>
+                </tr>
+            </table>
+        </section>
 
+        <section>
+            <h2>API Performance</h2>
+            <table>
+                <tr>
+                    <th>API</th>
+                    <th>Success/Total</th>
+                    <th>Success Rate</th>
+                    <th>Avg Time</th>
+                    <th>Cache Hits</th>
+                    <th>Errors</th>
+                </tr>"""
+
+        # Sort APIs by success rate
+        sorted_apis = sorted(
+            api_stats.items(),
+            key=lambda x: (x[1]['success'] / x[1]['total'] * 100 if x[1]['total'] > 0 else 0),
+            reverse=True
+        )
+
+        for api_name, stats in sorted_apis:
+            success_rate = (stats['success'] / stats['total'] * 100) if stats['total'] > 0 else 0
+            avg_time = stats['avg_time'] / stats['success'] if stats['success'] > 0 else 0
+            cache_hit_rate = (stats['cache_hits'] / stats['total'] * 100) if stats['total'] > 0 else 0
+            
+            html_content += f"""
+                <tr>
+                    <td>{api_name}</td>
+                    <td>{stats['success']}/{stats['total']}</td>
+                    <td>{success_rate:.1f}%</td>
+                    <td>{avg_time:.3f}s</td>
+                    <td>{stats['cache_hits']} ({cache_hit_rate:.1f}%)</td>
+                    <td>{stats['failure']} ({len(stats['errors'])} unique)</td>
+                </tr>"""
+
+        html_content += """
+            </table>
+        </section>
+
+        <section>
+            <h2>Publisher Statistics</h2>
+            <table>
+                <tr>
+                    <th>Publisher</th>
+                    <th>Success</th>
+                    <th>Total</th>
+                    <th>Success Rate</th>
+                </tr>"""
+
+        for publisher, stats in publisher_stats.items():
+            success_rate = (stats['success'] / stats['total'] * 100) if stats['total'] > 0 else 0
+            html_content += f"""
+                <tr>
+                    <td>{publisher}</td>
+                    <td>{stats['success']}</td>
+                    <td>{stats['total']}</td>
+                    <td>{success_rate:.1f}%</td>
+                </tr>"""
+
+        html_content += """
+            </table>
+        </section>
+
+        <section>
+            <h2>Error Analysis</h2>"""
+
+        for api_name, stats in sorted_apis:
+            if stats['errors']:
+                html_content += f"""
+                <div class="error-box">
+                    <h3>{api_name}</h3>
+                    <p>Total Errors: {len(stats['errors'])} in {stats['failure']} failures</p>
+                    <h4>Error Types:</h4>
+                    <ul>"""
+                
+                for error_type, count in stats['error_types'].most_common():
+                    percentage = (count / stats['failure'] * 100) if stats['failure'] > 0 else 0
+                    html_content += f"""
+                        <li><strong>{error_type}:</strong> {count} ({percentage:.1f}%)</li>"""
+                
+                html_content += """
+                    </ul>
+                </div>"""
+
+        html_content += """
+        </section>
+    </body>
+    </html>"""
+
+        # Save the file
         with open(output_file, 'w', encoding='utf-8') as f:
             f.write(html_content)
 
@@ -1652,150 +1855,339 @@ class ISBNAPITester:
         return 'Unknown'
 
     def _generate_html_header(self) -> str:
-        """Gera cabeçalho HTML com estilos melhorados."""
-        return """
+        """Gera cabeçalho HTML com estilos completos e melhorados."""
+        return f"""
         <!DOCTYPE html>
         <html>
         <head>
             <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>ISBN API Test Results</title>
             <style>
-                :root {
+                :root {{
                     --success-color: #28a745;
                     --warning-color: #ffc107;
                     --danger-color: #dc3545;
                     --info-color: #17a2b8;
-                }
-                body { 
+                    --border-color: #dee2e6;
+                    --header-bg: #f8f9fa;
+                    --text-primary: #212529;
+                    --text-secondary: #6c757d;
+                    --card-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                }}
+                
+                * {{
+                    box-sizing: border-box;
+                    margin: 0;
+                    padding: 0;
+                }}
+                
+                body {{ 
                     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-                    margin: 20px auto;
-                    max-width: 1200px;
+                    margin: 0 auto;
+                    max-width: 1600px;
                     background-color: #f8f9fa;
-                    color: #212529;
+                    color: var(--text-primary);
                     line-height: 1.5;
-                }
-                .card { 
-                    background: #fff;
+                    padding: 20px;
+                }}
+                
+                h1, h2, h3, h4 {{
+                    color: #2c3e50;
+                    margin-bottom: 1rem;
+                }}
+
+                h1 {{ font-size: 2rem; }}
+                h2 {{ font-size: 1.5rem; }}
+                h3 {{ font-size: 1.25rem; }}
+                
+                .content-grid {{
+                    display: grid;
+                    grid-template-columns: 1fr 350px;
+                    gap: 20px;
+                    margin: 20px 0;
+                }}
+                
+                .main-content {{
+                    min-width: 0;
+                }}
+                
+                .side-content {{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 20px;
+                }}
+                
+                .results-grid {{
+                    display: grid;
+                    grid-template-columns: 1fr 350px;
+                    gap: 20px;
+                }}
+                
+                .results-main {{
+                    min-width: 0;
+                }}
+                
+                .results-sidebar {{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 20px;
+                }}
+
+                .card {{ 
+                    background: white;
                     border-radius: 8px;
                     padding: 20px;
+                    margin-bottom: 20px;
+                    box-shadow: var(--card-shadow);
+                }}
+                
+                .overview-section {{
+                    margin-bottom: 30px;
+                }}
+                
+                .stats-grid {{
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                    gap: 20px;
+                }}
+                
+                .stat-box {{
+                    background: white;
+                    padding: 20px;
+                    border-radius: 8px;
+                    box-shadow: var(--card-shadow);
+                }}
+                
+                .overview-data {{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                }}
+                
+                .data-point {{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }}
+                
+                .data-point .label {{
+                    color: var(--text-secondary);
+                    font-weight: 500;
+                }}
+                
+                .data-point .value {{
+                    font-weight: 600;
+                }}
+                
+                .table-wrapper {{
+                    overflow-x: auto;
+                    border-radius: 8px;
+                    box-shadow: var(--card-shadow);
                     margin: 15px 0;
-                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-                }
-                .success { color: var(--success-color); }
-                .warning { color: var(--warning-color); }
-                .failure { color: var(--danger-color); }
-                table { 
+                }}
+                
+                table {{ 
                     width: 100%;
                     border-collapse: collapse;
-                    margin: 10px 0;
                     background: white;
-                }
-                th, td { 
-                    border: 1px solid #dee2e6;
-                    padding: 12px 8px;
+                    font-size: 0.9rem;
+                }}
+                
+                th, td {{ 
                     text-align: left;
-                }
-                th { 
-                    background: #f8f9fa;
+                    padding: 12px 16px;
+                    border: 1px solid var(--border-color);
+                }}
+                
+                th {{ 
+                    background: var(--header-bg);
                     font-weight: 600;
-                    color: #495057;
-                }
-                .metadata { 
-                    background: #f8f9fa;
+                    color: var(--text-primary);
+                    white-space: nowrap;
+                    position: sticky;
+                    top: 0;
+                    z-index: 10;
+                }}
+                
+                tr:hover {{
+                    background-color: rgba(0,0,0,0.02);
+                }}
+                
+                .metadata {{ 
+                    background: var(--header-bg);
                     padding: 15px;
                     border-radius: 4px;
                     margin: 10px 0;
-                }
-                .error-box {
+                }}
+                
+                .metadata ul {{
+                    columns: 2;
+                    column-gap: 40px;
+                    list-style: none;
+                    margin: 0;
+                    padding: 0;
+                }}
+                
+                .metadata li {{
+                    break-inside: avoid;
+                    margin-bottom: 8px;
+                    padding: 4px 0;
+                    border-bottom: 1px solid var(--border-color);
+                }}
+                
+                .status-badge {{
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 4px 12px;
+                    border-radius: 12px;
+                    font-size: 0.85rem;
+                    font-weight: 500;
+                    min-width: 80px;
+                }}
+                
+                .status-badge.success {{
+                    background-color: rgba(40, 167, 69, 0.1);
+                    color: var(--success-color);
+                }}
+                
+                .status-badge.warning {{
+                    background-color: rgba(255, 193, 7, 0.1);
+                    color: var(--warning-color);
+                }}
+                
+                .status-badge.failure {{
+                    background-color: rgba(220, 53, 69, 0.1);
+                    color: var(--danger-color);
+                }}
+                
+                .progress-bar {{
+                    height: 8px;
+                    background: var(--header-bg);
+                    border-radius: 4px;
+                    overflow: hidden;
+                }}
+                
+                .progress-fill {{
+                    height: 100%;
+                    transition: width 0.3s ease;
+                }}
+                
+                .progress-fill.success {{ background: var(--success-color); }}
+                .progress-fill.warning {{ background: var(--warning-color); }}
+                .progress-fill.failure {{ background: var(--danger-color); }}
+                
+                .success {{ color: var(--success-color); }}
+                .warning {{ color: var(--warning-color); }}
+                .failure {{ color: var(--danger-color); }}
+                
+                .tab-container {{
+                    margin: 20px 0;
+                }}
+                
+                .tab-header {{
+                    display: flex;
+                    gap: 10px;
+                    margin-bottom: 15px;
+                    border-bottom: 2px solid var(--border-color);
+                    padding-bottom: 10px;
+                }}
+                
+                .tab {{
+                    padding: 8px 16px;
+                    background: none;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    font-weight: 500;
+                    color: var(--text-secondary);
+                    transition: all 0.2s ease;
+                }}
+                
+                .tab:hover {{
+                    background: var(--header-bg);
+                    color: var(--text-primary);
+                }}
+                
+                .tab.active {{
+                    background: var(--info-color);
+                    color: white;
+                }}
+                
+                .tab-content {{
+                    display: none;
+                }}
+                
+                .tab-content.active {{
+                    display: block;
+                }}
+                
+                .error-box {{
                     background: #fff3f3;
                     padding: 15px;
                     border-radius: 4px;
                     margin: 10px 0;
                     border-left: 4px solid var(--danger-color);
-                }
-                .stats-grid {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                    gap: 20px;
-                    margin: 20px 0;
-                }
-                .stat-box {
-                    background: white;
-                    padding: 20px;
-                    border-radius: 8px;
-                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-                }
-                .progress-bar {
-                    height: 20px;
-                    background: #e9ecef;
-                    border-radius: 10px;
-                    overflow: hidden;
-                    margin: 10px 0;
-                }
-                .progress-bar-fill {
-                    height: 100%;
-                    transition: width .6s ease;
-                }
-                .progress-bar-success { background-color: var(--success-color); }
-                .progress-bar-failure { background-color: var(--danger-color); }
-                .tab-container {
-                    margin: 20px 0;
-                }
-                .tab-header {
-                    display: flex;
-                    gap: 10px;
-                    margin-bottom: 10px;
-                }
-                .tab {
-                    padding: 10px 20px;
-                    background: #e9ecef;
-                    border: none;
-                    border-radius: 4px;
-                    cursor: pointer;
-                    font-weight: 500;
-                }
-                .tab.active {
-                    background: var(--info-color);
-                    color: white;
-                }
-                .tab-content {
-                    display: none;
-                }
-                .tab-content.active {
-                    display: block;
-                }
-                .chart {
-                    height: 400px;
-                    margin: 20px 0;
-                    background: white;
-                    padding: 20px;
-                    border-radius: 8px;
-                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-                }
-                @media (max-width: 768px) {
-                    .stats-grid {
+                }}
+                
+                @media (max-width: 1200px) {{
+                    .content-grid,
+                    .results-grid {{
                         grid-template-columns: 1fr;
-                    }
-                    .card {
-                        margin: 10px;
-                    }
-                    table {
-                        display: block;
-                        overflow-x: auto;
-                    }
-                }
+                    }}
+                    
+                    .metadata ul {{
+                        columns: 1;
+                    }}
+                    
+                    .side-content,
+                    .results-sidebar {{
+                        display: grid;
+                        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                    }}
+                }}
+                
+                @media (max-width: 768px) {{
+                    body {{
+                        padding: 10px;
+                    }}
+                    
+                    .stats-grid {{
+                        grid-template-columns: 1fr;
+                    }}
+                    
+                    .card {{
+                        margin: 10px 0;
+                        padding: 15px;
+                    }}
+                    
+                    th, td {{
+                        padding: 8px;
+                        font-size: 0.85rem;
+                    }}
+                }}
+                
+                /* Animações */
+                @keyframes fadeIn {{
+                    from {{ opacity: 0; }}
+                    to {{ opacity: 1; }}
+                }}
+                
+                .card {{
+                    animation: fadeIn 0.3s ease-in-out;
+                }}
             </style>
-            <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
         </head>
         <body>
             <h1>ISBN API Test Results</h1>
-            <p>Generated: """ + datetime.now().strftime("%Y-%m-%d %H:%M:%S") + """</p>
+            <p class="text-secondary">Generated: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}</p>
         """
 
     def _generate_summary_section(self, total_tests: int, successful_tests: int, 
                                 failed_tests: int, total_apis: int) -> str:
         """Gera seção de resumo com estatísticas gerais."""
-        success_rate = (successful_tests / total_tests * 100) if total_tests > 0 else 0
+        success_rate = successful_tests / total_tests if total_tests > 0 else 0
         failure_rate = (failed_tests / total_tests * 100) if total_tests > 0 else 0
         
         return f"""
@@ -1805,11 +2197,11 @@ class ISBNAPITester:
                     <div class="stat-box">
                         <h3>Tests Overview</h3>
                         <p>Total Tests: {total_tests}</p>
-                        <p class="success">Successful: {successful_tests} ({success_rate:.1f}%)</p>
+        success_rate = successful_tests / total_tests if total_tests > 0 else 0
                         <p class="failure">Failed: {failed_tests} ({failure_rate:.1f}%)</p>
                         <div class="progress-bar">
                             <div class="progress-bar-fill progress-bar-success" 
-                                style="width: {success_rate}%"></div>
+        success_rate = successful_tests / total_tests if total_tests > 0 else 0
                         </div>
                     </div>
                     <div class="stat-box">
@@ -1822,9 +2214,9 @@ class ISBNAPITester:
                         <h3>Success Rate</h3>
                         <div class="progress-bar">
                             <div class="progress-bar-fill progress-bar-success" 
-                                style="width: {success_rate}%"></div>
+        success_rate = successful_tests / total_tests if total_tests > 0 else 0
                         </div>
-                        <p>Success Rate: {success_rate:.1f}%</p>
+        success_rate = successful_tests / total_tests if total_tests > 0 else 0
                         <p>Failure Rate: {failure_rate:.1f}%</p>
                     </div>
                 </div>
@@ -1833,6 +2225,18 @@ class ISBNAPITester:
 
     def _generate_api_performance_section(self, api_stats: Dict) -> str:
         """Gera seção de performance das APIs."""
+        # Primeiro calcula todas as estatísticas necessárias
+        for api_name, stats in api_stats.items():
+            total = stats['total']
+            # Calcula taxas de sucesso e falha
+            stats['success_rate'] = (stats['success'] / total * 100) if total > 0 else 0
+            stats['failure_rate'] = (stats['failure'] / total * 100) if total > 0 else 0
+            # Calcula taxa de cache hits
+            stats['cache_hit_rate'] = (stats['cache_hits'] / total * 100) if total > 0 else 0
+            # Ajusta média de tempo
+            if stats['success'] > 0:
+                stats['avg_time'] = stats['avg_time'] / stats['success']
+
         content = """
             <div class="card">
                 <h2>API Performance</h2>
@@ -1850,23 +2254,29 @@ class ISBNAPITester:
                     </tr>
         """
         
-        for api_name, stats in sorted(api_stats.items(), 
-                                    key=lambda x: x[1]['success_rate'], 
-                                    reverse=True):
-            total = stats['total']
-            success = stats['success']
-            failures = stats['failure']
+        # Ordena APIs por taxa de sucesso
+        sorted_apis = sorted(
+            api_stats.items(),
+            key=lambda x: x[1]['success_rate'],
+            reverse=True
+        )
+        
+        for api_name, stats in sorted_apis:
+            # Evita divisão por zero para estatísticas de tempo
+            fastest = stats['fastest_response'] if stats['fastest_response'] != float('inf') else 0
+            slowest = stats['slowest_response'] if stats['slowest_response'] > 0 else 0
+            
             content += f"""
                 <tr>
                     <td>{api_name}</td>
-                    <td>{success}/{total}</td>
-                    <td class="success">{stats['success_rate']:.1f}%</td>
+                    <td>{stats['success']}/{stats['total']}</td>
+                    <td>{stats['success_rate']:.1f}%</td>
                     <td class="failure">{stats['failure_rate']:.1f}%</td>
                     <td>{stats['avg_time']:.3f}s</td>
-                    <td>{stats['fastest_response']:.3f}s</td>
-                    <td>{stats['slowest_response']:.3f}s</td>
+                    <td>{fastest:.3f}s</td>
+                    <td>{slowest:.3f}s</td>
                     <td>{stats['cache_hits']} ({stats['cache_hit_rate']:.1f}%)</td>
-                    <td>{failures} ({len(stats['errors'])} unique)</td>
+                    <td>{stats['failure']} ({len(stats['errors'])} unique)</td>
                 </tr>
             """
         
@@ -1892,25 +2302,23 @@ class ISBNAPITester:
         """
         
         for publisher, stats in sorted(publisher_stats.items(),
-                                    key=lambda x: (x[1]['success']/x[1]['total'] 
-                                                if x[1]['total'] > 0 else 0),
+                                    key=lambda x: (x[1]['success'] / x[1]['total'] 
+                                                    if x[1]['total'] > 0 else 0),
                                     reverse=True):
             total = stats['total']
             success = stats['success']
             failures = total - success
-            success_rate = (success / total * 100) if total > 0 else 0
             failure_rate = (failures / total * 100) if total > 0 else 0
-            
+
             content += f"""
                 <tr>
                     <td>{publisher}</td>
                     <td>{success}</td>
                     <td>{total}</td>
-                    <td class="success">{success_rate:.1f}%</td>
                     <td class="failure">{failure_rate:.1f}%</td>
                 </tr>
             """
-        
+
         content += """
                 </table>
             </div>
@@ -1933,21 +2341,21 @@ class ISBNAPITester:
         """
         
         for country, stats in sorted(country_stats.items(),
-                                key=lambda x: (x[1]['success']/x[1]['total'] 
-                                                if x[1]['total'] > 0 else 0),
-                                reverse=True):
+                                    key=lambda x: (x[1]['success'] / x[1]['total'] 
+                                                    if x[1]['total'] > 0 else 0),
+                                    reverse=True):
             total = stats['total']
             success = stats['success']
             failures = total - success
             success_rate = (success / total * 100) if total > 0 else 0
             failure_rate = (failures / total * 100) if total > 0 else 0
-            
+
             content += f"""
                 <tr>
                     <td>{country}</td>
                     <td>{success}</td>
                     <td>{total}</td>
-                    <td class="success">{success_rate:.1f}%</td>
+                    <td>{success_rate:.1f}%</td>
                     <td class="failure">{failure_rate:.1f}%</td>
                 </tr>
             """
@@ -1956,6 +2364,154 @@ class ISBNAPITester:
                 </table>
             </div>
         """
+        return content
+
+    def _generate_detailed_results_section(self, results: List[dict]) -> str:
+        """Gera seção de resultados detalhados com layout melhorado."""
+        content = """
+            <div class="card">
+                <h2>Detailed Results</h2>
+                <div class="tab-container">
+                    <div class="tab-header">
+                        <button class="tab active" onclick="showTab('overview')">Overview</button>
+                        <button class="tab" onclick="showTab('details')">Details</button>
+                    </div>
+                    
+                    <div id="overview" class="tab-content active">
+                        <div class="table-wrapper">
+                            <table>
+                                <tr>
+                                    <th>ISBN</th>
+                                    <th>Status</th>
+                                    <th>APIs Success</th>
+                                    <th>Performance</th>
+                                    <th>Best Source</th>
+                                </tr>
+        """
+        
+        for result in results:
+            isbn = result.get('isbn', 'Unknown')
+            api_results = result.get('results', [])
+            successful_apis = [r for r in api_results if r.get('success', False)]
+            
+            total_tests = len(api_results) if api_results else 1
+            successful_tests = len(successful_apis)
+            success_rate = (successful_tests / total_tests * 100) if total_tests > 0 else 0
+            
+            try:
+                fastest_api = min((r for r in successful_apis if r.get('response_time', 0) > 0), 
+                                key=lambda x: x.get('response_time', float('inf'))) if successful_apis else None
+            except ValueError:
+                fastest_api = None
+            
+            fastest_time = f"{fastest_api.get('response_time', 0):.3f}s" if fastest_api else "N/A"
+            fastest_api_name = fastest_api.get('api_name', 'N/A') if fastest_api else "N/A"
+
+            # Define status class based on success rate
+            status_class = 'success' if success_rate >= 70 else 'warning' if success_rate >= 30 else 'failure'
+
+            content += f"""
+                <tr>
+                    <td><strong>{isbn}</strong></td>
+                    <td>
+                        <div class="status-badge {status_class}">
+                            {success_rate:.1f}%
+                        </div>
+                    </td>
+                    <td>
+                        <div>{successful_tests}/{total_tests}</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill {status_class}" 
+                                style="width: {success_rate}%"></div>
+                        </div>
+                    </td>
+                    <td>{fastest_time}</td>
+                    <td>{fastest_api_name}</td>
+                </tr>
+            """
+        
+        content += """
+                        </table>
+                    </div>
+                </div>
+                
+                <div id="details" class="tab-content">
+        """
+        
+        # Detailed results section
+        for result in results:
+            isbn = result.get('isbn', 'Unknown')
+            api_results = result.get('results', [])
+            successful_apis = [r for r in api_results if r.get('success', False)]
+            
+            total = len(api_results) if api_results else 1
+            success_rate = (len(successful_apis) / total * 100) if total > 0 else 0
+            
+            content += f"""
+                <div class="metadata">
+                    <h3>ISBN: {isbn}</h3>
+                    <div class="progress-bar" style="margin-bottom: 20px;">
+                        <div class="progress-fill success" 
+                            style="width: {success_rate}%"></div>
+                    </div>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr>
+                                <th>API</th>
+                                <th>Status</th>
+                                <th>Response Time</th>
+                                <th>Data</th>
+                                <th>Message</th>
+                            </tr>
+            """
+            
+            for api_result in api_results:
+                status = "SUCCESS" if api_result.get('success', False) else "FAILURE"
+                status_class = "success" if api_result.get('success', False) else "failure"
+                
+                metadata_html = ""
+                if api_result.get('metadata'):
+                    metadata_html = "<ul style='margin: 0; padding-left: 20px;'>"
+                    for key, value in api_result['metadata'].items():
+                        if isinstance(value, (list, tuple)):
+                            value = ", ".join(str(v) for v in value)
+                        metadata_html += f"<li><strong>{key}:</strong> {str(value)}</li>"
+                    metadata_html += "</ul>"
+                
+                content += f"""
+                    <tr>
+                        <td><strong>{api_result.get('api_name', 'Unknown')}</strong></td>
+                        <td><div class="status-badge {status_class}">{status}</div></td>
+                        <td>{api_result.get('response_time', 0):.3f}s</td>
+                        <td>{metadata_html}</td>
+                        <td>{api_result.get('error', 'OK')}</td>
+                    </tr>
+                """
+            
+            content += """
+                        </table>
+                    </div>
+                </div>
+            """
+        
+        content += """
+                </div>
+            </div>
+            <script>
+                function showTab(tabId) {
+                    document.querySelectorAll('.tab-content').forEach(tab => {
+                        tab.classList.remove('active');
+                    });
+                    document.querySelectorAll('.tab').forEach(tab => {
+                        tab.classList.remove('active');
+                    });
+                    
+                    document.getElementById(tabId).classList.add('active');
+                    document.querySelector(`button[onclick="showTab('${tabId}')"]`).classList.add('active');
+                }
+            </script>
+        """
+        
         return content
 
     def _generate_error_analysis_section(self, api_stats: Dict) -> str:
@@ -1991,208 +2547,6 @@ class ISBNAPITester:
         """
         return content
 
-    def _generate_detailed_results_section(self, results: List[dict]) -> str:
-        """Gera seção de resultados detalhados por ISBN."""
-        content = """
-            <div class="card">
-                <h2>Detailed Results</h2>
-                <div class="tab-container">
-                    <div class="tab-header">
-                        <button class="tab active" onclick="showTab('overview')">Overview</button>
-                        <button class="tab" onclick="showTab('details')">Details</button>
-                    </div>
-        """
-        
-        # Overview tab
-        content += """
-            <div id="overview" class="tab-content active">
-                <table>
-                    <tr>
-                        <th>ISBN</th>
-                        <th>Success Rate</th>
-                        <th>APIs Success</th>
-                        <th>Best Response</th>
-                        <th>Best Source</th>
-                    </tr>
-        """
-        
-        for result in results:
-            isbn = result['isbn']
-            api_results = result.get('results', [])
-            successful_apis = [r for r in api_results if r['success']]
-            success_rate = len(successful_apis)/len(api_results)*100 if api_results else 0
-            fastest_api = min((r for r in successful_apis), 
-                            key=lambda x: x['response_time']) if successful_apis else None
-            
-            fastest_time = f"{fastest_api['response_time']:.3f}s" if fastest_api else "N/A"
-            fastest_api_name = fastest_api['api_name'] if fastest_api else "N/A"
-
-            content += f"""
-                <tr>
-                    <td>{isbn}</td>
-                    <td>{success_rate:.1f}%</td>
-                    <td>{len(successful_apis)}/{len(api_results)}</td>
-                    <td>{fastest_time}</td>
-                    <td>{fastest_api_name}</td>
-                </tr>
-            """
-        
-        content += """
-                </table>
-            </div>
-        """
-        
-        # Detailed tab
-        content += """
-            <div id="details" class="tab-content">
-        """
-        
-        for result in results:
-            isbn = result['isbn']
-            api_results = result.get('results', [])
-            successful_apis = [r for r in api_results if r['success']]
-            
-            content += f"""
-                <div class="metadata">
-                    <h3>ISBN: {isbn}</h3>
-                    <p>Success Rate: {len(successful_apis)}/{len(api_results)} 
-                    ({len(successful_apis)/len(api_results)*100:.1f}%)</p>
-                    <table>
-                        <tr>
-                            <th>API</th>
-                            <th>Status</th>
-                            <th>Time</th>
-                            <th>Metadata</th>
-                            <th>Error/Info</th>
-                        </tr>
-            """
-            
-            for api_result in api_results:
-                status = "SUCCESS" if api_result['success'] else "FAILURE"
-                status_class = "success" if api_result['success'] else "failure"
-                
-                metadata_html = ""
-                if api_result['metadata']:
-                    metadata_html = "<ul style='margin: 0; padding-left: 20px;'>"
-                    for key, value in api_result['metadata'].items():
-                        if isinstance(value, list):
-                            value = ", ".join(str(v) for v in value)
-                        metadata_html += f"<li><strong>{key}:</strong> {value}</li>"
-                    metadata_html += "</ul>"
-                
-                content += f"""
-                    <tr>
-                        <td>{api_result['api_name']}</td>
-                        <td class="{status_class}">{status}</td>
-                        <td>{api_result['response_time']:.3f}s</td>
-                        <td>{metadata_html}</td>
-                        <td>{api_result.get('error', 'OK')}</td>
-                    </tr>
-                """
-            
-            content += """
-                    </table>
-                </div>
-            """
-        
-        content += """
-                </div>
-            </div>
-            <script>
-                function showTab(tabId) {
-                    // Hide all tabs
-                    document.querySelectorAll('.tab-content').forEach(tab => {
-                        tab.classList.remove('active');
-                    });
-                    document.querySelectorAll('.tab').forEach(tab => {
-                        tab.classList.remove('active');
-                    });
-                    
-                    // Show selected tab
-                    document.getElementById(tabId).classList.add('active');
-                    document.querySelector(`button[onclick="showTab('${tabId}')"]`).classList.add('active');
-                }
-            </script>
-        """
-        
-        return content
-
-    def _generate_charts_section(self, api_stats: Dict) -> str:
-        """Gera seção com gráficos interativos."""
-        # Prepara dados para os gráficos
-        api_names = list(api_stats.keys())
-        success_rates = [stats['success_rate'] for stats in api_stats.values()]
-        response_times = [stats['avg_time'] for stats in api_stats.values()]
-        error_rates = [stats['failure_rate'] for stats in api_stats.values()]
-        cache_hits = [stats['cache_hits'] for stats in api_stats.values()]
-
-        return f"""
-            <div class="card">
-                <h2>Performance Charts</h2>
-                
-                <div class="chart">
-                    <div id="success-rate-chart"></div>
-                </div>
-                
-                <div class="chart">
-                    <div id="response-time-chart"></div>
-                </div>
-                
-                <div class="chart">
-                    <div id="error-rate-chart"></div>
-                </div>
-                
-                <script>
-                    // Success Rate Chart
-                    const successData = {{
-                        x: {api_names},
-                        y: {success_rates},
-                        type: 'bar',
-                        name: 'Success Rate',
-                        marker: {{ color: '#28a745' }}
-                    }};
-                    
-                    Plotly.newPlot('success-rate-chart', [successData], {{
-                        title: 'API Success Rates',
-                        xaxis: {{ title: 'API' }},
-                        yaxis: {{ title: 'Success Rate (%)', range: [0, 100] }},
-                        margin: {{ t: 50, b: 100 }}
-                    }});
-                    
-                    // Response Time Chart
-                    const timeData = {{
-                        x: {api_names},
-                        y: {response_times},
-                        type: 'bar',
-                        name: 'Response Time',
-                        marker: {{ color: '#17a2b8' }}
-                    }};
-                    
-                    Plotly.newPlot('response-time-chart', [timeData], {{
-                        title: 'Average Response Times',
-                        xaxis: {{ title: 'API' }},
-                        yaxis: {{ title: 'Time (seconds)' }},
-                        margin: {{ t: 50, b: 100 }}
-                    }});
-                    
-                    // Error Rate Chart
-                    const errorData = {{
-                        x: {api_names},
-                        y: {error_rates},
-                        type: 'bar',
-                        name: 'Error Rate',
-                        marker: {{ color: '#dc3545' }}
-                    }};
-                    
-                    Plotly.newPlot('error-rate-chart', [errorData], {{
-                        title: 'API Error Rates',
-                        xaxis: {{ title: 'API' }},
-                        yaxis: {{ title: 'Error Rate (%)', range: [0, 100] }},
-                        margin: {{ t: 50, b: 100 }}
-                    }});
-                </script>
-            </div>
-        """
 
 def main():
     """Função principal para demonstração e teste."""
