@@ -834,10 +834,14 @@ class MetadataFetcher:
         self.session = requests.Session()
         self.isbndb_api_key = isbndb_api_key
         
-        # Configuração de timeouts e retries mais robusta
-        self.session.timeout = (5, 15)  # (connect timeout, read timeout)
+        # Contadores persistentes para estatísticas
+        self.api_success = Counter()
+        self.api_total = Counter()
+        self.api_times = defaultdict(list)
         
-        # Configuração de retry mais robusta
+        # Configuração de timeouts e retries
+        self.session.timeout = (5, 15)
+        
         retry_strategy = Retry(
             total=5,  
             backoff_factor=0.5,
@@ -846,7 +850,6 @@ class MetadataFetcher:
             respect_retry_after_header=True
         )
         
-        # Configuração do adapter
         adapter = HTTPAdapter(
             pool_connections=100,
             pool_maxsize=100,
@@ -857,7 +860,6 @@ class MetadataFetcher:
         self.session.mount("http://", adapter)
         self.session.mount("https://", adapter)
         
-        # Headers atualizados
         self.session.headers.update({
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
             'Accept': 'application/json,text/html,application/xhtml+xml',
@@ -865,152 +867,143 @@ class MetadataFetcher:
             'Connection': 'keep-alive'
         })
 
+    def print_current_stats(self):
+        """Imprime estatísticas atuais das APIs."""
+        print("\nEstatísticas em tempo real:")
+        print("-" * 40)
+        for api, total in sorted(self.api_total.items()):
+            if total > 0:
+                success = self.api_success[api]
+                success_rate = (success / total * 100)
+                avg_time = sum(self.api_times[api]) / len(self.api_times[api]) if self.api_times[api] else 0
+                print(f"{api:15}: {success}/{total} ({success_rate:.1f}%) - {avg_time:.2f}s")
+        print("-" * 40)
+
+    def reset_stats(self):
+        """Reseta os contadores de estatísticas."""
+        self.api_success.clear()
+        self.api_total.clear()
+        self.api_times.clear()
+
+
     def fetch_metadata(self, isbn: str) -> Optional[BookMetadata]:
-            """Método principal para buscar metadados."""
-            # Verifica cache primeiro
-            cached = self.cache.get(isbn)
-            if cached:
-                return BookMetadata(**cached)
+        """Método principal para buscar metadados."""
+        # Verifica cache primeiro
+        cached = self.cache.get(isbn)
+        if cached:
+            return BookMetadata(**cached)
 
-            # Todas as fontes em ordem de prioridade com scores atualizados baseados no relatório
-            fetchers = [
-                # APIs primárias - melhor desempenho comprovado
-                (self.fetch_google_books, 9),      # 50% sucesso - mantida como primária
-                (self.fetch_openlibrary, 8.5),     # 60% sucesso - melhor desempenho geral
-                (self.fetch_worldcat, 7.5),        # 55.6% sucesso - bom desempenho
-                
-                # ISBNlib primeiro (mais confiável)
-                (self.fetch_isbnlib_meta, 9.5),    # isbnlib.meta()
-                (self.fetch_isbnlib_goom, 9.0),    # isbnlib.goom()
-                
-                # APIs secundárias - desempenho moderado
-                (self.fetch_internet_archive, 7),   # 33.3% sucesso
-                (self.fetch_crossref, 6.5),        # Taxa moderada de sucesso
-                (self.fetch_google_books_br, 6),    # 11.1% sucesso mas útil para livros BR
-                (self.fetch_mercado_editorial, 5.5),# 11.1% sucesso mas mantida para BR
-                
-                # APIs com baixo desempenho mas mantidas para casos específicos
-
-                
-                # APIs desabilitadas temporariamente - 0% sucesso nos testes
-                # (self.fetch_zbib, 5),            # 
-                # (self.fetch_cbl, 5),             # 
-                # (self.fetch_oreilly, 9),         # 0% sucesso - desabilitada
-                # (self.fetch_springer, 8.5),      # 0% sucesso - desabilitada
-                # (self.fetch_mybib, 5),           # 0% sucesso - desabilitada
-                # (self.fetch_ebook_de, 5),        # 0% sucesso - desabilitada
-                # (self.fetch_deutsche_national, 5),# 0% sucesso - desabilitada
-                # (self.fetch_british_library, 5),  # 0% sucesso - desabilitada
-                # (self.fetch_hathitrust, 5),      # 0% sucesso - desabilitada
-                # (self.fetch_apress, 5),          # 0% sucesso - desabilitada
-                # (self.fetch_manning, 5),         # 0% sucesso - desabilitada
-                # (self.fetch_packt, 5),           # 0% sucesso - desabilitada
-            ]
-
-            # Ajusta scores de confiança baseados no desempenho real
-            confidence_adjustments = {
-                'google_books': 0.50,    # 50% taxa de sucesso
-                'openlibrary': 0.60,     # 60% taxa de sucesso
-                'worldcat': 0.55,        # ~55% taxa de sucesso
-                'internet_archive': 0.33, # 33.3% taxa de sucesso
-                'google_books_br': 0.11,  # 11.1% taxa de sucesso
-                'mercado_editorial': 0.11 # 11.1% taxa de sucesso
-            }
-
-            all_results = []
-            processed = set()
-            last_error = None
+        # Lista de fetchers (mantida igual)
+        fetchers = [
+            # APIs primárias - melhor desempenho comprovado
+            (self.fetch_google_books, 9),      # 50% sucesso - mantida como primária
+            (self.fetch_openlibrary, 8.5),     # 60% sucesso - melhor desempenho geral
+            (self.fetch_worldcat, 7.5),        # 55.6% sucesso - bom desempenho
             
-            # Adiciona contadores para estatísticas - NOVO
-            api_success = Counter()
-            api_total = Counter()
-            api_times = defaultdict(list)
+            # ISBNlib primeiro (mais confiável)
+            (self.fetch_isbnlib_meta, 9.5),    # isbnlib.meta()
+            (self.fetch_isbnlib_goom, 9.0),    # isbnlib.goom()
             
-            # Configurações de retry otimizadas baseadas no desempenho
-            retry_configs = {
-                'high_priority': {
-                    'max_retries': 3,    # Reduzido de 5 para 3
-                    'backoff_factor': 1.5,
-                    'retry_delay': 2
-                },
-                'medium_priority': {
-                    'max_retries': 2,    # Reduzido para 2
-                    'backoff_factor': 1,
-                    'retry_delay': 1
-                },
-                'low_priority': {
-                    'max_retries': 1,    # Apenas 1 tentativa
-                    'backoff_factor': 0.5,
-                    'retry_delay': 0.5
-                }
+            # APIs secundárias - desempenho moderado
+            (self.fetch_internet_archive, 7),   # 33.3% sucesso
+            (self.fetch_crossref, 6.5),        # Taxa moderada de sucesso
+            (self.fetch_google_books_br, 6),    # 11.1% sucesso mas útil para livros BR
+            (self.fetch_mercado_editorial, 5.5) # 11.1% sucesso mas mantida para BR
+        ]
+
+        # Ajusta scores de confiança (mantido igual)
+        confidence_adjustments = {
+            'google_books': 0.50,    # 50% taxa de sucesso
+            'openlibrary': 0.60,     # 60% taxa de sucesso
+            'worldcat': 0.55,        # ~55% taxa de sucesso
+            'internet_archive': 0.33, # 33.3% taxa de sucesso
+            'google_books_br': 0.11,  # 11.1% taxa de sucesso
+            'mercado_editorial': 0.11 # 11.1% taxa de sucesso
+        }
+
+        all_results = []
+        processed = set()
+        last_error = None
+        
+        retry_configs = {
+            'high_priority': {
+                'max_retries': 3,    
+                'backoff_factor': 1.5,
+                'retry_delay': 2
+            },
+            'medium_priority': {
+                'max_retries': 2,    
+                'backoff_factor': 1,
+                'retry_delay': 1
+            },
+            'low_priority': {
+                'max_retries': 1,    
+                'backoff_factor': 0.5,
+                'retry_delay': 0.5
             }
+        }
 
-            for fetcher, priority in fetchers:
-                if fetcher.__name__ not in processed:
-                    # Determina a configuração de retry baseada na prioridade
-                    start_time = time.time()
-                    api_total[fetcher.__name__] += 1
-                    if priority >= 8:
-                        retry_config = retry_configs['high_priority']
-                    elif priority >= 6:
-                        retry_config = retry_configs['medium_priority']
-                    else:
-                        retry_config = retry_configs['low_priority']
+        for fetcher, priority in fetchers:
+            if fetcher.__name__ not in processed:
+                # Determina a configuração de retry baseada na prioridade
+                start_time = time.time()
+                self.api_total[fetcher.__name__] += 1
 
-                    for attempt in range(retry_config['max_retries']):
-                        try:
-                            metadata = fetcher(isbn)
-                            elapsed = time.time() - start_time
-                            api_times[fetcher.__name__].append(elapsed)
-                            if metadata:
-                                # Ajusta score baseado no desempenho real da API
-                                api_success[fetcher.__name__] += 1
-                                base_score = priority / 10
-                                adjustment = confidence_adjustments.get(metadata.source, 0.5)
-                                metadata.confidence_score = min(1.0, base_score * adjustment)
-                                
-                                # Adiciona ISBN-10/13 se não existir
-                                if len(isbn) == 10 and not metadata.isbn_10:
-                                    metadata.isbn_10 = isbn
-                                elif len(isbn) == 13 and not metadata.isbn_13:
-                                    metadata.isbn_13 = isbn
-                                    
-                                all_results.append(metadata)
-                                
-                                # Se encontrou com alta confiança (>0.85), pode parar
-                                if metadata.confidence_score > 0.85:
-                                    break
-                        except Exception as e:
-                            elapsed = time.time() - start_time
-                            api_times[fetcher.__name__].append(elapsed)
-                            last_error = e
-                            self._handle_api_error(fetcher.__name__, e, isbn)
+                if priority >= 8:
+                    retry_config = retry_configs['high_priority']
+                elif priority >= 6:
+                    retry_config = retry_configs['medium_priority']
+                else:
+                    retry_config = retry_configs['low_priority']
+
+                for attempt in range(retry_config['max_retries']):
+                    try:
+                        metadata = fetcher(isbn)
+                        elapsed = time.time() - start_time
+                        self.api_times[fetcher.__name__].append(elapsed)
+                        
+                        if metadata:
+                            # Ajusta score baseado no desempenho real da API
+                            self.api_success[fetcher.__name__] += 1
+                            base_score = priority / 10
+                            adjustment = confidence_adjustments.get(metadata.source, 0.5)
+                            metadata.confidence_score = min(1.0, base_score * adjustment)
                             
-                            if attempt < retry_config['max_retries'] - 1:
-                                sleep_time = retry_config['retry_delay'] * (retry_config['backoff_factor'] ** attempt)
-                                time.sleep(sleep_time)
+                            # Adiciona ISBN-10/13 se não existir
+                            if len(isbn) == 10 and not metadata.isbn_10:
+                                metadata.isbn_10 = isbn
+                            elif len(isbn) == 13 and not metadata.isbn_13:
+                                metadata.isbn_13 = isbn
                                 
-                    processed.add(fetcher.__name__)
+                            all_results.append(metadata)
+                            
+                            if metadata.confidence_score > 0.85:
+                                break
+                    except Exception as e:
+                        elapsed = time.time() - start_time
+                        self.api_times[fetcher.__name__].append(elapsed)
+                        last_error = e
+                        self._handle_api_error(fetcher.__name__, e, isbn)
+                        
+                        if attempt < retry_config['max_retries'] - 1:
+                            sleep_time = retry_config['retry_delay'] * (retry_config['backoff_factor'] ** attempt)
+                            time.sleep(sleep_time)
+                            
+                processed.add(fetcher.__name__)
 
-                    if len(processed) % 5 == 0:
-                        print("\nEstatísticas em tempo real:")
-                        print("-" * 40)
-                        for api in processed:
-                            if api_total[api] > 0:
-                                success_rate = (api_success[api] / api_total[api] * 100)
-                                avg_time = sum(api_times[api]) / len(api_times[api]) if api_times[api] else 0
-                                print(f"{api:15}: {api_success[api]}/{api_total[api]} ({success_rate:.1f}%) - {avg_time:.2f}s")
-                        print("-" * 40)
+                # Imprime estatísticas a cada 5 APIs processadas
+                if len(processed) % 5 == 0:
+                    self.print_current_stats()
 
-                    # Se já tem resultados suficientes com boa confiança, pode parar
-                    if len(all_results) >= 2 and any(r.confidence_score > 0.80 for r in all_results):
-                        break
+                # Se já tem resultados suficientes com boa confiança, pode parar
+                if len(all_results) >= 2 and any(r.confidence_score > 0.80 for r in all_results):
+                    break
 
-            # Escolhe o melhor resultado baseado na pontuação de confiança ajustada
-            if all_results:
-                return max(all_results, key=lambda x: x.confidence_score)
-                
-            return self._create_fallback_metadata(isbn, last_error)
+        # Escolhe o melhor resultado baseado na pontuação de confiança
+        if all_results:
+            return max(all_results, key=lambda x: x.confidence_score)
+            
+        return self._create_fallback_metadata(isbn, last_error)
 
     def _results_match(self, result1: BookMetadata, result2: BookMetadata) -> bool:
         """Compara dois resultados para ver se são similares."""
