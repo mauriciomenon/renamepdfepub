@@ -12,7 +12,7 @@ import sqlite3
 import sys
 import time
 import unicodedata
-from collections import Counter
+from collections import Counter, defaultdict
 from concurrent import futures
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, asdict
@@ -878,6 +878,10 @@ class MetadataFetcher:
                 (self.fetch_openlibrary, 8.5),     # 60% sucesso - melhor desempenho geral
                 (self.fetch_worldcat, 7.5),        # 55.6% sucesso - bom desempenho
                 
+                # ISBNlib primeiro (mais confiável)
+                (self.fetch_isbnlib_meta, 9.5),    # isbnlib.meta()
+                (self.fetch_isbnlib_goom, 9.0),    # isbnlib.goom()
+                
                 # APIs secundárias - desempenho moderado
                 (self.fetch_internet_archive, 7),   # 33.3% sucesso
                 (self.fetch_crossref, 6.5),        # Taxa moderada de sucesso
@@ -885,10 +889,11 @@ class MetadataFetcher:
                 (self.fetch_mercado_editorial, 5.5),# 11.1% sucesso mas mantida para BR
                 
                 # APIs com baixo desempenho mas mantidas para casos específicos
-                (self.fetch_zbib, 5),              # Baixo sucesso mas mantida como fallback
-                (self.fetch_cbl, 5),               # Mantida para livros brasileiros
+
                 
                 # APIs desabilitadas temporariamente - 0% sucesso nos testes
+                # (self.fetch_zbib, 5),            # 
+                # (self.fetch_cbl, 5),             # 
                 # (self.fetch_oreilly, 9),         # 0% sucesso - desabilitada
                 # (self.fetch_springer, 8.5),      # 0% sucesso - desabilitada
                 # (self.fetch_mybib, 5),           # 0% sucesso - desabilitada
@@ -915,6 +920,11 @@ class MetadataFetcher:
             processed = set()
             last_error = None
             
+            # Adiciona contadores para estatísticas - NOVO
+            api_success = Counter()
+            api_total = Counter()
+            api_times = defaultdict(list)
+            
             # Configurações de retry otimizadas baseadas no desempenho
             retry_configs = {
                 'high_priority': {
@@ -937,6 +947,8 @@ class MetadataFetcher:
             for fetcher, priority in fetchers:
                 if fetcher.__name__ not in processed:
                     # Determina a configuração de retry baseada na prioridade
+                    start_time = time.time()
+                    api_total[fetcher.__name__] += 1
                     if priority >= 8:
                         retry_config = retry_configs['high_priority']
                     elif priority >= 6:
@@ -947,8 +959,11 @@ class MetadataFetcher:
                     for attempt in range(retry_config['max_retries']):
                         try:
                             metadata = fetcher(isbn)
+                            elapsed = time.time() - start_time
+                            api_times[fetcher.__name__].append(elapsed)
                             if metadata:
                                 # Ajusta score baseado no desempenho real da API
+                                api_success[fetcher.__name__] += 1
                                 base_score = priority / 10
                                 adjustment = confidence_adjustments.get(metadata.source, 0.5)
                                 metadata.confidence_score = min(1.0, base_score * adjustment)
@@ -965,6 +980,8 @@ class MetadataFetcher:
                                 if metadata.confidence_score > 0.85:
                                     break
                         except Exception as e:
+                            elapsed = time.time() - start_time
+                            api_times[fetcher.__name__].append(elapsed)
                             last_error = e
                             self._handle_api_error(fetcher.__name__, e, isbn)
                             
@@ -973,6 +990,16 @@ class MetadataFetcher:
                                 time.sleep(sleep_time)
                                 
                     processed.add(fetcher.__name__)
+
+                    if len(processed) % 5 == 0:
+                        print("\nEstatísticas em tempo real:")
+                        print("-" * 40)
+                        for api in processed:
+                            if api_total[api] > 0:
+                                success_rate = (api_success[api] / api_total[api] * 100)
+                                avg_time = sum(api_times[api]) / len(api_times[api]) if api_times[api] else 0
+                                print(f"{api:15}: {api_success[api]}/{api_total[api]} ({success_rate:.1f}%) - {avg_time:.2f}s")
+                        print("-" * 40)
 
                     # Se já tem resultados suficientes com boa confiança, pode parar
                     if len(all_results) >= 2 and any(r.confidence_score > 0.80 for r in all_results):
@@ -1173,9 +1200,10 @@ class MetadataFetcher:
                 from bs4 import BeautifulSoup
                 soup = BeautifulSoup(response.text, 'html.parser')
                 
+                # Atualiza a busca para usar 'string' em vez de 'text'
                 title = soup.find('h1', {'class': 'title'})
                 authors = soup.find_all('a', {'class': 'author'})
-                publisher = soup.find('td', text='Publisher')
+                publisher = soup.find('td', string='Publisher')  # <- Mudança aqui
                 
                 return BookMetadata(
                     title=title.text if title else 'Unknown',
@@ -2124,6 +2152,53 @@ class BookMetadataExtractor:
     def _generate_html_report(self, results, source_stats, publisher_stats, 
                             runtime_stats, total_files, successful, failed, avg_time, output_file):
         """Gera relatório HTML com visualizações aprimoradas."""
+        
+        # Prepara dados para os gráficos
+        source_keys = list(map(repr, source_stats.keys()))  # usa repr para strings em JavaScript
+        source_values = list(source_stats.values())
+        publisher_keys = list(map(repr, publisher_stats.keys()))
+        publisher_values = list(publisher_stats.values())
+
+        # Gera as linhas da tabela de APIs
+        api_rows = ""
+        for source, count in source_stats.items():
+            success_rate = (count/successful*100) if successful > 0 else 0
+            api_rows += f"""
+            <tr>
+                <td>{source}</td>
+                <td>{count}</td>
+                <td>{success_rate:.1f}%</td>
+            </tr>
+            """
+
+        # Gera as linhas da tabela de editoras
+        publisher_rows = ""
+        for publisher, count in publisher_stats.items():
+            percentage = (count/successful*100) if successful > 0 else 0
+            publisher_rows += f"""
+            <tr>
+                <td>{publisher}</td>
+                <td>{count}</td>
+                <td>{percentage:.1f}%</td>
+            </tr>
+            """
+
+        # Gera as linhas da tabela de resultados
+        result_rows = ""
+        for r in results:
+            if r is not None:  # Verifica se o resultado é válido
+                result_rows += f"""
+                <tr>
+                    <td>{r.title}</td>
+                    <td>{', '.join(r.authors)}</td>
+                    <td>{r.publisher}</td>
+                    <td>{r.isbn_13 or r.isbn_10 or 'N/A'}</td>
+                    <td>{r.confidence_score:.2f}</td>
+                    <td>{r.source}</td>
+                </tr>
+                """
+
+        # Template HTML principal
         html_content = f"""
         <!DOCTYPE html>
         <html>
@@ -2157,6 +2232,7 @@ class BookMetadataExtractor:
                     text-align: left;
                 }}
                 th {{ background: #f8f9fa; }}
+                tr:hover {{ background: #f8f9fa; }}
                 .success {{ color: #28a745; }}
                 .warning {{ color: #ffc107; }}
                 .failure {{ color: #dc3545; }}
@@ -2178,6 +2254,10 @@ class BookMetadataExtractor:
                     border-radius: 4px;
                     margin: 10px 0;
                     border-left: 4px solid #dc3545;
+                }}
+                .chart-container {{
+                    height: 400px;
+                    margin: 20px 0;
                 }}
             </style>
             <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
@@ -2210,44 +2290,32 @@ class BookMetadataExtractor:
                         <td>{avg_time:.2f}s</td>
                     </tr>
                 </table>
-                <div id="summaryChart"></div>
+                <div id="summaryChart" class="chart-container"></div>
             </div>
 
             <div class="card">
                 <h2>API Performance</h2>
-                <div id="apiChart"></div>
+                <div id="apiChart" class="chart-container"></div>
                 <table>
                     <tr>
                         <th>API Source</th>
                         <th>Successful Extractions</th>
                         <th>Success Rate</th>
                     </tr>
-                    {''.join(f"""
-                    <tr>
-                        <td>{source}</td>
-                        <td>{count}</td>
-                        <td>{(count/successful*100):.1f}%</td>
-                    </tr>
-                    """ for source, count in source_stats.items())}
+                    {api_rows}
                 </table>
             </div>
 
             <div class="card">
                 <h2>Publisher Statistics</h2>
-                <div id="publisherChart"></div>
+                <div id="publisherChart" class="chart-container"></div>
                 <table>
                     <tr>
                         <th>Publisher</th>
                         <th>Books</th>
                         <th>Percentage</th>
                     </tr>
-                    {''.join(f"""
-                    <tr>
-                        <td>{publisher}</td>
-                        <td>{count}</td>
-                        <td>{(count/successful*100):.1f}%</td>
-                    </tr>
-                    """ for publisher, count in publisher_stats.items())}
+                    {publisher_rows}
                 </table>
             </div>
 
@@ -2262,16 +2330,7 @@ class BookMetadataExtractor:
                         <th>Confidence</th>
                         <th>Source</th>
                     </tr>
-                    {''.join(f"""
-                    <tr>
-                        <td>{r.title}</td>
-                        <td>{', '.join(r.authors)}</td>
-                        <td>{r.publisher}</td>
-                        <td>{r.isbn_13 or r.isbn_10}</td>
-                        <td>{r.confidence_score:.2f}</td>
-                        <td>{r.source}</td>
-                    </tr>
-                    """ for r in results)}
+                    {result_rows}
                 </table>
             </div>
 
@@ -2289,8 +2348,8 @@ class BookMetadataExtractor:
 
                 // API Performance Chart
                 const apiData = [{{
-                    x: {list(source_stats.keys())},
-                    y: {list(source_stats.values())},
+                    x: {source_keys},
+                    y: {source_values},
                     type: 'bar',
                     marker: {{
                         color: '#17a2b8'
@@ -2304,8 +2363,8 @@ class BookMetadataExtractor:
 
                 // Publisher Chart
                 const publisherData = [{{
-                    labels: {list(publisher_stats.keys())},
-                    values: {list(publisher_stats.values())},
+                    labels: {publisher_keys},
+                    values: {publisher_values},
                     type: 'pie'
                 }}];
                 Plotly.newPlot('publisherChart', publisherData);
@@ -2314,6 +2373,7 @@ class BookMetadataExtractor:
         </html>
         """
         
+        # Salva o relatório HTML
         with open(output_file, 'w', encoding='utf-8') as f:
             f.write(html_content)
 
