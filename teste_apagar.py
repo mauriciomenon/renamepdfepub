@@ -2145,15 +2145,15 @@ class BookMetadataExtractor:
 
     def _generate_html_report(self, results, source_stats, publisher_stats, 
                             runtime_stats, total_files, successful, failed, avg_time, output_file):
-        """Gera relatório HTML com visualizações aprimoradas."""
+        """Gera relatório HTML com visualizações aprimoradas e análise de falhas."""
         
-        # Prepara dados para os gráficos
-        source_keys = list(map(repr, source_stats.keys()))  # usa repr para strings em JavaScript
+        # Código existente para preparar dados permanece o mesmo
+        source_keys = list(map(repr, source_stats.keys()))
         source_values = list(source_stats.values())
         publisher_keys = list(map(repr, publisher_stats.keys()))
         publisher_values = list(publisher_stats.values())
 
-        # Gera as linhas da tabela de APIs
+        # Código existente para gerar linhas das tabelas permanece o mesmo
         api_rows = ""
         for source, count in source_stats.items():
             success_rate = (count/successful*100) if successful > 0 else 0
@@ -2165,7 +2165,6 @@ class BookMetadataExtractor:
             </tr>
             """
 
-        # Gera as linhas da tabela de editoras
         publisher_rows = ""
         for publisher, count in publisher_stats.items():
             percentage = (count/successful*100) if successful > 0 else 0
@@ -2177,10 +2176,9 @@ class BookMetadataExtractor:
             </tr>
             """
 
-        # Gera as linhas da tabela de resultados
         result_rows = ""
         for r in results:
-            if r is not None:  # Verifica se o resultado é válido
+            if r is not None:
                 result_rows += f"""
                 <tr>
                     <td>{r.title}</td>
@@ -2192,7 +2190,30 @@ class BookMetadataExtractor:
                 </tr>
                 """
 
-        # Template HTML principal
+        # Nova seção: Gera linhas para arquivos que falharam
+        failed_rows = ""
+        failed_files = set(runtime_stats['processed_files']) - {r.file_path for r in results if r is not None}
+        
+        for file_path in sorted(failed_files):
+            details = runtime_stats['failure_details'].get(file_path, {})
+            methods = ', '.join(details.get('extraction_methods', ['None']))
+            isbns = ', '.join(details.get('found_isbns', ['None']))
+            status = details.get('status', 'Unknown error')
+            publisher = details.get('detected_publisher', 'Unknown')
+            errors = '<br>'.join(runtime_stats['api_errors'].get(file_path, ['None']))
+            
+            failed_rows += f"""
+            <tr>
+                <td class="file-path">{file_path}</td>
+                <td>{status}</td>
+                <td>{methods}</td>
+                <td>{isbns}</td>
+                <td>{publisher}</td>
+                <td class="error-detail">{errors}</td>
+            </tr>
+            """
+
+        # Template HTML com nova seção de Failed Files
         html_content = f"""
         <!DOCTYPE html>
         <html>
@@ -2230,28 +2251,46 @@ class BookMetadataExtractor:
                 .success {{ color: #28a745; }}
                 .warning {{ color: #ffc107; }}
                 .failure {{ color: #dc3545; }}
-                .progress-bar {{
-                    height: 8px;
-                    background: #e9ecef;
-                    border-radius: 4px;
-                    overflow: hidden;
-                    margin: 10px 0;
-                }}
-                .progress-fill {{
-                    height: 100%;
-                    background: #28a745;
-                    transition: width 0.3s ease;
-                }}
-                .error-box {{
-                    background: #fff5f5;
-                    padding: 15px;
-                    border-radius: 4px;
-                    margin: 10px 0;
-                    border-left: 4px solid #dc3545;
-                }}
                 .chart-container {{
                     height: 400px;
                     margin: 20px 0;
+                }}
+                .file-path {{
+                    font-family: monospace;
+                    font-size: 0.9em;
+                }}
+                .error-detail {{
+                    color: #dc3545;
+                    font-size: 0.9em;
+                }}
+                .todo-note {{
+                    background: #fff3cd;
+                    border-left: 4px solid #ffc107;
+                    padding: 15px;
+                    margin: 20px 0;
+                    border-radius: 4px;
+                }}
+                .tabs {{
+                    display: flex;
+                    margin-bottom: 20px;
+                }}
+                .tab {{
+                    padding: 10px 20px;
+                    cursor: pointer;
+                    border: none;
+                    background: #f8f9fa;
+                    margin-right: 5px;
+                    border-radius: 4px 4px 0 0;
+                }}
+                .tab.active {{
+                    background: white;
+                    border-bottom: 2px solid #007bff;
+                }}
+                .tab-content {{
+                    display: none;
+                }}
+                .tab-content.active {{
+                    display: block;
                 }}
             </style>
             <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
@@ -2260,108 +2299,167 @@ class BookMetadataExtractor:
             <h1>Book Metadata Extraction Report</h1>
             <p>Generated: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}</p>
             
-            <div class="card">
-                <h2>Overview</h2>
-                <table>
-                    <tr>
-                        <th>Total Files Processed</th>
-                        <td>{total_files}</td>
-                    </tr>
-                    <tr>
-                        <th>Successful Extractions</th>
-                        <td class="success">{successful}</td>
-                    </tr>
-                    <tr>
-                        <th>Failed Extractions</th>
-                        <td class="failure">{failed}</td>
-                    </tr>
-                    <tr>
-                        <th>Success Rate</th>
-                        <td>{(successful/total_files*100):.1f}%</td>
-                    </tr>
-                    <tr>
-                        <th>Average Processing Time</th>
-                        <td>{avg_time:.2f}s</td>
-                    </tr>
-                </table>
-                <div id="summaryChart" class="chart-container"></div>
+            <div class="tabs">
+                <button class="tab active" onclick="openTab(event, 'overview')">Overview</button>
+                <button class="tab" onclick="openTab(event, 'api-stats')">API Stats</button>
+                <button class="tab" onclick="openTab(event, 'publishers')">Publishers</button>
+                <button class="tab" onclick="openTab(event, 'results')">Results</button>
+                <button class="tab" onclick="openTab(event, 'failures')">Failed Files</button>
             </div>
 
-            <div class="card">
-                <h2>API Performance</h2>
-                <div id="apiChart" class="chart-container"></div>
-                <table>
-                    <tr>
-                        <th>API Source</th>
-                        <th>Successful Extractions</th>
-                        <th>Success Rate</th>
-                    </tr>
-                    {api_rows}
-                </table>
+            <div id="overview" class="tab-content active">
+                <div class="card">
+                    <h2>Overview</h2>
+                    <table>
+                        <tr>
+                            <th>Total Files Processed</th>
+                            <td>{total_files}</td>
+                        </tr>
+                        <tr>
+                            <th>Successful Extractions</th>
+                            <td class="success">{successful}</td>
+                        </tr>
+                        <tr>
+                            <th>Failed Extractions</th>
+                            <td class="failure">{failed}</td>
+                        </tr>
+                        <tr>
+                            <th>Success Rate</th>
+                            <td>{(successful/total_files*100):.1f}%</td>
+                        </tr>
+                        <tr>
+                            <th>Average Processing Time</th>
+                            <td>{avg_time:.2f}s</td>
+                        </tr>
+                    </table>
+                    <div id="summaryChart" class="chart-container"></div>
+                </div>
             </div>
 
-            <div class="card">
-                <h2>Publisher Statistics</h2>
-                <div id="publisherChart" class="chart-container"></div>
-                <table>
-                    <tr>
-                        <th>Publisher</th>
-                        <th>Books</th>
-                        <th>Percentage</th>
-                    </tr>
-                    {publisher_rows}
-                </table>
+            <div id="api-stats" class="tab-content">
+                <div class="card">
+                    <h2>API Performance</h2>
+                    <div id="apiChart" class="chart-container"></div>
+                    <table>
+                        <tr>
+                            <th>API Source</th>
+                            <th>Successful Extractions</th>
+                            <th>Success Rate</th>
+                        </tr>
+                        {api_rows}
+                    </table>
+                </div>
             </div>
 
-            <div class="card">
-                <h2>Detailed Results</h2>
-                <table>
-                    <tr>
-                        <th>Title</th>
-                        <th>Authors</th>
-                        <th>Publisher</th>
-                        <th>ISBN</th>
-                        <th>Confidence</th>
-                        <th>Source</th>
-                    </tr>
-                    {result_rows}
-                </table>
+            <div id="publishers" class="tab-content">
+                <div class="card">
+                    <h2>Publisher Statistics</h2>
+                    <div id="publisherChart" class="chart-container"></div>
+                    <table>
+                        <tr>
+                            <th>Publisher</th>
+                            <th>Books</th>
+                            <th>Percentage</th>
+                        </tr>
+                        {publisher_rows}
+                    </table>
+                </div>
+            </div>
+
+            <div id="results" class="tab-content">
+                <div class="card">
+                    <h2>Successful Results</h2>
+                    <table>
+                        <tr>
+                            <th>Title</th>
+                            <th>Authors</th>
+                            <th>Publisher</th>
+                            <th>ISBN</th>
+                            <th>Confidence</th>
+                            <th>Source</th>
+                        </tr>
+                        {result_rows}
+                    </table>
+                </div>
+            </div>
+
+            <div id="failures" class="tab-content">
+                <div class="card">
+                    <h2>Failed Files Analysis</h2>
+                    <div class="todo-note">
+                        <strong>TO DO:</strong> Implement aggressive detection methods for these files
+                    </div>
+                    <table>
+                        <tr>
+                            <th>File Path</th>
+                            <th>Status</th>
+                            <th>Extraction Methods</th>
+                            <th>Found ISBNs</th>
+                            <th>Publisher</th>
+                            <th>Errors</th>
+                        </tr>
+                        {failed_rows}
+                    </table>
+                </div>
             </div>
 
             <script>
-                // Summary Chart
-                const summaryData = [{{
-                    values: [{successful}, {failed}],
-                    labels: ['Successful', 'Failed'],
-                    type: 'pie',
-                    marker: {{
-                        colors: ['#28a745', '#dc3545']
-                    }}
-                }}];
-                Plotly.newPlot('summaryChart', summaryData);
+            function openTab(evt, tabName) {{
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("tab-content");
+                for (i = 0; i < tabcontent.length; i++) {{
+                    tabcontent[i].className = tabcontent[i].className.replace(" active", "");
+                }}
+                tablinks = document.getElementsByClassName("tab");
+                for (i = 0; i < tablinks.length; i++) {{
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }}
+                document.getElementById(tabName).className += " active";
+                evt.currentTarget.className += " active";
+                
+                // Reflow charts when tab is shown
+                if (tabName === 'overview') {{
+                    Plotly.relayout('summaryChart', {{}});
+                }} else if (tabName === 'api-stats') {{
+                    Plotly.relayout('apiChart', {{}});
+                }} else if (tabName === 'publishers') {{
+                    Plotly.relayout('publisherChart', {{}});
+                }}
+            }}
 
-                // API Performance Chart
-                const apiData = [{{
-                    x: {source_keys},
-                    y: {source_values},
-                    type: 'bar',
-                    marker: {{
-                        color: '#17a2b8'
-                    }}
-                }}];
-                const apiLayout = {{
-                    title: 'Successful Extractions by API',
-                    xaxis: {{ tickangle: -45 }}
-                }};
-                Plotly.newPlot('apiChart', apiData, apiLayout);
+            // Summary Chart
+            const summaryData = [{{
+                values: [{successful}, {failed}],
+                labels: ['Successful', 'Failed'],
+                type: 'pie',
+                marker: {{
+                    colors: ['#28a745', '#dc3545']
+                }}
+            }}];
+            Plotly.newPlot('summaryChart', summaryData);
 
-                // Publisher Chart
-                const publisherData = [{{
-                    labels: {publisher_keys},
-                    values: {publisher_values},
-                    type: 'pie'
-                }}];
-                Plotly.newPlot('publisherChart', publisherData);
+            // API Performance Chart
+            const apiData = [{{
+                x: {source_keys},
+                y: {source_values},
+                type: 'bar',
+                marker: {{
+                    color: '#17a2b8'
+                }}
+            }}];
+            const apiLayout = {{
+                title: 'Successful Extractions by API',
+                xaxis: {{ tickangle: -45 }}
+            }};
+            Plotly.newPlot('apiChart', apiData, apiLayout);
+
+            // Publisher Chart
+            const publisherData = [{{
+                labels: {publisher_keys},
+                values: {publisher_values},
+                type: 'pie'
+            }}];
+            Plotly.newPlot('publisherChart', publisherData);
             </script>
         </body>
         </html>
