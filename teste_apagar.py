@@ -2349,8 +2349,6 @@ def main():
         description='Extrai metadados de livros PDF e opcionalmente renomeia os arquivos',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
-        
-        
 Exemplos de uso:
   # Processar apenas o diretório atual:
   %(prog)s "/Users/menon/Downloads"
@@ -2370,30 +2368,23 @@ Exemplos de uso:
   # Comando completo:
   %(prog)s "/Users/menon/Downloads" -r -t 8 --rename -v -k "sua_chave_isbndb" -o "relatorio.json" --rescan
   
-  # Exemplos com diretórios reais:
-  %(prog)s "/Users/menon/Downloads/LEARN YOU SOME CODE BY NO STARCH"
-  %(prog)s "/Users/menon/Downloads/machine Learning Oreilly"
+  # Atualizar cache com dados melhores:
+  %(prog)s --update-cache
+  
+  # Reprocessar cache existente:
+  %(prog)s --rescan-cache
 
 Observações:
   - Por padrão, processa apenas o diretório especificado (sem subdiretórios)
   - Use -r para processar todos os subdiretórios
   - Use --subdirs para processar apenas subdiretórios específicos
   - A chave ISBNdb é opcional e pode ser colocada em qualquer posição do comando
-  - Use --rescan para forçar um rescaneamento e atualização do cache de metadados
-
-Rescaneamento do cache de metadados:
-  O programa possui a capacidade de rescanear periodicamente o cache de metadados e atualizar os registros com informações de
-  melhor qualidade. Essa funcionalidade é ativada quando a opção --rescan é utilizada.
-
-  Por exemplo, ao executar o comando:
-  %(prog)s "/Users/menon/Downloads" --rescan
-
- O programa processará os arquivos PDF no diretório e também atualizará os registros existentes no cache caso
- sejam encontrados metadados mais confiáveis. Recomenda-se utilizar a opção --rescan periodicamente.
-  
+  - Use --rescan-cache para reprocessar todo o cache em busca de dados melhores
+  - Use --update-cache para atualizar apenas registros com baixa confiança
 """)
     
     parser.add_argument('directory', 
+                       nargs='?',
                        help='Diretório contendo os arquivos PDF')
     parser.add_argument('-r', '--recursive',
                        action='store_true',
@@ -2418,12 +2409,17 @@ Rescaneamento do cache de metadados:
                        help='Arquivo de log (padrão: %(default)s)')
     parser.add_argument('-k', '--isbndb-key',
                        help='Chave da API ISBNdb (opcional)')
+    parser.add_argument('--rescan-cache',
+                       action='store_true',
+                       help='Reprocessa todo o cache em busca de dados melhores')
+    parser.add_argument('--update-cache',
+                       action='store_true',
+                       help='Atualiza registros com baixa confiança')
+    parser.add_argument('--confidence-threshold',
+                       type=float,
+                       default=0.7,
+                       help='Limite de confiança para atualização (padrão: 0.7)')
     
-    # Se nenhum argumento foi fornecido, mostra a ajuda
-    if len(sys.argv) == 1:
-        parser.print_help()
-        sys.exit(1)
-
     args = parser.parse_args()
     
     # Configuração de logging
@@ -2438,12 +2434,33 @@ Rescaneamento do cache de metadados:
         handlers=log_handlers
     )
     
-    # Converte subdiretórios em lista se especificados
-    subdirs = args.subdirs.split(',') if args.subdirs else None
-    
     try:
         # Inicializa o extrator
         extractor = BookMetadataExtractor(isbndb_api_key=args.isbndb_key)
+        
+        # Verifica se é para atualizar o cache
+        if args.rescan_cache:
+            print("\nReprocessando cache em busca de dados melhores...")
+            updated = extractor.metadata_fetcher.cache.rescan_and_update()
+            print(f"Atualizados {updated} registros no cache")
+            return
+            
+        if args.update_cache:
+            print(f"\nAtualizando registros com confiança menor que {args.confidence_threshold}...")
+            updated = extractor.metadata_fetcher.update_low_confidence_records(
+                confidence_threshold=args.confidence_threshold
+            )
+            print(f"Atualizados {updated} registros no cache")
+            return
+            
+        # Verifica se foi fornecido um diretório
+        if not args.directory:
+            parser.print_help()
+            print("\nERRO: É necessário fornecer um diretório ou usar --rescan-cache/--update-cache")
+            sys.exit(1)
+        
+        # Converte subdiretórios em lista se especificados
+        subdirs = args.subdirs.split(',') if args.subdirs else None
         
         print(f"\nProcessando PDFs em: {args.directory}")
         if args.recursive:
