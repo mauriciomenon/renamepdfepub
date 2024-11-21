@@ -1,0 +1,78 @@
+<!-- templates/search.html -->
+{% extends "base.html" %}
+{% block content %}
+<div class="mb-8">
+    <form action="/search" method="get" class="flex gap-4">
+        <input type="text" 
+               name="q" 
+               value="{{ query }}" 
+               class="flex-1 px-4 py-2 rounded-lg border focus:outline-none focus:ring-2"
+               placeholder="Buscar por título, autor, ISBN...">
+        <button type="submit" 
+                class="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+            Buscar
+        </button>
+    </form>
+</div>
+
+<div class="bg-white rounded-lg shadow-md">
+    <table class="min-w-full">
+        <thead>
+            <tr class="bg-gray-50">
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    ISBN
+                </th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Título
+                </th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Autores
+                </th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Editora
+                </th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Fonte
+                </th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Confiança
+                </th>
+            </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+            {% for item in results %}
+            <tr class="hover:bg-gray-50">
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {{ item.isbn_13 or item.isbn_10 }}
+                </td>
+                <td class="px-6 py-4 text-sm text-gray-900">
+                    {{ item.title }}
+                </td>
+                <td class="px-6 py-4 text-sm text-gray-500">
+                    {{ item.authors|join(", ") if item.authors else "" }}
+                </td>
+                <td class="px-6 py-4 text-sm text-gray-500">
+                    {{ item.publisher }}
+                </td>
+                <td class="px-6 py-4 text-sm text-gray-500">
+                    {{ item.source }}
+                </td>
+                <td class="px-6 py-4 text-sm text-gray-500">
+                    {{ item.confidence_score }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% if not results %}
+<div class="mt-4 p-4 bg-gray-50 rounded-lg text-center text-gray-600">
+    {% if query %}
+        Nenhum resultado encontrado para "{{ query }}"
+    {% else %}
+        Digite algo para buscar
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}

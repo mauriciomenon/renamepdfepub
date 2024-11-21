@@ -1,0 +1,62 @@
+<!-- templates/templates/home.html -->
+{% extends "base.html" %}
+{% block content %}
+<div class="grid gap-6">
+    <!-- Card Principal -->
+    <div class="bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-xl font-semibold mb-4">Estatísticas do Cache</h2>
+        
+        <!-- Total de Registros -->
+        <div class="mb-8">
+            <h3 class="text-sm font-medium text-gray-500 uppercase">Total de Registros</h3>
+            <p class="mt-2 text-4xl font-bold text-blue-600">{{ total_records }}</p>
+        </div>
+
+        <!-- Fontes -->
+        <div>
+            <h3 class="text-sm font-medium text-gray-500 uppercase mb-4">Fontes Ativas</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {% for fonte in sources.split(',') %}
+                <div class="p-4 bg-gray-50 rounded-lg">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-3 h-3 rounded-full bg-blue-500"></div>
+                        <span class="text-gray-700">{{ fonte.strip() }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Card de Links Úteis -->
+    <div class="bg-white rounded-lg shadow-md p-6">
+        <h3 class="text-sm font-medium text-gray-500 uppercase mb-4">Links Úteis</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <a href="/search" class="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 duration-200">
+                <h4 class="font-medium text-blue-700">Buscar Metadados</h4>
+                <p class="text-sm text-blue-600">Pesquise por título, autor ou ISBN</p>
+            </a>
+            <a href="/search?q=worldcat" class="p-4 bg-green-50 rounded-lg hover:bg-green-100 duration-200">
+                <h4 class="font-medium text-green-700">WorldCat</h4>
+                <p class="text-sm text-green-600">Ver registros do WorldCat</p>
+            </a>
+            <a href="/search?q=google_books" class="p-4 bg-yellow-50 rounded-lg hover:bg-yellow-100 duration-200">
+                <h4 class="font-medium text-yellow-700">Google Books</h4>
+                <p class="text-sm text-yellow-600">Ver registros do Google Books</p>
+            </a>
+            <a href="/search?q=openlibrary" class="p-4 bg-purple-50 rounded-lg hover:bg-purple-100 duration-200">
+                <h4 class="font-medium text-purple-700">OpenLibrary</h4>
+                <p class="text-sm text-purple-600">Ver registros da OpenLibrary</p>
+            </a>
+        </div>
+    </div>
+
+    <!-- Dicas -->
+    <div class="bg-blue-50 rounded-lg p-4">
+        <p class="text-sm text-blue-700">
+            💡 Dica: Use a página de busca para encontrar metadados específicos. 
+            Você pode buscar por título, autor ou ISBN.
+        </p>
+    </div>
+</div>
+{% endblock %}

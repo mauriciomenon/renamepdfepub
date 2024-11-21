@@ -12,7 +12,7 @@ import sqlite3
 import sys
 import time
 import unicodedata
-from collections import Counter
+from collections import Counter, defaultdict
 from concurrent import futures
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, asdict
@@ -33,6 +33,14 @@ import pdfplumber
 from pdfminer.high_level import extract_text as pdfminer_extract
 import pytesseract
 from pdf2image import convert_from_path
+
+import plotly.graph_objects as go
+from datetime import datetime
+from pathlib import Path
+import json
+from typing import Dict, List, Optional
+from collections import Counter, defaultdict
+
 
 class DependencyManager:
     def __init__(self):
@@ -242,6 +250,76 @@ class MetadataCache:
                     json.dumps(metadata)  # Armazena JSON bruto
                 )
             )
+
+    def rescan_and_update(self):
+        """
+        Verifica todos os registros no cache e atualiza aqueles com pontuação de confiança inferior.
+        """
+        with sqlite3.connect(self.db_path) as conn:
+            # Obtém todos os registros atuais
+            results = conn.execute("""
+                SELECT isbn_10, isbn_13, confidence_score
+                FROM metadata_cache
+            """).fetchall()
+            
+            updated_count = 0
+            for isbn_10, isbn_13, current_score in results:
+                isbn = isbn_13 or isbn_10  # Usa ISBN-13 preferencialmente
+                try:
+                    # Tenta obter novos metadados
+                    metadata = self.metadata_fetcher.fetch_metadata(isbn)
+                    
+                    if metadata and metadata.confidence_score > current_score:
+                        # Atualiza o registro se encontrou dados melhores
+                        conn.execute("""
+                            UPDATE metadata_cache
+                            SET title = ?, authors = ?, publisher = ?, 
+                                published_date = ?, confidence_score = ?,
+                                source = ?, raw_json = ?, timestamp = ?
+                            WHERE isbn_10 = ? OR isbn_13 = ?
+                        """, (
+                            metadata.title,
+                            ', '.join(metadata.authors),
+                            metadata.publisher,
+                            metadata.published_date,
+                            metadata.confidence_score,
+                            metadata.source,
+                            json.dumps(asdict(metadata)),
+                            int(time.time()),
+                            isbn_10,
+                            isbn_13
+                        ))
+                        updated_count += 1
+                except Exception as e:
+                    logging.error(f"Erro ao atualizar metadados para ISBN {isbn}: {str(e)}")
+                    continue
+            
+            logging.info(f"Rescan concluído. {updated_count} registros atualizados.")
+            return updated_count
+
+    def update(self, metadata: Dict):
+            """
+            Atualiza um registro existente no cache.
+            """
+            with sqlite3.connect(self.db_path) as conn:
+                conn.execute("""
+                    UPDATE metadata_cache
+                    SET title = ?, authors = ?, publisher = ?, 
+                        published_date = ?, confidence_score = ?,
+                        source = ?, raw_json = ?, timestamp = ?
+                    WHERE isbn_10 = ? OR isbn_13 = ?
+                """, (
+                    metadata.get('title'),
+                    ', '.join(metadata.get('authors', [])),
+                    metadata.get('publisher'),
+                    metadata.get('published_date'),
+                    metadata.get('confidence_score', 0.0),
+                    metadata.get('source'),
+                    json.dumps(metadata),
+                    int(time.time()),
+                    metadata.get('isbn_10'),
+                    metadata.get('isbn_13')
+                ))
 
 class APIHandler:
     def __init__(self):
@@ -801,6 +879,10 @@ class MetadataFetcher:
                 (self.fetch_openlibrary, 8.5),     # 60% sucesso - melhor desempenho geral
                 (self.fetch_worldcat, 7.5),        # 55.6% sucesso - bom desempenho
                 
+                # ISBNlib primeiro (mais confiável)
+                (self.fetch_isbnlib_meta, 9.5),    # isbnlib.meta()
+                (self.fetch_isbnlib_goom, 9.0),    # isbnlib.goom()
+                
                 # APIs secundárias - desempenho moderado
                 (self.fetch_internet_archive, 7),   # 33.3% sucesso
                 (self.fetch_crossref, 6.5),        # Taxa moderada de sucesso
@@ -808,10 +890,11 @@ class MetadataFetcher:
                 (self.fetch_mercado_editorial, 5.5),# 11.1% sucesso mas mantida para BR
                 
                 # APIs com baixo desempenho mas mantidas para casos específicos
-                (self.fetch_zbib, 5),              # Baixo sucesso mas mantida como fallback
-                (self.fetch_cbl, 5),               # Mantida para livros brasileiros
+
                 
                 # APIs desabilitadas temporariamente - 0% sucesso nos testes
+                # (self.fetch_zbib, 5),            # 
+                # (self.fetch_cbl, 5),             # 
                 # (self.fetch_oreilly, 9),         # 0% sucesso - desabilitada
                 # (self.fetch_springer, 8.5),      # 0% sucesso - desabilitada
                 # (self.fetch_mybib, 5),           # 0% sucesso - desabilitada
@@ -838,6 +921,11 @@ class MetadataFetcher:
             processed = set()
             last_error = None
             
+            # Adiciona contadores para estatísticas - NOVO
+            api_success = Counter()
+            api_total = Counter()
+            api_times = defaultdict(list)
+            
             # Configurações de retry otimizadas baseadas no desempenho
             retry_configs = {
                 'high_priority': {
@@ -860,6 +948,8 @@ class MetadataFetcher:
             for fetcher, priority in fetchers:
                 if fetcher.__name__ not in processed:
                     # Determina a configuração de retry baseada na prioridade
+                    start_time = time.time()
+                    api_total[fetcher.__name__] += 1
                     if priority >= 8:
                         retry_config = retry_configs['high_priority']
                     elif priority >= 6:
@@ -870,8 +960,11 @@ class MetadataFetcher:
                     for attempt in range(retry_config['max_retries']):
                         try:
                             metadata = fetcher(isbn)
+                            elapsed = time.time() - start_time
+                            api_times[fetcher.__name__].append(elapsed)
                             if metadata:
                                 # Ajusta score baseado no desempenho real da API
+                                api_success[fetcher.__name__] += 1
                                 base_score = priority / 10
                                 adjustment = confidence_adjustments.get(metadata.source, 0.5)
                                 metadata.confidence_score = min(1.0, base_score * adjustment)
@@ -888,6 +981,8 @@ class MetadataFetcher:
                                 if metadata.confidence_score > 0.85:
                                     break
                         except Exception as e:
+                            elapsed = time.time() - start_time
+                            api_times[fetcher.__name__].append(elapsed)
                             last_error = e
                             self._handle_api_error(fetcher.__name__, e, isbn)
                             
@@ -896,6 +991,16 @@ class MetadataFetcher:
                                 time.sleep(sleep_time)
                                 
                     processed.add(fetcher.__name__)
+
+                    if len(processed) % 5 == 0:
+                        print("\nEstatísticas em tempo real:")
+                        print("-" * 40)
+                        for api in processed:
+                            if api_total[api] > 0:
+                                success_rate = (api_success[api] / api_total[api] * 100)
+                                avg_time = sum(api_times[api]) / len(api_times[api]) if api_times[api] else 0
+                                print(f"{api:15}: {api_success[api]}/{api_total[api]} ({success_rate:.1f}%) - {avg_time:.2f}s")
+                        print("-" * 40)
 
                     # Se já tem resultados suficientes com boa confiança, pode parar
                     if len(all_results) >= 2 and any(r.confidence_score > 0.80 for r in all_results):
@@ -1096,9 +1201,10 @@ class MetadataFetcher:
                 from bs4 import BeautifulSoup
                 soup = BeautifulSoup(response.text, 'html.parser')
                 
+                # Atualiza a busca para usar 'string' em vez de 'text'
                 title = soup.find('h1', {'class': 'title'})
                 authors = soup.find_all('a', {'class': 'author'})
-                publisher = soup.find('td', text='Publisher')
+                publisher = soup.find('td', string='Publisher')  # <- Mudança aqui
                 
                 return BookMetadata(
                     title=title.text if title else 'Unknown',
@@ -1697,6 +1803,10 @@ class BookMetadataExtractor:
         self.metadata_fetcher = MetadataFetcher(isbndb_api_key=isbndb_api_key)
         self.pdf_processor = PDFProcessor()
         
+        # Configura diretório de relatórios
+        self.reports_dir = Path("reports")
+        self.reports_dir.mkdir(exist_ok=True)
+        
         logging.basicConfig(
             level=logging.INFO,
             format='%(asctime)s - %(levelname)s - %(message)s',
@@ -1983,34 +2093,323 @@ class BookMetadataExtractor:
                     finally:
                         pbar.update(1)
         
-        try:
-            self.print_detailed_report(results, runtime_stats)
-        except Exception as e:
-            logging.error(f"Erro ao gerar relatório: {str(e)}")
-            
-        return results
-    
-
-def rescan_and_update(self):
-    """
-    Verifica todos os registros no cache e atualiza aqueles com pontuação de confiança inferior.
-    """
-    all_metadata = self.get_all()
-    for metadata in all_metadata:
-        # Consulta os metadados usando o ISBN
-        new_metadata = self.fetch_metadata(metadata['isbn_10'] or metadata['isbn_13'])
+        # Gera relatórios aprimorados
+        self._generate_enhanced_report(results, runtime_stats)
         
-        # Atualiza o registro apenas se a nova pontuação de confiança for maior
-        if new_metadata and new_metadata['confidence_score'] > metadata['confidence_score']:
-            self.update(new_metadata)   
+        return results
+
+    def _generate_enhanced_report(self, results: List[BookMetadata], runtime_stats: Dict):
+        """Gera relatórios HTML e JSON aprimorados."""
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        
+        # Prepara dados para o relatório
+        successful_results = [r for r in results if r is not None]
+        total_files = len(runtime_stats['processed_files'])
+        successful = len(successful_results)
+        failed = total_files - successful
+
+        # Estatísticas por fonte
+        source_stats = Counter(r.source for r in successful_results)
+        
+        # Estatísticas por editora
+        publisher_stats = Counter(r.publisher for r in successful_results)
+        
+        # Análise de tempo de processamento
+        processing_times = runtime_stats['processing_times']
+        avg_time = sum(processing_times) / len(processing_times) if processing_times else 0
+        
+        # Gera relatório HTML
+        html_file = self.reports_dir / f"metadata_report_{timestamp}.html"
+        self._generate_html_report(
+            successful_results,
+            source_stats,
+            publisher_stats,
+            runtime_stats,
+            total_files,
+            successful,
+            failed,
+            avg_time,
+            html_file
+        )
+        
+        # Gera relatório JSON
+        json_file = self.reports_dir / f"metadata_report_{timestamp}.json"
+        self._generate_json_report(
+            successful_results,
+            source_stats,
+            publisher_stats,
+            runtime_stats,
+            total_files,
+            successful,
+            failed,
+            avg_time,
+            json_file
+        )
+        
+        print(f"\nRelatórios gerados:")
+        print(f"HTML: {html_file}")
+        print(f"JSON: {json_file}")
+
+    def _generate_html_report(self, results, source_stats, publisher_stats, 
+                            runtime_stats, total_files, successful, failed, avg_time, output_file):
+        """Gera relatório HTML com visualizações aprimoradas."""
+        
+        # Prepara dados para os gráficos
+        source_keys = list(map(repr, source_stats.keys()))  # usa repr para strings em JavaScript
+        source_values = list(source_stats.values())
+        publisher_keys = list(map(repr, publisher_stats.keys()))
+        publisher_values = list(publisher_stats.values())
+
+        # Gera as linhas da tabela de APIs
+        api_rows = ""
+        for source, count in source_stats.items():
+            success_rate = (count/successful*100) if successful > 0 else 0
+            api_rows += f"""
+            <tr>
+                <td>{source}</td>
+                <td>{count}</td>
+                <td>{success_rate:.1f}%</td>
+            </tr>
+            """
+
+        # Gera as linhas da tabela de editoras
+        publisher_rows = ""
+        for publisher, count in publisher_stats.items():
+            percentage = (count/successful*100) if successful > 0 else 0
+            publisher_rows += f"""
+            <tr>
+                <td>{publisher}</td>
+                <td>{count}</td>
+                <td>{percentage:.1f}%</td>
+            </tr>
+            """
+
+        # Gera as linhas da tabela de resultados
+        result_rows = ""
+        for r in results:
+            if r is not None:  # Verifica se o resultado é válido
+                result_rows += f"""
+                <tr>
+                    <td>{r.title}</td>
+                    <td>{', '.join(r.authors)}</td>
+                    <td>{r.publisher}</td>
+                    <td>{r.isbn_13 or r.isbn_10 or 'N/A'}</td>
+                    <td>{r.confidence_score:.2f}</td>
+                    <td>{r.source}</td>
+                </tr>
+                """
+
+        # Template HTML principal
+        html_content = f"""
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Book Metadata Extraction Report</title>
+            <style>
+                body {{
+                    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+                    line-height: 1.5;
+                    max-width: 1200px;
+                    margin: 0 auto;
+                    padding: 20px;
+                    background: #f8f9fa;
+                }}
+                .card {{
+                    background: white;
+                    border-radius: 8px;
+                    padding: 20px;
+                    margin-bottom: 20px;
+                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                }}
+                table {{
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin: 1em 0;
+                }}
+                th, td {{
+                    padding: 12px;
+                    border: 1px solid #dee2e6;
+                    text-align: left;
+                }}
+                th {{ background: #f8f9fa; }}
+                tr:hover {{ background: #f8f9fa; }}
+                .success {{ color: #28a745; }}
+                .warning {{ color: #ffc107; }}
+                .failure {{ color: #dc3545; }}
+                .progress-bar {{
+                    height: 8px;
+                    background: #e9ecef;
+                    border-radius: 4px;
+                    overflow: hidden;
+                    margin: 10px 0;
+                }}
+                .progress-fill {{
+                    height: 100%;
+                    background: #28a745;
+                    transition: width 0.3s ease;
+                }}
+                .error-box {{
+                    background: #fff5f5;
+                    padding: 15px;
+                    border-radius: 4px;
+                    margin: 10px 0;
+                    border-left: 4px solid #dc3545;
+                }}
+                .chart-container {{
+                    height: 400px;
+                    margin: 20px 0;
+                }}
+            </style>
+            <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        </head>
+        <body>
+            <h1>Book Metadata Extraction Report</h1>
+            <p>Generated: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}</p>
+            
+            <div class="card">
+                <h2>Overview</h2>
+                <table>
+                    <tr>
+                        <th>Total Files Processed</th>
+                        <td>{total_files}</td>
+                    </tr>
+                    <tr>
+                        <th>Successful Extractions</th>
+                        <td class="success">{successful}</td>
+                    </tr>
+                    <tr>
+                        <th>Failed Extractions</th>
+                        <td class="failure">{failed}</td>
+                    </tr>
+                    <tr>
+                        <th>Success Rate</th>
+                        <td>{(successful/total_files*100):.1f}%</td>
+                    </tr>
+                    <tr>
+                        <th>Average Processing Time</th>
+                        <td>{avg_time:.2f}s</td>
+                    </tr>
+                </table>
+                <div id="summaryChart" class="chart-container"></div>
+            </div>
+
+            <div class="card">
+                <h2>API Performance</h2>
+                <div id="apiChart" class="chart-container"></div>
+                <table>
+                    <tr>
+                        <th>API Source</th>
+                        <th>Successful Extractions</th>
+                        <th>Success Rate</th>
+                    </tr>
+                    {api_rows}
+                </table>
+            </div>
+
+            <div class="card">
+                <h2>Publisher Statistics</h2>
+                <div id="publisherChart" class="chart-container"></div>
+                <table>
+                    <tr>
+                        <th>Publisher</th>
+                        <th>Books</th>
+                        <th>Percentage</th>
+                    </tr>
+                    {publisher_rows}
+                </table>
+            </div>
+
+            <div class="card">
+                <h2>Detailed Results</h2>
+                <table>
+                    <tr>
+                        <th>Title</th>
+                        <th>Authors</th>
+                        <th>Publisher</th>
+                        <th>ISBN</th>
+                        <th>Confidence</th>
+                        <th>Source</th>
+                    </tr>
+                    {result_rows}
+                </table>
+            </div>
+
+            <script>
+                // Summary Chart
+                const summaryData = [{{
+                    values: [{successful}, {failed}],
+                    labels: ['Successful', 'Failed'],
+                    type: 'pie',
+                    marker: {{
+                        colors: ['#28a745', '#dc3545']
+                    }}
+                }}];
+                Plotly.newPlot('summaryChart', summaryData);
+
+                // API Performance Chart
+                const apiData = [{{
+                    x: {source_keys},
+                    y: {source_values},
+                    type: 'bar',
+                    marker: {{
+                        color: '#17a2b8'
+                    }}
+                }}];
+                const apiLayout = {{
+                    title: 'Successful Extractions by API',
+                    xaxis: {{ tickangle: -45 }}
+                }};
+                Plotly.newPlot('apiChart', apiData, apiLayout);
+
+                // Publisher Chart
+                const publisherData = [{{
+                    labels: {publisher_keys},
+                    values: {publisher_values},
+                    type: 'pie'
+                }}];
+                Plotly.newPlot('publisherChart', publisherData);
+            </script>
+        </body>
+        </html>
+        """
+        
+        # Salva o relatório HTML
+        with open(output_file, 'w', encoding='utf-8') as f:
+            f.write(html_content)
+
+    def _generate_json_report(self, results, source_stats, publisher_stats, 
+                            runtime_stats, total_files, successful, failed, avg_time, output_file):
+        """Gera relatório JSON detalhado."""
+        report_data = {
+            'summary': {
+                'total_files': total_files,
+                'successful': successful,
+                'failed': failed,
+                'success_rate': (successful/total_files*100) if total_files > 0 else 0,
+                'average_processing_time': avg_time,
+                'timestamp': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            },
+            'api_stats': dict(source_stats),
+            'publisher_stats': dict(publisher_stats),
+            'failure_details': runtime_stats['failure_details'],
+            'api_errors': runtime_stats['api_errors'],
+            'processing_times': {
+                'average': avg_time,
+                'min': min(runtime_stats['processing_times']) if runtime_stats['processing_times'] else 0,
+                'max': max(runtime_stats['processing_times']) if runtime_stats['processing_times'] else 0
+            },
+            'results': [asdict(r) for r in results]
+        }
+        
+        with open(output_file, 'w', encoding='utf-8') as f:
+            json.dump(report_data, f, indent=2, ensure_ascii=False)
 
 def main():
     parser = argparse.ArgumentParser(
         description='Extrai metadados de livros PDF e opcionalmente renomeia os arquivos',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
-        
-        
 Exemplos de uso:
   # Processar apenas o diretório atual:
   %(prog)s "/Users/menon/Downloads"
@@ -2030,30 +2429,23 @@ Exemplos de uso:
   # Comando completo:
   %(prog)s "/Users/menon/Downloads" -r -t 8 --rename -v -k "sua_chave_isbndb" -o "relatorio.json" --rescan
   
-  # Exemplos com diretórios reais:
-  %(prog)s "/Users/menon/Downloads/LEARN YOU SOME CODE BY NO STARCH"
-  %(prog)s "/Users/menon/Downloads/machine Learning Oreilly"
+  # Atualizar cache com dados melhores:
+  %(prog)s --update-cache
+  
+  # Reprocessar cache existente:
+  %(prog)s --rescan-cache
 
 Observações:
   - Por padrão, processa apenas o diretório especificado (sem subdiretórios)
   - Use -r para processar todos os subdiretórios
   - Use --subdirs para processar apenas subdiretórios específicos
   - A chave ISBNdb é opcional e pode ser colocada em qualquer posição do comando
-  - Use --rescan para forçar um rescaneamento e atualização do cache de metadados
-
-Rescaneamento do cache de metadados:
-  O programa possui a capacidade de rescanear periodicamente o cache de metadados e atualizar os registros com informações de
-  melhor qualidade. Essa funcionalidade é ativada quando a opção --rescan é utilizada.
-
-  Por exemplo, ao executar o comando:
-  %(prog)s "/Users/menon/Downloads" --rescan
-
- O programa processará os arquivos PDF no diretório e também atualizará os registros existentes no cache caso
- sejam encontrados metadados mais confiáveis. Recomenda-se utilizar a opção --rescan periodicamente.
-  
+  - Use --rescan-cache para reprocessar todo o cache em busca de dados melhores
+  - Use --update-cache para atualizar apenas registros com baixa confiança
 """)
     
     parser.add_argument('directory', 
+                       nargs='?',
                        help='Diretório contendo os arquivos PDF')
     parser.add_argument('-r', '--recursive',
                        action='store_true',
@@ -2078,12 +2470,17 @@ Rescaneamento do cache de metadados:
                        help='Arquivo de log (padrão: %(default)s)')
     parser.add_argument('-k', '--isbndb-key',
                        help='Chave da API ISBNdb (opcional)')
+    parser.add_argument('--rescan-cache',
+                       action='store_true',
+                       help='Reprocessa todo o cache em busca de dados melhores')
+    parser.add_argument('--update-cache',
+                       action='store_true',
+                       help='Atualiza registros com baixa confiança')
+    parser.add_argument('--confidence-threshold',
+                       type=float,
+                       default=0.7,
+                       help='Limite de confiança para atualização (padrão: 0.7)')
     
-    # Se nenhum argumento foi fornecido, mostra a ajuda
-    if len(sys.argv) == 1:
-        parser.print_help()
-        sys.exit(1)
-
     args = parser.parse_args()
     
     # Configuração de logging
@@ -2098,12 +2495,33 @@ Rescaneamento do cache de metadados:
         handlers=log_handlers
     )
     
-    # Converte subdiretórios em lista se especificados
-    subdirs = args.subdirs.split(',') if args.subdirs else None
-    
     try:
         # Inicializa o extrator
         extractor = BookMetadataExtractor(isbndb_api_key=args.isbndb_key)
+        
+        # Verifica se é para atualizar o cache
+        if args.rescan_cache:
+            print("\nReprocessando cache em busca de dados melhores...")
+            updated = extractor.metadata_fetcher.cache.rescan_and_update()
+            print(f"Atualizados {updated} registros no cache")
+            return
+            
+        if args.update_cache:
+            print(f"\nAtualizando registros com confiança menor que {args.confidence_threshold}...")
+            updated = extractor.metadata_fetcher.update_low_confidence_records(
+                confidence_threshold=args.confidence_threshold
+            )
+            print(f"Atualizados {updated} registros no cache")
+            return
+            
+        # Verifica se foi fornecido um diretório
+        if not args.directory:
+            parser.print_help()
+            print("\nERRO: É necessário fornecer um diretório ou usar --rescan-cache/--update-cache")
+            sys.exit(1)
+        
+        # Converte subdiretórios em lista se especificados
+        subdirs = args.subdirs.split(',') if args.subdirs else None
         
         print(f"\nProcessando PDFs em: {args.directory}")
         if args.recursive:
