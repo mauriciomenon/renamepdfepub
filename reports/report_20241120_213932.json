@@ -1,0 +1,3123 @@
+[
+  {
+    "isbn": "9786586057485",
+    "total_apis_tested": 30,
+    "successful_apis": 8,
+    "total_time": 53.46200346946716,
+    "results": [
+      {
+        "api_name": "isbnlib_default",
+        "success": true,
+        "response_time": 3.712790012359619,
+        "error": null,
+        "metadata": {
+          "ISBN-13": "9786586057485",
+          "Title": "Investindo na Bolsa Americana - Tudo o que você precisa saber para investir e ter bons resultados",
+          "Authors": [
+            "Felipe Augusto Russo"
+          ],
+          "Publisher": "Novatec Editora",
+          "Year": "2021",
+          "Language": "pt"
+        }
+      },
+      {
+        "api_name": "isbnlib_mask",
+        "success": true,
+        "response_time": 0.00014472007751464844,
+        "error": null,
+        "metadata": {
+          "result": "978-65-86057-48-5"
+        }
+      },
+      {
+        "api_name": "isbnlib_info",
+        "success": true,
+        "response_time": 4.482269287109375e-05,
+        "error": null,
+        "metadata": {
+          "result": "Brazil"
+        }
+      },
+      {
+        "api_name": "isbnlib_desc",
+        "success": true,
+        "response_time": 0.4289240837097168,
+        "error": null,
+        "metadata": {
+          "result": ""
+        }
+      },
+      {
+        "api_name": "isbnlib_classify",
+        "success": false,
+        "response_time": 3.0278379917144775,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "isbnlib_editions",
+        "success": true,
+        "response_time": 6.532613039016724,
+        "error": null,
+        "metadata": {
+          "results": [
+            "9786586057485"
+          ]
+        }
+      },
+      {
+        "api_name": "isbnlib_goom",
+        "success": true,
+        "response_time": 0.920335054397583,
+        "error": null,
+        "metadata": {
+          "results": [
+            {
+              "ISBN-13": "9786586057485",
+              "Title": "Investindo na Bolsa Americana",
+              "Authors": [
+                "Felipe Augusto Russo"
+              ],
+              "Publisher": "Novatec Editora",
+              "Year": "2021",
+              "Language": "pt"
+            },
+            {
+              "ISBN-13": "9788575221792",
+              "Title": "Avaliando Empresas, Investindo em Ações",
+              "Authors": [
+                "Carlos Alberto Debastiani",
+                "Felipe Augusto Russo"
+              ],
+              "Publisher": "Novatec Editora",
+              "Year": "2008",
+              "Language": "pt"
+            }
+          ]
+        }
+      },
+      {
+        "api_name": "isbnlib_doi2tex",
+        "success": false,
+        "response_time": 1.4467980861663818,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "isbnlib_isbn10",
+        "success": true,
+        "response_time": 0.0001239776611328125,
+        "error": null,
+        "metadata": {
+          "result": "6586057485"
+        }
+      },
+      {
+        "api_name": "isbnlib_isbn13",
+        "success": true,
+        "response_time": 1.1682510375976562e-05,
+        "error": null,
+        "metadata": {
+          "result": "9786586057485"
+        }
+      },
+      {
+        "api_name": "O'Reilly",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Manning",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Packt",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Apress",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "British Library",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Deutsche Nationalbibliothek",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Google Books",
+        "success": false,
+        "response_time": 0.43567728996276855,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "Open Library",
+        "success": false,
+        "response_time": 0.9285650253295898,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "WorldCat",
+        "success": false,
+        "response_time": 0.9828062057495117,
+        "error": "404 Client Error: Not Found for url: https://www.oclc.org/en/jfkdsj",
+        "metadata": null
+      },
+      {
+        "api_name": "Google Books BR",
+        "success": false,
+        "response_time": 0.3378880023956299,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "Mercado Editorial",
+        "success": false,
+        "response_time": 2.389650821685791,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "CrossRef",
+        "success": false,
+        "response_time": 2.8518242835998535,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "MyBib",
+        "success": false,
+        "response_time": 2.4679489135742188,
+        "error": "404 Client Error: Not Found for url: https://www.mybib.com/api/v1/references?q=9786586057485",
+        "metadata": null
+      },
+      {
+        "api_name": "CBL",
+        "success": false,
+        "response_time": 5.13658595085144,
+        "error": "HTTPSConnectionPool(host='isbn.cbl.org.br', port=443): Max retries exceeded with url: /api/isbn/9786586057485 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x105d00070>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known'))",
+        "metadata": null
+      },
+      {
+        "api_name": "Springer",
+        "success": false,
+        "response_time": 3.3374099731445312,
+        "error": "403 Client Error: Forbidden for url: https://api.springernature.com/metadata/book/isbn/9786586057485",
+        "metadata": null
+      },
+      {
+        "api_name": "ZBib",
+        "success": false,
+        "response_time": 5.317157983779907,
+        "error": "HTTPSConnectionPool(host='api.zbib.org', port=443): Max retries exceeded with url: /v1/search?q=isbn%3A9786586057485 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x105d00400>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known'))",
+        "metadata": null
+      },
+      {
+        "api_name": "Ebook.de",
+        "success": false,
+        "response_time": 3.8322417736053467,
+        "error": "404 Client Error: Not Found for url: https://www.ebook.de/de/tools/isbn2bibtex/9786586057485",
+        "metadata": null
+      },
+      {
+        "api_name": "Internet Archive",
+        "success": false,
+        "response_time": 3.0595767498016357,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "Library of Congress",
+        "success": false,
+        "response_time": 3.382951021194458,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "HathiTrust",
+        "success": false,
+        "response_time": 2.932096004486084,
+        "error": "No results found",
+        "metadata": null
+      }
+    ],
+    "fastest_api": "isbnlib_isbn13",
+    "best_response_time": 1.1682510375976562e-05
+  },
+  {
+    "isbn": "9788575228289",
+    "total_apis_tested": 30,
+    "successful_apis": 10,
+    "total_time": 18.662639617919922,
+    "results": [
+      {
+        "api_name": "isbnlib_default",
+        "success": true,
+        "response_time": 1.287667989730835,
+        "error": null,
+        "metadata": {
+          "ISBN-13": "9788575228289",
+          "Title": "Longevidade Inteligente - Como se preparar para uma vida de 100 anos",
+          "Authors": [
+            "Alexandre Correa"
+          ],
+          "Publisher": "Novatec Editora",
+          "Year": "2020",
+          "Language": "pt-BR"
+        }
+      },
+      {
+        "api_name": "isbnlib_mask",
+        "success": true,
+        "response_time": 8.797645568847656e-05,
+        "error": null,
+        "metadata": {
+          "result": "978-85-7522-828-9"
+        }
+      },
+      {
+        "api_name": "isbnlib_info",
+        "success": true,
+        "response_time": 3.695487976074219e-05,
+        "error": null,
+        "metadata": {
+          "result": "Brazil"
+        }
+      },
+      {
+        "api_name": "isbnlib_desc",
+        "success": true,
+        "response_time": 1.239062786102295,
+        "error": null,
+        "metadata": {
+          "result": "Dos muitos avanços que a humanidade obteve talvez o mais notável tenha sido\no espetacular aumento na expectativa de vida. E há cada vez mais cientistas\ndefendendo que em breve poderemos esticar nosso horizonte para muito além\nde qualquer limite imaginável. A revolução da longevidade terá impactos em\ntodas as áreas e nas narrativas sociais que compartilhamos sobre o que seja\nenvelhecer. No entanto, para que a Longevidade seja uma dádiva, e não um\nfardo, é preciso que a gente chegue “lá” munido de algumas ferramentas\nimportantes. São as dimensões da longevidade inteligente. Nessa\nsurpreendente viagem pelo passado e pelo futuro da longevidade, Alexandre\nCorrea traça um cenário de como poderemos aproveitar o pote de ouro dos\nadmiráveis anos de prata que nos esperam."
+        }
+      },
+      {
+        "api_name": "isbnlib_classify",
+        "success": false,
+        "response_time": 0.8044939041137695,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "isbnlib_editions",
+        "success": true,
+        "response_time": 2.368194103240967,
+        "error": null,
+        "metadata": {
+          "results": [
+            "9788575228289"
+          ]
+        }
+      },
+      {
+        "api_name": "isbnlib_goom",
+        "success": true,
+        "response_time": 0.783829927444458,
+        "error": null,
+        "metadata": {
+          "results": [
+            {
+              "ISBN-13": "9788575228289",
+              "Title": "Longevidade Inteligente",
+              "Authors": [
+                "Alexandre Correa"
+              ],
+              "Publisher": "Novatec Editora",
+              "Year": "2020",
+              "Language": "pt"
+            }
+          ]
+        }
+      },
+      {
+        "api_name": "isbnlib_doi2tex",
+        "success": false,
+        "response_time": 0.7522599697113037,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "isbnlib_isbn10",
+        "success": true,
+        "response_time": 0.00013709068298339844,
+        "error": null,
+        "metadata": {
+          "result": "8575228285"
+        }
+      },
+      {
+        "api_name": "isbnlib_isbn13",
+        "success": true,
+        "response_time": 1.0013580322265625e-05,
+        "error": null,
+        "metadata": {
+          "result": "9788575228289"
+        }
+      },
+      {
+        "api_name": "O'Reilly",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Manning",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Packt",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Apress",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "British Library",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Deutsche Nationalbibliothek",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Open Library",
+        "success": false,
+        "response_time": 0.30035996437072754,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "Google Books",
+        "success": true,
+        "response_time": 0.36463308334350586,
+        "error": null,
+        "metadata": {
+          "title": "Longevidade Inteligente",
+          "authors": [
+            "Alexandre Correa"
+          ],
+          "publisher": "Novatec Editora",
+          "publishedDate": "2020-02-07",
+          "isbn": "9788575228289",
+          "language": "pt-BR",
+          "pageCount": 31,
+          "categories": [
+            "Self-Help"
+          ]
+        }
+      },
+      {
+        "api_name": "Mercado Editorial",
+        "success": false,
+        "response_time": 0.13341164588928223,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "Google Books BR",
+        "success": true,
+        "response_time": 0.4167211055755615,
+        "error": null,
+        "metadata": {
+          "title": "Longevidade Inteligente",
+          "authors": [
+            "Alexandre Correa"
+          ],
+          "publisher": "Novatec Editora",
+          "publishedDate": "2020-02-07",
+          "isbn": "9788575228289",
+          "language": "pt-BR",
+          "categories": [
+            "Self-Help"
+          ]
+        }
+      },
+      {
+        "api_name": "WorldCat",
+        "success": false,
+        "response_time": 0.9459619522094727,
+        "error": "404 Client Error: Not Found for url: https://www.oclc.org/en/jfkdsj",
+        "metadata": null
+      },
+      {
+        "api_name": "CrossRef",
+        "success": false,
+        "response_time": 1.0231199264526367,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "MyBib",
+        "success": false,
+        "response_time": 0.2520420551300049,
+        "error": "404 Client Error: Not Found for url: https://www.mybib.com/api/v1/references?q=9788575228289",
+        "metadata": null
+      },
+      {
+        "api_name": "Ebook.de",
+        "success": false,
+        "response_time": 0.2573559284210205,
+        "error": "404 Client Error: Not Found for url: https://www.ebook.de/de/tools/isbn2bibtex/9788575228289",
+        "metadata": null
+      },
+      {
+        "api_name": "Springer",
+        "success": false,
+        "response_time": 0.23521113395690918,
+        "error": "403 Client Error: Forbidden for url: https://api.springernature.com/metadata/book/isbn/9788575228289",
+        "metadata": null
+      },
+      {
+        "api_name": "Internet Archive",
+        "success": false,
+        "response_time": 0.41103100776672363,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "HathiTrust",
+        "success": false,
+        "response_time": 0.2021939754486084,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "Library of Congress",
+        "success": false,
+        "response_time": 0.8377442359924316,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "CBL",
+        "success": false,
+        "response_time": 3.0240209102630615,
+        "error": "HTTPSConnectionPool(host='isbn.cbl.org.br', port=443): Max retries exceeded with url: /api/isbn/9788575228289 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x105c8e910>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known'))",
+        "metadata": null
+      },
+      {
+        "api_name": "ZBib",
+        "success": false,
+        "response_time": 3.0230519771575928,
+        "error": "HTTPSConnectionPool(host='api.zbib.org', port=443): Max retries exceeded with url: /v1/search?q=isbn%3A9788575228289 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x105c8e8b0>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known'))",
+        "metadata": null
+      }
+    ],
+    "fastest_api": "isbnlib_isbn13",
+    "best_response_time": 1.0013580322265625e-05
+  },
+  {
+    "isbn": "9788550800653",
+    "total_apis_tested": 30,
+    "successful_apis": 8,
+    "total_time": 57.20806097984314,
+    "results": [
+      {
+        "api_name": "isbnlib_default",
+        "success": false,
+        "response_time": 2.4703588485717773,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "isbnlib_mask",
+        "success": true,
+        "response_time": 8.797645568847656e-05,
+        "error": null,
+        "metadata": {
+          "result": "978-85-508-0065-3"
+        }
+      },
+      {
+        "api_name": "isbnlib_info",
+        "success": true,
+        "response_time": 3.409385681152344e-05,
+        "error": null,
+        "metadata": {
+          "result": "Brazil"
+        }
+      },
+      {
+        "api_name": "isbnlib_desc",
+        "success": true,
+        "response_time": 0.5067520141601562,
+        "error": null,
+        "metadata": {
+          "result": ""
+        }
+      },
+      {
+        "api_name": "isbnlib_classify",
+        "success": false,
+        "response_time": 20.005547046661377,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "isbnlib_editions",
+        "success": true,
+        "response_time": 11.02837586402893,
+        "error": null,
+        "metadata": {
+          "results": [
+            "9788550800653"
+          ]
+        }
+      },
+      {
+        "api_name": "isbnlib_goom",
+        "success": true,
+        "response_time": 0.9592158794403076,
+        "error": null,
+        "metadata": {
+          "results": [
+            {
+              "ISBN-13": "9788575227473",
+              "Title": "Microsserviços prontos para a produção",
+              "Authors": [
+                "Susan J. Fowler"
+              ],
+              "Publisher": "Novatec Editora",
+              "Year": "2019",
+              "Language": "pt"
+            },
+            {
+              "ISBN-13": "9788575224144",
+              "Title": "Introdução ao GitHub",
+              "Authors": [
+                "Peter Bell",
+                "Brent Beer"
+              ],
+              "Publisher": "Novatec Editora",
+              "Year": "2015",
+              "Language": "pt"
+            },
+            {
+              "ISBN-13": "9788575221365",
+              "Title": "Segurança de Redes em Ambientes Cooperativos",
+              "Authors": [
+                "Emilio Tissato Nakamura",
+                "Paulo Lício de Geus"
+              ],
+              "Publisher": "Novatec Editora",
+              "Year": "2007",
+              "Language": "pt"
+            },
+            {
+              "ISBN-13": "9788521215400",
+              "Title": "Segurança de dados",
+              "Authors": [
+                "Routo Terada"
+              ],
+              "Publisher": "Editora Blucher",
+              "Year": "2008",
+              "Language": "pt"
+            },
+            {
+              "ISBN-13": "9788540700536",
+              "Title": "Comunicação de Dados - Vol. 22: Série Livros Didáticos Informática UFRGS",
+              "Authors": [
+                "Juergen Rochol"
+              ],
+              "Publisher": "Bookman Editora",
+              "Year": "2009",
+              "Language": "pt"
+            },
+            {
+              "ISBN-13": "9788575224076",
+              "Title": "Testes de Invasão",
+              "Authors": [
+                "Georgia Weidman"
+              ],
+              "Publisher": "Novatec Editora",
+              "Year": "2014",
+              "Language": "pt"
+            },
+            {
+              "ISBN-13": "9788577804962",
+              "Title": "Redes de Computadores: Volume 20 da Série Livros didáticos informática UFRGS",
+              "Authors": [
+                "ALEXANDRE DA SILVA CARISSIMI",
+                "LISANDRO ZAMBENEDETTI GRANVILLE",
+                "JUERGEN ROCHOL"
+              ],
+              "Publisher": "Bookman",
+              "Year": "",
+              "Language": "pt"
+            },
+            {
+              "ISBN-13": "9788576089803",
+              "Title": "A relação Brasil-África",
+              "Authors": [
+                "Paulo G. Fagundes Visentini"
+              ],
+              "Publisher": "",
+              "Year": "2016",
+              "Language": "pt"
+            },
+            {
+              "ISBN-13": "9788550803555",
+              "Title": "E se colocar pimenta?",
+              "Authors": [
+                "Caito Maia",
+                "Rodolfo Araujo"
+              ],
+              "Publisher": "",
+              "Year": "2018",
+              "Language": "pt"
+            },
+            {
+              "ISBN-13": "9788577806812",
+              "Title": "Matemática Discreta para Computação e Informática: Volume 16 da Série Livros didáticos informática UFRGS",
+              "Authors": [
+                "Paulo Blauth Menezes"
+              ],
+              "Publisher": "Artmed",
+              "Year": "2010",
+              "Language": "pt"
+            }
+          ]
+        }
+      },
+      {
+        "api_name": "isbnlib_doi2tex",
+        "success": false,
+        "response_time": 0.3745560646057129,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "isbnlib_isbn10",
+        "success": true,
+        "response_time": 0.00011706352233886719,
+        "error": null,
+        "metadata": {
+          "result": "8550800651"
+        }
+      },
+      {
+        "api_name": "isbnlib_isbn13",
+        "success": true,
+        "response_time": 8.821487426757812e-06,
+        "error": null,
+        "metadata": {
+          "result": "9788550800653"
+        }
+      },
+      {
+        "api_name": "O'Reilly",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Manning",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Packt",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Apress",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "British Library",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Deutsche Nationalbibliothek",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Google Books",
+        "success": false,
+        "response_time": 0.3092937469482422,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "Open Library",
+        "success": false,
+        "response_time": 0.33171725273132324,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "Mercado Editorial",
+        "success": true,
+        "response_time": 0.18516921997070312,
+        "error": null,
+        "metadata": {
+          "title": null,
+          "authors": [],
+          "publisher": null,
+          "publishedDate": null,
+          "isbn": "9788550800653",
+          "price": null,
+          "language": "pt-BR",
+          "binding": null
+        }
+      },
+      {
+        "api_name": "Google Books BR",
+        "success": false,
+        "response_time": 0.32793426513671875,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "MyBib",
+        "success": false,
+        "response_time": 0.31954407691955566,
+        "error": "404 Client Error: Not Found for url: https://www.mybib.com/api/v1/references?q=9788550800653",
+        "metadata": null
+      },
+      {
+        "api_name": "CrossRef",
+        "success": false,
+        "response_time": 0.9785339832305908,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "Springer",
+        "success": false,
+        "response_time": 0.2317659854888916,
+        "error": "403 Client Error: Forbidden for url: https://api.springernature.com/metadata/book/isbn/9788550800653",
+        "metadata": null
+      },
+      {
+        "api_name": "Ebook.de",
+        "success": false,
+        "response_time": 0.2359790802001953,
+        "error": "404 Client Error: Not Found for url: https://www.ebook.de/de/tools/isbn2bibtex/9788550800653",
+        "metadata": null
+      },
+      {
+        "api_name": "Internet Archive",
+        "success": false,
+        "response_time": 0.33060717582702637,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "HathiTrust",
+        "success": false,
+        "response_time": 0.19943499565124512,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "Library of Congress",
+        "success": false,
+        "response_time": 1.4154078960418701,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "CBL",
+        "success": false,
+        "response_time": 3.023080825805664,
+        "error": "HTTPSConnectionPool(host='isbn.cbl.org.br', port=443): Max retries exceeded with url: /api/isbn/9788550800653 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x105c888b0>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known'))",
+        "metadata": null
+      },
+      {
+        "api_name": "ZBib",
+        "success": false,
+        "response_time": 3.0267159938812256,
+        "error": "HTTPSConnectionPool(host='api.zbib.org', port=443): Max retries exceeded with url: /v1/search?q=isbn%3A9788550800653 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x105c88760>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known'))",
+        "metadata": null
+      },
+      {
+        "api_name": "WorldCat",
+        "success": false,
+        "response_time": 10.94782280921936,
+        "error": "404 Client Error: Not Found for url: https://www.oclc.org/en/jfkdsj",
+        "metadata": null
+      }
+    ],
+    "fastest_api": "isbnlib_isbn13",
+    "best_response_time": 8.821487426757812e-06
+  },
+  {
+    "isbn": "9781718502666",
+    "total_apis_tested": 30,
+    "successful_apis": 11,
+    "total_time": 21.000364542007446,
+    "results": [
+      {
+        "api_name": "isbnlib_default",
+        "success": true,
+        "response_time": 0.5763120651245117,
+        "error": null,
+        "metadata": {
+          "ISBN-13": "9781718502666",
+          "Title": "Python Tools For Scientists - An Introduction To Using Anaconda, JupyterLab, And Python's Scientific Libraries",
+          "Authors": [
+            "Lee Vaughan"
+          ],
+          "Publisher": "No Starch Press",
+          "Year": "2023",
+          "Language": "en"
+        }
+      },
+      {
+        "api_name": "isbnlib_mask",
+        "success": true,
+        "response_time": 0.00011086463928222656,
+        "error": null,
+        "metadata": {
+          "result": "978-1-7185-0266-6"
+        }
+      },
+      {
+        "api_name": "isbnlib_info",
+        "success": true,
+        "response_time": 5.888938903808594e-05,
+        "error": null,
+        "metadata": {
+          "result": "English language"
+        }
+      },
+      {
+        "api_name": "isbnlib_desc",
+        "success": true,
+        "response_time": 0.5062708854675293,
+        "error": null,
+        "metadata": {
+          "result": "An introduction to the Python programming language and its most popular\ntools for scientists, engineers, students, and anyone who wants to use\nPython for research, simulations, and collaboration. Python Tools for\nScientists will introduce you to Python tools you can use in your\nscientific research, including Anaconda, Spyder, Jupyter Notebooks,\nJupyterLab, and numerous Python libraries. You’ll learn to use Python for\ntasks such as creating visualizations, representing geospatial information,\nsimulating natural events, and manipulating numerical data. Once you’ve\nbuilt an optimal programming environment with Anaconda, you’ll learn how to\norganize your projects and use interpreters, text editors, notebooks, and\ndevelopment environments to work with your code. Following the book’s fast-\npaced Python primer, you’ll tour a range of scientific tools and libraries\nlike scikit-learn and seaborn that you can use to manipulate and visualize\nyour data, or analyze it with machine learning algorithms. You’ll also\nlearn how to: Create isolated projects in virtual environments, build\ninteractive notebooks, test code in the Qt console, and use Spyder’s\ninteractive development features Use Python’s built-in data types, write\ncustom functions and classes, and document your code Represent data with\nthe essential NumPy, Matplotlib, and pandas libraries Use Python plotting\nlibraries like Plotly, HoloViews, and Datashader to handle large datasets\nand create 3D visualizations Regardless of your scientific field, Python\nTools for Scientists will show you how to choose the best tools to meet\nyour research and computational analysis needs."
+        }
+      },
+      {
+        "api_name": "isbnlib_classify",
+        "success": false,
+        "response_time": 0.8006851673126221,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "isbnlib_editions",
+        "success": true,
+        "response_time": 2.9484622478485107,
+        "error": null,
+        "metadata": {
+          "results": [
+            "9781718502666"
+          ]
+        }
+      },
+      {
+        "api_name": "isbnlib_goom",
+        "success": true,
+        "response_time": 0.8794229030609131,
+        "error": null,
+        "metadata": {
+          "results": [
+            {
+              "ISBN-13": "9788575225899",
+              "Title": "Princípios de Orientação a Objetos em JavaScript",
+              "Authors": [
+                "Nicholas C. Zakas"
+              ],
+              "Publisher": "Novatec Editora",
+              "Year": "2017",
+              "Language": "pt"
+            },
+            {
+              "ISBN-13": "9781718502666",
+              "Title": "Python Tools For Scientists",
+              "Authors": [
+                "Lee Vaughan"
+              ],
+              "Publisher": "No Starch Press",
+              "Year": "2023",
+              "Language": "en"
+            }
+          ]
+        }
+      },
+      {
+        "api_name": "isbnlib_doi2tex",
+        "success": false,
+        "response_time": 0.8222687244415283,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "isbnlib_isbn10",
+        "success": true,
+        "response_time": 0.00011610984802246094,
+        "error": null,
+        "metadata": {
+          "result": "1718502664"
+        }
+      },
+      {
+        "api_name": "isbnlib_isbn13",
+        "success": true,
+        "response_time": 1.0013580322265625e-05,
+        "error": null,
+        "metadata": {
+          "result": "9781718502666"
+        }
+      },
+      {
+        "api_name": "O'Reilly",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Manning",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Packt",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Apress",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "British Library",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Deutsche Nationalbibliothek",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Open Library",
+        "success": true,
+        "response_time": 0.5438008308410645,
+        "error": null,
+        "metadata": {
+          "title": "Doing Science with Python",
+          "authors": [
+            "Lee Vaughan"
+          ],
+          "publisher": "No Starch Press, Incorporated",
+          "publishedDate": "2022",
+          "isbn": "9781718502666",
+          "pages": 744,
+          "subjects": []
+        }
+      },
+      {
+        "api_name": "Mercado Editorial",
+        "success": false,
+        "response_time": 0.16202497482299805,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "CrossRef",
+        "success": false,
+        "response_time": 0.7453489303588867,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "WorldCat",
+        "success": false,
+        "response_time": 0.9549081325531006,
+        "error": "404 Client Error: Not Found for url: https://www.oclc.org/en/jfkdsj",
+        "metadata": null
+      },
+      {
+        "api_name": "Google Books",
+        "success": true,
+        "response_time": 1.0346310138702393,
+        "error": null,
+        "metadata": {
+          "title": "Python Tools for Scientists",
+          "authors": [
+            "Lee Vaughan"
+          ],
+          "publisher": "No Starch Press",
+          "publishedDate": "2023-01-17",
+          "isbn": "9781718502666",
+          "language": "en",
+          "pageCount": 744,
+          "categories": [
+            "Computers"
+          ]
+        }
+      },
+      {
+        "api_name": "MyBib",
+        "success": false,
+        "response_time": 0.2854881286621094,
+        "error": "404 Client Error: Not Found for url: https://www.mybib.com/api/v1/references?q=9781718502666",
+        "metadata": null
+      },
+      {
+        "api_name": "Ebook.de",
+        "success": false,
+        "response_time": 0.25159215927124023,
+        "error": "404 Client Error: Not Found for url: https://www.ebook.de/de/tools/isbn2bibtex/9781718502666",
+        "metadata": null
+      },
+      {
+        "api_name": "Springer",
+        "success": false,
+        "response_time": 0.2285900115966797,
+        "error": "403 Client Error: Forbidden for url: https://api.springernature.com/metadata/book/isbn/9781718502666",
+        "metadata": null
+      },
+      {
+        "api_name": "Internet Archive",
+        "success": false,
+        "response_time": 0.347639799118042,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "HathiTrust",
+        "success": false,
+        "response_time": 0.19858407974243164,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "Google Books BR",
+        "success": false,
+        "response_time": 1.142077922821045,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "CBL",
+        "success": false,
+        "response_time": 3.0251948833465576,
+        "error": "HTTPSConnectionPool(host='isbn.cbl.org.br', port=443): Max retries exceeded with url: /api/isbn/9781718502666 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x105c92400>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known'))",
+        "metadata": null
+      },
+      {
+        "api_name": "ZBib",
+        "success": false,
+        "response_time": 3.024355888366699,
+        "error": "HTTPSConnectionPool(host='api.zbib.org', port=443): Max retries exceeded with url: /v1/search?q=isbn%3A9781718502666 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x105c92910>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known'))",
+        "metadata": null
+      },
+      {
+        "api_name": "Library of Congress",
+        "success": true,
+        "response_time": 2.5224099159240723,
+        "error": null,
+        "metadata": {
+          "title": "Python tools for scientists : an introduction to coding, anaconda, jupyterlab, and the scientific libraries",
+          "authors": [
+            [
+              "vaughan, lee"
+            ]
+          ],
+          "publisher": null,
+          "publishedDate": "2023",
+          "isbn": "9781718502666",
+          "subjects": [],
+          "language": [
+            "english"
+          ]
+        }
+      }
+    ],
+    "fastest_api": "isbnlib_isbn13",
+    "best_response_time": 1.0013580322265625e-05
+  },
+  {
+    "isbn": "9781593279288",
+    "total_apis_tested": 30,
+    "successful_apis": 12,
+    "total_time": 140.39206743240356,
+    "results": [
+      {
+        "api_name": "isbnlib_default",
+        "success": true,
+        "response_time": 0.5916333198547363,
+        "error": null,
+        "metadata": {
+          "ISBN-13": "9781593279288",
+          "Title": "Python Crash Course, 2Nd Edition - A Hands-On, Project-Based Introduction To Programming",
+          "Authors": [
+            "Eric Matthes"
+          ],
+          "Publisher": "No Starch Press",
+          "Year": "2019",
+          "Language": "en"
+        }
+      },
+      {
+        "api_name": "isbnlib_mask",
+        "success": true,
+        "response_time": 9.584426879882812e-05,
+        "error": null,
+        "metadata": {
+          "result": "978-1-59327-928-8"
+        }
+      },
+      {
+        "api_name": "isbnlib_info",
+        "success": true,
+        "response_time": 3.2901763916015625e-05,
+        "error": null,
+        "metadata": {
+          "result": "English language"
+        }
+      },
+      {
+        "api_name": "isbnlib_desc",
+        "success": true,
+        "response_time": 0.5585892200469971,
+        "error": null,
+        "metadata": {
+          "result": "The best-selling Python book in the world, with over 1 million copies sold!\nA fast-paced, no-nonsense, updated guide to programming in Python. If\nyou've been thinking about learning how to code or picking up Python, this\ninternationally bestselling guide to the most popular programming language\nis your quickest, easiest way to get started and go! Even if you have no\nexperience whatsoever, Python Crash Course, 2nd Edition, will have you\nwriting programs, solving problems, building computer games, and creating\ndata visualizations in no time. You’ll begin with basic concepts like\nvariables, lists, classes, and loops—with the help of fun skill-\nstrengthening exercises for every topic—then move on to making interactive\nprograms and best practices for testing your code. Later chapters put your\nnew knowledge into play with three cool projects: a 2D Space Invaders-style\narcade game, a set of responsive data visualizations you’ll build with\nPython's handy libraries (Pygame, Matplotlib, Plotly, Django), and a\ncustomized web app you can deploy online. Why wait any longer? Start your\nengine and code!"
+        }
+      },
+      {
+        "api_name": "isbnlib_classify",
+        "success": false,
+        "response_time": 0.800213098526001,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "isbnlib_editions",
+        "success": true,
+        "response_time": 2.327578067779541,
+        "error": null,
+        "metadata": {
+          "results": [
+            "9781593279288"
+          ]
+        }
+      },
+      {
+        "api_name": "isbnlib_goom",
+        "success": true,
+        "response_time": 1.2367560863494873,
+        "error": null,
+        "metadata": {
+          "results": [
+            {
+              "ISBN-13": "9788575224465",
+              "Title": "Automatize tarefas maçantes com Python",
+              "Authors": [
+                "Al Sweigart"
+              ],
+              "Publisher": "Novatec Editora",
+              "Year": "2015",
+              "Language": "pt"
+            },
+            {
+              "ISBN-13": "9788575225783",
+              "Title": "Como o Linux funciona",
+              "Authors": [
+                "Brian Ward"
+              ],
+              "Publisher": "Novatec Editora",
+              "Year": "2017",
+              "Language": "pt"
+            },
+            {
+              "ISBN-13": "9788580866285",
+              "Title": "O humano mais humano",
+              "Authors": [
+                "Brian Christian"
+              ],
+              "Publisher": "Editora Companhia das Letras",
+              "Year": "2013",
+              "Language": "pt"
+            },
+            {
+              "ISBN-13": "9788575225035",
+              "Title": "Curso Intensivo de Python",
+              "Authors": [
+                "Eric Matthes"
+              ],
+              "Publisher": "Novatec Editora",
+              "Year": "2016",
+              "Language": "pt"
+            },
+            {
+              "ISBN-13": "9781593279288",
+              "Title": "Python Crash Course, 2Nd Edition",
+              "Authors": [
+                "Eric Matthes"
+              ],
+              "Publisher": "No Starch Press",
+              "Year": "2019",
+              "Language": "en"
+            },
+            {
+              "ISBN-13": "9788575223321",
+              "Title": "Python Cookbook",
+              "Authors": [
+                "Brian K. Jones",
+                "David Beazley"
+              ],
+              "Publisher": "Novatec Editora",
+              "Year": "2013",
+              "Language": "pt"
+            }
+          ]
+        }
+      },
+      {
+        "api_name": "isbnlib_doi2tex",
+        "success": false,
+        "response_time": 0.7083001136779785,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "isbnlib_isbn10",
+        "success": true,
+        "response_time": 0.00013685226440429688,
+        "error": null,
+        "metadata": {
+          "result": "1593279280"
+        }
+      },
+      {
+        "api_name": "isbnlib_isbn13",
+        "success": true,
+        "response_time": 1.0967254638671875e-05,
+        "error": null,
+        "metadata": {
+          "result": "9781593279288"
+        }
+      },
+      {
+        "api_name": "O'Reilly",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Manning",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Packt",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Apress",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "British Library",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Deutsche Nationalbibliothek",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Google Books",
+        "success": true,
+        "response_time": 0.5256290435791016,
+        "error": null,
+        "metadata": {
+          "title": "Python Crash Course, 2nd Edition",
+          "authors": [
+            "Eric Matthes"
+          ],
+          "publisher": "No Starch Press",
+          "publishedDate": "2019-05-03",
+          "isbn": "9781593279288",
+          "language": "en",
+          "pageCount": 546,
+          "categories": [
+            "Computers"
+          ]
+        }
+      },
+      {
+        "api_name": "Mercado Editorial",
+        "success": false,
+        "response_time": 0.18786835670471191,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "Google Books BR",
+        "success": false,
+        "response_time": 0.9926431179046631,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "CBL",
+        "success": false,
+        "response_time": 3.022407293319702,
+        "error": "HTTPSConnectionPool(host='isbn.cbl.org.br', port=443): Max retries exceeded with url: /api/isbn/9781593279288 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x103aa48b0>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known'))",
+        "metadata": null
+      },
+      {
+        "api_name": "ZBib",
+        "success": false,
+        "response_time": 3.024915933609009,
+        "error": "HTTPSConnectionPool(host='api.zbib.org', port=443): Max retries exceeded with url: /v1/search?q=isbn%3A9781593279288 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x105d2b280>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known'))",
+        "metadata": null
+      },
+      {
+        "api_name": "Ebook.de",
+        "success": false,
+        "response_time": 0.2879149913787842,
+        "error": "404 Client Error: Not Found for url: https://www.ebook.de/de/tools/isbn2bibtex/9781593279288",
+        "metadata": null
+      },
+      {
+        "api_name": "MyBib",
+        "success": false,
+        "response_time": 22.398200035095215,
+        "error": "404 Client Error: Not Found for url: https://www.mybib.com/api/v1/references?q=9781593279288",
+        "metadata": null
+      },
+      {
+        "api_name": "CrossRef",
+        "success": false,
+        "response_time": 25.7703378200531,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "Internet Archive",
+        "success": true,
+        "response_time": 0.36391782760620117,
+        "error": null,
+        "metadata": {
+          "title": "Donation From Better World Books",
+          "authors": [],
+          "publisher": null,
+          "publishedDate": null,
+          "isbn": "9781593279288",
+          "language": "eng"
+        }
+      },
+      {
+        "api_name": "Open Library",
+        "success": true,
+        "response_time": 25.960096836090088,
+        "error": null,
+        "metadata": {
+          "title": "Python Crash Course, 2nd Edition",
+          "authors": [
+            "Eric Matthes"
+          ],
+          "publisher": "No Starch Press",
+          "publishedDate": "May 03, 2019",
+          "isbn": "9781593279288",
+          "pages": 544,
+          "subjects": [
+            {
+              "name": "Python (computer program language)",
+              "url": "https://openlibrary.org/subjects/python_(computer_program_language)"
+            },
+            {
+              "name": "Criticism and interpretationmurasaki shikibu , 978?-",
+              "url": "https://openlibrary.org/subjects/criticism_and_interpretationmurasaki_shikibu_,_978?-"
+            },
+            {
+              "name": "Murasaki shikibu , 978?-",
+              "url": "https://openlibrary.org/subjects/murasaki_shikibu_,_978?-"
+            },
+            {
+              "name": "Pl788.4.z5 m87 2011",
+              "url": "https://openlibrary.org/subjects/pl788.4.z5_m87_2011"
+            },
+            {
+              "name": "Criticism and interpretation紫式部 , b. 978?",
+              "url": "https://openlibrary.org/subjects/criticism_and_interpretation紫式部_,_b._978?"
+            },
+            {
+              "name": "紫式部 , b. 978?",
+              "url": "https://openlibrary.org/subjects/紫式部_,_b._978?"
+            }
+          ]
+        }
+      },
+      {
+        "api_name": "WorldCat",
+        "success": false,
+        "response_time": 26.027506828308105,
+        "error": "404 Client Error: Not Found for url: https://www.oclc.org/en/jfkdsj",
+        "metadata": null
+      },
+      {
+        "api_name": "Springer",
+        "success": false,
+        "response_time": 21.944647073745728,
+        "error": "403 Client Error: Forbidden for url: https://api.springernature.com/metadata/book/isbn/9781593279288",
+        "metadata": null
+      },
+      {
+        "api_name": "HathiTrust",
+        "success": false,
+        "response_time": 1.2637839317321777,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "Library of Congress",
+        "success": true,
+        "response_time": 2.3988518714904785,
+        "error": null,
+        "metadata": {
+          "title": "Python crash course : a hands-on, project-based introduction to programming",
+          "authors": [
+            [
+              "matthes, eric"
+            ]
+          ],
+          "publisher": null,
+          "publishedDate": "2019",
+          "isbn": "9781593279288",
+          "subjects": [
+            "object-oriented programming (computer science)",
+            "python (computer program language)"
+          ],
+          "language": [
+            "english"
+          ]
+        }
+      }
+    ],
+    "fastest_api": "isbnlib_isbn13",
+    "best_response_time": 1.0967254638671875e-05
+  },
+  {
+    "isbn": "9781492056355",
+    "total_apis_tested": 30,
+    "successful_apis": 11,
+    "total_time": 17.61952805519104,
+    "results": [
+      {
+        "api_name": "isbnlib_default",
+        "success": true,
+        "response_time": 1.1934020519256592,
+        "error": null,
+        "metadata": {
+          "ISBN-13": "9781492056355",
+          "Title": "Fluent Python - Clear, Concise, And Effective Programming",
+          "Authors": [
+            "Luciano Ramalho"
+          ],
+          "Publisher": "",
+          "Year": "2021",
+          "Language": "en"
+        }
+      },
+      {
+        "api_name": "isbnlib_mask",
+        "success": true,
+        "response_time": 0.00013208389282226562,
+        "error": null,
+        "metadata": {
+          "result": "978-1-4920-5635-5"
+        }
+      },
+      {
+        "api_name": "isbnlib_info",
+        "success": true,
+        "response_time": 4.291534423828125e-05,
+        "error": null,
+        "metadata": {
+          "result": "English language"
+        }
+      },
+      {
+        "api_name": "isbnlib_desc",
+        "success": true,
+        "response_time": 0.5300149917602539,
+        "error": null,
+        "metadata": {
+          "result": "Python's simplicity lets you become productive quickly, but often this\nmeans you aren't using everything it has to offer. With the updated edition\nof this hands-on guide, you'll learn how to write effective, modern Python\n3 code by leveraging its best ideas. Don't waste time bending Python to fit\npatterns you learned in other languages. Discover and apply idiomatic\nPython 3 features beyond your past experience. Author Luciano Ramalho\nguides you through Python's core language features and libraries and\nteaches you how to make your code shorter, faster, and more readable.\nFeaturing major updates throughout the book, Fluent Python, second edition,\ncovers: Special methods: The key to the consistent behavior of Python\nobjects Data structures: Sequences, dicts, sets, Unicode, and data classes\nFunctions as objects: First-class functions, related design patterns, and\ntype hints in function declarations Object-oriented idioms: Composition,\ninheritance, mixins, interfaces, operator overloading, static typing and\nprotocols Control flow: Context managers, generators, coroutines,\nasync/await, and thread/process pools Metaprogramming: Properties,\nattribute descriptors, class decorators, and new class metaprogramming\nhooks that are simpler than metaclasses"
+        }
+      },
+      {
+        "api_name": "isbnlib_classify",
+        "success": false,
+        "response_time": 0.8274900913238525,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "isbnlib_editions",
+        "success": true,
+        "response_time": 2.183704137802124,
+        "error": null,
+        "metadata": {
+          "results": [
+            "9781492056355"
+          ]
+        }
+      },
+      {
+        "api_name": "isbnlib_goom",
+        "success": true,
+        "response_time": 0.7326328754425049,
+        "error": null,
+        "metadata": {
+          "results": [
+            {
+              "ISBN-13": "9788575224625",
+              "Title": "Python fluente",
+              "Authors": [
+                "Luciano Ramalho"
+              ],
+              "Publisher": "Novatec Editora",
+              "Year": "2015",
+              "Language": "pt"
+            },
+            {
+              "ISBN-13": "9781492056300",
+              "Title": "Fluent Python",
+              "Authors": [
+                "Luciano Ramalho"
+              ],
+              "Publisher": "\"O'Reilly Media, Inc.\"",
+              "Year": "2022",
+              "Language": "en"
+            },
+            {
+              "ISBN-13": "9788575223321",
+              "Title": "Python Cookbook",
+              "Authors": [
+                "Brian K. Jones",
+                "David Beazley"
+              ],
+              "Publisher": "Novatec Editora",
+              "Year": "2013",
+              "Language": "pt"
+            },
+            {
+              "ISBN-13": "9788577800131",
+              "Title": "Aprendendo Python, 2.ed",
+              "Authors": [
+                "M. Lutz",
+                "DAVID ASCHER"
+              ],
+              "Publisher": "",
+              "Year": "2007",
+              "Language": "pt"
+            }
+          ]
+        }
+      },
+      {
+        "api_name": "isbnlib_doi2tex",
+        "success": false,
+        "response_time": 0.3780350685119629,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "isbnlib_isbn10",
+        "success": true,
+        "response_time": 0.00015282630920410156,
+        "error": null,
+        "metadata": {
+          "result": "1492056359"
+        }
+      },
+      {
+        "api_name": "isbnlib_isbn13",
+        "success": true,
+        "response_time": 1.0013580322265625e-05,
+        "error": null,
+        "metadata": {
+          "result": "9781492056355"
+        }
+      },
+      {
+        "api_name": "O'Reilly",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Manning",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Packt",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Apress",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "British Library",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Deutsche Nationalbibliothek",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Open Library",
+        "success": true,
+        "response_time": 0.2971031665802002,
+        "error": null,
+        "metadata": {
+          "title": "Fluent Python",
+          "authors": [
+            "Luciano Ramalho"
+          ],
+          "publisher": "O’Reilly Media",
+          "publishedDate": "Apr 13, 2021",
+          "isbn": "9781492056355",
+          "pages": 850,
+          "subjects": [
+            {
+              "name": "Python (Computer program language)",
+              "url": "https://openlibrary.org/subjects/python_(computer_program_language)"
+            },
+            {
+              "name": "Computer programming",
+              "url": "https://openlibrary.org/subjects/computer_programming"
+            },
+            {
+              "name": "Object-oriented programming languages",
+              "url": "https://openlibrary.org/subjects/object-oriented_programming_languages"
+            },
+            {
+              "name": "Object-oriented programming (computer science)",
+              "url": "https://openlibrary.org/subjects/object-oriented_programming_(computer_science)"
+            },
+            {
+              "name": "Python (computer program language)",
+              "url": "https://openlibrary.org/subjects/python_(computer_program_language)"
+            },
+            {
+              "name": "Python (Langage de programmation)",
+              "url": "https://openlibrary.org/subjects/python_(langage_de_programmation)"
+            },
+            {
+              "name": "Langages orientés objet (Informatique)",
+              "url": "https://openlibrary.org/subjects/langages_orientés_objet_(informatique)"
+            },
+            {
+              "name": "COMPUTERS",
+              "url": "https://openlibrary.org/subjects/computers"
+            },
+            {
+              "name": "Programming Languages",
+              "url": "https://openlibrary.org/subjects/programming_languages"
+            },
+            {
+              "name": "Python",
+              "url": "https://openlibrary.org/subjects/python"
+            },
+            {
+              "name": "Aa76.73.p98",
+              "url": "https://openlibrary.org/subjects/aa76.73.p98"
+            }
+          ]
+        }
+      },
+      {
+        "api_name": "Google Books",
+        "success": true,
+        "response_time": 0.3848841190338135,
+        "error": null,
+        "metadata": {
+          "title": "Fluent Python",
+          "authors": [
+            "Luciano Ramalho"
+          ],
+          "publisher": null,
+          "publishedDate": "2021-02-09",
+          "isbn": "9781492056355",
+          "language": "en",
+          "pageCount": 850,
+          "categories": []
+        }
+      },
+      {
+        "api_name": "Mercado Editorial",
+        "success": false,
+        "response_time": 0.17316675186157227,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "CrossRef",
+        "success": false,
+        "response_time": 0.6939301490783691,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "Google Books BR",
+        "success": false,
+        "response_time": 0.34107112884521484,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "WorldCat",
+        "success": false,
+        "response_time": 0.9374251365661621,
+        "error": "404 Client Error: Not Found for url: https://www.oclc.org/en/jfkdsj",
+        "metadata": null
+      },
+      {
+        "api_name": "MyBib",
+        "success": false,
+        "response_time": 0.26677417755126953,
+        "error": "404 Client Error: Not Found for url: https://www.mybib.com/api/v1/references?q=9781492056355",
+        "metadata": null
+      },
+      {
+        "api_name": "Ebook.de",
+        "success": false,
+        "response_time": 0.3950622081756592,
+        "error": "404 Client Error: Not Found for url: https://www.ebook.de/de/tools/isbn2bibtex/9781492056355",
+        "metadata": null
+      },
+      {
+        "api_name": "Springer",
+        "success": false,
+        "response_time": 0.23250985145568848,
+        "error": "403 Client Error: Forbidden for url: https://api.springernature.com/metadata/book/isbn/9781492056355",
+        "metadata": null
+      },
+      {
+        "api_name": "Internet Archive",
+        "success": false,
+        "response_time": 0.3132328987121582,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "HathiTrust",
+        "success": false,
+        "response_time": 0.1995100975036621,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "Library of Congress",
+        "success": true,
+        "response_time": 1.4943768978118896,
+        "error": null,
+        "metadata": {
+          "title": "Fluent Python : clear, concise, and effective programming",
+          "authors": [
+            [
+              "ramalho, luciano"
+            ]
+          ],
+          "publisher": null,
+          "publishedDate": "2015",
+          "isbn": "9781492056355",
+          "subjects": [
+            "object-oriented programming languages",
+            "python (computer program language)"
+          ],
+          "language": [
+            "english"
+          ]
+        }
+      },
+      {
+        "api_name": "CBL",
+        "success": false,
+        "response_time": 3.023252248764038,
+        "error": "HTTPSConnectionPool(host='isbn.cbl.org.br', port=443): Max retries exceeded with url: /api/isbn/9781492056355 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x105d4af70>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known'))",
+        "metadata": null
+      },
+      {
+        "api_name": "ZBib",
+        "success": false,
+        "response_time": 3.0216121673583984,
+        "error": "HTTPSConnectionPool(host='api.zbib.org', port=443): Max retries exceeded with url: /v1/search?q=isbn%3A9781492056355 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x105d4a520>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known'))",
+        "metadata": null
+      }
+    ],
+    "fastest_api": "isbnlib_isbn13",
+    "best_response_time": 1.0013580322265625e-05
+  },
+  {
+    "isbn": "9781492051367",
+    "total_apis_tested": 30,
+    "successful_apis": 10,
+    "total_time": 20.64541530609131,
+    "results": [
+      {
+        "api_name": "isbnlib_default",
+        "success": false,
+        "response_time": 2.2755179405212402,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "isbnlib_mask",
+        "success": true,
+        "response_time": 0.00022983551025390625,
+        "error": null,
+        "metadata": {
+          "result": "978-1-4920-5136-7"
+        }
+      },
+      {
+        "api_name": "isbnlib_info",
+        "success": true,
+        "response_time": 8.225440979003906e-05,
+        "error": null,
+        "metadata": {
+          "result": "English language"
+        }
+      },
+      {
+        "api_name": "isbnlib_desc",
+        "success": true,
+        "response_time": 1.0905511379241943,
+        "error": null,
+        "metadata": {
+          "result": ""
+        }
+      },
+      {
+        "api_name": "isbnlib_classify",
+        "success": false,
+        "response_time": 0.8631563186645508,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "isbnlib_editions",
+        "success": true,
+        "response_time": 3.172335147857666,
+        "error": null,
+        "metadata": {
+          "results": [
+            "9781492051367"
+          ]
+        }
+      },
+      {
+        "api_name": "isbnlib_goom",
+        "success": true,
+        "response_time": 0.601815938949585,
+        "error": null,
+        "metadata": {
+          "results": [
+            {
+              "ISBN-13": "9781492051343",
+              "Title": "Introducing Python",
+              "Authors": [
+                "Bill Lubanovic"
+              ],
+              "Publisher": "O'Reilly Media",
+              "Year": "2019",
+              "Language": "en"
+            },
+            {
+              "ISBN-13": "9788575223321",
+              "Title": "Python Cookbook",
+              "Authors": [
+                "Brian K. Jones",
+                "David Beazley"
+              ],
+              "Publisher": "Novatec Editora",
+              "Year": "2013",
+              "Language": "pt"
+            },
+            {
+              "ISBN-13": "9788575226476",
+              "Title": "Python para análise de dados",
+              "Authors": [
+                "Wes McKinney"
+              ],
+              "Publisher": "Novatec Editora",
+              "Year": "",
+              "Language": "pt"
+            },
+            {
+              "ISBN-13": "9788575224472",
+              "Title": "Web Scraping com Python",
+              "Authors": [
+                "Ryan Mitchell"
+              ],
+              "Publisher": "Novatec Editora",
+              "Year": "2015",
+              "Language": "pt"
+            },
+            {
+              "ISBN-13": "9791162247648",
+              "Title": "처음 시작하는 파이썬(2판)",
+              "Authors": [
+                "빌 루바노빅"
+              ],
+              "Publisher": "한빛미디어",
+              "Year": "2020",
+              "Language": "ko"
+            },
+            {
+              "ISBN-13": "9788575225080",
+              "Title": "Pense em Python",
+              "Authors": [
+                "Allen B. Downey"
+              ],
+              "Publisher": "Novatec Editora",
+              "Year": "2016",
+              "Language": "pt"
+            },
+            {
+              "ISBN-13": "9788575224625",
+              "Title": "Python fluente",
+              "Authors": [
+                "Luciano Ramalho"
+              ],
+              "Publisher": "Novatec Editora",
+              "Year": "2015",
+              "Language": "pt"
+            }
+          ]
+        }
+      },
+      {
+        "api_name": "isbnlib_doi2tex",
+        "success": false,
+        "response_time": 0.8198592662811279,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "isbnlib_isbn10",
+        "success": true,
+        "response_time": 0.00012993812561035156,
+        "error": null,
+        "metadata": {
+          "result": "1492051365"
+        }
+      },
+      {
+        "api_name": "isbnlib_isbn13",
+        "success": true,
+        "response_time": 1.0728836059570312e-05,
+        "error": null,
+        "metadata": {
+          "result": "9781492051367"
+        }
+      },
+      {
+        "api_name": "O'Reilly",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Manning",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Packt",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Apress",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "British Library",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Deutsche Nationalbibliothek",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Open Library",
+        "success": true,
+        "response_time": 0.3102588653564453,
+        "error": null,
+        "metadata": {
+          "title": "Introducing Python",
+          "authors": [
+            "Bill Lubanovic"
+          ],
+          "publisher": "O'Reilly Media",
+          "publishedDate": "Dec 03, 2019",
+          "isbn": "9781492051367",
+          "pages": 630,
+          "subjects": [
+            {
+              "name": "Development",
+              "url": "https://openlibrary.org/subjects/development"
+            },
+            {
+              "name": "Python (Computer program language)",
+              "url": "https://openlibrary.org/subjects/python_(computer_program_language)"
+            },
+            {
+              "name": "Application software",
+              "url": "https://openlibrary.org/subjects/application_software"
+            },
+            {
+              "name": "Python (Langage de programmation)",
+              "url": "https://openlibrary.org/subjects/python_(langage_de_programmation)"
+            },
+            {
+              "name": "Logiciels d'application",
+              "url": "https://openlibrary.org/subjects/logiciels_d'application"
+            },
+            {
+              "name": "Développement",
+              "url": "https://openlibrary.org/subjects/développement"
+            },
+            {
+              "name": "COMPUTERS",
+              "url": "https://openlibrary.org/subjects/computers"
+            },
+            {
+              "name": "Programming Languages",
+              "url": "https://openlibrary.org/subjects/programming_languages"
+            },
+            {
+              "name": "Python",
+              "url": "https://openlibrary.org/subjects/python"
+            },
+            {
+              "name": "Games",
+              "url": "https://openlibrary.org/subjects/games"
+            },
+            {
+              "name": "Com051360",
+              "url": "https://openlibrary.org/subjects/com051360"
+            },
+            {
+              "name": "Cs.cmp_sc.prog_lang",
+              "url": "https://openlibrary.org/subjects/cs.cmp_sc.prog_lang"
+            }
+          ]
+        }
+      },
+      {
+        "api_name": "Google Books",
+        "success": false,
+        "response_time": 0.33466005325317383,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "Mercado Editorial",
+        "success": false,
+        "response_time": 0.14240074157714844,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "Google Books BR",
+        "success": false,
+        "response_time": 0.34612584114074707,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "CrossRef",
+        "success": false,
+        "response_time": 0.7408599853515625,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "WorldCat",
+        "success": false,
+        "response_time": 0.9443421363830566,
+        "error": "404 Client Error: Not Found for url: https://www.oclc.org/en/jfkdsj",
+        "metadata": null
+      },
+      {
+        "api_name": "Ebook.de",
+        "success": false,
+        "response_time": 0.23769807815551758,
+        "error": "404 Client Error: Not Found for url: https://www.ebook.de/de/tools/isbn2bibtex/9781492051367",
+        "metadata": null
+      },
+      {
+        "api_name": "MyBib",
+        "success": false,
+        "response_time": 0.3211948871612549,
+        "error": "404 Client Error: Not Found for url: https://www.mybib.com/api/v1/references?q=9781492051367",
+        "metadata": null
+      },
+      {
+        "api_name": "Springer",
+        "success": false,
+        "response_time": 0.22537517547607422,
+        "error": "403 Client Error: Forbidden for url: https://api.springernature.com/metadata/book/isbn/9781492051367",
+        "metadata": null
+      },
+      {
+        "api_name": "Internet Archive",
+        "success": true,
+        "response_time": 0.30454301834106445,
+        "error": null,
+        "metadata": {
+          "title": "Pallets from BWB for 2023-02-03",
+          "authors": [],
+          "publisher": null,
+          "publishedDate": null,
+          "isbn": "9781492051367",
+          "language": null
+        }
+      },
+      {
+        "api_name": "HathiTrust",
+        "success": false,
+        "response_time": 0.19792485237121582,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "Library of Congress",
+        "success": true,
+        "response_time": 1.6577081680297852,
+        "error": null,
+        "metadata": {
+          "title": "Introducing Python : modern computing in simple packages",
+          "authors": [
+            [
+              "lubanovic, bill"
+            ]
+          ],
+          "publisher": null,
+          "publishedDate": "2019",
+          "isbn": "9781492051367",
+          "subjects": [
+            "development",
+            "application software",
+            "python (computer program language)"
+          ],
+          "language": [
+            "english"
+          ]
+        }
+      },
+      {
+        "api_name": "CBL",
+        "success": false,
+        "response_time": 3.037214994430542,
+        "error": "HTTPSConnectionPool(host='isbn.cbl.org.br', port=443): Max retries exceeded with url: /api/isbn/9781492051367 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x105d2b040>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known'))",
+        "metadata": null
+      },
+      {
+        "api_name": "ZBib",
+        "success": false,
+        "response_time": 3.0214200019836426,
+        "error": "HTTPSConnectionPool(host='api.zbib.org', port=443): Max retries exceeded with url: /v1/search?q=isbn%3A9781492051367 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x105d2b760>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known'))",
+        "metadata": null
+      }
+    ],
+    "fastest_api": "isbnlib_isbn13",
+    "best_response_time": 1.0728836059570312e-05
+  },
+  {
+    "isbn": "9780134685991",
+    "total_apis_tested": 15,
+    "successful_apis": 8,
+    "total_time": 13.18954062461853,
+    "results": [
+      {
+        "api_name": "isbnlib_default",
+        "success": false,
+        "response_time": 2.2139477729797363,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "isbnlib_mask",
+        "success": true,
+        "response_time": 0.00012493133544921875,
+        "error": null,
+        "metadata": {
+          "result": "978-0-13-468599-1"
+        }
+      },
+      {
+        "api_name": "isbnlib_info",
+        "success": true,
+        "response_time": 3.790855407714844e-05,
+        "error": null,
+        "metadata": {
+          "result": "English language"
+        }
+      },
+      {
+        "api_name": "isbnlib_desc",
+        "success": true,
+        "response_time": 0.5153670310974121,
+        "error": null,
+        "metadata": {
+          "result": ""
+        }
+      },
+      {
+        "api_name": "isbnlib_classify",
+        "success": false,
+        "response_time": 0.8086850643157959,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "isbnlib_editions",
+        "success": true,
+        "response_time": 2.673811912536621,
+        "error": null,
+        "metadata": {
+          "results": [
+            "9780134685991"
+          ]
+        }
+      },
+      {
+        "api_name": "isbnlib_goom",
+        "success": true,
+        "response_time": 0.6078922748565674,
+        "error": null,
+        "metadata": {
+          "results": [
+            {
+              "ISBN-13": "9789892345673",
+              "Title": "Stranger Things - Nova Iorque sob Trevas",
+              "Authors": [
+                "Adam Christopher"
+              ],
+              "Publisher": "Leya",
+              "Year": "2019",
+              "Language": "pt"
+            },
+            {
+              "ISBN-13": "9788595080508",
+              "Title": "O inimigo do povo",
+              "Authors": [
+                "Jim Acosta"
+              ],
+              "Publisher": "HARLEQUIN",
+              "Year": "2019",
+              "Language": "pt"
+            }
+          ]
+        }
+      },
+      {
+        "api_name": "isbnlib_doi2tex",
+        "success": false,
+        "response_time": 0.9696371555328369,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "isbnlib_isbn10",
+        "success": true,
+        "response_time": 0.00010514259338378906,
+        "error": null,
+        "metadata": {
+          "result": "0134685997"
+        }
+      },
+      {
+        "api_name": "isbnlib_isbn13",
+        "success": true,
+        "response_time": 1.0013580322265625e-05,
+        "error": null,
+        "metadata": {
+          "result": "9780134685991"
+        }
+      },
+      {
+        "api_name": "Springer",
+        "success": false,
+        "response_time": 0.2230081558227539,
+        "error": "403 Client Error: Forbidden for url: https://api.springernature.com/metadata/book/isbn/9780134685991",
+        "metadata": null
+      },
+      {
+        "api_name": "Open Library",
+        "success": true,
+        "response_time": 0.2875542640686035,
+        "error": null,
+        "metadata": {
+          "title": "Effective Java",
+          "authors": [
+            "Joshua Bloch"
+          ],
+          "publisher": "Addison-Wesley Professional",
+          "publishedDate": "December 27, 2017",
+          "isbn": "9780134685991",
+          "pages": 416,
+          "subjects": [
+            {
+              "name": "Java (Computer program language)",
+              "url": "https://openlibrary.org/subjects/java_(computer_program_language)"
+            },
+            {
+              "name": "Object-oriented programming (Computer science)",
+              "url": "https://openlibrary.org/subjects/object-oriented_programming_(computer_science)"
+            },
+            {
+              "name": "Java 2.",
+              "url": "https://openlibrary.org/subjects/java_2."
+            },
+            {
+              "name": "Java yu yan",
+              "url": "https://openlibrary.org/subjects/java_yu_yan"
+            },
+            {
+              "name": "Cheng xu she ji",
+              "url": "https://openlibrary.org/subjects/cheng_xu_she_ji"
+            },
+            {
+              "name": "Qa76.73.j38",
+              "url": "https://openlibrary.org/subjects/qa76.73.j38"
+            },
+            {
+              "name": "Qa76.73.j38 b57 2001",
+              "url": "https://openlibrary.org/subjects/qa76.73.j38_b57_2001"
+            },
+            {
+              "name": "005.13/3",
+              "url": "https://openlibrary.org/subjects/005.13/3"
+            },
+            {
+              "name": "Literary collections",
+              "url": "https://openlibrary.org/subjects/literary_collections"
+            }
+          ]
+        }
+      },
+      {
+        "api_name": "Google Books",
+        "success": false,
+        "response_time": 0.33383822441101074,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "WorldCat",
+        "success": false,
+        "response_time": 0.9169197082519531,
+        "error": "404 Client Error: Not Found for url: https://www.oclc.org/en/jfkdsj",
+        "metadata": null
+      },
+      {
+        "api_name": "CrossRef",
+        "success": false,
+        "response_time": 3.638601064682007,
+        "error": "No results found",
+        "metadata": null
+      }
+    ],
+    "fastest_api": "isbnlib_isbn13",
+    "best_response_time": 1.0013580322265625e-05
+  },
+  {
+    "isbn": "9781119775553",
+    "total_apis_tested": 30,
+    "successful_apis": 6,
+    "total_time": 18.307162761688232,
+    "results": [
+      {
+        "api_name": "isbnlib_default",
+        "success": false,
+        "response_time": 1.9837839603424072,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "isbnlib_mask",
+        "success": true,
+        "response_time": 0.00012969970703125,
+        "error": null,
+        "metadata": {
+          "result": "978-1-119-77555-3"
+        }
+      },
+      {
+        "api_name": "isbnlib_info",
+        "success": true,
+        "response_time": 4.076957702636719e-05,
+        "error": null,
+        "metadata": {
+          "result": "English language"
+        }
+      },
+      {
+        "api_name": "isbnlib_desc",
+        "success": true,
+        "response_time": 0.47237706184387207,
+        "error": null,
+        "metadata": {
+          "result": ""
+        }
+      },
+      {
+        "api_name": "isbnlib_classify",
+        "success": false,
+        "response_time": 0.8143651485443115,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "isbnlib_editions",
+        "success": true,
+        "response_time": 2.6467738151550293,
+        "error": null,
+        "metadata": {
+          "results": [
+            "9781119775553"
+          ]
+        }
+      },
+      {
+        "api_name": "isbnlib_goom",
+        "success": false,
+        "response_time": 0.4880099296569824,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "isbnlib_doi2tex",
+        "success": false,
+        "response_time": 0.680401086807251,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "isbnlib_isbn10",
+        "success": true,
+        "response_time": 0.00011301040649414062,
+        "error": null,
+        "metadata": {
+          "result": "1119775558"
+        }
+      },
+      {
+        "api_name": "isbnlib_isbn13",
+        "success": true,
+        "response_time": 8.106231689453125e-06,
+        "error": null,
+        "metadata": {
+          "result": "9781119775553"
+        }
+      },
+      {
+        "api_name": "O'Reilly",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Manning",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Packt",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Apress",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "British Library",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Deutsche Nationalbibliothek",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Open Library",
+        "success": false,
+        "response_time": 0.3000771999359131,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "Google Books",
+        "success": false,
+        "response_time": 0.30466675758361816,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "Mercado Editorial",
+        "success": false,
+        "response_time": 0.1506810188293457,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "CrossRef",
+        "success": false,
+        "response_time": 0.7504949569702148,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "WorldCat",
+        "success": false,
+        "response_time": 0.9482021331787109,
+        "error": "404 Client Error: Not Found for url: https://www.oclc.org/en/jfkdsj",
+        "metadata": null
+      },
+      {
+        "api_name": "MyBib",
+        "success": false,
+        "response_time": 0.3142051696777344,
+        "error": "404 Client Error: Not Found for url: https://www.mybib.com/api/v1/references?q=9781119775553",
+        "metadata": null
+      },
+      {
+        "api_name": "Ebook.de",
+        "success": false,
+        "response_time": 0.24273896217346191,
+        "error": "404 Client Error: Not Found for url: https://www.ebook.de/de/tools/isbn2bibtex/9781119775553",
+        "metadata": null
+      },
+      {
+        "api_name": "Google Books BR",
+        "success": false,
+        "response_time": 0.9644660949707031,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "Springer",
+        "success": false,
+        "response_time": 0.22431421279907227,
+        "error": "403 Client Error: Forbidden for url: https://api.springernature.com/metadata/book/isbn/9781119775553",
+        "metadata": null
+      },
+      {
+        "api_name": "HathiTrust",
+        "success": false,
+        "response_time": 0.1926429271697998,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "Internet Archive",
+        "success": false,
+        "response_time": 0.38115596771240234,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "Library of Congress",
+        "success": false,
+        "response_time": 0.40267491340637207,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "CBL",
+        "success": false,
+        "response_time": 3.021972894668579,
+        "error": "HTTPSConnectionPool(host='isbn.cbl.org.br', port=443): Max retries exceeded with url: /api/isbn/9781119775553 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x105d00700>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known'))",
+        "metadata": null
+      },
+      {
+        "api_name": "ZBib",
+        "success": false,
+        "response_time": 3.02286696434021,
+        "error": "HTTPSConnectionPool(host='api.zbib.org', port=443): Max retries exceeded with url: /v1/search?q=isbn%3A9781119775553 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x105d00130>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known'))",
+        "metadata": null
+      }
+    ],
+    "fastest_api": "isbnlib_isbn13",
+    "best_response_time": 8.106231689453125e-06
+  },
+  {
+    "isbn": "9781118951309",
+    "total_apis_tested": 30,
+    "successful_apis": 12,
+    "total_time": 40.91078424453735,
+    "results": [
+      {
+        "api_name": "isbnlib_default",
+        "success": true,
+        "response_time": 1.229640007019043,
+        "error": null,
+        "metadata": {
+          "ISBN-13": "9781118951309",
+          "Title": "Coding For Dummies",
+          "Authors": [
+            "Nikhil Abraham"
+          ],
+          "Publisher": "John Wiley & Sons",
+          "Year": "2015",
+          "Language": "en"
+        }
+      },
+      {
+        "api_name": "isbnlib_mask",
+        "success": true,
+        "response_time": 0.00010704994201660156,
+        "error": null,
+        "metadata": {
+          "result": "978-1-118-95130-9"
+        }
+      },
+      {
+        "api_name": "isbnlib_info",
+        "success": true,
+        "response_time": 3.6716461181640625e-05,
+        "error": null,
+        "metadata": {
+          "result": "English language"
+        }
+      },
+      {
+        "api_name": "isbnlib_desc",
+        "success": true,
+        "response_time": 1.2685809135437012,
+        "error": null,
+        "metadata": {
+          "result": "\"Explore the basics of HTML, CSS, JavaScript, Ruby, and Python and find out\nhow you can use them to build great web applications.\" -- Back cover."
+        }
+      },
+      {
+        "api_name": "isbnlib_classify",
+        "success": false,
+        "response_time": 20.005086183547974,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "isbnlib_editions",
+        "success": true,
+        "response_time": 4.566879034042358,
+        "error": null,
+        "metadata": {
+          "results": [
+            "9781118951309"
+          ]
+        }
+      },
+      {
+        "api_name": "isbnlib_goom",
+        "success": true,
+        "response_time": 0.9032540321350098,
+        "error": null,
+        "metadata": {
+          "results": [
+            {
+              "ISBN-13": "9781119296072",
+              "Title": "Coding For Dummies",
+              "Authors": [
+                "Nikhil Abraham"
+              ],
+              "Publisher": "John Wiley & Sons",
+              "Year": "2016",
+              "Language": "en"
+            },
+            {
+              "ISBN-13": "9788577800131",
+              "Title": "Aprendendo Python, 2.ed",
+              "Authors": [
+                "M. Lutz",
+                "DAVID ASCHER"
+              ],
+              "Publisher": "",
+              "Year": "2007",
+              "Language": "pt"
+            }
+          ]
+        }
+      },
+      {
+        "api_name": "isbnlib_doi2tex",
+        "success": false,
+        "response_time": 0.7351150512695312,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "isbnlib_isbn10",
+        "success": true,
+        "response_time": 0.000125885009765625,
+        "error": null,
+        "metadata": {
+          "result": "1118951301"
+        }
+      },
+      {
+        "api_name": "isbnlib_isbn13",
+        "success": true,
+        "response_time": 1.0013580322265625e-05,
+        "error": null,
+        "metadata": {
+          "result": "9781118951309"
+        }
+      },
+      {
+        "api_name": "O'Reilly",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Manning",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Packt",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Apress",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "British Library",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Deutsche Nationalbibliothek",
+        "success": false,
+        "response_time": 0,
+        "error": "API key not provided",
+        "metadata": null
+      },
+      {
+        "api_name": "Open Library",
+        "success": true,
+        "response_time": 0.3232607841491699,
+        "error": null,
+        "metadata": {
+          "title": "Coding for dummies",
+          "authors": [
+            "Nikhil Abraham"
+          ],
+          "publisher": null,
+          "publishedDate": "2015",
+          "isbn": "9781118951309",
+          "pages": 260,
+          "subjects": [
+            {
+              "name": "Internet programming",
+              "url": "https://openlibrary.org/subjects/internet_programming"
+            },
+            {
+              "name": "Development",
+              "url": "https://openlibrary.org/subjects/development"
+            },
+            {
+              "name": "Computer programming",
+              "url": "https://openlibrary.org/subjects/computer_programming"
+            },
+            {
+              "name": "Application software",
+              "url": "https://openlibrary.org/subjects/application_software"
+            },
+            {
+              "name": "Html (document markup language)",
+              "url": "https://openlibrary.org/subjects/html_(document_markup_language)"
+            },
+            {
+              "name": "Cascading style sheets",
+              "url": "https://openlibrary.org/subjects/cascading_style_sheets"
+            },
+            {
+              "name": "HTML (Document markup language)",
+              "url": "https://openlibrary.org/subjects/html_(document_markup_language)"
+            }
+          ]
+        }
+      },
+      {
+        "api_name": "Google Books",
+        "success": true,
+        "response_time": 0.39295411109924316,
+        "error": null,
+        "metadata": {
+          "title": "Coding For Dummies",
+          "authors": [
+            "Nikhil Abraham"
+          ],
+          "publisher": "John Wiley & Sons",
+          "publishedDate": "2015-02-24",
+          "isbn": "9781118951309",
+          "language": "en",
+          "pageCount": 288,
+          "categories": [
+            "Computers"
+          ]
+        }
+      },
+      {
+        "api_name": "Mercado Editorial",
+        "success": false,
+        "response_time": 0.1559131145477295,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "Google Books BR",
+        "success": false,
+        "response_time": 0.34220123291015625,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "CrossRef",
+        "success": false,
+        "response_time": 0.7728698253631592,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "WorldCat",
+        "success": false,
+        "response_time": 0.9452028274536133,
+        "error": "404 Client Error: Not Found for url: https://www.oclc.org/en/jfkdsj",
+        "metadata": null
+      },
+      {
+        "api_name": "MyBib",
+        "success": false,
+        "response_time": 0.2754099369049072,
+        "error": "404 Client Error: Not Found for url: https://www.mybib.com/api/v1/references?q=9781118951309",
+        "metadata": null
+      },
+      {
+        "api_name": "Ebook.de",
+        "success": false,
+        "response_time": 0.23660707473754883,
+        "error": "404 Client Error: Not Found for url: https://www.ebook.de/de/tools/isbn2bibtex/9781118951309",
+        "metadata": null
+      },
+      {
+        "api_name": "Springer",
+        "success": false,
+        "response_time": 0.22888803482055664,
+        "error": "403 Client Error: Forbidden for url: https://api.springernature.com/metadata/book/isbn/9781118951309",
+        "metadata": null
+      },
+      {
+        "api_name": "HathiTrust",
+        "success": false,
+        "response_time": 0.2026371955871582,
+        "error": "No results found",
+        "metadata": null
+      },
+      {
+        "api_name": "Library of Congress",
+        "success": true,
+        "response_time": 0.9446871280670166,
+        "error": null,
+        "metadata": {
+          "title": "Coding for dummies",
+          "authors": [
+            [
+              "abraham, nikhil"
+            ]
+          ],
+          "publisher": null,
+          "publishedDate": "2015",
+          "isbn": "9781118951309",
+          "subjects": [
+            "html (document markup language)",
+            "computer programming",
+            "cascading style sheets"
+          ],
+          "language": [
+            "english"
+          ]
+        }
+      },
+      {
+        "api_name": "Internet Archive",
+        "success": true,
+        "response_time": 1.3351097106933594,
+        "error": null,
+        "metadata": {
+          "title": "Donation From Better World Books",
+          "authors": [],
+          "publisher": null,
+          "publishedDate": null,
+          "isbn": "9781118951309",
+          "language": "eng"
+        }
+      },
+      {
+        "api_name": "CBL",
+        "success": false,
+        "response_time": 3.022855281829834,
+        "error": "HTTPSConnectionPool(host='isbn.cbl.org.br', port=443): Max retries exceeded with url: /api/isbn/9781118951309 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x105cf4a90>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known'))",
+        "metadata": null
+      },
+      {
+        "api_name": "ZBib",
+        "success": false,
+        "response_time": 3.023353099822998,
+        "error": "HTTPSConnectionPool(host='api.zbib.org', port=443): Max retries exceeded with url: /v1/search?q=isbn%3A9781118951309 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x105cf4bb0>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known'))",
+        "metadata": null
+      }
+    ],
+    "fastest_api": "isbnlib_isbn13",
+    "best_response_time": 1.0013580322265625e-05
+  }
+]

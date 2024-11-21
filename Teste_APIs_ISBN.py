@@ -1799,7 +1799,7 @@ class ISBNAPITester:
         if 'timeout' in error:
             return 'Timeout'
         elif 'not found' in error:
-            return 'Not Found'
+            return 'Not Found' 
         elif 'key' in error and ('invalid' in error or 'missing' in error):
             return 'API Key Error'
         elif 'rate limit' in error or '429' in error:
@@ -1808,7 +1808,7 @@ class ISBNAPITester:
             return 'Server Error'
         elif 'connection' in error:
             return 'Connection Error'
-        return 'Other'
+        return 'Other'  # <- Este é o motivo de vermos tantos "Other" no relatório
 
     def _identify_publisher(self, isbn: str) -> str:
         """Identifica editora pelo ISBN."""
