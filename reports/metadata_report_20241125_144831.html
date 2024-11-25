@@ -1,0 +1,349 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Book Metadata Extraction Report</title>
+            <style>
+                body {
+                    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+                    line-height: 1.5;
+                    max-width: 1200px;
+                    margin: 0 auto;
+                    padding: 20px;
+                    background: #f8f9fa;
+                }
+                .card {
+                    background: white;
+                    border-radius: 8px;
+                    padding: 20px;
+                    margin-bottom: 20px;
+                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                }
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin: 1em 0;
+                }
+                th, td {
+                    padding: 12px;
+                    border: 1px solid #dee2e6;
+                    text-align: left;
+                }
+                th { background: #f8f9fa; }
+                tr:hover { background: #f8f9fa; }
+                .success { color: #28a745; }
+                .warning { color: #ffc107; }
+                .failure { color: #dc3545; }
+                .chart-container {
+                    height: 400px;
+                    margin: 20px 0;
+                }
+                .file-path {
+                    font-family: monospace;
+                    font-size: 0.9em;
+                }
+                .error-detail {
+                    color: #dc3545;
+                    font-size: 0.9em;
+                }
+                .todo-note {
+                    background: #fff3cd;
+                    border-left: 4px solid #ffc107;
+                    padding: 15px;
+                    margin: 20px 0;
+                    border-radius: 4px;
+                }
+                .tabs {
+                    display: flex;
+                    margin-bottom: 20px;
+                }
+                .tab {
+                    padding: 10px 20px;
+                    cursor: pointer;
+                    border: none;
+                    background: #f8f9fa;
+                    margin-right: 5px;
+                    border-radius: 4px 4px 0 0;
+                }
+                .tab.active {
+                    background: white;
+                    border-bottom: 2px solid #007bff;
+                }
+                .tab-content {
+                    display: none;
+                }
+                .tab-content.active {
+                    display: block;
+                }
+            </style>
+            <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        </head>
+        <body>
+            <h1>Book Metadata Extraction Report</h1>
+            <p>Generated: 2024-11-25 14:48:31</p>
+            
+            <div class="tabs">
+                <button class="tab active" onclick="openTab(event, 'overview')">Overview</button>
+                <button class="tab" onclick="openTab(event, 'api-stats')">API Stats</button>
+                <button class="tab" onclick="openTab(event, 'publishers')">Publishers</button>
+                <button class="tab" onclick="openTab(event, 'results')">Results</button>
+                <button class="tab" onclick="openTab(event, 'failures')">Failed Files</button>
+            </div>
+
+            <div id="overview" class="tab-content active">
+                <div class="card">
+                    <h2>Overview</h2>
+                    <table>
+                        <tr>
+                            <th>Total Files Processed</th>
+                            <td>11</td>
+                        </tr>
+                        <tr>
+                            <th>Successful Extractions</th>
+                            <td class="success">0</td>
+                        </tr>
+                        <tr>
+                            <th>Failed Extractions</th>
+                            <td class="failure">11</td>
+                        </tr>
+                        <tr>
+                            <th>Success Rate</th>
+                            <td>0.0%</td>
+                        </tr>
+                        <tr>
+                            <th>Average Processing Time</th>
+                            <td>0.17s</td>
+                        </tr>
+                    </table>
+                    <div id="summaryChart" class="chart-container"></div>
+                </div>
+            </div>
+
+            <div id="api-stats" class="tab-content">
+                <div class="card">
+                    <h2>API Performance</h2>
+                    <div id="apiChart" class="chart-container"></div>
+                    <table>
+                        <tr>
+                            <th>API Source</th>
+                            <th>Successful Extractions</th>
+                            <th>Success Rate</th>
+                        </tr>
+                        
+                    </table>
+                </div>
+            </div>
+
+            <div id="publishers" class="tab-content">
+                <div class="card">
+                    <h2>Publisher Statistics</h2>
+                    <div id="publisherChart" class="chart-container"></div>
+                    <table>
+                        <tr>
+                            <th>Publisher</th>
+                            <th>Books</th>
+                            <th>Percentage</th>
+                        </tr>
+                        
+                    </table>
+                </div>
+            </div>
+
+            <div id="results" class="tab-content">
+                <div class="card">
+                    <h2>Successful Results</h2>
+                    <table>
+                        <tr>
+                            <th>Title</th>
+                            <th>Authors</th>
+                            <th>Publisher</th>
+                            <th>ISBN</th>
+                            <th>Confidence</th>
+                            <th>Source</th>
+                        </tr>
+                        
+                    </table>
+                </div>
+            </div>
+
+            <div id="failures" class="tab-content">
+                <div class="card">
+                    <h2>Failed Files Analysis</h2>
+                    <div class="todo-note">
+                        <strong>TO DO:</strong> Implement aggressive detection methods for these files
+                    </div>
+                    <table>
+                        <tr>
+                            <th>File Path</th>
+                            <th>Status</th>
+                            <th>Extraction Methods</th>
+                            <th>Found ISBNs</th>
+                            <th>Publisher</th>
+                            <th>Errors</th>
+                        </tr>
+                        
+            <tr>
+                <td class="file-path">/Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf</td>
+                <td>No ISBN found in file</td>
+                <td>PyPDF2</td>
+                <td>None</td>
+                <td>Unknown</td>
+                <td class="error-detail"></td>
+            </tr>
+            
+            <tr>
+                <td class="file-path">/Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf</td>
+                <td>Unknown error</td>
+                <td>PyPDF2</td>
+                <td>9781119895213, 9781119895220, 9781119895237</td>
+                <td>Unknown</td>
+                <td class="error-detail">ISBN 9781119895213: 'api_attempts'<br>ISBN 9781119895220: 'api_attempts'<br>ISBN 9781119895237: 'api_attempts'</td>
+            </tr>
+            
+            <tr>
+                <td class="file-path">/Users/menon/Downloads/ansible_upandrunning3rdedition.pdf</td>
+                <td>Unknown error</td>
+                <td>PyPDF2</td>
+                <td>9781098109158</td>
+                <td>Unknown</td>
+                <td class="error-detail">ISBN 9781098109158: 'api_attempts'</td>
+            </tr>
+            
+            <tr>
+                <td class="file-path">/Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf</td>
+                <td>Unknown error</td>
+                <td>PyPDF2</td>
+                <td>9781803237015</td>
+                <td>Unknown</td>
+                <td class="error-detail">ISBN 9781803237015: 'api_attempts'</td>
+            </tr>
+            
+            <tr>
+                <td class="file-path">/Users/menon/Downloads/bashcookbook.pdf</td>
+                <td>Unknown error</td>
+                <td>PyPDF2</td>
+                <td>9781491975336</td>
+                <td>Unknown</td>
+                <td class="error-detail">ISBN 9781491975336: 'api_attempts'</td>
+            </tr>
+            
+            <tr>
+                <td class="file-path">/Users/menon/Downloads/bugbountybootcamp.pdf</td>
+                <td>Unknown error</td>
+                <td>PyPDF2</td>
+                <td>9781718501553, 9781718501546</td>
+                <td>Unknown</td>
+                <td class="error-detail">ISBN 9781718501546: 'api_attempts'<br>ISBN 9781718501553: 'api_attempts'</td>
+            </tr>
+            
+            <tr>
+                <td class="file-path">/Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf</td>
+                <td>Unknown error</td>
+                <td>PyPDF2</td>
+                <td>9786586110340, 9786586110357, 9786586110364</td>
+                <td>Unknown</td>
+                <td class="error-detail">ISBN 9786586110340: 'api_attempts'<br>ISBN 9786586110340: 'api_attempts'<br>ISBN 9786586110357: 'api_attempts'<br>ISBN 9786586110364: 'api_attempts'</td>
+            </tr>
+            
+            <tr>
+                <td class="file-path">/Users/menon/Downloads/hardwarehackinghandbook.pdf</td>
+                <td>Unknown error</td>
+                <td>PyPDF2</td>
+                <td>9781593278755, 9781593278748</td>
+                <td>Unknown</td>
+                <td class="error-detail">ISBN 9781593278748: 'api_attempts'<br>ISBN 9781593278755: 'api_attempts'</td>
+            </tr>
+            
+            <tr>
+                <td class="file-path">/Users/menon/Downloads/javaperformance2ndedition.pdf</td>
+                <td>Unknown error</td>
+                <td>PyPDF2</td>
+                <td>9781492056119</td>
+                <td>Unknown</td>
+                <td class="error-detail">ISBN 9781492056119: 'api_attempts'</td>
+            </tr>
+            
+            <tr>
+                <td class="file-path">/Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf</td>
+                <td>Unknown error</td>
+                <td>PyPDF2</td>
+                <td>9788575227510</td>
+                <td>Unknown</td>
+                <td class="error-detail">ISBN 9788575227510: 'api_attempts'</td>
+            </tr>
+            
+            <tr>
+                <td class="file-path">/Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf</td>
+                <td>Unknown error</td>
+                <td>PyPDF2</td>
+                <td>9781394158492, 9781394158508, 9781394158485</td>
+                <td>Unknown</td>
+                <td class="error-detail">ISBN 9781394158485: 'api_attempts'<br>ISBN 9781394158492: 'api_attempts'<br>ISBN 9781394158508: 'api_attempts'</td>
+            </tr>
+            
+                    </table>
+                </div>
+            </div>
+
+            <script>
+            function openTab(evt, tabName) {
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("tab-content");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].className = tabcontent[i].className.replace(" active", "");
+                }
+                tablinks = document.getElementsByClassName("tab");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+                document.getElementById(tabName).className += " active";
+                evt.currentTarget.className += " active";
+                
+                // Reflow charts when tab is shown
+                if (tabName === 'overview') {
+                    Plotly.relayout('summaryChart', {});
+                } else if (tabName === 'api-stats') {
+                    Plotly.relayout('apiChart', {});
+                } else if (tabName === 'publishers') {
+                    Plotly.relayout('publisherChart', {});
+                }
+            }
+
+            // Summary Chart
+            const summaryData = [{
+                values: [0, 11],
+                labels: ['Successful', 'Failed'],
+                type: 'pie',
+                marker: {
+                    colors: ['#28a745', '#dc3545']
+                }
+            }];
+            Plotly.newPlot('summaryChart', summaryData);
+
+            // API Performance Chart
+            const apiData = [{
+                x: [],
+                y: [],
+                type: 'bar',
+                marker: {
+                    color: '#17a2b8'
+                }
+            }];
+            const apiLayout = {
+                title: 'Successful Extractions by API',
+                xaxis: { tickangle: -45 }
+            };
+            Plotly.newPlot('apiChart', apiData, apiLayout);
+
+            // Publisher Chart
+            const publisherData = [{
+                labels: [],
+                values: [],
+                type: 'pie'
+            }];
+            Plotly.newPlot('publisherChart', publisherData);
+            </script>
+        </body>
+        </html>
+        

@@ -893,32 +893,55 @@ class MetadataFetcher:
         if cached:
             return BookMetadata(**cached)
 
-        # Lista de fetchers (mantida igual)
+        # Lista de fetchers 
         fetchers = [
-            # APIs primárias - melhor desempenho comprovado
-            (self.fetch_google_books, 9),      # 50% sucesso - mantida como primária
-            (self.fetch_openlibrary, 8.5),     # 60% sucesso - melhor desempenho geral
-            (self.fetch_worldcat, 7.5),        # 55.6% sucesso - bom desempenho
+            # Tier 1: APIs mais rápidas e confiáveis
+            (self.fetch_openlibrary, 9.9),     # 100% sucesso, 2.20s
+            (self.fetch_loc, 9.8),             # Rápido (0.49s) mas precisa fix XML
             
-            # ISBNlib primeiro (mais confiável)
-            (self.fetch_isbnlib_meta, 9.5),    # isbnlib.meta()
-            (self.fetch_isbnlib_goom, 9.0),    # isbnlib.goom()
+            # Tier 2: ISBNlib com boa performance
+            (self.fetch_isbnlib_info, 9.5),    # 54.5% sucesso, 3.16s
+            (self.fetch_isbnlib_mask, 9.4),    # 54.5% sucesso, 3.95s
             
-            # APIs secundárias - desempenho moderado
-            (self.fetch_internet_archive, 7),   # 33.3% sucesso
-            (self.fetch_crossref, 6.5),        # Taxa moderada de sucesso
-            (self.fetch_google_books_br, 6),    # 11.1% sucesso mas útil para livros BR
-            (self.fetch_mercado_editorial, 5.5) # 11.1% sucesso mas mantida para BR
+            # Tier 3: APIs com performance média
+            (self.fetch_google_books, 8.5),     # Rápido (0.60s) mas baixo sucesso
+            (self.fetch_internet_archive, 8.0), # 1.13s
+            
+            # Tier 4: Fallbacks lentos
+            (self.fetch_isbnlib_editions, 7.0), # Muito lento (6.85s)
+            (self.fetch_isbnlib_default, 6.5),  # Lento (4.01s)
         ]
-
-        # Ajusta scores de confiança (mantido igual)
+        # No método fetch_metadata da classe MetadataFetcher
         confidence_adjustments = {
-            'google_books': 0.50,    # 50% taxa de sucesso
-            'openlibrary': 0.60,     # 60% taxa de sucesso
-            'worldcat': 0.55,        # ~55% taxa de sucesso
-            'internet_archive': 0.33, # 33.3% taxa de sucesso
-            'google_books_br': 0.11,  # 11.1% taxa de sucesso
-            'mercado_editorial': 0.11 # 11.1% taxa de sucesso
+            # ISBNlib - Tier 1 (rápidos e 100% confiáveis)
+            'isbnlib_mask': 0.99,      # 100% sucesso, 0.000s
+            'isbnlib_info': 0.98,      # 100% sucesso, 0.000s
+            'isbnlib_isbn10': 0.97,    # 100% sucesso, 0.000s
+            'isbnlib_isbn13': 0.97,    # 100% sucesso, 0.000s
+            
+            # ISBNlib - Tier 2 (confiáveis mas mais lentos)
+            'isbnlib_desc': 0.95,      # 100% sucesso, 0.712s
+            'isbnlib_goom': 0.90,      # 90% sucesso, 0.847s
+            
+            # ISBNlib - Tier 3 (mais lentos)
+            'isbnlib_editions': 0.85,  # 100% sucesso, 4.045s
+            'isbnlib_default': 0.60,   # 60% sucesso, 1.432s
+            
+            # APIs Externas - Performance Real
+            'openlibrary': 0.60,       # 60% sucesso, 4.620s
+            'loc': 0.556,             # 55.6% sucesso, 1.804s
+            'google_books': 0.50,      # 50% sucesso, 0.541s
+            'internet_archive': 0.33,  # 33.3% sucesso, 0.668s
+            'google_books_br': 0.11,   # 11.1% sucesso, 0.417s
+            
+            # APIs com dados insuficientes mantém baixa confiança até termos métricas
+            'worldcat': 0.30,         # Necessita validação melhor
+            'mercado_editorial': 0.20, # Necessita validação
+            'springer': 0.20,         # Necessita validação
+            'oreilly': 0.20,          # Necessita validação
+            'zbib': 0.20,             # Necessita validação
+            'mybib': 0.20,            # Necessita validação
+            'ebook_de': 0.20          # Necessita validação
         }
 
         all_results = []
@@ -1046,6 +1069,258 @@ class MetadataFetcher:
 
         return previous_row[-1]
 
+    def fetch_isbnlib_mask(self, isbn: str) -> Optional[BookMetadata]:
+        """Busca usando isbnlib.mask() - formatação canônica do ISBN."""
+        try:
+            import isbnlib
+            if not isbnlib.is_isbn13(isbn) and not isbnlib.is_isbn10(isbn):
+                return None
+                
+            # Formata o ISBN no formato canônico
+            masked_isbn = isbnlib.mask(isbn)
+            if not masked_isbn:
+                return None
+                
+            # Busca metadados usando o ISBN formatado
+            metadata = isbnlib.meta(masked_isbn)
+            if not metadata:
+                return None
+                
+            return BookMetadata(
+                title=metadata.get('Title', '').strip(),
+                authors=[a.strip() for a in metadata.get('Authors', [])],
+                publisher=metadata.get('Publisher', '').strip(),
+                published_date=metadata.get('Year', 'Unknown'),
+                isbn_13=isbn if len(isbn) == 13 else None,
+                isbn_10=isbn if len(isbn) == 10 else None,
+                confidence_score=0.99,  # 100% success rate
+                source='isbnlib_mask'
+            )
+        except Exception as e:
+            logging.error(f"ISBNlib mask error for ISBN {isbn}: {str(e)}")
+            return None
+
+    def fetch_loc(self, isbn: str) -> Optional[BookMetadata]:
+        """Busca na API da Library of Congress."""
+        try:
+            # URL da API da LoC
+            url = f"https://lccn.loc.gov/{isbn}/marc21.xml"
+            response = self.session.get(url, timeout=10)
+            
+            if response.status_code == 200:
+                # Parse do XML
+                root = ET.fromstring(response.content)
+                
+                # Busca os campos MARC relevantes
+                title = None
+                authors = []
+                publisher = None
+                published_date = None
+                
+                # Procura no XML os campos MARC21
+                for field in root.findall(".//marc:datafield", {'marc': 'http://www.loc.gov/MARC21/slim'}):
+                    tag = field.get('tag')
+                    
+                    if tag == '245':  # Título
+                        title = ' '.join(subfield.text for subfield in field.findall(".//marc:subfield[@code='a']", {'marc': 'http://www.loc.gov/MARC21/slim'}))
+                        
+                    elif tag == '100':  # Autor principal
+                        author = ' '.join(subfield.text for subfield in field.findall(".//marc:subfield[@code='a']", {'marc': 'http://www.loc.gov/MARC21/slim'}))
+                        if author:
+                            authors.append(author)
+                            
+                    elif tag == '700':  # Autores adicionais
+                        author = ' '.join(subfield.text for subfield in field.findall(".//marc:subfield[@code='a']", {'marc': 'http://www.loc.gov/MARC21/slim'}))
+                        if author:
+                            authors.append(author)
+                            
+                    elif tag == '260' or tag == '264':  # Publicação
+                        publisher = ' '.join(subfield.text for subfield in field.findall(".//marc:subfield[@code='b']", {'marc': 'http://www.loc.gov/MARC21/slim'}))
+                        published_date = ' '.join(subfield.text for subfield in field.findall(".//marc:subfield[@code='c']", {'marc': 'http://www.loc.gov/MARC21/slim'}))
+                
+                # Validação mais rigorosa dos dados
+                if not title or not authors or not publisher:
+                    logging.warning(f"LoC: Dados incompletos para ISBN {isbn}")
+                    return None
+                    
+                # Remove pontuação extra e limpa os dados
+                if title:
+                    title = title.strip(' /.,')
+                if publisher:
+                    publisher = publisher.strip(' /.,')
+                if published_date:
+                    published_date = re.sub(r'[^\d]', '', published_date)
+                    
+                return BookMetadata(
+                    title=title,
+                    authors=[a.strip(' /.,') for a in authors],
+                    publisher=publisher,
+                    published_date=published_date or 'Unknown',
+                    isbn_13=isbn if len(isbn) == 13 else None,
+                    isbn_10=isbn if len(isbn) == 10 else None,
+                    confidence_score=0.556,  # 55.6% success rate
+                    source='loc'
+                )
+        except Exception as e:
+            logging.error(f"Library of Congress API error for ISBN {isbn}: {str(e)}")
+            return None
+
+    def fetch_isbnlib_info(self, isbn: str) -> Optional[BookMetadata]:
+        """Busca usando isbnlib.info() - informações básicas do ISBN."""
+        try:
+            import isbnlib
+            if not isbnlib.is_isbn13(isbn) and not isbnlib.is_isbn10(isbn):
+                return None
+                
+            # Obtém informações básicas do ISBN
+            info = isbnlib.info(isbn)
+            if not info:
+                return None
+                
+            # Usa o info para buscar metadados completos
+            metadata = isbnlib.meta(isbn)
+            if not metadata:
+                return None
+                
+            return BookMetadata(
+                title=metadata.get('Title', '').strip(),
+                authors=[a.strip() for a in metadata.get('Authors', [])],
+                publisher=metadata.get('Publisher', '').strip(),
+                published_date=metadata.get('Year', 'Unknown'),
+                isbn_13=isbn if len(isbn) == 13 else None,
+                isbn_10=isbn if len(isbn) == 10 else None,
+                confidence_score=0.98,  # 100% success rate
+                source='isbnlib_info'
+            )
+        except Exception as e:
+            logging.error(f"ISBNlib info error for ISBN {isbn}: {str(e)}")
+            return None
+
+    def fetch_isbnlib_desc(self, isbn: str) -> Optional[BookMetadata]:
+        """Busca usando isbnlib.desc() - descrição detalhada."""
+        try:
+            import isbnlib
+            if not isbnlib.is_isbn13(isbn) and not isbnlib.is_isbn10(isbn):
+                return None
+                
+            # Obtém descrição detalhada
+            desc = isbnlib.desc(isbn)
+            if not desc:
+                return None
+                
+            # Busca metadados completos
+            metadata = isbnlib.meta(isbn)
+            if not metadata:
+                return None
+                
+            return BookMetadata(
+                title=metadata.get('Title', '').strip(),
+                authors=[a.strip() for a in metadata.get('Authors', [])],
+                publisher=metadata.get('Publisher', '').strip(),
+                published_date=metadata.get('Year', 'Unknown'),
+                isbn_13=isbn if len(isbn) == 13 else None,
+                isbn_10=isbn if len(isbn) == 10 else None,
+                confidence_score=0.95,  # 100% success rate, but slower
+                source='isbnlib_desc'
+            )
+        except Exception as e:
+            logging.error(f"ISBNlib desc error for ISBN {isbn}: {str(e)}")
+            return None
+
+    def fetch_isbnlib_editions(self, isbn: str) -> Optional[BookMetadata]:
+        """Busca usando isbnlib.editions() - todas as edições do livro."""
+        try:
+            import isbnlib
+            if not isbnlib.is_isbn13(isbn) and not isbnlib.is_isbn10(isbn):
+                return None
+                
+            # Obtém todas as edições
+            editions = isbnlib.editions(isbn)
+            if not editions:
+                return None
+                
+            # Usa o ISBN original para buscar metadados
+            metadata = isbnlib.meta(isbn)
+            if not metadata:
+                return None
+                
+            return BookMetadata(
+                title=metadata.get('Title', '').strip(),
+                authors=[a.strip() for a in metadata.get('Authors', [])],
+                publisher=metadata.get('Publisher', '').strip(),
+                published_date=metadata.get('Year', 'Unknown'),
+                isbn_13=isbn if len(isbn) == 13 else None,
+                isbn_10=isbn if len(isbn) == 10 else None,
+                confidence_score=0.85,  # 100% success rate, but slowest
+                source='isbnlib_editions'
+            )
+        except Exception as e:
+            logging.error(f"ISBNlib editions error for ISBN {isbn}: {str(e)}")
+            return None
+
+    def fetch_isbnlib_isbn10(self, isbn: str) -> Optional[BookMetadata]:
+        """Busca usando isbnlib para ISBN-10."""
+        try:
+            import isbnlib
+            if not isbnlib.is_isbn13(isbn) and not isbnlib.is_isbn10(isbn):
+                return None
+                
+            # Converte para ISBN-10 se necessário
+            isbn10 = isbnlib.to_isbn10(isbn) if len(isbn) == 13 else isbn
+            if not isbn10:
+                return None
+                
+            # Busca metadados usando ISBN-10
+            metadata = isbnlib.meta(isbn10)
+            if not metadata:
+                return None
+                
+            return BookMetadata(
+                title=metadata.get('Title', '').strip(),
+                authors=[a.strip() for a in metadata.get('Authors', [])],
+                publisher=metadata.get('Publisher', '').strip(),
+                published_date=metadata.get('Year', 'Unknown'),
+                isbn_13=None,
+                isbn_10=isbn10,
+                confidence_score=0.97,  # 100% success rate
+                source='isbnlib_isbn10'
+            )
+        except Exception as e:
+            logging.error(f"ISBNlib ISBN-10 error for ISBN {isbn}: {str(e)}")
+            return None
+
+    def fetch_isbnlib_isbn13(self, isbn: str) -> Optional[BookMetadata]:
+        """Busca usando isbnlib para ISBN-13."""
+        try:
+            import isbnlib
+            if not isbnlib.is_isbn13(isbn) and not isbnlib.is_isbn10(isbn):
+                return None
+                
+            # Converte para ISBN-13 se necessário
+            isbn13 = isbnlib.to_isbn13(isbn) if len(isbn) == 10 else isbn
+            if not isbn13:
+                return None
+                
+            # Busca metadados usando ISBN-13
+            metadata = isbnlib.meta(isbn13)
+            if not metadata:
+                return None
+                
+            return BookMetadata(
+                title=metadata.get('Title', '').strip(),
+                authors=[a.strip() for a in metadata.get('Authors', [])],
+                publisher=metadata.get('Publisher', '').strip(),
+                published_date=metadata.get('Year', 'Unknown'),
+                isbn_13=isbn13,
+                isbn_10=None,
+                confidence_score=0.97,  # 100% success rate
+                source='isbnlib_isbn13'
+            )
+        except Exception as e:
+            logging.error(f"ISBNlib ISBN-13 error for ISBN {isbn}: {str(e)}")
+            return None
+
+
     def fetch_cbl(self, isbn: str) -> Optional[BookMetadata]:
         """Busca na API da Câmara Brasileira do Livro."""
         try:
@@ -1069,6 +1344,32 @@ class MetadataFetcher:
             )
         except Exception as e:
             logging.error(f"CBL API error: {str(e)}")
+            return None
+
+    def fetch_isbnlib_default(self, isbn: str) -> Optional[BookMetadata]:
+        """Busca usando o serviço padrão do isbnlib."""
+        try:
+            import isbnlib
+            if not isbnlib.is_isbn13(isbn) and not isbnlib.is_isbn10(isbn):
+                return None
+                
+            # Usa o serviço padrão do isbnlib
+            metadata = isbnlib.meta(isbn, service='default')
+            if not metadata:
+                return None
+                
+            return BookMetadata(
+                title=metadata.get('Title', '').strip(),
+                authors=[a.strip() for a in metadata.get('Authors', [])],
+                publisher=metadata.get('Publisher', '').strip(),
+                published_date=metadata.get('Year', 'Unknown'),
+                isbn_13=isbn if len(isbn) == 13 else None,
+                isbn_10=isbn if len(isbn) == 10 else None,
+                confidence_score=0.80,  # 60% success rate
+                source='isbnlib_default'
+            )
+        except Exception as e:
+            logging.error(f"ISBNlib default error for ISBN {isbn}: {str(e)}")
             return None
 
     def fetch_mercado_editorial(self, isbn: str) -> Optional[BookMetadata]:
@@ -1101,7 +1402,7 @@ class MetadataFetcher:
             return None
 
     def fetch_google_books(self, isbn: str) -> Optional[BookMetadata]:
-        """Busca na API do Google Books global."""
+        """Busca na API do Google Books com validação melhorada."""
         try:
             url = f"https://www.googleapis.com/books/v1/volumes?q=isbn:{isbn}"
             response = self.session.get(url, timeout=10)
@@ -1112,9 +1413,27 @@ class MetadataFetcher:
                 
             book_info = data['items'][0]['volumeInfo']
             
+            # Validação mais rigorosa
+            if (not book_info.get('title') or 
+                not book_info.get('authors') or 
+                not book_info.get('publisher')):
+                logging.warning(f"Google Books: Dados incompletos para ISBN {isbn}")
+                return None
+                
+            # Se publisher for Unknown, tenta próxima API
+            if book_info.get('publisher', 'Unknown') == 'Unknown':
+                logging.warning(f"Google Books: Publisher desconhecido para ISBN {isbn}")
+                return None
+            
+            # Validação adicional dos autores
+            authors = book_info.get('authors', [])
+            if not authors or any(not author.strip() for author in authors):
+                logging.warning(f"Google Books: Dados de autores inválidos para ISBN {isbn}")
+                return None
+            
             return BookMetadata(
                 title=book_info.get('title', 'Unknown'),
-                authors=book_info.get('authors', ['Unknown']),
+                authors=authors,
                 publisher=book_info.get('publisher', 'Unknown'),
                 published_date=book_info.get('publishedDate', 'Unknown'),
                 isbn_13=isbn if len(isbn) == 13 else None,
@@ -1123,8 +1442,28 @@ class MetadataFetcher:
                 source='google_books'
             )
         except Exception as e:
-            logging.error(f"Google Books API error: {str(e)}")
-            raise
+            logging.error(f"Google Books API error for ISBN {isbn}: {str(e)}")
+            return None
+
+    def fetch_isbnlib_meta(self, isbn: str) -> Optional[BookMetadata]:
+        """Busca metadados usando isbnlib.meta()"""
+        try:
+            import isbnlib
+            metadata = isbnlib.meta(isbn)
+            if metadata:
+                return BookMetadata(
+                    title=metadata.get('Title', 'Unknown'),
+                    authors=metadata.get('Authors', ['Unknown']),
+                    publisher=metadata.get('Publisher', 'Unknown'),
+                    published_date=metadata.get('Year', 'Unknown'),
+                    isbn_13=isbn if len(isbn) == 13 else None,
+                    isbn_10=isbn if len(isbn) == 10 else None,
+                    confidence_score=0.95,
+                    source='isbnlib_meta'
+                )
+        except Exception as e:
+            logging.error(f"ISBNlib meta error: {str(e)}")
+            return None
 
     def fetch_google_books_br(self, isbn: str) -> Optional[BookMetadata]:
         """Busca na API do Google Books com filtro para Brasil."""
@@ -1184,8 +1523,50 @@ class MetadataFetcher:
             logging.error(f"Open Library API error: {str(e)}")
             raise
 
+    def fetch_isbnlib_goom(self, isbn: str) -> Optional[BookMetadata]:
+        """Busca metadados usando isbnlib.goom() - otimizado para Google Books."""
+        try:
+            import isbnlib
+            if not isbnlib.is_isbn13(isbn) and not isbnlib.is_isbn10(isbn):
+                logging.warning(f"ISBNlib: ISBN inválido {isbn}")
+                return None
+                
+            metadata = isbnlib.goom(isbn)
+            if not metadata:
+                return None
+                
+            # Validação mais rigorosa dos dados
+            if (not metadata.get('Title') or 
+                not metadata.get('Authors') or 
+                not metadata.get('Publisher')):
+                logging.warning(f"ISBNlib goom: Dados incompletos para ISBN {isbn}")
+                return None
+                
+            # Validação de dados inválidos/unknown
+            if any(v.strip() == 'Unknown' for v in [
+                metadata.get('Title', ''),
+                metadata.get('Publisher', ''),
+                *metadata.get('Authors', [])
+            ]):
+                logging.warning(f"ISBNlib goom: Dados inválidos para ISBN {isbn}")
+                return None
+            
+            return BookMetadata(
+                title=metadata['Title'].strip(),
+                authors=[author.strip() for author in metadata['Authors']],
+                publisher=metadata['Publisher'].strip(),
+                published_date=metadata.get('Year', 'Unknown'),
+                isbn_13=isbn if len(isbn) == 13 else None,
+                isbn_10=isbn if len(isbn) == 10 else None,
+                confidence_score=0.90,  # Alta confiança devido à validação rigorosa
+                source='isbnlib_goom'
+            )
+        except Exception as e:
+            logging.error(f"ISBNlib goom error for ISBN {isbn}: {str(e)}")
+            return None
+
     def fetch_worldcat(self, isbn: str) -> Optional[BookMetadata]:
-        """Busca no WorldCat."""
+        """Busca no WorldCat com validação melhorada."""
         try:
             base_url = "https://www.worldcat.org/isbn/" + isbn
             response = self.session.get(base_url, timeout=5)
@@ -1194,23 +1575,32 @@ class MetadataFetcher:
                 from bs4 import BeautifulSoup
                 soup = BeautifulSoup(response.text, 'html.parser')
                 
-                # Atualiza a busca para usar 'string' em vez de 'text'
                 title = soup.find('h1', {'class': 'title'})
                 authors = soup.find_all('a', {'class': 'author'})
-                publisher = soup.find('td', string='Publisher')  # <- Mudança aqui
+                publisher = soup.find('td', string='Publisher')
+                published_date = soup.find('td', string='Date')
+                
+                # Validação mais rigorosa
+                if not title or not authors or not publisher:
+                    logging.warning(f"WorldCat: Dados incompletos para ISBN {isbn}")
+                    return None
+                    
+                if any(x.strip() == 'Unknown' for x in [title.text, publisher.next_sibling.text]):
+                    logging.warning(f"WorldCat: Dados inválidos para ISBN {isbn}")
+                    return None
                 
                 return BookMetadata(
-                    title=title.text if title else 'Unknown',
-                    authors=[a.text for a in authors] if authors else ['Unknown'],
-                    publisher=publisher.next_sibling.text if publisher else 'Unknown',
-                    published_date='Unknown',
+                    title=title.text.strip(),
+                    authors=[a.text.strip() for a in authors if a.text.strip()],
+                    publisher=publisher.next_sibling.text.strip(),
+                    published_date=published_date.next_sibling.text.strip() if published_date else 'Unknown',
                     isbn_13=isbn if len(isbn) == 13 else None,
                     isbn_10=isbn if len(isbn) == 10 else None,
                     confidence_score=0.75,
                     source='worldcat'
                 )
         except Exception as e:
-            logging.error(f"WorldCat error: {str(e)}")
+            logging.error(f"WorldCat error for ISBN {isbn}: {str(e)}")
             return None
 
     def fetch_zbib(self, isbn: str) -> Optional[BookMetadata]:
@@ -1513,16 +1903,81 @@ class MetadataFetcher:
             if metadata:
                 self.cache.set(asdict(metadata))
 
-    def rescan_cache(self) -> None:
-        """Verifica todos os registros no cache e atualiza aqueles com pontuação de confiança inferior."""
-        all_metadata = self.cache.get_all()
-        for metadata in all_metadata:
-            # Consulta os metadados usando o ISBN
-            new_metadata = self.fetch_metadata(metadata['isbn_10'] or metadata['isbn_13'])
+    def update_low_confidence_records(self, confidence_threshold: float = 0.7) -> int:
+        """
+        Atualiza registros do cache que têm pontuação de confiança abaixo do limiar.
+        
+        Args:
+            confidence_threshold: Limite de confiança para atualização (default: 0.7)
             
-            # Atualiza o registro apenas se a nova pontuação de confiança for maior
-            if new_metadata and new_metadata.confidence_score > metadata['confidence_score']:
-                self.cache.update(asdict(new_metadata))
+        Returns:
+            int: Número de registros atualizados
+        """
+        try:
+            all_records = self.cache.get_all()
+            updated_count = 0
+            
+            for record in all_records:
+                # Verifica se o registro tem baixa confiança
+                if record['confidence_score'] < confidence_threshold:
+                    isbn = record['isbn_13'] or record['isbn_10']
+                    logging.info(f"Tentando atualizar registro de baixa confiança: {isbn}")
+                    
+                    try:
+                        # Tenta obter novos metadados
+                        new_metadata = self.fetch_metadata(isbn)
+                        
+                        # Atualiza apenas se encontrou dados melhores
+                        if new_metadata and new_metadata.confidence_score > record['confidence_score']:
+                            self.cache.update(asdict(new_metadata))
+                            updated_count += 1
+                            logging.info(f"Atualizado ISBN {isbn}: {record['confidence_score']} -> {new_metadata.confidence_score}")
+                    except Exception as e:
+                        logging.error(f"Erro ao atualizar ISBN {isbn}: {str(e)}")
+                        continue
+                        
+            return updated_count
+            
+        except Exception as e:
+            logging.error(f"Erro ao atualizar registros: {str(e)}")
+            return 0
+
+    def rescan_cache(self) -> int:
+        """
+        Reprocessa todos os registros do cache, independente da pontuação de confiança.
+        
+        Returns:
+            int: Número de registros atualizados
+        """
+        try:
+            all_records = self.cache.get_all()
+            updated_count = 0
+            
+            for record in all_records:
+                isbn = record['isbn_13'] or record['isbn_10']
+                logging.info(f"Rescaneando registro: {isbn}")
+                
+                try:
+                    # Tenta obter novos metadados
+                    new_metadata = self.fetch_metadata(isbn)
+                    
+                    # Atualiza se encontrou dados novos
+                    if new_metadata:
+                        if new_metadata.confidence_score > record['confidence_score']:
+                            self.cache.update(asdict(new_metadata))
+                            updated_count += 1
+                            logging.info(f"Atualizado ISBN {isbn}: {record['confidence_score']} -> {new_metadata.confidence_score}")
+                        else:
+                            logging.info(f"Mantido ISBN {isbn}: dados existentes são melhores")
+                except Exception as e:
+                    logging.error(f"Erro ao processar ISBN {isbn}: {str(e)}")
+                    continue
+                    
+            return updated_count
+            
+        except Exception as e:
+            logging.error(f"Erro ao rescanear cache: {str(e)}")
+            return 0
             
 class PDFProcessor:
     def __init__(self):
@@ -2145,15 +2600,15 @@ class BookMetadataExtractor:
 
     def _generate_html_report(self, results, source_stats, publisher_stats, 
                             runtime_stats, total_files, successful, failed, avg_time, output_file):
-        """Gera relatório HTML com visualizações aprimoradas."""
+        """Gera relatório HTML com visualizações aprimoradas e análise de falhas."""
         
-        # Prepara dados para os gráficos
-        source_keys = list(map(repr, source_stats.keys()))  # usa repr para strings em JavaScript
+        # Código existente para preparar dados permanece o mesmo
+        source_keys = list(map(repr, source_stats.keys()))
         source_values = list(source_stats.values())
         publisher_keys = list(map(repr, publisher_stats.keys()))
         publisher_values = list(publisher_stats.values())
 
-        # Gera as linhas da tabela de APIs
+        # Código existente para gerar linhas das tabelas permanece o mesmo
         api_rows = ""
         for source, count in source_stats.items():
             success_rate = (count/successful*100) if successful > 0 else 0
@@ -2165,7 +2620,6 @@ class BookMetadataExtractor:
             </tr>
             """
 
-        # Gera as linhas da tabela de editoras
         publisher_rows = ""
         for publisher, count in publisher_stats.items():
             percentage = (count/successful*100) if successful > 0 else 0
@@ -2177,10 +2631,9 @@ class BookMetadataExtractor:
             </tr>
             """
 
-        # Gera as linhas da tabela de resultados
         result_rows = ""
         for r in results:
-            if r is not None:  # Verifica se o resultado é válido
+            if r is not None:
                 result_rows += f"""
                 <tr>
                     <td>{r.title}</td>
@@ -2192,7 +2645,30 @@ class BookMetadataExtractor:
                 </tr>
                 """
 
-        # Template HTML principal
+        # Nova seção: Gera linhas para arquivos que falharam
+        failed_rows = ""
+        failed_files = set(runtime_stats['processed_files']) - {r.file_path for r in results if r is not None}
+        
+        for file_path in sorted(failed_files):
+            details = runtime_stats['failure_details'].get(file_path, {})
+            methods = ', '.join(details.get('extraction_methods', ['None']))
+            isbns = ', '.join(details.get('found_isbns', ['None']))
+            status = details.get('status', 'Unknown error')
+            publisher = details.get('detected_publisher', 'Unknown')
+            errors = '<br>'.join(runtime_stats['api_errors'].get(file_path, ['None']))
+            
+            failed_rows += f"""
+            <tr>
+                <td class="file-path">{file_path}</td>
+                <td>{status}</td>
+                <td>{methods}</td>
+                <td>{isbns}</td>
+                <td>{publisher}</td>
+                <td class="error-detail">{errors}</td>
+            </tr>
+            """
+
+        # Template HTML com nova seção de Failed Files
         html_content = f"""
         <!DOCTYPE html>
         <html>
@@ -2230,28 +2706,46 @@ class BookMetadataExtractor:
                 .success {{ color: #28a745; }}
                 .warning {{ color: #ffc107; }}
                 .failure {{ color: #dc3545; }}
-                .progress-bar {{
-                    height: 8px;
-                    background: #e9ecef;
-                    border-radius: 4px;
-                    overflow: hidden;
-                    margin: 10px 0;
-                }}
-                .progress-fill {{
-                    height: 100%;
-                    background: #28a745;
-                    transition: width 0.3s ease;
-                }}
-                .error-box {{
-                    background: #fff5f5;
-                    padding: 15px;
-                    border-radius: 4px;
-                    margin: 10px 0;
-                    border-left: 4px solid #dc3545;
-                }}
                 .chart-container {{
                     height: 400px;
                     margin: 20px 0;
+                }}
+                .file-path {{
+                    font-family: monospace;
+                    font-size: 0.9em;
+                }}
+                .error-detail {{
+                    color: #dc3545;
+                    font-size: 0.9em;
+                }}
+                .todo-note {{
+                    background: #fff3cd;
+                    border-left: 4px solid #ffc107;
+                    padding: 15px;
+                    margin: 20px 0;
+                    border-radius: 4px;
+                }}
+                .tabs {{
+                    display: flex;
+                    margin-bottom: 20px;
+                }}
+                .tab {{
+                    padding: 10px 20px;
+                    cursor: pointer;
+                    border: none;
+                    background: #f8f9fa;
+                    margin-right: 5px;
+                    border-radius: 4px 4px 0 0;
+                }}
+                .tab.active {{
+                    background: white;
+                    border-bottom: 2px solid #007bff;
+                }}
+                .tab-content {{
+                    display: none;
+                }}
+                .tab-content.active {{
+                    display: block;
                 }}
             </style>
             <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
@@ -2260,108 +2754,167 @@ class BookMetadataExtractor:
             <h1>Book Metadata Extraction Report</h1>
             <p>Generated: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}</p>
             
-            <div class="card">
-                <h2>Overview</h2>
-                <table>
-                    <tr>
-                        <th>Total Files Processed</th>
-                        <td>{total_files}</td>
-                    </tr>
-                    <tr>
-                        <th>Successful Extractions</th>
-                        <td class="success">{successful}</td>
-                    </tr>
-                    <tr>
-                        <th>Failed Extractions</th>
-                        <td class="failure">{failed}</td>
-                    </tr>
-                    <tr>
-                        <th>Success Rate</th>
-                        <td>{(successful/total_files*100):.1f}%</td>
-                    </tr>
-                    <tr>
-                        <th>Average Processing Time</th>
-                        <td>{avg_time:.2f}s</td>
-                    </tr>
-                </table>
-                <div id="summaryChart" class="chart-container"></div>
+            <div class="tabs">
+                <button class="tab active" onclick="openTab(event, 'overview')">Overview</button>
+                <button class="tab" onclick="openTab(event, 'api-stats')">API Stats</button>
+                <button class="tab" onclick="openTab(event, 'publishers')">Publishers</button>
+                <button class="tab" onclick="openTab(event, 'results')">Results</button>
+                <button class="tab" onclick="openTab(event, 'failures')">Failed Files</button>
             </div>
 
-            <div class="card">
-                <h2>API Performance</h2>
-                <div id="apiChart" class="chart-container"></div>
-                <table>
-                    <tr>
-                        <th>API Source</th>
-                        <th>Successful Extractions</th>
-                        <th>Success Rate</th>
-                    </tr>
-                    {api_rows}
-                </table>
+            <div id="overview" class="tab-content active">
+                <div class="card">
+                    <h2>Overview</h2>
+                    <table>
+                        <tr>
+                            <th>Total Files Processed</th>
+                            <td>{total_files}</td>
+                        </tr>
+                        <tr>
+                            <th>Successful Extractions</th>
+                            <td class="success">{successful}</td>
+                        </tr>
+                        <tr>
+                            <th>Failed Extractions</th>
+                            <td class="failure">{failed}</td>
+                        </tr>
+                        <tr>
+                            <th>Success Rate</th>
+                            <td>{(successful/total_files*100):.1f}%</td>
+                        </tr>
+                        <tr>
+                            <th>Average Processing Time</th>
+                            <td>{avg_time:.2f}s</td>
+                        </tr>
+                    </table>
+                    <div id="summaryChart" class="chart-container"></div>
+                </div>
             </div>
 
-            <div class="card">
-                <h2>Publisher Statistics</h2>
-                <div id="publisherChart" class="chart-container"></div>
-                <table>
-                    <tr>
-                        <th>Publisher</th>
-                        <th>Books</th>
-                        <th>Percentage</th>
-                    </tr>
-                    {publisher_rows}
-                </table>
+            <div id="api-stats" class="tab-content">
+                <div class="card">
+                    <h2>API Performance</h2>
+                    <div id="apiChart" class="chart-container"></div>
+                    <table>
+                        <tr>
+                            <th>API Source</th>
+                            <th>Successful Extractions</th>
+                            <th>Success Rate</th>
+                        </tr>
+                        {api_rows}
+                    </table>
+                </div>
             </div>
 
-            <div class="card">
-                <h2>Detailed Results</h2>
-                <table>
-                    <tr>
-                        <th>Title</th>
-                        <th>Authors</th>
-                        <th>Publisher</th>
-                        <th>ISBN</th>
-                        <th>Confidence</th>
-                        <th>Source</th>
-                    </tr>
-                    {result_rows}
-                </table>
+            <div id="publishers" class="tab-content">
+                <div class="card">
+                    <h2>Publisher Statistics</h2>
+                    <div id="publisherChart" class="chart-container"></div>
+                    <table>
+                        <tr>
+                            <th>Publisher</th>
+                            <th>Books</th>
+                            <th>Percentage</th>
+                        </tr>
+                        {publisher_rows}
+                    </table>
+                </div>
+            </div>
+
+            <div id="results" class="tab-content">
+                <div class="card">
+                    <h2>Successful Results</h2>
+                    <table>
+                        <tr>
+                            <th>Title</th>
+                            <th>Authors</th>
+                            <th>Publisher</th>
+                            <th>ISBN</th>
+                            <th>Confidence</th>
+                            <th>Source</th>
+                        </tr>
+                        {result_rows}
+                    </table>
+                </div>
+            </div>
+
+            <div id="failures" class="tab-content">
+                <div class="card">
+                    <h2>Failed Files Analysis</h2>
+                    <div class="todo-note">
+                        <strong>TO DO:</strong> Implement aggressive detection methods for these files
+                    </div>
+                    <table>
+                        <tr>
+                            <th>File Path</th>
+                            <th>Status</th>
+                            <th>Extraction Methods</th>
+                            <th>Found ISBNs</th>
+                            <th>Publisher</th>
+                            <th>Errors</th>
+                        </tr>
+                        {failed_rows}
+                    </table>
+                </div>
             </div>
 
             <script>
-                // Summary Chart
-                const summaryData = [{{
-                    values: [{successful}, {failed}],
-                    labels: ['Successful', 'Failed'],
-                    type: 'pie',
-                    marker: {{
-                        colors: ['#28a745', '#dc3545']
-                    }}
-                }}];
-                Plotly.newPlot('summaryChart', summaryData);
+            function openTab(evt, tabName) {{
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("tab-content");
+                for (i = 0; i < tabcontent.length; i++) {{
+                    tabcontent[i].className = tabcontent[i].className.replace(" active", "");
+                }}
+                tablinks = document.getElementsByClassName("tab");
+                for (i = 0; i < tablinks.length; i++) {{
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }}
+                document.getElementById(tabName).className += " active";
+                evt.currentTarget.className += " active";
+                
+                // Reflow charts when tab is shown
+                if (tabName === 'overview') {{
+                    Plotly.relayout('summaryChart', {{}});
+                }} else if (tabName === 'api-stats') {{
+                    Plotly.relayout('apiChart', {{}});
+                }} else if (tabName === 'publishers') {{
+                    Plotly.relayout('publisherChart', {{}});
+                }}
+            }}
 
-                // API Performance Chart
-                const apiData = [{{
-                    x: {source_keys},
-                    y: {source_values},
-                    type: 'bar',
-                    marker: {{
-                        color: '#17a2b8'
-                    }}
-                }}];
-                const apiLayout = {{
-                    title: 'Successful Extractions by API',
-                    xaxis: {{ tickangle: -45 }}
-                }};
-                Plotly.newPlot('apiChart', apiData, apiLayout);
+            // Summary Chart
+            const summaryData = [{{
+                values: [{successful}, {failed}],
+                labels: ['Successful', 'Failed'],
+                type: 'pie',
+                marker: {{
+                    colors: ['#28a745', '#dc3545']
+                }}
+            }}];
+            Plotly.newPlot('summaryChart', summaryData);
 
-                // Publisher Chart
-                const publisherData = [{{
-                    labels: {publisher_keys},
-                    values: {publisher_values},
-                    type: 'pie'
-                }}];
-                Plotly.newPlot('publisherChart', publisherData);
+            // API Performance Chart
+            const apiData = [{{
+                x: {source_keys},
+                y: {source_values},
+                type: 'bar',
+                marker: {{
+                    color: '#17a2b8'
+                }}
+            }}];
+            const apiLayout = {{
+                title: 'Successful Extractions by API',
+                xaxis: {{ tickangle: -45 }}
+            }};
+            Plotly.newPlot('apiChart', apiData, apiLayout);
+
+            // Publisher Chart
+            const publisherData = [{{
+                labels: {publisher_keys},
+                values: {publisher_values},
+                type: 'pie'
+            }}];
+            Plotly.newPlot('publisherChart', publisherData);
             </script>
         </body>
         </html>
@@ -2494,8 +3047,8 @@ Observações:
         
         # Verifica se é para atualizar o cache
         if args.rescan_cache:
-            print("\nReprocessando cache em busca de dados melhores...")
-            updated = extractor.metadata_fetcher.cache.rescan_and_update()
+            print("\nReprocessando todo o cache...")
+            updated = extractor.metadata_fetcher.rescan_cache()
             print(f"Atualizados {updated} registros no cache")
             return
             

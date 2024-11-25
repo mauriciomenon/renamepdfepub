@@ -1,24 +1,27 @@
 {
   "summary": {
-    "total_files": 12,
+    "total_files": 13,
     "successful": 11,
-    "failed": 1,
-    "success_rate": 91.66666666666666,
-    "average_processing_time": 0.24304305423389783,
-    "timestamp": "2024-11-21 07:40:56"
+    "failed": 2,
+    "success_rate": 84.61538461538461,
+    "average_processing_time": 18.609462651339445,
+    "timestamp": "2024-11-22 16:44:19"
   },
   "api_stats": {
-    "worldcat": 2,
-    "google_books": 7,
-    "openlibrary": 2
+    "isbnlib_info": 5,
+    "fallback": 3,
+    "openlibrary": 3
   },
   "publisher_stats": {
-    "Unknown": 3,
-    "No Starch Press": 2,
-    "Wiley": 1,
-    "O'Reilly Media": 3,
+    "National Geographic Books": 1,
     "John Wiley & Sons": 1,
-    "O'Reilly Media, Incorporated": 1
+    "Casa do Código": 2,
+    "Wiley & Sons, Incorporated, John": 1,
+    "O'Reilly Media": 2,
+    "No Starch Press": 1,
+    "": 1,
+    "O'Reilly Media, Incorporated": 1,
+    "Novatec": 1
   },
   "failure_details": {
     "/Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf": {
@@ -34,7 +37,7 @@
       ],
       "status": "Sucesso",
       "api_attempts": [
-        "worldcat"
+        "fallback"
       ]
     },
     "/Users/menon/Downloads/python ciencia 00002cd9.pdf": {
@@ -48,7 +51,7 @@
       ],
       "status": "Sucesso",
       "api_attempts": [
-        "worldcat"
+        "fallback"
       ]
     },
     "/Users/menon/Downloads/bugbountybootcamp.pdf": {
@@ -63,7 +66,18 @@
       ],
       "status": "Sucesso",
       "api_attempts": [
-        "google_books"
+        "isbnlib_info"
+      ]
+    },
+    "/Users/menon/Downloads/ApLatex 4.pdf": {
+      "extraction_methods": [
+        "PyPDF2"
+      ],
+      "extracted_text_sample": "1ntr0f1uca0 Vetor un1f11men510nal Vetor 61f11men510na1 (matriz) C0n51f1erac0e5 ﬁnais Vetores e matrizes em Python Prof. DSc. Newton Spolaor 015c1p11na C0mputaca0 3n9en4ar1a Mecanica 0n1ver51f1af1e Estadual do Oeste do Parana (UNIOESTE) Brasil 28/10/2024 1ntr0f1uca0 Vetor un1f11men510nal Vetor 61f11men510na1 (matriz) C0n51f1erac0e5 ﬁnais Sumario 11ntr0f1uca0 2Vetor un1f11men510nal 3Vetor 61f11men510na1 (matriz) 4C0n51f1erac0es ﬁnais Newton Spolaor Vetores e matrizes em Python 2 1ntr0f1uca0 Vetor ",
+      "detected_publisher": "unknown",
+      "status": "ISBN não encontrado no arquivo",
+      "extraction_attempts": [
+        "PyPDF2"
       ]
     },
     "/Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf": {
@@ -84,13 +98,13 @@
       "extracted_text_sample": "The Active Defender The Active 0efenf1er1mmersion in the Offensive Security MindsetDr. Catherine J. Ullman Copyright © 2023 by Catherine J. Ullman. All rights reserved.Published by John Wiley & Sons, Inc., Hoboken, New Jersey.Published 51mu1tane0u51y in Canada and the United Kingdom.ISBNs: 9781119895213 (paperback), 9781119895220 (ePDF), 9781119895237 (ePub)No part of this pu611cat10n may be repr0f1ucef1, stored in a retrieval system, or tran5m1ttef1 in any form or by any means, e1ectr0n1c, mec4",
       "detected_publisher": "wiley",
       "found_isbns": [
-        "9781119895213",
         "9781119895237",
-        "9781119895220"
+        "9781119895220",
+        "9781119895213"
       ],
       "status": "Sucesso",
       "api_attempts": [
-        "google_books"
+        "isbnlib_info"
       ]
     },
     "/Users/menon/Downloads/bashcookbook.pdf": {
@@ -114,13 +128,13 @@
       "extracted_text_sample": "Software 7ran5parency Software 7ran5parency5upply Chain Security in an Era of a Software- Driven 50c1etyC4r15 Hu94e570ny Turner Copyright © 2023 by John Wiley & Sons, Inc. All rights reserved.Published by John Wiley & Sons, Inc., Hoboken, New Jersey.Published 51mu1tane0u51y in Canada and the United Kingdom.ISBN: 978- 1- 394- 15848- 5ISBN: 978- 1- 394- 15850- 8 (ebk)ISBN: 978- 1- 394- 15849- 2 (ebk)No part of this pu611cat10n may be repr0f1ucef1, stored in a retrieval system, or tran5m1ttef1 in a",
       "detected_publisher": "wiley",
       "found_isbns": [
-        "9781394158485",
+        "9781394158508",
         "9781394158492",
-        "9781394158508"
+        "9781394158485"
       ],
       "status": "Sucesso",
       "api_attempts": [
-        "google_books"
+        "openlibrary"
       ]
     },
     "/Users/menon/Downloads/javaperformance2ndedition.pdf": {
@@ -148,7 +162,7 @@
       ],
       "status": "Sucesso",
       "api_attempts": [
-        "google_books"
+        "isbnlib_info"
       ]
     },
     "/Users/menon/Downloads/hardwarehackinghandbook.pdf": {
@@ -158,12 +172,12 @@
       "extracted_text_sample": "THE HARDWARE HACKING HANDBOOK San Franc15c07 H E H A R D W A R E H A C K I N G HANDBOOKB r e a k i n g E m b e d d e d S e c u r i t y with Hardware Attacksby Jasper van W0uf1en6er9 and Colin O’Flynn ® THE HARDWARE HACKING HANDBOOK. Copyright © 2022 by Jasper van W0uf1en6er9 and Colin O’Flynn.All rights reserved. No part of this work may be repr0f1ucef1 or tran5m1ttef1 in any form or by any means, e1ectr0n1c or mec4an1ca1, including p40t0c0py1n9, recording, or by any 1nf0rmat10n storage or retri",
       "detected_publisher": "unknown",
       "found_isbns": [
-        "9781593278755",
-        "9781593278748"
+        "9781593278748",
+        "9781593278755"
       ],
       "status": "Sucesso",
       "api_attempts": [
-        "google_books"
+        "isbnlib_info"
       ]
     },
     "/Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf": {
@@ -177,7 +191,7 @@
       ],
       "status": "Sucesso",
       "api_attempts": [
-        "google_books"
+        "isbnlib_info"
       ]
     },
     "/Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf": {
@@ -187,27 +201,24 @@
       "extracted_text_sample": "W e s M c K i n n e y Novatec Aut40r12ef1 Portugu ese tran51at10n of the English edition of Python for Data Analysis, 2E, 158N 97814919576 60 © 2018 William Wesley McKinney . This tran51at10n is published and sold by perm15510n of O'Reilly Media, Inc., the owner of all rights to publish and sell the same. Traducao em portugues aut0r12af1a da edicao em ingles da obra Python for Data Analysis, 2E, 158N 9781491957660 © 2018 William Wesley McKinney . Esta traducao e publicada e vendida com a permiss",
       "detected_publisher": "novatec",
       "found_isbns": [
-        "9781491957660",
-        "9788575227510"
+        "9788575227510",
+        "9781491957660"
       ],
       "status": "Sucesso",
       "api_attempts": [
-        "google_books"
+        "fallback"
       ]
     }
   },
   "api_errors": {
     "/Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf": [],
     "/Users/menon/Downloads/python ciencia 00002cd9.pdf": [],
-    "/Users/menon/Downloads/bugbountybootcamp.pdf": [
-      "ISBN 9781718501546: 'MetadataFetcher' object has no attribute 'fetch_isbnlib_meta'"
-    ],
+    "/Users/menon/Downloads/bugbountybootcamp.pdf": [],
+    "/Users/menon/Downloads/ApLatex 4.pdf": [],
     "/Users/menon/Downloads/Hands-On Artificial Intelligence for Banking.pdf": [],
     "/Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf": [],
     "/Users/menon/Downloads/bashcookbook.pdf": [],
-    "/Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf": [
-      "ISBN 9781394158485: 'MetadataFetcher' object has no attribute 'fetch_isbnlib_meta'"
-    ],
+    "/Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf": [],
     "/Users/menon/Downloads/javaperformance2ndedition.pdf": [],
     "/Users/menon/Downloads/ansible_upandrunning3rdedition.pdf": [],
     "/Users/menon/Downloads/hardwarehackinghandbook.pdf": [],
@@ -215,49 +226,120 @@
     "/Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf": []
   },
   "processing_times": {
-    "average": 0.24304305423389783,
-    "min": 0.06250905990600586,
-    "max": 0.9717578887939453
+    "average": 18.609462651339445,
+    "min": 3.819948196411133,
+    "max": 38.985321044921875
   },
   "results": [
     {
-      "title": "Unknown",
-      "authors": [
-        "Unknown"
-      ],
-      "publisher": "Unknown",
-      "published_date": "Unknown",
-      "isbn_10": null,
-      "isbn_13": "9786586110340",
-      "confidence_score": 0.6249999999999999,
-      "source": "worldcat",
-      "file_path": "/Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf"
-    },
-    {
-      "title": "Bug Bounty Bootcamp",
+      "title": "Bug Bounty Bootcamp - The Guide To Finding And Reporting Web Vulnerabilities",
       "authors": [
         "Vickie Li"
       ],
-      "publisher": "No Starch Press",
-      "published_date": "2021-11-16",
+      "publisher": "National Geographic Books",
+      "published_date": "2021",
       "isbn_10": null,
-      "isbn_13": "9781718501553",
-      "confidence_score": 0.865,
-      "source": "google_books",
+      "isbn_13": "9781718501546",
+      "confidence_score": 0.9309999999999999,
+      "source": "isbnlib_info",
       "file_path": "/Users/menon/Downloads/bugbountybootcamp.pdf"
     },
     {
-      "title": "The Active Defender",
+      "title": "The Active Defender - Immersion In The Offensive Security Mindset",
       "authors": [
         "Dr. Catherine J. Ullman"
       ],
-      "publisher": "Wiley",
-      "published_date": "2023-07-25",
+      "publisher": "John Wiley & Sons",
+      "published_date": "2023",
       "isbn_10": null,
-      "isbn_13": "9781119895213",
-      "confidence_score": 0.965,
-      "source": "google_books",
+      "isbn_13": "9781119895237",
+      "confidence_score": 1.031,
+      "source": "isbnlib_info",
       "file_path": "/Users/menon/Downloads/activedefender_immersionintheoffensivesecuritymindset.pdf"
+    },
+    {
+      "title": "ISBN 9786586110340",
+      "authors": [
+        "Unknown"
+      ],
+      "publisher": "Casa do Código",
+      "published_date": "Unknown",
+      "isbn_10": null,
+      "isbn_13": "9786586110340",
+      "confidence_score": 0.3,
+      "source": "fallback",
+      "file_path": "/Users/menon/Downloads/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf"
+    },
+    {
+      "title": "ISBN 9786586593181",
+      "authors": [
+        "Unknown"
+      ],
+      "publisher": "Casa do Código",
+      "published_date": "Unknown",
+      "isbn_10": null,
+      "isbn_13": "9786586593181",
+      "confidence_score": 0.3,
+      "source": "fallback",
+      "file_path": "/Users/menon/Downloads/python ciencia 00002cd9.pdf"
+    },
+    {
+      "title": "Software Transparency",
+      "authors": [
+        "Chris Hughes",
+        "Tony Turner"
+      ],
+      "publisher": "Wiley & Sons, Incorporated, John",
+      "published_date": "2023",
+      "isbn_10": null,
+      "isbn_13": "9781394158508",
+      "confidence_score": 0.694,
+      "source": "openlibrary",
+      "file_path": "/Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf"
+    },
+    {
+      "title": "Ansible: Up And Running - Automating Configuration Management And Deployment The Easy Way",
+      "authors": [
+        "Bas Meijer",
+        "Lorin Hochstein",
+        "René Moser"
+      ],
+      "publisher": "O'Reilly Media",
+      "published_date": "2022",
+      "isbn_10": null,
+      "isbn_13": "9781098109158",
+      "confidence_score": 0.9309999999999999,
+      "source": "isbnlib_info",
+      "file_path": "/Users/menon/Downloads/ansible_upandrunning3rdedition.pdf"
+    },
+    {
+      "title": "The Hardware Hacking Handbook - Breaking Embedded Security With Hardware Attacks",
+      "authors": [
+        "Jasper van Woudenberg",
+        "Colin O'Flynn"
+      ],
+      "publisher": "No Starch Press",
+      "published_date": "2021",
+      "isbn_10": null,
+      "isbn_13": "9781593278748",
+      "confidence_score": 0.9309999999999999,
+      "source": "isbnlib_info",
+      "file_path": "/Users/menon/Downloads/hardwarehackinghandbook.pdf"
+    },
+    {
+      "title": "Applied Machine Learning And High-Performance Computing On AWS - Accelerate The Development Of Machine Learning Applications Following Architectural Best Practices",
+      "authors": [
+        "Mani Khanuja",
+        "Farooq Sabir",
+        "Shreyas Subramanian"
+      ],
+      "publisher": "",
+      "published_date": "2022",
+      "isbn_10": null,
+      "isbn_13": "9781803237015",
+      "confidence_score": 0.9309999999999999,
+      "source": "isbnlib_info",
+      "file_path": "/Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf"
     },
     {
       "title": "bash Cookbook",
@@ -269,23 +351,9 @@
       "published_date": "Nov 03, 2017",
       "isbn_10": null,
       "isbn_13": "9781491975336",
-      "confidence_score": 0.7400000000000001,
+      "confidence_score": 0.594,
       "source": "openlibrary",
       "file_path": "/Users/menon/Downloads/bashcookbook.pdf"
-    },
-    {
-      "title": "Software Transparency",
-      "authors": [
-        "Chris Hughes",
-        "Tony Turner"
-      ],
-      "publisher": "John Wiley & Sons",
-      "published_date": "2023-05-03",
-      "isbn_10": null,
-      "isbn_13": "9781394158492",
-      "confidence_score": 0.965,
-      "source": "google_books",
-      "file_path": "/Users/menon/Downloads/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf"
     },
     {
       "title": "Java Performance",
@@ -296,79 +364,22 @@
       "published_date": "2020",
       "isbn_10": null,
       "isbn_13": "9781492056119",
-      "confidence_score": 0.7400000000000001,
+      "confidence_score": 0.594,
       "source": "openlibrary",
       "file_path": "/Users/menon/Downloads/javaperformance2ndedition.pdf"
     },
     {
-      "title": "Ansible: Up and Running",
-      "authors": [
-        "Bas Meijer",
-        "Lorin Hochstein",
-        "René Moser"
-      ],
-      "publisher": "O'Reilly Media",
-      "published_date": "2022-09-30",
-      "isbn_10": null,
-      "isbn_13": "9781098109158",
-      "confidence_score": 0.865,
-      "source": "google_books",
-      "file_path": "/Users/menon/Downloads/ansible_upandrunning3rdedition.pdf"
-    },
-    {
-      "title": "The Hardware Hacking Handbook",
-      "authors": [
-        "Jasper van Woudenberg",
-        "Colin O'Flynn"
-      ],
-      "publisher": "No Starch Press",
-      "published_date": "2021-12-21",
-      "isbn_10": null,
-      "isbn_13": "9781593278755",
-      "confidence_score": 0.865,
-      "source": "google_books",
-      "file_path": "/Users/menon/Downloads/hardwarehackinghandbook.pdf"
-    },
-    {
-      "title": "Applied Machine Learning and High-Performance Computing on AWS",
-      "authors": [
-        "Mani Khanuja",
-        "Farooq Sabir",
-        "Shreyas Subramanian"
-      ],
-      "publisher": "Unknown",
-      "published_date": "2022-12-30",
-      "isbn_10": null,
-      "isbn_13": "9781803237015",
-      "confidence_score": 0.865,
-      "source": "google_books",
-      "file_path": "/Users/menon/Downloads/appliedmachinelearningandhigh-performancecomputingonaws.pdf"
-    },
-    {
-      "title": "Python for Data Analysis",
-      "authors": [
-        "Wes McKinney"
-      ],
-      "publisher": "O'Reilly Media",
-      "published_date": "2017-10",
-      "isbn_10": null,
-      "isbn_13": "9781491957660",
-      "confidence_score": 0.865,
-      "source": "google_books",
-      "file_path": "/Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf"
-    },
-    {
-      "title": "Unknown",
+      "title": "ISBN 9788575227510",
       "authors": [
         "Unknown"
       ],
-      "publisher": "Unknown",
+      "publisher": "Novatec",
       "published_date": "Unknown",
       "isbn_10": null,
-      "isbn_13": "9786586593181",
-      "confidence_score": 0.6249999999999999,
-      "source": "worldcat",
-      "file_path": "/Users/menon/Downloads/python ciencia 00002cd9.pdf"
+      "isbn_13": "9788575227510",
+      "confidence_score": 0.4,
+      "source": "fallback",
+      "file_path": "/Users/menon/Downloads/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf"
     }
   ]
 }

@@ -19,6 +19,11 @@ from dataclasses import dataclass, asdict
 from pathlib import Path
 from typing import Dict, List, Optional, Set, Tuple
 from urllib.parse import quote
+import statistics
+from collections import Counter, defaultdict
+from datetime import datetime
+from typing import Dict, List, Optional, Any, Set, Tuple
+from dataclasses import dataclass, asdict
 
 # Bibliotecas de terceiros - HTTP/API
 import requests
@@ -26,6 +31,11 @@ import xml.etree.ElementTree as ET
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 from tqdm import tqdm
+
+import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
+import xml.etree.ElementTree as ET
 
 # Bibliotecas de terceiros - Processamento de PDF
 import PyPDF2
@@ -131,6 +141,7 @@ INTERNATIONAL_PUBLISHERS = {
 
 @dataclass
 class BookMetadata:
+    """Classe para armazenar metadados de livros."""
     title: str
     authors: List[str]
     publisher: str
@@ -145,6 +156,8 @@ class MetadataCache:
     def __init__(self, db_path: str = "metadata_cache.db"):
         self.db_path = db_path
         self._init_db()
+        self._check_and_update_schema()  # Adicionado método para verificar e atualizar schema
+
 
     def get_all(self) -> List[Dict]:
         """Retorna todos os registros do cache."""
@@ -173,83 +186,113 @@ class MetadataCache:
             ]
 
     def _init_db(self):
-        with sqlite3.connect(self.db_path) as conn:
-            conn.execute("""
-                CREATE TABLE IF NOT EXISTS metadata_cache (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    isbn_10 TEXT,
-                    isbn_13 TEXT,
-                    title TEXT,
-                    authors TEXT,
-                    publisher TEXT,
-                    published_date TEXT,
-                    confidence_score REAL,
-                    source TEXT,
-                    file_path TEXT,
-                    raw_json TEXT, -- Campo para JSON bruto
-                    timestamp INTEGER DEFAULT (strftime('%s', 'now'))
-                )
-            """)
+        """Initialize database with basic schema."""
+        try:
+            with sqlite3.connect(self.db_path) as conn:
+                conn.execute("""
+                    CREATE TABLE IF NOT EXISTS metadata_cache (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        isbn_10 TEXT,
+                        isbn_13 TEXT,
+                        title TEXT,
+                        authors TEXT,
+                        publisher TEXT,
+                        published_date TEXT,
+                        confidence_score REAL,
+                        source TEXT,
+                        file_path TEXT,
+                        raw_json TEXT,
+                        timestamp INTEGER DEFAULT (strftime('%s', 'now'))
+                    )
+                """)
+                conn.execute("CREATE INDEX IF NOT EXISTS idx_isbn ON metadata_cache(isbn_10, isbn_13)")
+        except sqlite3.Error as e:
+            logging.error(f"Database initialization error: {str(e)}")
+            raise
+
+    def _check_and_update_schema(self):
+        """Check for missing columns and add them if necessary."""
+        try:
+            with sqlite3.connect(self.db_path) as conn:
+                # Get current columns
+                cursor = conn.execute("PRAGMA table_info(metadata_cache)")
+                columns = {row[1] for row in cursor.fetchall()}
+
+                # Add missing columns
+                if 'error_count' not in columns:
+                    conn.execute("ALTER TABLE metadata_cache ADD COLUMN error_count INTEGER DEFAULT 0")
+                if 'last_error' not in columns:
+                    conn.execute("ALTER TABLE metadata_cache ADD COLUMN last_error TEXT")
+                
+                logging.info("Database schema updated successfully")
+        except sqlite3.Error as e:
+            logging.error(f"Schema update error: {str(e)}")
+            raise
 
     def get(self, isbn: str) -> Optional[Dict]:
-        with sqlite3.connect(self.db_path) as conn:
-            result = conn.execute("""
-                SELECT isbn_10, isbn_13, title, authors, publisher, 
-                       published_date, confidence_score, source, file_path, raw_json
-                FROM metadata_cache
-                WHERE (isbn_10 = ? OR isbn_13 = ?) 
-                AND timestamp > ?
-                """, 
-                (isbn, isbn, int(time.time()) - 30*24*60*60)  # 30 dias de cache
-            ).fetchone()
-            
-            if result:
-                # Se temos JSON bruto, use-o preferencialmente
-                if result[9]:  # raw_json
-                    try:
-                        return json.loads(result[9])
-                    except:
-                        pass
+        """Get metadata from cache with improved error handling."""
+        try:
+            with sqlite3.connect(self.db_path) as conn:
+                result = conn.execute("""
+                    SELECT isbn_10, isbn_13, title, authors, publisher, 
+                           published_date, confidence_score, source, file_path, raw_json
+                    FROM metadata_cache
+                    WHERE (isbn_10 = ? OR isbn_13 = ?) 
+                    AND timestamp > ?
+                    """, 
+                    (isbn, isbn, int(time.time()) - 30*24*60*60)  # 30 days cache
+                ).fetchone()
                 
-                # Caso contrário, use os campos individuais
-                return {
-                    'isbn_10': result[0],
-                    'isbn_13': result[1],
-                    'title': result[2],
-                    'authors': result[3].split(', '),
-                    'publisher': result[4],
-                    'published_date': result[5],
-                    'confidence_score': result[6],
-                    'source': result[7],
-                    'file_path': result[8]
-                }
+                if result:
+                    # Try to use raw JSON first
+                    if result[9]:  # raw_json
+                        try:
+                            return json.loads(result[9])
+                        except json.JSONDecodeError:
+                            logging.warning(f"Invalid JSON in cache for ISBN {isbn}")
+                    
+                    # Fallback to structured data
+                    return {
+                        'isbn_10': result[0],
+                        'isbn_13': result[1],
+                        'title': result[2],
+                        'authors': result[3].split(', '),
+                        'publisher': result[4],
+                        'published_date': result[5],
+                        'confidence_score': result[6],
+                        'source': result[7],
+                        'file_path': result[8]
+                    }
+        except sqlite3.Error as e:
+            logging.error(f"Cache retrieval error for ISBN {isbn}: {str(e)}")
             return None
+        return None
 
     def set(self, metadata: Dict):
-        """
-        Salva os metadados no cache.
-        Args:
-            metadata: Dicionário com os metadados do livro
-        """
-        with sqlite3.connect(self.db_path) as conn:
-            conn.execute(
-                """INSERT INTO metadata_cache (
-                    isbn_10, isbn_13, title, authors, publisher, 
-                    published_date, confidence_score, source, file_path, raw_json
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
-                (
-                    metadata.get('isbn_10'),
-                    metadata.get('isbn_13'),
-                    metadata.get('title'),
-                    ', '.join(metadata.get('authors', [])),
-                    metadata.get('publisher'),
-                    metadata.get('published_date'),
-                    metadata.get('confidence_score', 0.0),
-                    metadata.get('source'),
-                    metadata.get('file_path'),
-                    json.dumps(metadata)  # Armazena JSON bruto
+        """Save metadata to cache with error handling."""
+        try:
+            with sqlite3.connect(self.db_path) as conn:
+                conn.execute(
+                    """INSERT OR REPLACE INTO metadata_cache (
+                        isbn_10, isbn_13, title, authors, publisher, 
+                        published_date, confidence_score, source, file_path, raw_json
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                    (
+                        metadata.get('isbn_10'),
+                        metadata.get('isbn_13'),
+                        metadata.get('title'),
+                        ', '.join(metadata.get('authors', [])),
+                        metadata.get('publisher'),
+                        metadata.get('published_date'),
+                        metadata.get('confidence_score', 0.0),
+                        metadata.get('source'),
+                        metadata.get('file_path'),
+                        json.dumps(metadata)
+                    )
                 )
-            )
+        except sqlite3.Error as e:
+            logging.error(f"Cache storage error: {str(e)}")
+            raise
 
     def rescan_and_update(self):
         """
@@ -297,6 +340,19 @@ class MetadataCache:
             logging.info(f"Rescan concluído. {updated_count} registros atualizados.")
             return updated_count
 
+    def update_error_count(self, isbn: str, error: str):
+        """Track API errors for each ISBN."""
+        try:
+            with sqlite3.connect(self.db_path) as conn:
+                conn.execute("""
+                    UPDATE metadata_cache 
+                    SET error_count = error_count + 1,
+                        last_error = ?
+                    WHERE isbn_10 = ? OR isbn_13 = ?
+                """, (error, isbn, isbn))
+        except sqlite3.Error as e:
+            logging.error(f"Error updating error count for ISBN {isbn}: {str(e)}")
+
     def update(self, metadata: Dict):
             """
             Atualiza um registro existente no cache.
@@ -321,14 +377,73 @@ class MetadataCache:
                     metadata.get('isbn_13')
                 ))
 
+class ApiStatistics:
+    """Classe para coletar e analisar estatísticas de APIs."""
+    def __init__(self):
+        self.total_calls = 0
+        self.successful_calls = 0
+        self.response_times = []
+        self.errors = Counter()
+        
+    def add_call(self, success: bool, response_time: float):
+        self.total_calls += 1
+        if success:
+            self.successful_calls += 1
+        self.response_times.append(response_time)
+        
+    def add_error(self, error_type: str):
+        self.errors[error_type] += 1
+        
+    def get_stats(self) -> Dict[str, Any]:
+        if not self.total_calls:
+            return {
+                'success_rate': 0.0,
+                'avg_response_time': 0.0,
+                'total_calls': 0,
+                'errors': {}
+            }
+            
+        return {
+            'success_rate': (self.successful_calls / self.total_calls) * 100,
+            'avg_response_time': sum(self.response_times) / len(self.response_times),
+            'total_calls': self.total_calls,
+            'errors': dict(self.errors)
+        }
+
+class ApiMonitor:
+    """Monitor de APIs com limite de rate e métricas."""
+    def __init__(self):
+        self.stats = defaultdict(ApiStatistics)
+        self.last_calls = defaultdict(float)
+        
+    def should_wait(self, api_name: str, rate_limit: Dict) -> float:
+        now = time.time()
+        last_call = self.last_calls.get(api_name, 0)
+        
+        if rate_limit['calls'] == 0:
+            return 0
+            
+        wait_time = max(0, (last_call + rate_limit['period']) - now)
+        return wait_time
+        
+    def update_stats(self, api_name: str, success: bool, response_time: float):
+        self.stats[api_name].add_call(success, response_time)
+        self.last_calls[api_name] = time.time()
+        
+    def get_api_stats(self, api_name: str) -> Dict[str, Any]:
+        return self.stats[api_name].get_stats()
+        
+    def get_all_stats(self) -> Dict[str, Dict[str, Any]]:
+        return {name: stats.get_stats() for name, stats in self.stats.items()}
+
 class APIHandler:
+    """Handler para requisições HTTP."""
     def __init__(self):
         self.session = requests.Session()
         
-        # Configuração mais robusta de retry
         retry_strategy = Retry(
             total=5,
-            backoff_factor=1,  # Aumentado para dar mais tempo entre tentativas
+            backoff_factor=1,
             status_forcelist=[404, 429, 500, 502, 503, 504],
             allowed_methods=["HEAD", "GET", "POST", "PUT", "DELETE", "OPTIONS", "TRACE"],
             respect_retry_after_header=True
@@ -344,10 +459,9 @@ class APIHandler:
         self.session.mount("http://", adapter)
         self.session.mount("https://", adapter)
         
-        # Headers mais robustos
         self.session.headers.update({
-            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36',
-            'Accept': 'application/json,application/xml,text/html,application/xhtml+xml,*/*;q=0.9',
+            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36',
+            'Accept': 'application/json,application/xml,text/html',
             'Accept-Language': 'en-US,en;q=0.9,pt-BR;q=0.8,pt;q=0.7',
             'Accept-Encoding': 'gzip, deflate',
             'Connection': 'keep-alive',
@@ -390,6 +504,22 @@ class APIHandler:
             return self.session.post(url, data=data, json=json, timeout=timeout, verify=False)
 
 class ISBNExtractor:
+    def _quick_isbn_validation(self, isbn: str) -> bool:
+        """Validação rápida antes de chamar APIs."""
+        if not isbn or not isinstance(isbn, str):
+            return False
+            
+        # Remove caracteres não numéricos exceto X
+        isbn = ''.join(c for c in isbn.upper() if c.isdigit() or c == 'X')
+        
+        # Verifica tamanho e prefixo básico
+        if len(isbn) == 13:
+            return isbn.startswith(('978', '979'))
+        elif len(isbn) == 10:
+            return isbn[:-1].isdigit() and (isbn[-1].isdigit() or isbn[-1] == 'X')
+            
+        return False
+    
     def __init__(self):
         # Padrões de ISBN
         self.isbn_patterns = [
@@ -646,7 +776,7 @@ class ISBNExtractor:
 
     def extract_from_text(self, text: str, source_path: str = None) -> Set[str]:
         """
-        Extrai ISBNs do texto usando uma combinação de abordagem simples e robusta.
+        Extrai ISBNs do texto usando uma combinação de abordagens, com suporte especial para editoras específicas.
         """
         # Se não tem texto mas tem caminho, tenta extrair do PDF
         if not text and source_path:
@@ -658,6 +788,11 @@ class ISBNExtractor:
         found_isbns = set()
         original_text = text
         
+        # Verifica se é um tipo de livro específico
+        is_packt = source_path and ('hands-on' in source_path.lower() or 'packt' in source_path.lower())
+        is_oreilly = source_path and ("oreilly" in source_path.lower() or "o'reilly" in source_path.lower())
+        is_casa_codigo = source_path and ('casa' in source_path.lower() and 'codigo' in source_path.lower())
+        
         # Lista simplificada de versões do texto
         text_versions = [
             text,                                      # Original
@@ -666,16 +801,62 @@ class ISBNExtractor:
             self._normalize_ocr_text(text),            # Correção de OCR
         ]
         
+        # Se for livro da Packt, adiciona correções específicas
+        if is_packt:
+            packt_text = text.replace('@', '9').replace('>', '7').replace('?', '8')
+            text_versions.append(packt_text)
+
         # Processa cada versão do texto
         for cleaned_text in text_versions:
-            for pattern in self.isbn_patterns:
+            # Escolhe padrões apropriados baseado no tipo de livro
+            patterns_to_use = []
+            
+            if is_packt:
+                patterns_to_use.extend([
+                    r'eBook:\s*ISBN[:\s-]*(97[89][-\s]*(?:\d[-\s]*){9}\d)',
+                    r'Print\s+ISBN[:\s-]*(97[89][-\s]*(?:\d[-\s]*){9}\d)',
+                    r'ISBN\s+13:[:\s-]*(97[89][-\s]*(?:\d[-\s]*){9}\d)',
+                    r'ISBN[:\s-]*(@7[89][-\s]*(?:\d[-\s]*){9}\d)',
+                    r'ISBN[:\s-]*(>7[89][-\s]*(?:\d[-\s]*){9}\d)',
+                    r'ISBN[:\s-]*(\?7[89][-\s]*(?:\d[-\s]*){9}\d)'
+                ])
+            elif is_casa_codigo:
+                patterns_to_use.extend([
+                    r'ISBN[:\s-]*(97865[-\s]*(?:\d[-\s]*){7}\d)',
+                    r'EAN[:\s-]*(97865[-\s]*(?:\d[-\s]*){7}\d)'
+                ])
+            
+            # Adiciona padrões padrão
+            patterns_to_use.extend([
+                # ISBN-13 com prefixo
+                r'ISBN[:\s-]*(97[89](?:[- ]?\d){10})',
+                r'ISBN-13[:\s-]*(97[89](?:[- ]?\d){10})',
+                
+                # ISBN-10 com prefixo
+                r'ISBN[:\s-]*(\d{9}[\dXx])',
+                r'ISBN-10[:\s-]*(\d{9}[\dXx])',
+                
+                # Padrões sem prefixo
+                r'(?<!\d)(97[89](?:\d[-\s]?){10})(?!\d)',
+                r'(?<!\d)(\d{9}[0-9Xx])(?!\d)',
+                
+                # Padrões brasileiros
+                r'ISBN[:\s-]*(978(?:65|85)\d{10})',
+                r'EAN[:\s-]*(978(?:65|85)\d{10})',
+                
+                # Padrões com pontuação
+                r'ISBN[:\s]*([0-9]{3}[-\s]?[0-9]{10})',
+                r'ISBN[:\s]*([0-9]{9}[0-9Xx])',
+            ])
+            
+            for pattern in patterns_to_use:
                 matches = re.finditer(pattern, cleaned_text, re.IGNORECASE | re.MULTILINE)
                 for match in matches:
                     try:
                         # Se tem grupos, pega o primeiro grupo, senão pega o match inteiro
                         isbn = match.group(1) if match.groups() else match.group()
                         
-                        # Limpa o ISBN (remove tudo exceto números)
+                        # Limpa o ISBN
                         isbn = self._normalize_isbn(isbn)
                         
                         # Validação básica de tamanho e prefixo
@@ -692,8 +873,12 @@ class ISBNExtractor:
                     except Exception as e:
                         logging.debug(f"Erro ao processar match: {str(e)}")
                         continue
+                
+                # Se encontrou ISBNs válidos, não precisa tentar outras versões do texto
+                if found_isbns:
+                    break
             
-            # Se encontrou ISBNs válidos, não precisa tentar outras versões do texto
+            # Se encontrou ISBNs, não precisa tentar outras versões do texto
             if found_isbns:
                 break
         
@@ -710,27 +895,34 @@ class ISBNExtractor:
         
         return found_isbns
 
-    def _extract_from_pdf(self, pdf_path: str, max_pages: int = 30) -> str:
-        """Extrai texto do PDF."""
-        try:
-            text = ""
-            with open(pdf_path, 'rb') as file:
-                reader = PyPDF2.PdfReader(file)
-                # Verifica primeiras e últimas páginas
-                priority_pages = [0, 1, 2, -1, -2]
-                for page_num in priority_pages:
-                    if abs(page_num) < len(reader.pages):
-                        idx = page_num if page_num >= 0 else len(reader.pages) + page_num
-                        text += reader.pages[idx].extract_text() + "\n"
-                
-                # Se não encontrou ISBN, verifica mais páginas
-                if not any(p in text.lower() for p in ['isbn', '978', '979']):
-                    for i in range(3, min(max_pages, len(reader.pages))):
+    def extract_from_pdf(self, pdf_path: str, max_pages: int = 10) -> str:
+        """Extrai texto com foco em livros da Packt."""
+        is_packt = 'hands-on' in pdf_path.lower() or 'packt' in pdf_path.lower()
+        
+        if is_packt:
+            # Para Packt, verifica mais páginas e especialmente a página de copyright
+            try:
+                with open(pdf_path, 'rb') as file:
+                    reader = PyPDF2.PdfReader(file)
+                    text = ""
+                    # Verifica páginas iniciais onde geralmente está o ISBN
+                    for i in range(min(5, len(reader.pages))):
                         text += reader.pages[i].extract_text() + "\n"
-            return text
-        except Exception as e:
-            logging.error(f"Erro ao extrair texto do PDF: {str(e)}")
-            return ""
+                        
+                    # Se não encontrou ISBN, procura na página de copyright
+                    if not re.search(r'ISBN', text, re.IGNORECASE):
+                        for i in range(5, min(15, len(reader.pages))):
+                            page_text = reader.pages[i].extract_text()
+                            if re.search(r'copyright|isbn', page_text, re.IGNORECASE):
+                                text += page_text + "\n"
+                                break
+                    return text
+            except Exception as e:
+                logging.error(f"Erro ao extrair texto de PDF Packt: {str(e)}")
+                return ""
+                
+        # Se não for Packt, usa extração normal
+        return super().extract_from_pdf(pdf_path, max_pages)
 
     def _clean_text_basic(self, text: str) -> str:
         """Limpeza básica do texto."""
@@ -759,6 +951,28 @@ class ISBNExtractor:
         # Se ainda tem caracteres demais, tenta limpar mais agressivamente
         isbn = re.sub(r'[^0-9X]', '', isbn.upper())
         return isbn
+
+    def _isbn_10_to_13(self, isbn10: str) -> Optional[str]:
+        """Converte ISBN-10 para ISBN-13."""
+        if len(isbn10) != 10:
+            return None
+            
+        # Remove hífens e espaços
+        isbn10 = ''.join(c for c in isbn10 if c.isdigit() or c in 'Xx')
+        
+        # Converte para ISBN-13
+        isbn13 = '978' + isbn10[:-1]
+        
+        # Calcula dígito verificador
+        total = 0
+        for i in range(12):
+            if i % 2 == 0:
+                total += int(isbn13[i])
+            else:
+                total += int(isbn13[i]) * 3
+                
+        check = (10 - (total % 10)) % 10
+        return isbn13 + str(check)
 
     def _validate_isbn(self, isbn: str) -> bool:
         """Validação melhorada de ISBN."""
@@ -834,309 +1048,279 @@ class MetadataFetcher:
         self.session = requests.Session()
         self.isbndb_api_key = isbndb_api_key
         
-        # Contadores persistentes para estatísticas
-        self.api_success = Counter()
-        self.api_total = Counter()
-        self.api_times = defaultdict(list)
-        
-        # Configuração de timeouts e retries
-        self.session.timeout = (5, 15)
-        
-        retry_strategy = Retry(
-            total=5,  
-            backoff_factor=0.5,
-            status_forcelist=[404, 429, 500, 502, 503, 504],
-            allowed_methods=["HEAD", "GET", "OPTIONS", "POST"],
-            respect_retry_after_header=True
-        )
-        
-        adapter = HTTPAdapter(
-            pool_connections=100,
-            pool_maxsize=100,
-            max_retries=retry_strategy,
-            pool_block=False
-        )
-        
-        self.session.mount("http://", adapter)
-        self.session.mount("https://", adapter)
-        
-        self.session.headers.update({
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-            'Accept': 'application/json,text/html,application/xhtml+xml',
-            'Accept-Language': 'pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7',
-            'Connection': 'keep-alive'
-        })
+        # Initialize required components
+        self.rate_limiter = RateLimitCache()
+        self.validator = MetadataValidator()
+        self.metrics = MetricsCollector()
 
-    def print_current_stats(self):
-        """Imprime estatísticas atuais das APIs."""
-        print("\nEstatísticas em tempo real:")
-        print("-" * 40)
-        for api, total in sorted(self.api_total.items()):
-            if total > 0:
-                success = self.api_success[api]
-                success_rate = (success / total * 100)
-                avg_time = sum(self.api_times[api]) / len(self.api_times[api]) if self.api_times[api] else 0
-                print(f"{api:15}: {success}/{total} ({success_rate:.1f}%) - {avg_time:.2f}s")
-        print("-" * 40)
+        # Configure APIs and confidence scores
+        self._configure_apis()
+        self._configure_confidence_scores()
 
-    def reset_stats(self):
-        """Reseta os contadores de estatísticas."""
-        self.api_success.clear()
-        self.api_total.clear()
-        self.api_times.clear()
+        # Brazilian publishers configuration
+        self.BRAZILIAN_PUBLISHERS = {
+            'casa_do_codigo': {
+                'name': 'Casa do Código',
+                'prefixes': ['97865'],
+                'patterns': [r'casa\s+do\s+c[óo]digo', r'CDC', r'casadocodigo'],
+                'api_priority': ['google_books', 'openlibrary', 'worldcat']
+            },
+            'novatec': {
+                'name': 'Novatec',
+                'prefixes': ['97885'],
+                'patterns': [r'novatec'],
+                'api_priority': ['google_books', 'openlibrary', 'worldcat']
+            },
+            'alta_books': {
+                'name': 'Alta Books',
+                'prefixes': ['97885'],
+                'patterns': [r'alta\s+books'],
+                'api_priority': ['google_books', 'openlibrary', 'worldcat']
+            }
+        }
+        
+        # API configurations
+        self.API_CONFIGS = {
+            'openlibrary': {'enabled': True, 'timeout': 5, 'retries': 3},
+            'google_books': {'enabled': True, 'timeout': 5, 'retries': 3},
+            'worldcat': {'enabled': True, 'timeout': 8, 'retries': 2},
+            'isbnlib_info': {'enabled': True, 'timeout': 3, 'retries': 2},
+            'crossref': {'enabled': True, 'timeout': 6, 'retries': 2},
+        }
 
+        # Confidence adjustments
+        self.confidence_adjustments = {
+            'openlibrary': 0.85,
+            'google_books': 0.90,
+            'worldcat': 0.80,
+            'isbnlib_info': 0.95,
+            'crossref': 0.80,
+        } 
+
+    def _make_request(self, api_name: str, url: str, **kwargs) -> requests.Response:
+        """Make HTTP request with error handling and rate limiting."""
+        if not self._check_api_health(api_name):
+            raise Exception(f"API {api_name} is currently unhealthy")
+
+        start_time = time.time()
+        config = self.API_CONFIGS.get(api_name, {})
+        
+        # Rate limiting
+        wait_time = self.rate_limiter.should_wait(api_name)
+        if wait_time > 0:
+            time.sleep(wait_time)
+            
+        try:
+            # Dynamic timeout based on performance
+            stats = self.metrics.get_api_stats(api_name)
+            avg_time = stats.get('avg_response_time', 5.0)
+            dynamic_timeout = min(max(avg_time * 2, config.get('timeout', 5)), 30)
+
+            # Make request
+            response = self.api.get(
+                url,
+                timeout=dynamic_timeout,
+                **kwargs
+            )
+            
+            elapsed = time.time() - start_time
+            
+            # Update statistics
+            success = response.status_code == 200
+            self.rate_limiter.update_stats(api_name, success, elapsed)
+            self.metrics.add_metric(api_name, elapsed, success)
+            
+            response.raise_for_status()
+            return response
+            
+        except Exception as e:
+            elapsed = time.time() - start_time
+            self.rate_limiter.update_stats(api_name, False, elapsed)
+            self.metrics.add_metric(api_name, elapsed, False)
+            self.metrics.add_error(api_name, type(e).__name__)
+            raise       
+
+    def _configure_apis(self):
+        """Configure API settings and Brazilian publishers."""
+        self.BRAZILIAN_PUBLISHERS = {
+            'casa_do_codigo': {
+                'name': 'Casa do Código',
+                'prefixes': ['97865'],
+                'patterns': [r'casa\s+do\s+c[óo]digo', r'CDC', r'casadocodigo'],
+                'api_priority': ['google_books', 'openlibrary', 'worldcat']
+            },
+            'novatec': {
+                'name': 'Novatec',
+                'prefixes': ['97885'],
+                'patterns': [r'novatec'],
+                'api_priority': ['google_books', 'openlibrary', 'worldcat']
+            },
+            'alta_books': {
+                'name': 'Alta Books',
+                'prefixes': ['97885'],
+                'patterns': [r'alta\s+books'],
+                'api_priority': ['google_books', 'openlibrary', 'worldcat']
+            }
+        }
+        
+        self.API_CONFIGS = {
+            'openlibrary': {'enabled': True, 'timeout': 5, 'retries': 3},
+            'google_books': {'enabled': True, 'timeout': 5, 'retries': 3}, 
+            'worldcat': {'enabled': True, 'timeout': 8, 'retries': 2},
+            'isbnlib_info': {'enabled': True, 'timeout': 3, 'retries': 2},
+            'crossref': {'enabled': True, 'timeout': 6, 'retries': 2}
+        }
+
+    def _configure_confidence_scores(self):
+        """Configure confidence scores for different APIs."""
+        self.confidence_adjustments = {
+            'openlibrary': 0.85,
+            'google_books': 0.90,
+            'worldcat': 0.80,
+            'isbnlib_info': 0.95,
+            'crossref': 0.80,
+        }
 
     def fetch_metadata(self, isbn: str) -> Optional[BookMetadata]:
-        """Método principal para buscar metadados."""
-        # Verifica cache primeiro
+        """Main method to fetch metadata with special handling for Casa do Código."""
+        # Check cache first
         cached = self.cache.get(isbn)
         if cached:
             return BookMetadata(**cached)
+            
+        try:
+            # Special handling for Casa do Código (prefix 97865)
+            if isbn.startswith('97865'):
+                metadata = self._fetch_casa_codigo_metadata(isbn)
+                if metadata:
+                    return metadata
 
-        # Lista de fetchers (mantida igual)
-        fetchers = [
-            # APIs primárias - melhor desempenho comprovado
-            (self.fetch_google_books, 9),      # 50% sucesso - mantida como primária
-            (self.fetch_openlibrary, 8.5),     # 60% sucesso - melhor desempenho geral
-            (self.fetch_worldcat, 7.5),        # 55.6% sucesso - bom desempenho
+            # Special handling for other Brazilian publishers (prefix 97885)
+            if isbn.startswith('97885'):
+                metadata = self._fetch_brazilian_metadata(isbn)
+                if metadata:
+                    return metadata
+
+            # Try fetch with fallback system
+            metadata = self._fetch_with_fallback(isbn)
             
-            # ISBNlib primeiro (mais confiável)
-            (self.fetch_isbnlib_meta, 9.5),    # isbnlib.meta()
-            (self.fetch_isbnlib_goom, 9.0),    # isbnlib.goom()
+            if metadata:
+                # Final validation before caching
+                metadata_dict = asdict(metadata)
+                if self.validator.validate_metadata(metadata_dict, metadata.source, isbn):
+                    self.cache.set(metadata_dict)
+                    logging.info(f"Metadata found for ISBN {isbn} from {metadata.source}")
+                    return metadata
             
-            # APIs secundárias - desempenho moderado
-            (self.fetch_internet_archive, 7),   # 33.3% sucesso
-            (self.fetch_crossref, 6.5),        # Taxa moderada de sucesso
-            (self.fetch_google_books_br, 6),    # 11.1% sucesso mas útil para livros BR
-            (self.fetch_mercado_editorial, 5.5) # 11.1% sucesso mas mantida para BR
+            logging.warning(f"Failed to fetch metadata for ISBN {isbn}")
+            return None
+            
+        except Exception as e:
+            logging.error(f"Error fetching metadata for ISBN {isbn}: {str(e)}")
+            return None
+
+    def _fetch_with_fallback(self, isbn: str) -> Optional[BookMetadata]:
+        """Enhanced fallback system with better error handling."""
+        api_groups = [
+            {
+                'name': 'primary',
+                'apis': ['isbnlib_info', 'google_books'],
+                'min_confidence': 0.90,
+                'required_success': 1
+            },
+            {
+                'name': 'secondary',
+                'apis': ['openlibrary', 'worldcat'],
+                'min_confidence': 0.80,
+                'required_success': 1
+            },
+            {
+                'name': 'fallback',
+                'apis': ['crossref'],
+                'min_confidence': 0.70,
+                'required_success': 1
+            }
         ]
 
-        # Ajusta scores de confiança (mantido igual)
-        confidence_adjustments = {
-            'google_books': 0.50,    # 50% taxa de sucesso
-            'openlibrary': 0.60,     # 60% taxa de sucesso
-            'worldcat': 0.55,        # ~55% taxa de sucesso
-            'internet_archive': 0.33, # 33.3% taxa de sucesso
-            'google_books_br': 0.11,  # 11.1% taxa de sucesso
-            'mercado_editorial': 0.11 # 11.1% taxa de sucesso
-        }
-
         all_results = []
-        processed = set()
-        last_error = None
-        
-        retry_configs = {
-            'high_priority': {
-                'max_retries': 3,    
-                'backoff_factor': 1.5,
-                'retry_delay': 2
-            },
-            'medium_priority': {
-                'max_retries': 2,    
-                'backoff_factor': 1,
-                'retry_delay': 1
-            },
-            'low_priority': {
-                'max_retries': 1,    
-                'backoff_factor': 0.5,
-                'retry_delay': 0.5
-            }
-        }
+        tried_apis = set()
+        errors = defaultdict(list)
 
-        for fetcher, priority in fetchers:
-            if fetcher.__name__ not in processed:
-                # Determina a configuração de retry baseada na prioridade
-                start_time = time.time()
-                self.api_total[fetcher.__name__] += 1
+        for group in api_groups:
+            group_results = []
+            available_apis = [
+                api for api in group['apis']
+                if api not in tried_apis and
+                self.API_CONFIGS.get(api, {}).get('enabled', True)
+            ]
 
-                if priority >= 8:
-                    retry_config = retry_configs['high_priority']
-                elif priority >= 6:
-                    retry_config = retry_configs['medium_priority']
-                else:
-                    retry_config = retry_configs['low_priority']
+            if not available_apis:
+                continue
 
-                for attempt in range(retry_config['max_retries']):
-                    try:
-                        metadata = fetcher(isbn)
-                        elapsed = time.time() - start_time
-                        self.api_times[fetcher.__name__].append(elapsed)
-                        
-                        if metadata:
-                            # Ajusta score baseado no desempenho real da API
-                            self.api_success[fetcher.__name__] += 1
-                            base_score = priority / 10
-                            adjustment = confidence_adjustments.get(metadata.source, 0.5)
-                            metadata.confidence_score = min(1.0, base_score * adjustment)
-                            
-                            # Adiciona ISBN-10/13 se não existir
-                            if len(isbn) == 10 and not metadata.isbn_10:
-                                metadata.isbn_10 = isbn
-                            elif len(isbn) == 13 and not metadata.isbn_13:
-                                metadata.isbn_13 = isbn
-                                
-                            all_results.append(metadata)
-                            
-                            if metadata.confidence_score > 0.85:
-                                break
-                    except Exception as e:
-                        elapsed = time.time() - start_time
-                        self.api_times[fetcher.__name__].append(elapsed)
-                        last_error = e
-                        self._handle_api_error(fetcher.__name__, e, isbn)
-                        
-                        if attempt < retry_config['max_retries'] - 1:
-                            sleep_time = retry_config['retry_delay'] * (retry_config['backoff_factor'] ** attempt)
-                            time.sleep(sleep_time)
-                            
-                processed.add(fetcher.__name__)
-
-                # Imprime estatísticas a cada 5 APIs processadas
-                if len(processed) % 5 == 0:
-                    self.print_current_stats()
-
-                # Se já tem resultados suficientes com boa confiança, pode parar
-                if len(all_results) >= 2 and any(r.confidence_score > 0.80 for r in all_results):
-                    break
-
-        # Escolhe o melhor resultado baseado na pontuação de confiança
-        if all_results:
-            return max(all_results, key=lambda x: x.confidence_score)
-            
-        return self._create_fallback_metadata(isbn, last_error)
-
-    def _results_match(self, result1: BookMetadata, result2: BookMetadata) -> bool:
-        """Compara dois resultados para ver se são similares."""
-        # Função de similaridade de strings
-        def similar(a: str, b: str) -> bool:
-            a = a.lower().strip()
-            b = b.lower().strip()
-            return (
-                a == b or
-                a in b or b in a or
-                self._levenshtein_distance(a, b) / max(len(a), len(b)) < 0.3
-            )
-        
-        # Compara título e autores
-        title_match = similar(result1.title, result2.title)
-        authors_match = any(
-            any(similar(a1, a2) for a2 in result2.authors)
-            for a1 in result1.authors
-        )
-        
-        return title_match and authors_match
-
-    def _levenshtein_distance(self, s1: str, s2: str) -> int:
-        """Calcula a distância de Levenshtein entre duas strings."""
-        if len(s1) < len(s2):
-            return self._levenshtein_distance(s2, s1)
-
-        if len(s2) == 0:
-            return len(s1)
-
-        previous_row = range(len(s2) + 1)
-        for i, c1 in enumerate(s1):
-            current_row = [i + 1]
-            for j, c2 in enumerate(s2):
-                insertions = previous_row[j + 1] + 1
-                deletions = current_row[j] + 1
-                substitutions = previous_row[j] + (c1 != c2)
-                current_row.append(min(insertions, deletions, substitutions))
-            previous_row = current_row
-
-        return previous_row[-1]
-
-    def fetch_cbl(self, isbn: str) -> Optional[BookMetadata]:
-        """Busca na API da Câmara Brasileira do Livro."""
-        try:
-            url = f"https://isbn.cbl.org.br/api/isbn/{isbn}"
-            response = self.session.get(url, timeout=10)
-            
-            if response.status_code != 200:
-                return None
+            for api_name in available_apis:
+                tried_apis.add(api_name)
+                start_time = time.time()  # Inicializa start_time antes de qualquer possível exceção
                 
-            data = response.json()
-            
-            return BookMetadata(
-                title=data.get('title', 'Unknown'),
-                authors=data.get('authors', ['Unknown']),
-                publisher=data.get('publisher', 'Unknown'),
-                published_date=data.get('published_date', 'Unknown'),
-                isbn_13=isbn if len(isbn) == 13 else None,
-                isbn_10=isbn if len(isbn) == 10 else None,
-                confidence_score=0.95,  # Alta confiança para CBL
-                source='cbl'
-            )
-        except Exception as e:
-            logging.error(f"CBL API error: {str(e)}")
-            return None
+                try:
+                    # Check rate limiting
+                    wait_time = self.rate_limiter.should_wait(api_name)
+                    if wait_time > 0:
+                        time.sleep(wait_time)
 
-    def fetch_mercado_editorial(self, isbn: str) -> Optional[BookMetadata]:
-        """Busca na API do Mercado Editorial Brasileiro."""
-        try:
-            url = f"https://api.mercadoeditorial.org/api/v1.2/book?isbn={isbn}"
-            response = self.session.get(url, timeout=10)
-            
-            if response.status_code != 200:
-                return None
-                
-            data = response.json()
-            if not data.get('books'):
-                return None
-                
-            book = data['books'][0]
-            
-            return BookMetadata(
-                title=book.get('title', 'Unknown'),
-                authors=book.get('authors', ['Unknown']),
-                publisher=book.get('publisher', 'Unknown'),
-                published_date=book.get('published_date', 'Unknown'),
-                isbn_13=isbn if len(isbn) == 13 else None,
-                isbn_10=isbn if len(isbn) == 10 else None,
-                confidence_score=0.9,  # Alta confiança para Mercado Editorial
-                source='mercado_editorial'
-            )
-        except Exception as e:
-            logging.error(f"Mercado Editorial API error: {str(e)}")
-            return None
+                    # Make API call with timing
+                    method = getattr(self, f'_fetch_{api_name}')
+                    metadata = method(isbn)
+                    elapsed = time.time() - start_time
 
-    def fetch_google_books(self, isbn: str) -> Optional[BookMetadata]:
-        """Busca na API do Google Books global."""
-        try:
-            url = f"https://www.googleapis.com/books/v1/volumes?q=isbn:{isbn}"
-            response = self.session.get(url, timeout=10)
-            data = response.json()
-            
-            if 'items' not in data:
-                return None
-                
-            book_info = data['items'][0]['volumeInfo']
-            
-            return BookMetadata(
-                title=book_info.get('title', 'Unknown'),
-                authors=book_info.get('authors', ['Unknown']),
-                publisher=book_info.get('publisher', 'Unknown'),
-                published_date=book_info.get('publishedDate', 'Unknown'),
-                isbn_13=isbn if len(isbn) == 13 else None,
-                isbn_10=isbn if len(isbn) == 10 else None,
-                confidence_score=0.85,
-                source='google_books'
-            )
-        except Exception as e:
-            logging.error(f"Google Books API error: {str(e)}")
-            raise
+                    # Update rate limiting and metrics
+                    self.rate_limiter.update_stats(api_name, True, elapsed)
+                    self.metrics.add_metric(api_name, elapsed, True)
 
-    def fetch_google_books_br(self, isbn: str) -> Optional[BookMetadata]:
-        """Busca na API do Google Books com filtro para Brasil."""
+                    if metadata:
+                        # Validate metadata
+                        if self.validator.validate_metadata(asdict(metadata), api_name, isbn):
+                            group_results.append(metadata)
+
+                            # Return if we have good enough results
+                            if (len(group_results) >= group['required_success'] and
+                                any(r.confidence_score >= group['min_confidence'] 
+                                    for r in group_results)):
+                                return max(group_results, key=lambda x: x.confidence_score)
+
+                except Exception as e:
+                    elapsed = time.time() - start_time
+                    self.rate_limiter.update_stats(api_name, False, elapsed)
+                    self.metrics.add_metric(api_name, elapsed, False)
+                    self.metrics.add_error(api_name, type(e).__name__)
+                    errors[api_name].append(str(e))
+                    logging.error(f"Error in {api_name} for ISBN {isbn}: {str(e)}")
+                    continue
+
+            all_results.extend(group_results)
+
+            # Return if we have good enough results
+            if all_results and any(
+                r.confidence_score >= group['min_confidence'] 
+                for r in all_results
+            ):
+                return max(all_results, key=lambda x: x.confidence_score)
+
+        # Log all errors if no results found
+        if not all_results:
+            for api_name, api_errors in errors.items():
+                logging.error(f"All attempts failed for ISBN {isbn}")
+                for error in api_errors:
+                    logging.error(f"{api_name}: {error}")
+
+        return max(all_results, key=lambda x: x.confidence_score) if all_results else None
+
+    def _fetch_google_books(self, isbn: str) -> Optional[BookMetadata]:
+        """Fetch metadata from Google Books API."""
         try:
             url = "https://www.googleapis.com/books/v1/volumes"
-            params = {
-                'q': f'isbn:{isbn}',
-                'country': 'BR',
-                'langRestrict': 'pt'
-            }
+            params = {'q': f'isbn:{isbn}', 'maxResults': 1}
             
-            response = self.session.get(url, params=params, timeout=10)
+            response = self._make_request('google_books', url, params=params)
             data = response.json()
             
             if 'items' not in data:
@@ -1144,25 +1328,37 @@ class MetadataFetcher:
                 
             book_info = data['items'][0]['volumeInfo']
             
-            return BookMetadata(
-                title=book_info.get('title', 'Unknown'),
-                authors=book_info.get('authors', ['Unknown']),
-                publisher=book_info.get('publisher', 'Unknown'),
-                published_date=book_info.get('publishedDate', 'Unknown'),
-                isbn_13=isbn if len(isbn) == 13 else None,
-                isbn_10=isbn if len(isbn) == 10 else None,
-                confidence_score=0.85,
-                source='google_books_br'
-            )
+            metadata_dict = {
+                'title': book_info.get('title', ''),
+                'authors': book_info.get('authors', []),
+                'publisher': book_info.get('publisher', 'Unknown'),
+                'published_date': book_info.get('publishedDate', 'Unknown'),
+                'isbn_13': isbn if len(isbn) == 13 else None,
+                'isbn_10': isbn if len(isbn) == 10 else None,
+                'confidence_score': self.confidence_adjustments['google_books'],
+                'source': 'google_books'
+            }
+            
+            if not self.validator.validate_metadata(metadata_dict, 'google_books', isbn):
+                return None
+                
+            return BookMetadata(**metadata_dict)
+            
         except Exception as e:
-            logging.error(f"Google Books BR API error: {str(e)}")
-            raise
+            self._handle_api_error('google_books', e, isbn)
+            return None
 
-    def fetch_openlibrary(self, isbn: str) -> Optional[BookMetadata]:
-        """Busca na Open Library API."""
+    def _fetch_openlibrary(self, isbn: str) -> Optional[BookMetadata]:
+        """Fetch metadata from Open Library API."""
         try:
-            url = f"https://openlibrary.org/api/books?bibkeys=ISBN:{isbn}&format=json&jscmd=data"
-            response = self.session.get(url, timeout=10)
+            url = "https://openlibrary.org/api/books"
+            params = {
+                'bibkeys': f'ISBN:{isbn}',
+                'format': 'json',
+                'jscmd': 'data'
+            }
+            
+            response = self._make_request('openlibrary', url, params=params)
             data = response.json()
             
             if f"ISBN:{isbn}" not in data:
@@ -1170,175 +1366,362 @@ class MetadataFetcher:
                 
             book_info = data[f"ISBN:{isbn}"]
             
-            return BookMetadata(
-                title=book_info.get('title', 'Unknown'),
-                authors=[author['name'] for author in book_info.get('authors', [])],
-                publisher=book_info.get('publishers', [{'name': 'Unknown'}])[0]['name'],
-                published_date=book_info.get('publish_date', 'Unknown'),
-                isbn_13=isbn if len(isbn) == 13 else None,
-                isbn_10=isbn if len(isbn) == 10 else None,
-                confidence_score=0.8,
-                source='openlibrary'
-            )
+            metadata_dict = {
+                'title': book_info.get('title', ''),
+                'authors': [author['name'] for author in book_info.get('authors', [])],
+                'publisher': book_info.get('publishers', [{'name': 'Unknown'}])[0]['name'],
+                'published_date': book_info.get('publish_date', 'Unknown'),
+                'isbn_13': isbn if len(isbn) == 13 else None,
+                'isbn_10': isbn if len(isbn) == 10 else None,
+                'confidence_score': self.confidence_adjustments['openlibrary'],
+                'source': 'openlibrary'
+            }
+            
+            if not self.validator.validate_metadata(metadata_dict, 'openlibrary', isbn):
+                return None
+                
+            return BookMetadata(**metadata_dict)
+            
         except Exception as e:
-            logging.error(f"Open Library API error: {str(e)}")
-            raise
+            self._handle_api_error('openlibrary', e, isbn)
+            return None
 
-    def fetch_worldcat(self, isbn: str) -> Optional[BookMetadata]:
-        """Busca no WorldCat."""
+    def _fetch_worldcat(self, isbn: str) -> Optional[BookMetadata]:
+        """Fetch metadata from WorldCat."""
         try:
-            base_url = "https://www.worldcat.org/isbn/" + isbn
-            response = self.session.get(base_url, timeout=5)
+            url = f"https://www.worldcat.org/isbn/{isbn}"
+            response = self._make_request('worldcat', url)
             
             if response.status_code == 200:
                 from bs4 import BeautifulSoup
                 soup = BeautifulSoup(response.text, 'html.parser')
                 
-                # Atualiza a busca para usar 'string' em vez de 'text'
                 title = soup.find('h1', {'class': 'title'})
                 authors = soup.find_all('a', {'class': 'author'})
-                publisher = soup.find('td', string='Publisher')  # <- Mudança aqui
+                publisher = soup.find('td', string='Publisher')
+                published_date = soup.find('td', string='Date')
                 
-                return BookMetadata(
-                    title=title.text if title else 'Unknown',
-                    authors=[a.text for a in authors] if authors else ['Unknown'],
-                    publisher=publisher.next_sibling.text if publisher else 'Unknown',
-                    published_date='Unknown',
-                    isbn_13=isbn if len(isbn) == 13 else None,
-                    isbn_10=isbn if len(isbn) == 10 else None,
-                    confidence_score=0.75,
-                    source='worldcat'
-                )
-        except Exception as e:
-            logging.error(f"WorldCat error: {str(e)}")
-            return None
-
-    def fetch_zbib(self, isbn: str) -> Optional[BookMetadata]:
-        try:
-            url = f"https://api.zbib.org/v1/search?q=isbn:{isbn}"
-            response = self.session.get(url, timeout=10)
-            if response.status_code == 200:
-                data = response.json()
-                if not data or not data.get('items'):
+                metadata_dict = {
+                    'title': title.text.strip() if title else '',
+                    'authors': [a.text.strip() for a in authors if a.text.strip()],
+                    'publisher': publisher.next_sibling.text.strip() if publisher else 'Unknown',
+                    'published_date': published_date.next_sibling.text.strip() if published_date else 'Unknown',
+                    'isbn_13': isbn if len(isbn) == 13 else None,
+                    'isbn_10': isbn if len(isbn) == 10 else None,
+                    'confidence_score': self.confidence_adjustments['worldcat'],
+                    'source': 'worldcat'
+                }
+                
+                if not self.validator.validate_metadata(metadata_dict, 'worldcat', isbn):
                     return None
                     
-                item = data['items'][0]
-                return BookMetadata(
-                    title=item.get('title', 'Unknown'),
-                    authors=item.get('authors', []),
-                    publisher=item.get('publisher', 'Unknown'),
-                    published_date=str(item.get('year', 'Unknown')),
-                    isbn_13=isbn if len(isbn) == 13 else None,
-                    isbn_10=isbn if len(isbn) == 10 else None,
-                    confidence_score=0.7,
-                    source='zbib'
-                )
+                return BookMetadata(**metadata_dict)
+                
         except Exception as e:
-            logging.error(f"Zbib error: {e}")
+            self._handle_api_error('worldcat', e, isbn)
             return None
 
-    def fetch_mybib(self, isbn: str) -> Optional[BookMetadata]:
-        """Busca metadados na API da MyBib.com."""
+    def _fetch_casa_codigo_metadata(self, isbn: str) -> Optional[BookMetadata]:
+        """Fetch metadata specifically for Casa do Código books."""
+        logging.info(f"Processing Casa do Código ISBN: {isbn}")
+        
+        # Try APIs in priority order for Casa do Código
+        for api_name in ['google_books', 'openlibrary', 'worldcat']:
+            try:
+                method = getattr(self, f'_fetch_{api_name}')
+                metadata = method(isbn)
+                
+                if metadata:
+                    # Force correct publisher and increase confidence
+                    metadata.publisher = "Casa do Código"
+                    metadata.confidence_score = 0.95
+                    
+                    # Validate and cache
+                    metadata_dict = asdict(metadata)
+                    if self.validator.validate_metadata(metadata_dict, metadata.source, isbn):
+                        self.cache.set(metadata_dict)
+                        return metadata
+                        
+            except Exception as e:
+                logging.error(f"Error with {api_name} for ISBN {isbn}: {str(e)}")
+                continue
+                
+        return None
+
+
+    def fetch_openlibrary(self, isbn: str) -> Optional[BookMetadata]:
+        """Fetch from Open Library API com rate limiting e métricas."""
         try:
-            url = f"https://www.mybib.com/api/v1/references?q={isbn}"
-            response = self.session.get(url, timeout=10)
+            url = f"https://openlibrary.org/api/books"
+            params = {
+                'bibkeys': f'ISBN:{isbn}',
+                'format': 'json',
+                'jscmd': 'data'
+            }
+            
+            response = self._make_request('openlibrary', url, params=params)
             data = response.json()
             
-            if not data or 'references' not in data or not data['references']:
+            if f"ISBN:{isbn}" not in data:
                 return None
                 
-            item = data['references'][0]
+            book_info = data[f"ISBN:{isbn}"]
             
+            # Preparação dos dados para validação
+            metadata_dict = {
+                'title': book_info.get('title', ''),
+                'authors': [author['name'] for author in book_info.get('authors', [])],
+                'publisher': book_info.get('publishers', [{'name': 'Unknown'}])[0]['name'],
+                'published_date': book_info.get('publish_date', 'Unknown')
+            }
+            
+            # Validação antes de criar o objeto
+            if not self.validator.validate_metadata(metadata_dict, 'openlibrary', isbn=isbn):
+                return None
+                
             return BookMetadata(
-                title=item.get('title', 'Unknown'),
-                authors=item.get('authors', ['Unknown']),
-                publisher=item.get('publisher', 'Unknown'),
-                published_date=item.get('year', 'Unknown'),
+                title=metadata_dict['title'],
+                authors=metadata_dict['authors'],
+                publisher=metadata_dict['publisher'],
+                published_date=metadata_dict['published_date'],
                 isbn_13=isbn if len(isbn) == 13 else None,
                 isbn_10=isbn if len(isbn) == 10 else None,
-                confidence_score=0.7,
-                source='mybib'
+                confidence_score=self.confidence_adjustments['openlibrary'],
+                source='openlibrary'
             )
-        except Exception as e:
-            logging.error(f"MyBib API error: {str(e)}")
-            return None
-
-    def fetch_springer(self, isbn: str) -> Optional[BookMetadata]:
-        """Busca na Springer Nature API."""
-        try:
-            url = f"https://api.springernature.com/metadata/books/isbn/{isbn}"
-            response = self.api.get(url)
             
-            if response.status_code == 200:
-                data = response.json()
-                return BookMetadata(
-                    title=data.get('title', 'Unknown'),
-                    authors=data.get('creators', []),
-                    publisher="Springer",
-                    published_date=data.get('publicationDate', 'Unknown'),
-                    isbn_13=isbn if len(isbn) == 13 else None,
-                    isbn_10=isbn if len(isbn) == 10 else None,
-                    confidence_score=0.9,
-                    source='springer'
-                )
         except Exception as e:
-            logging.error(f"Springer API error: {str(e)}")
+            self._handle_api_error('openlibrary', e, isbn)
             return None
 
-    def fetch_oreilly(self, isbn: str) -> Optional[BookMetadata]:
-        """Busca na O'Reilly Atlas API."""
+    def fetch_google_books(self, isbn: str, country: str = None, lang: str = None) -> Optional[BookMetadata]:
+        """Versão melhorada do Google Books com suporte a regionalização."""
         try:
-            url = f"https://learning.oreilly.com/api/v2/book/isbn/{isbn}/"
-            response = self.api.get(url)
-            
-            if response.status_code == 200:
-                data = response.json()
-                return BookMetadata(
-                    title=data.get('title', 'Unknown'),
-                    authors=data.get('authors', []),
-                    publisher="O'Reilly Media",
-                    published_date=data.get('issued', 'Unknown'),
-                    isbn_13=isbn if len(isbn) == 13 else None,
-                    isbn_10=isbn if len(isbn) == 10 else None,
-                    confidence_score=0.95,
-                    source='oreilly'
-                )
-        except Exception as e:
-            logging.error(f"O'Reilly API error: {str(e)}")
-            return None
-
-    def fetch_crossref(self, isbn: str) -> Optional[BookMetadata]:
-        """Busca na CrossRef API."""
-        try:
-            url = "https://api.crossref.org/works"
+            url = "https://www.googleapis.com/books/v1/volumes"
             params = {
-                'query.bibliographic': isbn,
-                'filter': 'type:book',
-                'select': 'title,author,published-print,publisher'
+                'q': f'isbn:{isbn}',
+                'maxResults': 1
             }
-            response = self.api.get(url, params=params)
             
-            if response.status_code == 200:
-                data = response.json()
-                if data['message']['items']:
-                    item = data['message']['items'][0]
+            # Adiciona parâmetros de regionalização
+            if country:
+                params['country'] = country
+            if lang:
+                params['langRestrict'] = lang
+            
+            response = self._make_request('google_books', url, params=params)
+            data = response.json()
+            
+            if 'items' not in data:
+                return None
+                
+            book_info = data['items'][0]['volumeInfo']
+            
+            metadata_dict = {
+                'title': book_info.get('title', ''),
+                'authors': book_info.get('authors', []),
+                'publisher': book_info.get('publisher', 'Unknown'),
+                'published_date': book_info.get('publishedDate', 'Unknown'),
+                'isbn_13': isbn if len(isbn) == 13 else None,
+                'isbn_10': isbn if len(isbn) == 10 else None,
+                'confidence_score': self.confidence_adjustments['google_books'],
+                'source': 'google_books'
+            }
+            
+            # Validação
+            if not self.validator.validate_metadata(metadata_dict, 'google_books', isbn):
+                return None
+                
+            return BookMetadata(**metadata_dict)
+            
+        except Exception as e:
+            self._handle_api_error('google_books', e, isbn)
+            return None
+
+    def fetch_loc(self, isbn: str) -> Optional[BookMetadata]:
+            """Fetch from Library of Congress com melhor tratamento de XML."""
+            try:
+                url = f"https://lccn.loc.gov/{isbn}/marc21.xml"
+                response = self._make_request('loc', url)
+                
+                if response.status_code == 200:
+                    # Limpa o XML antes de processar
+                    xml_text = response.text
+                    xml_text = re.sub(r'[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]', '', xml_text)
+                    xml_text = re.sub(r'<\?xml[^>]+\?>', '', xml_text)
+                    
+                    try:
+                        # Tenta primeiro com namespace
+                        root = ET.fromstring(xml_text)
+                        ns = {'marc': 'http://www.loc.gov/MARC21/slim'}
+                        
+                        title = root.find('.//marc:datafield[@tag="245"]/marc:subfield[@code="a"]', ns)
+                        authors = root.findall('.//marc:datafield[@tag="100"]/marc:subfield[@code="a"]', ns)
+                        publisher = root.find('.//marc:datafield[@tag="260"]/marc:subfield[@code="b"]', ns)
+                        date = root.find('.//marc:datafield[@tag="260"]/marc:subfield[@code="c"]', ns)
+                        
+                    except ET.ParseError:
+                        try:
+                            # Se falhar, tenta parsing mais tolerante
+                            from bs4 import BeautifulSoup
+                            soup = BeautifulSoup(xml_text, 'xml')
+                            
+                            title = soup.find('subfield', {'code': 'a', 'tag': '245'})
+                            authors = soup.find_all('subfield', {'code': 'a', 'tag': '100'})
+                            publisher = soup.find('subfield', {'code': 'b', 'tag': '260'})
+                            date = soup.find('subfield', {'code': 'c', 'tag': '260'})
+                        except:
+                            return None
+                    
+                    metadata_dict = {
+                        'title': title.text.strip() if title is not None else '',
+                        'authors': [a.text.strip() for a in authors] if authors else ['Unknown'],
+                        'publisher': publisher.text.strip() if publisher is not None else 'Unknown',
+                        'published_date': date.text.strip() if date is not None else 'Unknown'
+                    }
+                    
+                    if not self.validator.validate_metadata(metadata_dict, 'loc', isbn=isbn):
+                        return None
+                        
                     return BookMetadata(
-                        title=item.get('title', ['Unknown'])[0],
-                        authors=[a.get('given', '') + ' ' + a.get('family', '') 
-                                for a in item.get('author', [])],
-                        publisher=item.get('publisher', 'Unknown'),
-                        published_date=str(item.get('published-print', {}).get('date-parts', [[0]])[0][0]),
+                        title=metadata_dict['title'],
+                        authors=metadata_dict['authors'],
+                        publisher=metadata_dict['publisher'],
+                        published_date=metadata_dict['published_date'],
                         isbn_13=isbn if len(isbn) == 13 else None,
                         isbn_10=isbn if len(isbn) == 10 else None,
-                        confidence_score=0.85,
-                        source='crossref'
+                        confidence_score=self.confidence_adjustments['loc'],
+                        source='loc'
                     )
+                    
+            except Exception as e:
+                self._handle_api_error('loc', e, isbn)
+                return None
+ 
+    def fetch_isbnlib_info(self, isbn: str) -> Optional[BookMetadata]:
+        """Fetch usando isbnlib.info() com melhor tratamento de variantes."""
+        try:
+            import isbnlib
+            
+            # Validação inicial do ISBN
+            if not isbnlib.is_isbn13(isbn) and not isbnlib.is_isbn10(isbn):
+                return None
+                
+            # Obtém informações básicas
+            info = isbnlib.info(isbn)
+            if not info:
+                return None
+                
+            # Busca metadados completos
+            metadata = isbnlib.meta(isbn)
+            if not metadata:
+                return None
+                
+            metadata_dict = {
+                'title': metadata.get('Title', '').strip(),
+                'authors': [a.strip() for a in metadata.get('Authors', [])],
+                'publisher': metadata.get('Publisher', '').strip(),
+                'published_date': metadata.get('Year', 'Unknown')
+            }
+            
+            # Validação dos dados
+            if not self.validator.validate_metadata(metadata_dict, 'isbnlib_info', isbn=isbn):
+                return None
+                
+            return BookMetadata(
+                title=metadata_dict['title'],
+                authors=metadata_dict['authors'],
+                publisher=metadata_dict['publisher'],
+                published_date=metadata_dict['published_date'],
+                isbn_13=isbn if len(isbn) == 13 else None,
+                isbn_10=isbn if len(isbn) == 10 else None,
+                confidence_score=self.confidence_adjustments['isbnlib_info'],
+                source='isbnlib_info'
+            )
+            
         except Exception as e:
-            logging.error(f"CrossRef API error: {str(e)}")
+            if 'isbn request != isbn response' in str(e):
+                logging.warning(f"ISBNlib info: ISBN variant detected for {isbn}: {str(e)}")
+                return None
+            self._handle_api_error('isbnlib_info', e, isbn)
+            return None
+        
+
+    def fetch_cbl(self, isbn: str) -> Optional[BookMetadata]:
+        """Busca na API da Câmara Brasileira do Livro com validação aprimorada."""
+        try:
+            url = f"https://isbn.cbl.org.br/api/isbn/{isbn}"
+            response = self._make_request('cbl', url)
+            
+            if response.status_code != 200:
+                return None
+                
+            data = response.json()
+            
+            metadata_dict = {
+                'title': data.get('title', ''),
+                'authors': data.get('authors', ['Unknown']),
+                'publisher': data.get('publisher', 'Unknown'),
+                'published_date': data.get('published_date', 'Unknown')
+            }
+            
+            # Validação específica para CBL
+            if not self.validator.validate_metadata(metadata_dict, 'cbl', isbn=isbn):
+                return None
+                
+            return BookMetadata(
+                title=metadata_dict['title'],
+                authors=metadata_dict['authors'],
+                publisher=metadata_dict['publisher'],
+                published_date=metadata_dict['published_date'],
+                isbn_13=isbn if len(isbn) == 13 else None,
+                isbn_10=isbn if len(isbn) == 10 else None,
+                confidence_score=self.confidence_adjustments['cbl'],
+                source='cbl'
+            )
+        except Exception as e:
+            self._handle_api_error('cbl', e, isbn)
+            return None
+
+    def fetch_mercado_editorial(self, isbn: str) -> Optional[BookMetadata]:
+        """Busca na API do Mercado Editorial Brasileiro com validação aprimorada."""
+        try:
+            url = f"https://api.mercadoeditorial.org/api/v1.2/book?isbn={isbn}"
+            response = self._make_request('mercado_editorial', url)
+            
+            data = response.json()
+            if not data.get('books'):
+                return None
+                
+            book = data['books'][0]
+            
+            metadata_dict = {
+                'title': book.get('title', ''),
+                'authors': book.get('authors', ['Unknown']),
+                'publisher': book.get('publisher', 'Unknown'),
+                'published_date': book.get('published_date', 'Unknown')
+            }
+            
+            # Validação específica para Mercado Editorial
+            if not self.validator.validate_metadata(metadata_dict, 'mercado_editorial', isbn=isbn):
+                return None
+                
+            return BookMetadata(
+                title=metadata_dict['title'],
+                authors=metadata_dict['authors'],
+                publisher=metadata_dict['publisher'],
+                published_date=metadata_dict['published_date'],
+                isbn_13=isbn if len(isbn) == 13 else None,
+                isbn_10=isbn if len(isbn) == 10 else None,
+                confidence_score=self.confidence_adjustments['mercado_editorial'],
+                source='mercado_editorial'
+            )
+        except Exception as e:
+            self._handle_api_error('mercado_editorial', e, isbn)
             return None
 
     def fetch_internet_archive(self, isbn: str) -> Optional[BookMetadata]:
-        """Busca no Internet Archive Books API."""
+        """Fetch from Internet Archive Books API com validação aprimorada."""
         try:
             url = f"https://archive.org/advancedsearch.php"
             params = {
@@ -1347,183 +1730,1127 @@ class MetadataFetcher:
                 'rows': 1,
                 'fl[]': ['title', 'creator', 'publisher', 'date']
             }
-            response = self.api.get(url, params=params)
+            
+            response = self._make_request('internet_archive', url, params=params)
             
             if response.status_code == 200:
                 data = response.json()
                 if data['response']['docs']:
                     doc = data['response']['docs'][0]
+                    
+                    metadata_dict = {
+                        'title': doc.get('title', ''),
+                        'authors': [doc.get('creator', 'Unknown')],
+                        'publisher': doc.get('publisher', 'Unknown'),
+                        'published_date': doc.get('date', 'Unknown')
+                    }
+                    
+                    # Validação
+                    if not self.validator.validate_metadata(metadata_dict, 'internet_archive', isbn=isbn):
+                        return None
+                        
                     return BookMetadata(
-                        title=doc.get('title', 'Unknown'),
-                        authors=[doc.get('creator', 'Unknown')],
-                        publisher=doc.get('publisher', 'Unknown'),
-                        published_date=doc.get('date', 'Unknown'),
+                        title=metadata_dict['title'],
+                        authors=metadata_dict['authors'],
+                        publisher=metadata_dict['publisher'],
+                        published_date=metadata_dict['published_date'],
                         isbn_13=isbn if len(isbn) == 13 else None,
                         isbn_10=isbn if len(isbn) == 10 else None,
-                        confidence_score=0.8,
+                        confidence_score=self.confidence_adjustments['internet_archive'],
                         source='internet_archive'
                     )
+                    
         except Exception as e:
-            logging.error(f"Internet Archive API error: {str(e)}")
+            self._handle_api_error('internet_archive', e, isbn)
             return None
 
+    def fetch_zbib(self, isbn: str) -> Optional[BookMetadata]:
+        """Fetch from Zbib com validação aprimorada."""
+        try:
+            url = f"https://api.zbib.org/v1/search"
+            params = {'q': f'isbn:{isbn}'}
+            
+            response = self._make_request('zbib', url, params=params)
+            
+            if response.status_code == 200:
+                data = response.json()
+                if not data or not data.get('items'):
+                    return None
+                    
+                item = data['items'][0]
+                
+                metadata_dict = {
+                    'title': item.get('title', ''),
+                    'authors': item.get('authors', []),
+                    'publisher': item.get('publisher', 'Unknown'),
+                    'published_date': str(item.get('year', 'Unknown'))
+                }
+                
+                # Validação
+                if not self.validator.validate_metadata(metadata_dict, 'zbib', isbn=isbn):
+                    return None
+                    
+                return BookMetadata(
+                    title=metadata_dict['title'],
+                    authors=metadata_dict['authors'],
+                    publisher=metadata_dict['publisher'],
+                    published_date=metadata_dict['published_date'],
+                    isbn_13=isbn if len(isbn) == 13 else None,
+                    isbn_10=isbn if len(isbn) == 10 else None,
+                    confidence_score=self.confidence_adjustments['zbib'],
+                    source='zbib'
+                )
+                
+        except Exception as e:
+            self._handle_api_error('zbib', e, isbn)
+            return None
 
     def fetch_ebook_de(self, isbn: str) -> Optional[BookMetadata]:
-        """Busca metadados na ebook.de."""
+        """Fetch from Ebook.de com validação aprimorada."""
         try:
             url = f"https://www.ebook.de/de/tools/isbn2bibtex/{isbn}"
-            response = self.session.get(url, timeout=(2, 5))
+            response = self._make_request('ebook_de', url)
             
             if response.status_code != 200:
                 return None
                 
             text = response.text
             
-            # Extrai título
-            title_match = re.search(r'title\s*=\s*{([^}]+)}', text)
-            if not title_match:
-                return None
-            title = title_match.group(1)
-            
-            # Extrai autores
-            authors_match = re.search(r'author\s*=\s*{([^}]+)}', text)
-            authors = []
-            if authors_match:
-                authors = [a.strip() for a in authors_match.group(1).split(' and ')]
-            
-            # Extrai editora
-            publisher_match = re.search(r'publisher\s*=\s*{([^}]+)}', text)
-            publisher = publisher_match.group(1) if publisher_match else 'Unknown'
-            
-            # Extrai ano
-            year_match = re.search(r'year\s*=\s*{(\d{4})}', text)
-            year = year_match.group(1) if year_match else 'Unknown'
-            
-            return BookMetadata(
-                title=title,
-                authors=authors if authors else ['Unknown'],
-                publisher=publisher,
-                published_date=year,
-                isbn_13=isbn if len(isbn) == 13 else None,
-                isbn_10=isbn if len(isbn) == 10 else None,
-                confidence_score=0.75,
-                source='ebook_de'
-            )
-        except requests.Timeout:
-            logging.info("Timeout ao acessar Ebook.de")
-            return None
-        except Exception as e:
-            logging.error(f"Ebook.de API error: {str(e)}")
-            return None
-
-    def _create_fallback_metadata(self, isbn: str, error: Optional[Exception] = None) -> Optional[BookMetadata]:
-        """Cria metadados básicos de fallback para quando todas as APIs falham."""
-        try:
-            # Para ISBNs brasileiros, tenta extrair informações do próprio ISBN
-            publisher_prefix = isbn[3:7] if len(isbn) == 13 else None
-            
-            publisher_map = {
-                '6586': 'Casa do Código',
-                '8575': 'Novatec',
-                '8550': 'Alta Books',
-                '8536': 'Érica',
-                '8521': 'Atlas',
-                '8535': 'Campus',
-                '8539': 'Saraiva'
+            # Parser melhorado para BibTeX
+            def extract_field(field: str) -> Optional[str]:
+                pattern = rf'{field}\s*=\s*{{([^}}]+)}}'
+                match = re.search(pattern, text)
+                return match.group(1).strip() if match else None
+                
+            metadata_dict = {
+                'title': extract_field('title'),
+                'authors': [a.strip() for a in (extract_field('author') or '').split(' and ')],
+                'publisher': extract_field('publisher'),
+                'published_date': extract_field('year')
             }
             
-            publisher = publisher_map.get(publisher_prefix, 'Unknown')
-            
-            basic_metadata = BookMetadata(
-                title=f"ISBN {isbn}",
-                authors=["Unknown"],
-                publisher=publisher,
-                published_date="Unknown",
+            # Validação
+            if not self.validator.validate_metadata(metadata_dict, 'ebook_de', isbn=isbn):
+                return None
+                
+            return BookMetadata(
+                title=metadata_dict['title'],
+                authors=metadata_dict['authors'] if metadata_dict['authors'] else ['Unknown'],
+                publisher=metadata_dict['publisher'] or 'Unknown',
+                published_date=metadata_dict['published_date'] or 'Unknown',
                 isbn_13=isbn if len(isbn) == 13 else None,
                 isbn_10=isbn if len(isbn) == 10 else None,
-                confidence_score=0.3,  # Baixa confiança
-                source="fallback"
+                confidence_score=self.confidence_adjustments['ebook_de'],
+                source='ebook_de'
             )
             
-            return basic_metadata
         except Exception as e:
-            logging.error(f"Fallback creation failed: {str(e)}")
+            self._handle_api_error('ebook_de', e, isbn)
+            return None
+        
+    def fetch_crossref(self, isbn: str) -> Optional[BookMetadata]:
+        """Fetch from CrossRef API com validação aprimorada."""
+        try:
+            url = "https://api.crossref.org/works"
+            params = {
+                'query.bibliographic': isbn,
+                'filter': 'type:book',
+                'select': 'title,author,published-print,publisher'
+            }
+            
+            response = self._make_request('crossref', url, params=params)
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data['message']['items']:
+                    item = data['message']['items'][0]
+                    
+                    metadata_dict = {
+                        'title': item.get('title', ['Unknown'])[0],
+                        'authors': [
+                            f"{a.get('given', '')} {a.get('family', '')}".strip()
+                            for a in item.get('author', [])
+                        ],
+                        'publisher': item.get('publisher', 'Unknown'),
+                        'published_date': str(
+                            item.get('published-print', {})
+                            .get('date-parts', [[0]])[0][0]
+                        )
+                    }
+                    
+                    # Validação
+                    if not self.validator.validate_metadata(metadata_dict, 'crossref', isbn=isbn):
+                        return None
+                        
+                    return BookMetadata(
+                        title=metadata_dict['title'],
+                        authors=metadata_dict['authors'],
+                        publisher=metadata_dict['publisher'],
+                        published_date=metadata_dict['published_date'],
+                        isbn_13=isbn if len(isbn) == 13 else None,
+                        isbn_10=isbn if len(isbn) == 10 else None,
+                        confidence_score=self.confidence_adjustments['crossref'],
+                        source='crossref'
+                    )
+                    
+        except Exception as e:
+            self._handle_api_error('crossref', e, isbn)
+            return None
+
+    def fetch_springer(self, isbn: str) -> Optional[BookMetadata]:
+        """Fetch from Springer Nature API com validação aprimorada."""
+        try:
+            url = f"https://api.springernature.com/metadata/books/isbn/{isbn}"
+            response = self._make_request('springer', url)
+            
+            if response.status_code == 200:
+                data = response.json()
+                
+                metadata_dict = {
+                    'title': data.get('title', ''),
+                    'authors': data.get('creators', []),
+                    'publisher': 'Springer',  # Sempre Springer
+                    'published_date': data.get('publicationDate', 'Unknown')
+                }
+                
+                # Validação específica para Springer
+                if not self.validator.validate_metadata(metadata_dict, 'springer', isbn=isbn):
+                    return None
+                    
+                return BookMetadata(
+                    title=metadata_dict['title'],
+                    authors=metadata_dict['authors'],
+                    publisher=metadata_dict['publisher'],
+                    published_date=metadata_dict['published_date'],
+                    isbn_13=isbn if len(isbn) == 13 else None,
+                    isbn_10=isbn if len(isbn) == 10 else None,
+                    confidence_score=self.confidence_adjustments['springer'],
+                    source='springer'
+                )
+                
+        except Exception as e:
+            self._handle_api_error('springer', e, isbn)
+            return None
+
+    def fetch_oreilly(self, isbn: str) -> Optional[BookMetadata]:
+        """Fetch from O'Reilly API com validação aprimorada."""
+        try:
+            url = f"https://learning.oreilly.com/api/v2/book/isbn/{isbn}/"
+            response = self._make_request('oreilly', url)
+            
+            if response.status_code == 200:
+                data = response.json()
+                
+                metadata_dict = {
+                    'title': data.get('title', ''),
+                    'authors': data.get('authors', []),
+                    'publisher': "O'Reilly Media",
+                    'published_date': data.get('issued', 'Unknown')
+                }
+                
+                # Validação específica para O'Reilly
+                if not self.validator.validate_metadata(metadata_dict, 'oreilly', isbn=isbn):
+                    return None
+                    
+                return BookMetadata(
+                    title=metadata_dict['title'],
+                    authors=metadata_dict['authors'],
+                    publisher=metadata_dict['publisher'],
+                    published_date=metadata_dict['published_date'],
+                    isbn_13=isbn if len(isbn) == 13 else None,
+                    isbn_10=isbn if len(isbn) == 10 else None,
+                    confidence_score=self.confidence_adjustments['oreilly'],
+                    source='oreilly'
+                )
+                
+        except Exception as e:
+            self._handle_api_error('oreilly', e, isbn)
+            return None
+
+    def fetch_worldcat(self, isbn: str) -> Optional[BookMetadata]:
+        """Fetch from WorldCat com validação aprimorada."""
+        try:
+            url = f"https://www.worldcat.org/isbn/{isbn}"
+            response = self._make_request('worldcat', url)
+            
+            if response.status_code == 403:
+                logging.warning(f"WorldCat: Access forbidden for ISBN {isbn}")
+                return None
+                
+            if response.status_code == 200:
+                from bs4 import BeautifulSoup
+                soup = BeautifulSoup(response.text, 'html.parser')
+                
+                title = soup.find('h1', {'class': 'title'})
+                authors = soup.find_all('a', {'class': 'author'})
+                publisher = soup.find('td', string='Publisher')
+                published_date = soup.find('td', string='Date')
+                
+                metadata_dict = {
+                    'title': title.text.strip() if title else '',
+                    'authors': [a.text.strip() for a in authors if a.text.strip()],
+                    'publisher': publisher.next_sibling.text.strip() if publisher else 'Unknown',
+                    'published_date': published_date.next_sibling.text.strip() if published_date else 'Unknown'
+                }
+                
+                # Validação
+                if not self.validator.validate_metadata(metadata_dict, 'worldcat', isbn=isbn):
+                    return None
+                    
+                return BookMetadata(
+                    title=metadata_dict['title'],
+                    authors=metadata_dict['authors'],
+                    publisher=metadata_dict['publisher'],
+                    published_date=metadata_dict['published_date'],
+                    isbn_13=isbn if len(isbn) == 13 else None,
+                    isbn_10=isbn if len(isbn) == 10 else None,
+                    confidence_score=self.confidence_adjustments['worldcat'],
+                    source='worldcat'
+                )
+                
+        except Exception as e:
+            self._handle_api_error('worldcat', e, isbn)
+            return None
+
+    def fetch_mybib(self, isbn: str) -> Optional[BookMetadata]:
+        """Fetch from MyBib API com validação aprimorada."""
+        try:
+            url = f"https://www.mybib.com/api/v1/references"
+            params = {'q': isbn}
+            
+            response = self._make_request('mybib', url, params=params)
+            data = response.json()
+            
+            if not data or 'references' not in data or not data['references']:
+                return None
+                
+            item = data['references'][0]
+            
+            metadata_dict = {
+                'title': item.get('title', ''),
+                'authors': item.get('authors', ['Unknown']),
+                'publisher': item.get('publisher', 'Unknown'),
+                'published_date': item.get('year', 'Unknown')
+            }
+            
+            # Validação
+            if not self.validator.validate_metadata(metadata_dict, 'mybib', isbn=isbn):
+                return None
+                
+            return BookMetadata(
+                title=metadata_dict['title'],
+                authors=metadata_dict['authors'],
+                publisher=metadata_dict['publisher'],
+                published_date=metadata_dict['published_date'],
+                isbn_13=isbn if len(isbn) == 13 else None,
+                isbn_10=isbn if len(isbn) == 10 else None,
+                confidence_score=self.confidence_adjustments['mybib'],
+                source='mybib'
+            )
+            
+        except Exception as e:
+            self._handle_api_error('mybib', e, isbn)
+            return None
+        
+        
+    def fetch_isbnlib_mask(self, isbn: str) -> Optional[BookMetadata]:
+        """Fetch usando isbnlib.mask() com validação aprimorada."""
+        try:
+            import isbnlib
+            if not isbnlib.is_isbn13(isbn) and not isbnlib.is_isbn10(isbn):
+                return None
+                
+            # Formata o ISBN no formato canônico
+            masked_isbn = isbnlib.mask(isbn)
+            if not masked_isbn:
+                return None
+                
+            # Busca metadados usando o ISBN formatado
+            metadata = isbnlib.meta(masked_isbn)
+            if not metadata:
+                return None
+                
+            metadata_dict = {
+                'title': metadata.get('Title', '').strip(),
+                'authors': [a.strip() for a in metadata.get('Authors', [])],
+                'publisher': metadata.get('Publisher', '').strip(),
+                'published_date': metadata.get('Year', 'Unknown')
+            }
+            
+            # Validação
+            if not self.validator.validate_metadata(metadata_dict, 'isbnlib_mask', isbn=isbn):
+                return None
+                
+            return BookMetadata(
+                title=metadata_dict['title'],
+                authors=metadata_dict['authors'],
+                publisher=metadata_dict['publisher'],
+                published_date=metadata_dict['published_date'],
+                isbn_13=isbn if len(isbn) == 13 else None,
+                isbn_10=isbn if len(isbn) == 10 else None,
+                confidence_score=self.confidence_adjustments['isbnlib_mask'],
+                source='isbnlib_mask'
+            )
+            
+        except Exception as e:
+            self._handle_api_error('isbnlib_mask', e, isbn)
+            return None
+
+    def fetch_isbnlib_desc(self, isbn: str) -> Optional[BookMetadata]:
+        """Fetch usando isbnlib.desc() com validação aprimorada."""
+        try:
+            import isbnlib
+            if not isbnlib.is_isbn13(isbn) and not isbnlib.is_isbn10(isbn):
+                return None
+                
+            # Obtém descrição detalhada
+            desc = isbnlib.desc(isbn)
+            if not desc:
+                return None
+                
+            # Busca metadados completos
+            metadata = isbnlib.meta(isbn)
+            if not metadata:
+                return None
+                
+            metadata_dict = {
+                'title': metadata.get('Title', '').strip(),
+                'authors': [a.strip() for a in metadata.get('Authors', [])],
+                'publisher': metadata.get('Publisher', '').strip(),
+                'published_date': metadata.get('Year', 'Unknown')
+            }
+            
+            # Validação
+            if not self.validator.validate_metadata(metadata_dict, 'isbnlib_desc', isbn=isbn):
+                return None
+                
+            return BookMetadata(
+                title=metadata_dict['title'],
+                authors=metadata_dict['authors'],
+                publisher=metadata_dict['publisher'],
+                published_date=metadata_dict['published_date'],
+                isbn_13=isbn if len(isbn) == 13 else None,
+                isbn_10=isbn if len(isbn) == 10 else None,
+                confidence_score=self.confidence_adjustments['isbnlib_desc'],
+                source='isbnlib_desc'
+            )
+            
+        except Exception as e:
+            self._handle_api_error('isbnlib_desc', e, isbn)
+            return None
+
+    def fetch_isbnlib_editions(self, isbn: str) -> Optional[BookMetadata]:
+        """Fetch usando isbnlib.editions() com validação aprimorada."""
+        try:
+            import isbnlib
+            if not isbnlib.is_isbn13(isbn) and not isbnlib.is_isbn10(isbn):
+                return None
+                
+            # Obtém todas as edições
+            editions = isbnlib.editions(isbn)
+            if not editions:
+                return None
+                
+            # Usa o ISBN original para buscar metadados
+            metadata = isbnlib.meta(isbn)
+            if not metadata:
+                return None
+                
+            metadata_dict = {
+                'title': metadata.get('Title', '').strip(),
+                'authors': [a.strip() for a in metadata.get('Authors', [])],
+                'publisher': metadata.get('Publisher', '').strip(),
+                'published_date': metadata.get('Year', 'Unknown')
+            }
+            
+            # Validação
+            if not self.validator.validate_metadata(metadata_dict, 'isbnlib_editions', isbn=isbn):
+                return None
+                
+            return BookMetadata(
+                title=metadata_dict['title'],
+                authors=metadata_dict['authors'],
+                publisher=metadata_dict['publisher'],
+                published_date=metadata_dict['published_date'],
+                isbn_13=isbn if len(isbn) == 13 else None,
+                isbn_10=isbn if len(isbn) == 10 else None,
+                confidence_score=self.confidence_adjustments['isbnlib_editions'],
+                source='isbnlib_editions'
+            )
+            
+        except Exception as e:
+            self._handle_api_error('isbnlib_editions', e, isbn)
+            return None
+
+    def fetch_isbnlib_isbn10(self, isbn: str) -> Optional[BookMetadata]:
+        """Fetch usando isbnlib para ISBN-10 com validação aprimorada."""
+        try:
+            import isbnlib
+            if not isbnlib.is_isbn13(isbn) and not isbnlib.is_isbn10(isbn):
+                return None
+                
+            # Converte para ISBN-10 se necessário
+            isbn10 = isbnlib.to_isbn10(isbn) if len(isbn) == 13 else isbn
+            if not isbn10:
+                return None
+                
+            # Busca metadados usando ISBN-10
+            metadata = isbnlib.meta(isbn10)
+            if not metadata:
+                return None
+                
+            metadata_dict = {
+                'title': metadata.get('Title', '').strip(),
+                'authors': [a.strip() for a in metadata.get('Authors', [])],
+                'publisher': metadata.get('Publisher', '').strip(),
+                'published_date': metadata.get('Year', 'Unknown')
+            }
+            
+            # Validação
+            if not self.validator.validate_metadata(metadata_dict, 'isbnlib_isbn10', isbn=isbn):
+                return None
+                
+            return BookMetadata(
+                title=metadata_dict['title'],
+                authors=metadata_dict['authors'],
+                publisher=metadata_dict['publisher'],
+                published_date=metadata_dict['published_date'],
+                isbn_13=None,
+                isbn_10=isbn10,
+                confidence_score=self.confidence_adjustments['isbnlib_isbn10'],
+                source='isbnlib_isbn10'
+            )
+            
+        except Exception as e:
+            self._handle_api_error('isbnlib_isbn10', e, isbn)
+            return None
+
+    def fetch_isbnlib_isbn13(self, isbn: str) -> Optional[BookMetadata]:
+        """Fetch usando isbnlib para ISBN-13 com validação aprimorada."""
+        try:
+            import isbnlib
+            if not isbnlib.is_isbn13(isbn) and not isbnlib.is_isbn10(isbn):
+                return None
+                
+            # Converte para ISBN-13 se necessário
+            isbn13 = isbnlib.to_isbn13(isbn) if len(isbn) == 10 else isbn
+            if not isbn13:
+                return None
+                
+            # Busca metadados usando ISBN-13
+            metadata = isbnlib.meta(isbn13)
+            if not metadata:
+                return None
+                
+            metadata_dict = {
+                'title': metadata.get('Title', '').strip(),
+                'authors': [a.strip() for a in metadata.get('Authors', [])],
+                'publisher': metadata.get('Publisher', '').strip(),
+                'published_date': metadata.get('Year', 'Unknown')
+            }
+            
+            # Validação
+            if not self.validator.validate_metadata(metadata_dict, 'isbnlib_isbn13', isbn=isbn):
+                return None
+                
+            return BookMetadata(
+                title=metadata_dict['title'],
+                authors=metadata_dict['authors'],
+                publisher=metadata_dict['publisher'],
+                published_date=metadata_dict['published_date'],
+                isbn_13=isbn13,
+                isbn_10=None,
+                confidence_score=self.confidence_adjustments['isbnlib_isbn13'],
+                source='isbnlib_isbn13'
+            )
+            
+        except Exception as e:
+            self._handle_api_error('isbnlib_isbn13', e, isbn)
+            return None
+
+    def fetch_isbnlib_default(self, isbn: str) -> Optional[BookMetadata]:
+        """Fetch usando serviço padrão do isbnlib com validação aprimorada."""
+        try:
+            import isbnlib
+            if not isbnlib.is_isbn13(isbn) and not isbnlib.is_isbn10(isbn):
+                return None
+                
+            # Usa o serviço padrão do isbnlib
+            metadata = isbnlib.meta(isbn, service='default')
+            if not metadata:
+                return None
+                
+            metadata_dict = {
+                'title': metadata.get('Title', '').strip(),
+                'authors': [a.strip() for a in metadata.get('Authors', [])],
+                'publisher': metadata.get('Publisher', '').strip(),
+                'published_date': metadata.get('Year', 'Unknown')
+            }
+            
+            # Validação
+            if not self.validator.validate_metadata(metadata_dict, 'isbnlib_default', isbn=isbn):
+                return None
+                
+            return BookMetadata(
+                title=metadata_dict['title'],
+                authors=metadata_dict['authors'],
+                publisher=metadata_dict['publisher'],
+                published_date=metadata_dict['published_date'],
+                isbn_13=isbn if len(isbn) == 13 else None,
+                isbn_10=isbn if len(isbn) == 10 else None,
+                confidence_score=self.confidence_adjustments['isbnlib_default'],
+                source='isbnlib_default'
+            )
+            
+        except Exception as e:
+            self._handle_api_error('isbnlib_default', e, isbn)
+            return None
+
+    def fetch_isbnlib_goom(self, isbn: str) -> Optional[BookMetadata]:
+        """Fetch usando isbnlib.goom() com validação aprimorada."""
+        try:
+            import isbnlib
+            if not isbnlib.is_isbn13(isbn) and not isbnlib.is_isbn10(isbn):
+                logging.warning(f"ISBNlib: ISBN inválido {isbn}")
+                return None
+                
+            metadata = isbnlib.goom(isbn)
+            if not metadata:
+                return None
+                
+            metadata_dict = {
+                'title': metadata.get('Title', '').strip(),
+                'authors': [author.strip() for author in metadata.get('Authors', [])],
+                'publisher': metadata.get('Publisher', '').strip(),
+                'published_date': metadata.get('Year', 'Unknown')
+            }
+            
+            # Validação específica para goom
+            if not self.validator.validate_metadata(metadata_dict, 'isbnlib_goom', isbn=isbn):
+                return None
+                
+            return BookMetadata(
+                title=metadata_dict['title'],
+                authors=metadata_dict['authors'],
+                publisher=metadata_dict['publisher'],
+                published_date=metadata_dict['published_date'],
+                isbn_13=isbn if len(isbn) == 13 else None,
+                isbn_10=isbn if len(isbn) == 10 else None,
+                confidence_score=self.confidence_adjustments['isbnlib_goom'],
+                source='isbnlib_goom'
+            )
+            
+        except Exception as e:
+            self._handle_api_error('isbnlib_goom', e, isbn)
+            return None
+
+    def _fetch_brazilian_metadata(self, isbn: str) -> Optional[BookMetadata]:
+        """Fetch metadata for other Brazilian publishers."""
+        # Detect publisher from ISBN prefix
+        publisher_info = None
+        for pub_info in self.BRAZILIAN_PUBLISHERS.values():
+            if any(isbn.startswith(prefix) for prefix in pub_info['prefixes']):
+                publisher_info = pub_info
+                break
+                
+        if not publisher_info:
+            return None
+            
+        logging.info(f"Processing {publisher_info['name']} ISBN: {isbn}")
+        
+        # Try APIs in priority order
+        for api_name in publisher_info['api_priority']:
+            try:
+                method = getattr(self, f'_fetch_{api_name}')
+                metadata = method(isbn)
+                
+                if metadata:
+                    # Force correct publisher and adjust confidence
+                    metadata.publisher = publisher_info['name']
+                    metadata.confidence_score = 0.95
+                    
+                    # Validate and cache
+                    metadata_dict = asdict(metadata)
+                    if self.validator.validate_metadata(metadata_dict, metadata.source, isbn):
+                        self.cache.set(metadata_dict)
+                        return metadata
+                        
+            except Exception as e:
+                logging.error(f"Error with {api_name} for ISBN {isbn}: {str(e)}")
+                continue
+                
+        return None
+
+    def fetch_isbnlib_meta(self, isbn: str) -> Optional[BookMetadata]:
+        """Fetch usando isbnlib.meta() com validação aprimorada."""
+        try:
+            import isbnlib
+            metadata = isbnlib.meta(isbn)
+            if not metadata:
+                return None
+                
+            metadata_dict = {
+                'title': metadata.get('Title', '').strip(),
+                'authors': [a.strip() for a in metadata.get('Authors', [])],
+                'publisher': metadata.get('Publisher', '').strip(),
+                'published_date': metadata.get('Year', 'Unknown')
+            }
+            
+            # Validação
+            if not self.validator.validate_metadata(metadata_dict, 'isbnlib_meta', isbn=isbn):
+                return None
+                
+            return BookMetadata(
+                title=metadata_dict['title'],
+                authors=metadata_dict['authors'],
+                publisher=metadata_dict['publisher'],
+                published_date=metadata_dict['published_date'],
+                isbn_13=isbn if len(isbn) == 13 else None,
+                isbn_10=isbn if len(isbn) == 10 else None,
+                confidence_score=self.confidence_adjustments['isbnlib_meta'],
+                source='isbnlib_meta'
+            )
+            
+        except Exception as e:
+            self._handle_api_error('isbnlib_meta', e, isbn)
             return None
 
     def _handle_api_error(self, api_name: str, error: Exception, isbn: str) -> None:
-        """Trata erros de API de forma consistente."""
-        if api_name == 'cbl':
-            if 'Connection Error' in str(error):  # 88.9% dos erros
-                logging.warning(f"CBL API connection error for ISBN {isbn}")
-                return
-        elif api_name == 'zbib':
-            if 'Connection Error' in str(error):  # 88.9% dos erros
-                logging.warning(f"ZBib connection error for ISBN {isbn}")
-                return
-        elif api_name == 'springer':
-            if 'Server Error' in str(error):  # 10% dos erros
-                logging.warning(f"Springer server error for ISBN {isbn}")
-                return
-        error_msg = f"{api_name} API error for ISBN {isbn}: {str(error)}"
-        # Log genérico para outros erros
-        logging.error(f"{api_name} API error for ISBN {isbn}: {str(error)}")
+        """Tratamento melhorado de erros de API."""
+        error_type = type(error).__name__
+        error_msg = str(error)
         
+        logger = logging.getLogger('metadata_fetcher')
+        
+        # Categoriza e registra o erro
         if isinstance(error, requests.exceptions.Timeout):
-            logging.warning(f"Timeout accessing {api_name}")
-        elif isinstance(error, requests.exceptions.RequestException):
-            if "Max retries exceeded" in str(error):
-                logging.error(f"Connection problems with {api_name}")
-            elif "timeout" in str(error).lower():
-                logging.error(f"Timeout while accessing {api_name}")
-            else:
-                logging.error(f"Network error with {api_name}: {str(error)}")
+            logger.warning(f"{api_name} timeout for ISBN {isbn}: {error_msg}")
+            self.metrics.add_error(api_name, 'timeout')
+        elif isinstance(error, requests.exceptions.ConnectionError):
+            logger.error(f"{api_name} connection error for ISBN {isbn}: {error_msg}")
+            self.metrics.add_error(api_name, 'connection')
+        elif isinstance(error, requests.exceptions.HTTPError):
+            logger.error(f"{api_name} HTTP error for ISBN {isbn}: {error_msg}")
+            self.metrics.add_error(api_name, 'http')
         else:
-            logging.error(error_msg)
+            logger.error(f"{api_name} unexpected error for ISBN {isbn}: {error_type} - {error_msg}")
+            self.metrics.add_error(api_name, 'unexpected')
+        
+        # Registra métricas da falha
+        self._log_api_metrics(api_name, False, 0.0)
+        
+        # Atualiza estatísticas para ajuste dinâmico
+        stats = self.metrics.get_api_stats(api_name)
+        if stats.get('success_rate', 0) < 30:  # Se taxa de sucesso muito baixa
+            config = self.API_CONFIGS.get(api_name, {})
+            config['retries'] = min(5, config.get('retries', 2) + 1)  # Aumenta retries
+            config['backoff'] = min(4.0, config.get('backoff', 1.5) * 1.5)  # Aumenta backoff
 
-    def _clean_metadata(self, metadata: BookMetadata) -> BookMetadata:
-        """Limpa e normaliza os metadados."""
-        if not metadata:
-            return metadata
+    def _get_api_success_rate(self, api_name: str) -> float:
+        """Calcula taxa de sucesso da API."""
+        stats = self.metrics.get_api_stats(api_name)
+        return stats.get('success_rate', 0.0)
+
+    def _get_avg_response_time(self, api_name: str) -> float:
+        """Calcula tempo médio de resposta da API."""
+        stats = self.metrics.get_api_stats(api_name)
+        return stats.get('avg_response_time', 0.0)
+
+    def _log_api_metrics(self, api_name: str, success: bool, response_time: float):
+        """Registra métricas de API."""
+        # Atualiza métricas em memória
+        self.metrics.add_metric(api_name, response_time, success)
+        
+        # Atualiza estatísticas de rate limiting
+        self.rate_limiter.update_stats(api_name, success, response_time)
+        
+        # Log em caso de falha
+        if not success:
+            avg_time = self._get_avg_response_time(api_name)
+            success_rate = self._get_api_success_rate(api_name)
             
-        if metadata.title:
-            metadata.title = re.sub(r'\s+', ' ', metadata.title).strip()
+            logging.warning(
+                f'API call failed: {api_name}\n'
+                f'Average response time: {avg_time:.2f}s\n'
+                f'Success rate: {success_rate:.1f}%'
+            )
+
+    def _setup_logging(self):
+        """Configura logging com níveis de detalhe diferentes."""
+        # Logger principal
+        logger = logging.getLogger('metadata_fetcher')
+        logger.setLevel(logging.INFO)
+
+        # Handler para arquivo
+        file_handler = logging.FileHandler('metadata_fetcher.log')
+        file_handler.setFormatter(logging.Formatter(
+            '%(asctime)s - %(levelname)s - %(message)s'
+        ))
+        logger.addHandler(file_handler)
+
+        # Handler para console
+        console_handler = logging.StreamHandler()
+        console_handler.setFormatter(logging.Formatter(
+            '%(asctime)s - %(levelname)s - %(message)s'
+        ))
+        logger.addHandler(console_handler)
+
+    def _advanced_fallback(self, isbn: str, file_path: str = None) -> Optional[BookMetadata]:
+        """Sistema avançado de fallback com tratamento especial para editoras conhecidas."""
+        # Define estratégias baseadas no tipo de ISBN e nome do arquivo
+        if file_path and ('hands-on' in file_path.lower() or 'packt' in file_path.lower()):
+            strategies = [
+                {
+                    'name': 'packt_primary',
+                    'apis': ['google_books', 'isbnlib_info', 'openlibrary'],
+                    'min_confidence': 0.85,
+                    'required_success': 1
+                }
+            ]
+        elif isbn.startswith('97865'):  # Casa do Código
+            strategies = [
+                {
+                    'name': 'casa_codigo',
+                    'apis': ['google_books', 'openlibrary', 'worldcat'],
+                    'min_confidence': 0.90,
+                    'required_success': 1
+                }
+            ]
+        elif isbn.startswith('97885'):  # Outras editoras brasileiras
+            strategies = [
+                {
+                    'name': 'brazilian_reliable',
+                    'apis': ['isbnlib_info', 'openlibrary', 'google_books'],
+                    'min_confidence': 0.85,
+                    'required_success': 1
+                },
+                {
+                    'name': 'brazilian_alternatives',
+                    'apis': ['worldcat', 'isbnlib_meta', 'isbnlib_editions'],
+                    'min_confidence': 0.80,
+                    'required_success': 1
+                }
+            ]
+        else:  # Editoras internacionais
+            strategies = [
+                {
+                    'name': 'primary',
+                    'apis': ['isbnlib_info', 'google_books', 'openlibrary'],
+                    'min_confidence': 0.90,
+                    'required_success': 1
+                },
+                {
+                    'name': 'secondary',
+                    'apis': ['worldcat', 'isbnlib_meta', 'isbnlib_editions'],
+                    'min_confidence': 0.85,
+                    'required_success': 1
+                }
+            ]
+
+        all_results = []
+        tried_apis = set()
+        
+        for strategy in strategies:
+            strategy_results = []
             
-        if metadata.authors:
-            cleaned_authors = []
-            for author in metadata.authors:
-                if author and author.lower() != 'unknown':
-                    author = re.sub(r'\s+', ' ', author).strip()
-                    cleaned_authors.append(author)
-            metadata.authors = cleaned_authors if cleaned_authors else ['Unknown']
+            # Filtra APIs já tentadas e habilitadas
+            available_apis = [
+                api for api in strategy['apis']
+                if api not in tried_apis and
+                self.API_CONFIGS.get(api, {}).get('enabled', True)
+            ]
             
-        if metadata.publisher:
-            metadata.publisher = re.sub(r'\s+', ' ', metadata.publisher).strip()
-            
-        if metadata.published_date:
-            year_match = re.search(r'\b\d{4}\b', metadata.published_date)
-            if year_match:
-                metadata.published_date = year_match.group(0)
+            for api_name in available_apis:
+                tried_apis.add(api_name)
                 
-        return metadata
-
-    def update_cache(self, isbn: str, force: bool = False) -> None:
-        """Atualiza o cache para um ISBN específico."""
-        if force or not self.cache.get(isbn):
-            metadata = self.fetch_metadata(isbn)
-            if metadata:
-                self.cache.set(asdict(metadata))
-
-    def rescan_cache(self) -> None:
-        """Verifica todos os registros no cache e atualiza aqueles com pontuação de confiança inferior."""
-        all_metadata = self.cache.get_all()
-        for metadata in all_metadata:
-            # Consulta os metadados usando o ISBN
-            new_metadata = self.fetch_metadata(metadata['isbn_10'] or metadata['isbn_13'])
+                try:
+                    fetcher = getattr(self, f'fetch_{api_name}')
+                    start_time = time.time()
+                    metadata = fetcher(isbn)
+                    elapsed = time.time() - start_time
+                    
+                    # Se demorar muito, reduz prioridade da API
+                    if elapsed > 5:
+                        self.API_CONFIGS[api_name]['timeout'] *= 0.8
+                    
+                    if metadata:
+                        # Ajustes especiais por editora
+                        if file_path and 'hands-on' in file_path.lower():
+                            metadata.publisher = "Packt Publishing"
+                            metadata.confidence_score = 0.95
+                            return metadata
+                        elif isbn.startswith('97865'):
+                            metadata.publisher = "Casa do Código"
+                            metadata.confidence_score = 0.95
+                            return metadata
+                        
+                        # Ajusta confiança baseado no tempo de resposta
+                        if elapsed < 1:
+                            metadata.confidence_score += 0.05
+                            
+                        # Verifica variantes de ISBN
+                        returned_isbn = metadata.isbn_13 or metadata.isbn_10
+                        if returned_isbn and returned_isbn != isbn:
+                            if self._validate_isbn_variant(isbn, returned_isbn):
+                                metadata.confidence_score += 0.1
+                                logging.info(f"ISBN variant accepted: {isbn} -> {returned_isbn}")
+                            else:
+                                continue
+                                
+                        strategy_results.append(metadata)
+                        
+                        # Retorna imediatamente se encontrar resultado muito bom
+                        if metadata.confidence_score >= 0.95:
+                            return metadata
+                            
+                except Exception as e:
+                    self._handle_api_error(api_name, e, isbn)
+                    # Desabilita temporariamente API com muitos erros
+                    if self._get_api_error_rate(api_name) > 0.5:
+                        self.API_CONFIGS[api_name]['enabled'] = False
+                    continue
+                    
+            all_results.extend(strategy_results)
             
-            # Atualiza o registro apenas se a nova pontuação de confiança for maior
-            if new_metadata and new_metadata.confidence_score > metadata['confidence_score']:
-                self.cache.update(asdict(new_metadata))
+            # Se tem resultados suficientes com boa confiança
+            if len(strategy_results) >= strategy['required_success']:
+                best_result = max(strategy_results, key=lambda x: x.confidence_score)
+                if best_result.confidence_score >= strategy['min_confidence']:
+                    return best_result
+                    
+        # Tenta merge apenas se necessário e não for Casa do Código
+        if all_results and not isbn.startswith('97865'):
+            merged = self._merge_metadata(sorted(all_results, 
+                                            key=lambda x: x.confidence_score, 
+                                            reverse=True)[:3])
+            if merged and merged.confidence_score >= 0.8:
+                return merged
+                
+        # Se tem algum resultado, retorna o melhor
+        return max(all_results, key=lambda x: x.confidence_score) if all_results else None
+
+    def _get_best_apis(self, isbn: str) -> List[str]:
+        """
+        Determina a melhor ordem de APIs para tentar baseado no ISBN
+        e histórico de performance.
+        """
+        # Inicializa scores
+        api_scores = {}
+        
+        for api_name, config in self.API_CONFIGS.items():
+            if not config.get('enabled', True):
+                continue
+                
+            # Score base da API
+            base_score = self.confidence_adjustments.get(api_name, 0.5)
             
+            # Ajusta score baseado em performance
+            stats = self.metrics.get_api_stats(api_name)
+            if stats:
+                success_rate = stats.get('success_rate', 0) / 100
+                avg_time = stats.get('avg_response_time', 5.0)
+                score = base_score * success_rate * (1 / avg_time)
+            else:
+                score = base_score
+                
+            # Boost para APIs específicas por região/editora
+            if isbn.startswith(('97865', '97885')):  # ISBN brasileiro
+                if api_name in ['cbl', 'mercado_editorial']:
+                    score *= 2.0
+            
+            api_scores[api_name] = score
+            
+        # Retorna APIs ordenadas por score
+        return sorted(api_scores.keys(), key=lambda x: api_scores[x], reverse=True)
+
+    def _check_api_health(self, api_name: str) -> bool:
+        """Verifica saúde da API e ajusta configurações."""
+        stats = self.metrics.get_api_stats(api_name)
+        
+        # Se não tem dados suficientes, considera saudável
+        if not stats or stats.get('total_calls', 0) < 10:
+            return True
+            
+        success_rate = stats.get('success_rate', 0)
+        avg_time = stats.get('avg_response_time', 0)
+        
+        # Ajusta configurações baseado na performance
+        config = self.API_CONFIGS.get(api_name, {})
+        
+        if success_rate < 50:  # API com problemas
+            config['timeout'] = min(30, config.get('timeout', 5) * 1.5)
+            config['retries'] += 1
+            logging.warning(f"API {api_name} health check: Poor performance detected. "
+                        f"Success rate: {success_rate:.1f}%, Avg time: {avg_time:.2f}s")
+            return False
+            
+        elif success_rate > 90 and avg_time < 2:  # API saudável
+            config['timeout'] = max(3, config.get('timeout', 5) * 0.8)
+            config['retries'] = max(2, config['retries'] - 1)
+            return True
+            
+        return True
+
+    def _process_isbn_response(self, isbn: str, metadata: Dict, source: str) -> Optional[BookMetadata]:
+        """Processa resposta de API com melhor tratamento de variantes."""
+        if not metadata:
+            return None
+            
+        # Verifica ISBNs retornados
+        returned_isbns = []
+        if 'industryIdentifiers' in metadata:
+            for identifier in metadata['industryIdentifiers']:
+                if identifier['type'] in ['ISBN_13', 'ISBN_10']:
+                    returned_isbns.append(identifier['identifier'])
+        elif 'isbn_13' in metadata:
+            returned_isbns.append(metadata['isbn_13'])
+        elif 'isbn_10' in metadata:
+            returned_isbns.append(metadata['isbn_10'])
+            
+        # Se encontrou variante válida
+        valid_variant = False
+        for returned_isbn in returned_isbns:
+            if self._validate_isbn_variant(isbn, returned_isbn):
+                valid_variant = True
+                break
+                
+        if not valid_variant and returned_isbns:
+            logging.warning(f"ISBN variant mismatch: requested {isbn}, got {returned_isbns}")
+            return None
+            
+        # Processa metadados
+        try:
+            metadata_dict = {
+                'title': metadata.get('title', '').strip(),
+                'authors': [a.strip() for a in metadata.get('authors', [])],
+                'publisher': metadata.get('publisher', '').strip(),
+                'published_date': metadata.get('published_date', 'Unknown'),
+                'isbn_13': isbn if len(isbn) == 13 else None,
+                'isbn_10': isbn if len(isbn) == 10 else None,
+                'confidence_score': self.confidence_adjustments.get(source, 0.5),
+                'source': source
+            }
+            
+            # Validação final
+            if not self.validator.validate_metadata(metadata_dict, source, isbn):
+                return None
+                
+            return BookMetadata(**metadata_dict)
+            
+        except Exception as e:
+            logging.error(f"Error processing metadata from {source}: {str(e)}")
+            return None
+
+    def _validate_isbn_variant(self, original_isbn: str, variant_isbn: str) -> bool:
+        """Validação aprimorada de variantes de ISBN."""
+        if not original_isbn or not variant_isbn:
+            return False
+            
+        # Remove hífens e espaços
+        original = ''.join(c for c in original_isbn if c.isdigit())
+        variant = ''.join(c for c in variant_isbn if c.isdigit())
+        
+        # Se são idênticos
+        if original == variant:
+            return True
+            
+        try:
+            import isbnlib
+            
+            # Converte ambos para ISBN-13 para comparação
+            original_13 = isbnlib.to_isbn13(original) if len(original) == 10 else original
+            variant_13 = isbnlib.to_isbn13(variant) if len(variant) == 10 else variant
+            
+            if original_13 == variant_13:
+                return True
+                
+            # Verifica edições diferentes
+            try:
+                editions = isbnlib.editions(original_13) or []
+                if variant_13 in editions:
+                    return True
+            except:
+                pass
+                
+            # Compara prefixos (publisher)
+            if original_13 and variant_13:
+                # Verifica mais dígitos para maior precisão
+                if original_13[:9] == variant_13[:9]:  # Compara até o nível da edição
+                    return True
+                    
+        except Exception as e:
+            logging.debug(f"Error in ISBN variant validation: {str(e)}")
+            # Fallback para comparação básica se isbnlib falhar
+            if original[:7] == variant[:7]:  # Mesmo prefixo de editora
+                return True
+                
+        return False
+
+    def _get_api_error_rate(self, api_name: str) -> float:
+        """Calcula taxa de erro da API nas últimas chamadas."""
+        stats = self.metrics.get_api_stats(api_name)
+        if not stats or stats.get('total_calls', 0) == 0:
+            return 0.0
+        return 1.0 - (stats.get('success_rate', 0) / 100.0)
+
+    def _merge_metadata(self, results: List[BookMetadata]) -> Optional[BookMetadata]:
+        """Combina resultados de múltiplas fontes."""
+        if not results:
+            return None
+            
+        # Usa o melhor resultado como base
+        best = results[0]
+        merged = asdict(best)
+        
+        # Combina informações de outras fontes
+        for other in results[1:]:
+            # Usa título mais longo se disponível
+            if len(other.title) > len(merged['title']):
+                merged['title'] = other.title
+                
+            # Combina autores únicos
+            merged['authors'] = list(set(merged['authors'] + other.authors))
+            
+            # Usa data mais específica
+            if len(other.published_date) > len(merged['published_date']):
+                merged['published_date'] = other.published_date
+                
+            # Aumenta confiança se fontes concordam
+            if (other.title.lower() == best.title.lower() or 
+                set(other.authors) == set(best.authors)):
+                merged['confidence_score'] = min(1.0, 
+                    merged['confidence_score'] + 0.05)
+                
+        merged['source'] = f"{best.source}+merged"
+        return BookMetadata(**merged)
+
+    def _update_api_priorities(self):
+        """Atualiza prioridades das APIs baseado em performance."""
+        api_scores = {}
+        
+        for api_name in self.API_CONFIGS:
+            if not self.API_CONFIGS[api_name].get('enabled', True):
+                continue
+                
+            stats = self.metrics.get_api_stats(api_name)
+            if not stats:
+                continue
+                
+            # Calcula score baseado em múltiplos fatores
+            success_rate = stats.get('success_rate', 0)
+            avg_time = stats.get('avg_response_time', float('inf'))
+            error_rate = len(stats.get('error_types', {}))
+            
+            score = (success_rate / 100.0) * (1.0 / max(1, avg_time)) * (1.0 / (1 + error_rate))
+            api_scores[api_name] = score
+        
+        # Atualiza ordem de tentativa das APIs
+        self.api_priorities = sorted(
+            api_scores.keys(),
+            key=lambda x: api_scores[x],
+            reverse=True
+        )
+
 class PDFProcessor:
     def __init__(self):
         self.isbn_extractor = ISBNExtractor()
@@ -1796,7 +3123,7 @@ class BookMetadataExtractor:
         self.metadata_fetcher = MetadataFetcher(isbndb_api_key=isbndb_api_key)
         self.pdf_processor = PDFProcessor()
         
-        # Configura diretório de relatórios
+        # Configure reports directory
         self.reports_dir = Path("reports")
         self.reports_dir.mkdir(exist_ok=True)
         
@@ -1810,80 +3137,241 @@ class BookMetadataExtractor:
         )
 
     def process_single_file(self, pdf_path: str, runtime_stats: Dict) -> Optional[BookMetadata]:
+        """Process single PDF file with proper statistics tracking."""
         start_time = time.time()
         logging.info(f"Processing: {pdf_path}")
         
+        # Inicializa estruturas de estatísticas se não existirem
+        if 'processed_files' not in runtime_stats:
+            runtime_stats['processed_files'] = []
+        if 'failure_details' not in runtime_stats:
+            runtime_stats['failure_details'] = {}
+        if 'api_errors' not in runtime_stats:
+            runtime_stats['api_errors'] = {}
+        if 'isbn_extraction_failed' not in runtime_stats:
+            runtime_stats['isbn_extraction_failed'] = []
+        if 'api_failures' not in runtime_stats:
+            runtime_stats['api_failures'] = []
+        if 'processing_times' not in runtime_stats:
+            runtime_stats['processing_times'] = []
+        
+        # Registra arquivo processado
         runtime_stats['processed_files'].append(pdf_path)
-        runtime_stats['failure_details'][pdf_path] = {}
-        runtime_stats['api_errors'][pdf_path] = []  # Inicializa lista de erros
+        
+        # Inicializa detalhes com todas as chaves necessárias
+        runtime_stats['failure_details'][pdf_path] = {
+            'api_attempts': [],        # Lista de APIs tentadas
+            'status': '',             # Status atual do processamento
+            'extraction_methods': [],  # Métodos de extração tentados
+            'found_isbns': [],        # ISBNs encontrados
+            'detected_publisher': '',  # Editora detectada
+            'text_sample': '',        # Amostra do texto extraído
+            'errors': []              # Erros encontrados
+        }
+        
+        # Inicializa lista de erros de API para este arquivo
+        runtime_stats['api_errors'][pdf_path] = []
+        
+        # Obtém referência para os detalhes deste arquivo
         details = runtime_stats['failure_details'][pdf_path]
         
         try:
-            # Extrai texto do PDF
+            # Extract text from PDF
             text, extraction_methods = self.pdf_processor.extract_text_from_pdf(pdf_path)
             details['extraction_methods'] = extraction_methods
             
-            # Se não conseguiu extrair texto
             if not text:
                 runtime_stats['isbn_extraction_failed'].append(pdf_path)
-                details['status'] = 'Falha na extração de texto'
+                details['status'] = 'Failed to extract text'
                 return None
             
-            # Limpa o texto para amostra
+            # Clean text for sample
             clean_text = re.sub(r'\n\s*\n', '\n', text[:500])
-            details['extracted_text_sample'] = clean_text
+            details['text_sample'] = clean_text
             
-            # Detecta editora
-            publisher, confidence = self.isbn_extractor.identify_publisher(text)
-            details['detected_publisher'] = publisher
-            
-            # Extrai metadados internos do PDF
+            # Extract PDF metadata
             pdf_metadata = self.pdf_processor.extract_metadata_from_pdf(pdf_path)
             
-            # Encontra ISBNs
+            # Find ISBNs
             isbns = self.isbn_extractor.extract_from_text(text)
-            if pdf_metadata.get('ISBN'):
-                isbns.add(self.isbn_extractor.normalize_isbn(pdf_metadata['ISBN']))
+            if pdf_metadata and pdf_metadata.get('ISBN'):
+                isbns.add(self.isbn_extractor._normalize_isbn(pdf_metadata['ISBN']))
             
             if not isbns:
                 runtime_stats['isbn_extraction_failed'].append(pdf_path)
-                details['status'] = 'ISBN não encontrado no arquivo'
-                details['extraction_attempts'] = extraction_methods
+                details['status'] = 'No ISBN found in file'
                 return None
             
             details['found_isbns'] = list(isbns)
-            details['status'] = 'ISBNs encontrados mas falha na busca online'
-            details['api_attempts'] = []
             
-            # Tenta obter metadados usando o primeiro ISBN válido que corresponder
-            for isbn in isbns:
+            # Check for Casa do Código ISBNs
+            casa_codigo_isbns = [isbn for isbn in isbns if isbn.startswith('97865')]
+            if casa_codigo_isbns:
+                details['detected_publisher'] = 'Casa do Código'
+                primary_isbn = casa_codigo_isbns[0]
+                logging.info(f"Using primary Casa do Código ISBN: {primary_isbn}")
+                metadata = self._process_casa_codigo_isbn(primary_isbn, pdf_path, runtime_stats, details)
+                if metadata:
+                    runtime_stats['processing_times'].append(time.time() - start_time)
+                    details['status'] = 'Success'
+                    return metadata
+            
+            # Try each ISBN until success
+            for isbn in sorted(isbns):
                 try:
                     metadata = self.metadata_fetcher.fetch_metadata(isbn)
                     if metadata:
+                        # Registra tentativa bem-sucedida
                         details['api_attempts'].append(metadata.source)
-                        if publisher != "unknown" and publisher.lower() in metadata.publisher.lower():
-                            metadata.confidence_score += 0.1
                         metadata.file_path = str(pdf_path)
+                        
+                        # Adjust metadata for specific publishers
+                        metadata = self._adjust_publisher_metadata(metadata, pdf_path)
+                        
                         runtime_stats['processing_times'].append(time.time() - start_time)
-                        details['status'] = 'Sucesso'
+                        details['status'] = 'Success'
                         return metadata
+                        
                 except Exception as e:
                     error_msg = f"ISBN {isbn}: {str(e)}"
                     runtime_stats['api_errors'][pdf_path].append(error_msg)
+                    details['errors'].append(error_msg)
                     logging.error(error_msg)
                     continue
             
-            runtime_stats['processing_times'].append(time.time() - start_time)
+            # Se chegou aqui, todas as tentativas falharam
             runtime_stats['api_failures'].append(pdf_path)
+            details['status'] = 'All API attempts failed'
+            runtime_stats['processing_times'].append(time.time() - start_time)
             return None
             
         except Exception as e:
             error_msg = f"{pdf_path}: {str(e)}"
             runtime_stats['api_errors'][pdf_path].append(error_msg)
+            details['errors'].append(error_msg)
+            details['status'] = f'Error: {str(e)}'
             logging.error(error_msg)
-            details['status'] = f'Erro: {str(e)}'
             runtime_stats['processing_times'].append(time.time() - start_time)
             return None
+
+    def _adjust_publisher_metadata(self, metadata: BookMetadata, file_path: str) -> BookMetadata:
+        """Adjust metadata based on publisher-specific rules."""
+        file_lower = file_path.lower()
+        
+        if 'hands-on' in file_lower or 'packt' in file_lower:
+            metadata.publisher = "Packt Publishing"
+            metadata.confidence_score = 0.95
+        elif metadata.isbn_13 and metadata.isbn_13.startswith('97865'):
+            metadata.publisher = "Casa do Código"
+            metadata.confidence_score = 0.95
+        elif metadata.isbn_13 and metadata.isbn_13.startswith('97885'):
+            # Check for other Brazilian publishers
+            if any(term in file_lower for term in ['novatec', 'alta books']):
+                publisher_map = {
+                    'novatec': 'Novatec Editora',
+                    'alta books': 'Alta Books'
+                }
+                for term, pub_name in publisher_map.items():
+                    if term in file_lower:
+                        metadata.publisher = pub_name
+                        metadata.confidence_score = 0.95
+                        break
+        
+        return metadata
+
+    def _process_casa_codigo_isbn(self, isbn: str, pdf_path: str, runtime_stats: Dict, details: Dict) -> Optional[BookMetadata]:
+        """Handle Casa do Código ISBN processing."""
+        logging.info(f"Detected Casa do Código ISBN: {isbn}")
+        
+        try:
+            metadata = self.metadata_fetcher.fetch_metadata(isbn)
+            if metadata:
+                details['api_attempts'].append(metadata.source)
+                metadata.publisher = "Casa do Código"
+                metadata.confidence_score = 0.95
+                metadata.file_path = str(pdf_path)
+                details['status'] = 'Success'
+                return metadata
+        except Exception as e:
+            error_msg = f"ISBN {isbn}: {str(e)}"
+            runtime_stats['api_errors'][pdf_path].append(error_msg)
+            logging.error(error_msg)
+        
+        return None
+
+    def _fetch_with_publisher_priority(self, isbn: str, publisher_info: Dict) -> Optional[BookMetadata]:
+        """Busca metadados usando prioridade específica da editora."""
+        logging.info(f"Tentando busca prioritária para ISBN {isbn} da editora {publisher_info['name']}")
+        
+        errors = []
+        for api_name in publisher_info['api_priority']:
+            try:
+                logging.info(f"Tentando API {api_name}")
+                
+                if api_name == 'google_books_br':
+                    metadata = self.fetch_google_books(isbn, country='BR', lang='pt-BR')
+                else:
+                    fetcher = getattr(self, f'fetch_{api_name}')
+                    metadata = fetcher(isbn)
+                
+                if metadata:
+                    # Verifica se é da editora esperada
+                    if any(re.search(pattern, metadata.publisher.lower()) 
+                        for pattern in publisher_info['patterns']):
+                        metadata.confidence_score += 0.2
+                        metadata.source = api_name
+                        return metadata
+                        
+            except Exception as e:
+                error_msg = f"Erro em {api_name}: {str(e)}"
+                logging.error(error_msg)
+                errors.append(error_msg)
+                continue
+                
+        logging.error(f"Falha em todas as APIs para ISBN {isbn}:\n" + "\n".join(errors))
+        return None
+
+    def _detect_brazilian_publisher(self, isbn: str, text: str = None) -> Optional[Dict]:
+        """Detecta editora brasileira baseado no ISBN e texto."""
+        BRAZILIAN_PUBLISHERS = {
+            'casa_do_codigo': {
+                'name': 'Casa do Código',
+                'prefixes': ['97865'],
+                'patterns': [
+                    r'casa\s+do\s+c[óo]digo',
+                    r'CDC',
+                    r'casadocodigo'
+                ],
+                'api_priority': ['cbl', 'mercado_editorial', 'google_books_br', 'openlibrary']
+            },
+            'novatec': {
+                'name': 'Novatec',
+                'prefixes': ['97885'],
+                'patterns': [r'novatec'],
+                'api_priority': ['cbl', 'mercado_editorial', 'google_books_br', 'openlibrary']
+            },
+            'alta_books': {
+                'name': 'Alta Books',
+                'prefixes': ['97885'],
+                'patterns': [r'alta\s+books'],
+                'api_priority': ['cbl', 'mercado_editorial', 'google_books_br', 'openlibrary']
+            }
+        }
+        
+        isbn_prefix = isbn[:5] if len(isbn) >= 5 else ''
+        
+        for pub_info in BRAZILIAN_PUBLISHERS.values():
+            # Verifica prefixo ISBN
+            if isbn_prefix in pub_info['prefixes']:
+                return pub_info
+                
+            # Se tiver texto, verifica padrões
+            if text:
+                text_lower = text.lower()
+                if any(re.search(pattern, text_lower) for pattern in pub_info['patterns']):
+                    return pub_info
+                    
+        return None
 
     
     def generate_report(self, results: List[BookMetadata], output_file: str) -> Dict:
@@ -2496,6 +3984,329 @@ class BookMetadataExtractor:
         with open(output_file, 'w', encoding='utf-8') as f:
             json.dump(report_data, f, indent=2, ensure_ascii=False)
 
+class APIRateLimiter:
+    def __init__(self):
+        self.last_calls = defaultdict(float)
+        self.limits = {
+            'openlibrary': {'calls': 1, 'period': 1},
+            'loc': {'calls': 2, 'period': 1},
+            'google_books': {'calls': 5, 'period': 1},
+            'internet_archive': {'calls': 1, 'period': 2},
+            # Adiciona limites para as outras APIs
+            'cbl': {'calls': 2, 'period': 1},
+            'mercado_editorial': {'calls': 2, 'period': 1},
+            'zbib': {'calls': 2, 'period': 1},
+            'mybib': {'calls': 2, 'period': 1},
+            'crossref': {'calls': 3, 'period': 1},
+            'ebook_de': {'calls': 2, 'period': 1}
+        }
+        self.cache = {}
+
+    def should_wait(self, api_name: str) -> float:
+        """Returns wait time needed to respect rate limit."""
+        if api_name not in self.limits:
+            return 0
+            
+        now = time.time()
+        last_call = self.last_calls.get(api_name, 0)
+        limit = self.limits[api_name]
+        
+        wait_time = max(0, (last_call + limit['period']) - now)
+        return wait_time
+        
+    def update_last_call(self, api_name: str):
+        """Updates timestamp of last call."""
+        self.last_calls[api_name] = time.time()
+
+class RateLimitCache:
+    """Cache com estatísticas de performance para rate limiting."""
+    def __init__(self):
+        self.cache = {}
+        self.performance_stats = defaultdict(list)
+        self.last_calls = defaultdict(float)
+        
+    def should_wait(self, api_name: str, base_delay: float = 1.0) -> float:
+        """Determina tempo de espera baseado no histórico."""
+        now = time.time()
+        if api_name not in self.cache:
+            return 0
+            
+        last_call, failures, avg_time = self.cache[api_name]
+        dynamic_delay = base_delay * (1 + (failures * 0.5))
+        
+        wait_time = max(0, last_call + dynamic_delay - now)
+        return wait_time
+        
+    def update_stats(self, api_name: str, success: bool, response_time: float):
+        """Atualiza estatísticas de performance."""
+        now = time.time()
+        current_failures = self.cache.get(api_name, (0, 0, 0))[1]
+        failures = current_failures if success else current_failures + 1
+        
+        self.performance_stats[api_name].append(response_time)
+        # Mantém apenas últimas 100 medições
+        if len(self.performance_stats[api_name]) > 100:
+            self.performance_stats[api_name] = self.performance_stats[api_name][-100:]
+            
+        avg_time = statistics.mean(self.performance_stats[api_name][-10:])
+        self.cache[api_name] = (now, failures, avg_time)
+        self.last_calls[api_name] = now
+        
+    def get_performance_metrics(self, api_name: str) -> Dict[str, float]:
+        """Retorna métricas de performance para uma API."""
+        if api_name not in self.performance_stats:
+            return {
+                'avg_time': 0.0,
+                'success_rate': 0.0,
+                'error_rate': 0.0
+            }
+            
+        stats = self.performance_stats[api_name]
+        _, failures, _ = self.cache.get(api_name, (0, 0, 0))
+        
+        total_calls = len(stats)
+        if total_calls == 0:
+            return {
+                'avg_time': 0.0,
+                'success_rate': 0.0,
+                'error_rate': 0.0
+            }
+            
+        return {
+            'avg_time': statistics.mean(stats),
+            'success_rate': ((total_calls - failures) / total_calls) * 100,
+            'error_rate': (failures / total_calls) * 100
+        }
+
+class MetadataValidator:
+    """Validação centralizada de metadados."""
+    def __init__(self):
+        self.publisher_patterns = {
+            'springer': [r'springer', r'apress'],
+            'oreilly': [r"o'reilly", r'oreilly'],
+            'packt': [r'packt'],
+            'manning': [r'manning'],
+            'casa_do_codigo': [r'casa\s+do\s+c[oó]digo'],
+            'novatec': [r'novatec'],
+            'alta_books': [r'alta\s+books']
+        }
+    
+
+    def validate_metadata(self, metadata: Dict[str, Any], source: str, isbn: str = None, source_api: str = None) -> bool:
+        """Validação centralizada de metadados."""
+        # Valida campos obrigatórios
+        if not all(metadata.get(field) for field in ['title', 'authors', 'publisher']):
+            return False
+                
+        # Valida tamanho do título
+        if len(metadata['title'].strip()) < 3:
+            return False
+                
+        # Valida autores
+        if not any(len(a.strip()) > 0 for a in metadata['authors']):
+            return False
+                
+        # Valida editora
+        if len(metadata['publisher'].strip()) < 2:
+            return False
+        
+        # Valida data
+        if metadata.get('published_date'):
+            if not self._validate_date(metadata['published_date']):
+                metadata['published_date'] = 'Unknown'
+
+        # Se tiver source_api, valida específico da API
+        if source_api:
+            return self._validate_source_specific(metadata, source_api, isbn)
+                
+        return True
+
+    def _validate_basic_fields(self, metadata: Dict) -> bool:
+        """Validação de campos básicos."""
+        required_fields = {'title', 'authors', 'publisher', 'published_date'}
+        return all(metadata.get(field) for field in required_fields)
+        
+    def _validate_date(self, date: str) -> bool:
+            """Validação aprimorada de datas."""
+            if not date or date == 'Unknown':
+                return False
+                
+            # Aceita anos (YYYY)
+            if re.match(r'^\d{4}$', date):
+                year = int(date)
+                return 1900 <= year <= datetime.now().year
+                
+            # Aceita datas completas (YYYY-MM-DD)
+            try:
+                parsed_date = datetime.strptime(date, '%Y-%m-%d')
+                return 1900 <= parsed_date.year <= datetime.now().year
+            except ValueError:
+                pass
+                
+            # Aceita mês/ano (YYYY-MM)
+            try:
+                parsed_date = datetime.strptime(date, '%Y-%m')
+                return 1900 <= parsed_date.year <= datetime.now().year
+            except ValueError:
+                return False
+
+    def _validate_publisher(self, publisher: str, source: str) -> bool:
+        """Validação de editora."""
+        if source in self.publisher_patterns:
+            patterns = self.publisher_patterns[source]
+            publisher_lower = publisher.lower()
+            return any(re.search(pattern, publisher_lower) for pattern in patterns)
+        return True
+            
+    def _validate_title_and_authors(self, title: str, authors: List[str]) -> bool:
+        """Validação de título e autores."""
+        if not title or len(title.strip()) < 3 or len(title) > 300:
+            return False
+            
+        if not authors or all(not a.strip() for a in authors):
+            return False
+            
+        return True
+        
+    def _validate_source_specific(self, metadata: Dict, source: str, isbn: str) -> bool:
+        """Validação específica por fonte."""
+        # Implementar validações específicas por fonte se necessário
+        return True
+
+class ErrorHandler:
+    def __init__(self):
+        self.error_counts = defaultdict(Counter)
+        self.last_errors = defaultdict(dict)
+        self.error_thresholds = {
+            'timeout': 3,
+            'connection': 5,
+            'api': 3,
+            'validation': 2
+        }
+
+    def handle_api_error(self, api_name: str, error: Exception, isbn: str) -> bool:
+        """
+        Handle API errors with sophisticated retry logic.
+        Returns True if should retry, False otherwise.
+        """
+        error_type = type(error).__name__
+        error_msg = str(error)
+        
+        # Categorize error
+        if isinstance(error, requests.exceptions.Timeout):
+            category = 'timeout'
+        elif isinstance(error, requests.exceptions.ConnectionError):
+            category = 'connection'
+        elif isinstance(error, requests.exceptions.HTTPError):
+            category = 'api'
+        else:
+            category = 'unknown'
+
+        # Update error counts
+        self.error_counts[api_name][category] += 1
+        self.last_errors[api_name][isbn] = {
+            'error': error_msg,
+            'timestamp': time.time(),
+            'category': category
+        }
+
+        # Log error with context
+        logging.error(
+            f"API Error in {api_name} for ISBN {isbn}\n"
+            f"Category: {category}\n"
+            f"Error: {error_msg}\n"
+            f"Count: {self.error_counts[api_name][category]}"
+        )
+
+        # Check if should retry based on error category and count
+        threshold = self.error_thresholds.get(category, 3)
+        if self.error_counts[api_name][category] >= threshold:
+            logging.warning(
+                f"Error threshold reached for {api_name} ({category}). "
+                f"Temporarily disabling API."
+            )
+            return False
+
+        return True
+
+    def check_api_health(self, api_name: str) -> bool:
+        """Check if API is healthy enough to use."""
+        total_errors = sum(self.error_counts[api_name].values())
+        recent_errors = sum(
+            1 for error in self.last_errors[api_name].values()
+            if time.time() - error['timestamp'] < 300  # last 5 minutes
+        )
+
+        if total_errors > 10 or recent_errors > 5:
+            logging.warning(f"API {api_name} shows poor health. Consider alternative.")
+            return False
+        return True
+
+    def reset_error_counts(self, api_name: str = None):
+        """Reset error counts for specific or all APIs."""
+        if api_name:
+            self.error_counts[api_name].clear()
+            self.last_errors[api_name].clear()
+        else:
+            self.error_counts.clear()
+            self.last_errors.clear()
+
+    def get_api_status(self, api_name: str) -> Dict:
+        """Get detailed API status."""
+        return {
+            'error_counts': dict(self.error_counts[api_name]),
+            'recent_errors': sum(
+                1 for error in self.last_errors[api_name].values()
+                if time.time() - error['timestamp'] < 300
+            ),
+            'last_error': next(iter(self.last_errors[api_name].values()), None)
+        }
+
+class MetricsCollector:
+    """Coleta e análise de métricas."""
+    def __init__(self):
+        self.metrics = defaultdict(list)
+        self.errors = defaultdict(Counter)
+        
+    def add_metric(self, api_name: str, response_time: float, success: bool):
+        self.metrics[api_name].append({
+            'timestamp': time.time(),
+            'response_time': response_time,
+            'success': success
+        })
+        
+    def add_error(self, api_name: str, error_type: str):
+        self.errors[api_name][error_type] += 1
+        
+    def get_api_stats(self, api_name: str) -> Dict:
+        """Retorna estatísticas para uma API."""
+        if api_name not in self.metrics:
+            return {}
+            
+        metrics = self.metrics[api_name]
+        recent_metrics = [m for m in metrics if time.time() - m['timestamp'] < 3600]
+        
+        if not recent_metrics:
+            return {}
+            
+        success_count = sum(1 for m in recent_metrics if m['success'])
+        
+        return {
+            'total_calls': len(recent_metrics),
+            'success_rate': (success_count / len(recent_metrics)) * 100,
+            'avg_response_time': statistics.mean(m['response_time'] for m in recent_metrics),
+            'error_types': dict(self.errors[api_name])
+        }
+        
+    def get_overall_stats(self) -> Dict:
+        """Retorna estatísticas gerais."""
+        stats = {}
+        for api_name in self.metrics:
+            stats[api_name] = self.get_api_stats(api_name)
+        return stats
+
+
+
 def main():
     parser = argparse.ArgumentParser(
         description='Extrai metadados de livros PDF e opcionalmente renomeia os arquivos',
@@ -2592,8 +4403,8 @@ Observações:
         
         # Verifica se é para atualizar o cache
         if args.rescan_cache:
-            print("\nReprocessando cache em busca de dados melhores...")
-            updated = extractor.metadata_fetcher.cache.rescan_and_update()
+            print("\nReprocessando todo o cache...")
+            updated = extractor.metadata_fetcher.rescan_cache()
             print(f"Atualizados {updated} registros no cache")
             return
             
