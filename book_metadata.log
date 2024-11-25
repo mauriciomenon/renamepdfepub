@@ -12298,3 +12298,170 @@
 2024-11-25 16:50:18,216 - INFO - Processing: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Learn D3.js.pdf
 2024-11-25 16:50:18,229 - INFO - Sucesso: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Clean Code in JavaScript.pdf
 2024-11-25 16:50:18,229 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Learn D3.js.pdf
+2024-11-25 16:50:36,242 - INFO - Métodos tentados: pdfplumber
+2024-11-25 16:50:36,261 - INFO - Métodos bem-sucedidos: pdfplumber
+2024-11-25 16:50:36,274 - INFO - Extraindo metadados de: /Users/menon/Downloads/NETWORKING & SECURITY CERT PREP WITH EXAM CRAM AND MORE BY PEARSON/comptiasecurityplussy0-601certguide5thedition.pdf
+2024-11-25 16:50:36,710 - ERROR - Erro ao extrair metadados de /Users/menon/Downloads/NETWORKING & SECURITY CERT PREP WITH EXAM CRAM AND MORE BY PEARSON/comptiasecurityplussy0-601certguide5thedition.pdf: PyCryptodome is required for AES algorithm
+2024-11-25 16:50:36,869 - INFO - Processing: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Mastering React Test-Driven Development.pdf
+2024-11-25 16:50:36,888 - INFO - Sucesso: /Users/menon/Downloads/NETWORKING & SECURITY CERT PREP WITH EXAM CRAM AND MORE BY PEARSON/comptiasecurityplussy0-601certguide5thedition.pdf
+2024-11-25 16:50:36,888 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Mastering React Test-Driven Development.pdf
+2024-11-25 16:50:44,884 - INFO - Métodos tentados: PyPDF2
+2024-11-25 16:50:44,904 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-25 16:50:44,916 - INFO - Extraindo metadados de: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Full-Stack React Projects - Second Edition.pdf
+2024-11-25 16:50:45,184 - INFO - Processing: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Real-Time 3D Graphics with WebGL 2 - Second Edition.pdf
+2024-11-25 16:50:45,203 - INFO - Sucesso: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Full-Stack React Projects - Second Edition.pdf
+2024-11-25 16:50:45,221 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Real-Time 3D Graphics with WebGL 2 - Second Edition.pdf
+2024-11-25 16:50:49,820 - INFO - Métodos tentados: PyPDF2
+2024-11-25 16:50:49,833 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-25 16:50:49,852 - INFO - Extraindo metadados de: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Mastering JavaScript Functional Programming - Second Edition.pdf
+2024-11-25 16:50:50,186 - INFO - Processing: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Hands-On JavaScript High Performance.pdf
+2024-11-25 16:50:50,199 - INFO - Sucesso: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Mastering JavaScript Functional Programming - Second Edition.pdf
+2024-11-25 16:50:50,217 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Hands-On JavaScript High Performance.pdf
+2024-11-25 16:50:51,056 - INFO - Métodos tentados: PyPDF2
+2024-11-25 16:50:51,075 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-25 16:50:51,088 - INFO - Extraindo metadados de: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Learn D3.js.pdf
+2024-11-25 16:50:51,407 - INFO - Processing: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Learn Chart.js.pdf
+2024-11-25 16:50:51,425 - INFO - Sucesso: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Learn D3.js.pdf
+2024-11-25 16:50:51,425 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Learn Chart.js.pdf
+2024-11-25 16:51:08,642 - INFO - Métodos tentados: PyPDF2
+2024-11-25 16:51:08,680 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-25 16:51:08,705 - INFO - Extraindo metadados de: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Mastering React Test-Driven Development.pdf
+2024-11-25 16:51:08,988 - INFO - Processing: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Node Cookbook - Fourth Edition.pdf
+2024-11-25 16:51:08,988 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Node Cookbook - Fourth Edition.pdf
+2024-11-25 16:51:08,995 - INFO - Sucesso: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Mastering React Test-Driven Development.pdf
+2024-11-25 16:51:11,726 - INFO - Métodos tentados: PyPDF2
+2024-11-25 16:51:11,738 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-25 16:51:11,757 - INFO - Extraindo metadados de: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Node Cookbook - Fourth Edition.pdf
+2024-11-25 16:51:11,973 - INFO - Processing: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Building Enterprise JavaScript Applications.pdf
+2024-11-25 16:51:11,979 - INFO - Sucesso: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Node Cookbook - Fourth Edition.pdf
+2024-11-25 16:51:12,017 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Building Enterprise JavaScript Applications.pdf
+2024-11-25 16:51:17,700 - INFO - Métodos tentados: PyPDF2
+2024-11-25 16:51:17,706 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-25 16:51:17,731 - INFO - Extraindo metadados de: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Hands-On JavaScript High Performance.pdf
+2024-11-25 16:51:17,923 - INFO - Processing: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/React Design Patterns and Best Practices - Second Edition.pdf
+2024-11-25 16:51:17,930 - INFO - Sucesso: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Hands-On JavaScript High Performance.pdf
+2024-11-25 16:51:17,955 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/React Design Patterns and Best Practices - Second Edition.pdf
+2024-11-25 16:51:21,270 - INFO - Métodos tentados: PyPDF2
+2024-11-25 16:51:21,282 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-25 16:51:21,282 - INFO - Extraindo metadados de: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Learn Chart.js.pdf
+2024-11-25 16:51:21,430 - INFO - Processing: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Deno Web Development.pdf
+2024-11-25 16:51:21,446 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Deno Web Development.pdf
+2024-11-25 16:51:21,446 - INFO - Sucesso: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Learn Chart.js.pdf
+2024-11-25 16:51:21,450 - INFO - Métodos tentados: PyPDF2
+2024-11-25 16:51:21,538 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-25 16:51:21,560 - INFO - Extraindo metadados de: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Real-Time 3D Graphics with WebGL 2 - Second Edition.pdf
+2024-11-25 16:51:21,852 - INFO - Processing: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Modern JavaScript Web Development Cookbook.pdf
+2024-11-25 16:51:21,864 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Modern JavaScript Web Development Cookbook.pdf
+2024-11-25 16:51:21,889 - INFO - Sucesso: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Real-Time 3D Graphics with WebGL 2 - Second Edition.pdf
+2024-11-25 16:51:22,678 - INFO - Métodos tentados: PyPDF2
+2024-11-25 16:51:22,684 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-25 16:51:22,746 - INFO - Extraindo metadados de: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Deno Web Development.pdf
+2024-11-25 16:51:22,851 - INFO - Processing: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Learn Three.js - Third Edition.pdf
+2024-11-25 16:51:22,857 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Learn Three.js - Third Edition.pdf
+2024-11-25 16:51:22,857 - WARNING - Sem metadados: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Deno Web Development.pdf
+2024-11-25 16:51:39,157 - INFO - Métodos tentados: PyPDF2
+2024-11-25 16:51:39,176 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-25 16:51:39,182 - INFO - Extraindo metadados de: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Building Enterprise JavaScript Applications.pdf
+2024-11-25 16:51:39,332 - INFO - Processing: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/networkprogrammabilityandautomation2ndedition.pdf
+2024-11-25 16:51:39,345 - INFO - Sucesso: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Building Enterprise JavaScript Applications.pdf
+2024-11-25 16:51:39,363 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/networkprogrammabilityandautomation2ndedition.pdf
+2024-11-25 16:51:42,232 - INFO - Métodos tentados: PyPDF2
+2024-11-25 16:51:42,264 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-25 16:51:42,306 - INFO - Extraindo metadados de: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/networkprogrammabilityandautomation2ndedition.pdf
+2024-11-25 16:51:42,474 - INFO - Métodos tentados: PyPDF2
+2024-11-25 16:51:42,488 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-25 16:51:42,488 - INFO - Extraindo metadados de: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/React Design Patterns and Best Practices - Second Edition.pdf
+2024-11-25 16:51:42,718 - INFO - Processing: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/pythonfordevops.pdf
+2024-11-25 16:51:42,731 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/pythonfordevops.pdf
+2024-11-25 16:51:42,731 - INFO - Sucesso: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/React Design Patterns and Best Practices - Second Edition.pdf
+2024-11-25 16:51:42,849 - INFO - Processing: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/efficientlinuxatthecommandline.pdf
+2024-11-25 16:51:42,868 - INFO - Sucesso: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/networkprogrammabilityandautomation2ndedition.pdf
+2024-11-25 16:51:42,887 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/efficientlinuxatthecommandline.pdf
+2024-11-25 16:51:44,366 - INFO - Métodos tentados: PyPDF2
+2024-11-25 16:51:44,379 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-25 16:51:44,398 - INFO - Extraindo metadados de: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/efficientlinuxatthecommandline.pdf
+2024-11-25 16:51:44,795 - INFO - Processing: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/terraform_upandrunning3rdedition_V2.pdf
+2024-11-25 16:51:44,801 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/terraform_upandrunning3rdedition_V2.pdf
+2024-11-25 16:51:44,815 - INFO - Sucesso: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/efficientlinuxatthecommandline.pdf
+2024-11-25 16:51:45,346 - INFO - Métodos tentados: PyPDF2
+2024-11-25 16:51:45,396 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-25 16:51:45,409 - INFO - Extraindo metadados de: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/pythonfordevops.pdf
+2024-11-25 16:51:45,797 - INFO - Processing: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/practicallinuxsystemadministration.pdf
+2024-11-25 16:51:45,816 - INFO - Sucesso: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/pythonfordevops.pdf
+2024-11-25 16:51:45,816 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/practicallinuxsystemadministration.pdf
+2024-11-25 16:51:46,669 - INFO - Métodos tentados: PyPDF2
+2024-11-25 16:51:46,689 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-25 16:51:46,715 - INFO - Extraindo metadados de: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/terraform_upandrunning3rdedition_V2.pdf
+2024-11-25 16:51:47,068 - INFO - Processing: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/learningdevsecops.pdf
+2024-11-25 16:51:47,068 - INFO - Sucesso: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/terraform_upandrunning3rdedition_V2.pdf
+2024-11-25 16:51:47,099 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/learningdevsecops.pdf
+2024-11-25 16:51:47,302 - INFO - Métodos tentados: PyPDF2
+2024-11-25 16:51:47,319 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-25 16:51:47,326 - INFO - Extraindo metadados de: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/practicallinuxsystemadministration.pdf
+2024-11-25 16:51:47,506 - INFO - Processing: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/learninggit.pdf
+2024-11-25 16:51:47,512 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/learninggit.pdf
+2024-11-25 16:51:47,599 - INFO - Sucesso: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/practicallinuxsystemadministration.pdf
+2024-11-25 16:51:48,390 - INFO - Métodos tentados: PyPDF2
+2024-11-25 16:51:48,416 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-25 16:51:48,429 - INFO - Extraindo metadados de: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/learningdevsecops.pdf
+2024-11-25 16:51:48,727 - INFO - Processing: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/ansible_upandrunning3rdedition.pdf
+2024-11-25 16:51:48,739 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/ansible_upandrunning3rdedition.pdf
+2024-11-25 16:51:48,757 - INFO - Sucesso: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/learningdevsecops.pdf
+2024-11-25 16:51:50,026 - INFO - Métodos tentados: PyPDF2
+2024-11-25 16:51:50,046 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-25 16:51:50,058 - INFO - Extraindo metadados de: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/learninggit.pdf
+2024-11-25 16:51:50,270 - INFO - Métodos tentados: PyPDF2
+2024-11-25 16:51:50,283 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-25 16:51:50,315 - INFO - Extraindo metadados de: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/ansible_upandrunning3rdedition.pdf
+2024-11-25 16:51:50,507 - INFO - Processing: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/linuxpocketguide4thedition.pdf
+2024-11-25 16:51:50,513 - INFO - Sucesso: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/learninggit.pdf
+2024-11-25 16:51:50,520 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/linuxpocketguide4thedition.pdf
+2024-11-25 16:51:50,576 - INFO - Processing: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/kubernetes_upandrunning3e.pdf
+2024-11-25 16:51:50,589 - INFO - Sucesso: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/ansible_upandrunning3rdedition.pdf
+2024-11-25 16:51:50,589 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/kubernetes_upandrunning3e.pdf
+2024-11-25 16:51:51,900 - INFO - Métodos tentados: PyPDF2
+2024-11-25 16:51:51,903 - INFO - Métodos tentados: PyPDF2
+2024-11-25 16:51:51,909 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-25 16:51:51,951 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-25 16:51:51,957 - INFO - Extraindo metadados de: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Learn Three.js - Third Edition.pdf
+2024-11-25 16:51:51,964 - INFO - Extraindo metadados de: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/linuxpocketguide4thedition.pdf
+2024-11-25 16:51:51,996 - INFO - Métodos tentados: PyPDF2
+2024-11-25 16:51:52,008 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-25 16:51:52,008 - INFO - Extraindo metadados de: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/kubernetes_upandrunning3e.pdf
+2024-11-25 16:51:52,103 - INFO - Processing: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/webapplicationsecurity2ndedition.pdf
+2024-11-25 16:51:52,111 - INFO - Sucesso: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/linuxpocketguide4thedition.pdf
+2024-11-25 16:51:52,136 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/webapplicationsecurity2ndedition.pdf
+2024-11-25 16:51:52,155 - INFO - Processing: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/fastapi.pdf
+2024-11-25 16:51:52,155 - INFO - Sucesso: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/kubernetes_upandrunning3e.pdf
+2024-11-25 16:51:52,174 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/fastapi.pdf
+2024-11-25 16:51:52,174 - INFO - Processing: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/learninggithubactions.pdf
+2024-11-25 16:51:52,193 - INFO - Sucesso: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Learn Three.js - Third Edition.pdf
+2024-11-25 16:51:52,199 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/learninggithubactions.pdf
+2024-11-25 16:51:53,415 - INFO - Métodos tentados: PyPDF2
+2024-11-25 16:51:53,425 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-25 16:51:53,430 - INFO - Extraindo metadados de: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/fastapi.pdf
+2024-11-25 16:51:53,669 - INFO - Processing: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/docker_upandrunning3rdedition.pdf
+2024-11-25 16:51:53,679 - INFO - Sucesso: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/fastapi.pdf
+2024-11-25 16:51:53,687 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/docker_upandrunning3rdedition.pdf
+2024-11-25 16:51:53,949 - INFO - Métodos tentados: PyPDF2
+2024-11-25 16:51:53,962 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-25 16:51:53,975 - INFO - Extraindo metadados de: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/learninggithubactions.pdf
+2024-11-25 16:51:54,223 - INFO - Processing: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/learningmodernlinux.pdf
+2024-11-25 16:51:54,237 - INFO - Sucesso: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/learninggithubactions.pdf
+2024-11-25 16:51:54,256 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/learningmodernlinux.pdf
+2024-11-25 16:51:54,257 - INFO - Métodos tentados: PyPDF2
+2024-11-25 16:51:54,294 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-25 16:51:54,305 - INFO - Extraindo metadados de: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/webapplicationsecurity2ndedition.pdf
+2024-11-25 16:51:54,620 - INFO - Sucesso: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/webapplicationsecurity2ndedition.pdf
+2024-11-25 16:51:54,782 - INFO - Métodos tentados: PyPDF2
+2024-11-25 16:51:54,788 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-25 16:51:54,788 - INFO - Extraindo metadados de: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Modern JavaScript Web Development Cookbook.pdf
+2024-11-25 16:51:54,880 - INFO - Sucesso: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Modern JavaScript Web Development Cookbook.pdf
+2024-11-25 16:51:54,882 - INFO - Métodos tentados: PyPDF2
+2024-11-25 16:51:54,882 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-25 16:51:54,882 - INFO - Extraindo metadados de: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/docker_upandrunning3rdedition.pdf
+2024-11-25 16:51:54,947 - INFO - Sucesso: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/docker_upandrunning3rdedition.pdf
+2024-11-25 16:51:54,978 - INFO - Métodos tentados: PyPDF2
+2024-11-25 16:51:54,979 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-25 16:51:54,979 - INFO - Extraindo metadados de: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/learningmodernlinux.pdf
+2024-11-25 16:51:55,011 - INFO - Sucesso: /Users/menon/Downloads/LINUX FOR SEASONED ADMINS BY O'REILLY/learningmodernlinux.pdf
