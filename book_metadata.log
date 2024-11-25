@@ -12279,3 +12279,22 @@
 2024-11-25 16:50:13,624 - INFO - Processing: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Mastering JavaScript Functional Programming - Second Edition.pdf
 2024-11-25 16:50:13,630 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Mastering JavaScript Functional Programming - Second Edition.pdf
 2024-11-25 16:50:13,630 - INFO - Sucesso: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Learning Angular - Third Edition.pdf
+2024-11-25 16:50:14,124 - INFO - Métodos tentados: pdfplumber
+2024-11-25 16:50:14,131 - INFO - Métodos bem-sucedidos: pdfplumber
+2024-11-25 16:50:14,164 - INFO - Extraindo metadados de: /Users/menon/Downloads/NETWORKING & SECURITY CERT PREP WITH EXAM CRAM AND MORE BY PEARSON/awscertifiedsolutionsarchitect_associatesaa-c03certguide.pdf
+2024-11-25 16:50:14,275 - ERROR - Erro ao extrair metadados de /Users/menon/Downloads/NETWORKING & SECURITY CERT PREP WITH EXAM CRAM AND MORE BY PEARSON/awscertifiedsolutionsarchitect_associatesaa-c03certguide.pdf: PyCryptodome is required for AES algorithm
+2024-11-25 16:50:14,334 - INFO - Processing: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Svelte 3 Up and Running.pdf
+2024-11-25 16:50:14,347 - INFO - Sucesso: /Users/menon/Downloads/NETWORKING & SECURITY CERT PREP WITH EXAM CRAM AND MORE BY PEARSON/awscertifiedsolutionsarchitect_associatesaa-c03certguide.pdf
+2024-11-25 16:50:14,349 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Svelte 3 Up and Running.pdf
+2024-11-25 16:50:15,044 - INFO - Métodos tentados: PyPDF2
+2024-11-25 16:50:15,051 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-25 16:50:15,051 - INFO - Extraindo metadados de: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Svelte 3 Up and Running.pdf
+2024-11-25 16:50:15,143 - INFO - Processing: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Full-Stack React Projects - Second Edition.pdf
+2024-11-25 16:50:15,154 - INFO - Sucesso: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Svelte 3 Up and Running.pdf
+2024-11-25 16:50:15,167 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Full-Stack React Projects - Second Edition.pdf
+2024-11-25 16:50:17,953 - INFO - Métodos tentados: PyPDF2
+2024-11-25 16:50:17,953 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-25 16:50:17,953 - INFO - Extraindo metadados de: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Clean Code in JavaScript.pdf
+2024-11-25 16:50:18,216 - INFO - Processing: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Learn D3.js.pdf
+2024-11-25 16:50:18,229 - INFO - Sucesso: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Clean Code in JavaScript.pdf
+2024-11-25 16:50:18,229 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Learn D3.js.pdf
