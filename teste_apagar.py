@@ -6,6 +6,7 @@
 # Bibliotecas padrão do Python
 import argparse
 import json
+import mobi
 import logging
 import re
 import sqlite3
@@ -3122,6 +3123,7 @@ class BookMetadataExtractor:
         self.isbn_extractor = ISBNExtractor()
         self.metadata_fetcher = MetadataFetcher(isbndb_api_key=isbndb_api_key)
         self.pdf_processor = PDFProcessor()
+        self.ebook_processor = EbookProcessor()
         
         # Configure reports directory
         self.reports_dir = Path("reports")
@@ -3523,10 +3525,11 @@ class BookMetadataExtractor:
             logging.error(traceback.format_exc())
 
     def process_directory(self, directory_path: str, subdirs: Optional[List[str]] = None, 
-                         recursive: bool = False, max_workers: int = 4) -> List[BookMetadata]:
+                        recursive: bool = False, max_workers: int = 4) -> List[BookMetadata]:
         directory = Path(directory_path)
-        pdf_files = []
+        ebook_files = []
         
+        # Inicialização correta do runtime_stats
         runtime_stats = {
             'processed_files': [],
             'isbn_not_found': [],
@@ -3538,44 +3541,51 @@ class BookMetadataExtractor:
             'failure_details': {}
         }
         
+        # Encontra todos os arquivos suportados
+        extensions = {'pdf', 'epub', 'mobi'}
+        
         if subdirs:
             for subdir in subdirs:
                 subdir_path = directory / subdir
                 if subdir_path.exists():
-                    pdf_files.extend(subdir_path.glob('*.pdf'))
-                else:
-                    logging.warning(f"Subdiretório não encontrado: {subdir_path}")
+                    for ext in extensions:
+                        ebook_files.extend(subdir_path.glob(f'*.{ext}'))
         elif recursive:
-            pdf_files = list(directory.glob('**/*.pdf'))
+            for ext in extensions:
+                ebook_files.extend(directory.glob(f'**/*.{ext}'))
         else:
-            pdf_files = list(directory.glob('*.pdf'))
+            for ext in extensions:
+                ebook_files.extend(directory.glob(f'*.{ext}'))
         
-        logging.info(f"Encontrados {len(pdf_files)} arquivos PDF para processar")
+        # Agrupa arquivos pelo nome base
+        file_groups = defaultdict(list)
+        for file_path in ebook_files:
+            base_name = file_path.stem
+            file_groups[base_name].append(file_path)
+        
+        logging.info(f"Encontrados {len(ebook_files)} arquivos para processar em {len(file_groups)} grupos")
         results = []
         
         with ThreadPoolExecutor(max_workers=max_workers) as executor:
-            future_to_pdf = {
-                executor.submit(self.process_single_file, str(pdf_path), runtime_stats): pdf_path
-                for pdf_path in pdf_files
+            future_to_group = {
+                executor.submit(self._process_file_group, group, runtime_stats): base_name
+                for base_name, group in file_groups.items()
             }
             
-            with tqdm(total=len(pdf_files), desc="Processando PDFs") as pbar:
-                for future in futures.as_completed(future_to_pdf):
-                    pdf_path = future_to_pdf[future]
+            with tqdm(total=len(file_groups), desc="Processando grupos") as pbar:
+                for future in futures.as_completed(future_to_group):
+                    base_name = future_to_group[future]
                     try:
                         metadata = future.result()
                         if metadata:
                             results.append(metadata)
-                            logging.info(f"Sucesso: {pdf_path}")
+                            logging.info(f"Sucesso: {base_name}")
                         else:
-                            logging.warning(f"Sem metadados: {pdf_path}")
+                            logging.warning(f"Sem metadados: {base_name}")
                     except Exception as e:
-                        logging.error(f"Erro processando {pdf_path}: {str(e)}")
+                        logging.error(f"Erro processando {base_name}: {str(e)}")
                     finally:
                         pbar.update(1)
-        
-        # Gera relatórios aprimorados
-        self._generate_enhanced_report(results, runtime_stats)
         
         return results
 
@@ -3630,6 +3640,48 @@ class BookMetadataExtractor:
         print(f"\nRelatórios gerados:")
         print(f"HTML: {html_file}")
         print(f"JSON: {json_file}")
+
+    def _process_file_group(self, files: List[Path], runtime_stats: Dict) -> Optional[BookMetadata]:
+        """Processa grupo de arquivos com mesmo nome base."""
+        metadata = None
+        combined_isbns = set()
+        
+        # Tenta cada arquivo do grupo
+        for file_path in sorted(files):  # Ordena para tentar PDF primeiro
+            ext = file_path.suffix.lower()
+            
+            try:
+                if ext == '.pdf':
+                    metadata = self.process_single_file(str(file_path), runtime_stats)
+                elif ext in {'.epub', '.mobi'}:
+                    # Usa o EbookProcessor
+                    text, methods = self.ebook_processor.extract_text_from_epub(str(file_path)) \
+                                if ext == '.epub' else \
+                                self.ebook_processor.extract_text_from_mobi(str(file_path))
+                                
+                    ebook_metadata = self.ebook_processor.extract_metadata(str(file_path))
+                    if ebook_metadata.get('isbn'):
+                        combined_isbns.add(ebook_metadata['isbn'])
+                        
+                    isbns = self.isbn_extractor.extract_from_text(text)
+                    combined_isbns.update(isbns)
+            except Exception as e:
+                logging.error(f"Erro processando {file_path}: {str(e)}")
+                continue
+        
+        # Se encontrou ISBNs em qualquer arquivo do grupo
+        if combined_isbns:
+            for isbn in sorted(combined_isbns):
+                try:
+                    metadata = self.metadata_fetcher.fetch_metadata(isbn)
+                    if metadata:
+                        # Atualiza file_path para incluir todos os arquivos do grupo
+                        metadata.file_paths = [str(f) for f in files]
+                        return metadata
+                except Exception as e:
+                    logging.error(f"Erro obtendo metadados para ISBN {isbn}: {str(e)}")
+                    
+        return metadata
 
     def _generate_html_report(self, results, source_stats, publisher_stats, 
                             runtime_stats, total_files, successful, failed, avg_time, output_file):
@@ -4305,7 +4357,97 @@ class MetricsCollector:
             stats[api_name] = self.get_api_stats(api_name)
         return stats
 
+class EbookProcessor:
+    def __init__(self):
+        self.isbn_extractor = ISBNExtractor()
+        
+    def extract_text_from_epub(self, epub_path: str) -> Tuple[str, List[str]]:
+        """Extrai texto de EPUB."""
+        import ebooklib
+        from ebooklib import epub
+        from bs4 import BeautifulSoup
+        
+        methods_tried = ["ebooklib"]
+        methods_succeeded = []
+        
+        try:
+            book = epub.read_epub(epub_path)
+            text = ""
+            
+            for item in book.get_items():
+                if item.get_type() == ebooklib.ITEM_DOCUMENT:
+                    soup = BeautifulSoup(item.get_content(), 'html.parser')
+                    text += soup.get_text() + "\n"
+            
+            if text.strip():
+                methods_succeeded.append("ebooklib")
+            return text, methods_tried
+            
+        except Exception as e:
+            logging.debug(f"Erro na extração EPUB: {str(e)}")
+            return "", methods_tried
+            
+    def extract_text_from_mobi(self, mobi_path: str) -> Tuple[str, List[str]]:
+        """Extrai texto de MOBI."""
+        from mobi import Mobi
+        
+        methods_tried = ["mobi"]
+        methods_succeeded = []
+        
+        try:
+            book = Mobi(mobi_path)
+            book.parse()
+            text = book.get_book_content()
+            
+            if text.strip():
+                methods_succeeded.append("mobi")
+            return text, methods_tried
+            
+        except Exception as e:
+            logging.debug(f"Erro na extração MOBI: {str(e)}")
+            return "", methods_tried
 
+    def extract_metadata(self, ebook_path: str) -> Dict:
+        """Extrai metadados nativos do ebook."""
+        ext = ebook_path.lower().split('.')[-1]
+        
+        if ext == 'epub':
+            return self._extract_epub_metadata(ebook_path)
+        elif ext == 'mobi':
+            return self._extract_mobi_metadata(ebook_path)
+        return {}
+        
+    def _extract_epub_metadata(self, epub_path: str) -> Dict:
+        """Extrai metadados de EPUB."""
+        from ebooklib import epub
+        try:
+            book = epub.read_epub(epub_path)
+            return {
+                'title': book.get_metadata('DC', 'title')[0][0],
+                'creator': book.get_metadata('DC', 'creator')[0][0],
+                'publisher': book.get_metadata('DC', 'publisher')[0][0],
+                'isbn': next((i[0] for i in book.get_metadata('DC', 'identifier') 
+                            if 'isbn' in i[0].lower()), None)
+            }
+        except Exception as e:
+            logging.debug(f"Erro ao extrair metadados EPUB: {str(e)}")
+            return {}
+            
+    def _extract_mobi_metadata(self, mobi_path: str) -> Dict:
+        """Extrai metadados de MOBI."""
+        from mobi import Mobi
+        try:
+            book = Mobi(mobi_path)
+            book.parse()
+            return {
+                'title': book.title(),
+                'author': book.author(),
+                'publisher': book.publisher(),
+                'isbn': book.isbn()
+            }
+        except Exception as e:
+            logging.debug(f"Erro ao extrair metadados MOBI: {str(e)}")
+            return {}
 
 def main():
     parser = argparse.ArgumentParser(
