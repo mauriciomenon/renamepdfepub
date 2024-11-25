@@ -12248,3 +12248,34 @@
 2024-11-25 16:50:02,860 - INFO - Processing: /Users/menon/Downloads/CI:CD MASTERY FOR CLOUD INFRASTRUCTURE BY PACKT/dockerworkshop.pdf
 2024-11-25 16:50:02,860 - INFO - Sucesso: /Users/menon/Downloads/CI:CD MASTERY FOR CLOUD INFRASTRUCTURE BY PACKT/microsoftazurefundamentalscertificationandbeyond1e.pdf
 2024-11-25 16:50:02,860 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/CI:CD MASTERY FOR CLOUD INFRASTRUCTURE BY PACKT/dockerworkshop.pdf
+2024-11-25 16:50:04,110 - INFO - Métodos tentados: PyPDF2
+2024-11-25 16:50:04,110 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-25 16:50:04,110 - INFO - Extraindo metadados de: /Users/menon/Downloads/CI:CD MASTERY FOR CLOUD INFRASTRUCTURE BY PACKT/dockerworkshop.pdf
+2024-11-25 16:50:04,204 - INFO - Processing: /Users/menon/Downloads/CI:CD MASTERY FOR CLOUD INFRASTRUCTURE BY PACKT/kubernetesworkshop.pdf
+2024-11-25 16:50:04,205 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/CI:CD MASTERY FOR CLOUD INFRASTRUCTURE BY PACKT/kubernetesworkshop.pdf
+2024-11-25 16:50:04,205 - INFO - Sucesso: /Users/menon/Downloads/CI:CD MASTERY FOR CLOUD INFRASTRUCTURE BY PACKT/dockerworkshop.pdf
+2024-11-25 16:50:05,008 - INFO - Métodos tentados: PyPDF2
+2024-11-25 16:50:05,010 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-25 16:50:05,010 - INFO - Extraindo metadados de: /Users/menon/Downloads/CI:CD MASTERY FOR CLOUD INFRASTRUCTURE BY PACKT/kubernetesworkshop.pdf
+2024-11-25 16:50:05,099 - INFO - Processing: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Clean Code in JavaScript.pdf
+2024-11-25 16:50:05,100 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Clean Code in JavaScript.pdf
+2024-11-25 16:50:05,100 - INFO - Sucesso: /Users/menon/Downloads/CI:CD MASTERY FOR CLOUD INFRASTRUCTURE BY PACKT/kubernetesworkshop.pdf
+2024-11-25 16:50:08,331 - INFO - Métodos tentados: pdfplumber
+2024-11-25 16:50:08,338 - INFO - Métodos bem-sucedidos: pdfplumber
+2024-11-25 16:50:08,338 - INFO - Extraindo metadados de: /Users/menon/Downloads/NETWORKING & SECURITY CERT PREP WITH EXAM CRAM AND MORE BY PEARSON/redhatrhcsa9certguide_ex200.pdf
+2024-11-25 16:50:08,468 - ERROR - Erro ao extrair metadados de /Users/menon/Downloads/NETWORKING & SECURITY CERT PREP WITH EXAM CRAM AND MORE BY PEARSON/redhatrhcsa9certguide_ex200.pdf: PyCryptodome is required for AES algorithm
+2024-11-25 16:50:08,535 - INFO - Processing: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Vue.js 3 By Example.pdf
+2024-11-25 16:50:08,542 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Vue.js 3 By Example.pdf
+2024-11-25 16:50:08,560 - INFO - Sucesso: /Users/menon/Downloads/NETWORKING & SECURITY CERT PREP WITH EXAM CRAM AND MORE BY PEARSON/redhatrhcsa9certguide_ex200.pdf
+2024-11-25 16:50:11,622 - INFO - Métodos tentados: PyPDF2
+2024-11-25 16:50:11,629 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-25 16:50:11,629 - INFO - Extraindo metadados de: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Vue.js 3 By Example.pdf
+2024-11-25 16:50:12,141 - INFO - Processing: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Learning Angular - Third Edition.pdf
+2024-11-25 16:50:12,141 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Learning Angular - Third Edition.pdf
+2024-11-25 16:50:12,151 - INFO - Sucesso: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Vue.js 3 By Example.pdf
+2024-11-25 16:50:13,429 - INFO - Métodos tentados: PyPDF2
+2024-11-25 16:50:13,436 - INFO - Métodos bem-sucedidos: PyPDF2
+2024-11-25 16:50:13,443 - INFO - Extraindo metadados de: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Learning Angular - Third Edition.pdf
+2024-11-25 16:50:13,624 - INFO - Processing: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Mastering JavaScript Functional Programming - Second Edition.pdf
+2024-11-25 16:50:13,630 - INFO - Iniciando extração de texto de: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Mastering JavaScript Functional Programming - Second Edition.pdf
+2024-11-25 16:50:13,630 - INFO - Sucesso: /Users/menon/Downloads/JavaScript Bundle 3rd Ed. Packt/Learning Angular - Third Edition.pdf
