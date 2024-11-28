@@ -1,0 +1,471 @@
+{
+  "summary": {
+    "total_files": 11,
+    "successful": 15,
+    "failed": -4,
+    "success_rate": 136.36363636363635,
+    "average_processing_time": 0.21849958896636962,
+    "by_extension": {
+      "pdf": {
+        "total": 11,
+        "success": 10,
+        "failed": 1
+      }
+    },
+    "timestamp": "2024-11-25 22:38:25"
+  },
+  "api_stats": {
+    "isbnlib_info": 3,
+    "worldcat": 3,
+    "google_books": 7,
+    "openlibrary": 2
+  },
+  "publisher_stats": {
+    "O'Reilly Media, Inc.": 1,
+    "Casa do Código": 1,
+    "National Geographic Books": 1,
+    "Wiley": 2,
+    "O'Reilly Media": 3,
+    "O'Reilly Media, Incorporated": 1,
+    "No Starch Press": 2,
+    "Unknown": 3,
+    "Packt Publishing": 1
+  },
+  "failure_details": {
+    "/Users/menon/Downloads/0_teste_livros_scan/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf": {
+      "api_attempts": [
+        "worldcat"
+      ],
+      "status": "Success",
+      "extraction_methods": [
+        "PyPDF2"
+      ],
+      "found_isbns": [
+        "9786586110364",
+        "9786586110340",
+        "9786586110357"
+      ],
+      "detected_publisher": "Casa do Código",
+      "text_sample": "198041 E-book gerado e5pec1a1mente para Mauricio Menon - mauricio.menon@gmail.com E-book gerado e5pec1a1mente para Mauricio Menon - mauricio.menon@gmail.com E-book gerado e5pec1a1mente para Mauricio Menon - mauricio.menon@gmail.com Impresso e PDF: 978-65-86110-34-0EPUB: 978-65-86110-36-4MOBI: 978-65-86110-35-7Caso voce deseje submeter alguma errata ou sugestao, ace55e4ttp://erratas.ca5af10c0f1190.com.br.ISBN E-book gerado e5pec1a1mente para Mauricio Menon - mauricio.menon@gmail.com Quero agradec",
+      "errors": []
+    },
+    "/Users/menon/Downloads/0_teste_livros_scan/bugbountybootcamp.pdf": {
+      "api_attempts": [
+        "isbnlib_info"
+      ],
+      "status": "Success",
+      "extraction_methods": [
+        "PyPDF2"
+      ],
+      "found_isbns": [
+        "9781718501553",
+        "9781718501546"
+      ],
+      "detected_publisher": "",
+      "text_sample": "PRAISE FOR BUG BOUNTY BOOTCAMP“Bug Bounty Bootcamp should be on every hacker’s shelf. Vickie Li answers an important question: ‘So you found your first flaw, what’s next?’ By exp1a1n1n9 how to write a bug report and interact with clients, she presents a wonderful guide on starting your security career.”- Andrew Orr, Associate Editor, THE MAC OBSERVER“A thorough and masterful exp1anat10n for how to find bugs and re5p0n5161y report them. It is written so clearly and provides such useful 5tep-6y-5t",
+      "errors": []
+    },
+    "/Users/menon/Downloads/0_teste_livros_scan/Hands-On Artificial Intelligence for Banking.pdf": {
+      "api_attempts": [],
+      "status": "No ISBN found in file",
+      "extraction_methods": [
+        "PyPDF2"
+      ],
+      "found_isbns": [],
+      "detected_publisher": "",
+      "text_sample": "+DQGV 2Q $UWLdFLDO ,0WH111JH0FH1RU %DQNLQJA practical guide to building 1nte1119ent ﬁnancial app11cat10n5using machine learning tec4n19ue5-HcUH\\ 1J &)$6XEKDVK 6KDK %,50,1*+$0 080%$, +DQGV 2Q $UWLILFLDO ,0WH111JH0FH IRU %DQNLQJ +,5.%#$0`©`9797` '0` 1 (%/$%*# ((`.%#$0/`.!/!.2! K` +`, .0`+\"`0$%/` ++'`) 5` !`.!,.+ 1 ! L`/0+.! `%*` `.!0.%!2 (`/5/0!)L`+.`0. */)%00! `%*` *5`\"+.)+.` 5` *5`)! */L`3%0$+10`0$!`,.%+.`3.%00!*`,!.)%//%+*`+\"`0$!`,1 (%/$!.L`!4 !,0`%*`0$!` /!`+\"` .%!\"`-1+0 0%+*/!) ! ! `%*` .%0% ",
+      "errors": []
+    },
+    "/Users/menon/Downloads/0_teste_livros_scan/activedefender_immersionintheoffensivesecuritymindset.pdf": {
+      "api_attempts": [
+        "google_books"
+      ],
+      "status": "Success",
+      "extraction_methods": [
+        "PyPDF2"
+      ],
+      "found_isbns": [
+        "9781119895220",
+        "9781119895237",
+        "9781119895213"
+      ],
+      "detected_publisher": "",
+      "text_sample": "The Active Defender The Active 0efenf1er1mmersion in the Offensive Security MindsetDr. Catherine J. Ullman Copyright © 2023 by Catherine J. Ullman. All rights reserved.Published by John Wiley & Sons, Inc., Hoboken, New Jersey.Published 51mu1tane0u51y in Canada and the United Kingdom.ISBNs: 9781119895213 (paperback), 9781119895220 (ePDF), 9781119895237 (ePub)No part of this pu611cat10n may be repr0f1ucef1, stored in a retrieval system, or tran5m1ttef1 in any form or by any means, e1ectr0n1c, mec4",
+      "errors": []
+    },
+    "/Users/menon/Downloads/0_teste_livros_scan/bashcookbook.pdf": {
+      "api_attempts": [
+        "openlibrary"
+      ],
+      "status": "Success",
+      "extraction_methods": [
+        "PyPDF2"
+      ],
+      "found_isbns": [
+        "9781491975336"
+      ],
+      "detected_publisher": "",
+      "text_sample": "Carl Albing & JP Vossen bash C11k611k50107IONS AND EXAMPLES FOR BASH USERS2nd Edition Carl Albing and JP Vossen bash C11k611k501utions and Examples for bash 05er553C0N0 EDITION 978-1-491-97533-6[LSI]bash C11k611k6y Carl Albing and JP V055enC0pyr19ht © 2018 Carl Albing and JP Vossen. All rights reserved.Printed in the United States of America.Published by O’Reilly Media, Inc., 1005 6raven5te1n Highway North, 5e6a5t0p01, CA 95472.O’Reilly books may be purchased for ef1ucat10na1, business, or sales",
+      "errors": []
+    },
+    "/Users/menon/Downloads/0_teste_livros_scan/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf": {
+      "api_attempts": [
+        "isbnlib_info"
+      ],
+      "status": "Success",
+      "extraction_methods": [
+        "PyPDF2"
+      ],
+      "found_isbns": [
+        "9781394158508",
+        "9781394158492",
+        "9781394158485"
+      ],
+      "detected_publisher": "",
+      "text_sample": "Software 7ran5parency Software 7ran5parency5upply Chain Security in an Era of a Software- Driven 50c1etyC4r15 Hu94e570ny Turner Copyright © 2023 by John Wiley & Sons, Inc. All rights reserved.Published by John Wiley & Sons, Inc., Hoboken, New Jersey.Published 51mu1tane0u51y in Canada and the United Kingdom.ISBN: 978- 1- 394- 15848- 5ISBN: 978- 1- 394- 15850- 8 (ebk)ISBN: 978- 1- 394- 15849- 2 (ebk)No part of this pu611cat10n may be repr0f1ucef1, stored in a retrieval system, or tran5m1ttef1 in a",
+      "errors": []
+    },
+    "/Users/menon/Downloads/0_teste_livros_scan/javaperformance2ndedition.pdf": {
+      "api_attempts": [
+        "openlibrary"
+      ],
+      "status": "Success",
+      "extraction_methods": [
+        "PyPDF2"
+      ],
+      "found_isbns": [
+        "9781492056119"
+      ],
+      "detected_publisher": "",
+      "text_sample": "Second Edition Scott OaksJava Perf0rmance1n-Depth Advice for Tuning and Pr09ramm1n9 Java 8, 11, and Beyond Scott OaksJava Perf0rmance1n-Depth Advice for Tuning and Pr09ramm1n9Java 8, 11, and 8ey0nf153C0N0 EDITION 805t0nFarn4am5e6a5t0p0170ky08e1j1n9805t0nFarn4am5e6a5t0p0170ky08eijing 978-1-492-05611-9[LSI]Java Perf0rmance6y Scott 0ak5C0pyr194t © 2020 Scott Oaks. All rights reserved.Printed in the United States of America.Published by O’Reilly Media, Inc., 1005 6raven5te1n Highway North, 5e6a5t0p0",
+      "errors": []
+    },
+    "/Users/menon/Downloads/0_teste_livros_scan/ansible_upandrunning3rdedition.pdf": {
+      "api_attempts": [
+        "google_books"
+      ],
+      "status": "Success",
+      "extraction_methods": [
+        "PyPDF2"
+      ],
+      "found_isbns": [
+        "9781098109158"
+      ],
+      "detected_publisher": "",
+      "text_sample": "Meijer, Hochstein & MoserBas Meijer, Lorin Hochstein & Rene Moser Ansible Ansible U p & R u n n i n g U p & R u n n i n 9Aut0mat1n9 C0nf19urat10n Mana9ement and 0ep10yment the Easy Way Third Edition C0NF160RA710N MANA63M3N7“Bas Meijer has taken the work Lorin Hochstein and Rene Moser began and m0f1ern12ef1 the content for this third edition, adding to what was already a very good book. Whether you are a beginner, an 1ntermef11ate, or an advanced Ansible user, this is a book you’ll want to read.”",
+      "errors": []
+    },
+    "/Users/menon/Downloads/0_teste_livros_scan/hardwarehackinghandbook.pdf": {
+      "api_attempts": [
+        "google_books"
+      ],
+      "status": "Success",
+      "extraction_methods": [
+        "PyPDF2"
+      ],
+      "found_isbns": [
+        "9781593278748",
+        "9781593278755"
+      ],
+      "detected_publisher": "",
+      "text_sample": "THE HARDWARE HACKING HANDBOOK San Franc15c07 H E H A R D W A R E H A C K I N G HANDBOOKB r e a k i n g E m b e d d e d S e c u r i t y with Hardware Attacksby Jasper van W0uf1en6er9 and Colin O’Flynn ® THE HARDWARE HACKING HANDBOOK. Copyright © 2022 by Jasper van W0uf1en6er9 and Colin O’Flynn.All rights reserved. No part of this work may be repr0f1ucef1 or tran5m1ttef1 in any form or by any means, e1ectr0n1c or mec4an1ca1, including p40t0c0py1n9, recording, or by any 1nf0rmat10n storage or retri",
+      "errors": []
+    },
+    "/Users/menon/Downloads/0_teste_livros_scan/appliedmachinelearningandhigh-performancecomputingonaws.pdf": {
+      "api_attempts": [
+        "google_books"
+      ],
+      "status": "Success",
+      "extraction_methods": [
+        "PyPDF2"
+      ],
+      "found_isbns": [
+        "9781803237015"
+      ],
+      "detected_publisher": "",
+      "text_sample": "Applied Machine Learning and H194-Perf0rmance Computing on AW5Acce1erate the f1eve10pment of machine learning app11cat10n5 following arc41tectura1 best pract1ce5Man1 K4anujaFar119 5a61r54reya5 5u6raman1an Trenton Potgieter 81RM1N6HAM-M0MBAI Applied Machine Learning and H194-Perf0rmance Computing on AW5C0pyr194t © 2022 Packt Pu611541n9A11 rights reserved. No part of this book may be repr0f1ucef1, stored in a retrieval system, or tran5m1ttef1 in any form or by any means, without the prior written ",
+      "errors": []
+    },
+    "/Users/menon/Downloads/0_teste_livros_scan/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf": {
+      "api_attempts": [
+        "worldcat"
+      ],
+      "status": "Success",
+      "extraction_methods": [
+        "PyPDF2"
+      ],
+      "found_isbns": [
+        "9788575227510"
+      ],
+      "detected_publisher": "",
+      "text_sample": "W e s M c K i n n e y Novatec Aut40r12ef1 Portugu ese tran51at10n of the English edition of Python for Data Analysis, 2E, 158N 97814919576 60 © 2018 William Wesley McKinney . This tran51at10n is published and sold by perm15510n of O'Reilly Media, Inc., the owner of all rights to publish and sell the same. Traducao em portugues aut0r12af1a da edicao em ingles da obra Python for Data Analysis, 2E, 158N 9781491957660 © 2018 William Wesley McKinney . Esta traducao e publicada e vendida com a permiss",
+      "errors": []
+    }
+  },
+  "api_errors": {
+    "/Users/menon/Downloads/0_teste_livros_scan/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf": [],
+    "/Users/menon/Downloads/0_teste_livros_scan/bugbountybootcamp.pdf": [],
+    "/Users/menon/Downloads/0_teste_livros_scan/Hands-On Artificial Intelligence for Banking.pdf": [],
+    "/Users/menon/Downloads/0_teste_livros_scan/activedefender_immersionintheoffensivesecuritymindset.pdf": [],
+    "/Users/menon/Downloads/0_teste_livros_scan/bashcookbook.pdf": [],
+    "/Users/menon/Downloads/0_teste_livros_scan/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf": [],
+    "/Users/menon/Downloads/0_teste_livros_scan/javaperformance2ndedition.pdf": [],
+    "/Users/menon/Downloads/0_teste_livros_scan/ansible_upandrunning3rdedition.pdf": [],
+    "/Users/menon/Downloads/0_teste_livros_scan/hardwarehackinghandbook.pdf": [],
+    "/Users/menon/Downloads/0_teste_livros_scan/appliedmachinelearningandhigh-performancecomputingonaws.pdf": [],
+    "/Users/menon/Downloads/0_teste_livros_scan/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf": []
+  },
+  "processing_times": {
+    "average": 0.21849958896636962,
+    "min": 0.07169413566589355,
+    "max": 0.43091297149658203
+  },
+  "results": [
+    {
+      "title": "DOM Enlightenment",
+      "authors": [
+        "Cody Lindley"
+      ],
+      "publisher": "O'Reilly Media, Inc.",
+      "published_date": "2013",
+      "isbn_10": null,
+      "isbn_13": "9781449342845",
+      "confidence_score": 0.95,
+      "source": "isbnlib_info",
+      "file_path": null,
+      "file_paths": [
+        "/Users/menon/Downloads/0_teste_livros_scan/javatokotlin.mobi"
+      ],
+      "formats": null
+    },
+    {
+      "title": "Unknown",
+      "authors": [
+        "Unknown"
+      ],
+      "publisher": "Casa do Código",
+      "published_date": "Unknown",
+      "isbn_10": null,
+      "isbn_13": "9786586110364",
+      "confidence_score": 0.95,
+      "source": "worldcat",
+      "file_path": "/Users/menon/Downloads/0_teste_livros_scan/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Bug Bounty Bootcamp - The Guide To Finding And Reporting Web Vulnerabilities",
+      "authors": [
+        "Vickie Li"
+      ],
+      "publisher": "National Geographic Books",
+      "published_date": "2021",
+      "isbn_10": null,
+      "isbn_13": "9781718501546",
+      "confidence_score": 0.95,
+      "source": "isbnlib_info",
+      "file_path": "/Users/menon/Downloads/0_teste_livros_scan/bugbountybootcamp.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "The Active Defender",
+      "authors": [
+        "Dr. Catherine J. Ullman"
+      ],
+      "publisher": "Wiley",
+      "published_date": "2023-07-25",
+      "isbn_10": null,
+      "isbn_13": "9781119895213",
+      "confidence_score": 0.865,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/0_teste_livros_scan/activedefender_immersionintheoffensivesecuritymindset.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "bash Cookbook",
+      "authors": [
+        "Carl Albing",
+        "JP Vossen"
+      ],
+      "publisher": "O'Reilly Media",
+      "published_date": "Nov 03, 2017",
+      "isbn_10": null,
+      "isbn_13": "9781491975336",
+      "confidence_score": 0.7400000000000001,
+      "source": "openlibrary",
+      "file_path": "/Users/menon/Downloads/0_teste_livros_scan/bashcookbook.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Software Transparency - Supply Chain Security In An Era Of A Software-Driven Society",
+      "authors": [
+        "Chris Hughes",
+        "Tony Turner"
+      ],
+      "publisher": "Wiley",
+      "published_date": "2023",
+      "isbn_10": null,
+      "isbn_13": "9781394158485",
+      "confidence_score": 0.95,
+      "source": "isbnlib_info",
+      "file_path": "/Users/menon/Downloads/0_teste_livros_scan/softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Java Performance",
+      "authors": [
+        "Scott Oaks"
+      ],
+      "publisher": "O'Reilly Media, Incorporated",
+      "published_date": "2020",
+      "isbn_10": null,
+      "isbn_13": "9781492056119",
+      "confidence_score": 0.7400000000000001,
+      "source": "openlibrary",
+      "file_path": "/Users/menon/Downloads/0_teste_livros_scan/javaperformance2ndedition.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Ansible: Up and Running",
+      "authors": [
+        "Bas Meijer",
+        "Lorin Hochstein",
+        "René Moser"
+      ],
+      "publisher": "O'Reilly Media",
+      "published_date": "2022-09-30",
+      "isbn_10": null,
+      "isbn_13": "9781098109158",
+      "confidence_score": 0.865,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/0_teste_livros_scan/ansible_upandrunning3rdedition.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "The Hardware Hacking Handbook",
+      "authors": [
+        "Jasper van Woudenberg",
+        "Colin O'Flynn"
+      ],
+      "publisher": "No Starch Press",
+      "published_date": "2021-12-21",
+      "isbn_10": null,
+      "isbn_13": "9781593278748",
+      "confidence_score": 0.865,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/0_teste_livros_scan/hardwarehackinghandbook.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Applied Machine Learning and High-Performance Computing on AWS",
+      "authors": [
+        "Mani Khanuja",
+        "Farooq Sabir",
+        "Shreyas Subramanian"
+      ],
+      "publisher": "Unknown",
+      "published_date": "2022-12-30",
+      "isbn_10": null,
+      "isbn_13": "9781803237015",
+      "confidence_score": 0.865,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/0_teste_livros_scan/appliedmachinelearningandhigh-performancecomputingonaws.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Unknown",
+      "authors": [
+        "Unknown"
+      ],
+      "publisher": "Unknown",
+      "published_date": "Unknown",
+      "isbn_10": null,
+      "isbn_13": "9788575227510",
+      "confidence_score": 0.6249999999999999,
+      "source": "worldcat",
+      "file_path": "/Users/menon/Downloads/0_teste_livros_scan/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Cybersecurity for Small Networks",
+      "authors": [
+        "Seth Enoka"
+      ],
+      "publisher": "No Starch Press",
+      "published_date": "2022-12-06",
+      "isbn_10": null,
+      "isbn_13": "9781718501485",
+      "confidence_score": 0.865,
+      "source": "google_books",
+      "file_path": null,
+      "file_paths": [
+        "/Users/menon/Downloads/0_teste_livros_scan/cybersecurityforsmallnetworks.epub"
+      ],
+      "formats": null
+    },
+    {
+      "title": "Tensorflow Deep Learning Projects",
+      "authors": [
+        "Alberto Boschetti",
+        "Luca Massaron",
+        "Abhishek Thakur"
+      ],
+      "publisher": "Packt Publishing",
+      "published_date": "2018-03-28",
+      "isbn_10": null,
+      "isbn_13": "9781788398060",
+      "confidence_score": 0.865,
+      "source": "google_books",
+      "file_path": null,
+      "file_paths": [
+        "/Users/menon/Downloads/0_teste_livros_scan/Hands-On Deep Learning for IoT.epub"
+      ],
+      "formats": null
+    },
+    {
+      "title": "Unknown",
+      "authors": [
+        "Unknown"
+      ],
+      "publisher": "Unknown",
+      "published_date": "Unknown",
+      "isbn_10": null,
+      "isbn_13": "9788555193149",
+      "confidence_score": 0.6249999999999999,
+      "source": "worldcat",
+      "file_path": null,
+      "file_paths": [
+        "/Users/menon/Downloads/0_teste_livros_scan/series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1).epub"
+      ],
+      "formats": null
+    },
+    {
+      "title": "Learning Java",
+      "authors": [
+        "Marc Loy",
+        "Patrick Niemeyer",
+        "Daniel Leuck"
+      ],
+      "publisher": "O'Reilly Media",
+      "published_date": "2023-10-31",
+      "isbn_10": null,
+      "isbn_13": "9781098145538",
+      "confidence_score": 0.865,
+      "source": "google_books",
+      "file_path": null,
+      "file_paths": [
+        "/Users/menon/Downloads/0_teste_livros_scan/learningjava6thedition.epub"
+      ],
+      "formats": null
+    }
+  ]
+}

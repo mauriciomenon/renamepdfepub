@@ -1,0 +1,832 @@
+{
+  "report_metadata": {
+    "generated_at": "2024-11-27T15:28:53.254531",
+    "total_files_processed": 73,
+    "processing_duration": "6.40s"
+  },
+  "summary_statistics": {
+    "total_files": 73,
+    "successful_extractions": 60,
+    "failed_extractions": 13,
+    "success_rate_percentage": 82.19,
+    "average_processing_time": 6.4
+  },
+  "format_statistics": {
+    "mobi": {
+      "total": 3,
+      "successful": 3,
+      "failed": 0,
+      "success_rate_percentage": 100.0
+    },
+    "pdf": {
+      "total": 40,
+      "successful": 28,
+      "failed": 12,
+      "success_rate_percentage": 70.0
+    },
+    "epub": {
+      "total": 30,
+      "successful": 29,
+      "failed": 1,
+      "success_rate_percentage": 96.67
+    }
+  },
+  "api_statistics": {
+    "sources_used": {
+      "openlibrary": 20,
+      "google_books": 34,
+      "isbnlib_info": 3,
+      "worldcat": 3
+    },
+    "most_successful_source": "google_books"
+  },
+  "publisher_statistics": {
+    "total_publishers": 11,
+    "publisher_distribution": {
+      "Packt Publishing, Limited": 12,
+      "Packt Publishing": 13,
+      "Packt Publishing - ebooks Account": 1,
+      "Apress": 2,
+      "Unknown": 18,
+      "O'Reilly Media": 5,
+      "Packt Publishing Ltd": 2,
+      "Packt": 2,
+      "O'Reilly Media, Inc.": 3,
+      "\"O'Reilly Media, Inc.\"": 1,
+      "O'Reilly Media, Incorporated": 1
+    }
+  },
+  "successful_extractions": [
+    {
+      "filename": "Agile Security Operations.epub",
+      "title": "Industrial Cybersecurity",
+      "authors": [
+        "Pascal Ackerman"
+      ],
+      "publisher": "Packt Publishing, Limited",
+      "isbn": "9781800202092",
+      "source": "openlibrary",
+      "confidence_score": 0.9
+    },
+    {
+      "filename": "Pentesting Industrial Control Systems.epub",
+      "title": "Pentesting Industrial Control Systems",
+      "authors": [
+        "Paul Smith"
+      ],
+      "publisher": "Packt Publishing",
+      "isbn": "9781800202382",
+      "source": "google_books",
+      "confidence_score": 0.9
+    },
+    {
+      "filename": "Hands-On Deep Learning Algorithms with Python.epub",
+      "title": "Python Deep Learning: Next generation techniques to revolutionize computer vision, AI, speech and data analysis",
+      "authors": [
+        "Valentino Zocca",
+        "Gianmario Spacagna",
+        "Daniel Slater",
+        "Peter Roelants"
+      ],
+      "publisher": "Packt Publishing - ebooks Account",
+      "isbn": "9781786464453",
+      "source": "openlibrary",
+      "confidence_score": 0.85
+    },
+    {
+      "filename": "Industrial Cybersecurity - Second Edition.epub",
+      "title": "Industrial Cybersecurity",
+      "authors": [
+        "Pascal Ackerman"
+      ],
+      "publisher": "Packt Publishing, Limited",
+      "isbn": "9781800202092",
+      "source": "openlibrary",
+      "confidence_score": 0.9
+    },
+    {
+      "filename": "introductiontojavathroughgamedevelopment.epub",
+      "title": "Introduction to Java Through Game Development",
+      "authors": [
+        "Victor G. Brusca"
+      ],
+      "publisher": "Apress",
+      "isbn": "9781484289501",
+      "source": "google_books",
+      "confidence_score": 0.86
+    },
+    {
+      "filename": "artofagiledevelopment2e_V2.epub",
+      "title": "More Fearless Change",
+      "authors": [
+        "Mary Lynn Manns",
+        "Linda Rising"
+      ],
+      "publisher": "Unknown",
+      "isbn": "9780133966534",
+      "source": "google_books",
+      "confidence_score": 0.95
+    },
+    {
+      "filename": "continuousapimanagement2e.epub",
+      "title": "Continuous API Management",
+      "authors": [
+        "Mehdi Medjaoui",
+        "Erik Wilde",
+        "Ronnie Mitra",
+        "Mike Amundsen"
+      ],
+      "publisher": "O'Reilly Media",
+      "isbn": "9781098103521",
+      "source": "google_books",
+      "confidence_score": 0.86
+    },
+    {
+      "filename": "TensorFlow 1.x Deep Learning Cookbook.epub",
+      "title": "TensorFlow 1.x Deep Learning Cookbook",
+      "authors": [
+        "Antonio Gulli",
+        "Amita Kapoor"
+      ],
+      "publisher": "Packt Publishing Ltd",
+      "isbn": "9781788291866",
+      "source": "google_books",
+      "confidence_score": 0.95
+    },
+    {
+      "filename": "Deep Learning with PyTorch_01.epub",
+      "title": "Deep learning with keras",
+      "authors": [
+        "Antonio Gulli",
+        "Sujit Pal"
+      ],
+      "publisher": "Packt",
+      "isbn": "9781787128422",
+      "source": "openlibrary",
+      "confidence_score": 0.85
+    },
+    {
+      "filename": "Automated Machine Learning.epub",
+      "title": "Hands-On Artificial Intelligence on Google Cloud Platform",
+      "authors": [
+        "Anand Deshpande",
+        "Manish Kumar",
+        "Vikram Chaudhari"
+      ],
+      "publisher": "Unknown",
+      "isbn": "9781789538465",
+      "source": "google_books",
+      "confidence_score": 0.95
+    },
+    {
+      "filename": "Graph Machine Learning.epub",
+      "title": "Graph Machine Learning",
+      "authors": [
+        "Claudio Stamile",
+        "Aldo Marzullo",
+        "Enrico Deusebio"
+      ],
+      "publisher": "Packt Publishing, Limited",
+      "isbn": "9781800204492",
+      "source": "openlibrary",
+      "confidence_score": 0.9
+    },
+    {
+      "filename": "Data Engineering with Python.epub",
+      "title": "Practical Data Analysis Using Jupyter Notebook",
+      "authors": [
+        "Marc Wintjen",
+        "Andrew Vlahutin"
+      ],
+      "publisher": "Packt Publishing, Limited",
+      "isbn": "9781838826031",
+      "source": "openlibrary",
+      "confidence_score": 0.85
+    },
+    {
+      "filename": "Deep Learning with TensorFlow 2 and Keras - Second Edition.epub",
+      "title": "Python Machine Learning",
+      "authors": [
+        "Sebastian Raschka"
+      ],
+      "publisher": "Packt Publishing",
+      "isbn": "9781789955750",
+      "source": "openlibrary",
+      "confidence_score": 0.74
+    },
+    {
+      "filename": "Deep Learning for Natural Language Processing.epub",
+      "title": "Deep Learning for Natural Language Processing",
+      "authors": [
+        "Karthiek Reddy Bokka",
+        "Shubhangi Hora",
+        "Tanuj Jain",
+        "Monicah Wambugu"
+      ],
+      "publisher": "Packt Publishing, Limited",
+      "isbn": "9781838550295",
+      "source": "openlibrary",
+      "confidence_score": 0.74
+    },
+    {
+      "filename": "Deep Learning Quick Reference.epub",
+      "title": "Deep learning with keras",
+      "authors": [
+        "Antonio Gulli",
+        "Sujit Pal"
+      ],
+      "publisher": "Packt",
+      "isbn": "9781787128422",
+      "source": "openlibrary",
+      "confidence_score": 0.85
+    },
+    {
+      "filename": "Getting Started with Google BERT.epub",
+      "title": "Getting Started with Google BERT",
+      "authors": [
+        "Sudharsan Ravichandiran"
+      ],
+      "publisher": "Unknown",
+      "isbn": "9781838821593",
+      "source": "google_books",
+      "confidence_score": 0.86
+    },
+    {
+      "filename": "Hands-On AWS Penetration Testing with Kali Linux.epub",
+      "title": "AWS Certified SysOps Administrator - Associate Guide",
+      "authors": [
+        "Marko Sluga"
+      ],
+      "publisher": "Packt Publishing",
+      "isbn": "9781788990776",
+      "source": "google_books",
+      "confidence_score": 0.9
+    },
+    {
+      "filename": "The Cybersecurity Playbook for Modern Enterprises.epub",
+      "title": "Cybersecurity Leadership Demystified",
+      "authors": [
+        "DR. ERDAL. OZKAYA"
+      ],
+      "publisher": "Packt Publishing",
+      "isbn": "9781801819282",
+      "source": "google_books",
+      "confidence_score": 0.95
+    },
+    {
+      "filename": "Python Natural Language Processing Cookbook.epub",
+      "title": "Getting Started with Google BERT",
+      "authors": [
+        "Sudharsan Ravichandiran"
+      ],
+      "publisher": "Unknown",
+      "isbn": "9781838821593",
+      "source": "google_books",
+      "confidence_score": 0.86
+    },
+    {
+      "filename": "Mastering Reinforcement Learning with Python.epub",
+      "title": "PyTorch 1. X Reinforcement Learning Cookbook",
+      "authors": [
+        "Yuxi (Hayden) Liu"
+      ],
+      "publisher": "Unknown",
+      "isbn": "9781838551964",
+      "source": "google_books",
+      "confidence_score": 0.9
+    },
+    {
+      "filename": "Machine Learning Automation with TPOT.epub",
+      "title": "Automated Machine Learning with Microsoft Azure",
+      "authors": [
+        "Dennis Michael Sawyers"
+      ],
+      "publisher": "Packt Publishing",
+      "isbn": "9781800565319",
+      "source": "google_books",
+      "confidence_score": 0.95
+    },
+    {
+      "filename": "Learn TensorFlow Enterprise.epub",
+      "title": "Hands-On Artificial Intelligence on Google Cloud Platform",
+      "authors": [
+        "Anand Deshpande",
+        "Manish Kumar",
+        "Vikram Chaudhari"
+      ],
+      "publisher": "Unknown",
+      "isbn": "9781789538465",
+      "source": "google_books",
+      "confidence_score": 0.95
+    },
+    {
+      "filename": "Serverless Analytics with Amazon Athena.epub",
+      "title": "Learn Amazon SageMaker",
+      "authors": [
+        "Julien Simon"
+      ],
+      "publisher": "Unknown",
+      "isbn": "9781800208919",
+      "source": "google_books",
+      "confidence_score": 0.9
+    },
+    {
+      "filename": "2019 - 978-1-78934-266-6 - Shrey Mehrotra.epub",
+      "title": "Apache Spark Quick Start Guide",
+      "authors": [
+        "Shrey Mehrotra",
+        "Akash Grade"
+      ],
+      "publisher": "Packt Publishing Ltd",
+      "isbn": "9781789342666",
+      "source": "google_books",
+      "confidence_score": 0.95
+    },
+    {
+      "filename": "Engineering MLOps.epub",
+      "title": "Mastering Azure Machine Learning",
+      "authors": [
+        "Christoph Körner",
+        "Kaijisse Waaijer"
+      ],
+      "publisher": "Packt Publishing, Limited",
+      "isbn": "9781789807554",
+      "source": "openlibrary",
+      "confidence_score": 0.85
+    },
+    {
+      "filename": "Learn Ethical Hacking from Scratch.epub",
+      "title": "Kali Linux - An Ethical Hacker's Cookbook: End-to-end penetration testing solutions",
+      "authors": [
+        "Himanshu Sharma"
+      ],
+      "publisher": "Packt Publishing",
+      "isbn": "9781787121829",
+      "source": "openlibrary",
+      "confidence_score": 0.85
+    },
+    {
+      "filename": "Neural Networks with Keras Cookbook.epub",
+      "title": "Keras Reinforcement Learning Projects",
+      "authors": [
+        "Giuseppe Ciaburro"
+      ],
+      "publisher": "Unknown",
+      "isbn": "9781789342093",
+      "source": "google_books",
+      "confidence_score": 0.95
+    },
+    {
+      "filename": "Hands-On Python Deep Learning for the Web.epub",
+      "title": "Hands-On Web Scraping with Python",
+      "authors": [
+        "Anish Chapagain"
+      ],
+      "publisher": "Unknown",
+      "isbn": "9781789533392",
+      "source": "google_books",
+      "confidence_score": 0.95
+    },
+    {
+      "filename": "Amazon Redshift Cookbook.epub",
+      "title": "Snowflake Cookbook",
+      "authors": [
+        "Hamid Mahmood Qureshi",
+        "Hammad Sharif"
+      ],
+      "publisher": "Packt Publishing",
+      "isbn": "9781800560611",
+      "source": "google_books",
+      "confidence_score": 0.9
+    },
+    {
+      "filename": "buildingmicro-frontends.mobi",
+      "title": "DOM Enlightenment",
+      "authors": [
+        "Cody Lindley"
+      ],
+      "publisher": "O'Reilly Media, Inc.",
+      "isbn": "9781449342845",
+      "source": "isbnlib_info",
+      "confidence_score": 0.95
+    },
+    {
+      "filename": "flowarchitectures.mobi",
+      "title": "DOM Enlightenment",
+      "authors": [
+        "Cody Lindley"
+      ],
+      "publisher": "O'Reilly Media, Inc.",
+      "isbn": "9781449342845",
+      "source": "isbnlib_info",
+      "confidence_score": 0.95
+    },
+    {
+      "filename": "monolithtomicroservices.mobi",
+      "title": "DOM Enlightenment",
+      "authors": [
+        "Cody Lindley"
+      ],
+      "publisher": "O'Reilly Media, Inc.",
+      "isbn": "9781449342845",
+      "source": "isbnlib_info",
+      "confidence_score": 0.95
+    },
+    {
+      "filename": "Deep Learning with PyTorch_01.pdf",
+      "title": "Deep Learning with PyTorch: A practical approach to building neural network models using PyTorch",
+      "authors": [
+        "Vishnu Subramanian"
+      ],
+      "publisher": "Packt Publishing",
+      "isbn": "9781788624336",
+      "source": "openlibrary",
+      "confidence_score": 0.74
+    },
+    {
+      "filename": "Mastering Reinforcement Learning with Python.pdf",
+      "title": "Mastering Reinforcement Learning with Python",
+      "authors": [
+        "Enes Bilgin"
+      ],
+      "publisher": "Unknown",
+      "isbn": "9781838644147",
+      "source": "google_books",
+      "confidence_score": 0.86
+    },
+    {
+      "filename": "Deep Learning with TensorFlow 2 and Keras - Second Edition.pdf",
+      "title": "Deep Learning with TensorFlow 2 and Keras - Second Edition",
+      "authors": [
+        "Antonio Gulli",
+        "Sujit Pal",
+        "Amita Kapoor"
+      ],
+      "publisher": "Unknown",
+      "isbn": "9781838823412",
+      "source": "google_books",
+      "confidence_score": 0.86
+    },
+    {
+      "filename": "Hands-On Deep Learning with Apache Spark.pdf",
+      "title": "Hands-On Deep Learning with Apache Spark",
+      "authors": [
+        "Guglielmo Iozzia"
+      ],
+      "publisher": "Packt Publishing",
+      "isbn": "9781788994613",
+      "source": "google_books",
+      "confidence_score": 0.86
+    },
+    {
+      "filename": "continuousapimanagement2e.pdf",
+      "title": "Continuous API Management",
+      "authors": [
+        "Mehdi Medjaoui",
+        "Erik Wilde",
+        "Ronnie Mitra",
+        "Mike Amundsen"
+      ],
+      "publisher": "O'Reilly Media",
+      "isbn": "9781098103521",
+      "source": "google_books",
+      "confidence_score": 0.86
+    },
+    {
+      "filename": "Agile Machine Learning with DataRobot.pdf",
+      "title": "Agile Machine Learning with DataRobot",
+      "authors": [
+        "Bipin Chadha",
+        "Sylvester Juwe"
+      ],
+      "publisher": "Packt Publishing, Limited",
+      "isbn": "9781801076807",
+      "source": "openlibrary",
+      "confidence_score": 0.74
+    },
+    {
+      "filename": "Data Processing with Optimus.pdf",
+      "title": "Data Processing with Optimus",
+      "authors": [
+        "Argenis Leon",
+        "Luis Aguirre"
+      ],
+      "publisher": "Packt Publishing, Limited",
+      "isbn": "9781801079563",
+      "source": "openlibrary",
+      "confidence_score": 0.74
+    },
+    {
+      "filename": "flowarchitectures.pdf",
+      "title": "Flow Architectures",
+      "authors": [
+        "James Urquhart"
+      ],
+      "publisher": "O'Reilly Media",
+      "isbn": "9781492075899",
+      "source": "google_books",
+      "confidence_score": 0.86
+    },
+    {
+      "filename": "Python Deep Learning Projects.pdf",
+      "title": "Python Deep Learning Projects",
+      "authors": [
+        "Matthew Lamons",
+        "Rahul Kumar",
+        "Abhishek Nagaraja"
+      ],
+      "publisher": "Unknown",
+      "isbn": "9781788997096",
+      "source": "google_books",
+      "confidence_score": 0.86
+    },
+    {
+      "filename": "Optimizing Databricks Workloads.pdf",
+      "title": "Optimizing Databricks Workloads",
+      "authors": [
+        "Anirudh Kala",
+        "Anshul Bhatnagar",
+        "Sarthak Sarbahi"
+      ],
+      "publisher": "Packt Publishing, Limited",
+      "isbn": "9781801819077",
+      "source": "openlibrary",
+      "confidence_score": 0.74
+    },
+    {
+      "filename": "artofagiledevelopment2e_V2.pdf",
+      "title": "The Art of Agile Development",
+      "authors": [
+        "James Shore",
+        "Shane Warden"
+      ],
+      "publisher": "O'Reilly Media",
+      "isbn": "9781492080695",
+      "source": "google_books",
+      "confidence_score": 0.86
+    },
+    {
+      "filename": "introductiontojavathroughgamedevelopment.pdf",
+      "title": "Introduction to Java Through Game Development",
+      "authors": [
+        "Victor G. Brusca"
+      ],
+      "publisher": "Apress",
+      "isbn": "9781484289501",
+      "source": "google_books",
+      "confidence_score": 0.86
+    },
+    {
+      "filename": "Hands-On Python Deep Learning for the Web.pdf",
+      "title": "Hands-On Python Deep Learning for the Web",
+      "authors": [
+        "Anubhav Singh",
+        "Sayak Paul"
+      ],
+      "publisher": "Unknown",
+      "isbn": "9781789956085",
+      "source": "google_books",
+      "confidence_score": 0.86
+    },
+    {
+      "filename": "sedandawk.pdf",
+      "title": "Sed & Awk",
+      "authors": [
+        "Dale Dougherty",
+        "Arnold Robbins"
+      ],
+      "publisher": "\"O'Reilly Media, Inc.\"",
+      "isbn": "9781565922259",
+      "source": "google_books",
+      "confidence_score": 0.86
+    },
+    {
+      "filename": "monolithtomicroservices.pdf",
+      "title": "Monolith to Microservices",
+      "authors": [
+        "Sam Newman"
+      ],
+      "publisher": "O'Reilly Media",
+      "isbn": "9781492047841",
+      "source": "google_books",
+      "confidence_score": 0.86
+    },
+    {
+      "filename": "livro_algoritnos em Pascal  ufpr.pdf",
+      "title": "Unknown",
+      "authors": [
+        "Unknown"
+      ],
+      "publisher": "Unknown",
+      "isbn": "9786586233629",
+      "source": "worldcat",
+      "confidence_score": 0.62
+    },
+    {
+      "filename": "Deep Learning for Natural Language Processing.pdf",
+      "title": "Deep Learning for Natural Language Processing",
+      "authors": [
+        "Karthiek Reddy Bokka",
+        "Shubhangi Hora",
+        "Tanuj Jain",
+        "Monicah Wambugu"
+      ],
+      "publisher": "Packt Publishing, Limited",
+      "isbn": "9781838550295",
+      "source": "openlibrary",
+      "confidence_score": 0.74
+    },
+    {
+      "filename": "Mastering PyTorch.pdf",
+      "title": "Mastering Pytorch",
+      "authors": [
+        "Ashish Ranjan Jha",
+        "Gopinath Pillai"
+      ],
+      "publisher": "Packt Publishing, Limited",
+      "isbn": "9781789614381",
+      "source": "openlibrary",
+      "confidence_score": 0.74
+    },
+    {
+      "filename": "learningthebashshell_3rdedition.pdf",
+      "title": "Unknown",
+      "authors": [
+        "Unknown"
+      ],
+      "publisher": "Unknown",
+      "isbn": "9780596119",
+      "source": "worldcat",
+      "confidence_score": 0.62
+    },
+    {
+      "filename": "Python Natural Language Processing Cookbook.pdf",
+      "title": "Python Natural Language Processing Cookbook",
+      "authors": [
+        "ZHENYA. ANTIC"
+      ],
+      "publisher": "Unknown",
+      "isbn": "9781838987312",
+      "source": "google_books",
+      "confidence_score": 0.86
+    },
+    {
+      "filename": "Deep Learning Quick Reference.pdf",
+      "title": "Deep Learning Quick Reference",
+      "authors": [
+        "Mike Bernico"
+      ],
+      "publisher": "Packt Publishing",
+      "isbn": "9781788837996",
+      "source": "google_books",
+      "confidence_score": 0.86
+    },
+    {
+      "filename": "buildingmicro-frontends.pdf",
+      "title": "Building Micro-Frontends",
+      "authors": [
+        "Luca Mezzalira"
+      ],
+      "publisher": "O'Reilly Media, Incorporated",
+      "isbn": "9781492082996",
+      "source": "openlibrary",
+      "confidence_score": 0.74
+    },
+    {
+      "filename": "Mastering Kali Linux for Advanced Penetration Testing - Third Editi.pdf",
+      "title": "Mastering Kali Linux for Advanced Penetration Testing, Third Edition",
+      "authors": [
+        "Vijay Kumar Velu",
+        "Robert Beggs"
+      ],
+      "publisher": "Packt Publishing",
+      "isbn": "9781789340563",
+      "source": "google_books",
+      "confidence_score": 0.86
+    },
+    {
+      "filename": "Learn Ethical Hacking from Scratch.pdf",
+      "title": "Learn Ethical Hacking from Scratch",
+      "authors": [
+        "Zaid Sabih"
+      ],
+      "publisher": "Unknown",
+      "isbn": "9781788622059",
+      "source": "google_books",
+      "confidence_score": 0.86
+    },
+    {
+      "filename": "Unkn - 978-1-78934-910-8.pdf",
+      "title": "Apache Spark Quick Start Guide",
+      "authors": [
+        "Shrey Mehrotra",
+        "Akash Grade"
+      ],
+      "publisher": "Packt Publishing",
+      "isbn": "9781789349108",
+      "source": "google_books",
+      "confidence_score": 0.86
+    },
+    {
+      "filename": "Data Engineering with Apache Spark, Delta Lake, and Lakehouse.pdf",
+      "title": "Data Engineering with Apache Spark, Delta Lake, and Lakehouse",
+      "authors": [
+        "Manoj Kukreja"
+      ],
+      "publisher": "Packt Publishing, Limited",
+      "isbn": "9781801077743",
+      "source": "openlibrary",
+      "confidence_score": 0.74
+    },
+    {
+      "filename": "socm-Sistemas Operacionais UFPR.pdf",
+      "title": "Unknown",
+      "authors": [
+        "Unknown"
+      ],
+      "publisher": "Unknown",
+      "isbn": "9788573353402",
+      "source": "worldcat",
+      "confidence_score": 0.62
+    },
+    {
+      "filename": "TensorFlow 1.x Deep Learning Cookbook.pdf",
+      "title": "TensorFlow 1.x Deep Learning Cookbook: Over 90 unique recipes to solve artificial-intelligence driven problems with Python",
+      "authors": [
+        "Antonio Gulli",
+        "Amita Kapoor"
+      ],
+      "publisher": "Packt Publishing",
+      "isbn": "1788293592",
+      "source": "openlibrary",
+      "confidence_score": 0.74
+    }
+  ],
+  "failed_extractions": [
+    {
+      "filename": "progit.epub",
+      "error_type": "text_extraction_failed",
+      "error_details": "No details available"
+    },
+    {
+      "filename": "Scalable Data Streaming with Amazon Kinesis.pdf",
+      "error_type": "no_isbn_found",
+      "error_details": "No details available"
+    },
+    {
+      "filename": "Serverless Analytics with Amazon Athena.pdf",
+      "error_type": "no_isbn_found",
+      "error_details": "No details available"
+    },
+    {
+      "filename": "Mastering Defensive Security.pdf",
+      "error_type": "no_isbn_found",
+      "error_details": "No details available"
+    },
+    {
+      "filename": "Infosec Strategies and Best Practices.pdf",
+      "error_type": "no_isbn_found",
+      "error_details": "No details available"
+    },
+    {
+      "filename": "slago-C++.pdf",
+      "error_type": "no_isbn_found",
+      "error_details": "No details available"
+    },
+    {
+      "filename": "Machine Learning Automation with TPOT.pdf",
+      "error_type": "no_isbn_found",
+      "error_details": "No details available"
+    },
+    {
+      "filename": "slago-C.pdf",
+      "error_type": "no_isbn_found",
+      "error_details": "No details available"
+    },
+    {
+      "filename": "Learn TensorFlow Enterprise.pdf",
+      "error_type": "no_isbn_found",
+      "error_details": "No details available"
+    },
+    {
+      "filename": "Industrial Cybersecurity - Second Edition.pdf",
+      "error_type": "no_isbn_found",
+      "error_details": "No details available"
+    },
+    {
+      "filename": "Aula 02 - Propagação de sinais (Introdução).pdf",
+      "error_type": "no_isbn_found",
+      "error_details": "No details available"
+    },
+    {
+      "filename": "progit.pdf",
+      "error_type": "no_isbn_found",
+      "error_details": "No details available"
+    },
+    {
+      "filename": "Cloud Scale Analytics with Azure Data Services.pdf",
+      "error_type": "no_isbn_found",
+      "error_details": "No details available"
+    }
+  ]
+}

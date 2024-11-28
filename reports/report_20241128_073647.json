@@ -1,0 +1,168 @@
+{
+  "report_metadata": {
+    "generated_at": "2024-11-28T07:36:47.271791",
+    "total_files_processed": 10,
+    "processing_duration": "13.70s"
+  },
+  "summary_statistics": {
+    "total_files": 10,
+    "successful_extractions": 10,
+    "failed_extractions": 0,
+    "success_rate_percentage": 100.0,
+    "average_processing_time": 13.7
+  },
+  "format_statistics": {
+    "pdf": {
+      "total": 5,
+      "successful": 5,
+      "failed": 0,
+      "success_rate_percentage": 100.0
+    },
+    "mobi": {
+      "total": 3,
+      "successful": 3,
+      "failed": 0,
+      "success_rate_percentage": 100.0
+    },
+    "epub": {
+      "total": 2,
+      "successful": 2,
+      "failed": 0,
+      "success_rate_percentage": 100.0
+    }
+  },
+  "api_statistics": {
+    "sources_used": {
+      "google_books": 5,
+      "isbnlib_info": 3,
+      "openlibrary": 2
+    },
+    "most_successful_source": "google_books"
+  },
+  "publisher_statistics": {
+    "total_publishers": 4,
+    "publisher_distribution": {
+      "Ediciones diference": 2,
+      "O'Reilly Media, Inc.": 3,
+      "O'Reilly Media": 3,
+      "O'Reilly Media, Incorporated": 2
+    }
+  },
+  "successful_extractions": [
+    {
+      "filename": "artofagiledevelopment2e_V2.epub",
+      "title": "ISBN:9788494683527",
+      "authors": [
+        "Abdessamad Lahib Dabaj"
+      ],
+      "publisher": "Ediciones diference",
+      "isbn": "N/A",
+      "source": "google_books",
+      "confidence_score": 0.9
+    },
+    {
+      "filename": "continuousapimanagement2e.epub",
+      "title": "ISBN:9788494683527",
+      "authors": [
+        "Abdessamad Lahib Dabaj"
+      ],
+      "publisher": "Ediciones diference",
+      "isbn": "N/A",
+      "source": "google_books",
+      "confidence_score": 0.95
+    },
+    {
+      "filename": "buildingmicro-frontends.mobi",
+      "title": "DOM Enlightenment",
+      "authors": [
+        "Cody Lindley"
+      ],
+      "publisher": "O'Reilly Media, Inc.",
+      "isbn": "9781449342845",
+      "source": "isbnlib_info",
+      "confidence_score": 1.0
+    },
+    {
+      "filename": "flowarchitectures.mobi",
+      "title": "DOM Enlightenment",
+      "authors": [
+        "Cody Lindley"
+      ],
+      "publisher": "O'Reilly Media, Inc.",
+      "isbn": "9781449342845",
+      "source": "isbnlib_info",
+      "confidence_score": 0.95
+    },
+    {
+      "filename": "monolithtomicroservices.mobi",
+      "title": "DOM Enlightenment",
+      "authors": [
+        "Cody Lindley"
+      ],
+      "publisher": "O'Reilly Media, Inc.",
+      "isbn": "9781449342845",
+      "source": "isbnlib_info",
+      "confidence_score": 0.95
+    },
+    {
+      "filename": "continuousapimanagement2e.pdf",
+      "title": "Continuous API Management",
+      "authors": [
+        "Mehdi Medjaoui",
+        "Erik Wilde",
+        "Ronnie Mitra",
+        "Mike Amundsen"
+      ],
+      "publisher": "O'Reilly Media",
+      "isbn": "9781098103521",
+      "source": "google_books",
+      "confidence_score": 0.9
+    },
+    {
+      "filename": "flowarchitectures.pdf",
+      "title": "Flow Architectures",
+      "authors": [
+        "James Urquhart"
+      ],
+      "publisher": "O'Reilly Media, Incorporated",
+      "isbn": "9781492075899",
+      "source": "openlibrary",
+      "confidence_score": 0.9
+    },
+    {
+      "filename": "artofagiledevelopment2e_V2.pdf",
+      "title": "The Art of Agile Development",
+      "authors": [
+        "James Shore",
+        "Shane Warden"
+      ],
+      "publisher": "O'Reilly Media",
+      "isbn": "9781492080695",
+      "source": "google_books",
+      "confidence_score": 0.95
+    },
+    {
+      "filename": "monolithtomicroservices.pdf",
+      "title": "Monolith to Microservices",
+      "authors": [
+        "Sam Newman"
+      ],
+      "publisher": "O'Reilly Media",
+      "isbn": "9781492047841",
+      "source": "google_books",
+      "confidence_score": 0.95
+    },
+    {
+      "filename": "buildingmicro-frontends.pdf",
+      "title": "Building Micro-Frontends",
+      "authors": [
+        "Luca Mezzalira"
+      ],
+      "publisher": "O'Reilly Media, Incorporated",
+      "isbn": "9781492082996",
+      "source": "openlibrary",
+      "confidence_score": 0.9
+    }
+  ],
+  "failed_extractions": []
+}

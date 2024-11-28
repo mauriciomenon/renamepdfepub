@@ -2556,22 +2556,43 @@ def main():
         "9786586057485",  # Casa do Código - Entendendo Algoritmos
         "9788575228289",  # Novatec - Python e Django
         "9788550800653",  # Alta Books - Docker
-        
+        "9788566252456",  # Casa do Código - Introdução à Ciência de Dados
+        "9788575228371",  # Novatec - Ciência de Dados na Prática
+
         # No Starch Press
         "9781718502666",  # The Rust Programming Language
         "9781593279288",  # Python Crash Course
-        
+        "9781593279929",  # Automate the Boring Stuff with Python
+        "9781718500723",  # Black Hat Python
+        "9781718503021",  # The Linux Command Line
+
         # O'Reilly
         "9781492056355",  # Fluent Python
         "9781492051367",  # Designing Data-Intensive Applications
-        
+        "9781491920497",  # Data Science from Scratch
+        "9781492077695",  # Kubernetes Up & Running
+        "9781491904244",  # Python for Data Analysis
+
         # Pearson
         "9780134685991",  # Effective Java
-        
+        "9780134757599",  # Clean Architecture
+        "9780134190449",  # Java: The Complete Reference
+        "9780134494165",  # Computer Networking: A Top-Down Approach
+        "9780134706053",  # Artificial Intelligence: A Guide to Intelligent Systems
+
         # Wiley
         "9781119775553",  # AWS Certified Solutions Architect
-        "9781118951309"   # Software Architecture in Practice
-        
+        "9781118951309",  # Software Architecture in Practice
+        "9781119267002",  # Practical Statistics for Data Scientists
+        "9781119449271",  # Blockchain Basics
+        "9781119603321",  # Deep Learning with Python
+
+        # Manning
+        "9781617294433",  # Spring in Action
+        "9781617295607",  # Kubernetes in Action
+        "9781617294945",  # Grokking Algorithms
+        "9781617295850",  # Microservices Patterns
+        "9781617295270",  # Machine Learning with TensorFlow
     ]
 
     # Configuração de APIs (adicione suas chaves aqui)

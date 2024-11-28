@@ -1,0 +1,25 @@
+{
+  "report_metadata": {
+    "generated_at": "2024-11-27T16:31:53.609606",
+    "total_files_processed": 0,
+    "processing_duration": "0.00s"
+  },
+  "summary_statistics": {
+    "total_files": 0,
+    "successful_extractions": 0,
+    "failed_extractions": 0,
+    "success_rate_percentage": 0.0,
+    "average_processing_time": 0.0
+  },
+  "format_statistics": {},
+  "api_statistics": {
+    "sources_used": {},
+    "most_successful_source": "None"
+  },
+  "publisher_statistics": {
+    "total_publishers": 0,
+    "publisher_distribution": {}
+  },
+  "successful_extractions": [],
+  "failed_extractions": []
+}

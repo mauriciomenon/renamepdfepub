@@ -8,17 +8,9 @@ import argparse
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning, module="ebooklib.epub")
 import json
-from ebooklib import epub, ITEM_DOCUMENT  # Add this specific import
 import mobi
 import functools
 import logging
-import re
-import logging
-from pathlib import Path
-from typing import Set, Dict, Optional
-from ebooklib import epub
-from bs4 import BeautifulSoup
-import mobi
 import traceback
 import re
 import sqlite3
@@ -64,13 +56,6 @@ from pathlib import Path
 import json
 from typing import Dict, List, Optional
 from collections import Counter, defaultdict
-from pathlib import Path
-import logging
-from typing import Dict, List, Optional, Union, Tuple, Any
-from ebooklib import epub, ITEM_DOCUMENT
-import mobi
-import re
-from bs4 import BeautifulSoup
 
 
 class DependencyManager:
@@ -5588,320 +5573,388 @@ class MetricsCollector:
         return stats
 
 class EbookProcessor:
-    """Enhanced processor for ebook files (EPUB and MOBI) with working implementation from isbn_diagnostic."""
-    
     def __init__(self):
-        # ISBN patterns ordered by reliability and specificity
-        self.isbn_patterns = [
-            # Primary patterns with publisher context
-            r'O\'Reilly\s+(?:Media|Publishing).*?ISBN[:\s-]*(97[89]\d{10})',
-            r'(?:Print|eBook|Digital)\s+ISBN[:\s-]*(97[89]\d{10})',
+        self.isbn_extractor = ISBNExtractor()
+        self.supported_formats = {'epub', 'mobi'}
+ 
+    def _clean_text(self, text: str) -> str:
+        """Limpa e normaliza texto extraído."""
+        if not text:
+            return ""
             
-            # Standard ISBN-13 patterns
-            r'ISBN-13[:\s-]*(97[89]\d{10})',
-            r'ISBN[:\s-]*(97[89]\d{10})',
-            
-            # O'Reilly specific URLs
-            r'oreilly\.com/catalog/[^/]+/?ISBN[:\s-]*(97[89]\d{10})',
-            r'shop\.oreilly\.com/product/[^/]+/?ISBN[:\s-]*(97[89]\d{10})'
-        ]
-
-    def extract_text_from_epub(self, epub_path: str) -> Tuple[str, List[str]]:
-        """
-        Extract text content from EPUB files with focus on copyright and ISBN sections.
-
-        Args:
-            epub_path: Path to the EPUB file
-
-        Returns:
-            Tuple containing extracted text and list of methods attempted
-        """
-        methods_tried = ["ebooklib"]
-        text_sections = []
+        # Remove múltiplas quebras de linha
+        text = re.sub(r'\n\s*\n', '\n\n', text)
+        # Remove strings longas de whitespace
+        text = re.sub(r'\s{4,}', ' ', text)
+        # Normaliza whitespace restante
+        text = ' '.join(text.split())
+        return text.strip()
         
+    def _clean_html(self, content: str) -> str:
+        """Processa conteúdo HTML/XML e extrai texto limpo."""
         try:
-            book = epub.read_epub(epub_path)
+            # Tenta primeiro como XML
+            from bs4 import BeautifulSoup
+            soup = BeautifulSoup(content, 'xml')
+        except:
+            # Fallback para HTML se XML falhar
+            soup = BeautifulSoup(content, 'html.parser')
+        
+        # Remove elementos indesejados
+        for tag in soup(['script', 'style', 'meta', 'link']):
+            tag.decompose()
             
-            # Check DC metadata first
-            if book.get_metadata('DC', 'identifier'):
-                for ident in book.get_metadata('DC', 'identifier'):
-                    isbn_match = re.search(r'(?:97[89]\d{10})|(?:\d{9}[\dXx])', str(ident[0]))
-                    if isbn_match:
-                        text_sections.append(f"ISBN: {isbn_match.group(0)}")
-
-            # Process document items
-            for item in book.get_items():
-                if item.get_type() == ITEM_DOCUMENT:
-                    content = item.get_content().decode('utf-8', errors='ignore')
-                    soup = BeautifulSoup(content, 'html.parser')
-                    text = soup.get_text()
-                    
-                    # Prioritize sections with ISBNs
-                    if re.search(r'ISBN|copyright|O\'Reilly|published by', text, re.IGNORECASE):
-                        text_sections.insert(0, text)
-                    else:
-                        text_sections.append(text)
-
-            return "\n\n".join(text_sections), methods_tried
-            
-        except Exception as e:
-            logging.error(f"EPUB extraction error: {str(e)}")
-            return "", methods_tried
-
-    def extract_text_from_mobi(self, mobi_path: str) -> Tuple[str, List[str]]:
-        """
-        Extract text content from MOBI files with reliable ISBN detection.
-
-        Args:
-            mobi_path: Path to the MOBI file
-
-        Returns:
-            Tuple containing extracted text and list of methods attempted
-        """
-        methods_tried = []
-        text_sections = []
-
-        try:
-            methods_tried.append("mobi-raw")
-            with open(mobi_path, 'rb') as file:
-                raw_content = file.read()
+        return soup.get_text(separator='\n')
+        
+    def _handle_file_errors(func):
+        """Decorator para tratamento de erros de arquivo."""
+        @functools.wraps(func)
+        def wrapper(self, file_path: str, *args, **kwargs):
+            if not Path(file_path).exists():
+                logging.error(f"Arquivo não encontrado: {file_path}")
+                return "", ["file_not_found"]
                 
-                # Try multiple encodings for content extraction
-                for encoding in ['utf-8', 'latin-1', 'cp1252']:
+            try:
+                return func(self, file_path, *args, **kwargs)
+            except (PermissionError, OSError) as e:
+                logging.error(f"Erro de acesso ao arquivo {file_path}: {str(e)}")
+                return "", ["file_access_error"]
+            except Exception as e:
+                logging.error(f"Erro processando {file_path}: {str(e)}")
+                return "", ["processing_error"]
+                
+        return wrapper
+        
+    def extract_text_from_epub(self, epub_path: str) -> Tuple[str, List[str]]:
+        """Extracts text from EPUB with proper error handling."""
+        try:
+            import ebooklib
+            from ebooklib import epub
+            from bs4 import BeautifulSoup
+            
+            methods = ["ebooklib"]
+            text_content = []
+            
+            try:
+                book = epub.read_epub(epub_path)
+                if not book:
+                    logging.debug(f"Could not read EPUB file: {epub_path}")
+                    return "", methods
+                
+                items_processed = 0
+                items_with_content = 0
+                
+                # Process each item with strict type checking
+                for item in book.get_items():
+                    if not item or not hasattr(item, 'get_type'):
+                        continue
+                        
+                    if item.get_type() != ebooklib.ITEM_DOCUMENT:
+                        continue
+                        
+                    items_processed += 1
                     try:
-                        content = raw_content.decode(encoding, errors='ignore')
-                        
-                        # Look for copyright section first
-                        copyright_section = re.search(
-                            r'(?:Copyright|\u00A9|©).*?(?=\n\n|\Z)',
-                            content,
-                            re.IGNORECASE | re.DOTALL
-                        )
-                        if copyright_section:
-                            text_sections.append(copyright_section.group(0))
-                        
-                        # Find ISBN sections
-                        isbn_sections = re.finditer(
-                            r'(?:ISBN[-: ]?13?|Print ISBN|eBook ISBN).*?(?:\n\n|\Z)',
-                            content,
-                            re.IGNORECASE | re.DOTALL
-                        )
-                        for section in isbn_sections:
-                            text_sections.append(section.group(0))
+                        # Get content with explicit type checking
+                        content = item.get_content()
+                        if not isinstance(content, bytes):
+                            continue
                             
-                        if text_sections:
-                            break
+                        # Decode with fallback value
+                        decoded_text = content.decode('utf-8', errors='ignore')
+                        if not decoded_text or not isinstance(decoded_text, str):
+                            decoded_text = ""
+                            
+                        # Parse HTML safely
+                        soup = BeautifulSoup(decoded_text, 'html.parser', on_duplicate_attribute='ignore')
+                        if not soup:
+                            continue
+                            
+                        text = soup.get_text(separator=' ', strip=True)
+                        if text and isinstance(text, str):
+                            text_content.append(text)
+                            items_with_content += 1
                             
                     except Exception as e:
-                        logging.debug(f"Failed with {encoding} encoding: {str(e)}")
+                        logging.debug(f"Error processing EPUB item {items_processed} in {epub_path}: {str(e)}")
                         continue
-
-                # Try MOBI parsing as backup
-                try:
-                    methods_tried.append("mobi-structured")
-                    book = mobi.Mobi(file)
-                    book.parse()
+                
+                if items_with_content > 0:
+                    logging.debug(f"Successfully extracted {items_with_content}/{items_processed} items from {epub_path}")
+                    final_text = "\n\n".join(text_content)
+                    return final_text if final_text else "", methods
+                else:
+                    logging.warning(f"No content could be extracted from {items_processed} items in {epub_path}")
+                    return "", methods
                     
-                    if hasattr(book, 'book_header'):
-                        if hasattr(book.book_header, 'title'):
-                            text_sections.append(
-                                book.book_header.title.decode('utf-8', errors='ignore')
-                            )
-                        
-                except Exception as e:
-                    logging.debug(f"MOBI parsing failed: {str(e)}")
-                    
+            except Exception as e:
+                logging.error(f"Error reading EPUB {epub_path}: {str(e)}")
+                return "", methods
+                
         except Exception as e:
-            logging.error(f"MOBI extraction failed for {mobi_path}: {str(e)}")
-            return "", methods_tried
-            
-        return "\n\n".join(text_sections), methods_tried
+            logging.error(f"EPUB extraction error in {epub_path}: {str(e)}")
+            return "", ["ebooklib-failed"]
 
-    def extract_metadata(self, file_path: str) -> Dict[str, Union[str, List[str], None]]:
-        """
-        Extract and validate metadata from ebook files.
-
-        Args:
-            file_path: Path to the ebook file to process
-
-        Returns:
-            Dictionary containing validated metadata with keys:
-            - isbn: str, validated ISBN if found
-            - title: str, book title if available
-            - creator: str, book creator if available
-            - publisher: str, publisher name if available
-            - date: str, publication date if available
-        """
-        metadata: Dict[str, Union[str, List[str], None]] = {}
-        ext = Path(file_path).suffix.lower()
-        
+    def _make_request(self, api_name: str, url: str, **kwargs) -> Optional[requests.Response]:
+        """Make HTTP request with better error handling."""
         try:
-            if ext == '.epub':
-                book = epub.read_epub(file_path)
+            # Add timeout if not provided
+            if 'timeout' not in kwargs:
+                kwargs['timeout'] = 10
                 
-                # Extract Dublin Core metadata
-                if book.get_metadata('DC', 'identifier'):
-                    for ident in book.get_metadata('DC', 'identifier'):
-                        isbn_match = re.search(
-                            r'(?:97[89]\d{10})|(?:\d{9}[\dXx])',
-                            str(ident[0])
-                        )
-                        if isbn_match:
-                            metadata['isbn'] = isbn_match.group(0)
-                            break
-                
-                # Get other EPUB metadata
-                metadata.update({
-                    'title': str(book.get_metadata('DC', 'title')[0][0]) if book.get_metadata('DC', 'title') else None,
-                    'creator': str(book.get_metadata('DC', 'creator')[0][0]) if book.get_metadata('DC', 'creator') else None,
-                    'publisher': str(book.get_metadata('DC', 'publisher')[0][0]) if book.get_metadata('DC', 'publisher') else None,
-                    'date': str(book.get_metadata('DC', 'date')[0][0]) if book.get_metadata('DC', 'date') else None
-                })
-                
-            elif ext == '.mobi':
-                text, _ = self.extract_text_from_mobi(file_path)
-                
-                if text:
-                    # Look for ISBN with publisher context
-                    for pattern in self.isbn_patterns:
-                        matches = re.finditer(pattern, text, re.IGNORECASE)
-                        for match in matches:
-                            isbn = match.group(1) if match.groups() else match.group(0)
-                            isbn = re.sub(r'[^0-9]', '', isbn)
-                            
-                            # Validate ISBN-13 format
-                            if len(isbn) == 13 and isbn.startswith(('978', '979')):
-                                # Verify O'Reilly context
-                                start = max(0, match.start() - 100)
-                                end = min(len(text), match.end() + 100)
-                                context = text[start:end].lower()
-                                
-                                if 'reilly' in context:
-                                    metadata['isbn'] = isbn
-                                    break
-                        
-                        if 'isbn' in metadata:
-                            break
-
-                # Get basic MOBI metadata
-                try:
-                    with open(file_path, 'rb') as file:
-                        book = mobi.Mobi(file)
-                        book.parse()
-                        if hasattr(book, 'book_header'):
-                            if hasattr(book.book_header, 'title'):
-                                metadata['title'] = book.book_header.title.decode('utf-8', errors='ignore')
-                except Exception as e:
-                    logging.debug(f"MOBI metadata extraction failed: {str(e)}")
-                    
-        except Exception as e:
-            logging.error(f"Metadata extraction failed for {file_path}: {str(e)}")
+            response = self.session.get(url, **kwargs)
+            response.raise_for_status()
+            return response
             
-        return {k: v for k, v in metadata.items() if v is not None}
+        except requests.exceptions.ConnectionError as e:
+            logging.error(f"Connection error for {api_name}: {str(e)}")
+            # Don't retry immediately - let the retry mechanism handle it
+            raise
+            
+        except requests.exceptions.Timeout as e:
+            logging.error(f"Timeout error for {api_name}: {str(e)}")
+            raise
+            
+        except requests.exceptions.RequestException as e:
+            logging.error(f"Request failed for {api_name}: {str(e)}")
+            raise
     
-    def _clean_isbn(self, isbn: str) -> str:
-        """
-        Clean and normalize ISBN string.
+    def extract_text_from_mobi(self, mobi_path: str) -> Tuple[str, List[str]]:
+        """Extracts text from MOBI using multiple approaches."""
+        methods_tried = []
+        methods_succeeded = []
+        text = ""
         
-        Args:
-            isbn: Raw ISBN string
-            
-        Returns:
-            str: Cleaned ISBN string without hyphens or spaces
-        """
-        return re.sub(r'[^0-9X]', '', isbn.upper())
-
-    def _validate_isbn_13(self, isbn: str) -> bool:
-        """
-        Validate ISBN-13 checksum according to standard.
-        
-        Args:
-            isbn: ISBN-13 string to validate
-            
-        Returns:
-            bool: True if valid ISBN-13
-        """
-        if len(isbn) != 13 or not isbn.startswith(('978', '979')):
-            return False
+        # Try mobi-reader first
         try:
-            total = sum(int(num) * (1 if i % 2 == 0 else 3) 
-                    for i, num in enumerate(isbn[:12]))
-            check = (10 - (total % 10)) % 10
-            return check == int(isbn[-1])
-        except ValueError:
-            return False
-
-    def _validate_isbn_10(self, isbn: str) -> bool:
-        """
-        Validate ISBN-10 checksum according to standard.
-        
-        Args:
-            isbn: ISBN-10 string to validate
+            from mobi import reader as mobi_reader
+            methods_tried.append("mobi-reader")
             
-        Returns:
-            bool: True if valid ISBN-10
-        """
-        if len(isbn) != 10:
-            return False
+            book = mobi_reader(mobi_path)
+            content = book.text() if hasattr(book, 'text') else book.get_content()
+            
+            if isinstance(content, bytes):
+                content = content.decode('utf-8', errors='ignore')
+                
+            # Try to parse HTML content if present
+            if '<' in content and '>' in content:
+                from bs4 import BeautifulSoup
+                soup = BeautifulSoup(content, 'lxml')
+                # Remove scripts and styles
+                for tag in soup(['script', 'style']):
+                    tag.decompose()
+                text = soup.get_text(separator='\n')
+            else:
+                text = content
+                
+            if text.strip():
+                methods_succeeded.append("mobi-reader")
+                
+        except Exception as e:
+            logging.debug(f"mobi-reader extraction failed: {str(e)}")
+        
+        # Try ebooklib as fallback if mobi-reader failed
+        if not text:
+            try:
+                import ebooklib
+                from ebooklib import epub
+                methods_tried.append("ebooklib")
+                
+                # Create temporary EPUB file
+                temp_epub = str(Path(mobi_path).with_suffix('.epub'))
+                
+                # Try to convert MOBI to EPUB
+                try:
+                    book = ebooklib.epub.read_epub(mobi_path)
+                    text = ""
+                    for item in book.get_items_of_type(ebooklib.ITEM_DOCUMENT):
+                        # Parse HTML content
+                        from bs4 import BeautifulSoup
+                        soup = BeautifulSoup(item.get_content(), 'lxml')
+                        text += soup.get_text(separator='\n') + "\n"
+                        
+                    if text.strip():
+                        methods_succeeded.append("ebooklib")
+                except:
+                    logging.debug("Direct EPUB conversion failed")
+                
+                # Clean up temporary file if it was created
+                if Path(temp_epub).exists():
+                    Path(temp_epub).unlink()
+                    
+            except Exception as e:
+                logging.debug(f"ebooklib extraction failed: {str(e)}")
+        
+        # If both methods failed, try basic text extraction
+        if not text:
+            try:
+                methods_tried.append("basic-extraction")
+                with open(mobi_path, 'rb') as f:
+                    content = f.read()
+                    # Look for text content between HTML tags
+                    text = re.sub(r'<[^>]+>', ' ', 
+                                content.decode('utf-8', errors='ignore'))
+                    text = ' '.join(text.split())
+                    
+                    if text.strip():
+                        methods_succeeded.append("basic-extraction")
+                        
+            except Exception as e:
+                logging.debug(f"Basic text extraction failed: {str(e)}")
+        
+        # Final cleanup of extracted text
+        if text:
+            # Remove multiple newlines
+            text = re.sub(r'\n\s*\n', '\n\n', text)
+            # Remove very long strings of whitespace
+            text = re.sub(r'\s{4,}', ' ', text)
+            # Normalize remaining whitespace
+            text = ' '.join(text.split())
+            
+            logging.info(f"Successfully extracted text using methods: {', '.join(methods_succeeded)}")
+        else:
+            logging.warning(f"Failed to extract text. Tried methods: {', '.join(methods_tried)}")
+        
+        return text, methods_tried
+
+    def extract_metadata(self, ebook_path: str) -> Dict:
+        """Extrai metadados nativos do ebook com tratamento robusto de erros."""
+        ext = Path(ebook_path).suffix.lower()[1:]
+        metadata = {}
+        
         try:
-            total = sum((10 - i) * (int(num) if num != 'X' else 10)
-                    for i, num in enumerate(isbn))
-            return total % 11 == 0
-        except ValueError:
-            return False
+            if ext == 'epub':
+                from ebooklib import epub
+                try:
+                    book = epub.read_epub(ebook_path)
+                    if not book:
+                        logging.debug(f"Could not read EPUB book: {ebook_path}")
+                        return {}
+                        
+                    # Extract metadata with explicit None checks
+                    metadata = {
+                        'title': '',
+                        'creator': '',
+                        'publisher': '',
+                        'isbn': ''
+                    }
+                    
+                    # Title
+                    if book.get_metadata('DC', 'title'):
+                        title_info = book.get_metadata('DC', 'title')[0]
+                        metadata['title'] = str(title_info[0]) if title_info else ''
+                        
+                    # Creator/Author
+                    if book.get_metadata('DC', 'creator'):
+                        creator_info = book.get_metadata('DC', 'creator')[0]
+                        metadata['creator'] = str(creator_info[0]) if creator_info else ''
+                        
+                    # Publisher
+                    if book.get_metadata('DC', 'publisher'):
+                        publisher_info = book.get_metadata('DC', 'publisher')[0]
+                        metadata['publisher'] = str(publisher_info[0]) if publisher_info else ''
+                        
+                    # ISBN/Identifier
+                    if book.get_metadata('DC', 'identifier'):
+                        isbn_info = book.get_metadata('DC', 'identifier')[0]
+                        metadata['isbn'] = str(isbn_info[0]) if isbn_info else ''
+                        
+                    # Normalize fields
+                    if 'creator' in metadata:
+                        metadata['authors'] = [metadata.pop('creator')]
+                    if 'author' in metadata:
+                        metadata['authors'] = [metadata.pop('author')]
+                        
+                    # Ensure authors list exists
+                    if 'authors' not in metadata:
+                        metadata['authors'] = []
+                        
+                    # Extract ISBN if present
+                    if 'identifier' in metadata:
+                        isbn = self.isbn_extractor.extract_from_text(metadata['identifier'])
+                        if isbn:
+                            metadata['isbn'] = list(isbn)[0]
+                            
+                except Exception as e:
+                    logging.error(f"Error extracting EPUB metadata from {ebook_path}: {str(e)}")
+                    return {}
+                    
+            elif ext == 'mobi':
+                metadata = self._extract_mobi_metadata(ebook_path)
+                
+            # Add common metadata
+            metadata.update({
+                'format': ext,
+                'file_path': str(ebook_path),
+                'extraction_date': datetime.now().isoformat()
+            })
+            
+            return metadata
+            
+        except Exception as e:
+            logging.error(f"Error extracting metadata from {ebook_path}: {str(e)}")
+            return {}
 
-    def _convert_isbn_10_to_13(self, isbn10: str) -> Optional[str]:
-        """
-        Convert valid ISBN-10 to ISBN-13.
+    def _extract_epub_metadata(self, epub_path: str) -> Dict:
+        """Extrai metadados de EPUB."""
+        from ebooklib import epub
+        try:
+            book = epub.read_epub(epub_path)
+            return {
+                'title': book.get_metadata('DC', 'title')[0][0],
+                'creator': book.get_metadata('DC', 'creator')[0][0],
+                'publisher': book.get_metadata('DC', 'publisher')[0][0],
+                'isbn': next((i[0] for i in book.get_metadata('DC', 'identifier') 
+                            if 'isbn' in i[0].lower()), None)
+            }
+        except Exception as e:
+            logging.debug(f"Erro ao extrair metadados EPUB: {str(e)}")
+            return {}
+            
+    def _extract_mobi_metadata(self, mobi_path: str) -> Dict:
+        """Extrai metadados de MOBI usando múltiplas abordagens."""
+        metadata = {}
         
-        Args:
-            isbn10: Valid ISBN-10 string
+        # Primeira tentativa: mobi-python3
+        try:
+            import mobi.mobi as mobi_reader
+            book = mobi_reader.Mobi(mobi_path)
+            book.parse()
             
-        Returns:
-            Optional[str]: Converted ISBN-13 or None if conversion fails
-        """
-        if not self._validate_isbn_10(isbn10):
-            return None
-            
-        isbn13 = f"978{isbn10[:-1]}"
-        total = sum(int(num) * (1 if i % 2 == 0 else 3) 
-                for i, num in enumerate(isbn13))
-        check = (10 - (total % 10)) % 10
-        return f"{isbn13}{check}"
+            metadata = {
+                'title': book.title() if callable(book.title) else book.title,
+                'author': book.author() if callable(book.author) else book.author,
+                'publisher': book.publisher() if callable(book.publisher) else book.publisher,
+                'isbn': ''
+            }
+        except ImportError:
+            logging.debug("mobi-python3 não está instalado, tentando alternativa")
+        except Exception as e:
+            logging.debug(f"Erro ao usar mobi-python3: {str(e)}")
 
-    def _extract_copyright_section(self, text: str) -> Optional[str]:
-        """
-        Extract copyright section from text content.
+        # Segunda tentativa: extração básica
+        if not any(metadata.values()):
+            try:
+                with open(mobi_path, 'rb') as f:
+                    content = f.read().decode('utf-8', errors='ignore')
+                    
+                    # Busca por ISBN usando regex
+                    isbn_matches = re.findall(r'ISBN[:\s-]*(97[89]\d{10}|\d{9}[\dXx])', content)
+                    if isbn_matches:
+                        metadata['isbn'] = isbn_matches[0]
+                    
+                    # Busca por título e autor em metadados HTML
+                    title_match = re.search(r'<dc:title>(.*?)</dc:title>', content)
+                    if title_match:
+                        metadata['title'] = title_match.group(1)
+                    
+                    author_match = re.search(r'<dc:creator>(.*?)</dc:creator>', content)
+                    if author_match:
+                        metadata['author'] = author_match.group(1)
+                        
+            except Exception as e:
+                logging.debug(f"Erro na extração básica: {str(e)}")
         
-        Args:
-            text: Text content to search
-            
-        Returns:
-            Optional[str]: Copyright section if found
-        """
-        copyright_match = re.search(
-            r'(?:Copyright|\u00A9|©).*?(?=\n\n|\Z)',
-            text,
-            re.IGNORECASE | re.DOTALL
-        )
-        return copyright_match.group(0) if copyright_match else None
-
-    def _check_oreilly_context(self, text: str, isbn_pos: int, context_size: int = 100) -> bool:
-        """
-        Check if ISBN appears in O'Reilly context.
-        
-        Args:
-            text: Full text content
-            isbn_pos: Position of ISBN match
-            context_size: Size of context window to check
-            
-        Returns:
-            bool: True if ISBN appears in O'Reilly context
-        """
-        start = max(0, isbn_pos - context_size)
-        end = min(len(text), isbn_pos + context_size)
-        context = text[start:end].lower()
-        return 'reilly' in context or "o'reilly" in context
+        return metadata
 
 def main():
     parser = argparse.ArgumentParser(

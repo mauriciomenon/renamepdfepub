@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <title>Book Metadata Report</title>
+            <style>
+                
+            body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
+            .card { background: #fff; padding: 20px; margin: 20px 0; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+            table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+            th, td { padding: 12px 8px; text-align: left; border-bottom: 1px solid #ddd; }
+            th { background-color: #f5f5f5; }
+            .success { color: #28a745; }
+            .failure { color: #dc3545; }
+            .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        
+            </style>
+        </head>
+        <body>
+            <h1>Book Metadata Report</h1>
+            
+            <div class="card">
+                <h2>Summary</h2>
+                <div class="stats-grid">
+                    <table>
+                        <tr><th>Total Files</th><td>16</td></tr>
+                        <tr><th>Successful</th><td class="success">12</td></tr>
+                        <tr><th>Failed</th><td class="failure">4</td></tr>
+                        <tr><th>Success Rate</th><td>75.0%</td></tr>
+                        <tr><th>Average Time</th><td>4.40s</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Format Statistics</h2>
+                <table>
+                    <tr>
+                        <th>Format</th>
+                        <th>Total</th>
+                        <th>Success</th>
+                        <th>Failed</th>
+                        <th>Success Rate</th>
+                    </tr>
+                    
+                <tr>
+                    <td>MOBI</td>
+                    <td>1</td>
+                    <td class="success">1</td>
+                    <td class="failure">0</td>
+                    <td>100.0%</td>
+                </tr>
+                <tr>
+                    <td>EPUB</td>
+                    <td>4</td>
+                    <td class="success">1</td>
+                    <td class="failure">3</td>
+                    <td>25.0%</td>
+                </tr>
+                <tr>
+                    <td>PDF</td>
+                    <td>11</td>
+                    <td class="success">10</td>
+                    <td class="failure">1</td>
+                    <td>90.9%</td>
+                </tr>
+                </table>
+            </div>
+
+            <div class="card">
+                <h2>Successful Extractions</h2>
+                <table>
+                    <tr>
+                        <th>File</th>
+                        <th>Title</th>
+                        <th>Authors</th>
+                        <th>ISBN</th>
+                        <th>Source</th>
+                    </tr>
+                    
+                <tr>
+                    <td>series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1).epub</td>
+                    <td>Unknown</td>
+                    <td>Unknown</td>
+                    <td>9788555193149</td>
+                    <td>worldcat</td>
+                </tr>
+                <tr>
+                    <td>javatokotlin.mobi</td>
+                    <td>DOM Enlightenment</td>
+                    <td>Cody Lindley</td>
+                    <td>9781449342845</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                <tr>
+                    <td>computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf</td>
+                    <td>Unknown</td>
+                    <td>Unknown</td>
+                    <td>9786586110340</td>
+                    <td>worldcat</td>
+                </tr>
+                <tr>
+                    <td>bugbountybootcamp.pdf</td>
+                    <td>Bug Bounty Bootcamp - The Guide To Finding And Reporting Web Vulnerabilities</td>
+                    <td>Vickie Li</td>
+                    <td>9781718501546</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                <tr>
+                    <td>activedefender_immersionintheoffensivesecuritymindset.pdf</td>
+                    <td>The Active Defender</td>
+                    <td>Dr. Catherine J. Ullman</td>
+                    <td>9781119895213</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>bashcookbook.pdf</td>
+                    <td>bash Cookbook</td>
+                    <td>Carl Albing, JP Vossen</td>
+                    <td>9781491975336</td>
+                    <td>openlibrary</td>
+                </tr>
+                <tr>
+                    <td>softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf</td>
+                    <td>Software Transparency - Supply Chain Security In An Era Of A Software-Driven Society</td>
+                    <td>Chris Hughes, Tony Turner</td>
+                    <td>9781394158485</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                <tr>
+                    <td>javaperformance2ndedition.pdf</td>
+                    <td>Java Performance</td>
+                    <td>Scott Oaks</td>
+                    <td>9781492056119</td>
+                    <td>openlibrary</td>
+                </tr>
+                <tr>
+                    <td>ansible_upandrunning3rdedition.pdf</td>
+                    <td>Ansible: Up and Running</td>
+                    <td>Bas Meijer, Lorin Hochstein, René Moser</td>
+                    <td>9781098109158</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>hardwarehackinghandbook.pdf</td>
+                    <td>The Hardware Hacking Handbook</td>
+                    <td>Jasper van Woudenberg, Colin O'Flynn</td>
+                    <td>9781593278748</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>appliedmachinelearningandhigh-performancecomputingonaws.pdf</td>
+                    <td>Applied Machine Learning and High-Performance Computing on AWS</td>
+                    <td>Mani Khanuja, Farooq Sabir, Shreyas Subramanian</td>
+                    <td>9781803237015</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf</td>
+                    <td>Unknown</td>
+                    <td>Unknown</td>
+                    <td>9788575227510</td>
+                    <td>worldcat</td>
+                </tr>
+                </table>
+            </div>
+
+            <div class="card">
+                <h2>Failed Extractions</h2>
+                <table>
+                    <tr>
+                        <th>File</th>
+                        <th>Error</th>
+                        <th>Details</th>
+                    </tr>
+                    
+                <tr>
+                    <td>cybersecurityforsmallnetworks.epub</td>
+                    <td>'<' not supported between instances of 'NoneType' and 'str'</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>learningjava6thedition.epub</td>
+                    <td>'<' not supported between instances of 'NoneType' and 'str'</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Hands-On Artificial Intelligence for Banking.pdf</td>
+                    <td>no_isbn_found</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Hands-On Deep Learning for IoT.epub</td>
+                    <td>'<' not supported between instances of 'NoneType' and 'str'</td>
+                    <td></td>
+                </tr>
+                </table>
+            </div>
+        </body>
+        </html>

@@ -1,0 +1,125 @@
+{
+  "report_metadata": {
+    "generated_at": "2024-11-27T14:48:28.318553",
+    "total_files_processed": 16,
+    "processing_duration": "0.65s"
+  },
+  "summary_statistics": {
+    "total_files": 16,
+    "successful_extractions": 0,
+    "failed_extractions": 16,
+    "success_rate_percentage": 0.0,
+    "average_processing_time": 0.65
+  },
+  "format_statistics": {
+    "mobi": {
+      "total": 1,
+      "successful": 0,
+      "failed": 1,
+      "success_rate_percentage": 0.0
+    },
+    "pdf": {
+      "total": 11,
+      "successful": 0,
+      "failed": 11,
+      "success_rate_percentage": 0.0
+    },
+    "epub": {
+      "total": 4,
+      "successful": 0,
+      "failed": 4,
+      "success_rate_percentage": 0.0
+    }
+  },
+  "api_statistics": {
+    "sources_used": {},
+    "most_successful_source": "None"
+  },
+  "publisher_statistics": {
+    "total_publishers": 0,
+    "publisher_distribution": {}
+  },
+  "successful_extractions": [],
+  "failed_extractions": [
+    {
+      "filename": "series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1).epub",
+      "error_type": "metadata_fetch_failed",
+      "error_details": "No details available"
+    },
+    {
+      "filename": "javatokotlin.mobi",
+      "error_type": "metadata_fetch_failed",
+      "error_details": "No details available"
+    },
+    {
+      "filename": "computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf",
+      "error_type": "metadata_fetch_failed",
+      "error_details": "No details available"
+    },
+    {
+      "filename": "bugbountybootcamp.pdf",
+      "error_type": "metadata_fetch_failed",
+      "error_details": "No details available"
+    },
+    {
+      "filename": "cybersecurityforsmallnetworks.epub",
+      "error_type": "metadata_fetch_failed",
+      "error_details": "No details available"
+    },
+    {
+      "filename": "activedefender_immersionintheoffensivesecuritymindset.pdf",
+      "error_type": "metadata_fetch_failed",
+      "error_details": "No details available"
+    },
+    {
+      "filename": "Hands-On Artificial Intelligence for Banking.pdf",
+      "error_type": "no_isbn_found",
+      "error_details": "No details available"
+    },
+    {
+      "filename": "bashcookbook.pdf",
+      "error_type": "metadata_fetch_failed",
+      "error_details": "No details available"
+    },
+    {
+      "filename": "softwaretransparency_supplychainsecurityinaneraofasoftware-drivens.pdf",
+      "error_type": "metadata_fetch_failed",
+      "error_details": "No details available"
+    },
+    {
+      "filename": "javaperformance2ndedition.pdf",
+      "error_type": "metadata_fetch_failed",
+      "error_details": "No details available"
+    },
+    {
+      "filename": "ansible_upandrunning3rdedition.pdf",
+      "error_type": "metadata_fetch_failed",
+      "error_details": "No details available"
+    },
+    {
+      "filename": "hardwarehackinghandbook.pdf",
+      "error_type": "metadata_fetch_failed",
+      "error_details": "No details available"
+    },
+    {
+      "filename": "appliedmachinelearningandhigh-performancecomputingonaws.pdf",
+      "error_type": "metadata_fetch_failed",
+      "error_details": "No details available"
+    },
+    {
+      "filename": "pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf",
+      "error_type": "metadata_fetch_failed",
+      "error_details": "No details available"
+    },
+    {
+      "filename": "learningjava6thedition.epub",
+      "error_type": "metadata_fetch_failed",
+      "error_details": "No details available"
+    },
+    {
+      "filename": "Hands-On Deep Learning for IoT.epub",
+      "error_type": "metadata_fetch_failed",
+      "error_details": "No details available"
+    }
+  ]
+}
