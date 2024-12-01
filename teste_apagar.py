@@ -7,6 +7,7 @@
 import argparse
 import functools
 import json
+import textwrap
 import logging
 import os
 import re
@@ -4360,7 +4361,7 @@ class BookMetadataExtractor:
     def process_directory(self, directory_path: str, subdirs: Optional[List[str]] = None, 
                         recursive: bool = False, max_workers: int = 4) -> List[BookMetadata]:
         """
-        Process a directory containing book files with support for file groups and formats.
+        Process a directory containing book files with detailed progress tracking and summary.
         
         Args:
             directory_path: Path to the directory to process
@@ -4370,10 +4371,6 @@ class BookMetadataExtractor:
             
         Returns:
             List[BookMetadata]: List of successfully processed book metadata
-            
-        Note:
-            This implementation handles grouped files (e.g., PDF + EPUB + code.zip)
-            and ensures consistent metadata extraction across formats.
         """
         directory = Path(directory_path)
         
@@ -4386,6 +4383,7 @@ class BookMetadataExtractor:
             'api_errors': defaultdict(list),
             'processing_times': {},
             'format_stats': defaultdict(lambda: {'total': 0, 'success': 0, 'failed': 0}),
+            'file_summaries': [],  # Lista para armazenar sumários de cada arquivo
             'start_time': time.time()
         }
 
@@ -4393,32 +4391,41 @@ class BookMetadataExtractor:
         all_files = []
         extensions = {'pdf', 'epub', 'mobi', 'zip'}
         
-        if recursive:
-            for ext in extensions:
-                all_files.extend(directory.rglob(f"*.{ext}"))
-        else:
-            if subdirs:
-                for subdir in subdirs:
-                    subdir_path = directory / subdir
-                    if subdir_path.exists():
-                        for ext in extensions:
-                            all_files.extend(subdir_path.glob(f"*.{ext}"))
-            else:
+        with tqdm(desc="Finding files", unit="dir") as pbar:
+            if recursive:
                 for ext in extensions:
-                    all_files.extend(directory.glob(f"*.{ext}"))
+                    files = list(directory.rglob(f"*.{ext}"))
+                    all_files.extend(files)
+                    pbar.update()
+            else:
+                if subdirs:
+                    for subdir in subdirs:
+                        pbar.set_description(f"Scanning {subdir}")
+                        subdir_path = directory / subdir
+                        if subdir_path.exists():
+                            for ext in extensions:
+                                files = list(subdir_path.glob(f"*.{ext}"))
+                                all_files.extend(files)
+                                pbar.update()
+                else:
+                    for ext in extensions:
+                        files = list(directory.glob(f"*.{ext}"))
+                        all_files.extend(files)
+                        pbar.update()
+
+        print(f"\nEncontrados {len(all_files)} arquivos em {len(set([f.parent for f in all_files]))} diretórios")
 
         # Update initial statistics
         runtime_stats['processed_files'] = [str(f) for f in all_files]
-        
-        logging.info(f"Found {len(all_files)} files to process in {len(set([f.parent for f in all_files]))} directories")
-
-        # Group related files
-        file_groups = self.file_group.group_files([str(f) for f in all_files])
         
         # Update format statistics
         for file_path in all_files:
             ext = file_path.suffix.lower()[1:]
             runtime_stats['format_stats'][ext]['total'] += 1
+
+        # Group related files
+        file_groups = self.file_group.group_files([str(f) for f in all_files])
+        print(f"Agrupados em {len(file_groups)} grupos de arquivos relacionados")
 
         # Process groups with thread pool
         with ThreadPoolExecutor(max_workers=max_workers) as executor:
@@ -4431,45 +4438,75 @@ class BookMetadataExtractor:
                     future = executor.submit(self.process_single_file, best_source, runtime_stats)
                     futures.append((future, group_files))
 
-            # Process results with progress bar
-            with tqdm(total=len(file_groups), desc="Processing files") as pbar:
+            # Process results with enhanced progress bar
+            with tqdm(total=len(file_groups), desc="Processing files", 
+                    bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{elapsed}<{remaining}, {rate_fmt}]") as pbar:
                 for future, group_files in futures:
                     try:
                         start_time = time.time()
                         metadata = future.result()
                         elapsed = time.time() - start_time
                         
+                        main_file = Path(group_files[0]).name
+                        summary = {
+                            'file': main_file,
+                            'status': None,
+                            'time': elapsed,
+                            'details': None
+                        }
+
                         if metadata:
+                            # Update progress description with success
+                            pbar.set_description(f"✓ {main_file}")
+                            
                             # Update metadata with all related files
                             metadata.file_paths = group_files
                             metadata.formats = [Path(f).suffix[1:] for f in group_files]
                             runtime_stats['successful_results'].append(metadata)
                             runtime_stats['successful_files'].extend(group_files)
                             
-                            # Log success
-                            logging.info(f"Success: {Path(group_files[0]).stem}")
-                            
                             # Update format stats for success
                             for file_path in group_files:
                                 ext = Path(file_path).suffix.lower()[1:]
                                 runtime_stats['format_stats'][ext]['success'] += 1
-                                
+                            
+                            # Update summary
+                            summary.update({
+                                'status': 'success',
+                                'details': f"ISBN: {metadata.isbn_13 or metadata.isbn_10} | Source: {metadata.source}"
+                            })
+
                         else:
-                            # Log warning for unsuccessful processing
-                            logging.warning(f"No metadata: {Path(group_files[0]).stem}")
+                            # Update progress description with failure
+                            pbar.set_description(f"✗ {main_file}")
                             
                             # Update format stats for failure
                             for file_path in group_files:
                                 ext = Path(file_path).suffix.lower()[1:]
                                 runtime_stats['format_stats'][ext]['failed'] += 1
-                                
+                            
+                            # Update summary with failure details
+                            details = runtime_stats['failure_details'].get(str(group_files[0]), {})
+                            summary.update({
+                                'status': 'failed',
+                                'details': details.get('error', 'Unknown error')
+                            })
+                        
                         # Record processing time
                         runtime_stats['processing_times'][group_files[0]] = elapsed
                         
                     except Exception as e:
-                        # Handle and log errors
+                        # Handle and log errors with visual indicator
+                        pbar.set_description(f"! Erro em {Path(group_files[0]).name}")
                         error_msg = f"Error processing group {Path(group_files[0]).stem}: {str(e)}"
                         logging.error(error_msg)
+                        
+                        summary = {
+                            'file': main_file,
+                            'status': 'error',
+                            'time': time.time() - start_time,
+                            'details': str(e)
+                        }
                         
                         for file_path in group_files:
                             ext = Path(file_path).suffix.lower()[1:]
@@ -4478,9 +4515,22 @@ class BookMetadataExtractor:
                                 'error': str(e),
                                 'traceback': traceback.format_exc()
                             }
-                            
+                    
                     finally:
+                        runtime_stats['file_summaries'].append(summary)
                         pbar.update(1)
+
+        # Print file processing summary
+        print("\nSumário de Processamento:")
+        print("-" * 160)
+        print(f"{'Arquivo':<60} {'Status':<10} {'Tempo':<10} {'Detalhes':<40}")
+        print("-" * 160)
+        for summary in runtime_stats['file_summaries']:
+            status_symbol = "✓" if summary['status'] == 'success' else "✗" if summary['status'] == 'failed' else "!"
+            status_text = f"{status_symbol} {summary['status']}"
+            details = summary['details'][:50] + "..." if len(summary['details']) > 50 else summary['details']
+            print(f"{summary['file']:<50} {status_text:<10} {summary['time']:.2f}s     {details}")
+        print("-" * 160)
 
         # Calculate final statistics
         runtime_stats['end_time'] = time.time()
@@ -6600,50 +6650,51 @@ class BookFileGroup:
         return False
 
 
-
 def main():
+    """Main function for book metadata extraction and renaming."""
     parser = argparse.ArgumentParser(
         description='Extrai metadados de livros PDF e opcionalmente renomeia os arquivos',
         formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-Exemplos de uso:
-  # Processar apenas o diretório atual:
-  %(prog)s "/Users/menon/Downloads"
-  
-  # Processar diretório e subdiretórios:
-  %(prog)s "/Users/menon/Downloads" -r
-  
-  # Processar e renomear arquivos com padrão default:
-  %(prog)s "/Users/menon/Downloads" --rename
-  
-  # Processar e renomear com padrão personalizado:
-  %(prog)s "/Users/menon/Downloads" --rename --name-pattern "{publisher}_{year}_{title}"
-  
-  # Processar com mais threads e detalhes:
-  %(prog)s "/Users/menon/Downloads" -t 8 -v
-  
-  # Processar diretórios específicos:
-  %(prog)s "/Users/menon/Downloads" --subdirs "Machine Learning,Python Books"
-  
-  # Comando completo:
-  %(prog)s "/Users/menon/Downloads" -r -t 8 --rename --name-pattern "{publisher}_{title}" -v -k "sua_chave_isbndb" -o "relatorio.json"
-  
-  # Atualizar cache com dados melhores:
-  %(prog)s --update-cache
-  
-  # Reprocessar cache existente:
-  %(prog)s --rescan-cache
+        epilog=textwrap.dedent("""
+            Exemplos de uso:
+              # Processar apenas o diretório atual:
+              %(prog)s "/Users/menon/Downloads"
+              
+              # Processar diretório e subdiretórios:
+              %(prog)s "/Users/menon/Downloads" -r
+              
+              # Processar e renomear arquivos com padrão default:
+              %(prog)s "/Users/menon/Downloads" --rename
+              
+              # Processar e renomear com padrão personalizado:
+              %(prog)s "/Users/menon/Downloads" --rename --name-pattern "{publisher}_{year}_{title}"
+              
+              # Processar com mais threads e detalhes:
+              %(prog)s "/Users/menon/Downloads" -t 8 -v
+              
+              # Processar diretórios específicos:
+              %(prog)s "/Users/menon/Downloads" --subdirs "Machine Learning,Python Books"
+              
+              # Comando completo:
+              %(prog)s "/Users/menon/Downloads" -r -t 8 --rename --name-pattern "{publisher}_{title}" -v -k "sua_chave_isbndb" -o "relatorio.json"
+              
+              # Atualizar cache com dados melhores:
+              %(prog)s --update-cache
+              
+              # Reprocessar cache existente:
+              %(prog)s --rescan-cache
 
-Observações:
-  - Por padrão, processa apenas o diretório especificado (sem subdiretórios)
-  - Use -r para processar todos os subdiretórios
-  - Use --subdirs para processar apenas subdiretórios específicos
-  - Use --name-pattern para definir o padrão de nomeação. Placeholders disponíveis:
-    {title}, {author}, {year}, {publisher}, {isbn}
-  - A chave ISBNdb é opcional e pode ser colocada em qualquer posição do comando
-  - Use --rescan-cache para reprocessar todo o cache em busca de dados melhores
-  - Use --update-cache para atualizar apenas registros com baixa confiança
-""")
+            Observações:
+              - Por padrão, processa apenas o diretório especificado (sem subdiretórios)
+              - Use -r para processar todos os subdiretórios
+              - Use --subdirs para processar apenas subdiretórios específicos
+              - Use --name-pattern para definir o padrão de nomeação. Placeholders disponíveis:
+                {title}, {author}, {year}, {publisher}, {isbn}
+              - A chave ISBNdb é opcional e pode ser colocada em qualquer posição do comando
+              - Use --rescan-cache para reprocessar todo o cache em busca de dados melhores
+              - Use --update-cache para atualizar apenas registros com baixa confiança
+            """)
+    )
     
     # Argumentos básicos
     parser.add_argument('directory', 
@@ -6657,14 +6708,11 @@ Observações:
                        
     # Argumentos de saída e logging
     parser.add_argument('-o', '--output',
-                       default='book_metadata_report.json',
+                       default='report.json',
                        help='Arquivo JSON de saída (padrão: %(default)s)')
     parser.add_argument('-v', '--verbose',
                        action='store_true',
                        help='Mostra informações detalhadas')
-    parser.add_argument('--log-file',
-                       default='book_metadata.log',
-                       help='Arquivo de log (padrão: %(default)s)')
                        
     # Argumentos de processamento
     parser.add_argument('-t', '--threads',
@@ -6695,18 +6743,6 @@ Observações:
                        help='Padrão para nomes de arquivo. Placeholders: {title}, {author}, {year}, {publisher}, {isbn}')
     
     args = parser.parse_args()
-    
-    # Configuração de logging
-    log_handlers = [
-        logging.StreamHandler(),
-        logging.FileHandler(args.log_file)
-    ]
-    
-    logging.basicConfig(
-        level=logging.DEBUG if args.verbose else logging.INFO,
-        format='%(asctime)s - %(levelname)s - %(message)s',
-        handlers=log_handlers
-    )
     
     try:
         # Inicializa o extrator
@@ -6757,31 +6793,6 @@ Observações:
             max_workers=args.threads
         )
         
-        # Gera relatório JSON
-        if results:
-            successful_results = [r for r in results if r is not None]
-            report = {
-                'summary': {
-                    'total_processed': len(results),
-                    'successful': len(successful_results),
-                    'timestamp': time.strftime('%Y-%m-%d %H:%M:%S')
-                },
-                'books': [asdict(r) for r in successful_results]
-            }
-            
-            with open(args.output, 'w', encoding='utf-8') as f:
-                json.dump(report, f, ensure_ascii=False, indent=2)
-            print(f"\nRelatório JSON salvo em: {args.output}")
-        
-        # Renomeia arquivos
-        if args.rename and results:
-            print("\nRenomeando arquivos...")
-            for metadata in results:
-                if metadata and metadata.file_path:
-                    extractor.rename_file(asdict(metadata), simulate=False)
-        
-        print(f"\nLog salvo em: {args.log_file}")
-        
     except KeyboardInterrupt:
         print("\nProcessamento interrompido pelo usuário.")
         sys.exit(1)
@@ -6791,6 +6802,5 @@ Observações:
             import traceback
             traceback.print_exc()
         sys.exit(1)
-
 if __name__ == "__main__":
     main()
