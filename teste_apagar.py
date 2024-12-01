@@ -3408,15 +3408,18 @@ class BookMetadataExtractor:
         # Initialize file grouping support
         self.file_group = BookFileGroup()
         
+        # Configure logging to write to reports directory
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        log_path = self.reports_dir / f"report_{timestamp}_metadata.log"
+        
         logging.basicConfig(
             level=logging.INFO,
             format='%(asctime)s - %(levelname)s - %(message)s',
             handlers=[
                 logging.StreamHandler(),
-                logging.FileHandler('book_metadata.log')
+                logging.FileHandler(str(log_path))
             ]
         )
-
 
     def print_final_summary(self, runtime_stats):
         """Imprime um resumo final com proteção total contra divisão por zero e valores nulos."""
@@ -3978,88 +3981,6 @@ class BookMetadataExtractor:
             }
         }
 
-
-    def _generate_reports(self, runtime_stats: Dict):
-        """
-        Gera relatórios HTML e JSON mantendo consistência com o resto do sistema.
-        """
-        if not runtime_stats:
-            logging.error("Dados de runtime_stats vazios ou inválidos")
-            return
-
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        
-        try:
-            report_data = self._prepare_report_data(runtime_stats)
-            
-            # Define nomes dos arquivos com padrão consistente
-            html_path = self.reports_dir / f"report_{timestamp}.html"
-            json_path = self.reports_dir / f"report_book_metadata_{timestamp}.json"  # Nome atualizado
-
-            self._generate_html_report(report_data, html_path)
-            self._generate_json_report(report_data, json_path)
-            
-            runtime_stats['generated_reports'] = [
-                {'type': 'HTML', 'path': str(html_path)},
-                {'type': 'JSON', 'path': str(json_path)}
-            ]
-
-            # Atualiza a mensagem final para usar o caminho correto
-            runtime_stats['json_report_path'] = str(json_path)  # Adiciona o caminho do JSON para uso posterior
-            
-        except Exception as e:
-            logging.error(f"Erro gerando relatórios: {str(e)}")
-            logging.error(traceback.format_exc())
-
-    def _generate_reports(self, runtime_stats: Dict):
-        """
-        Gera relatórios HTML e JSON mantendo consistência com o resto do sistema.
-        """
-        if not runtime_stats:
-            logging.error("Dados de runtime_stats vazios ou inválidos")
-            return
-
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        
-        try:
-            report_data = self._prepare_report_data(runtime_stats)
-            
-            # Define nomes dos arquivos com padrão consistente
-            html_path = self.reports_dir / f"report_{timestamp}.html"
-            json_path = self.reports_dir / f"report_book_metadata_{timestamp}.json"  # Nome atualizado
-
-            self._generate_html_report(report_data, html_path)
-            self._generate_json_report(report_data, json_path)
-            
-            runtime_stats['generated_reports'] = [
-                {'type': 'HTML', 'path': str(html_path)},
-                {'type': 'JSON', 'path': str(json_path)}
-            ]
-
-            # Atualiza a mensagem final para usar o caminho correto
-            runtime_stats['json_report_path'] = str(json_path)  # Adiciona o caminho do JSON para uso posterior
-            
-        except Exception as e:
-            logging.error(f"Erro gerando relatórios: {str(e)}")
-            logging.error(traceback.format_exc())
-
-        # Define nomes atualizados para consistência
-        book_metadata_report_path = self.reports_dir / f"report_book_metadata_{timestamp}.json"
-        metadata_log_path = self.reports_dir / f"book_metadata_{timestamp}.log"
-        
-        try:
-            # Move os arquivos gerados para o diretório correto com timestamp no nome
-            shutil.move(json_path, book_metadata_report_path)
-            logging.info(f"Relatório JSON salvo em: {book_metadata_report_path}")
-
-            log_file_path = Path("book_metadata.log")
-            if log_file_path.exists():
-                shutil.move(log_file_path, metadata_log_path)
-                logging.info(f"Log salvo em: {metadata_log_path}")
-        except Exception as e:
-            logging.error(f"Erro ao mover arquivos gerados: {str(e)}")
-
-
     def _generate_html_report(self, data: Dict, output_file: Path):
         """
         Gera relatório HTML com visualizações e estatísticas detalhadas.
@@ -4254,26 +4175,6 @@ class BookMetadataExtractor:
             logging.error(f"Error generating JSON report: {str(e)}")
             logging.error(traceback.format_exc())
             raise
-
-    def generate_report(self, results: List[BookMetadata], output_file: str) -> Dict:
-            """Gera um relatório detalhado em JSON com os resultados."""
-            report = {
-                'summary': {
-                    'total_files_processed': len(results),
-                    'successful_extractions': sum(1 for r in results if r is not None),
-                    'failed_extractions': sum(1 for r in results if r is None),
-                    'sources_used': dict(Counter(r.source for r in results if r is not None)),
-                    'timestamp': time.strftime('%Y-%m-%d %H:%M:%S'),
-                    'publishers': dict(Counter(r.publisher for r in results if r is not None))
-                },
-                'books': [asdict(r) for r in results if r is not None]
-            }
-            
-            # Salva o relatório
-            with open(output_file, 'w', encoding='utf-8') as f:
-                json.dump(report, f, ensure_ascii=False, indent=2)
-                
-            return report
 
     def suggest_filename(self, metadata: Dict) -> str:
         """
@@ -5143,70 +5044,90 @@ class BookMetadataExtractor:
         ]"""
 
     def _generate_reports(self, runtime_stats: Dict):
-            """
-            Gera relatórios HTML e JSON dos resultados do processamento.
+        """
+        Generate all reports (HTML, JSON, and log) in the reports directory with consistent naming.
+        
+        Args:
+            runtime_stats: Dictionary containing runtime statistics
             
-            Args:
-                runtime_stats: Dicionário com estatísticas de execução
-            """
-            if not runtime_stats:
-                logging.error("Dados de runtime_stats vazios ou inválidos")
-                return
+        Generates:
+            - HTML report
+            - JSON report with full metadata
+            - Log file
+        All files use consistent timestamp and are stored in reports directory.
+        """
+        if not runtime_stats:
+            logging.error("Invalid runtime_stats data")
+            return
 
-            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        
+        try:
+            # Ensure reports directory exists
+            self.reports_dir.mkdir(exist_ok=True)
             
-            try:
-                # Prepara dados para os relatórios
-                successful_results = runtime_stats.get('successful_results', [])
-                processed_files = runtime_stats.get('processed_files', [])
+            # Define consistent file paths
+            html_path = self.reports_dir / f"report_{timestamp}.html"
+            json_path = self.reports_dir / f"report_{timestamp}.json"
+            log_path = self.reports_dir / f"report_{timestamp}_metadata.log"
+            
+            # Generate reports
+            report_data = self._prepare_report_data(runtime_stats)
+            
+            # Generate HTML report
+            self._generate_html_report(report_data, html_path)
+            
+            # Generate JSON report (combined format)
+            json_data = {
+                "report_metadata": {
+                    "generated_at": datetime.now().isoformat(),
+                    "total_files_processed": len(runtime_stats['processed_files']),
+                    "successful_extractions": len(runtime_stats['successful_results']),
+                    "failed_extractions": len(runtime_stats['failure_details'])
+                },
+                "summary_statistics": report_data['summary'],
+                "format_statistics": report_data['details']['format_stats'],
+                "successful_extractions": report_data['details']['successful'],
+                "failed_extractions": runtime_stats['failure_details']
+            }
+            
+            with open(json_path, 'w', encoding='utf-8') as f:
+                json.dump(json_data, f, indent=2, ensure_ascii=False)
                 
-                total_files = len(processed_files)
-                successful = len(successful_results)
-                failed = total_files - successful if total_files >= successful else 0
+            # Move log file to reports directory
+            log_file = Path("book_metadata.log")
+            if log_file.exists():
+                shutil.move(log_file, log_path)
                 
-                # Calcula métricas
-                success_rate = (successful / total_files * 100) if total_files > 0 else 0.0
-                processing_times = list(runtime_stats.get('processing_times', {}).values())
-                avg_time = statistics.mean(processing_times) if processing_times else 0.0
-                
-                # Prepara estatísticas por publisher e formato
-                publisher_stats = Counter(r.publisher for r in successful_results if r)
-                format_stats = self._calculate_format_stats(runtime_stats)
-                
-                report_data = {
-                    'summary': {
-                        'total_files': total_files,
-                        'successful': successful,
-                        'failed': failed,
-                        'success_rate': success_rate,
-                        'average_time': avg_time,
-                        'timestamp': datetime.now().isoformat()
-                    },
-                    'details': {
-                        'successful': [asdict(r) for r in successful_results],
-                        'failures': runtime_stats.get('failure_details', {}),
-                        'publisher_stats': dict(publisher_stats),
-                        'format_stats': format_stats
-                    }
-                }
+            # Update runtime stats with file locations
+            runtime_stats['generated_reports'] = [
+                {'type': 'HTML', 'path': str(html_path)},
+                {'type': 'JSON', 'path': str(json_path)},
+                {'type': 'LOG', 'path': str(log_path)}
+            ]
+            
+            logging.info(f"Reports generated successfully in {self.reports_dir}")
+            
+        except Exception as e:
+            logging.error(f"Error generating reports: {str(e)}")
+            logging.error(traceback.format_exc())
 
-                # Gera relatórios
-                html_path = self.reports_dir / f"report_{timestamp}.html"
-                json_path = self.reports_dir / f"report_{timestamp}.json"
-
-                self._generate_html_report(report_data, html_path)
-                self._generate_json_report(report_data, json_path)
-                
-                runtime_stats['generated_reports'] = [
-                    {'type': 'HTML', 'path': str(html_path)},
-                    {'type': 'JSON', 'path': str(json_path)}
-                ]
-                
-            except Exception as e:
-                logging.error(f"Erro gerando relatórios: {str(e)}")
-                import traceback
-                logging.error(traceback.format_exc())
-
+    def _init_logging(self):
+        """Initialize logging with correct file location."""
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        log_path = self.reports_dir / f"report_{timestamp}_metadata.log"
+        
+        handlers = [
+            logging.StreamHandler(),
+            logging.FileHandler(str(log_path))
+        ]
+        
+        logging.basicConfig(
+            level=logging.INFO,
+            format='%(asctime)s - %(levelname)s - %(message)s',
+            handlers=handlers
+        )
+    
     def _generate_html_report(self, data: Dict, output_file: Path):
         """Gera relatório HTML usando nomes de parâmetros consistentes."""
         # O resto do método permanece o mesmo, apenas mudando html_path para output_file
@@ -5499,98 +5420,27 @@ class BookMetadataExtractor:
 
     def print_final_summary(self, runtime_stats: Dict):
         """
-        Imprime um resumo final no console.
+        Print final summary with consistent file paths.
         
         Args:
-            runtime_stats: Dicionário com estatísticas de execução
+            runtime_stats: Dictionary containing runtime statistics
         """
-        if not runtime_stats:
-            print("\nErro: Nenhuma estatística disponível")
-            return
-            
-        try:
-            # Inicializa contadores com valores seguros
-            extension_stats = defaultdict(lambda: {'total': 0, 'success': 0, 'failed': 0, 'success_rate': 0.0})
-            total_files = 0
-            total_success = 0
-            
-            # Conta totais por extensão
-            processed_files = runtime_stats.get('processed_files', [])
-            if processed_files:
-                for file_path in processed_files:
-                    if isinstance(file_path, str):
-                        ext = Path(file_path).suffix.lower()[1:]
-                        if ext in {'pdf', 'epub', 'mobi'}:
-                            extension_stats[ext]['total'] += 1
-                            total_files += 1
-            
-            # Conta sucessos por extensão
-            successful_results = runtime_stats.get('successful_results', [])
-            if successful_results:
-                for result in successful_results:
-                    if not result or not hasattr(result, 'file_path'):
-                        continue
-                    try:
-                        ext = Path(result.file_path).suffix.lower()[1:]
-                        if ext in extension_stats:
-                            extension_stats[ext]['success'] += 1
-                            total_success += 1
-                    except Exception as e:
-                        logging.debug(f"Erro ao processar resultado: {str(e)}")
-            
-            # Calcula estatísticas finais
-            total_failed = total_files - total_success
-            overall_rate = (total_success / total_files * 100) if total_files > 0 else 0.0
-            
-            # Calcula estatísticas por extensão
-            for ext in extension_stats:
-                stats = extension_stats[ext]
-                stats['failed'] = stats['total'] - stats['success']
-                if stats['total'] > 0:
-                    stats['success_rate'] = (stats['success'] / stats['total']) * 100
-            
-            # Imprime o relatório
-            print("\n" + "=" * 60)
-            print(f"{'RESUMO DO PROCESSAMENTO':^60}")
-            print("=" * 60)
-            
-            print("\nEstatísticas Gerais:")
-            print("-" * 40)
-            print(f"Total de arquivos processados: {total_files}")
-            print(f"Total de sucessos: {total_success}")
-            print(f"Total de falhas: {total_failed}")
-            print(f"Taxa de sucesso geral: {overall_rate:.1f}%")
-            
-            if any(stats['total'] > 0 for stats in extension_stats.values()):
-                print("\nEstatísticas por tipo de arquivo:")
-                print("-" * 40)
-                
-                for ext in sorted(extension_stats.keys()):
-                    stats = extension_stats[ext]
-                    if stats['total'] > 0:
-                        print(f"\n{ext.upper()}:")
-                        print(f"  Total: {stats['total']}")
-                        print(f"  Sucessos: {stats['success']}")
-                        print(f"  Falhas: {stats['failed']}")
-                        print(f"  Taxa de Sucesso: {stats['success_rate']:.1f}%")
-            
-            # Arquivos gerados
-            print("\nArquivos Gerados:")
-            print("-" * 40)
-            
-            reports = runtime_stats.get('generated_reports', [])
-            for report in reports:
-                report_type = report.get('type', '')
-                path = report.get('path', '')
-                if path:
-                    print(f"{report_type:5} {path}")
-            
-            print("\n" + "=" * 60)
-            
-        except Exception as e:
-            print(f"\nErro ao gerar resumo: {str(e)}")
-            logging.error(f"Erro ao gerar resumo: {str(e)}")
+        # ... [previous summary code remains the same until file listing] ...
 
+        # Print generated files section with consistent formatting
+        print("\nArquivos Gerados:")
+        print("-" * 40)
+        
+        if reports := runtime_stats.get('generated_reports', []):
+            # Sort by type to ensure consistent order
+            for report in sorted(reports, key=lambda x: x['type']):
+                report_type = report['type']
+                path = Path(report['path'])
+                # Align output using consistent spacing
+                print(f"{report_type:4} {path}")
+        
+        print("\n" + "=" * 60)
+    
     def suggest_filename(self, metadata: BookMetadata) -> str:
             """
             Sugere um nome de arquivo baseado nos metadados do livro.

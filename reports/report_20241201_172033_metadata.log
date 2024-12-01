@@ -1,0 +1,1902 @@
+2024-12-01 16:35:40,705 - INFO - Database initialized successfully with schema verified
+2024-12-01 16:35:40,706 - INFO - Schema verification completed successfully
+2024-12-01 16:35:40,751 - INFO - Extractores disponíveis: pypdf2, pdfplumber, pdfminer, tesseract, pdf2image
+2024-12-01 16:35:40,752 - INFO - Suporte a OCR está disponível
+2024-12-01 16:35:40,754 - INFO - Database initialized successfully with schema verified
+2024-12-01 16:35:40,754 - INFO - Schema verification completed successfully
+2024-12-01 16:35:40,758 - INFO - Found 16 files to process in 1 directories
+2024-12-01 16:35:40,758 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-12-01 16:35:40,758 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_The_Active_Defender_Dr._Catherine_J._Ullman_9781119895213.pdf
+2024-12-01 16:35:40,758 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_Software_Transparency_Chris_Hughes-_Tony_Turner_9781394158485.pdf
+2024-12-01 16:35:40,759 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/Hands-On Artificial Intelligence for Banking.pdf
+2024-12-01 16:35:40,805 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-12-01 16:35:40,822 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_Software_Transparency_Chris_Hughes-_Tony_Turner_9781394158485.pdf
+2024-12-01 16:35:40,834 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_The_Active_Defender_Dr._Catherine_J._Ullman_9781119895213.pdf
+2024-12-01 16:35:40,863 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/OReilly_bash_Cookbook_Carl_Albing-_JP_Vossen_9781491975336.pdf
+2024-12-01 16:35:40,872 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Hands-On Artificial Intelligence for Banking.pdf
+2024-12-01 16:35:40,883 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2022_Ansible_Up_and_Running_Bas_Meijer-_Lorin_Hochstein_9781098109158.pdf
+2024-12-01 16:35:40,897 - WARNING - No metadata: computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy
+2024-12-01 16:35:40,929 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_bash_Cookbook_Carl_Albing-_JP_Vossen_9781491975336.pdf
+2024-12-01 16:35:40,988 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2022_Ansible_Up_and_Running_Bas_Meijer-_Lorin_Hochstein_9781098109158.pdf
+2024-12-01 16:35:43,566 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/National_Geographic_Books_2021_Bug_Bounty_Bootcamp_Vickie_Li_9781718501546.pdf
+2024-12-01 16:35:43,567 - INFO - Success: Wiley_2023_The_Active_Defender_Dr._Catherine_J._Ullman_9781119895213
+2024-12-01 16:35:43,571 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2020_Java_Performance_Scott_Oaks_9781492056119.pdf
+2024-12-01 16:35:43,571 - INFO - Success: Wiley_2023_Software_Transparency_Chris_Hughes-_Tony_Turner_9781394158485
+2024-12-01 16:35:43,574 - WARNING - No metadata: Hands-On Artificial Intelligence for Banking
+2024-12-01 16:35:43,581 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/Packt_2022_Applied_Machine_Learning_and_High-Performance_Comp_Mani_Khanuja-_Farooq_Sabir_9781803237015.pdf
+2024-12-01 16:35:43,677 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/National_Geographic_Books_2021_Bug_Bounty_Bootcamp_Vickie_Li_9781718501546.pdf
+2024-12-01 16:35:43,693 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2020_Java_Performance_Scott_Oaks_9781492056119.pdf
+2024-12-01 16:35:43,792 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Packt_2022_Applied_Machine_Learning_and_High-Performance_Comp_Mani_Khanuja-_Farooq_Sabir_9781803237015.pdf
+2024-12-01 16:35:45,004 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2021_The_Hardware_Hacking_Handbook_Jasper_van_Woudenberg-_Colin_O'Flynn_9781593278748.pdf
+2024-12-01 16:35:45,042 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2021_The_Hardware_Hacking_Handbook_Jasper_van_Woudenberg-_Colin_O'Flynn_9781593278748.pdf
+2024-12-01 16:35:46,475 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-12-01 16:35:46,671 - WARNING - ISBNlib info: ISBN variant detected for 9781491975336: isbn request != isbn response (9781491975336 not in [{'type': 'ISBN_13', 'identifier': '9781491975282'}, {'type': 'ISBN_10', 'identifier': '1491975288'}])
+2024-12-01 16:35:46,691 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-12-01 16:35:46,697 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2021_Java_to_Kotlin_Duncan_McGregor-_Nat_Pryce_9781492082279.mobi
+2024-12-01 16:35:46,793 - INFO - Extracting metadata from: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2021_Java_to_Kotlin_Duncan_McGregor-_Nat_Pryce_9781492082279.mobi
+2024-12-01 16:35:47,911 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538.epub
+2024-12-01 16:35:47,911 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538.epub
+2024-12-01 16:35:48,001 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 16:35:48,001 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 16:35:48,001 - INFO - Found ISBN-10 in content: 9781098145
+2024-12-01 16:35:48,025 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 16:35:48,152 - WARNING - ISBNlib info: ISBN variant detected for 9781492056119: isbn request != isbn response (9781492056119 not in [{'type': 'ISBN_13', 'identifier': '9781492056089'}, {'type': 'ISBN_10', 'identifier': '1492056081'}])
+2024-12-01 16:35:48,250 - INFO - Found ISBN-10 in content: 1415926535
+2024-12-01 16:35:48,250 - INFO - Found ISBN-10 in content: 1415926535
+2024-12-01 16:35:48,250 - INFO - Found ISBN-10 in content: 7694409323
+2024-12-01 16:35:48,250 - INFO - Found ISBN-10 in content: 0973355292
+2024-12-01 16:35:48,250 - INFO - Found ISBN-10 in content: 0973355292
+2024-12-01 16:35:48,250 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 16:35:48,250 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 16:35:48,250 - INFO - Found ISBN-10 in content: 4123456789
+2024-12-01 16:35:48,250 - INFO - Found ISBN-10 in content: 4123456789
+2024-12-01 16:35:48,250 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 16:35:48,250 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 16:35:48,250 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 16:35:48,305 - ERROR - isbnlib_goom unexpected error for ISBN 9781491975336: KeyError - 'isbnlib_goom'
+2024-12-01 16:35:48,311 - WARNING - API call failed: isbnlib_goom
+Average response time: 0.00s
+Success rate: 0.0%
+2024-12-01 16:35:48,582 - INFO - Found ISBN-10 in content: 9999999999
+2024-12-01 16:35:48,583 - INFO - Found ISBN-10 in content: 4142135623
+2024-12-01 16:35:48,583 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 16:35:48,583 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 16:35:48,583 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 16:35:48,583 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 16:35:48,583 - INFO - Found ISBN-10 in content: 1844674407
+2024-12-01 16:35:48,583 - INFO - Found ISBN-10 in content: 3709551614
+2024-12-01 16:35:48,855 - INFO - Found ISBN-13 in content: 9792082722375
+2024-12-01 16:35:48,855 - INFO - Found ISBN-10 in content: 0000000840
+2024-12-01 16:35:48,855 - INFO - Found ISBN-10 in content: 0000000840
+2024-12-01 16:35:48,855 - INFO - Found ISBN-10 in content: 4895000000
+2024-12-01 16:35:48,855 - INFO - Found ISBN-10 in content: 7040000000
+2024-12-01 16:35:48,856 - INFO - Found ISBN-10 in content: 6227020800
+2024-12-01 16:35:48,856 - INFO - Found ISBN-10 in content: 5109094217
+2024-12-01 16:35:48,856 - INFO - Found ISBN-10 in content: 1709440000
+2024-12-01 16:35:48,856 - INFO - Found ISBN-10 in content: 9332621544
+2024-12-01 16:35:48,856 - INFO - Found ISBN-10 in content: 3944152681
+2024-12-01 16:35:48,856 - INFO - Found ISBN-10 in content: 6992388562
+2024-12-01 16:35:48,856 - INFO - Found ISBN-10 in content: 6670049071
+2024-12-01 16:35:48,856 - INFO - Found ISBN-10 in content: 8162146859
+2024-12-01 16:35:48,856 - INFO - Found ISBN-10 in content: 2963895217
+2024-12-01 16:35:48,856 - INFO - Found ISBN-10 in content: 5999932299
+2024-12-01 16:35:48,856 - INFO - Found ISBN-10 in content: 1560894146
+2024-12-01 16:35:48,856 - INFO - Found ISBN-10 in content: 1828625369
+2024-12-01 16:35:48,856 - INFO - Found ISBN-10 in content: 7920827223
+2024-12-01 16:35:48,856 - INFO - Found ISBN-10 in content: 7582511852
+2024-12-01 16:35:48,856 - INFO - Found ISBN-10 in content: 1091686400
+2024-12-01 16:35:48,856 - INFO - Found ISBN-10 in content: 0000000000
+2024-12-01 16:35:48,856 - INFO - Found ISBN-10 in content: 1800000000
+2024-12-01 16:35:49,104 - INFO - Found ISBN-10 in content: 2208988800
+2024-12-01 16:35:49,333 - INFO - Processed 24 items
+2024-12-01 16:35:49,333 - INFO - Found 34 unique ISBNs: ['0000000000', '0000000840', '0973355292', '1091686400', '1415926535', '1560894146', '1709440000', '1800000000', '1828625369', '1844674407', '2208988800', '2963895217', '3709551614', '3944152681', '4012345678', '4123456789', '4142135623', '4895000000', '5109094217', '5999932299', '6227020800', '6670049071', '6992388562', '7040000000', '7582511852', '7694409323', '7920827223', '8162146859', '9223372036', '9332621544', '9781098145', '9781098145538', '9792082722375', '9999999999']
+2024-12-01 16:35:49,333 - INFO - Extracting metadata from: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538.epub
+2024-12-01 16:35:49,361 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538.epub
+2024-12-01 16:35:49,392 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 16:35:49,392 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 16:35:49,392 - INFO - Found ISBN-10 in content: 9781098145
+2024-12-01 16:35:49,414 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 16:35:49,615 - INFO - Found ISBN-10 in content: 1415926535
+2024-12-01 16:35:49,615 - INFO - Found ISBN-10 in content: 1415926535
+2024-12-01 16:35:49,615 - INFO - Found ISBN-10 in content: 7694409323
+2024-12-01 16:35:49,615 - INFO - Found ISBN-10 in content: 0973355292
+2024-12-01 16:35:49,615 - INFO - Found ISBN-10 in content: 0973355292
+2024-12-01 16:35:49,615 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 16:35:49,615 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 16:35:49,615 - INFO - Found ISBN-10 in content: 4123456789
+2024-12-01 16:35:49,615 - INFO - Found ISBN-10 in content: 4123456789
+2024-12-01 16:35:49,615 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 16:35:49,615 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 16:35:49,615 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 16:35:49,864 - ERROR - isbnlib_goom unexpected error for ISBN 9781492056119: KeyError - 'isbnlib_goom'
+2024-12-01 16:35:49,870 - WARNING - API call failed: isbnlib_goom
+Average response time: 0.80s
+Success rate: 50.0%
+2024-12-01 16:35:49,994 - INFO - Found ISBN-10 in content: 9999999999
+2024-12-01 16:35:49,994 - INFO - Found ISBN-10 in content: 4142135623
+2024-12-01 16:35:49,994 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 16:35:49,994 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 16:35:49,994 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 16:35:49,994 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 16:35:49,994 - INFO - Found ISBN-10 in content: 1844674407
+2024-12-01 16:35:49,994 - INFO - Found ISBN-10 in content: 3709551614
+2024-12-01 16:35:50,259 - INFO - Found ISBN-13 in content: 9792082722375
+2024-12-01 16:35:50,260 - INFO - Found ISBN-10 in content: 0000000840
+2024-12-01 16:35:50,260 - INFO - Found ISBN-10 in content: 0000000840
+2024-12-01 16:35:50,260 - INFO - Found ISBN-10 in content: 4895000000
+2024-12-01 16:35:50,260 - INFO - Found ISBN-10 in content: 7040000000
+2024-12-01 16:35:50,260 - INFO - Found ISBN-10 in content: 6227020800
+2024-12-01 16:35:50,260 - INFO - Found ISBN-10 in content: 5109094217
+2024-12-01 16:35:50,260 - INFO - Found ISBN-10 in content: 1709440000
+2024-12-01 16:35:50,260 - INFO - Found ISBN-10 in content: 9332621544
+2024-12-01 16:35:50,260 - INFO - Found ISBN-10 in content: 3944152681
+2024-12-01 16:35:50,260 - INFO - Found ISBN-10 in content: 6992388562
+2024-12-01 16:35:50,260 - INFO - Found ISBN-10 in content: 6670049071
+2024-12-01 16:35:50,260 - INFO - Found ISBN-10 in content: 8162146859
+2024-12-01 16:35:50,260 - INFO - Found ISBN-10 in content: 2963895217
+2024-12-01 16:35:50,260 - INFO - Found ISBN-10 in content: 5999932299
+2024-12-01 16:35:50,260 - INFO - Found ISBN-10 in content: 1560894146
+2024-12-01 16:35:50,260 - INFO - Found ISBN-10 in content: 1828625369
+2024-12-01 16:35:50,260 - INFO - Found ISBN-10 in content: 7920827223
+2024-12-01 16:35:50,260 - INFO - Found ISBN-10 in content: 7582511852
+2024-12-01 16:35:50,260 - INFO - Found ISBN-10 in content: 1091686400
+2024-12-01 16:35:50,260 - INFO - Found ISBN-10 in content: 0000000000
+2024-12-01 16:35:50,260 - INFO - Found ISBN-10 in content: 1800000000
+2024-12-01 16:35:50,348 - ERROR - isbnlib_meta unexpected error for ISBN 9781491975336: ISBNNotConsistentError - isbn request != isbn response (9781491975336 not in [{'type': 'ISBN_13', 'identifier': '9781491975282'}, {'type': 'ISBN_10', 'identifier': '1491975288'}])
+2024-12-01 16:35:50,354 - WARNING - API call failed: isbnlib_meta
+Average response time: 0.00s
+Success rate: 0.0%
+2024-12-01 16:35:50,501 - INFO - Found ISBN-10 in content: 2208988800
+2024-12-01 16:35:50,696 - INFO - Processed 24 items
+2024-12-01 16:35:50,696 - INFO - Found 34 unique ISBNs: ['0000000000', '0000000840', '0973355292', '1091686400', '1415926535', '1560894146', '1709440000', '1800000000', '1828625369', '1844674407', '2208988800', '2963895217', '3709551614', '3944152681', '4012345678', '4123456789', '4142135623', '4895000000', '5109094217', '5999932299', '6227020800', '6670049071', '6992388562', '7040000000', '7582511852', '7694409323', '7920827223', '8162146859', '9223372036', '9332621544', '9781098145', '9781098145538', '9792082722375', '9999999999']
+2024-12-01 16:35:50,717 - INFO - Found ISBN in content: 9781098145538
+2024-12-01 16:35:50,717 - INFO - Successfully extracted metadata: {'title': 'Learning Java', 'creator': 'Marc Loy, Patrick Niemeyer, and Daniel Leuck', 'publisher': "O'Reilly Media, Inc.", 'date': '2023-08-23', 'isbn': '9781098145538'}
+2024-12-01 16:35:51,154 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2022_Cybersecurity_for_Small_Networks_Seth_Enoka_9781718501485.epub
+2024-12-01 16:35:51,154 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2022_Cybersecurity_for_Small_Networks_Seth_Enoka_9781718501485.epub
+2024-12-01 16:35:51,224 - INFO - Found ISBN in DC metadata: 9781718501492
+2024-12-01 16:35:51,249 - INFO - Found ISBN-13 in content: 9781718501485
+2024-12-01 16:35:51,249 - INFO - Found ISBN-13 in content: 9781718501492
+2024-12-01 16:35:51,250 - INFO - Found ISBN-13 in content: 9781718501485
+2024-12-01 16:35:51,250 - INFO - Found ISBN-13 in content: 9781718501492
+2024-12-01 16:35:51,250 - INFO - Found ISBN-13 in content: 9781718501485
+2024-12-01 16:35:51,250 - INFO - Found ISBN-13 in content: 9781718501492
+2024-12-01 16:35:51,250 - INFO - Found ISBN-13 in content: 9781718501485
+2024-12-01 16:35:51,250 - INFO - Found ISBN-13 in content: 9781718501492
+2024-12-01 16:35:51,250 - INFO - Found ISBN-13 in content: 9781718501485
+2024-12-01 16:35:51,250 - INFO - Found ISBN-13 in content: 9781718501492
+2024-12-01 16:35:51,250 - INFO - Found ISBN-10 in content: 2022021005
+2024-12-01 16:35:51,250 - INFO - Found ISBN-10 in content: 2022021006
+2024-12-01 16:35:51,250 - INFO - Found ISBN-10 in content: 9781718501
+2024-12-01 16:35:51,250 - INFO - Found ISBN-10 in content: 9781718501
+2024-12-01 16:35:51,250 - INFO - Found ISBN-10 in content: 2022021005
+2024-12-01 16:35:51,250 - INFO - Found ISBN-10 in content: 2022021006
+2024-12-01 16:35:51,423 - INFO - Found ISBN-10 in content: 1619747519
+2024-12-01 16:35:51,423 - INFO - Found ISBN-10 in content: 1619747519
+2024-12-01 16:35:51,423 - INFO - Found ISBN-10 in content: 1619747519
+2024-12-01 16:35:51,423 - INFO - Found ISBN-10 in content: 1619747520
+2024-12-01 16:35:51,423 - INFO - Found ISBN-10 in content: 1584414232
+2024-12-01 16:35:51,423 - INFO - Found ISBN-10 in content: 1584414237
+2024-12-01 16:35:51,423 - INFO - Found ISBN-10 in content: 1584414242
+2024-12-01 16:35:51,424 - INFO - Found ISBN-10 in content: 1584414247
+2024-12-01 16:35:51,424 - INFO - Found ISBN-10 in content: 1584414248
+2024-12-01 16:35:51,424 - INFO - Found ISBN-10 in content: 1584414254
+2024-12-01 16:35:51,465 - INFO - Found ISBN-10 in content: 1634779305
+2024-12-01 16:35:51,465 - INFO - Found ISBN-10 in content: 1634779305
+2024-12-01 16:35:51,465 - INFO - Found ISBN-10 in content: 0788339744
+2024-12-01 16:35:51,547 - INFO - Processed 23 items
+2024-12-01 16:35:51,547 - INFO - Found 15 unique ISBNs: ['0788339744', '1584414232', '1584414237', '1584414242', '1584414247', '1584414248', '1584414254', '1619747519', '1619747520', '1634779305', '2022021005', '2022021006', '9781718501', '9781718501485', '9781718501492']
+2024-12-01 16:35:51,547 - INFO - Extracting metadata from: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2022_Cybersecurity_for_Small_Networks_Seth_Enoka_9781718501485.epub
+2024-12-01 16:35:51,579 - INFO - Found ISBN in DC metadata: 9781718501492
+2024-12-01 16:35:51,579 - INFO - Successfully extracted metadata: {'title': 'Cybersecurity for Small Networks', 'creator': 'Seth Enoka', 'publisher': 'No Starch Press', 'isbn': '9781718501492'}
+2024-12-01 16:35:51,895 - ERROR - isbnlib_meta unexpected error for ISBN 9781492056119: ISBNNotConsistentError - isbn request != isbn response (9781492056119 not in [{'type': 'ISBN_13', 'identifier': '9781492056089'}, {'type': 'ISBN_10', 'identifier': '1492056081'}])
+2024-12-01 16:35:51,896 - WARNING - API call failed: isbnlib_meta
+Average response time: 1.02s
+Success rate: 50.0%
+2024-12-01 16:35:52,550 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060.epub
+2024-12-01 16:35:52,550 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060.epub
+2024-12-01 16:35:52,721 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 16:35:52,721 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 16:35:52,731 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 16:35:52,731 - INFO - Found ISBN-10 in content: 9781789616
+2024-12-01 16:35:52,843 - INFO - Found ISBN-10 in content: 7865167308
+2024-12-01 16:35:52,853 - INFO - Found ISBN-10 in content: 8874887488
+2024-12-01 16:35:52,853 - INFO - Found ISBN-10 in content: 2961186622
+2024-12-01 16:35:52,853 - INFO - Found ISBN-10 in content: 1188118811
+2024-12-01 16:35:52,853 - INFO - Found ISBN-10 in content: 1797660478
+2024-12-01 16:35:52,949 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 16:35:52,949 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 16:35:52,949 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 16:35:52,949 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 16:35:52,950 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 16:35:52,950 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 16:35:52,950 - INFO - Found ISBN-10 in content: 9781788836
+2024-12-01 16:35:52,950 - INFO - Found ISBN-10 in content: 9781788398
+2024-12-01 16:35:52,950 - INFO - Processed 222 items
+2024-12-01 16:35:52,950 - INFO - Found 11 unique ISBNs: ['1188118811', '1797660478', '2961186622', '7865167308', '8874887488', '9781788398', '9781788398060', '9781788836', '9781788836067', '9781789616', '9781789616132']
+2024-12-01 16:35:52,950 - INFO - Extracting metadata from: /Users/menon/Downloads/0_teste_livros_scan/Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060.epub
+2024-12-01 16:35:53,023 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060.epub
+2024-12-01 16:35:53,118 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 16:35:53,118 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 16:35:53,126 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 16:35:53,127 - INFO - Found ISBN-10 in content: 9781789616
+2024-12-01 16:35:53,216 - INFO - Found ISBN-10 in content: 7865167308
+2024-12-01 16:35:53,226 - INFO - Found ISBN-10 in content: 8874887488
+2024-12-01 16:35:53,226 - INFO - Found ISBN-10 in content: 2961186622
+2024-12-01 16:35:53,226 - INFO - Found ISBN-10 in content: 1188118811
+2024-12-01 16:35:53,226 - INFO - Found ISBN-10 in content: 1797660478
+2024-12-01 16:35:53,322 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 16:35:53,322 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 16:35:53,323 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 16:35:53,323 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 16:35:53,323 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 16:35:53,323 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 16:35:53,323 - INFO - Found ISBN-10 in content: 9781788836
+2024-12-01 16:35:53,323 - INFO - Found ISBN-10 in content: 9781788398
+2024-12-01 16:35:53,323 - INFO - Processed 222 items
+2024-12-01 16:35:53,323 - INFO - Found 11 unique ISBNs: ['1188118811', '1797660478', '2961186622', '7865167308', '8874887488', '9781788398', '9781788398060', '9781788836', '9781788836067', '9781789616', '9781789616132']
+2024-12-01 16:35:53,324 - INFO - Found ISBN in content: 9781788836067
+2024-12-01 16:35:53,324 - INFO - Successfully extracted metadata: {'title': 'Hands-On Deep Learning for IoT', 'creator': 'Mohammad Abdur Razzaque, PhD', 'publisher': 'Packt', 'date': '2019-06-27T06:26:31Z', 'isbn': '9781788836067'}
+2024-12-01 16:35:54,054 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1).epub
+2024-12-01 16:35:54,055 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1).epub
+2024-12-01 16:35:54,149 - INFO - Found ISBN-10 in content: 7742338443
+2024-12-01 16:35:54,149 - INFO - Found ISBN-10 in content: 1102733054
+2024-12-01 16:35:54,260 - INFO - Found ISBN-10 in content: 6033220602
+2024-12-01 16:35:54,260 - INFO - Found ISBN-10 in content: 2670123361
+2024-12-01 16:35:54,260 - INFO - Found ISBN-10 in content: 2684179187
+2024-12-01 16:35:54,260 - INFO - Found ISBN-10 in content: 6003123012
+2024-12-01 16:35:54,262 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 16:35:54,262 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 16:35:54,262 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 16:35:54,263 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 16:35:54,263 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 16:35:54,263 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 16:35:54,263 - INFO - Processed 16 items
+2024-12-01 16:35:54,263 - INFO - Found 8 unique ISBNs: ['1102733054', '2670123361', '2684179187', '6003123012', '6033220602', '7742338443', '9788555193125', '9788555193149']
+2024-12-01 16:35:54,263 - INFO - Extracting metadata from: /Users/menon/Downloads/0_teste_livros_scan/series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1).epub
+2024-12-01 16:35:54,293 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1).epub
+2024-12-01 16:35:54,337 - INFO - Found ISBN-10 in content: 7742338443
+2024-12-01 16:35:54,337 - INFO - Found ISBN-10 in content: 1102733054
+2024-12-01 16:35:54,375 - ERROR - isbnlib_default unexpected error for ISBN 9781492056119: ISBNNotConsistentError - isbn request != isbn response (9781492056119 not in [{'type': 'ISBN_13', 'identifier': '9781492056089'}, {'type': 'ISBN_10', 'identifier': '1492056081'}])
+2024-12-01 16:35:54,375 - WARNING - API call failed: isbnlib_default
+Average response time: 0.00s
+Success rate: 0.0%
+2024-12-01 16:35:54,426 - INFO - Found ISBN-10 in content: 6033220602
+2024-12-01 16:35:54,426 - INFO - Found ISBN-10 in content: 2670123361
+2024-12-01 16:35:54,426 - INFO - Found ISBN-10 in content: 2684179187
+2024-12-01 16:35:54,426 - INFO - Found ISBN-10 in content: 6003123012
+2024-12-01 16:35:54,428 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 16:35:54,428 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 16:35:54,428 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 16:35:54,428 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 16:35:54,428 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 16:35:54,428 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 16:35:54,429 - INFO - Processed 16 items
+2024-12-01 16:35:54,429 - INFO - Found 8 unique ISBNs: ['1102733054', '2670123361', '2684179187', '6003123012', '6033220602', '7742338443', '9788555193125', '9788555193149']
+2024-12-01 16:35:54,429 - INFO - Found ISBN in content: 9788555193149
+2024-12-01 16:35:54,429 - INFO - Successfully extracted metadata: {'title': 'Series temporais com Prophet: Analise e previsao de dados com Python', 'creator': 'Allan Spadini e Valquiria Alencar', 'isbn': '9788555193149', 'publisher': 'Casa do Código'}
+2024-12-01 16:35:55,389 - ERROR - isbnlib_default unexpected error for ISBN 9781491975336: ISBNNotConsistentError - isbn request != isbn response (9781491975336 not in [{'type': 'ISBN_13', 'identifier': '9781491975282'}, {'type': 'ISBN_10', 'identifier': '1491975288'}])
+2024-12-01 16:35:55,391 - WARNING - API call failed: isbnlib_default
+Average response time: 0.76s
+Success rate: 50.0%
+2024-12-01 16:35:56,518 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x12f3796a0>: Failed to establish a new connection: [Errno 12] Cannot allocate memory')': /api/books?bibkeys=ISBN%3A9781492056119&format=json&jscmd=data
+2024-12-01 16:35:56,519 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x12f379910>: Failed to establish a new connection: [Errno 12] Cannot allocate memory')': /api/books?bibkeys=ISBN%3A9781491975336&format=json&jscmd=data
+2024-12-01 16:35:56,519 - WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x12f379370>: Failed to establish a new connection: [Errno 12] Cannot allocate memory')': /api/books?bibkeys=ISBN%3A9781803237015&format=json&jscmd=data
+2024-12-01 16:35:57,483 - INFO - Success: OReilly_bash_Cookbook_Carl_Albing-_JP_Vossen_9781491975336
+2024-12-01 16:35:57,484 - INFO - Success: OReilly_2022_Ansible_Up_and_Running_Bas_Meijer-_Lorin_Hochstein_9781098109158
+2024-12-01 16:35:57,484 - INFO - Success: National_Geographic_Books_2021_Bug_Bounty_Bootcamp_Vickie_Li_9781718501546
+2024-12-01 16:35:57,484 - INFO - Success: OReilly_2020_Java_Performance_Scott_Oaks_9781492056119
+2024-12-01 16:35:58,764 - INFO - Success: Packt_2022_Applied_Machine_Learning_and_High-Performance_Comp_Mani_Khanuja-_Farooq_Sabir_9781803237015
+2024-12-01 16:35:58,765 - INFO - Success: No_Starch_Press_2021_The_Hardware_Hacking_Handbook_Jasper_van_Woudenberg-_Colin_O'Flynn_9781593278748
+2024-12-01 16:35:58,765 - WARNING - No metadata: pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free
+2024-12-01 16:35:58,765 - INFO - Success: OReilly_2021_Java_to_Kotlin_Duncan_McGregor-_Nat_Pryce_9781492082279
+2024-12-01 16:35:58,765 - INFO - Success: OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538
+2024-12-01 16:35:58,766 - INFO - Success: No_Starch_Press_2022_Cybersecurity_for_Small_Networks_Seth_Enoka_9781718501485
+2024-12-01 16:35:58,766 - INFO - Success: Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060
+2024-12-01 16:35:58,766 - INFO - Success: series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1)
+2024-12-01 16:56:49,102 - INFO - Database initialized successfully with schema verified
+2024-12-01 16:56:49,103 - INFO - Schema verification completed successfully
+2024-12-01 16:56:49,135 - INFO - Extractores disponíveis: pypdf2, pdfplumber, pdfminer, tesseract, pdf2image
+2024-12-01 16:56:49,135 - INFO - Suporte a OCR está disponível
+2024-12-01 16:56:49,136 - INFO - Database initialized successfully with schema verified
+2024-12-01 16:56:49,137 - INFO - Schema verification completed successfully
+2024-12-01 16:56:49,174 - INFO - Found 16 files to process in 1 directories
+2024-12-01 16:56:49,175 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2021_Java_to_Kotlin_Duncan_McGregor-_Nat_Pryce_9781492082279.mobi
+2024-12-01 16:56:49,175 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-12-01 16:56:49,175 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_The_Active_Defender_Dr._Catherine_J._Ullman_9781119895213.pdf
+2024-12-01 16:56:49,175 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_Software_Transparency_Chris_Hughes-_Tony_Turner_9781394158485.pdf
+2024-12-01 16:56:49,278 - INFO - Extracting metadata from: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2021_Java_to_Kotlin_Duncan_McGregor-_Nat_Pryce_9781492082279.mobi
+2024-12-01 16:56:49,289 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/Hands-On Artificial Intelligence for Banking.pdf
+2024-12-01 16:56:49,339 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-12-01 16:56:49,348 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_Software_Transparency_Chris_Hughes-_Tony_Turner_9781394158485.pdf
+2024-12-01 16:56:49,359 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_The_Active_Defender_Dr._Catherine_J._Ullman_9781119895213.pdf
+2024-12-01 16:56:49,371 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/OReilly_bash_Cookbook_Carl_Albing-_JP_Vossen_9781491975336.pdf
+2024-12-01 16:56:49,372 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2022_Ansible_Up_and_Running_Bas_Meijer-_Lorin_Hochstein_9781098109158.pdf
+2024-12-01 16:56:49,387 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/National_Geographic_Books_2021_Bug_Bounty_Bootcamp_Vickie_Li_9781718501546.pdf
+2024-12-01 16:56:49,396 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Hands-On Artificial Intelligence for Banking.pdf
+2024-12-01 16:56:49,425 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2020_Java_Performance_Scott_Oaks_9781492056119.pdf
+2024-12-01 16:56:49,430 - INFO - Success: OReilly_2021_Java_to_Kotlin_Duncan_McGregor-_Nat_Pryce_9781492082279
+2024-12-01 16:56:49,432 - WARNING - No metadata: computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy
+2024-12-01 16:56:49,432 - INFO - Success: Wiley_2023_The_Active_Defender_Dr._Catherine_J._Ullman_9781119895213
+2024-12-01 16:56:49,433 - INFO - Success: Wiley_2023_Software_Transparency_Chris_Hughes-_Tony_Turner_9781394158485
+2024-12-01 16:56:49,459 - WARNING - No metadata: Hands-On Artificial Intelligence for Banking
+2024-12-01 16:56:49,491 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_bash_Cookbook_Carl_Albing-_JP_Vossen_9781491975336.pdf
+2024-12-01 16:56:49,536 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2022_Ansible_Up_and_Running_Bas_Meijer-_Lorin_Hochstein_9781098109158.pdf
+2024-12-01 16:56:49,564 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/Packt_2022_Applied_Machine_Learning_and_High-Performance_Comp_Mani_Khanuja-_Farooq_Sabir_9781803237015.pdf
+2024-12-01 16:56:49,574 - INFO - Success: OReilly_bash_Cookbook_Carl_Albing-_JP_Vossen_9781491975336
+2024-12-01 16:56:49,590 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2020_Java_Performance_Scott_Oaks_9781492056119.pdf
+2024-12-01 16:56:49,591 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2021_The_Hardware_Hacking_Handbook_Jasper_van_Woudenberg-_Colin_O'Flynn_9781593278748.pdf
+2024-12-01 16:56:49,591 - INFO - Success: OReilly_2022_Ansible_Up_and_Running_Bas_Meijer-_Lorin_Hochstein_9781098109158
+2024-12-01 16:56:49,602 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/National_Geographic_Books_2021_Bug_Bounty_Bootcamp_Vickie_Li_9781718501546.pdf
+2024-12-01 16:56:49,606 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-12-01 16:56:49,606 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538.epub
+2024-12-01 16:56:49,606 - INFO - Success: National_Geographic_Books_2021_Bug_Bounty_Bootcamp_Vickie_Li_9781718501546
+2024-12-01 16:56:49,606 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538.epub
+2024-12-01 16:56:49,607 - INFO - Success: OReilly_2020_Java_Performance_Scott_Oaks_9781492056119
+2024-12-01 16:56:49,706 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2021_The_Hardware_Hacking_Handbook_Jasper_van_Woudenberg-_Colin_O'Flynn_9781593278748.pdf
+2024-12-01 16:56:49,729 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2022_Cybersecurity_for_Small_Networks_Seth_Enoka_9781718501485.epub
+2024-12-01 16:56:49,745 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Packt_2022_Applied_Machine_Learning_and_High-Performance_Comp_Mani_Khanuja-_Farooq_Sabir_9781803237015.pdf
+2024-12-01 16:56:49,745 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2022_Cybersecurity_for_Small_Networks_Seth_Enoka_9781718501485.epub
+2024-12-01 16:56:49,752 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060.epub
+2024-12-01 16:56:49,752 - INFO - Success: Packt_2022_Applied_Machine_Learning_and_High-Performance_Comp_Mani_Khanuja-_Farooq_Sabir_9781803237015
+2024-12-01 16:56:49,752 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060.epub
+2024-12-01 16:56:49,753 - INFO - Success: No_Starch_Press_2021_The_Hardware_Hacking_Handbook_Jasper_van_Woudenberg-_Colin_O'Flynn_9781593278748
+2024-12-01 16:56:49,921 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-12-01 16:56:49,926 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1).epub
+2024-12-01 16:56:49,926 - WARNING - No metadata: pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free
+2024-12-01 16:56:49,926 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1).epub
+2024-12-01 16:56:49,959 - INFO - Found ISBN in DC metadata: 9781718501492
+2024-12-01 16:56:50,040 - INFO - Found ISBN-13 in content: 9781718501485
+2024-12-01 16:56:50,040 - INFO - Found ISBN-13 in content: 9781718501492
+2024-12-01 16:56:50,041 - INFO - Found ISBN-13 in content: 9781718501485
+2024-12-01 16:56:50,041 - INFO - Found ISBN-13 in content: 9781718501492
+2024-12-01 16:56:50,041 - INFO - Found ISBN-13 in content: 9781718501485
+2024-12-01 16:56:50,041 - INFO - Found ISBN-13 in content: 9781718501492
+2024-12-01 16:56:50,041 - INFO - Found ISBN-13 in content: 9781718501485
+2024-12-01 16:56:50,041 - INFO - Found ISBN-13 in content: 9781718501492
+2024-12-01 16:56:50,041 - INFO - Found ISBN-13 in content: 9781718501485
+2024-12-01 16:56:50,041 - INFO - Found ISBN-13 in content: 9781718501492
+2024-12-01 16:56:50,041 - INFO - Found ISBN-10 in content: 2022021005
+2024-12-01 16:56:50,041 - INFO - Found ISBN-10 in content: 2022021006
+2024-12-01 16:56:50,041 - INFO - Found ISBN-10 in content: 9781718501
+2024-12-01 16:56:50,041 - INFO - Found ISBN-10 in content: 9781718501
+2024-12-01 16:56:50,042 - INFO - Found ISBN-10 in content: 2022021005
+2024-12-01 16:56:50,042 - INFO - Found ISBN-10 in content: 2022021006
+2024-12-01 16:56:50,052 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 16:56:50,053 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 16:56:50,054 - INFO - Found ISBN-10 in content: 9781098145
+2024-12-01 16:56:50,097 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 16:56:50,302 - INFO - Found ISBN-10 in content: 1619747519
+2024-12-01 16:56:50,302 - INFO - Found ISBN-10 in content: 1619747519
+2024-12-01 16:56:50,302 - INFO - Found ISBN-10 in content: 1619747519
+2024-12-01 16:56:50,302 - INFO - Found ISBN-10 in content: 1619747520
+2024-12-01 16:56:50,302 - INFO - Found ISBN-10 in content: 1584414232
+2024-12-01 16:56:50,302 - INFO - Found ISBN-10 in content: 1584414237
+2024-12-01 16:56:50,302 - INFO - Found ISBN-10 in content: 1584414242
+2024-12-01 16:56:50,303 - INFO - Found ISBN-10 in content: 1584414247
+2024-12-01 16:56:50,303 - INFO - Found ISBN-10 in content: 1584414248
+2024-12-01 16:56:50,303 - INFO - Found ISBN-10 in content: 1584414254
+2024-12-01 16:56:50,391 - INFO - Found ISBN-10 in content: 1634779305
+2024-12-01 16:56:50,392 - INFO - Found ISBN-10 in content: 1634779305
+2024-12-01 16:56:50,392 - INFO - Found ISBN-10 in content: 0788339744
+2024-12-01 16:56:50,472 - INFO - Found ISBN-10 in content: 1415926535
+2024-12-01 16:56:50,472 - INFO - Found ISBN-10 in content: 1415926535
+2024-12-01 16:56:50,472 - INFO - Found ISBN-10 in content: 7694409323
+2024-12-01 16:56:50,472 - INFO - Found ISBN-10 in content: 0973355292
+2024-12-01 16:56:50,472 - INFO - Found ISBN-10 in content: 0973355292
+2024-12-01 16:56:50,473 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 16:56:50,473 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 16:56:50,473 - INFO - Found ISBN-10 in content: 4123456789
+2024-12-01 16:56:50,473 - INFO - Found ISBN-10 in content: 4123456789
+2024-12-01 16:56:50,473 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 16:56:50,473 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 16:56:50,473 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 16:56:50,564 - INFO - Processed 23 items
+2024-12-01 16:56:50,577 - INFO - Found 15 unique ISBNs: ['0788339744', '1584414232', '1584414237', '1584414242', '1584414247', '1584414248', '1584414254', '1619747519', '1619747520', '1634779305', '2022021005', '2022021006', '9781718501', '9781718501485', '9781718501492']
+2024-12-01 16:56:50,583 - INFO - Extracting metadata from: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2022_Cybersecurity_for_Small_Networks_Seth_Enoka_9781718501485.epub
+2024-12-01 16:56:50,783 - INFO - Found ISBN-10 in content: 7742338443
+2024-12-01 16:56:50,783 - INFO - Found ISBN-10 in content: 1102733054
+2024-12-01 16:56:50,961 - INFO - Found ISBN-10 in content: 6033220602
+2024-12-01 16:56:50,961 - INFO - Found ISBN-10 in content: 2670123361
+2024-12-01 16:56:50,962 - INFO - Found ISBN-10 in content: 2684179187
+2024-12-01 16:56:50,962 - INFO - Found ISBN-10 in content: 6003123012
+2024-12-01 16:56:50,964 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 16:56:50,964 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 16:56:50,964 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 16:56:50,964 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 16:56:50,964 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 16:56:50,964 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 16:56:51,021 - INFO - Processed 16 items
+2024-12-01 16:56:51,035 - INFO - Found 8 unique ISBNs: ['1102733054', '2670123361', '2684179187', '6003123012', '6033220602', '7742338443', '9788555193125', '9788555193149']
+2024-12-01 16:56:51,035 - INFO - Extracting metadata from: /Users/menon/Downloads/0_teste_livros_scan/series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1).epub
+2024-12-01 16:56:51,036 - INFO - Found ISBN-10 in content: 9999999999
+2024-12-01 16:56:51,036 - INFO - Found ISBN-10 in content: 4142135623
+2024-12-01 16:56:51,036 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 16:56:51,036 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 16:56:51,036 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 16:56:51,036 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 16:56:51,036 - INFO - Found ISBN-10 in content: 1844674407
+2024-12-01 16:56:51,036 - INFO - Found ISBN-10 in content: 3709551614
+2024-12-01 16:56:51,302 - INFO - Found ISBN-13 in content: 9792082722375
+2024-12-01 16:56:51,302 - INFO - Found ISBN-10 in content: 0000000840
+2024-12-01 16:56:51,303 - INFO - Found ISBN-10 in content: 0000000840
+2024-12-01 16:56:51,303 - INFO - Found ISBN-10 in content: 4895000000
+2024-12-01 16:56:51,303 - INFO - Found ISBN-10 in content: 7040000000
+2024-12-01 16:56:51,303 - INFO - Found ISBN-10 in content: 6227020800
+2024-12-01 16:56:51,303 - INFO - Found ISBN-10 in content: 5109094217
+2024-12-01 16:56:51,303 - INFO - Found ISBN-10 in content: 1709440000
+2024-12-01 16:56:51,303 - INFO - Found ISBN-10 in content: 9332621544
+2024-12-01 16:56:51,303 - INFO - Found ISBN-10 in content: 3944152681
+2024-12-01 16:56:51,303 - INFO - Found ISBN-10 in content: 6992388562
+2024-12-01 16:56:51,303 - INFO - Found ISBN-10 in content: 6670049071
+2024-12-01 16:56:51,303 - INFO - Found ISBN-10 in content: 8162146859
+2024-12-01 16:56:51,303 - INFO - Found ISBN-10 in content: 2963895217
+2024-12-01 16:56:51,303 - INFO - Found ISBN-10 in content: 5999932299
+2024-12-01 16:56:51,303 - INFO - Found ISBN-10 in content: 1560894146
+2024-12-01 16:56:51,303 - INFO - Found ISBN-10 in content: 1828625369
+2024-12-01 16:56:51,303 - INFO - Found ISBN-10 in content: 7920827223
+2024-12-01 16:56:51,304 - INFO - Found ISBN-10 in content: 7582511852
+2024-12-01 16:56:51,304 - INFO - Found ISBN-10 in content: 1091686400
+2024-12-01 16:56:51,304 - INFO - Found ISBN-10 in content: 0000000000
+2024-12-01 16:56:51,304 - INFO - Found ISBN-10 in content: 1800000000
+2024-12-01 16:56:51,436 - INFO - Found ISBN in DC metadata: 9781718501492
+2024-12-01 16:56:51,437 - INFO - Successfully extracted metadata: {'title': 'Cybersecurity for Small Networks', 'creator': 'Seth Enoka', 'publisher': 'No Starch Press', 'isbn': '9781718501492'}
+2024-12-01 16:56:51,554 - INFO - Found ISBN-10 in content: 2208988800
+2024-12-01 16:56:51,598 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1).epub
+2024-12-01 16:56:51,786 - INFO - Processed 24 items
+2024-12-01 16:56:51,786 - INFO - Found 34 unique ISBNs: ['0000000000', '0000000840', '0973355292', '1091686400', '1415926535', '1560894146', '1709440000', '1800000000', '1828625369', '1844674407', '2208988800', '2963895217', '3709551614', '3944152681', '4012345678', '4123456789', '4142135623', '4895000000', '5109094217', '5999932299', '6227020800', '6670049071', '6992388562', '7040000000', '7582511852', '7694409323', '7920827223', '8162146859', '9223372036', '9332621544', '9781098145', '9781098145538', '9792082722375', '9999999999']
+2024-12-01 16:56:51,786 - INFO - Extracting metadata from: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538.epub
+2024-12-01 16:56:51,826 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 16:56:51,826 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 16:56:51,838 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 16:56:51,838 - INFO - Found ISBN-10 in content: 9781789616
+2024-12-01 16:56:51,852 - INFO - Found ISBN-10 in content: 7742338443
+2024-12-01 16:56:51,852 - INFO - Found ISBN-10 in content: 1102733054
+2024-12-01 16:56:51,957 - INFO - Found ISBN-10 in content: 6033220602
+2024-12-01 16:56:51,959 - INFO - Found ISBN-10 in content: 2670123361
+2024-12-01 16:56:51,959 - INFO - Found ISBN-10 in content: 2684179187
+2024-12-01 16:56:51,959 - INFO - Found ISBN-10 in content: 6003123012
+2024-12-01 16:56:51,964 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 16:56:51,964 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 16:56:51,964 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 16:56:51,964 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 16:56:51,964 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 16:56:51,964 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 16:56:51,966 - INFO - Processed 16 items
+2024-12-01 16:56:51,966 - INFO - Found 8 unique ISBNs: ['1102733054', '2670123361', '2684179187', '6003123012', '6033220602', '7742338443', '9788555193125', '9788555193149']
+2024-12-01 16:56:51,966 - INFO - Found ISBN in content: 9788555193149
+2024-12-01 16:56:51,966 - INFO - Successfully extracted metadata: {'title': 'Series temporais com Prophet: Analise e previsao de dados com Python', 'creator': 'Allan Spadini e Valquiria Alencar', 'isbn': '9788555193149', 'publisher': 'Casa do Código'}
+2024-12-01 16:56:52,026 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538.epub
+2024-12-01 16:56:52,035 - INFO - Found ISBN-10 in content: 7865167308
+2024-12-01 16:56:52,045 - INFO - Found ISBN-10 in content: 8874887488
+2024-12-01 16:56:52,045 - INFO - Found ISBN-10 in content: 2961186622
+2024-12-01 16:56:52,045 - INFO - Found ISBN-10 in content: 1188118811
+2024-12-01 16:56:52,045 - INFO - Found ISBN-10 in content: 1797660478
+2024-12-01 16:56:52,172 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 16:56:52,172 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 16:56:52,172 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 16:56:52,172 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 16:56:52,172 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 16:56:52,172 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 16:56:52,172 - INFO - Found ISBN-10 in content: 9781788836
+2024-12-01 16:56:52,172 - INFO - Found ISBN-10 in content: 9781788398
+2024-12-01 16:56:52,173 - INFO - Processed 222 items
+2024-12-01 16:56:52,173 - INFO - Found 11 unique ISBNs: ['1188118811', '1797660478', '2961186622', '7865167308', '8874887488', '9781788398', '9781788398060', '9781788836', '9781788836067', '9781789616', '9781789616132']
+2024-12-01 16:56:52,173 - INFO - Extracting metadata from: /Users/menon/Downloads/0_teste_livros_scan/Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060.epub
+2024-12-01 16:56:52,199 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 16:56:52,199 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 16:56:52,199 - INFO - Found ISBN-10 in content: 9781098145
+2024-12-01 16:56:52,223 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 16:56:52,424 - INFO - Found ISBN-10 in content: 1415926535
+2024-12-01 16:56:52,424 - INFO - Found ISBN-10 in content: 1415926535
+2024-12-01 16:56:52,424 - INFO - Found ISBN-10 in content: 7694409323
+2024-12-01 16:56:52,424 - INFO - Found ISBN-10 in content: 0973355292
+2024-12-01 16:56:52,424 - INFO - Found ISBN-10 in content: 0973355292
+2024-12-01 16:56:52,425 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 16:56:52,425 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 16:56:52,425 - INFO - Found ISBN-10 in content: 4123456789
+2024-12-01 16:56:52,425 - INFO - Found ISBN-10 in content: 4123456789
+2024-12-01 16:56:52,425 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 16:56:52,425 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 16:56:52,425 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 16:56:52,785 - INFO - Found ISBN-10 in content: 9999999999
+2024-12-01 16:56:52,785 - INFO - Found ISBN-10 in content: 4142135623
+2024-12-01 16:56:52,785 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 16:56:52,785 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 16:56:52,785 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 16:56:52,785 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 16:56:52,785 - INFO - Found ISBN-10 in content: 1844674407
+2024-12-01 16:56:52,785 - INFO - Found ISBN-10 in content: 3709551614
+2024-12-01 16:56:53,050 - INFO - Found ISBN-13 in content: 9792082722375
+2024-12-01 16:56:53,050 - INFO - Found ISBN-10 in content: 0000000840
+2024-12-01 16:56:53,050 - INFO - Found ISBN-10 in content: 0000000840
+2024-12-01 16:56:53,051 - INFO - Found ISBN-10 in content: 4895000000
+2024-12-01 16:56:53,051 - INFO - Found ISBN-10 in content: 7040000000
+2024-12-01 16:56:53,051 - INFO - Found ISBN-10 in content: 6227020800
+2024-12-01 16:56:53,051 - INFO - Found ISBN-10 in content: 5109094217
+2024-12-01 16:56:53,051 - INFO - Found ISBN-10 in content: 1709440000
+2024-12-01 16:56:53,051 - INFO - Found ISBN-10 in content: 9332621544
+2024-12-01 16:56:53,051 - INFO - Found ISBN-10 in content: 3944152681
+2024-12-01 16:56:53,051 - INFO - Found ISBN-10 in content: 6992388562
+2024-12-01 16:56:53,051 - INFO - Found ISBN-10 in content: 6670049071
+2024-12-01 16:56:53,051 - INFO - Found ISBN-10 in content: 8162146859
+2024-12-01 16:56:53,051 - INFO - Found ISBN-10 in content: 2963895217
+2024-12-01 16:56:53,051 - INFO - Found ISBN-10 in content: 5999932299
+2024-12-01 16:56:53,051 - INFO - Found ISBN-10 in content: 1560894146
+2024-12-01 16:56:53,051 - INFO - Found ISBN-10 in content: 1828625369
+2024-12-01 16:56:53,051 - INFO - Found ISBN-10 in content: 7920827223
+2024-12-01 16:56:53,051 - INFO - Found ISBN-10 in content: 7582511852
+2024-12-01 16:56:53,051 - INFO - Found ISBN-10 in content: 1091686400
+2024-12-01 16:56:53,051 - INFO - Found ISBN-10 in content: 0000000000
+2024-12-01 16:56:53,051 - INFO - Found ISBN-10 in content: 1800000000
+2024-12-01 16:56:53,105 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060.epub
+2024-12-01 16:56:53,299 - INFO - Found ISBN-10 in content: 2208988800
+2024-12-01 16:56:53,500 - INFO - Processed 24 items
+2024-12-01 16:56:53,500 - INFO - Found 34 unique ISBNs: ['0000000000', '0000000840', '0973355292', '1091686400', '1415926535', '1560894146', '1709440000', '1800000000', '1828625369', '1844674407', '2208988800', '2963895217', '3709551614', '3944152681', '4012345678', '4123456789', '4142135623', '4895000000', '5109094217', '5999932299', '6227020800', '6670049071', '6992388562', '7040000000', '7582511852', '7694409323', '7920827223', '8162146859', '9223372036', '9332621544', '9781098145', '9781098145538', '9792082722375', '9999999999']
+2024-12-01 16:56:53,522 - INFO - Found ISBN in content: 9781098145538
+2024-12-01 16:56:53,522 - INFO - Successfully extracted metadata: {'title': 'Learning Java', 'creator': 'Marc Loy, Patrick Niemeyer, and Daniel Leuck', 'publisher': "O'Reilly Media, Inc.", 'date': '2023-08-23', 'isbn': '9781098145538'}
+2024-12-01 16:56:53,542 - INFO - Success: OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538
+2024-12-01 16:56:53,542 - INFO - Success: No_Starch_Press_2022_Cybersecurity_for_Small_Networks_Seth_Enoka_9781718501485
+2024-12-01 16:56:53,613 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 16:56:53,613 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 16:56:53,622 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 16:56:53,622 - INFO - Found ISBN-10 in content: 9781789616
+2024-12-01 16:56:53,751 - INFO - Found ISBN-10 in content: 7865167308
+2024-12-01 16:56:53,761 - INFO - Found ISBN-10 in content: 8874887488
+2024-12-01 16:56:53,761 - INFO - Found ISBN-10 in content: 2961186622
+2024-12-01 16:56:53,761 - INFO - Found ISBN-10 in content: 1188118811
+2024-12-01 16:56:53,761 - INFO - Found ISBN-10 in content: 1797660478
+2024-12-01 16:56:53,858 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 16:56:53,858 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 16:56:53,858 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 16:56:53,858 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 16:56:53,858 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 16:56:53,858 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 16:56:53,858 - INFO - Found ISBN-10 in content: 9781788836
+2024-12-01 16:56:53,858 - INFO - Found ISBN-10 in content: 9781788398
+2024-12-01 16:56:53,859 - INFO - Processed 222 items
+2024-12-01 16:56:53,859 - INFO - Found 11 unique ISBNs: ['1188118811', '1797660478', '2961186622', '7865167308', '8874887488', '9781788398', '9781788398060', '9781788836', '9781788836067', '9781789616', '9781789616132']
+2024-12-01 16:56:53,859 - INFO - Found ISBN in content: 9781788836067
+2024-12-01 16:56:53,859 - INFO - Successfully extracted metadata: {'title': 'Hands-On Deep Learning for IoT', 'creator': 'Mohammad Abdur Razzaque, PhD', 'publisher': 'Packt', 'date': '2019-06-27T06:26:31Z', 'isbn': '9781788836067'}
+2024-12-01 16:56:53,861 - INFO - Success: Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060
+2024-12-01 16:56:53,861 - INFO - Success: series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1)
+2024-12-01 16:57:33,388 - INFO - Database initialized successfully with schema verified
+2024-12-01 16:57:33,389 - INFO - Schema verification completed successfully
+2024-12-01 16:57:33,434 - INFO - Extractores disponíveis: pypdf2, pdfplumber, pdfminer, tesseract, pdf2image
+2024-12-01 16:57:33,434 - INFO - Suporte a OCR está disponível
+2024-12-01 16:57:33,435 - INFO - Database initialized successfully with schema verified
+2024-12-01 16:57:33,436 - INFO - Schema verification completed successfully
+2024-12-01 16:57:33,438 - INFO - Found 16 files to process in 1 directories
+2024-12-01 16:57:33,439 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2021_Java_to_Kotlin_Duncan_McGregor-_Nat_Pryce_9781492082279.mobi
+2024-12-01 16:57:33,439 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538.epub
+2024-12-01 16:57:33,439 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2022_Cybersecurity_for_Small_Networks_Seth_Enoka_9781718501485.epub
+2024-12-01 16:57:33,439 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538.epub
+2024-12-01 16:57:33,439 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060.epub
+2024-12-01 16:57:33,439 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2022_Cybersecurity_for_Small_Networks_Seth_Enoka_9781718501485.epub
+2024-12-01 16:57:33,439 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060.epub
+2024-12-01 16:57:33,539 - INFO - Extracting metadata from: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2021_Java_to_Kotlin_Duncan_McGregor-_Nat_Pryce_9781492082279.mobi
+2024-12-01 16:57:33,548 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1).epub
+2024-12-01 16:57:33,548 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1).epub
+2024-12-01 16:57:33,586 - INFO - Success: OReilly_2021_Java_to_Kotlin_Duncan_McGregor-_Nat_Pryce_9781492082279
+2024-12-01 16:57:33,646 - INFO - Found ISBN in DC metadata: 9781718501492
+2024-12-01 16:57:33,685 - INFO - Found ISBN-13 in content: 9781718501485
+2024-12-01 16:57:33,686 - INFO - Found ISBN-10 in content: 7742338443
+2024-12-01 16:57:33,686 - INFO - Found ISBN-13 in content: 9781718501492
+2024-12-01 16:57:33,686 - INFO - Found ISBN-10 in content: 1102733054
+2024-12-01 16:57:33,686 - INFO - Found ISBN-13 in content: 9781718501485
+2024-12-01 16:57:33,687 - INFO - Found ISBN-13 in content: 9781718501492
+2024-12-01 16:57:33,687 - INFO - Found ISBN-13 in content: 9781718501485
+2024-12-01 16:57:33,687 - INFO - Found ISBN-13 in content: 9781718501492
+2024-12-01 16:57:33,687 - INFO - Found ISBN-13 in content: 9781718501485
+2024-12-01 16:57:33,687 - INFO - Found ISBN-13 in content: 9781718501492
+2024-12-01 16:57:33,687 - INFO - Found ISBN-13 in content: 9781718501485
+2024-12-01 16:57:33,687 - INFO - Found ISBN-13 in content: 9781718501492
+2024-12-01 16:57:33,687 - INFO - Found ISBN-10 in content: 2022021005
+2024-12-01 16:57:33,687 - INFO - Found ISBN-10 in content: 2022021006
+2024-12-01 16:57:33,687 - INFO - Found ISBN-10 in content: 9781718501
+2024-12-01 16:57:33,693 - INFO - Found ISBN-10 in content: 9781718501
+2024-12-01 16:57:33,697 - INFO - Found ISBN-10 in content: 2022021005
+2024-12-01 16:57:33,697 - INFO - Found ISBN-10 in content: 2022021006
+2024-12-01 16:57:33,814 - INFO - Found ISBN-10 in content: 6033220602
+2024-12-01 16:57:33,820 - INFO - Found ISBN-10 in content: 2670123361
+2024-12-01 16:57:33,820 - INFO - Found ISBN-10 in content: 2684179187
+2024-12-01 16:57:33,820 - INFO - Found ISBN-10 in content: 6003123012
+2024-12-01 16:57:33,822 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 16:57:33,822 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 16:57:33,822 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 16:57:33,822 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 16:57:33,822 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 16:57:33,822 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 16:57:33,823 - INFO - Processed 16 items
+2024-12-01 16:57:33,823 - INFO - Found 8 unique ISBNs: ['1102733054', '2670123361', '2684179187', '6003123012', '6033220602', '7742338443', '9788555193125', '9788555193149']
+2024-12-01 16:57:33,823 - INFO - Extracting metadata from: /Users/menon/Downloads/0_teste_livros_scan/series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1).epub
+2024-12-01 16:57:33,865 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 16:57:33,866 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 16:57:33,866 - INFO - Found ISBN-10 in content: 9781098145
+2024-12-01 16:57:33,919 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 16:57:33,958 - INFO - Found ISBN-10 in content: 1619747519
+2024-12-01 16:57:33,958 - INFO - Found ISBN-10 in content: 1619747519
+2024-12-01 16:57:33,959 - INFO - Found ISBN-10 in content: 1619747519
+2024-12-01 16:57:33,959 - INFO - Found ISBN-10 in content: 1619747520
+2024-12-01 16:57:33,959 - INFO - Found ISBN-10 in content: 1584414232
+2024-12-01 16:57:33,959 - INFO - Found ISBN-10 in content: 1584414237
+2024-12-01 16:57:33,959 - INFO - Found ISBN-10 in content: 1584414242
+2024-12-01 16:57:33,959 - INFO - Found ISBN-10 in content: 1584414247
+2024-12-01 16:57:33,959 - INFO - Found ISBN-10 in content: 1584414248
+2024-12-01 16:57:33,959 - INFO - Found ISBN-10 in content: 1584414254
+2024-12-01 16:57:34,026 - INFO - Found ISBN-10 in content: 1634779305
+2024-12-01 16:57:34,026 - INFO - Found ISBN-10 in content: 1634779305
+2024-12-01 16:57:34,026 - INFO - Found ISBN-10 in content: 0788339744
+2024-12-01 16:57:34,175 - INFO - Processed 23 items
+2024-12-01 16:57:34,175 - INFO - Found 15 unique ISBNs: ['0788339744', '1584414232', '1584414237', '1584414242', '1584414247', '1584414248', '1584414254', '1619747519', '1619747520', '1634779305', '2022021005', '2022021006', '9781718501', '9781718501485', '9781718501492']
+2024-12-01 16:57:34,175 - INFO - Extracting metadata from: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2022_Cybersecurity_for_Small_Networks_Seth_Enoka_9781718501485.epub
+2024-12-01 16:57:34,305 - INFO - Found ISBN-10 in content: 1415926535
+2024-12-01 16:57:34,305 - INFO - Found ISBN-10 in content: 1415926535
+2024-12-01 16:57:34,305 - INFO - Found ISBN-10 in content: 7694409323
+2024-12-01 16:57:34,305 - INFO - Found ISBN-10 in content: 0973355292
+2024-12-01 16:57:34,306 - INFO - Found ISBN-10 in content: 0973355292
+2024-12-01 16:57:34,306 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 16:57:34,306 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 16:57:34,306 - INFO - Found ISBN-10 in content: 4123456789
+2024-12-01 16:57:34,306 - INFO - Found ISBN-10 in content: 4123456789
+2024-12-01 16:57:34,306 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 16:57:34,306 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 16:57:34,306 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 16:57:34,482 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1).epub
+2024-12-01 16:57:34,643 - INFO - Found ISBN-10 in content: 9999999999
+2024-12-01 16:57:34,643 - INFO - Found ISBN-10 in content: 4142135623
+2024-12-01 16:57:34,643 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 16:57:34,643 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 16:57:34,643 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 16:57:34,643 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 16:57:34,644 - INFO - Found ISBN-10 in content: 1844674407
+2024-12-01 16:57:34,644 - INFO - Found ISBN-10 in content: 3709551614
+2024-12-01 16:57:34,862 - INFO - Found ISBN in DC metadata: 9781718501492
+2024-12-01 16:57:34,868 - INFO - Successfully extracted metadata: {'title': 'Cybersecurity for Small Networks', 'creator': 'Seth Enoka', 'publisher': 'No Starch Press', 'isbn': '9781718501492'}
+2024-12-01 16:57:34,906 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-12-01 16:57:34,911 - INFO - Found ISBN-13 in content: 9792082722375
+2024-12-01 16:57:34,911 - INFO - Found ISBN-10 in content: 0000000840
+2024-12-01 16:57:34,911 - INFO - Found ISBN-10 in content: 0000000840
+2024-12-01 16:57:34,911 - INFO - Found ISBN-10 in content: 4895000000
+2024-12-01 16:57:34,911 - INFO - Found ISBN-10 in content: 7040000000
+2024-12-01 16:57:34,912 - INFO - Found ISBN-10 in content: 6227020800
+2024-12-01 16:57:34,912 - INFO - Found ISBN-10 in content: 5109094217
+2024-12-01 16:57:34,912 - INFO - Found ISBN-10 in content: 1709440000
+2024-12-01 16:57:34,912 - INFO - Found ISBN-10 in content: 9332621544
+2024-12-01 16:57:34,912 - INFO - Found ISBN-10 in content: 3944152681
+2024-12-01 16:57:34,912 - INFO - Found ISBN-10 in content: 6992388562
+2024-12-01 16:57:34,912 - INFO - Found ISBN-10 in content: 6670049071
+2024-12-01 16:57:34,912 - INFO - Found ISBN-10 in content: 8162146859
+2024-12-01 16:57:34,912 - INFO - Found ISBN-10 in content: 2963895217
+2024-12-01 16:57:34,912 - INFO - Found ISBN-10 in content: 5999932299
+2024-12-01 16:57:34,912 - INFO - Found ISBN-10 in content: 1560894146
+2024-12-01 16:57:34,912 - INFO - Found ISBN-10 in content: 1828625369
+2024-12-01 16:57:34,912 - INFO - Found ISBN-10 in content: 7920827223
+2024-12-01 16:57:34,912 - INFO - Found ISBN-10 in content: 7582511852
+2024-12-01 16:57:34,912 - INFO - Found ISBN-10 in content: 1091686400
+2024-12-01 16:57:34,912 - INFO - Found ISBN-10 in content: 0000000000
+2024-12-01 16:57:34,912 - INFO - Found ISBN-10 in content: 1800000000
+2024-12-01 16:57:34,936 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-12-01 16:57:34,939 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_The_Active_Defender_Dr._Catherine_J._Ullman_9781119895213.pdf
+2024-12-01 16:57:35,107 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_The_Active_Defender_Dr._Catherine_J._Ullman_9781119895213.pdf
+2024-12-01 16:57:35,192 - INFO - Found ISBN-10 in content: 2208988800
+2024-12-01 16:57:35,195 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_Software_Transparency_Chris_Hughes-_Tony_Turner_9781394158485.pdf
+2024-12-01 16:57:35,214 - INFO - Found ISBN-10 in content: 7742338443
+2024-12-01 16:57:35,214 - INFO - Found ISBN-10 in content: 1102733054
+2024-12-01 16:57:35,315 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_Software_Transparency_Chris_Hughes-_Tony_Turner_9781394158485.pdf
+2024-12-01 16:57:35,339 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/Hands-On Artificial Intelligence for Banking.pdf
+2024-12-01 16:57:35,545 - INFO - Found ISBN-10 in content: 6033220602
+2024-12-01 16:57:35,546 - INFO - Found ISBN-10 in content: 2670123361
+2024-12-01 16:57:35,551 - INFO - Found ISBN-10 in content: 2684179187
+2024-12-01 16:57:35,556 - INFO - Found ISBN-10 in content: 6003123012
+2024-12-01 16:57:35,557 - INFO - Processed 24 items
+2024-12-01 16:57:35,563 - INFO - Found 34 unique ISBNs: ['0000000000', '0000000840', '0973355292', '1091686400', '1415926535', '1560894146', '1709440000', '1800000000', '1828625369', '1844674407', '2208988800', '2963895217', '3709551614', '3944152681', '4012345678', '4123456789', '4142135623', '4895000000', '5109094217', '5999932299', '6227020800', '6670049071', '6992388562', '7040000000', '7582511852', '7694409323', '7920827223', '8162146859', '9223372036', '9332621544', '9781098145', '9781098145538', '9792082722375', '9999999999']
+2024-12-01 16:57:35,572 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Hands-On Artificial Intelligence for Banking.pdf
+2024-12-01 16:57:35,573 - INFO - Extracting metadata from: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538.epub
+2024-12-01 16:57:35,573 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 16:57:35,573 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 16:57:35,573 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 16:57:35,574 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 16:57:35,574 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 16:57:35,574 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 16:57:35,580 - INFO - Processed 16 items
+2024-12-01 16:57:35,580 - INFO - Found 8 unique ISBNs: ['1102733054', '2670123361', '2684179187', '6003123012', '6033220602', '7742338443', '9788555193125', '9788555193149']
+2024-12-01 16:57:35,583 - INFO - Found ISBN in content: 9788555193149
+2024-12-01 16:57:35,583 - INFO - Successfully extracted metadata: {'title': 'Series temporais com Prophet: Analise e previsao de dados com Python', 'creator': 'Allan Spadini e Valquiria Alencar', 'isbn': '9788555193149', 'publisher': 'Casa do Código'}
+2024-12-01 16:57:35,583 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/OReilly_bash_Cookbook_Carl_Albing-_JP_Vossen_9781491975336.pdf
+2024-12-01 16:57:35,584 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2022_Ansible_Up_and_Running_Bas_Meijer-_Lorin_Hochstein_9781098109158.pdf
+2024-12-01 16:57:35,663 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_bash_Cookbook_Carl_Albing-_JP_Vossen_9781491975336.pdf
+2024-12-01 16:57:35,676 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2022_Ansible_Up_and_Running_Bas_Meijer-_Lorin_Hochstein_9781098109158.pdf
+2024-12-01 16:57:35,679 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/National_Geographic_Books_2021_Bug_Bounty_Bootcamp_Vickie_Li_9781718501546.pdf
+2024-12-01 16:57:35,679 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2020_Java_Performance_Scott_Oaks_9781492056119.pdf
+2024-12-01 16:57:35,748 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 16:57:35,753 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 16:57:35,808 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/National_Geographic_Books_2021_Bug_Bounty_Bootcamp_Vickie_Li_9781718501546.pdf
+2024-12-01 16:57:35,811 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2020_Java_Performance_Scott_Oaks_9781492056119.pdf
+2024-12-01 16:57:35,816 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/Packt_2022_Applied_Machine_Learning_and_High-Performance_Comp_Mani_Khanuja-_Farooq_Sabir_9781803237015.pdf
+2024-12-01 16:57:35,819 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2021_The_Hardware_Hacking_Handbook_Jasper_van_Woudenberg-_Colin_O'Flynn_9781593278748.pdf
+2024-12-01 16:57:35,824 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 16:57:35,824 - INFO - Found ISBN-10 in content: 9781789616
+2024-12-01 16:57:35,891 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2021_The_Hardware_Hacking_Handbook_Jasper_van_Woudenberg-_Colin_O'Flynn_9781593278748.pdf
+2024-12-01 16:57:35,938 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Packt_2022_Applied_Machine_Learning_and_High-Performance_Comp_Mani_Khanuja-_Farooq_Sabir_9781803237015.pdf
+2024-12-01 16:57:35,945 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-12-01 16:57:36,102 - INFO - Found ISBN-10 in content: 7865167308
+2024-12-01 16:57:36,118 - INFO - Found ISBN-10 in content: 8874887488
+2024-12-01 16:57:36,118 - INFO - Found ISBN-10 in content: 2961186622
+2024-12-01 16:57:36,118 - INFO - Found ISBN-10 in content: 1188118811
+2024-12-01 16:57:36,119 - INFO - Found ISBN-10 in content: 1797660478
+2024-12-01 16:57:36,258 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-12-01 16:57:36,350 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 16:57:36,350 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 16:57:36,350 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 16:57:36,350 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 16:57:36,350 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 16:57:36,350 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 16:57:36,351 - INFO - Found ISBN-10 in content: 9781788836
+2024-12-01 16:57:36,351 - INFO - Found ISBN-10 in content: 9781788398
+2024-12-01 16:57:36,351 - INFO - Processed 222 items
+2024-12-01 16:57:36,351 - INFO - Found 11 unique ISBNs: ['1188118811', '1797660478', '2961186622', '7865167308', '8874887488', '9781788398', '9781788398060', '9781788836', '9781788836067', '9781789616', '9781789616132']
+2024-12-01 16:57:36,351 - INFO - Extracting metadata from: /Users/menon/Downloads/0_teste_livros_scan/Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060.epub
+2024-12-01 16:57:36,356 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538.epub
+2024-12-01 16:57:36,393 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 16:57:36,393 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 16:57:36,393 - INFO - Found ISBN-10 in content: 9781098145
+2024-12-01 16:57:36,417 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 16:57:36,619 - INFO - Found ISBN-10 in content: 1415926535
+2024-12-01 16:57:36,619 - INFO - Found ISBN-10 in content: 1415926535
+2024-12-01 16:57:36,620 - INFO - Found ISBN-10 in content: 7694409323
+2024-12-01 16:57:36,620 - INFO - Found ISBN-10 in content: 0973355292
+2024-12-01 16:57:36,620 - INFO - Found ISBN-10 in content: 0973355292
+2024-12-01 16:57:36,620 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 16:57:36,620 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 16:57:36,620 - INFO - Found ISBN-10 in content: 4123456789
+2024-12-01 16:57:36,620 - INFO - Found ISBN-10 in content: 4123456789
+2024-12-01 16:57:36,620 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 16:57:36,620 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 16:57:36,620 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 16:57:36,980 - INFO - Found ISBN-10 in content: 9999999999
+2024-12-01 16:57:36,981 - INFO - Found ISBN-10 in content: 4142135623
+2024-12-01 16:57:36,981 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 16:57:36,981 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 16:57:36,981 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 16:57:36,981 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 16:57:36,981 - INFO - Found ISBN-10 in content: 1844674407
+2024-12-01 16:57:36,981 - INFO - Found ISBN-10 in content: 3709551614
+2024-12-01 16:57:37,172 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060.epub
+2024-12-01 16:57:37,250 - INFO - Found ISBN-13 in content: 9792082722375
+2024-12-01 16:57:37,250 - INFO - Found ISBN-10 in content: 0000000840
+2024-12-01 16:57:37,250 - INFO - Found ISBN-10 in content: 0000000840
+2024-12-01 16:57:37,250 - INFO - Found ISBN-10 in content: 4895000000
+2024-12-01 16:57:37,251 - INFO - Found ISBN-10 in content: 7040000000
+2024-12-01 16:57:37,251 - INFO - Found ISBN-10 in content: 6227020800
+2024-12-01 16:57:37,251 - INFO - Found ISBN-10 in content: 5109094217
+2024-12-01 16:57:37,251 - INFO - Found ISBN-10 in content: 1709440000
+2024-12-01 16:57:37,251 - INFO - Found ISBN-10 in content: 9332621544
+2024-12-01 16:57:37,251 - INFO - Found ISBN-10 in content: 3944152681
+2024-12-01 16:57:37,251 - INFO - Found ISBN-10 in content: 6992388562
+2024-12-01 16:57:37,251 - INFO - Found ISBN-10 in content: 6670049071
+2024-12-01 16:57:37,251 - INFO - Found ISBN-10 in content: 8162146859
+2024-12-01 16:57:37,251 - INFO - Found ISBN-10 in content: 2963895217
+2024-12-01 16:57:37,251 - INFO - Found ISBN-10 in content: 5999932299
+2024-12-01 16:57:37,251 - INFO - Found ISBN-10 in content: 1560894146
+2024-12-01 16:57:37,251 - INFO - Found ISBN-10 in content: 1828625369
+2024-12-01 16:57:37,251 - INFO - Found ISBN-10 in content: 7920827223
+2024-12-01 16:57:37,251 - INFO - Found ISBN-10 in content: 7582511852
+2024-12-01 16:57:37,251 - INFO - Found ISBN-10 in content: 1091686400
+2024-12-01 16:57:37,251 - INFO - Found ISBN-10 in content: 0000000000
+2024-12-01 16:57:37,252 - INFO - Found ISBN-10 in content: 1800000000
+2024-12-01 16:57:37,497 - INFO - Found ISBN-10 in content: 2208988800
+2024-12-01 16:57:37,697 - INFO - Processed 24 items
+2024-12-01 16:57:37,698 - INFO - Found 34 unique ISBNs: ['0000000000', '0000000840', '0973355292', '1091686400', '1415926535', '1560894146', '1709440000', '1800000000', '1828625369', '1844674407', '2208988800', '2963895217', '3709551614', '3944152681', '4012345678', '4123456789', '4142135623', '4895000000', '5109094217', '5999932299', '6227020800', '6670049071', '6992388562', '7040000000', '7582511852', '7694409323', '7920827223', '8162146859', '9223372036', '9332621544', '9781098145', '9781098145538', '9792082722375', '9999999999']
+2024-12-01 16:57:37,720 - INFO - Found ISBN in content: 9781098145538
+2024-12-01 16:57:37,720 - INFO - Successfully extracted metadata: {'title': 'Learning Java', 'creator': 'Marc Loy, Patrick Niemeyer, and Daniel Leuck', 'publisher': "O'Reilly Media, Inc.", 'date': '2023-08-23', 'isbn': '9781098145538'}
+2024-12-01 16:57:37,739 - INFO - Success: OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538
+2024-12-01 16:57:37,739 - INFO - Success: No_Starch_Press_2022_Cybersecurity_for_Small_Networks_Seth_Enoka_9781718501485
+2024-12-01 16:57:37,800 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 16:57:37,800 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 16:57:37,809 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 16:57:37,809 - INFO - Found ISBN-10 in content: 9781789616
+2024-12-01 16:57:37,940 - INFO - Found ISBN-10 in content: 7865167308
+2024-12-01 16:57:37,950 - INFO - Found ISBN-10 in content: 8874887488
+2024-12-01 16:57:37,950 - INFO - Found ISBN-10 in content: 2961186622
+2024-12-01 16:57:37,950 - INFO - Found ISBN-10 in content: 1188118811
+2024-12-01 16:57:37,950 - INFO - Found ISBN-10 in content: 1797660478
+2024-12-01 16:57:38,046 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 16:57:38,047 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 16:57:38,047 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 16:57:38,047 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 16:57:38,047 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 16:57:38,047 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 16:57:38,047 - INFO - Found ISBN-10 in content: 9781788836
+2024-12-01 16:57:38,047 - INFO - Found ISBN-10 in content: 9781788398
+2024-12-01 16:57:38,047 - INFO - Processed 222 items
+2024-12-01 16:57:38,048 - INFO - Found 11 unique ISBNs: ['1188118811', '1797660478', '2961186622', '7865167308', '8874887488', '9781788398', '9781788398060', '9781788836', '9781788836067', '9781789616', '9781789616132']
+2024-12-01 16:57:38,048 - INFO - Found ISBN in content: 9781788836067
+2024-12-01 16:57:38,048 - INFO - Successfully extracted metadata: {'title': 'Hands-On Deep Learning for IoT', 'creator': 'Mohammad Abdur Razzaque, PhD', 'publisher': 'Packt', 'date': '2019-06-27T06:26:31Z', 'isbn': '9781788836067'}
+2024-12-01 16:57:38,050 - INFO - Success: Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060
+2024-12-01 16:57:38,050 - INFO - Success: series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1)
+2024-12-01 16:57:38,050 - WARNING - No metadata: computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy
+2024-12-01 16:57:38,050 - INFO - Success: Wiley_2023_The_Active_Defender_Dr._Catherine_J._Ullman_9781119895213
+2024-12-01 16:57:38,050 - INFO - Success: Wiley_2023_Software_Transparency_Chris_Hughes-_Tony_Turner_9781394158485
+2024-12-01 16:57:38,050 - WARNING - No metadata: Hands-On Artificial Intelligence for Banking
+2024-12-01 16:57:38,050 - INFO - Success: OReilly_bash_Cookbook_Carl_Albing-_JP_Vossen_9781491975336
+2024-12-01 16:57:38,050 - INFO - Success: OReilly_2022_Ansible_Up_and_Running_Bas_Meijer-_Lorin_Hochstein_9781098109158
+2024-12-01 16:57:38,050 - INFO - Success: National_Geographic_Books_2021_Bug_Bounty_Bootcamp_Vickie_Li_9781718501546
+2024-12-01 16:57:38,050 - INFO - Success: OReilly_2020_Java_Performance_Scott_Oaks_9781492056119
+2024-12-01 16:57:38,050 - INFO - Success: Packt_2022_Applied_Machine_Learning_and_High-Performance_Comp_Mani_Khanuja-_Farooq_Sabir_9781803237015
+2024-12-01 16:57:38,050 - INFO - Success: No_Starch_Press_2021_The_Hardware_Hacking_Handbook_Jasper_van_Woudenberg-_Colin_O'Flynn_9781593278748
+2024-12-01 16:57:38,050 - WARNING - No metadata: pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free
+2024-12-01 17:17:26,263 - INFO - Database initialized successfully with schema verified
+2024-12-01 17:17:26,264 - INFO - Schema verification completed successfully
+2024-12-01 17:17:26,330 - INFO - Extractores disponíveis: pypdf2, pdfplumber, pdfminer, tesseract, pdf2image
+2024-12-01 17:17:26,330 - INFO - Suporte a OCR está disponível
+2024-12-01 17:17:26,331 - INFO - Database initialized successfully with schema verified
+2024-12-01 17:17:26,332 - INFO - Schema verification completed successfully
+2024-12-01 17:17:26,365 - INFO - Found 16 files to process in 1 directories
+2024-12-01 17:17:26,366 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2021_Java_to_Kotlin_Duncan_McGregor-_Nat_Pryce_9781492082279.mobi
+2024-12-01 17:17:26,366 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-12-01 17:17:26,366 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_The_Active_Defender_Dr._Catherine_J._Ullman_9781119895213.pdf
+2024-12-01 17:17:26,366 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_Software_Transparency_Chris_Hughes-_Tony_Turner_9781394158485.pdf
+2024-12-01 17:17:26,489 - INFO - Extracting metadata from: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2021_Java_to_Kotlin_Duncan_McGregor-_Nat_Pryce_9781492082279.mobi
+2024-12-01 17:17:26,504 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/Hands-On Artificial Intelligence for Banking.pdf
+2024-12-01 17:17:26,520 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-12-01 17:17:26,534 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_Software_Transparency_Chris_Hughes-_Tony_Turner_9781394158485.pdf
+2024-12-01 17:17:26,545 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_The_Active_Defender_Dr._Catherine_J._Ullman_9781119895213.pdf
+2024-12-01 17:17:26,560 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/OReilly_bash_Cookbook_Carl_Albing-_JP_Vossen_9781491975336.pdf
+2024-12-01 17:17:26,560 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2022_Ansible_Up_and_Running_Bas_Meijer-_Lorin_Hochstein_9781098109158.pdf
+2024-12-01 17:17:26,565 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/National_Geographic_Books_2021_Bug_Bounty_Bootcamp_Vickie_Li_9781718501546.pdf
+2024-12-01 17:17:26,584 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Hands-On Artificial Intelligence for Banking.pdf
+2024-12-01 17:17:26,612 - INFO - Success: OReilly_2021_Java_to_Kotlin_Duncan_McGregor-_Nat_Pryce_9781492082279
+2024-12-01 17:17:26,615 - WARNING - No metadata: computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy
+2024-12-01 17:17:26,616 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2020_Java_Performance_Scott_Oaks_9781492056119.pdf
+2024-12-01 17:17:26,616 - INFO - Success: Wiley_2023_The_Active_Defender_Dr._Catherine_J._Ullman_9781119895213
+2024-12-01 17:17:26,634 - INFO - Success: Wiley_2023_Software_Transparency_Chris_Hughes-_Tony_Turner_9781394158485
+2024-12-01 17:17:26,640 - WARNING - No metadata: Hands-On Artificial Intelligence for Banking
+2024-12-01 17:17:26,671 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_bash_Cookbook_Carl_Albing-_JP_Vossen_9781491975336.pdf
+2024-12-01 17:17:26,742 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/National_Geographic_Books_2021_Bug_Bounty_Bootcamp_Vickie_Li_9781718501546.pdf
+2024-12-01 17:17:26,743 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/Packt_2022_Applied_Machine_Learning_and_High-Performance_Comp_Mani_Khanuja-_Farooq_Sabir_9781803237015.pdf
+2024-12-01 17:17:26,744 - INFO - Success: OReilly_bash_Cookbook_Carl_Albing-_JP_Vossen_9781491975336
+2024-12-01 17:17:26,780 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2020_Java_Performance_Scott_Oaks_9781492056119.pdf
+2024-12-01 17:17:26,789 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2022_Ansible_Up_and_Running_Bas_Meijer-_Lorin_Hochstein_9781098109158.pdf
+2024-12-01 17:17:26,789 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2021_The_Hardware_Hacking_Handbook_Jasper_van_Woudenberg-_Colin_O'Flynn_9781593278748.pdf
+2024-12-01 17:17:26,792 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-12-01 17:17:26,793 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538.epub
+2024-12-01 17:17:26,793 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538.epub
+2024-12-01 17:17:26,793 - INFO - Success: OReilly_2022_Ansible_Up_and_Running_Bas_Meijer-_Lorin_Hochstein_9781098109158
+2024-12-01 17:17:26,793 - INFO - Success: National_Geographic_Books_2021_Bug_Bounty_Bootcamp_Vickie_Li_9781718501546
+2024-12-01 17:17:26,794 - INFO - Success: OReilly_2020_Java_Performance_Scott_Oaks_9781492056119
+2024-12-01 17:17:26,851 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2021_The_Hardware_Hacking_Handbook_Jasper_van_Woudenberg-_Colin_O'Flynn_9781593278748.pdf
+2024-12-01 17:17:26,905 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2022_Cybersecurity_for_Small_Networks_Seth_Enoka_9781718501485.epub
+2024-12-01 17:17:26,914 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2022_Cybersecurity_for_Small_Networks_Seth_Enoka_9781718501485.epub
+2024-12-01 17:17:26,930 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Packt_2022_Applied_Machine_Learning_and_High-Performance_Comp_Mani_Khanuja-_Farooq_Sabir_9781803237015.pdf
+2024-12-01 17:17:26,937 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060.epub
+2024-12-01 17:17:26,937 - INFO - Success: Packt_2022_Applied_Machine_Learning_and_High-Performance_Comp_Mani_Khanuja-_Farooq_Sabir_9781803237015
+2024-12-01 17:17:26,937 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060.epub
+2024-12-01 17:17:26,937 - INFO - Success: No_Starch_Press_2021_The_Hardware_Hacking_Handbook_Jasper_van_Woudenberg-_Colin_O'Flynn_9781593278748
+2024-12-01 17:17:27,109 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-12-01 17:17:27,114 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1).epub
+2024-12-01 17:17:27,115 - WARNING - No metadata: pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free
+2024-12-01 17:17:27,115 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1).epub
+2024-12-01 17:17:27,167 - INFO - Found ISBN in DC metadata: 9781718501492
+2024-12-01 17:17:27,195 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 17:17:27,195 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 17:17:27,196 - INFO - Found ISBN-13 in content: 9781718501485
+2024-12-01 17:17:27,196 - INFO - Found ISBN-10 in content: 9781098145
+2024-12-01 17:17:27,196 - INFO - Found ISBN-13 in content: 9781718501492
+2024-12-01 17:17:27,196 - INFO - Found ISBN-13 in content: 9781718501485
+2024-12-01 17:17:27,196 - INFO - Found ISBN-13 in content: 9781718501492
+2024-12-01 17:17:27,197 - INFO - Found ISBN-13 in content: 9781718501485
+2024-12-01 17:17:27,197 - INFO - Found ISBN-13 in content: 9781718501492
+2024-12-01 17:17:27,197 - INFO - Found ISBN-13 in content: 9781718501485
+2024-12-01 17:17:27,197 - INFO - Found ISBN-13 in content: 9781718501492
+2024-12-01 17:17:27,197 - INFO - Found ISBN-13 in content: 9781718501485
+2024-12-01 17:17:27,197 - INFO - Found ISBN-13 in content: 9781718501492
+2024-12-01 17:17:27,197 - INFO - Found ISBN-10 in content: 2022021005
+2024-12-01 17:17:27,197 - INFO - Found ISBN-10 in content: 2022021006
+2024-12-01 17:17:27,197 - INFO - Found ISBN-10 in content: 9781718501
+2024-12-01 17:17:27,197 - INFO - Found ISBN-10 in content: 9781718501
+2024-12-01 17:17:27,197 - INFO - Found ISBN-10 in content: 2022021005
+2024-12-01 17:17:27,197 - INFO - Found ISBN-10 in content: 2022021006
+2024-12-01 17:17:27,222 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 17:17:27,440 - INFO - Found ISBN-10 in content: 1619747519
+2024-12-01 17:17:27,440 - INFO - Found ISBN-10 in content: 1619747519
+2024-12-01 17:17:27,440 - INFO - Found ISBN-10 in content: 1619747519
+2024-12-01 17:17:27,440 - INFO - Found ISBN-10 in content: 1619747520
+2024-12-01 17:17:27,440 - INFO - Found ISBN-10 in content: 1584414232
+2024-12-01 17:17:27,440 - INFO - Found ISBN-10 in content: 1584414237
+2024-12-01 17:17:27,440 - INFO - Found ISBN-10 in content: 1584414242
+2024-12-01 17:17:27,440 - INFO - Found ISBN-10 in content: 1584414247
+2024-12-01 17:17:27,440 - INFO - Found ISBN-10 in content: 1584414248
+2024-12-01 17:17:27,440 - INFO - Found ISBN-10 in content: 1584414254
+2024-12-01 17:17:27,490 - INFO - Found ISBN-10 in content: 1634779305
+2024-12-01 17:17:27,527 - INFO - Found ISBN-10 in content: 1634779305
+2024-12-01 17:17:27,533 - INFO - Found ISBN-10 in content: 0788339744
+2024-12-01 17:17:27,609 - INFO - Found ISBN-10 in content: 1415926535
+2024-12-01 17:17:27,610 - INFO - Found ISBN-10 in content: 1415926535
+2024-12-01 17:17:27,610 - INFO - Found ISBN-10 in content: 7694409323
+2024-12-01 17:17:27,610 - INFO - Found ISBN-10 in content: 0973355292
+2024-12-01 17:17:27,610 - INFO - Found ISBN-10 in content: 0973355292
+2024-12-01 17:17:27,610 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:17:27,610 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:17:27,610 - INFO - Found ISBN-10 in content: 4123456789
+2024-12-01 17:17:27,610 - INFO - Found ISBN-10 in content: 4123456789
+2024-12-01 17:17:27,610 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:17:27,610 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:17:27,610 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:17:27,731 - INFO - Processed 23 items
+2024-12-01 17:17:27,779 - INFO - Found 15 unique ISBNs: ['0788339744', '1584414232', '1584414237', '1584414242', '1584414247', '1584414248', '1584414254', '1619747519', '1619747520', '1634779305', '2022021005', '2022021006', '9781718501', '9781718501485', '9781718501492']
+2024-12-01 17:17:27,792 - INFO - Extracting metadata from: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2022_Cybersecurity_for_Small_Networks_Seth_Enoka_9781718501485.epub
+2024-12-01 17:17:27,878 - INFO - Found ISBN-10 in content: 7742338443
+2024-12-01 17:17:27,883 - INFO - Found ISBN-10 in content: 1102733054
+2024-12-01 17:17:28,079 - INFO - Found ISBN-10 in content: 6033220602
+2024-12-01 17:17:28,079 - INFO - Found ISBN-10 in content: 2670123361
+2024-12-01 17:17:28,079 - INFO - Found ISBN-10 in content: 2684179187
+2024-12-01 17:17:28,079 - INFO - Found ISBN-10 in content: 6003123012
+2024-12-01 17:17:28,081 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 17:17:28,081 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 17:17:28,081 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 17:17:28,081 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 17:17:28,082 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 17:17:28,082 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 17:17:28,082 - INFO - Processed 16 items
+2024-12-01 17:17:28,082 - INFO - Found 8 unique ISBNs: ['1102733054', '2670123361', '2684179187', '6003123012', '6033220602', '7742338443', '9788555193125', '9788555193149']
+2024-12-01 17:17:28,082 - INFO - Extracting metadata from: /Users/menon/Downloads/0_teste_livros_scan/series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1).epub
+2024-12-01 17:17:28,157 - INFO - Found ISBN-10 in content: 9999999999
+2024-12-01 17:17:28,157 - INFO - Found ISBN-10 in content: 4142135623
+2024-12-01 17:17:28,158 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 17:17:28,158 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 17:17:28,158 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 17:17:28,158 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 17:17:28,158 - INFO - Found ISBN-10 in content: 1844674407
+2024-12-01 17:17:28,158 - INFO - Found ISBN-10 in content: 3709551614
+2024-12-01 17:17:28,424 - INFO - Found ISBN-13 in content: 9792082722375
+2024-12-01 17:17:28,424 - INFO - Found ISBN-10 in content: 0000000840
+2024-12-01 17:17:28,424 - INFO - Found ISBN-10 in content: 0000000840
+2024-12-01 17:17:28,424 - INFO - Found ISBN-10 in content: 4895000000
+2024-12-01 17:17:28,424 - INFO - Found ISBN-10 in content: 7040000000
+2024-12-01 17:17:28,424 - INFO - Found ISBN-10 in content: 6227020800
+2024-12-01 17:17:28,424 - INFO - Found ISBN-10 in content: 5109094217
+2024-12-01 17:17:28,424 - INFO - Found ISBN-10 in content: 1709440000
+2024-12-01 17:17:28,425 - INFO - Found ISBN-10 in content: 9332621544
+2024-12-01 17:17:28,425 - INFO - Found ISBN-10 in content: 3944152681
+2024-12-01 17:17:28,425 - INFO - Found ISBN-10 in content: 6992388562
+2024-12-01 17:17:28,425 - INFO - Found ISBN-10 in content: 6670049071
+2024-12-01 17:17:28,425 - INFO - Found ISBN-10 in content: 8162146859
+2024-12-01 17:17:28,425 - INFO - Found ISBN-10 in content: 2963895217
+2024-12-01 17:17:28,425 - INFO - Found ISBN-10 in content: 5999932299
+2024-12-01 17:17:28,425 - INFO - Found ISBN-10 in content: 1560894146
+2024-12-01 17:17:28,425 - INFO - Found ISBN-10 in content: 1828625369
+2024-12-01 17:17:28,425 - INFO - Found ISBN-10 in content: 7920827223
+2024-12-01 17:17:28,425 - INFO - Found ISBN-10 in content: 7582511852
+2024-12-01 17:17:28,425 - INFO - Found ISBN-10 in content: 1091686400
+2024-12-01 17:17:28,425 - INFO - Found ISBN-10 in content: 0000000000
+2024-12-01 17:17:28,425 - INFO - Found ISBN-10 in content: 1800000000
+2024-12-01 17:17:28,518 - INFO - Found ISBN in DC metadata: 9781718501492
+2024-12-01 17:17:28,530 - INFO - Successfully extracted metadata: {'title': 'Cybersecurity for Small Networks', 'creator': 'Seth Enoka', 'publisher': 'No Starch Press', 'isbn': '9781718501492'}
+2024-12-01 17:17:28,620 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1).epub
+2024-12-01 17:17:28,680 - INFO - Found ISBN-10 in content: 2208988800
+2024-12-01 17:17:28,911 - INFO - Processed 24 items
+2024-12-01 17:17:28,911 - INFO - Found 34 unique ISBNs: ['0000000000', '0000000840', '0973355292', '1091686400', '1415926535', '1560894146', '1709440000', '1800000000', '1828625369', '1844674407', '2208988800', '2963895217', '3709551614', '3944152681', '4012345678', '4123456789', '4142135623', '4895000000', '5109094217', '5999932299', '6227020800', '6670049071', '6992388562', '7040000000', '7582511852', '7694409323', '7920827223', '8162146859', '9223372036', '9332621544', '9781098145', '9781098145538', '9792082722375', '9999999999']
+2024-12-01 17:17:28,911 - INFO - Extracting metadata from: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538.epub
+2024-12-01 17:17:28,946 - INFO - Found ISBN-10 in content: 7742338443
+2024-12-01 17:17:28,946 - INFO - Found ISBN-10 in content: 1102733054
+2024-12-01 17:17:29,007 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 17:17:29,007 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 17:17:29,054 - INFO - Found ISBN-10 in content: 6033220602
+2024-12-01 17:17:29,056 - INFO - Found ISBN-10 in content: 2670123361
+2024-12-01 17:17:29,056 - INFO - Found ISBN-10 in content: 2684179187
+2024-12-01 17:17:29,056 - INFO - Found ISBN-10 in content: 6003123012
+2024-12-01 17:17:29,059 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 17:17:29,059 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 17:17:29,059 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 17:17:29,059 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 17:17:29,060 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 17:17:29,060 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 17:17:29,061 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 17:17:29,061 - INFO - Found ISBN-10 in content: 9781789616
+2024-12-01 17:17:29,061 - INFO - Processed 16 items
+2024-12-01 17:17:29,061 - INFO - Found 8 unique ISBNs: ['1102733054', '2670123361', '2684179187', '6003123012', '6033220602', '7742338443', '9788555193125', '9788555193149']
+2024-12-01 17:17:29,063 - INFO - Found ISBN in content: 9788555193149
+2024-12-01 17:17:29,063 - INFO - Successfully extracted metadata: {'title': 'Series temporais com Prophet: Analise e previsao de dados com Python', 'creator': 'Allan Spadini e Valquiria Alencar', 'isbn': '9788555193149', 'publisher': 'Casa do Código'}
+2024-12-01 17:17:29,149 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538.epub
+2024-12-01 17:17:29,157 - INFO - Found ISBN-10 in content: 7865167308
+2024-12-01 17:17:29,167 - INFO - Found ISBN-10 in content: 8874887488
+2024-12-01 17:17:29,167 - INFO - Found ISBN-10 in content: 2961186622
+2024-12-01 17:17:29,167 - INFO - Found ISBN-10 in content: 1188118811
+2024-12-01 17:17:29,167 - INFO - Found ISBN-10 in content: 1797660478
+2024-12-01 17:17:29,294 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 17:17:29,294 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 17:17:29,294 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 17:17:29,294 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 17:17:29,294 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 17:17:29,294 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 17:17:29,294 - INFO - Found ISBN-10 in content: 9781788836
+2024-12-01 17:17:29,294 - INFO - Found ISBN-10 in content: 9781788398
+2024-12-01 17:17:29,295 - INFO - Processed 222 items
+2024-12-01 17:17:29,295 - INFO - Found 11 unique ISBNs: ['1188118811', '1797660478', '2961186622', '7865167308', '8874887488', '9781788398', '9781788398060', '9781788836', '9781788836067', '9781789616', '9781789616132']
+2024-12-01 17:17:29,295 - INFO - Extracting metadata from: /Users/menon/Downloads/0_teste_livros_scan/Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060.epub
+2024-12-01 17:17:29,321 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 17:17:29,321 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 17:17:29,321 - INFO - Found ISBN-10 in content: 9781098145
+2024-12-01 17:17:29,344 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 17:17:29,546 - INFO - Found ISBN-10 in content: 1415926535
+2024-12-01 17:17:29,546 - INFO - Found ISBN-10 in content: 1415926535
+2024-12-01 17:17:29,546 - INFO - Found ISBN-10 in content: 7694409323
+2024-12-01 17:17:29,546 - INFO - Found ISBN-10 in content: 0973355292
+2024-12-01 17:17:29,546 - INFO - Found ISBN-10 in content: 0973355292
+2024-12-01 17:17:29,546 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:17:29,546 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:17:29,546 - INFO - Found ISBN-10 in content: 4123456789
+2024-12-01 17:17:29,546 - INFO - Found ISBN-10 in content: 4123456789
+2024-12-01 17:17:29,546 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:17:29,546 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:17:29,546 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:17:29,908 - INFO - Found ISBN-10 in content: 9999999999
+2024-12-01 17:17:29,908 - INFO - Found ISBN-10 in content: 4142135623
+2024-12-01 17:17:29,908 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 17:17:29,908 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 17:17:29,908 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 17:17:29,908 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 17:17:29,908 - INFO - Found ISBN-10 in content: 1844674407
+2024-12-01 17:17:29,908 - INFO - Found ISBN-10 in content: 3709551614
+2024-12-01 17:17:30,175 - INFO - Found ISBN-13 in content: 9792082722375
+2024-12-01 17:17:30,175 - INFO - Found ISBN-10 in content: 0000000840
+2024-12-01 17:17:30,175 - INFO - Found ISBN-10 in content: 0000000840
+2024-12-01 17:17:30,175 - INFO - Found ISBN-10 in content: 4895000000
+2024-12-01 17:17:30,175 - INFO - Found ISBN-10 in content: 7040000000
+2024-12-01 17:17:30,175 - INFO - Found ISBN-10 in content: 6227020800
+2024-12-01 17:17:30,175 - INFO - Found ISBN-10 in content: 5109094217
+2024-12-01 17:17:30,175 - INFO - Found ISBN-10 in content: 1709440000
+2024-12-01 17:17:30,175 - INFO - Found ISBN-10 in content: 9332621544
+2024-12-01 17:17:30,175 - INFO - Found ISBN-10 in content: 3944152681
+2024-12-01 17:17:30,176 - INFO - Found ISBN-10 in content: 6992388562
+2024-12-01 17:17:30,176 - INFO - Found ISBN-10 in content: 6670049071
+2024-12-01 17:17:30,176 - INFO - Found ISBN-10 in content: 8162146859
+2024-12-01 17:17:30,176 - INFO - Found ISBN-10 in content: 2963895217
+2024-12-01 17:17:30,176 - INFO - Found ISBN-10 in content: 5999932299
+2024-12-01 17:17:30,176 - INFO - Found ISBN-10 in content: 1560894146
+2024-12-01 17:17:30,176 - INFO - Found ISBN-10 in content: 1828625369
+2024-12-01 17:17:30,176 - INFO - Found ISBN-10 in content: 7920827223
+2024-12-01 17:17:30,176 - INFO - Found ISBN-10 in content: 7582511852
+2024-12-01 17:17:30,176 - INFO - Found ISBN-10 in content: 1091686400
+2024-12-01 17:17:30,176 - INFO - Found ISBN-10 in content: 0000000000
+2024-12-01 17:17:30,176 - INFO - Found ISBN-10 in content: 1800000000
+2024-12-01 17:17:30,236 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060.epub
+2024-12-01 17:17:30,423 - INFO - Found ISBN-10 in content: 2208988800
+2024-12-01 17:17:30,624 - INFO - Processed 24 items
+2024-12-01 17:17:30,625 - INFO - Found 34 unique ISBNs: ['0000000000', '0000000840', '0973355292', '1091686400', '1415926535', '1560894146', '1709440000', '1800000000', '1828625369', '1844674407', '2208988800', '2963895217', '3709551614', '3944152681', '4012345678', '4123456789', '4142135623', '4895000000', '5109094217', '5999932299', '6227020800', '6670049071', '6992388562', '7040000000', '7582511852', '7694409323', '7920827223', '8162146859', '9223372036', '9332621544', '9781098145', '9781098145538', '9792082722375', '9999999999']
+2024-12-01 17:17:30,646 - INFO - Found ISBN in content: 9781098145538
+2024-12-01 17:17:30,646 - INFO - Successfully extracted metadata: {'title': 'Learning Java', 'creator': 'Marc Loy, Patrick Niemeyer, and Daniel Leuck', 'publisher': "O'Reilly Media, Inc.", 'date': '2023-08-23', 'isbn': '9781098145538'}
+2024-12-01 17:17:30,666 - INFO - Success: OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538
+2024-12-01 17:17:30,666 - INFO - Success: No_Starch_Press_2022_Cybersecurity_for_Small_Networks_Seth_Enoka_9781718501485
+2024-12-01 17:17:30,741 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 17:17:30,741 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 17:17:30,750 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 17:17:30,750 - INFO - Found ISBN-10 in content: 9781789616
+2024-12-01 17:17:30,879 - INFO - Found ISBN-10 in content: 7865167308
+2024-12-01 17:17:30,889 - INFO - Found ISBN-10 in content: 8874887488
+2024-12-01 17:17:30,889 - INFO - Found ISBN-10 in content: 2961186622
+2024-12-01 17:17:30,889 - INFO - Found ISBN-10 in content: 1188118811
+2024-12-01 17:17:30,889 - INFO - Found ISBN-10 in content: 1797660478
+2024-12-01 17:17:30,986 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 17:17:30,986 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 17:17:30,986 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 17:17:30,986 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 17:17:30,986 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 17:17:30,986 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 17:17:30,986 - INFO - Found ISBN-10 in content: 9781788836
+2024-12-01 17:17:30,986 - INFO - Found ISBN-10 in content: 9781788398
+2024-12-01 17:17:30,986 - INFO - Processed 222 items
+2024-12-01 17:17:30,986 - INFO - Found 11 unique ISBNs: ['1188118811', '1797660478', '2961186622', '7865167308', '8874887488', '9781788398', '9781788398060', '9781788836', '9781788836067', '9781789616', '9781789616132']
+2024-12-01 17:17:30,987 - INFO - Found ISBN in content: 9781788836067
+2024-12-01 17:17:30,987 - INFO - Successfully extracted metadata: {'title': 'Hands-On Deep Learning for IoT', 'creator': 'Mohammad Abdur Razzaque, PhD', 'publisher': 'Packt', 'date': '2019-06-27T06:26:31Z', 'isbn': '9781788836067'}
+2024-12-01 17:17:30,988 - INFO - Success: Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060
+2024-12-01 17:17:30,988 - INFO - Success: series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1)
+2024-12-01 17:17:53,342 - INFO - Database initialized successfully with schema verified
+2024-12-01 17:17:53,342 - INFO - Schema verification completed successfully
+2024-12-01 17:17:53,381 - INFO - Extractores disponíveis: pypdf2, pdfplumber, pdfminer, tesseract, pdf2image
+2024-12-01 17:17:53,381 - INFO - Suporte a OCR está disponível
+2024-12-01 17:17:53,382 - INFO - Database initialized successfully with schema verified
+2024-12-01 17:17:53,383 - INFO - Schema verification completed successfully
+2024-12-01 17:17:53,384 - INFO - Found 16 files to process in 1 directories
+2024-12-01 17:17:53,385 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538.epub
+2024-12-01 17:17:53,385 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2022_Cybersecurity_for_Small_Networks_Seth_Enoka_9781718501485.epub
+2024-12-01 17:17:53,385 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538.epub
+2024-12-01 17:17:53,385 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060.epub
+2024-12-01 17:17:53,385 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2022_Cybersecurity_for_Small_Networks_Seth_Enoka_9781718501485.epub
+2024-12-01 17:17:53,385 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1).epub
+2024-12-01 17:17:53,386 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060.epub
+2024-12-01 17:17:53,386 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1).epub
+2024-12-01 17:17:53,487 - INFO - Found ISBN in DC metadata: 9781718501492
+2024-12-01 17:17:53,524 - INFO - Found ISBN-10 in content: 7742338443
+2024-12-01 17:17:53,525 - INFO - Found ISBN-10 in content: 1102733054
+2024-12-01 17:17:53,527 - INFO - Found ISBN-13 in content: 9781718501485
+2024-12-01 17:17:53,527 - INFO - Found ISBN-13 in content: 9781718501492
+2024-12-01 17:17:53,527 - INFO - Found ISBN-13 in content: 9781718501485
+2024-12-01 17:17:53,527 - INFO - Found ISBN-13 in content: 9781718501492
+2024-12-01 17:17:53,534 - INFO - Found ISBN-13 in content: 9781718501485
+2024-12-01 17:17:53,537 - INFO - Found ISBN-13 in content: 9781718501492
+2024-12-01 17:17:53,537 - INFO - Found ISBN-13 in content: 9781718501485
+2024-12-01 17:17:53,539 - INFO - Found ISBN-13 in content: 9781718501492
+2024-12-01 17:17:53,539 - INFO - Found ISBN-13 in content: 9781718501485
+2024-12-01 17:17:53,540 - INFO - Found ISBN-13 in content: 9781718501492
+2024-12-01 17:17:53,540 - INFO - Found ISBN-10 in content: 2022021005
+2024-12-01 17:17:53,540 - INFO - Found ISBN-10 in content: 2022021006
+2024-12-01 17:17:53,540 - INFO - Found ISBN-10 in content: 9781718501
+2024-12-01 17:17:53,540 - INFO - Found ISBN-10 in content: 9781718501
+2024-12-01 17:17:53,540 - INFO - Found ISBN-10 in content: 2022021005
+2024-12-01 17:17:53,546 - INFO - Found ISBN-10 in content: 2022021006
+2024-12-01 17:17:53,654 - INFO - Found ISBN-10 in content: 6033220602
+2024-12-01 17:17:53,654 - INFO - Found ISBN-10 in content: 2670123361
+2024-12-01 17:17:53,654 - INFO - Found ISBN-10 in content: 2684179187
+2024-12-01 17:17:53,660 - INFO - Found ISBN-10 in content: 6003123012
+2024-12-01 17:17:53,662 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 17:17:53,662 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 17:17:53,662 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 17:17:53,663 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 17:17:53,663 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 17:17:53,663 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 17:17:53,663 - INFO - Processed 16 items
+2024-12-01 17:17:53,663 - INFO - Found 8 unique ISBNs: ['1102733054', '2670123361', '2684179187', '6003123012', '6033220602', '7742338443', '9788555193125', '9788555193149']
+2024-12-01 17:17:53,663 - INFO - Extracting metadata from: /Users/menon/Downloads/0_teste_livros_scan/series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1).epub
+2024-12-01 17:17:53,704 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 17:17:53,704 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 17:17:53,704 - INFO - Found ISBN-10 in content: 9781098145
+2024-12-01 17:17:53,757 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 17:17:53,797 - INFO - Found ISBN-10 in content: 1619747519
+2024-12-01 17:17:53,797 - INFO - Found ISBN-10 in content: 1619747519
+2024-12-01 17:17:53,797 - INFO - Found ISBN-10 in content: 1619747519
+2024-12-01 17:17:53,797 - INFO - Found ISBN-10 in content: 1619747520
+2024-12-01 17:17:53,797 - INFO - Found ISBN-10 in content: 1584414232
+2024-12-01 17:17:53,797 - INFO - Found ISBN-10 in content: 1584414237
+2024-12-01 17:17:53,797 - INFO - Found ISBN-10 in content: 1584414242
+2024-12-01 17:17:53,798 - INFO - Found ISBN-10 in content: 1584414247
+2024-12-01 17:17:53,798 - INFO - Found ISBN-10 in content: 1584414248
+2024-12-01 17:17:53,798 - INFO - Found ISBN-10 in content: 1584414254
+2024-12-01 17:17:53,864 - INFO - Found ISBN-10 in content: 1634779305
+2024-12-01 17:17:53,865 - INFO - Found ISBN-10 in content: 1634779305
+2024-12-01 17:17:53,865 - INFO - Found ISBN-10 in content: 0788339744
+2024-12-01 17:17:54,014 - INFO - Processed 23 items
+2024-12-01 17:17:54,015 - INFO - Found 15 unique ISBNs: ['0788339744', '1584414232', '1584414237', '1584414242', '1584414247', '1584414248', '1584414254', '1619747519', '1619747520', '1634779305', '2022021005', '2022021006', '9781718501', '9781718501485', '9781718501492']
+2024-12-01 17:17:54,015 - INFO - Extracting metadata from: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2022_Cybersecurity_for_Small_Networks_Seth_Enoka_9781718501485.epub
+2024-12-01 17:17:54,145 - INFO - Found ISBN-10 in content: 1415926535
+2024-12-01 17:17:54,146 - INFO - Found ISBN-10 in content: 1415926535
+2024-12-01 17:17:54,146 - INFO - Found ISBN-10 in content: 7694409323
+2024-12-01 17:17:54,146 - INFO - Found ISBN-10 in content: 0973355292
+2024-12-01 17:17:54,146 - INFO - Found ISBN-10 in content: 0973355292
+2024-12-01 17:17:54,146 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:17:54,146 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:17:54,146 - INFO - Found ISBN-10 in content: 4123456789
+2024-12-01 17:17:54,146 - INFO - Found ISBN-10 in content: 4123456789
+2024-12-01 17:17:54,146 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:17:54,146 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:17:54,146 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:17:54,407 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1).epub
+2024-12-01 17:17:54,482 - INFO - Found ISBN-10 in content: 9999999999
+2024-12-01 17:17:54,483 - INFO - Found ISBN-10 in content: 4142135623
+2024-12-01 17:17:54,483 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 17:17:54,483 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 17:17:54,483 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 17:17:54,483 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 17:17:54,483 - INFO - Found ISBN-10 in content: 1844674407
+2024-12-01 17:17:54,483 - INFO - Found ISBN-10 in content: 3709551614
+2024-12-01 17:17:54,591 - INFO - Found ISBN in DC metadata: 9781718501492
+2024-12-01 17:17:54,610 - INFO - Successfully extracted metadata: {'title': 'Cybersecurity for Small Networks', 'creator': 'Seth Enoka', 'publisher': 'No Starch Press', 'isbn': '9781718501492'}
+2024-12-01 17:17:54,665 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2021_Java_to_Kotlin_Duncan_McGregor-_Nat_Pryce_9781492082279.mobi
+2024-12-01 17:17:54,797 - INFO - Extracting metadata from: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2021_Java_to_Kotlin_Duncan_McGregor-_Nat_Pryce_9781492082279.mobi
+2024-12-01 17:17:54,805 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-12-01 17:17:54,861 - INFO - Found ISBN-13 in content: 9792082722375
+2024-12-01 17:17:54,861 - INFO - Found ISBN-10 in content: 0000000840
+2024-12-01 17:17:54,861 - INFO - Found ISBN-10 in content: 0000000840
+2024-12-01 17:17:54,862 - INFO - Found ISBN-10 in content: 4895000000
+2024-12-01 17:17:54,862 - INFO - Found ISBN-10 in content: 7040000000
+2024-12-01 17:17:54,862 - INFO - Found ISBN-10 in content: 6227020800
+2024-12-01 17:17:54,862 - INFO - Found ISBN-10 in content: 5109094217
+2024-12-01 17:17:54,862 - INFO - Found ISBN-10 in content: 1709440000
+2024-12-01 17:17:54,862 - INFO - Found ISBN-10 in content: 9332621544
+2024-12-01 17:17:54,864 - INFO - Found ISBN-10 in content: 3944152681
+2024-12-01 17:17:54,864 - INFO - Found ISBN-10 in content: 6992388562
+2024-12-01 17:17:54,864 - INFO - Found ISBN-10 in content: 6670049071
+2024-12-01 17:17:54,864 - INFO - Found ISBN-10 in content: 8162146859
+2024-12-01 17:17:54,864 - INFO - Found ISBN-10 in content: 2963895217
+2024-12-01 17:17:54,874 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-12-01 17:17:54,875 - INFO - Found ISBN-10 in content: 5999932299
+2024-12-01 17:17:54,875 - INFO - Found ISBN-10 in content: 1560894146
+2024-12-01 17:17:54,875 - INFO - Found ISBN-10 in content: 1828625369
+2024-12-01 17:17:54,875 - INFO - Found ISBN-10 in content: 7920827223
+2024-12-01 17:17:54,875 - INFO - Found ISBN-10 in content: 7582511852
+2024-12-01 17:17:54,875 - INFO - Found ISBN-10 in content: 1091686400
+2024-12-01 17:17:54,875 - INFO - Found ISBN-10 in content: 0000000000
+2024-12-01 17:17:54,875 - INFO - Found ISBN-10 in content: 1800000000
+2024-12-01 17:17:54,880 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_The_Active_Defender_Dr._Catherine_J._Ullman_9781119895213.pdf
+2024-12-01 17:17:54,959 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_The_Active_Defender_Dr._Catherine_J._Ullman_9781119895213.pdf
+2024-12-01 17:17:55,050 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_Software_Transparency_Chris_Hughes-_Tony_Turner_9781394158485.pdf
+2024-12-01 17:17:55,152 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_Software_Transparency_Chris_Hughes-_Tony_Turner_9781394158485.pdf
+2024-12-01 17:17:55,154 - INFO - Found ISBN-10 in content: 2208988800
+2024-12-01 17:17:55,161 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/Hands-On Artificial Intelligence for Banking.pdf
+2024-12-01 17:17:55,285 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Hands-On Artificial Intelligence for Banking.pdf
+2024-12-01 17:17:55,425 - INFO - Processed 24 items
+2024-12-01 17:17:55,425 - INFO - Found 34 unique ISBNs: ['0000000000', '0000000840', '0973355292', '1091686400', '1415926535', '1560894146', '1709440000', '1800000000', '1828625369', '1844674407', '2208988800', '2963895217', '3709551614', '3944152681', '4012345678', '4123456789', '4142135623', '4895000000', '5109094217', '5999932299', '6227020800', '6670049071', '6992388562', '7040000000', '7582511852', '7694409323', '7920827223', '8162146859', '9223372036', '9332621544', '9781098145', '9781098145538', '9792082722375', '9999999999']
+2024-12-01 17:17:55,438 - INFO - Extracting metadata from: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538.epub
+2024-12-01 17:17:55,438 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/OReilly_bash_Cookbook_Carl_Albing-_JP_Vossen_9781491975336.pdf
+2024-12-01 17:17:55,439 - INFO - Found ISBN-10 in content: 7742338443
+2024-12-01 17:17:55,439 - INFO - Found ISBN-10 in content: 1102733054
+2024-12-01 17:17:55,535 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_bash_Cookbook_Carl_Albing-_JP_Vossen_9781491975336.pdf
+2024-12-01 17:17:55,556 - INFO - Found ISBN-10 in content: 6033220602
+2024-12-01 17:17:55,556 - INFO - Found ISBN-10 in content: 2670123361
+2024-12-01 17:17:55,556 - INFO - Found ISBN-10 in content: 2684179187
+2024-12-01 17:17:55,557 - INFO - Found ISBN-10 in content: 6003123012
+2024-12-01 17:17:55,557 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2022_Ansible_Up_and_Running_Bas_Meijer-_Lorin_Hochstein_9781098109158.pdf
+2024-12-01 17:17:55,559 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 17:17:55,559 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 17:17:55,559 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 17:17:55,559 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 17:17:55,559 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 17:17:55,559 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 17:17:55,560 - INFO - Processed 16 items
+2024-12-01 17:17:55,560 - INFO - Found 8 unique ISBNs: ['1102733054', '2670123361', '2684179187', '6003123012', '6033220602', '7742338443', '9788555193125', '9788555193149']
+2024-12-01 17:17:55,560 - INFO - Found ISBN in content: 9788555193149
+2024-12-01 17:17:55,561 - INFO - Successfully extracted metadata: {'title': 'Series temporais com Prophet: Analise e previsao de dados com Python', 'creator': 'Allan Spadini e Valquiria Alencar', 'isbn': '9788555193149', 'publisher': 'Casa do Código'}
+2024-12-01 17:17:55,561 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/National_Geographic_Books_2021_Bug_Bounty_Bootcamp_Vickie_Li_9781718501546.pdf
+2024-12-01 17:17:55,671 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2022_Ansible_Up_and_Running_Bas_Meijer-_Lorin_Hochstein_9781098109158.pdf
+2024-12-01 17:17:55,690 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2020_Java_Performance_Scott_Oaks_9781492056119.pdf
+2024-12-01 17:17:55,707 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/National_Geographic_Books_2021_Bug_Bounty_Bootcamp_Vickie_Li_9781718501546.pdf
+2024-12-01 17:17:55,712 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/Packt_2022_Applied_Machine_Learning_and_High-Performance_Comp_Mani_Khanuja-_Farooq_Sabir_9781803237015.pdf
+2024-12-01 17:17:55,744 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2020_Java_Performance_Scott_Oaks_9781492056119.pdf
+2024-12-01 17:17:55,815 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2021_The_Hardware_Hacking_Handbook_Jasper_van_Woudenberg-_Colin_O'Flynn_9781593278748.pdf
+2024-12-01 17:17:55,830 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Packt_2022_Applied_Machine_Learning_and_High-Performance_Comp_Mani_Khanuja-_Farooq_Sabir_9781803237015.pdf
+2024-12-01 17:17:55,837 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 17:17:55,837 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 17:17:55,838 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-12-01 17:17:55,882 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2021_The_Hardware_Hacking_Handbook_Jasper_van_Woudenberg-_Colin_O'Flynn_9781593278748.pdf
+2024-12-01 17:17:55,885 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 17:17:55,885 - INFO - Found ISBN-10 in content: 9781789616
+2024-12-01 17:17:56,064 - INFO - Found ISBN-10 in content: 7865167308
+2024-12-01 17:17:56,166 - INFO - Found ISBN-10 in content: 8874887488
+2024-12-01 17:17:56,166 - INFO - Found ISBN-10 in content: 2961186622
+2024-12-01 17:17:56,167 - INFO - Found ISBN-10 in content: 1188118811
+2024-12-01 17:17:56,168 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-12-01 17:17:56,168 - INFO - Found ISBN-10 in content: 1797660478
+2024-12-01 17:17:56,275 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538.epub
+2024-12-01 17:17:56,325 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 17:17:56,325 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 17:17:56,325 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 17:17:56,325 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 17:17:56,325 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 17:17:56,325 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 17:17:56,325 - INFO - Found ISBN-10 in content: 9781788836
+2024-12-01 17:17:56,325 - INFO - Found ISBN-10 in content: 9781788398
+2024-12-01 17:17:56,326 - INFO - Processed 222 items
+2024-12-01 17:17:56,326 - INFO - Found 11 unique ISBNs: ['1188118811', '1797660478', '2961186622', '7865167308', '8874887488', '9781788398', '9781788398060', '9781788836', '9781788836067', '9781789616', '9781789616132']
+2024-12-01 17:17:56,326 - INFO - Extracting metadata from: /Users/menon/Downloads/0_teste_livros_scan/Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060.epub
+2024-12-01 17:17:56,360 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 17:17:56,360 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 17:17:56,360 - INFO - Found ISBN-10 in content: 9781098145
+2024-12-01 17:17:56,383 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 17:17:56,586 - INFO - Found ISBN-10 in content: 1415926535
+2024-12-01 17:17:56,587 - INFO - Found ISBN-10 in content: 1415926535
+2024-12-01 17:17:56,587 - INFO - Found ISBN-10 in content: 7694409323
+2024-12-01 17:17:56,587 - INFO - Found ISBN-10 in content: 0973355292
+2024-12-01 17:17:56,587 - INFO - Found ISBN-10 in content: 0973355292
+2024-12-01 17:17:56,587 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:17:56,587 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:17:56,587 - INFO - Found ISBN-10 in content: 4123456789
+2024-12-01 17:17:56,587 - INFO - Found ISBN-10 in content: 4123456789
+2024-12-01 17:17:56,587 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:17:56,587 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:17:56,587 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:17:56,954 - INFO - Found ISBN-10 in content: 9999999999
+2024-12-01 17:17:56,955 - INFO - Found ISBN-10 in content: 4142135623
+2024-12-01 17:17:56,955 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 17:17:56,955 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 17:17:56,955 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 17:17:56,955 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 17:17:56,955 - INFO - Found ISBN-10 in content: 1844674407
+2024-12-01 17:17:56,955 - INFO - Found ISBN-10 in content: 3709551614
+2024-12-01 17:17:57,221 - INFO - Found ISBN-13 in content: 9792082722375
+2024-12-01 17:17:57,221 - INFO - Found ISBN-10 in content: 0000000840
+2024-12-01 17:17:57,221 - INFO - Found ISBN-10 in content: 0000000840
+2024-12-01 17:17:57,222 - INFO - Found ISBN-10 in content: 4895000000
+2024-12-01 17:17:57,222 - INFO - Found ISBN-10 in content: 7040000000
+2024-12-01 17:17:57,222 - INFO - Found ISBN-10 in content: 6227020800
+2024-12-01 17:17:57,222 - INFO - Found ISBN-10 in content: 5109094217
+2024-12-01 17:17:57,222 - INFO - Found ISBN-10 in content: 1709440000
+2024-12-01 17:17:57,222 - INFO - Found ISBN-10 in content: 9332621544
+2024-12-01 17:17:57,222 - INFO - Found ISBN-10 in content: 3944152681
+2024-12-01 17:17:57,222 - INFO - Found ISBN-10 in content: 6992388562
+2024-12-01 17:17:57,222 - INFO - Found ISBN-10 in content: 6670049071
+2024-12-01 17:17:57,222 - INFO - Found ISBN-10 in content: 8162146859
+2024-12-01 17:17:57,222 - INFO - Found ISBN-10 in content: 2963895217
+2024-12-01 17:17:57,222 - INFO - Found ISBN-10 in content: 5999932299
+2024-12-01 17:17:57,222 - INFO - Found ISBN-10 in content: 1560894146
+2024-12-01 17:17:57,222 - INFO - Found ISBN-10 in content: 1828625369
+2024-12-01 17:17:57,222 - INFO - Found ISBN-10 in content: 7920827223
+2024-12-01 17:17:57,222 - INFO - Found ISBN-10 in content: 7582511852
+2024-12-01 17:17:57,222 - INFO - Found ISBN-10 in content: 1091686400
+2024-12-01 17:17:57,222 - INFO - Found ISBN-10 in content: 0000000000
+2024-12-01 17:17:57,222 - INFO - Found ISBN-10 in content: 1800000000
+2024-12-01 17:17:57,229 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060.epub
+2024-12-01 17:17:57,472 - INFO - Found ISBN-10 in content: 2208988800
+2024-12-01 17:17:57,672 - INFO - Processed 24 items
+2024-12-01 17:17:57,672 - INFO - Found 34 unique ISBNs: ['0000000000', '0000000840', '0973355292', '1091686400', '1415926535', '1560894146', '1709440000', '1800000000', '1828625369', '1844674407', '2208988800', '2963895217', '3709551614', '3944152681', '4012345678', '4123456789', '4142135623', '4895000000', '5109094217', '5999932299', '6227020800', '6670049071', '6992388562', '7040000000', '7582511852', '7694409323', '7920827223', '8162146859', '9223372036', '9332621544', '9781098145', '9781098145538', '9792082722375', '9999999999']
+2024-12-01 17:17:57,694 - INFO - Found ISBN in content: 9781098145538
+2024-12-01 17:17:57,694 - INFO - Successfully extracted metadata: {'title': 'Learning Java', 'creator': 'Marc Loy, Patrick Niemeyer, and Daniel Leuck', 'publisher': "O'Reilly Media, Inc.", 'date': '2023-08-23', 'isbn': '9781098145538'}
+2024-12-01 17:17:57,713 - INFO - Success: OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538
+2024-12-01 17:17:57,713 - INFO - Success: No_Starch_Press_2022_Cybersecurity_for_Small_Networks_Seth_Enoka_9781718501485
+2024-12-01 17:17:57,777 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 17:17:57,777 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 17:17:57,786 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 17:17:57,786 - INFO - Found ISBN-10 in content: 9781789616
+2024-12-01 17:17:57,918 - INFO - Found ISBN-10 in content: 7865167308
+2024-12-01 17:17:57,929 - INFO - Found ISBN-10 in content: 8874887488
+2024-12-01 17:17:57,929 - INFO - Found ISBN-10 in content: 2961186622
+2024-12-01 17:17:57,929 - INFO - Found ISBN-10 in content: 1188118811
+2024-12-01 17:17:57,929 - INFO - Found ISBN-10 in content: 1797660478
+2024-12-01 17:17:58,027 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 17:17:58,027 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 17:17:58,027 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 17:17:58,027 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 17:17:58,027 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 17:17:58,027 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 17:17:58,027 - INFO - Found ISBN-10 in content: 9781788836
+2024-12-01 17:17:58,027 - INFO - Found ISBN-10 in content: 9781788398
+2024-12-01 17:17:58,028 - INFO - Processed 222 items
+2024-12-01 17:17:58,028 - INFO - Found 11 unique ISBNs: ['1188118811', '1797660478', '2961186622', '7865167308', '8874887488', '9781788398', '9781788398060', '9781788836', '9781788836067', '9781789616', '9781789616132']
+2024-12-01 17:17:58,028 - INFO - Found ISBN in content: 9781788836067
+2024-12-01 17:17:58,028 - INFO - Successfully extracted metadata: {'title': 'Hands-On Deep Learning for IoT', 'creator': 'Mohammad Abdur Razzaque, PhD', 'publisher': 'Packt', 'date': '2019-06-27T06:26:31Z', 'isbn': '9781788836067'}
+2024-12-01 17:17:58,030 - INFO - Success: Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060
+2024-12-01 17:17:58,030 - INFO - Success: series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1)
+2024-12-01 17:17:58,030 - INFO - Success: OReilly_2021_Java_to_Kotlin_Duncan_McGregor-_Nat_Pryce_9781492082279
+2024-12-01 17:17:58,030 - WARNING - No metadata: computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy
+2024-12-01 17:17:58,030 - INFO - Success: Wiley_2023_The_Active_Defender_Dr._Catherine_J._Ullman_9781119895213
+2024-12-01 17:17:58,030 - INFO - Success: Wiley_2023_Software_Transparency_Chris_Hughes-_Tony_Turner_9781394158485
+2024-12-01 17:17:58,030 - WARNING - No metadata: Hands-On Artificial Intelligence for Banking
+2024-12-01 17:17:58,030 - INFO - Success: OReilly_bash_Cookbook_Carl_Albing-_JP_Vossen_9781491975336
+2024-12-01 17:17:58,030 - INFO - Success: OReilly_2022_Ansible_Up_and_Running_Bas_Meijer-_Lorin_Hochstein_9781098109158
+2024-12-01 17:17:58,030 - INFO - Success: National_Geographic_Books_2021_Bug_Bounty_Bootcamp_Vickie_Li_9781718501546
+2024-12-01 17:17:58,030 - INFO - Success: OReilly_2020_Java_Performance_Scott_Oaks_9781492056119
+2024-12-01 17:17:58,030 - INFO - Success: Packt_2022_Applied_Machine_Learning_and_High-Performance_Comp_Mani_Khanuja-_Farooq_Sabir_9781803237015
+2024-12-01 17:17:58,031 - INFO - Success: No_Starch_Press_2021_The_Hardware_Hacking_Handbook_Jasper_van_Woudenberg-_Colin_O'Flynn_9781593278748
+2024-12-01 17:17:58,031 - WARNING - No metadata: pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free
+2024-12-01 17:17:58,031 - ERROR - Error generating reports: 'details'
+2024-12-01 17:17:58,032 - ERROR - Traceback (most recent call last):
+  File "/Users/menon/Documents/GitHub/renamepdfepub/teste_apagar.py", line 4005, in _generate_reports
+    self._generate_html_report(runtime_stats, html_path)
+  File "/Users/menon/Documents/GitHub/renamepdfepub/teste_apagar.py", line 5094, in _generate_html_report
+    html_content = self._generate_html_content(data)
+  File "/Users/menon/Documents/GitHub/renamepdfepub/teste_apagar.py", line 5116, in _generate_html_content
+    for fmt, stats in data['details']['format_stats'].items():
+KeyError: 'details'
+
+2024-12-01 17:18:37,910 - INFO - Database initialized successfully with schema verified
+2024-12-01 17:18:37,910 - INFO - Schema verification completed successfully
+2024-12-01 17:18:37,950 - INFO - Extractores disponíveis: pypdf2, pdfplumber, pdfminer, tesseract, pdf2image
+2024-12-01 17:18:37,950 - INFO - Suporte a OCR está disponível
+2024-12-01 17:18:37,951 - INFO - Database initialized successfully with schema verified
+2024-12-01 17:18:37,951 - INFO - Schema verification completed successfully
+2024-12-01 17:18:37,953 - INFO - Found 16 files to process in 1 directories
+2024-12-01 17:18:37,954 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538.epub
+2024-12-01 17:18:37,954 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2022_Cybersecurity_for_Small_Networks_Seth_Enoka_9781718501485.epub
+2024-12-01 17:18:37,954 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538.epub
+2024-12-01 17:18:37,954 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060.epub
+2024-12-01 17:18:37,954 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2022_Cybersecurity_for_Small_Networks_Seth_Enoka_9781718501485.epub
+2024-12-01 17:18:37,954 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1).epub
+2024-12-01 17:18:37,955 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060.epub
+2024-12-01 17:18:37,955 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1).epub
+2024-12-01 17:18:38,055 - INFO - Found ISBN in DC metadata: 9781718501492
+2024-12-01 17:18:38,079 - INFO - Found ISBN-13 in content: 9781718501485
+2024-12-01 17:18:38,079 - INFO - Found ISBN-13 in content: 9781718501492
+2024-12-01 17:18:38,080 - INFO - Found ISBN-13 in content: 9781718501485
+2024-12-01 17:18:38,080 - INFO - Found ISBN-13 in content: 9781718501492
+2024-12-01 17:18:38,080 - INFO - Found ISBN-13 in content: 9781718501485
+2024-12-01 17:18:38,080 - INFO - Found ISBN-13 in content: 9781718501492
+2024-12-01 17:18:38,080 - INFO - Found ISBN-13 in content: 9781718501485
+2024-12-01 17:18:38,080 - INFO - Found ISBN-13 in content: 9781718501492
+2024-12-01 17:18:38,080 - INFO - Found ISBN-13 in content: 9781718501485
+2024-12-01 17:18:38,081 - INFO - Found ISBN-13 in content: 9781718501492
+2024-12-01 17:18:38,081 - INFO - Found ISBN-10 in content: 2022021005
+2024-12-01 17:18:38,081 - INFO - Found ISBN-10 in content: 2022021006
+2024-12-01 17:18:38,081 - INFO - Found ISBN-10 in content: 9781718501
+2024-12-01 17:18:38,081 - INFO - Found ISBN-10 in content: 9781718501
+2024-12-01 17:18:38,081 - INFO - Found ISBN-10 in content: 2022021005
+2024-12-01 17:18:38,081 - INFO - Found ISBN-10 in content: 2022021006
+2024-12-01 17:18:38,098 - INFO - Found ISBN-10 in content: 7742338443
+2024-12-01 17:18:38,098 - INFO - Found ISBN-10 in content: 1102733054
+2024-12-01 17:18:38,250 - INFO - Found ISBN-10 in content: 6033220602
+2024-12-01 17:18:38,250 - INFO - Found ISBN-10 in content: 2670123361
+2024-12-01 17:18:38,250 - INFO - Found ISBN-10 in content: 2684179187
+2024-12-01 17:18:38,250 - INFO - Found ISBN-10 in content: 6003123012
+2024-12-01 17:18:38,252 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 17:18:38,252 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 17:18:38,252 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 17:18:38,252 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 17:18:38,254 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 17:18:38,254 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 17:18:38,255 - INFO - Processed 16 items
+2024-12-01 17:18:38,255 - INFO - Found 8 unique ISBNs: ['1102733054', '2670123361', '2684179187', '6003123012', '6033220602', '7742338443', '9788555193125', '9788555193149']
+2024-12-01 17:18:38,255 - INFO - Extracting metadata from: /Users/menon/Downloads/0_teste_livros_scan/series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1).epub
+2024-12-01 17:18:38,258 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 17:18:38,258 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 17:18:38,258 - INFO - Found ISBN-10 in content: 9781098145
+2024-12-01 17:18:38,296 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 17:18:38,372 - INFO - Found ISBN-10 in content: 1619747519
+2024-12-01 17:18:38,372 - INFO - Found ISBN-10 in content: 1619747519
+2024-12-01 17:18:38,391 - INFO - Found ISBN-10 in content: 1619747519
+2024-12-01 17:18:38,391 - INFO - Found ISBN-10 in content: 1619747520
+2024-12-01 17:18:38,391 - INFO - Found ISBN-10 in content: 1584414232
+2024-12-01 17:18:38,391 - INFO - Found ISBN-10 in content: 1584414237
+2024-12-01 17:18:38,391 - INFO - Found ISBN-10 in content: 1584414242
+2024-12-01 17:18:38,391 - INFO - Found ISBN-10 in content: 1584414247
+2024-12-01 17:18:38,391 - INFO - Found ISBN-10 in content: 1584414248
+2024-12-01 17:18:38,391 - INFO - Found ISBN-10 in content: 1584414254
+2024-12-01 17:18:38,481 - INFO - Found ISBN-10 in content: 1634779305
+2024-12-01 17:18:38,481 - INFO - Found ISBN-10 in content: 1634779305
+2024-12-01 17:18:38,481 - INFO - Found ISBN-10 in content: 0788339744
+2024-12-01 17:18:38,583 - INFO - Processed 23 items
+2024-12-01 17:18:38,584 - INFO - Found 15 unique ISBNs: ['0788339744', '1584414232', '1584414237', '1584414242', '1584414247', '1584414248', '1584414254', '1619747519', '1619747520', '1634779305', '2022021005', '2022021006', '9781718501', '9781718501485', '9781718501492']
+2024-12-01 17:18:38,584 - INFO - Extracting metadata from: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2022_Cybersecurity_for_Small_Networks_Seth_Enoka_9781718501485.epub
+2024-12-01 17:18:38,714 - INFO - Found ISBN-10 in content: 1415926535
+2024-12-01 17:18:38,715 - INFO - Found ISBN-10 in content: 1415926535
+2024-12-01 17:18:38,715 - INFO - Found ISBN-10 in content: 7694409323
+2024-12-01 17:18:38,715 - INFO - Found ISBN-10 in content: 0973355292
+2024-12-01 17:18:38,715 - INFO - Found ISBN-10 in content: 0973355292
+2024-12-01 17:18:38,715 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:18:38,715 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:18:38,715 - INFO - Found ISBN-10 in content: 4123456789
+2024-12-01 17:18:38,715 - INFO - Found ISBN-10 in content: 4123456789
+2024-12-01 17:18:38,715 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:18:38,715 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:18:38,715 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:18:38,983 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1).epub
+2024-12-01 17:18:39,056 - INFO - Found ISBN-10 in content: 9999999999
+2024-12-01 17:18:39,056 - INFO - Found ISBN-10 in content: 4142135623
+2024-12-01 17:18:39,056 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 17:18:39,056 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 17:18:39,056 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 17:18:39,056 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 17:18:39,057 - INFO - Found ISBN-10 in content: 1844674407
+2024-12-01 17:18:39,057 - INFO - Found ISBN-10 in content: 3709551614
+2024-12-01 17:18:39,312 - INFO - Found ISBN in DC metadata: 9781718501492
+2024-12-01 17:18:39,312 - INFO - Successfully extracted metadata: {'title': 'Cybersecurity for Small Networks', 'creator': 'Seth Enoka', 'publisher': 'No Starch Press', 'isbn': '9781718501492'}
+2024-12-01 17:18:39,324 - INFO - Found ISBN-13 in content: 9792082722375
+2024-12-01 17:18:39,324 - INFO - Found ISBN-10 in content: 0000000840
+2024-12-01 17:18:39,324 - INFO - Found ISBN-10 in content: 0000000840
+2024-12-01 17:18:39,325 - INFO - Found ISBN-10 in content: 4895000000
+2024-12-01 17:18:39,325 - INFO - Found ISBN-10 in content: 7040000000
+2024-12-01 17:18:39,325 - INFO - Found ISBN-10 in content: 6227020800
+2024-12-01 17:18:39,325 - INFO - Found ISBN-10 in content: 5109094217
+2024-12-01 17:18:39,325 - INFO - Found ISBN-10 in content: 1709440000
+2024-12-01 17:18:39,325 - INFO - Found ISBN-10 in content: 9332621544
+2024-12-01 17:18:39,325 - INFO - Found ISBN-10 in content: 3944152681
+2024-12-01 17:18:39,325 - INFO - Found ISBN-10 in content: 6992388562
+2024-12-01 17:18:39,325 - INFO - Found ISBN-10 in content: 6670049071
+2024-12-01 17:18:39,325 - INFO - Found ISBN-10 in content: 8162146859
+2024-12-01 17:18:39,325 - INFO - Found ISBN-10 in content: 2963895217
+2024-12-01 17:18:39,325 - INFO - Found ISBN-10 in content: 5999932299
+2024-12-01 17:18:39,325 - INFO - Found ISBN-10 in content: 1560894146
+2024-12-01 17:18:39,325 - INFO - Found ISBN-10 in content: 1828625369
+2024-12-01 17:18:39,325 - INFO - Found ISBN-10 in content: 7920827223
+2024-12-01 17:18:39,325 - INFO - Found ISBN-10 in content: 7582511852
+2024-12-01 17:18:39,325 - INFO - Found ISBN-10 in content: 1091686400
+2024-12-01 17:18:39,326 - INFO - Found ISBN-10 in content: 0000000000
+2024-12-01 17:18:39,326 - INFO - Found ISBN-10 in content: 1800000000
+2024-12-01 17:18:39,327 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-12-01 17:18:39,349 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-12-01 17:18:39,353 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_The_Active_Defender_Dr._Catherine_J._Ullman_9781119895213.pdf
+2024-12-01 17:18:39,523 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_The_Active_Defender_Dr._Catherine_J._Ullman_9781119895213.pdf
+2024-12-01 17:18:39,525 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_Software_Transparency_Chris_Hughes-_Tony_Turner_9781394158485.pdf
+2024-12-01 17:18:39,606 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_Software_Transparency_Chris_Hughes-_Tony_Turner_9781394158485.pdf
+2024-12-01 17:18:39,626 - INFO - Found ISBN-10 in content: 2208988800
+2024-12-01 17:18:39,634 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/Hands-On Artificial Intelligence for Banking.pdf
+2024-12-01 17:18:39,731 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Hands-On Artificial Intelligence for Banking.pdf
+2024-12-01 17:18:39,740 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/OReilly_bash_Cookbook_Carl_Albing-_JP_Vossen_9781491975336.pdf
+2024-12-01 17:18:39,915 - INFO - Processed 24 items
+2024-12-01 17:18:39,915 - INFO - Found 34 unique ISBNs: ['0000000000', '0000000840', '0973355292', '1091686400', '1415926535', '1560894146', '1709440000', '1800000000', '1828625369', '1844674407', '2208988800', '2963895217', '3709551614', '3944152681', '4012345678', '4123456789', '4142135623', '4895000000', '5109094217', '5999932299', '6227020800', '6670049071', '6992388562', '7040000000', '7582511852', '7694409323', '7920827223', '8162146859', '9223372036', '9332621544', '9781098145', '9781098145538', '9792082722375', '9999999999']
+2024-12-01 17:18:39,920 - INFO - Extracting metadata from: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538.epub
+2024-12-01 17:18:39,923 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_bash_Cookbook_Carl_Albing-_JP_Vossen_9781491975336.pdf
+2024-12-01 17:18:39,940 - INFO - Found ISBN-10 in content: 7742338443
+2024-12-01 17:18:39,941 - INFO - Found ISBN-10 in content: 1102733054
+2024-12-01 17:18:39,941 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2022_Ansible_Up_and_Running_Bas_Meijer-_Lorin_Hochstein_9781098109158.pdf
+2024-12-01 17:18:40,069 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2022_Ansible_Up_and_Running_Bas_Meijer-_Lorin_Hochstein_9781098109158.pdf
+2024-12-01 17:18:40,091 - INFO - Found ISBN-10 in content: 6033220602
+2024-12-01 17:18:40,091 - INFO - Found ISBN-10 in content: 2670123361
+2024-12-01 17:18:40,091 - INFO - Found ISBN-10 in content: 2684179187
+2024-12-01 17:18:40,091 - INFO - Found ISBN-10 in content: 6003123012
+2024-12-01 17:18:40,091 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/National_Geographic_Books_2021_Bug_Bounty_Bootcamp_Vickie_Li_9781718501546.pdf
+2024-12-01 17:18:40,120 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 17:18:40,120 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 17:18:40,120 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 17:18:40,120 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 17:18:40,120 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 17:18:40,120 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 17:18:40,121 - INFO - Processed 16 items
+2024-12-01 17:18:40,121 - INFO - Found 8 unique ISBNs: ['1102733054', '2670123361', '2684179187', '6003123012', '6033220602', '7742338443', '9788555193125', '9788555193149']
+2024-12-01 17:18:40,121 - INFO - Found ISBN in content: 9788555193149
+2024-12-01 17:18:40,121 - INFO - Successfully extracted metadata: {'title': 'Series temporais com Prophet: Analise e previsao de dados com Python', 'creator': 'Allan Spadini e Valquiria Alencar', 'isbn': '9788555193149', 'publisher': 'Casa do Código'}
+2024-12-01 17:18:40,121 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2020_Java_Performance_Scott_Oaks_9781492056119.pdf
+2024-12-01 17:18:40,206 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2020_Java_Performance_Scott_Oaks_9781492056119.pdf
+2024-12-01 17:18:40,210 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/National_Geographic_Books_2021_Bug_Bounty_Bootcamp_Vickie_Li_9781718501546.pdf
+2024-12-01 17:18:40,214 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/Packt_2022_Applied_Machine_Learning_and_High-Performance_Comp_Mani_Khanuja-_Farooq_Sabir_9781803237015.pdf
+2024-12-01 17:18:40,227 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2021_The_Hardware_Hacking_Handbook_Jasper_van_Woudenberg-_Colin_O'Flynn_9781593278748.pdf
+2024-12-01 17:18:40,230 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 17:18:40,230 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 17:18:40,324 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2021_The_Hardware_Hacking_Handbook_Jasper_van_Woudenberg-_Colin_O'Flynn_9781593278748.pdf
+2024-12-01 17:18:40,343 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Packt_2022_Applied_Machine_Learning_and_High-Performance_Comp_Mani_Khanuja-_Farooq_Sabir_9781803237015.pdf
+2024-12-01 17:18:40,345 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 17:18:40,346 - INFO - Found ISBN-10 in content: 9781789616
+2024-12-01 17:18:40,350 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-12-01 17:18:40,351 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2021_Java_to_Kotlin_Duncan_McGregor-_Nat_Pryce_9781492082279.mobi
+2024-12-01 17:18:40,457 - INFO - Extracting metadata from: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2021_Java_to_Kotlin_Duncan_McGregor-_Nat_Pryce_9781492082279.mobi
+2024-12-01 17:18:40,633 - INFO - Found ISBN-10 in content: 7865167308
+2024-12-01 17:18:40,647 - INFO - Found ISBN-10 in content: 8874887488
+2024-12-01 17:18:40,647 - INFO - Found ISBN-10 in content: 2961186622
+2024-12-01 17:18:40,648 - INFO - Found ISBN-10 in content: 1188118811
+2024-12-01 17:18:40,648 - INFO - Found ISBN-10 in content: 1797660478
+2024-12-01 17:18:40,747 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-12-01 17:18:40,848 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538.epub
+2024-12-01 17:18:40,867 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 17:18:40,867 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 17:18:40,867 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 17:18:40,867 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 17:18:40,867 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 17:18:40,867 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 17:18:40,867 - INFO - Found ISBN-10 in content: 9781788836
+2024-12-01 17:18:40,867 - INFO - Found ISBN-10 in content: 9781788398
+2024-12-01 17:18:40,868 - INFO - Processed 222 items
+2024-12-01 17:18:40,868 - INFO - Found 11 unique ISBNs: ['1188118811', '1797660478', '2961186622', '7865167308', '8874887488', '9781788398', '9781788398060', '9781788836', '9781788836067', '9781789616', '9781789616132']
+2024-12-01 17:18:40,868 - INFO - Extracting metadata from: /Users/menon/Downloads/0_teste_livros_scan/Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060.epub
+2024-12-01 17:18:40,902 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 17:18:40,902 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 17:18:40,903 - INFO - Found ISBN-10 in content: 9781098145
+2024-12-01 17:18:40,925 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 17:18:41,128 - INFO - Found ISBN-10 in content: 1415926535
+2024-12-01 17:18:41,128 - INFO - Found ISBN-10 in content: 1415926535
+2024-12-01 17:18:41,129 - INFO - Found ISBN-10 in content: 7694409323
+2024-12-01 17:18:41,129 - INFO - Found ISBN-10 in content: 0973355292
+2024-12-01 17:18:41,129 - INFO - Found ISBN-10 in content: 0973355292
+2024-12-01 17:18:41,129 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:18:41,129 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:18:41,129 - INFO - Found ISBN-10 in content: 4123456789
+2024-12-01 17:18:41,129 - INFO - Found ISBN-10 in content: 4123456789
+2024-12-01 17:18:41,129 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:18:41,129 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:18:41,129 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:18:41,492 - INFO - Found ISBN-10 in content: 9999999999
+2024-12-01 17:18:41,493 - INFO - Found ISBN-10 in content: 4142135623
+2024-12-01 17:18:41,493 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 17:18:41,493 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 17:18:41,493 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 17:18:41,493 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 17:18:41,493 - INFO - Found ISBN-10 in content: 1844674407
+2024-12-01 17:18:41,493 - INFO - Found ISBN-10 in content: 3709551614
+2024-12-01 17:18:41,756 - INFO - Found ISBN-13 in content: 9792082722375
+2024-12-01 17:18:41,757 - INFO - Found ISBN-10 in content: 0000000840
+2024-12-01 17:18:41,757 - INFO - Found ISBN-10 in content: 0000000840
+2024-12-01 17:18:41,757 - INFO - Found ISBN-10 in content: 4895000000
+2024-12-01 17:18:41,757 - INFO - Found ISBN-10 in content: 7040000000
+2024-12-01 17:18:41,757 - INFO - Found ISBN-10 in content: 6227020800
+2024-12-01 17:18:41,757 - INFO - Found ISBN-10 in content: 5109094217
+2024-12-01 17:18:41,757 - INFO - Found ISBN-10 in content: 1709440000
+2024-12-01 17:18:41,757 - INFO - Found ISBN-10 in content: 9332621544
+2024-12-01 17:18:41,757 - INFO - Found ISBN-10 in content: 3944152681
+2024-12-01 17:18:41,757 - INFO - Found ISBN-10 in content: 6992388562
+2024-12-01 17:18:41,757 - INFO - Found ISBN-10 in content: 6670049071
+2024-12-01 17:18:41,757 - INFO - Found ISBN-10 in content: 8162146859
+2024-12-01 17:18:41,757 - INFO - Found ISBN-10 in content: 2963895217
+2024-12-01 17:18:41,757 - INFO - Found ISBN-10 in content: 5999932299
+2024-12-01 17:18:41,758 - INFO - Found ISBN-10 in content: 1560894146
+2024-12-01 17:18:41,758 - INFO - Found ISBN-10 in content: 1828625369
+2024-12-01 17:18:41,758 - INFO - Found ISBN-10 in content: 7920827223
+2024-12-01 17:18:41,758 - INFO - Found ISBN-10 in content: 7582511852
+2024-12-01 17:18:41,758 - INFO - Found ISBN-10 in content: 1091686400
+2024-12-01 17:18:41,758 - INFO - Found ISBN-10 in content: 0000000000
+2024-12-01 17:18:41,758 - INFO - Found ISBN-10 in content: 1800000000
+2024-12-01 17:18:41,764 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060.epub
+2024-12-01 17:18:42,006 - INFO - Found ISBN-10 in content: 2208988800
+2024-12-01 17:18:42,206 - INFO - Processed 24 items
+2024-12-01 17:18:42,206 - INFO - Found 34 unique ISBNs: ['0000000000', '0000000840', '0973355292', '1091686400', '1415926535', '1560894146', '1709440000', '1800000000', '1828625369', '1844674407', '2208988800', '2963895217', '3709551614', '3944152681', '4012345678', '4123456789', '4142135623', '4895000000', '5109094217', '5999932299', '6227020800', '6670049071', '6992388562', '7040000000', '7582511852', '7694409323', '7920827223', '8162146859', '9223372036', '9332621544', '9781098145', '9781098145538', '9792082722375', '9999999999']
+2024-12-01 17:18:42,228 - INFO - Found ISBN in content: 9781098145538
+2024-12-01 17:18:42,228 - INFO - Successfully extracted metadata: {'title': 'Learning Java', 'creator': 'Marc Loy, Patrick Niemeyer, and Daniel Leuck', 'publisher': "O'Reilly Media, Inc.", 'date': '2023-08-23', 'isbn': '9781098145538'}
+2024-12-01 17:18:42,247 - INFO - Success: OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538
+2024-12-01 17:18:42,248 - INFO - Success: No_Starch_Press_2022_Cybersecurity_for_Small_Networks_Seth_Enoka_9781718501485
+2024-12-01 17:18:42,314 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 17:18:42,314 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 17:18:42,323 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 17:18:42,323 - INFO - Found ISBN-10 in content: 9781789616
+2024-12-01 17:18:42,452 - INFO - Found ISBN-10 in content: 7865167308
+2024-12-01 17:18:42,462 - INFO - Found ISBN-10 in content: 8874887488
+2024-12-01 17:18:42,462 - INFO - Found ISBN-10 in content: 2961186622
+2024-12-01 17:18:42,462 - INFO - Found ISBN-10 in content: 1188118811
+2024-12-01 17:18:42,462 - INFO - Found ISBN-10 in content: 1797660478
+2024-12-01 17:18:42,558 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 17:18:42,558 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 17:18:42,558 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 17:18:42,558 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 17:18:42,558 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 17:18:42,558 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 17:18:42,558 - INFO - Found ISBN-10 in content: 9781788836
+2024-12-01 17:18:42,558 - INFO - Found ISBN-10 in content: 9781788398
+2024-12-01 17:18:42,558 - INFO - Processed 222 items
+2024-12-01 17:18:42,558 - INFO - Found 11 unique ISBNs: ['1188118811', '1797660478', '2961186622', '7865167308', '8874887488', '9781788398', '9781788398060', '9781788836', '9781788836067', '9781789616', '9781789616132']
+2024-12-01 17:18:42,559 - INFO - Found ISBN in content: 9781788836067
+2024-12-01 17:18:42,559 - INFO - Successfully extracted metadata: {'title': 'Hands-On Deep Learning for IoT', 'creator': 'Mohammad Abdur Razzaque, PhD', 'publisher': 'Packt', 'date': '2019-06-27T06:26:31Z', 'isbn': '9781788836067'}
+2024-12-01 17:18:42,560 - INFO - Success: Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060
+2024-12-01 17:18:42,561 - INFO - Success: series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1)
+2024-12-01 17:18:42,561 - WARNING - No metadata: computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy
+2024-12-01 17:18:42,561 - INFO - Success: Wiley_2023_The_Active_Defender_Dr._Catherine_J._Ullman_9781119895213
+2024-12-01 17:18:42,561 - INFO - Success: Wiley_2023_Software_Transparency_Chris_Hughes-_Tony_Turner_9781394158485
+2024-12-01 17:18:42,561 - WARNING - No metadata: Hands-On Artificial Intelligence for Banking
+2024-12-01 17:18:42,561 - INFO - Success: OReilly_bash_Cookbook_Carl_Albing-_JP_Vossen_9781491975336
+2024-12-01 17:18:42,561 - INFO - Success: OReilly_2022_Ansible_Up_and_Running_Bas_Meijer-_Lorin_Hochstein_9781098109158
+2024-12-01 17:18:42,561 - INFO - Success: National_Geographic_Books_2021_Bug_Bounty_Bootcamp_Vickie_Li_9781718501546
+2024-12-01 17:18:42,561 - INFO - Success: OReilly_2020_Java_Performance_Scott_Oaks_9781492056119
+2024-12-01 17:18:42,561 - INFO - Success: Packt_2022_Applied_Machine_Learning_and_High-Performance_Comp_Mani_Khanuja-_Farooq_Sabir_9781803237015
+2024-12-01 17:18:42,561 - INFO - Success: No_Starch_Press_2021_The_Hardware_Hacking_Handbook_Jasper_van_Woudenberg-_Colin_O'Flynn_9781593278748
+2024-12-01 17:18:42,561 - WARNING - No metadata: pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free
+2024-12-01 17:18:42,561 - INFO - Success: OReilly_2021_Java_to_Kotlin_Duncan_McGregor-_Nat_Pryce_9781492082279
+2024-12-01 17:20:28,693 - INFO - Database initialized successfully with schema verified
+2024-12-01 17:20:28,694 - INFO - Schema verification completed successfully
+2024-12-01 17:20:28,762 - INFO - Extractores disponíveis: pypdf2, pdfplumber, pdfminer, tesseract, pdf2image
+2024-12-01 17:20:28,762 - INFO - Suporte a OCR está disponível
+2024-12-01 17:20:28,764 - INFO - Database initialized successfully with schema verified
+2024-12-01 17:20:28,764 - INFO - Schema verification completed successfully
+2024-12-01 17:20:28,767 - INFO - Found 16 files to process in 1 directories
+2024-12-01 17:20:28,767 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2021_Java_to_Kotlin_Duncan_McGregor-_Nat_Pryce_9781492082279.mobi
+2024-12-01 17:20:28,767 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-12-01 17:20:28,767 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_The_Active_Defender_Dr._Catherine_J._Ullman_9781119895213.pdf
+2024-12-01 17:20:28,768 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_Software_Transparency_Chris_Hughes-_Tony_Turner_9781394158485.pdf
+2024-12-01 17:20:28,868 - INFO - Extracting metadata from: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2021_Java_to_Kotlin_Duncan_McGregor-_Nat_Pryce_9781492082279.mobi
+2024-12-01 17:20:28,901 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/Hands-On Artificial Intelligence for Banking.pdf
+2024-12-01 17:20:28,915 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-12-01 17:20:28,928 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_Software_Transparency_Chris_Hughes-_Tony_Turner_9781394158485.pdf
+2024-12-01 17:20:28,946 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_The_Active_Defender_Dr._Catherine_J._Ullman_9781119895213.pdf
+2024-12-01 17:20:28,950 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/OReilly_bash_Cookbook_Carl_Albing-_JP_Vossen_9781491975336.pdf
+2024-12-01 17:20:28,958 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2022_Ansible_Up_and_Running_Bas_Meijer-_Lorin_Hochstein_9781098109158.pdf
+2024-12-01 17:20:28,967 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/National_Geographic_Books_2021_Bug_Bounty_Bootcamp_Vickie_Li_9781718501546.pdf
+2024-12-01 17:20:28,982 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Hands-On Artificial Intelligence for Banking.pdf
+2024-12-01 17:20:29,024 - INFO - Success: OReilly_2021_Java_to_Kotlin_Duncan_McGregor-_Nat_Pryce_9781492082279
+2024-12-01 17:20:29,029 - WARNING - No metadata: computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy
+2024-12-01 17:20:29,030 - INFO - Success: Wiley_2023_The_Active_Defender_Dr._Catherine_J._Ullman_9781119895213
+2024-12-01 17:20:29,030 - INFO - Success: Wiley_2023_Software_Transparency_Chris_Hughes-_Tony_Turner_9781394158485
+2024-12-01 17:20:29,039 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2020_Java_Performance_Scott_Oaks_9781492056119.pdf
+2024-12-01 17:20:29,041 - WARNING - No metadata: Hands-On Artificial Intelligence for Banking
+2024-12-01 17:20:29,038 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_bash_Cookbook_Carl_Albing-_JP_Vossen_9781491975336.pdf
+2024-12-01 17:20:29,097 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/Packt_2022_Applied_Machine_Learning_and_High-Performance_Comp_Mani_Khanuja-_Farooq_Sabir_9781803237015.pdf
+2024-12-01 17:20:29,102 - INFO - Success: OReilly_bash_Cookbook_Carl_Albing-_JP_Vossen_9781491975336
+2024-12-01 17:20:29,146 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2022_Ansible_Up_and_Running_Bas_Meijer-_Lorin_Hochstein_9781098109158.pdf
+2024-12-01 17:20:29,164 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/National_Geographic_Books_2021_Bug_Bounty_Bootcamp_Vickie_Li_9781718501546.pdf
+2024-12-01 17:20:29,188 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2020_Java_Performance_Scott_Oaks_9781492056119.pdf
+2024-12-01 17:20:29,189 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2021_The_Hardware_Hacking_Handbook_Jasper_van_Woudenberg-_Colin_O'Flynn_9781593278748.pdf
+2024-12-01 17:20:29,194 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-12-01 17:20:29,195 - INFO - Success: OReilly_2022_Ansible_Up_and_Running_Bas_Meijer-_Lorin_Hochstein_9781098109158
+2024-12-01 17:20:29,195 - INFO - Success: National_Geographic_Books_2021_Bug_Bounty_Bootcamp_Vickie_Li_9781718501546
+2024-12-01 17:20:29,207 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538.epub
+2024-12-01 17:20:29,207 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538.epub
+2024-12-01 17:20:29,208 - INFO - Success: OReilly_2020_Java_Performance_Scott_Oaks_9781492056119
+2024-12-01 17:20:29,295 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Packt_2022_Applied_Machine_Learning_and_High-Performance_Comp_Mani_Khanuja-_Farooq_Sabir_9781803237015.pdf
+2024-12-01 17:20:29,324 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2021_The_Hardware_Hacking_Handbook_Jasper_van_Woudenberg-_Colin_O'Flynn_9781593278748.pdf
+2024-12-01 17:20:29,326 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2022_Cybersecurity_for_Small_Networks_Seth_Enoka_9781718501485.epub
+2024-12-01 17:20:29,326 - INFO - Success: Packt_2022_Applied_Machine_Learning_and_High-Performance_Comp_Mani_Khanuja-_Farooq_Sabir_9781803237015
+2024-12-01 17:20:29,327 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2022_Cybersecurity_for_Small_Networks_Seth_Enoka_9781718501485.epub
+2024-12-01 17:20:29,330 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060.epub
+2024-12-01 17:20:29,331 - INFO - Success: No_Starch_Press_2021_The_Hardware_Hacking_Handbook_Jasper_van_Woudenberg-_Colin_O'Flynn_9781593278748
+2024-12-01 17:20:29,331 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060.epub
+2024-12-01 17:20:29,499 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-12-01 17:20:29,505 - INFO - Processing: /Users/menon/Downloads/0_teste_livros_scan/series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1).epub
+2024-12-01 17:20:29,505 - WARNING - No metadata: pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free
+2024-12-01 17:20:29,505 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1).epub
+2024-12-01 17:20:29,562 - INFO - Found ISBN in DC metadata: 9781718501492
+2024-12-01 17:20:29,589 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 17:20:29,590 - INFO - Found ISBN-13 in content: 9781718501485
+2024-12-01 17:20:29,590 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 17:20:29,590 - INFO - Found ISBN-13 in content: 9781718501492
+2024-12-01 17:20:29,591 - INFO - Found ISBN-10 in content: 9781098145
+2024-12-01 17:20:29,591 - INFO - Found ISBN-13 in content: 9781718501485
+2024-12-01 17:20:29,591 - INFO - Found ISBN-13 in content: 9781718501492
+2024-12-01 17:20:29,591 - INFO - Found ISBN-13 in content: 9781718501485
+2024-12-01 17:20:29,591 - INFO - Found ISBN-13 in content: 9781718501492
+2024-12-01 17:20:29,591 - INFO - Found ISBN-13 in content: 9781718501485
+2024-12-01 17:20:29,591 - INFO - Found ISBN-13 in content: 9781718501492
+2024-12-01 17:20:29,591 - INFO - Found ISBN-13 in content: 9781718501485
+2024-12-01 17:20:29,591 - INFO - Found ISBN-13 in content: 9781718501492
+2024-12-01 17:20:29,591 - INFO - Found ISBN-10 in content: 2022021005
+2024-12-01 17:20:29,591 - INFO - Found ISBN-10 in content: 2022021006
+2024-12-01 17:20:29,591 - INFO - Found ISBN-10 in content: 9781718501
+2024-12-01 17:20:29,591 - INFO - Found ISBN-10 in content: 9781718501
+2024-12-01 17:20:29,591 - INFO - Found ISBN-10 in content: 2022021005
+2024-12-01 17:20:29,591 - INFO - Found ISBN-10 in content: 2022021006
+2024-12-01 17:20:29,623 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 17:20:29,838 - INFO - Found ISBN-10 in content: 1619747519
+2024-12-01 17:20:29,838 - INFO - Found ISBN-10 in content: 1619747519
+2024-12-01 17:20:29,838 - INFO - Found ISBN-10 in content: 1619747519
+2024-12-01 17:20:29,838 - INFO - Found ISBN-10 in content: 1619747520
+2024-12-01 17:20:29,838 - INFO - Found ISBN-10 in content: 1584414232
+2024-12-01 17:20:29,838 - INFO - Found ISBN-10 in content: 1584414237
+2024-12-01 17:20:29,838 - INFO - Found ISBN-10 in content: 1584414242
+2024-12-01 17:20:29,838 - INFO - Found ISBN-10 in content: 1584414247
+2024-12-01 17:20:29,838 - INFO - Found ISBN-10 in content: 1584414248
+2024-12-01 17:20:29,838 - INFO - Found ISBN-10 in content: 1584414254
+2024-12-01 17:20:29,921 - INFO - Found ISBN-10 in content: 1634779305
+2024-12-01 17:20:29,927 - INFO - Found ISBN-10 in content: 1634779305
+2024-12-01 17:20:29,927 - INFO - Found ISBN-10 in content: 0788339744
+2024-12-01 17:20:30,010 - INFO - Found ISBN-10 in content: 1415926535
+2024-12-01 17:20:30,010 - INFO - Found ISBN-10 in content: 1415926535
+2024-12-01 17:20:30,010 - INFO - Found ISBN-10 in content: 7694409323
+2024-12-01 17:20:30,010 - INFO - Found ISBN-10 in content: 0973355292
+2024-12-01 17:20:30,010 - INFO - Found ISBN-10 in content: 0973355292
+2024-12-01 17:20:30,010 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:20:30,010 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:20:30,010 - INFO - Found ISBN-10 in content: 4123456789
+2024-12-01 17:20:30,011 - INFO - Found ISBN-10 in content: 4123456789
+2024-12-01 17:20:30,011 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:20:30,011 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:20:30,011 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:20:30,119 - INFO - Processed 23 items
+2024-12-01 17:20:30,119 - INFO - Found 15 unique ISBNs: ['0788339744', '1584414232', '1584414237', '1584414242', '1584414247', '1584414248', '1584414254', '1619747519', '1619747520', '1634779305', '2022021005', '2022021006', '9781718501', '9781718501485', '9781718501492']
+2024-12-01 17:20:30,120 - INFO - Extracting metadata from: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2022_Cybersecurity_for_Small_Networks_Seth_Enoka_9781718501485.epub
+2024-12-01 17:20:30,303 - INFO - Found ISBN-10 in content: 7742338443
+2024-12-01 17:20:30,303 - INFO - Found ISBN-10 in content: 1102733054
+2024-12-01 17:20:30,480 - INFO - Found ISBN-10 in content: 6033220602
+2024-12-01 17:20:30,480 - INFO - Found ISBN-10 in content: 2670123361
+2024-12-01 17:20:30,480 - INFO - Found ISBN-10 in content: 2684179187
+2024-12-01 17:20:30,480 - INFO - Found ISBN-10 in content: 6003123012
+2024-12-01 17:20:30,483 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 17:20:30,483 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 17:20:30,483 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 17:20:30,483 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 17:20:30,483 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 17:20:30,483 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 17:20:30,483 - INFO - Processed 16 items
+2024-12-01 17:20:30,483 - INFO - Found 8 unique ISBNs: ['1102733054', '2670123361', '2684179187', '6003123012', '6033220602', '7742338443', '9788555193125', '9788555193149']
+2024-12-01 17:20:30,483 - INFO - Extracting metadata from: /Users/menon/Downloads/0_teste_livros_scan/series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1).epub
+2024-12-01 17:20:30,556 - INFO - Found ISBN-10 in content: 9999999999
+2024-12-01 17:20:30,557 - INFO - Found ISBN-10 in content: 4142135623
+2024-12-01 17:20:30,557 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 17:20:30,557 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 17:20:30,557 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 17:20:30,557 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 17:20:30,557 - INFO - Found ISBN-10 in content: 1844674407
+2024-12-01 17:20:30,557 - INFO - Found ISBN-10 in content: 3709551614
+2024-12-01 17:20:30,823 - INFO - Found ISBN-13 in content: 9792082722375
+2024-12-01 17:20:30,823 - INFO - Found ISBN-10 in content: 0000000840
+2024-12-01 17:20:30,823 - INFO - Found ISBN-10 in content: 0000000840
+2024-12-01 17:20:30,824 - INFO - Found ISBN-10 in content: 4895000000
+2024-12-01 17:20:30,824 - INFO - Found ISBN-10 in content: 7040000000
+2024-12-01 17:20:30,824 - INFO - Found ISBN-10 in content: 6227020800
+2024-12-01 17:20:30,824 - INFO - Found ISBN-10 in content: 5109094217
+2024-12-01 17:20:30,824 - INFO - Found ISBN-10 in content: 1709440000
+2024-12-01 17:20:30,824 - INFO - Found ISBN-10 in content: 9332621544
+2024-12-01 17:20:30,824 - INFO - Found ISBN-10 in content: 3944152681
+2024-12-01 17:20:30,824 - INFO - Found ISBN-10 in content: 6992388562
+2024-12-01 17:20:30,824 - INFO - Found ISBN-10 in content: 6670049071
+2024-12-01 17:20:30,824 - INFO - Found ISBN-10 in content: 8162146859
+2024-12-01 17:20:30,824 - INFO - Found ISBN-10 in content: 2963895217
+2024-12-01 17:20:30,824 - INFO - Found ISBN-10 in content: 5999932299
+2024-12-01 17:20:30,824 - INFO - Found ISBN-10 in content: 1560894146
+2024-12-01 17:20:30,824 - INFO - Found ISBN-10 in content: 1828625369
+2024-12-01 17:20:30,824 - INFO - Found ISBN-10 in content: 7920827223
+2024-12-01 17:20:30,824 - INFO - Found ISBN-10 in content: 7582511852
+2024-12-01 17:20:30,824 - INFO - Found ISBN-10 in content: 1091686400
+2024-12-01 17:20:30,825 - INFO - Found ISBN-10 in content: 0000000000
+2024-12-01 17:20:30,825 - INFO - Found ISBN-10 in content: 1800000000
+2024-12-01 17:20:30,897 - INFO - Found ISBN in DC metadata: 9781718501492
+2024-12-01 17:20:30,910 - INFO - Successfully extracted metadata: {'title': 'Cybersecurity for Small Networks', 'creator': 'Seth Enoka', 'publisher': 'No Starch Press', 'isbn': '9781718501492'}
+2024-12-01 17:20:31,077 - INFO - Found ISBN-10 in content: 2208988800
+2024-12-01 17:20:31,121 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1).epub
+2024-12-01 17:20:31,310 - INFO - Processed 24 items
+2024-12-01 17:20:31,311 - INFO - Found 34 unique ISBNs: ['0000000000', '0000000840', '0973355292', '1091686400', '1415926535', '1560894146', '1709440000', '1800000000', '1828625369', '1844674407', '2208988800', '2963895217', '3709551614', '3944152681', '4012345678', '4123456789', '4142135623', '4895000000', '5109094217', '5999932299', '6227020800', '6670049071', '6992388562', '7040000000', '7582511852', '7694409323', '7920827223', '8162146859', '9223372036', '9332621544', '9781098145', '9781098145538', '9792082722375', '9999999999']
+2024-12-01 17:20:31,311 - INFO - Extracting metadata from: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538.epub
+2024-12-01 17:20:31,365 - INFO - Found ISBN-10 in content: 7742338443
+2024-12-01 17:20:31,365 - INFO - Found ISBN-10 in content: 1102733054
+2024-12-01 17:20:31,368 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 17:20:31,368 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 17:20:31,421 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 17:20:31,421 - INFO - Found ISBN-10 in content: 9781789616
+2024-12-01 17:20:31,472 - INFO - Found ISBN-10 in content: 6033220602
+2024-12-01 17:20:31,472 - INFO - Found ISBN-10 in content: 2670123361
+2024-12-01 17:20:31,473 - INFO - Found ISBN-10 in content: 2684179187
+2024-12-01 17:20:31,473 - INFO - Found ISBN-10 in content: 6003123012
+2024-12-01 17:20:31,477 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 17:20:31,477 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 17:20:31,477 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 17:20:31,477 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 17:20:31,477 - INFO - Found ISBN-13 in content: 9788555193149
+2024-12-01 17:20:31,477 - INFO - Found ISBN-13 in content: 9788555193125
+2024-12-01 17:20:31,478 - INFO - Processed 16 items
+2024-12-01 17:20:31,478 - INFO - Found 8 unique ISBNs: ['1102733054', '2670123361', '2684179187', '6003123012', '6033220602', '7742338443', '9788555193125', '9788555193149']
+2024-12-01 17:20:31,478 - INFO - Found ISBN in content: 9788555193149
+2024-12-01 17:20:31,478 - INFO - Successfully extracted metadata: {'title': 'Series temporais com Prophet: Analise e previsao de dados com Python', 'creator': 'Allan Spadini e Valquiria Alencar', 'isbn': '9788555193149', 'publisher': 'Casa do Código'}
+2024-12-01 17:20:31,525 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538.epub
+2024-12-01 17:20:31,562 - INFO - Found ISBN-10 in content: 7865167308
+2024-12-01 17:20:31,573 - INFO - Found ISBN-10 in content: 8874887488
+2024-12-01 17:20:31,573 - INFO - Found ISBN-10 in content: 2961186622
+2024-12-01 17:20:31,573 - INFO - Found ISBN-10 in content: 1188118811
+2024-12-01 17:20:31,573 - INFO - Found ISBN-10 in content: 1797660478
+2024-12-01 17:20:31,701 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 17:20:31,701 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 17:20:31,701 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 17:20:31,701 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 17:20:31,701 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 17:20:31,701 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 17:20:31,701 - INFO - Found ISBN-10 in content: 9781788836
+2024-12-01 17:20:31,701 - INFO - Found ISBN-10 in content: 9781788398
+2024-12-01 17:20:31,702 - INFO - Processed 222 items
+2024-12-01 17:20:31,702 - INFO - Found 11 unique ISBNs: ['1188118811', '1797660478', '2961186622', '7865167308', '8874887488', '9781788398', '9781788398060', '9781788836', '9781788836067', '9781789616', '9781789616132']
+2024-12-01 17:20:31,702 - INFO - Extracting metadata from: /Users/menon/Downloads/0_teste_livros_scan/Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060.epub
+2024-12-01 17:20:31,726 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 17:20:31,726 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 17:20:31,726 - INFO - Found ISBN-10 in content: 9781098145
+2024-12-01 17:20:31,750 - INFO - Found ISBN-13 in content: 9781098145538
+2024-12-01 17:20:31,981 - INFO - Found ISBN-10 in content: 1415926535
+2024-12-01 17:20:31,981 - INFO - Found ISBN-10 in content: 1415926535
+2024-12-01 17:20:31,981 - INFO - Found ISBN-10 in content: 7694409323
+2024-12-01 17:20:31,981 - INFO - Found ISBN-10 in content: 0973355292
+2024-12-01 17:20:31,981 - INFO - Found ISBN-10 in content: 0973355292
+2024-12-01 17:20:31,981 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:20:31,981 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:20:31,981 - INFO - Found ISBN-10 in content: 4123456789
+2024-12-01 17:20:31,981 - INFO - Found ISBN-10 in content: 4123456789
+2024-12-01 17:20:31,981 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:20:31,981 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:20:31,981 - INFO - Found ISBN-10 in content: 4012345678
+2024-12-01 17:20:32,345 - INFO - Found ISBN-10 in content: 9999999999
+2024-12-01 17:20:32,346 - INFO - Found ISBN-10 in content: 4142135623
+2024-12-01 17:20:32,346 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 17:20:32,346 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 17:20:32,346 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 17:20:32,346 - INFO - Found ISBN-10 in content: 9223372036
+2024-12-01 17:20:32,346 - INFO - Found ISBN-10 in content: 1844674407
+2024-12-01 17:20:32,346 - INFO - Found ISBN-10 in content: 3709551614
+2024-12-01 17:20:32,623 - INFO - Found ISBN-13 in content: 9792082722375
+2024-12-01 17:20:32,623 - INFO - Found ISBN-10 in content: 0000000840
+2024-12-01 17:20:32,623 - INFO - Found ISBN-10 in content: 0000000840
+2024-12-01 17:20:32,624 - INFO - Found ISBN-10 in content: 4895000000
+2024-12-01 17:20:32,624 - INFO - Found ISBN-10 in content: 7040000000
+2024-12-01 17:20:32,624 - INFO - Found ISBN-10 in content: 6227020800
+2024-12-01 17:20:32,624 - INFO - Found ISBN-10 in content: 5109094217
+2024-12-01 17:20:32,624 - INFO - Found ISBN-10 in content: 1709440000
+2024-12-01 17:20:32,624 - INFO - Found ISBN-10 in content: 9332621544
+2024-12-01 17:20:32,624 - INFO - Found ISBN-10 in content: 3944152681
+2024-12-01 17:20:32,624 - INFO - Found ISBN-10 in content: 6992388562
+2024-12-01 17:20:32,624 - INFO - Found ISBN-10 in content: 6670049071
+2024-12-01 17:20:32,624 - INFO - Found ISBN-10 in content: 8162146859
+2024-12-01 17:20:32,624 - INFO - Found ISBN-10 in content: 2963895217
+2024-12-01 17:20:32,624 - INFO - Found ISBN-10 in content: 5999932299
+2024-12-01 17:20:32,624 - INFO - Found ISBN-10 in content: 1560894146
+2024-12-01 17:20:32,624 - INFO - Found ISBN-10 in content: 1828625369
+2024-12-01 17:20:32,624 - INFO - Found ISBN-10 in content: 7920827223
+2024-12-01 17:20:32,624 - INFO - Found ISBN-10 in content: 7582511852
+2024-12-01 17:20:32,624 - INFO - Found ISBN-10 in content: 1091686400
+2024-12-01 17:20:32,624 - INFO - Found ISBN-10 in content: 0000000000
+2024-12-01 17:20:32,625 - INFO - Found ISBN-10 in content: 1800000000
+2024-12-01 17:20:32,785 - INFO - Processing EPUB file: /Users/menon/Downloads/0_teste_livros_scan/Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060.epub
+2024-12-01 17:20:32,875 - INFO - Found ISBN-10 in content: 2208988800
+2024-12-01 17:20:33,077 - INFO - Processed 24 items
+2024-12-01 17:20:33,077 - INFO - Found 34 unique ISBNs: ['0000000000', '0000000840', '0973355292', '1091686400', '1415926535', '1560894146', '1709440000', '1800000000', '1828625369', '1844674407', '2208988800', '2963895217', '3709551614', '3944152681', '4012345678', '4123456789', '4142135623', '4895000000', '5109094217', '5999932299', '6227020800', '6670049071', '6992388562', '7040000000', '7582511852', '7694409323', '7920827223', '8162146859', '9223372036', '9332621544', '9781098145', '9781098145538', '9792082722375', '9999999999']
+2024-12-01 17:20:33,099 - INFO - Found ISBN in content: 9781098145538
+2024-12-01 17:20:33,099 - INFO - Successfully extracted metadata: {'title': 'Learning Java', 'creator': 'Marc Loy, Patrick Niemeyer, and Daniel Leuck', 'publisher': "O'Reilly Media, Inc.", 'date': '2023-08-23', 'isbn': '9781098145538'}
+2024-12-01 17:20:33,119 - INFO - Success: OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538
+2024-12-01 17:20:33,119 - INFO - Success: No_Starch_Press_2022_Cybersecurity_for_Small_Networks_Seth_Enoka_9781718501485
+2024-12-01 17:20:33,193 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 17:20:33,193 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 17:20:33,202 - INFO - Found ISBN-13 in content: 9781789616132
+2024-12-01 17:20:33,202 - INFO - Found ISBN-10 in content: 9781789616
+2024-12-01 17:20:33,334 - INFO - Found ISBN-10 in content: 7865167308
+2024-12-01 17:20:33,344 - INFO - Found ISBN-10 in content: 8874887488
+2024-12-01 17:20:33,344 - INFO - Found ISBN-10 in content: 2961186622
+2024-12-01 17:20:33,345 - INFO - Found ISBN-10 in content: 1188118811
+2024-12-01 17:20:33,345 - INFO - Found ISBN-10 in content: 1797660478
+2024-12-01 17:20:33,442 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 17:20:33,442 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 17:20:33,442 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 17:20:33,442 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 17:20:33,442 - INFO - Found ISBN-13 in content: 9781788836067
+2024-12-01 17:20:33,442 - INFO - Found ISBN-13 in content: 9781788398060
+2024-12-01 17:20:33,442 - INFO - Found ISBN-10 in content: 9781788836
+2024-12-01 17:20:33,442 - INFO - Found ISBN-10 in content: 9781788398
+2024-12-01 17:20:33,443 - INFO - Processed 222 items
+2024-12-01 17:20:33,443 - INFO - Found 11 unique ISBNs: ['1188118811', '1797660478', '2961186622', '7865167308', '8874887488', '9781788398', '9781788398060', '9781788836', '9781788836067', '9781789616', '9781789616132']
+2024-12-01 17:20:33,443 - INFO - Found ISBN in content: 9781788836067
+2024-12-01 17:20:33,443 - INFO - Successfully extracted metadata: {'title': 'Hands-On Deep Learning for IoT', 'creator': 'Mohammad Abdur Razzaque, PhD', 'publisher': 'Packt', 'date': '2019-06-27T06:26:31Z', 'isbn': '9781788836067'}
+2024-12-01 17:20:33,445 - INFO - Success: Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060
+2024-12-01 17:20:33,445 - INFO - Success: series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1)
+2024-12-01 17:20:33,447 - INFO - Reports generated successfully at reports
