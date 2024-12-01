@@ -1,167 +1,269 @@
 {
   "summary": {
-    "total_processed": 10,
-    "successful": 10,
-    "timestamp": "2024-11-28 15:55:32"
+    "total_processed": 13,
+    "successful": 13,
+    "timestamp": "2024-12-01 16:35:58"
   },
   "books": [
     {
-      "title": "More Fearless Change",
+      "title": "The Active Defender",
       "authors": [
-        "Mary Lynn Manns",
-        "Linda Rising"
+        "Dr. Catherine J. Ullman"
       ],
-      "publisher": "Unknown",
-      "published_date": "2015",
+      "publisher": "Wiley",
+      "published_date": "2023-07-25",
       "isbn_10": null,
-      "isbn_13": "9780133966534",
-      "confidence_score": 0.9500000000000001,
+      "isbn_13": "9781119895213",
+      "confidence_score": 0.9,
       "source": "google_books",
-      "file_path": "/Users/menon/Downloads/livros/SOFTWARE ARCHITECTURE BY O'REILLY/artofagiledevelopment2e_V2.epub",
-      "file_paths": null,
-      "formats": null
+      "file_path": "/Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_The_Active_Defender_Dr._Catherine_J._Ullman_9781119895213.pdf",
+      "file_paths": [
+        "/Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_The_Active_Defender_Dr._Catherine_J._Ullman_9781119895213.pdf"
+      ],
+      "formats": [
+        "pdf"
+      ]
     },
     {
-      "title": "Continuous API Management",
+      "title": "Software Transparency",
       "authors": [
-        "Mehdi Medjaoui",
-        "Erik Wilde",
-        "Ronnie Mitra",
-        "Mike Amundsen"
+        "Chris Hughes",
+        "Tony Turner"
+      ],
+      "publisher": "Wiley",
+      "published_date": "2023-06-07",
+      "isbn_10": null,
+      "isbn_13": "9781394158485",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_Software_Transparency_Chris_Hughes-_Tony_Turner_9781394158485.pdf",
+      "file_paths": [
+        "/Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_Software_Transparency_Chris_Hughes-_Tony_Turner_9781394158485.pdf"
+      ],
+      "formats": [
+        "pdf"
+      ]
+    },
+    {
+      "title": "bash Cookbook",
+      "authors": [
+        "Carl Albing",
+        "JP Vossen"
       ],
       "publisher": "O'Reilly Media",
+      "published_date": "Unknown",
+      "isbn_10": null,
+      "isbn_13": "9781491975336",
+      "confidence_score": 0.85,
+      "source": "openlibrary",
+      "file_path": "/Users/menon/Downloads/0_teste_livros_scan/OReilly_bash_Cookbook_Carl_Albing-_JP_Vossen_9781491975336.pdf",
+      "file_paths": [
+        "/Users/menon/Downloads/0_teste_livros_scan/OReilly_bash_Cookbook_Carl_Albing-_JP_Vossen_9781491975336.pdf"
+      ],
+      "formats": [
+        "pdf"
+      ]
+    },
+    {
+      "title": "Ansible: Up and Running",
+      "authors": [
+        "Bas Meijer",
+        "Lorin Hochstein",
+        "René Moser"
+      ],
+      "publisher": "O'Reilly Media",
+      "published_date": "2022-09-30",
+      "isbn_10": null,
+      "isbn_13": "9781098109158",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/0_teste_livros_scan/OReilly_2022_Ansible_Up_and_Running_Bas_Meijer-_Lorin_Hochstein_9781098109158.pdf",
+      "file_paths": [
+        "/Users/menon/Downloads/0_teste_livros_scan/OReilly_2022_Ansible_Up_and_Running_Bas_Meijer-_Lorin_Hochstein_9781098109158.pdf"
+      ],
+      "formats": [
+        "pdf"
+      ]
+    },
+    {
+      "title": "Bug Bounty Bootcamp",
+      "authors": [
+        "Vickie Li"
+      ],
+      "publisher": "National Geographic Books",
+      "published_date": "2021-12-07",
+      "isbn_10": null,
+      "isbn_13": "9781718501546",
+      "confidence_score": 0.9500000000000001,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/0_teste_livros_scan/National_Geographic_Books_2021_Bug_Bounty_Bootcamp_Vickie_Li_9781718501546.pdf",
+      "file_paths": [
+        "/Users/menon/Downloads/0_teste_livros_scan/National_Geographic_Books_2021_Bug_Bounty_Bootcamp_Vickie_Li_9781718501546.pdf"
+      ],
+      "formats": [
+        "pdf"
+      ]
+    },
+    {
+      "title": "Java Performance",
+      "authors": [
+        "Scott Oaks"
+      ],
+      "publisher": "O'Reilly Media, Incorporated",
+      "published_date": "2020",
+      "isbn_10": null,
+      "isbn_13": "9781492056119",
+      "confidence_score": 0.85,
+      "source": "openlibrary",
+      "file_path": "/Users/menon/Downloads/0_teste_livros_scan/OReilly_2020_Java_Performance_Scott_Oaks_9781492056119.pdf",
+      "file_paths": [
+        "/Users/menon/Downloads/0_teste_livros_scan/OReilly_2020_Java_Performance_Scott_Oaks_9781492056119.pdf"
+      ],
+      "formats": [
+        "pdf"
+      ]
+    },
+    {
+      "title": "Applied Machine Learning and High-Performance Computing on AWS",
+      "authors": [
+        "Mani Khanuja",
+        "Farooq Sabir",
+        "Shreyas Subramanian",
+        "Trenton Potgieter"
+      ],
+      "publisher": "Packt Publishing, Limited",
+      "published_date": "2022",
+      "isbn_10": null,
+      "isbn_13": "9781803237015",
+      "confidence_score": 0.85,
+      "source": "openlibrary",
+      "file_path": "/Users/menon/Downloads/0_teste_livros_scan/Packt_2022_Applied_Machine_Learning_and_High-Performance_Comp_Mani_Khanuja-_Farooq_Sabir_9781803237015.pdf",
+      "file_paths": [
+        "/Users/menon/Downloads/0_teste_livros_scan/Packt_2022_Applied_Machine_Learning_and_High-Performance_Comp_Mani_Khanuja-_Farooq_Sabir_9781803237015.pdf"
+      ],
+      "formats": [
+        "pdf"
+      ]
+    },
+    {
+      "title": "The Hardware Hacking Handbook",
+      "authors": [
+        "Jasper van Woudenberg",
+        "Colin O'Flynn"
+      ],
+      "publisher": "No Starch Press",
       "published_date": "2021-12-21",
       "isbn_10": null,
-      "isbn_13": "9781098103521",
+      "isbn_13": "9781593278748",
       "confidence_score": 0.9500000000000001,
       "source": "google_books",
-      "file_path": "/Users/menon/Downloads/livros/SOFTWARE ARCHITECTURE BY O'REILLY/continuousapimanagement2e.epub",
-      "file_paths": null,
-      "formats": null
-    },
-    {
-      "title": "Building Micro-Frontends",
-      "authors": [
-        "Luca Mezzalira"
+      "file_path": "/Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2021_The_Hardware_Hacking_Handbook_Jasper_van_Woudenberg-_Colin_O'Flynn_9781593278748.pdf",
+      "file_paths": [
+        "/Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2021_The_Hardware_Hacking_Handbook_Jasper_van_Woudenberg-_Colin_O'Flynn_9781593278748.pdf"
       ],
-      "publisher": "O'Reilly Media, Incorporated",
-      "published_date": "2021",
-      "isbn_10": null,
-      "isbn_13": "9781492082996",
-      "confidence_score": 0.85,
-      "source": "openlibrary",
-      "file_path": "/Users/menon/Downloads/livros/SOFTWARE ARCHITECTURE BY O'REILLY/buildingmicro-frontends.mobi",
-      "file_paths": null,
-      "formats": null
+      "formats": [
+        "pdf"
+      ]
     },
     {
-      "title": "Flow Architectures",
+      "title": "Java to Kotlin",
       "authors": [
-        "James Urquhart"
-      ],
-      "publisher": "O'Reilly Media, Incorporated",
-      "published_date": "2021",
-      "isbn_10": null,
-      "isbn_13": "9781492075899",
-      "confidence_score": 0.85,
-      "source": "openlibrary",
-      "file_path": "/Users/menon/Downloads/livros/SOFTWARE ARCHITECTURE BY O'REILLY/flowarchitectures.mobi",
-      "file_paths": null,
-      "formats": null
-    },
-    {
-      "title": "Monolith to Microservices",
-      "authors": [
-        "Sam Newman"
+        "Duncan McGregor",
+        "Nat Pryce"
       ],
       "publisher": "O'Reilly Media",
-      "published_date": "2019-09-04",
+      "published_date": "2021-11-16",
       "isbn_10": null,
-      "isbn_13": "9781492047841",
-      "confidence_score": 0.9,
-      "source": "google_books",
-      "file_path": "/Users/menon/Downloads/livros/SOFTWARE ARCHITECTURE BY O'REILLY/monolithtomicroservices.mobi",
-      "file_paths": null,
-      "formats": null
-    },
-    {
-      "title": "Continuous API Management",
-      "authors": [
-        "Mehdi Medjaoui",
-        "Erik Wilde",
-        "Ronnie Mitra",
-        "Mike Amundsen"
-      ],
-      "publisher": "O'Reilly Media",
-      "published_date": "2021-12-21",
-      "isbn_10": null,
-      "isbn_13": "9781098103521",
+      "isbn_13": "9781492082279",
       "confidence_score": 0.9500000000000001,
       "source": "google_books",
-      "file_path": "/Users/menon/Downloads/livros/SOFTWARE ARCHITECTURE BY O'REILLY/continuousapimanagement2e.pdf",
-      "file_paths": null,
-      "formats": null
-    },
-    {
-      "title": "Flow Architectures",
-      "authors": [
-        "James Urquhart"
+      "file_path": "/Users/menon/Downloads/0_teste_livros_scan/OReilly_2021_Java_to_Kotlin_Duncan_McGregor-_Nat_Pryce_9781492082279.mobi",
+      "file_paths": [
+        "/Users/menon/Downloads/0_teste_livros_scan/OReilly_2021_Java_to_Kotlin_Duncan_McGregor-_Nat_Pryce_9781492082279.mobi"
       ],
-      "publisher": "O'Reilly Media, Incorporated",
-      "published_date": "2021",
-      "isbn_10": null,
-      "isbn_13": "9781492075899",
-      "confidence_score": 0.9,
-      "source": "openlibrary",
-      "file_path": "/Users/menon/Downloads/livros/SOFTWARE ARCHITECTURE BY O'REILLY/flowarchitectures.pdf",
-      "file_paths": null,
-      "formats": null
+      "formats": [
+        "mobi"
+      ]
     },
     {
-      "title": "The Art of Agile Development",
+      "title": "Learning Java",
       "authors": [
-        "James Shore",
-        "Shane Warden"
+        "Marc Loy",
+        "Patrick Niemeyer",
+        "Daniel Leuck"
       ],
       "publisher": "O'Reilly Media",
-      "published_date": "2022-01-18",
+      "published_date": "2023-10-31",
       "isbn_10": null,
-      "isbn_13": "9781492080695",
+      "isbn_13": "9781098145538",
       "confidence_score": 0.9500000000000001,
       "source": "google_books",
-      "file_path": "/Users/menon/Downloads/livros/SOFTWARE ARCHITECTURE BY O'REILLY/artofagiledevelopment2e_V2.pdf",
-      "file_paths": null,
-      "formats": null
+      "file_path": "/Users/menon/Downloads/0_teste_livros_scan/OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538.epub",
+      "file_paths": [
+        "/Users/menon/Downloads/0_teste_livros_scan/OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538.epub"
+      ],
+      "formats": [
+        "epub"
+      ]
     },
     {
-      "title": "Monolith to Microservices",
+      "title": "Cybersecurity for Small Networks",
       "authors": [
-        "Sam Newman"
+        "Seth Enoka"
       ],
-      "publisher": "O'Reilly Media",
-      "published_date": "2019-09-04",
+      "publisher": "No Starch Press",
+      "published_date": "2022-12-06",
       "isbn_10": null,
-      "isbn_13": "9781492047841",
-      "confidence_score": 0.9,
+      "isbn_13": "9781718501485",
+      "confidence_score": 0.9500000000000001,
       "source": "google_books",
-      "file_path": "/Users/menon/Downloads/livros/SOFTWARE ARCHITECTURE BY O'REILLY/monolithtomicroservices.pdf",
-      "file_paths": null,
-      "formats": null
+      "file_path": "/Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2022_Cybersecurity_for_Small_Networks_Seth_Enoka_9781718501485.epub",
+      "file_paths": [
+        "/Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2022_Cybersecurity_for_Small_Networks_Seth_Enoka_9781718501485.epub"
+      ],
+      "formats": [
+        "epub"
+      ]
     },
     {
-      "title": "Building Micro-Frontends",
+      "title": "Tensorflow Deep Learning Projects",
       "authors": [
-        "Luca Mezzalira"
+        "Alberto Boschetti",
+        "Luca Massaron",
+        "Abhishek Thakur"
       ],
-      "publisher": "O'Reilly Media, Incorporated",
-      "published_date": "2021",
+      "publisher": "Packt Publishing",
+      "published_date": "2018-03-28",
       "isbn_10": null,
-      "isbn_13": "9781492082996",
-      "confidence_score": 0.85,
-      "source": "openlibrary",
-      "file_path": "/Users/menon/Downloads/livros/SOFTWARE ARCHITECTURE BY O'REILLY/buildingmicro-frontends.pdf",
-      "file_paths": null,
-      "formats": null
+      "isbn_13": "9781788398060",
+      "confidence_score": 0.9500000000000001,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/0_teste_livros_scan/Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060.epub",
+      "file_paths": [
+        "/Users/menon/Downloads/0_teste_livros_scan/Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060.epub"
+      ],
+      "formats": [
+        "epub"
+      ]
+    },
+    {
+      "title": "Series temporais com Prophet: Analise e previsao de dados com Python",
+      "authors": [
+        "Allan Spadini e Valquiria Alencar"
+      ],
+      "publisher": "Casa do Código",
+      "published_date": "Unknown",
+      "isbn_10": null,
+      "isbn_13": "9788555193149",
+      "confidence_score": 0.95,
+      "source": "epub_metadata",
+      "file_path": "/Users/menon/Downloads/0_teste_livros_scan/series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1).epub",
+      "file_paths": [
+        "/Users/menon/Downloads/0_teste_livros_scan/series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1).epub"
+      ],
+      "formats": [
+        "epub"
+      ]
     }
   ]
 }

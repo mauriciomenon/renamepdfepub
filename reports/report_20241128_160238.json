@@ -1,0 +1,170 @@
+{
+  "report_metadata": {
+    "generated_at": "2024-11-28T16:02:38.303034",
+    "total_files_processed": 10,
+    "processing_duration": "6.28s"
+  },
+  "summary_statistics": {
+    "total_files": 10,
+    "successful_extractions": 10,
+    "failed_extractions": 0,
+    "success_rate_percentage": 100.0,
+    "average_processing_time": 6.28
+  },
+  "format_statistics": {
+    "epub": {
+      "total": 2,
+      "successful": 2,
+      "failed": 0,
+      "success_rate_percentage": 100.0
+    },
+    "mobi": {
+      "total": 3,
+      "successful": 3,
+      "failed": 0,
+      "success_rate_percentage": 100.0
+    },
+    "pdf": {
+      "total": 5,
+      "successful": 5,
+      "failed": 0,
+      "success_rate_percentage": 100.0
+    }
+  },
+  "api_statistics": {
+    "sources_used": {
+      "google_books": 6,
+      "openlibrary": 4
+    },
+    "most_successful_source": "google_books"
+  },
+  "publisher_statistics": {
+    "total_publishers": 3,
+    "publisher_distribution": {
+      "Unknown": 1,
+      "O'Reilly Media": 5,
+      "O'Reilly Media, Incorporated": 4
+    }
+  },
+  "successful_extractions": [
+    {
+      "filename": "artofagiledevelopment2e_V2.epub",
+      "title": "More Fearless Change",
+      "authors": [
+        "Mary Lynn Manns",
+        "Linda Rising"
+      ],
+      "publisher": "Unknown",
+      "isbn": "9780133966534",
+      "source": "google_books",
+      "confidence_score": 0.95
+    },
+    {
+      "filename": "continuousapimanagement2e.epub",
+      "title": "Continuous API Management",
+      "authors": [
+        "Mehdi Medjaoui",
+        "Erik Wilde",
+        "Ronnie Mitra",
+        "Mike Amundsen"
+      ],
+      "publisher": "O'Reilly Media",
+      "isbn": "9781098103521",
+      "source": "google_books",
+      "confidence_score": 0.95
+    },
+    {
+      "filename": "buildingmicro-frontends.mobi",
+      "title": "Building Micro-Frontends",
+      "authors": [
+        "Luca Mezzalira"
+      ],
+      "publisher": "O'Reilly Media, Incorporated",
+      "isbn": "9781492082996",
+      "source": "openlibrary",
+      "confidence_score": 0.85
+    },
+    {
+      "filename": "flowarchitectures.mobi",
+      "title": "Flow Architectures",
+      "authors": [
+        "James Urquhart"
+      ],
+      "publisher": "O'Reilly Media, Incorporated",
+      "isbn": "9781492075899",
+      "source": "openlibrary",
+      "confidence_score": 0.85
+    },
+    {
+      "filename": "monolithtomicroservices.mobi",
+      "title": "Monolith to Microservices",
+      "authors": [
+        "Sam Newman"
+      ],
+      "publisher": "O'Reilly Media",
+      "isbn": "9781492047841",
+      "source": "google_books",
+      "confidence_score": 0.9
+    },
+    {
+      "filename": "continuousapimanagement2e.pdf",
+      "title": "Continuous API Management",
+      "authors": [
+        "Mehdi Medjaoui",
+        "Erik Wilde",
+        "Ronnie Mitra",
+        "Mike Amundsen"
+      ],
+      "publisher": "O'Reilly Media",
+      "isbn": "9781098103521",
+      "source": "google_books",
+      "confidence_score": 0.95
+    },
+    {
+      "filename": "flowarchitectures.pdf",
+      "title": "Flow Architectures",
+      "authors": [
+        "James Urquhart"
+      ],
+      "publisher": "O'Reilly Media, Incorporated",
+      "isbn": "9781492075899",
+      "source": "openlibrary",
+      "confidence_score": 0.9
+    },
+    {
+      "filename": "artofagiledevelopment2e_V2.pdf",
+      "title": "The Art of Agile Development",
+      "authors": [
+        "James Shore",
+        "Shane Warden"
+      ],
+      "publisher": "O'Reilly Media",
+      "isbn": "9781492080695",
+      "source": "google_books",
+      "confidence_score": 0.95
+    },
+    {
+      "filename": "monolithtomicroservices.pdf",
+      "title": "Monolith to Microservices",
+      "authors": [
+        "Sam Newman"
+      ],
+      "publisher": "O'Reilly Media",
+      "isbn": "9781492047841",
+      "source": "google_books",
+      "confidence_score": 0.9
+    },
+    {
+      "filename": "buildingmicro-frontends.pdf",
+      "title": "Building Micro-Frontends",
+      "authors": [
+        "Luca Mezzalira"
+      ],
+      "publisher": "O'Reilly Media, Incorporated",
+      "isbn": "9781492082996",
+      "source": "openlibrary",
+      "confidence_score": 0.85
+    }
+  ],
+  "failed_extractions": []
+}

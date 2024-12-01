@@ -1,0 +1,230 @@
+{
+  "report_metadata": {
+    "generated_at": "2024-11-30T21:07:29.197817",
+    "total_files_processed": 16,
+    "processing_duration": "0.28s"
+  },
+  "summary_statistics": {
+    "total_files": 16,
+    "successful_extractions": 13,
+    "failed_extractions": 3,
+    "success_rate_percentage": 81.25,
+    "average_processing_time": 0.28
+  },
+  "format_statistics": {
+    "epub": {
+      "total": 4,
+      "successful": 4,
+      "failed": 0,
+      "success_rate_percentage": 100.0
+    },
+    "mobi": {
+      "total": 1,
+      "successful": 1,
+      "failed": 0,
+      "success_rate_percentage": 100.0
+    },
+    "pdf": {
+      "total": 11,
+      "successful": 8,
+      "failed": 3,
+      "success_rate_percentage": 72.73
+    }
+  },
+  "api_statistics": {
+    "sources_used": {
+      "google_books": 9,
+      "epub_metadata": 1,
+      "openlibrary": 3
+    },
+    "most_successful_source": "google_books"
+  },
+  "publisher_statistics": {
+    "total_publishers": 8,
+    "publisher_distribution": {
+      "O'Reilly Media": 4,
+      "No Starch Press": 2,
+      "Packt Publishing": 1,
+      "Casa do Código": 1,
+      "Wiley": 2,
+      "National Geographic Books": 1,
+      "O'Reilly Media, Incorporated": 1,
+      "Packt Publishing, Limited": 1
+    }
+  },
+  "successful_extractions": [
+    {
+      "filename": "OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538.epub",
+      "title": "Learning Java",
+      "authors": [
+        "Marc Loy",
+        "Patrick Niemeyer",
+        "Daniel Leuck"
+      ],
+      "publisher": "O'Reilly Media",
+      "isbn": "9781098145538",
+      "source": "google_books",
+      "confidence_score": 0.9
+    },
+    {
+      "filename": "No_Starch_Press_2022_Cybersecurity_for_Small_Networks_Seth_Enoka_9781718501485.epub",
+      "title": "Cybersecurity for Small Networks",
+      "authors": [
+        "Seth Enoka"
+      ],
+      "publisher": "No Starch Press",
+      "isbn": "9781718501485",
+      "source": "google_books",
+      "confidence_score": 0.95
+    },
+    {
+      "filename": "Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060.epub",
+      "title": "Tensorflow Deep Learning Projects",
+      "authors": [
+        "Alberto Boschetti",
+        "Luca Massaron",
+        "Abhishek Thakur"
+      ],
+      "publisher": "Packt Publishing",
+      "isbn": "9781788398060",
+      "source": "google_books",
+      "confidence_score": 0.95
+    },
+    {
+      "filename": "series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1).epub",
+      "title": "Series temporais com Prophet: Analise e previsao de dados com Python",
+      "authors": [
+        "Allan Spadini e Valquiria Alencar"
+      ],
+      "publisher": "Casa do Código",
+      "isbn": "9788555193149",
+      "source": "epub_metadata",
+      "confidence_score": 0.95
+    },
+    {
+      "filename": "OReilly_2021_Java_to_Kotlin_Duncan_McGregor-_Nat_Pryce_9781492082279.mobi",
+      "title": "Java to Kotlin",
+      "authors": [
+        "Duncan McGregor",
+        "Nat Pryce"
+      ],
+      "publisher": "O'Reilly Media",
+      "isbn": "9781492082279",
+      "source": "google_books",
+      "confidence_score": 0.95
+    },
+    {
+      "filename": "Wiley_2023_The_Active_Defender_Dr._Catherine_J._Ullman_9781119895213.pdf",
+      "title": "The Active Defender",
+      "authors": [
+        "Dr. Catherine J. Ullman"
+      ],
+      "publisher": "Wiley",
+      "isbn": "9781119895213",
+      "source": "google_books",
+      "confidence_score": 0.9
+    },
+    {
+      "filename": "Wiley_2023_Software_Transparency_Chris_Hughes-_Tony_Turner_9781394158485.pdf",
+      "title": "Software Transparency",
+      "authors": [
+        "Chris Hughes",
+        "Tony Turner"
+      ],
+      "publisher": "Wiley",
+      "isbn": "9781394158485",
+      "source": "google_books",
+      "confidence_score": 0.95
+    },
+    {
+      "filename": "OReilly_bash_Cookbook_Carl_Albing-_JP_Vossen_9781491975336.pdf",
+      "title": "bash Cookbook",
+      "authors": [
+        "Carl Albing",
+        "JP Vossen"
+      ],
+      "publisher": "O'Reilly Media",
+      "isbn": "9781491975336",
+      "source": "openlibrary",
+      "confidence_score": 0.85
+    },
+    {
+      "filename": "OReilly_2022_Ansible_Up_and_Running_Bas_Meijer-_Lorin_Hochstein_9781098109158.pdf",
+      "title": "Ansible: Up and Running",
+      "authors": [
+        "Bas Meijer",
+        "Lorin Hochstein",
+        "René Moser"
+      ],
+      "publisher": "O'Reilly Media",
+      "isbn": "9781098109158",
+      "source": "google_books",
+      "confidence_score": 0.9
+    },
+    {
+      "filename": "National_Geographic_Books_2021_Bug_Bounty_Bootcamp_Vickie_Li_9781718501546.pdf",
+      "title": "Bug Bounty Bootcamp",
+      "authors": [
+        "Vickie Li"
+      ],
+      "publisher": "National Geographic Books",
+      "isbn": "9781718501546",
+      "source": "google_books",
+      "confidence_score": 0.95
+    },
+    {
+      "filename": "OReilly_2020_Java_Performance_Scott_Oaks_9781492056119.pdf",
+      "title": "Java Performance",
+      "authors": [
+        "Scott Oaks"
+      ],
+      "publisher": "O'Reilly Media, Incorporated",
+      "isbn": "9781492056119",
+      "source": "openlibrary",
+      "confidence_score": 0.9
+    },
+    {
+      "filename": "Packt_2022_Applied_Machine_Learning_and_High-Performance_Comp_Mani_Khanuja-_Farooq_Sabir_9781803237015.pdf",
+      "title": "Applied Machine Learning and High-Performance Computing on AWS",
+      "authors": [
+        "Mani Khanuja",
+        "Farooq Sabir",
+        "Shreyas Subramanian",
+        "Trenton Potgieter"
+      ],
+      "publisher": "Packt Publishing, Limited",
+      "isbn": "9781803237015",
+      "source": "openlibrary",
+      "confidence_score": 0.9
+    },
+    {
+      "filename": "No_Starch_Press_2021_The_Hardware_Hacking_Handbook_Jasper_van_Woudenberg-_Colin_O'Flynn_9781593278748.pdf",
+      "title": "The Hardware Hacking Handbook",
+      "authors": [
+        "Jasper van Woudenberg",
+        "Colin O'Flynn"
+      ],
+      "publisher": "No Starch Press",
+      "isbn": "9781593278748",
+      "source": "google_books",
+      "confidence_score": 0.95
+    }
+  ],
+  "failed_extractions": [
+    {
+      "filename": "computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf",
+      "error_type": "metadata_fetch_failed",
+      "error_details": "No details available"
+    },
+    {
+      "filename": "Hands-On Artificial Intelligence for Banking.pdf",
+      "error_type": "no_isbn_found",
+      "error_details": "No details available"
+    },
+    {
+      "filename": "pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf",
+      "error_type": "metadata_fetch_failed",
+      "error_details": "No details available"
+    }
+  ]
+}

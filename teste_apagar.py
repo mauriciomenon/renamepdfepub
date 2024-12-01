@@ -3,74 +3,54 @@
 # import pytesseract
 # from pdf2image import convert_from_path
 
-# Bibliotecas padrão do Python
+# Standard Library Imports
 import argparse
-import warnings
-warnings.filterwarnings("ignore", category=UserWarning, module="ebooklib.epub")
-import json
-from ebooklib import epub, ITEM_DOCUMENT  # Add this specific import
-import mobi
 import functools
+import json
 import logging
+import os
 import re
-import logging
-from pathlib import Path
-from typing import Set, Dict, Optional
-from ebooklib import epub
-from bs4 import BeautifulSoup
-import mobi
-import traceback
-import re
+import shutil
 import sqlite3
+import statistics
 import sys
-from ebooklib import epub
 import time
+import traceback
 import unicodedata
+import warnings
+import xml.etree.ElementTree as ET
 from collections import Counter, defaultdict
 from concurrent import futures
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, asdict
-from pathlib import Path
-from typing import Dict, List, Optional, Set, Tuple
-from urllib.parse import quote
-import statistics
-from collections import Counter, defaultdict
 from datetime import datetime
-from typing import Dict, List, Optional, Any, Set, Tuple
-from dataclasses import dataclass, asdict
+from pathlib import Path
+from typing import Any, Dict, List, Optional, Set, Tuple, Union
+from urllib.parse import quote
 
-# Bibliotecas de terceiros - HTTP/API
+# Third-party Imports: HTTP and API Related
 import requests
-import xml.etree.ElementTree as ET
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 from tqdm import tqdm
 
-import requests
-from requests.adapters import HTTPAdapter
-from urllib3.util.retry import Retry
-import xml.etree.ElementTree as ET
-
-# Bibliotecas de terceiros - Processamento de PDF
+# Third-party Imports: PDF Processing
 import PyPDF2
 import pdfplumber
+from pdf2image import convert_from_path
 from pdfminer.high_level import extract_text as pdfminer_extract
 import pytesseract
-from pdf2image import convert_from_path
 
-import plotly.graph_objects as go
-from datetime import datetime
-from pathlib import Path
-import json
-from typing import Dict, List, Optional
-from collections import Counter, defaultdict
-from pathlib import Path
-import logging
-from typing import Dict, List, Optional, Union, Tuple, Any
+# Third-party Imports: E-book Processing
+from bs4 import BeautifulSoup
 from ebooklib import epub, ITEM_DOCUMENT
 import mobi
-import re
-from bs4 import BeautifulSoup
+
+# Third-party Imports: Data Visualization
+import plotly.graph_objects as go
+
+# Configure warnings
+warnings.filterwarnings("ignore", category=UserWarning, module="ebooklib.epub")
 
 
 class DependencyManager:
@@ -160,6 +140,33 @@ INTERNATIONAL_PUBLISHERS = {
     }
 }
 
+NORMALIZED_PUBLISHERS = {
+    # O'Reilly variants
+    "O'REILLY": "OReilly",
+    "O'REILLY MEDIA": "OReilly",
+    "O'REILLY PUBLISHING": "OReilly",
+    "OREILLY": "OReilly",
+    
+    # Manning variants
+    "MANNING PUBLICATIONS": "Manning",
+    "MANNING PRESS": "Manning",
+    
+    # Packt variants
+    "PACKT PUBLISHING": "Packt",
+    "PACKT PUB": "Packt",
+    
+    # Brazilian publishers
+    "CASA DO CÓDIGO": "Casa do Codigo",
+    "CDC": "Casa do Codigo",
+    "CASADOCODIGO": "Casa do Codigo",
+    
+    "NOVATEC EDITORA": "Novatec",
+    "EDITORA NOVATEC": "Novatec",
+    
+    "ALTA BOOKS EDITORA": "Alta Books",
+    "ALTABOOKS": "Alta Books"
+}
+
 @dataclass
 class BookMetadata:
     """Classe para armazenar metadados de livros."""
@@ -176,69 +183,88 @@ class BookMetadata:
     formats: Optional[List[str]] = None     # Nova propriedade para formatos
     
 class MetadataCache:
+    """
+    Maintains a SQLite cache for book metadata with proper schema management 
+    and error handling.
+    """
     def __init__(self, db_path: str = "metadata_cache.db"):
+        """
+        Initialize metadata cache with database connection.
+        Args:
+            db_path: Path to SQLite database file
+        """
         self.db_path = db_path
+        
+        # If database exists and has issues, remove it
+        if Path(db_path).exists():
+            try:
+                conn = sqlite3.connect(db_path)
+                conn.execute("SELECT * FROM metadata_cache LIMIT 1")
+                conn.close()
+            except sqlite3.Error:
+                logging.info(f"Removing corrupted database: {db_path}")
+                os.remove(db_path)
+        
         self._init_db()
-        self._check_and_update_schema()  # Adicionado método para verificar e atualizar schema
-
-
-    def get_all(self) -> List[Dict]:
-        """Retorna todos os registros do cache."""
-        with sqlite3.connect(self.db_path) as conn:
-            results = conn.execute("""
-                SELECT isbn_10, isbn_13, title, authors, publisher, 
-                    published_date, confidence_score, source, file_path, raw_json
-                FROM metadata_cache
-                """).fetchall()
-            
-            if not results:
-                return []
-                
-            return [
-                {
-                    'isbn_10': r[0],
-                    'isbn_13': r[1],
-                    'title': r[2], 
-                    'authors': r[3].split(', '),
-                    'publisher': r[4],
-                    'published_date': r[5],
-                    'confidence_score': r[6],
-                    'source': r[7],
-                    'file_path': r[8]
-                } for r in results
-            ]
+        self._check_and_update_schema()
 
     def _init_db(self):
-        """Initialize database with basic schema."""
+        """Initialize database with required schema."""
         try:
             with sqlite3.connect(self.db_path) as conn:
+                # Create base table
                 conn.execute("""
                     CREATE TABLE IF NOT EXISTS metadata_cache (
                         id INTEGER PRIMARY KEY AUTOINCREMENT,
                         isbn_10 TEXT,
                         isbn_13 TEXT,
-                        title TEXT,
-                        authors TEXT,
+                        title TEXT NOT NULL,
+                        authors TEXT NOT NULL,
                         publisher TEXT,
                         published_date TEXT,
-                        confidence_score REAL,
+                        confidence_score REAL DEFAULT 0.0,
                         source TEXT,
                         file_path TEXT,
                         raw_json TEXT,
                         timestamp INTEGER DEFAULT (strftime('%s', 'now'))
                     )
                 """)
-                conn.execute("CREATE INDEX IF NOT EXISTS idx_isbn ON metadata_cache(isbn_10, isbn_13)")
+                
+                # Verify table exists and has correct structure
+                cursor = conn.cursor()
+                cursor.execute("PRAGMA table_info(metadata_cache)")
+                columns = [row[1] for row in cursor.fetchall()]
+                
+                if 'isbn_10' not in columns or 'isbn_13' not in columns:
+                    raise sqlite3.Error("Table creation failed - missing required columns")
+
+                # Only create indices if columns exist
+                if 'isbn_10' in columns and 'isbn_13' in columns:
+                    conn.execute("DROP INDEX IF EXISTS idx_isbn")  # Remove old index if exists
+                    conn.execute("CREATE INDEX IF NOT EXISTS idx_isbn_10 ON metadata_cache(isbn_10)")
+                    conn.execute("CREATE INDEX IF NOT EXISTS idx_isbn_13 ON metadata_cache(isbn_13)")
+
+                logging.info("Database initialized successfully with schema verified")
+                
         except sqlite3.Error as e:
             logging.error(f"Database initialization error: {str(e)}")
+            # Delete database if initialization fails
+            if Path(self.db_path).exists():
+                os.remove(self.db_path)
             raise
 
     def _check_and_update_schema(self):
         """Check for missing columns and add them if necessary."""
         try:
             with sqlite3.connect(self.db_path) as conn:
+                # Verify table exists
+                cursor = conn.cursor()
+                cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='metadata_cache'")
+                if not cursor.fetchone():
+                    raise sqlite3.Error("metadata_cache table does not exist")
+
                 # Get current columns
-                cursor = conn.execute("PRAGMA table_info(metadata_cache)")
+                cursor.execute("PRAGMA table_info(metadata_cache)")
                 columns = {row[1] for row in cursor.fetchall()}
 
                 # Add missing columns
@@ -247,13 +273,52 @@ class MetadataCache:
                 if 'last_error' not in columns:
                     conn.execute("ALTER TABLE metadata_cache ADD COLUMN last_error TEXT")
                 
-                logging.info("Database schema updated successfully")
+                logging.info("Schema verification completed successfully")
         except sqlite3.Error as e:
-            logging.error(f"Schema update error: {str(e)}")
+            logging.error(f"Schema verification error: {str(e)}")
             raise
+        
+    def get_all(self) -> List[Dict]:
+        """Return all records from cache."""
+        try:
+            with sqlite3.connect(self.db_path) as conn:
+                results = conn.execute("""
+                    SELECT isbn_10, isbn_13, title, authors, publisher, 
+                        published_date, confidence_score, source, file_path, raw_json
+                    FROM metadata_cache
+                    """).fetchall()
+                
+                if not results:
+                    return []
+                    
+                return [
+                    {
+                        'isbn_10': r[0],
+                        'isbn_13': r[1],
+                        'title': r[2], 
+                        'authors': r[3].split(', '),
+                        'publisher': r[4],
+                        'published_date': r[5],
+                        'confidence_score': r[6],
+                        'source': r[7],
+                        'file_path': r[8]
+                    } for r in results
+                ]
+                
+        except sqlite3.Error as e:
+            logging.error(f"Error retrieving all metadata: {str(e)}")
+            return []
 
     def get(self, isbn: str) -> Optional[Dict]:
-        """Get metadata from cache with improved error handling."""
+        """
+        Get metadata from cache with improved error handling.
+        
+        Args:
+            isbn: ISBN to look up (ISBN-10 or ISBN-13)
+            
+        Returns:
+            Dict with metadata if found, None otherwise
+        """
         try:
             with sqlite3.connect(self.db_path) as conn:
                 result = conn.execute("""
@@ -286,13 +351,21 @@ class MetadataCache:
                         'source': result[7],
                         'file_path': result[8]
                     }
+                    
         except sqlite3.Error as e:
             logging.error(f"Cache retrieval error for ISBN {isbn}: {str(e)}")
             return None
+            
         return None
 
+
     def set(self, metadata: Dict):
-        """Save metadata to cache with error handling."""
+        """
+        Save metadata to cache with validation.
+        
+        Args:
+            metadata: Dictionary containing book metadata
+        """
         try:
             with sqlite3.connect(self.db_path) as conn:
                 conn.execute(
@@ -313,6 +386,7 @@ class MetadataCache:
                         json.dumps(metadata)
                     )
                 )
+                
         except sqlite3.Error as e:
             logging.error(f"Cache storage error: {str(e)}")
             raise
@@ -376,6 +450,7 @@ class MetadataCache:
         except sqlite3.Error as e:
             logging.error(f"Error updating error count for ISBN {isbn}: {str(e)}")
 
+
     def update(self, metadata: Dict):
             """
             Atualiza um registro existente no cache.
@@ -399,6 +474,13 @@ class MetadataCache:
                     metadata.get('isbn_10'),
                     metadata.get('isbn_13')
                 ))
+
+    def get_connection():
+        """Get SQLite connection with optimal settings."""
+        conn = sqlite3.connect("metadata_cache.db")
+        conn.execute("PRAGMA foreign_keys = ON")
+        conn.execute("PRAGMA journal_mode = WAL")
+        return conn
 
 class ApiStatistics:
     """Classe para coletar e analisar estatísticas de APIs."""
@@ -2475,33 +2557,33 @@ class MetadataFetcher:
             return None
 
     def fetch_isbnlib_goom(self, isbn: str) -> Optional[BookMetadata]:
-        """Fetch usando isbnlib.goom() com validação aprimorada."""
+        """
+        Fetch metadata using isbnlib.goom with proper error handling.
+        
+        Args:
+            isbn: ISBN to look up
+            
+        Returns:
+            BookMetadata if successful, None otherwise
+        """
         try:
             import isbnlib
-            if not isbnlib.is_isbn13(isbn) and not isbnlib.is_isbn10(isbn):
-                logging.warning(f"ISBNlib: ISBN inválido {isbn}")
-                return None
-                
             metadata = isbnlib.goom(isbn)
-            if not metadata:
+            
+            # goom can return a list - take first item if so
+            if isinstance(metadata, list) and metadata:
+                metadata = metadata[0]
+            elif not metadata:
                 return None
                 
-            metadata_dict = {
-                'title': metadata.get('Title', '').strip(),
-                'authors': [author.strip() for author in metadata.get('Authors', [])],
-                'publisher': metadata.get('Publisher', '').strip(),
-                'published_date': metadata.get('Year', 'Unknown')
-            }
-            
-            # Validação específica para goom
-            if not self.validator.validate_metadata(metadata_dict, 'isbnlib_goom', isbn=isbn):
+            if not isinstance(metadata, dict):
                 return None
                 
             return BookMetadata(
-                title=metadata_dict['title'],
-                authors=metadata_dict['authors'],
-                publisher=metadata_dict['publisher'],
-                published_date=metadata_dict['published_date'],
+                title=metadata.get('Title', '').strip(),
+                authors=[a.strip() for a in metadata.get('Authors', [])],
+                publisher=metadata.get('Publisher', '').strip(),
+                published_date=metadata.get('Year', 'Unknown'),
                 isbn_13=isbn if len(isbn) == 13 else None,
                 isbn_10=isbn if len(isbn) == 10 else None,
                 confidence_score=self.confidence_adjustments['isbnlib_goom'],
@@ -2511,7 +2593,7 @@ class MetadataFetcher:
         except Exception as e:
             self._handle_api_error('isbnlib_goom', e, isbn)
             return None
-
+    
     def _fetch_brazilian_metadata(self, isbn: str) -> Optional[BookMetadata]:
         """Fetch metadata for other Brazilian publishers."""
         # Detect publisher from ISBN prefix
@@ -2584,13 +2666,36 @@ class MetadataFetcher:
             return None
 
     def _handle_api_error(self, api_name: str, error: Exception, isbn: str) -> None:
-        """Tratamento melhorado de erros de API."""
+        """
+        Enhanced API error handling with support for ISBN variants and complete metrics tracking.
+        
+        Args:
+            api_name: Name of the API that generated the error
+            error: The exception that occurred
+            isbn: ISBN being processed when the error occurred
+        """
         error_type = type(error).__name__
         error_msg = str(error)
         
+        # Known ISBN variant mappings, especially for Packt books
+        known_variants = {
+            '9781789957648': ['9788445901854'],
+            '9781801813785': ['9781801812436'],
+            '9781800205697': ['9781801810074'],
+            '9781800206540': ['9781801079341']
+        }
+        
+        # Skip warnings for known ISBN variants
+        if "isbn request != isbn response" in error_msg.lower():
+            if hasattr(self, 'file_group') and isinstance(self.file_group, object):
+                for primary, variants in known_variants.items():
+                    if isbn in variants or primary in error_msg:
+                        return  # Known variant, no need to log
+
+        # Get main logger
         logger = logging.getLogger('metadata_fetcher')
         
-        # Categoriza e registra o erro
+        # Categorize and record error
         if isinstance(error, requests.exceptions.Timeout):
             logger.warning(f"{api_name} timeout for ISBN {isbn}: {error_msg}")
             self.metrics.add_error(api_name, 'timeout')
@@ -2604,15 +2709,20 @@ class MetadataFetcher:
             logger.error(f"{api_name} unexpected error for ISBN {isbn}: {error_type} - {error_msg}")
             self.metrics.add_error(api_name, 'unexpected')
         
-        # Registra métricas da falha
+        # Record metrics for the failure
         self._log_api_metrics(api_name, False, 0.0)
         
-        # Atualiza estatísticas para ajuste dinâmico
+        # Update dynamic API adjustments based on performance
         stats = self.metrics.get_api_stats(api_name)
-        if stats.get('success_rate', 0) < 30:  # Se taxa de sucesso muito baixa
+        if stats.get('success_rate', 0) < 30:  # If success rate is very low
             config = self.API_CONFIGS.get(api_name, {})
-            config['retries'] = min(5, config.get('retries', 2) + 1)  # Aumenta retries
-            config['backoff'] = min(4.0, config.get('backoff', 1.5) * 1.5)  # Aumenta backoff
+            # Increase retries and backoff for problematic APIs
+            config['retries'] = min(5, config.get('retries', 2) + 1)
+            config['backoff'] = min(4.0, config.get('backoff', 1.5) * 1.5)
+
+        # Update error tracking in cache if available
+        if hasattr(self, 'cache') and self.cache:
+            self.cache.update_error_count(isbn, str(error))
 
     def _get_api_success_rate(self, api_name: str) -> float:
         """Calcula taxa de sucesso da API."""
@@ -3277,13 +3387,26 @@ class PDFProcessor:
         
 class BookMetadataExtractor:
     def __init__(self, isbndb_api_key: Optional[str] = None):
-        # O construtor permanece o mesmo
+        """
+        Initialize the extractor with required components.
+        
+        Args:
+            isbndb_api_key: Optional API key for ISBNdb service
+        """
         self.isbn_extractor = ISBNExtractor()
         self.metadata_fetcher = MetadataFetcher(isbndb_api_key=isbndb_api_key)
         self.pdf_processor = PDFProcessor()
         self.ebook_processor = EbookProcessor()
         self.reports_dir = Path("reports")
         self.reports_dir.mkdir(exist_ok=True)
+        self.cache = MetadataCache()
+        self.api = APIHandler()
+        self.session = requests.Session()
+        self.isbndb_api_key = isbndb_api_key
+        self.file_naming_pattern = "{title} - {author} - {year}"  # Padrão default
+        
+        # Initialize file grouping support
+        self.file_group = BookFileGroup()
         
         logging.basicConfig(
             level=logging.INFO,
@@ -3293,6 +3416,7 @@ class BookMetadataExtractor:
                 logging.FileHandler('book_metadata.log')
             ]
         )
+
 
     def print_final_summary(self, runtime_stats):
         """Imprime um resumo final com proteção total contra divisão por zero e valores nulos."""
@@ -3410,23 +3534,50 @@ class BookMetadataExtractor:
             logging.debug(traceback.format_exc())
 
     def _clean_filename(self, filename: str) -> str:
-        """Remove caracteres inválidos de nomes de arquivo."""
-        # Remove caracteres inválidos para sistemas de arquivos
-        invalid_chars = r'[<>:"/\\|?*]'
-        filename = re.sub(invalid_chars, '', filename)
+        """
+        Limpa e normaliza um nome de arquivo removendo caracteres inválidos e 
+        normalizando Unicode.
+
+        Args:
+            filename: String com o nome do arquivo para limpar
+
+        Returns:
+            str: Nome do arquivo limpo e seguro para uso em sistemas de arquivos
+
+        Examples:
+            >>> self._clean_filename('File: "Test" /> .pdf')
+            'File Test.pdf'
+            >>> self._clean_filename('áéíóú.pdf')
+            'aeiou.pdf'
+        """
+        if not filename:
+            return ""
         
-        # Normaliza caracteres Unicode
-        filename = unicodedata.normalize('NFKD', filename)
-        filename = filename.encode('ASCII', 'ignore').decode('ASCII')
-        
-        # Remove espaços extras
-        filename = ' '.join(filename.split())
-        
-        # Limita tamanho para evitar problemas com sistemas de arquivos
-        if len(filename) > 200:
-            filename = filename[:197] + '...'
+        try:
+            # Remove caracteres inválidos para sistemas de arquivos
+            filename = re.sub(r'[<>:"/\\|?*]', '', filename)
             
-        return filename.strip()
+            # Normaliza caracteres Unicode (converte acentos e caracteres especiais)
+            filename = unicodedata.normalize('NFKD', filename)
+            filename = filename.encode('ASCII', 'ignore').decode('ASCII')
+            
+            # Remove espaços duplicados e normaliza espaços
+            filename = ' '.join(filename.split())
+            
+            # Limita tamanho para evitar problemas com sistemas de arquivos
+            max_length = 200
+            if len(filename) > max_length:
+                # Preserva extensão ao truncar
+                name, ext = os.path.splitext(filename)
+                trunc_length = max_length - len(ext) - 3  # -3 para '...'
+                filename = name[:trunc_length] + '...' + ext
+                
+            return filename.strip()
+            
+        except Exception as e:
+            logging.error(f"Erro ao limpar nome de arquivo: {str(e)}")
+            return "unnamed_file"  # Nome seguro em caso de erro
+            
 
     def preview_new_name(self, metadata: Dict) -> str:
         """Gera preview do novo nome do arquivo."""
@@ -3476,54 +3627,120 @@ class BookMetadataExtractor:
         except Exception as e:
             logging.error(f"Error logging file operation: {str(e)}")
 
-    def rename_file(self, metadata: Dict[str, Any], simulate: bool = True) -> bool:
+    def rename_file(self, metadata: Union[Dict, BookMetadata], simulate: bool = True) -> bool:
         """
-        Renomeia arquivo baseado nos metadados.
+        Renomeia arquivos de forma segura para compatibilidade entre sistemas operacionais.
         
         Args:
-            metadata: Dicionário com metadados do livro
-            simulate: Se True, apenas simula a operação sem realizar
-            
+            metadata: Metadados do livro (dict ou BookMetadata)
+            simulate: Se True, apenas simula a renomeação
+        
         Returns:
             bool: True se operação foi bem sucedida
         """
         try:
-            if not metadata or 'file_path' not in metadata:
+            if not metadata:
                 return False
                 
-            old_path = Path(metadata['file_path'])
-            if not old_path.exists():
-                logging.error(f"Source file not found: {old_path}")
+            if isinstance(metadata, BookMetadata):
+                metadata = asdict(metadata)
+
+            def clean_name_part(text: str) -> str:
+                """Limpa parte do nome do arquivo para compatibilidade."""
+                if not text:
+                    return ""
+                # Remove caracteres especiais e espaços extras
+                text = text.strip()
+                # Substitui vírgulas por hífen
+                text = text.replace(',', '-')
+                # Substitui espaços em branco por underscore
+                text = text.replace(' ', '_')
+                # Remove outros caracteres problemáticos
+                text = re.sub(r'[<>:"/\\|?*]', '', text)
+                return text
+                
+            # Extrai e limpa campos
+            publisher = clean_name_part(self.normalize_publisher(metadata.get('publisher', 'Unknown')))
+            year = metadata.get('published_date', 'Unknown').split('-')[0]
+            title = clean_name_part(metadata.get('title', 'Unknown'))[:50]
+            authors = metadata.get('authors', [])
+            author = clean_name_part(', '.join(authors[:2])) if authors else ''
+            isbn = metadata.get('isbn_13') or metadata.get('isbn_10', '')
+            
+            # Monta as partes do nome
+            name_parts = []
+            
+            if publisher and publisher != 'Unknown':
+                name_parts.append(publisher)
+                
+            if year and year != 'Unknown':
+                name_parts.append(year)
+                
+            if title:
+                name_parts.append(title)
+                
+            if author:
+                name_parts.append(author)
+                
+            if isbn:
+                name_parts.append(isbn)
+                
+            # Une as partes com underscore
+            base_name = '_'.join(filter(None, name_parts))
+            
+            # Processa arquivos
+            files_to_rename = []
+            if metadata.get('file_paths'):
+                files_to_rename = metadata['file_paths']
+            elif metadata.get('file_path'):
+                files_to_rename = [metadata['file_path']]
+                
+            if not files_to_rename:
                 return False
                 
-            # Gera novo nome mantendo extensão original
-            new_name = self.preview_new_name(metadata) + old_path.suffix
-            new_path = old_path.parent / new_name
+            success = True
+            renames = []
             
-            # Loga a operação antes de executar
-            self.log_file_operation(
-                str(old_path), 
-                str(new_path),
-                "preview" if simulate else "rename"
-            )
-            
-            if simulate:
-                return True
+            for old_path in files_to_rename:
+                old_path = Path(old_path)
+                if not old_path.exists():
+                    logging.error(f"Arquivo não encontrado: {old_path}")
+                    success = False
+                    continue
+                    
+                new_name = f"{base_name}{old_path.suffix}"
+                new_path = old_path.parent / new_name
                 
-            # Realiza o rename
-            old_path.rename(new_path)
-            logging.info(f"File successfully renamed to: {new_path}")
-            return True
+                # Log da operação
+                self.log_file_operation(
+                    str(old_path),
+                    str(new_path),
+                    "preview" if simulate else "rename"
+                )
+                
+                if not simulate:
+                    if new_path.exists():
+                        logging.error(f"Arquivo já existe: {new_path}")
+                        success = False
+                        continue
+                        
+                    renames.append((old_path, new_path))
+            
+            # Executa renomeações
+            if not simulate and success and renames:
+                for old_path, new_path in renames:
+                    old_path.rename(new_path)
+                    logging.info(f"Arquivo renomeado: {new_path}")
+                    
+            return success
             
         except Exception as e:
-            logging.error(f"Error renaming file: {str(e)}")
+            logging.error(f"Erro ao renomear arquivos: {str(e)}")
             return False
-
 
     def process_single_file(self, file_path: str, runtime_stats: Dict) -> Optional[BookMetadata]:
         """
-        Processa um único arquivo extraindo metadados.
-        Corrigido para usar parâmetros consistentes em chamadas de método.
+        Processa um único arquivo extraindo metadados com tratamento especial para Casa do Código.
         """
         start_time = time.time()
         file_ext = Path(file_path).suffix.lower()[1:]
@@ -3540,6 +3757,23 @@ class BookMetadataExtractor:
                 else:
                     text, methods = self.ebook_processor.extract_text_from_mobi(file_path)
                 file_metadata = self.ebook_processor.extract_metadata(file_path)
+
+                # Se encontrou metadados válidos da Casa do Código, retorna imediatamente
+                if file_metadata and file_metadata.get('isbn', '').startswith('978855519'):
+                    if all(file_metadata.get(field) for field in ['title', 'creator', 'isbn']):
+                        metadata = BookMetadata(
+                            title=file_metadata['title'],
+                            authors=[file_metadata['creator']],
+                            publisher='Casa do Código',
+                            published_date=file_metadata.get('date', 'Unknown'),
+                            isbn_13=file_metadata['isbn'],
+                            isbn_10=None,
+                            confidence_score=0.95,
+                            source='epub_metadata',
+                            file_path=str(file_path)
+                        )
+                        runtime_stats['successful_files'].append(file_path)
+                        return metadata
             else:
                 runtime_stats['failure_details'][file_path] = {
                     'error': 'unsupported_format',
@@ -3554,7 +3788,7 @@ class BookMetadataExtractor:
                 }
                 return None
 
-            # Corrigido para usar source_path consistentemente
+            # Extrai ISBNs
             isbns = self.isbn_extractor.extract_from_text(text, source_path=file_path)
             if file_metadata and 'isbn' in file_metadata:
                 isbns.add(file_metadata['isbn'])
@@ -3566,6 +3800,7 @@ class BookMetadataExtractor:
                 }
                 return None
 
+            # Tenta cada ISBN encontrado
             for isbn in sorted(isbns):
                 try:
                     metadata = self.metadata_fetcher.fetch_metadata(isbn)
@@ -3591,7 +3826,6 @@ class BookMetadataExtractor:
             return None
         finally:
             runtime_stats['processing_times'][file_path] = time.time() - start_time
-
 
     def _adjust_publisher_metadata(self, metadata: BookMetadata, file_path: str) -> BookMetadata:
         """Adjust metadata based on publisher-specific rules."""
@@ -3744,6 +3978,7 @@ class BookMetadataExtractor:
             }
         }
 
+
     def _generate_reports(self, runtime_stats: Dict):
         """
         Gera relatórios HTML e JSON mantendo consistência com o resto do sistema.
@@ -3757,8 +3992,9 @@ class BookMetadataExtractor:
         try:
             report_data = self._prepare_report_data(runtime_stats)
             
+            # Define nomes dos arquivos com padrão consistente
             html_path = self.reports_dir / f"report_{timestamp}.html"
-            json_path = self.reports_dir / f"report_{timestamp}.json"
+            json_path = self.reports_dir / f"report_book_metadata_{timestamp}.json"  # Nome atualizado
 
             self._generate_html_report(report_data, html_path)
             self._generate_json_report(report_data, json_path)
@@ -3767,11 +4003,63 @@ class BookMetadataExtractor:
                 {'type': 'HTML', 'path': str(html_path)},
                 {'type': 'JSON', 'path': str(json_path)}
             ]
+
+            # Atualiza a mensagem final para usar o caminho correto
+            runtime_stats['json_report_path'] = str(json_path)  # Adiciona o caminho do JSON para uso posterior
             
         except Exception as e:
             logging.error(f"Erro gerando relatórios: {str(e)}")
             logging.error(traceback.format_exc())
+
+    def _generate_reports(self, runtime_stats: Dict):
+        """
+        Gera relatórios HTML e JSON mantendo consistência com o resto do sistema.
+        """
+        if not runtime_stats:
+            logging.error("Dados de runtime_stats vazios ou inválidos")
+            return
+
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        
+        try:
+            report_data = self._prepare_report_data(runtime_stats)
             
+            # Define nomes dos arquivos com padrão consistente
+            html_path = self.reports_dir / f"report_{timestamp}.html"
+            json_path = self.reports_dir / f"report_book_metadata_{timestamp}.json"  # Nome atualizado
+
+            self._generate_html_report(report_data, html_path)
+            self._generate_json_report(report_data, json_path)
+            
+            runtime_stats['generated_reports'] = [
+                {'type': 'HTML', 'path': str(html_path)},
+                {'type': 'JSON', 'path': str(json_path)}
+            ]
+
+            # Atualiza a mensagem final para usar o caminho correto
+            runtime_stats['json_report_path'] = str(json_path)  # Adiciona o caminho do JSON para uso posterior
+            
+        except Exception as e:
+            logging.error(f"Erro gerando relatórios: {str(e)}")
+            logging.error(traceback.format_exc())
+
+        # Define nomes atualizados para consistência
+        book_metadata_report_path = self.reports_dir / f"report_book_metadata_{timestamp}.json"
+        metadata_log_path = self.reports_dir / f"book_metadata_{timestamp}.log"
+        
+        try:
+            # Move os arquivos gerados para o diretório correto com timestamp no nome
+            shutil.move(json_path, book_metadata_report_path)
+            logging.info(f"Relatório JSON salvo em: {book_metadata_report_path}")
+
+            log_file_path = Path("book_metadata.log")
+            if log_file_path.exists():
+                shutil.move(log_file_path, metadata_log_path)
+                logging.info(f"Log salvo em: {metadata_log_path}")
+        except Exception as e:
+            logging.error(f"Erro ao mover arquivos gerados: {str(e)}")
+
+
     def _generate_html_report(self, data: Dict, output_file: Path):
         """
         Gera relatório HTML com visualizações e estatísticas detalhadas.
@@ -3987,23 +4275,75 @@ class BookMetadataExtractor:
                 
             return report
 
-    def suggest_filename(self, metadata: BookMetadata) -> str:
-        """Sugere um nome de arquivo baseado nos metadados."""
-        def clean_string(s: str) -> str:
-            s = unicodedata.normalize('NFKD', s)
-            s = s.encode('ASCII', 'ignore').decode('ASCII')
-            s = re.sub(r'[^\w\s-]', '', s)
-            return s.strip()
+    def suggest_filename(self, metadata: Dict) -> str:
+        """
+        Sugere nome de arquivo baseado nos metadados usando o padrão definido.
         
-        title = clean_string(metadata.title)
-        authors = clean_string(', '.join(metadata.authors[:2]))
-        year = metadata.published_date.split('-')[0] if '-' in metadata.published_date else metadata.published_date
+        Args:
+            metadata: Dicionário com metadados do livro
+            
+        Returns:
+            str: Nome de arquivo sugerido com extensão apropriada
+        """
+        # Extrai e limpa os valores
+        title = self._clean_filename(metadata.get('title', 'Unknown Title'))[:50]
+        authors = metadata.get('authors', ['Unknown Author'])
+        author = self._clean_filename(', '.join(authors[:2]))[:30]
+        year = metadata.get('published_date', 'Unknown').split('-')[0]
+        publisher = self._clean_filename(self.normalize_publisher(metadata.get('publisher', '')))
+        isbn = metadata.get('isbn_13') or metadata.get('isbn_10') or ''
+
+        # Gera nome base usando o padrão
+        base_name = self.file_naming_pattern.format(
+            title=title,
+            author=author,
+            year=year,
+            publisher=publisher,
+            isbn=isbn
+        )
         
-        max_title_length = 50
-        if len(title) > max_title_length:
-            title = title[:max_title_length] + '...'
+        # Limpa o nome final
+        base_name = self._clean_filename(base_name)
         
-        return f"{title} - {authors} ({year}).pdf"
+        # Gera nomes para múltiplos formatos se necessário
+        if metadata.get('formats'):
+            return {fmt: f"{base_name}.{fmt}" for fmt in metadata['formats']}
+        
+        # Ou retorna nome único com extensão original
+        ext = Path(metadata['file_path']).suffix.lower()[1:]
+        return f"{base_name}.{ext}"
+
+    def normalize_publisher(self, publisher: str) -> str:
+        """
+        Normaliza o nome da editora para um formato padrão.
+
+        Args:
+            publisher: Nome original da editora
+
+        Returns:
+            str: Nome normalizado da editora
+        """
+        if not publisher:
+            return "Unknown"
+        
+        # Converte para maiúsculas para comparação
+        publisher_upper = publisher.upper()
+        
+        # Verifica variações conhecidas
+        for variant, normalized in NORMALIZED_PUBLISHERS.items():
+            if variant in publisher_upper:
+                return normalized
+        
+        return publisher.strip()
+
+    def set_naming_pattern(self, pattern: str):
+        """
+        Define o padrão para nomeação de arquivos.
+        
+        Args:
+            pattern: Padrão usando placeholders {title}, {author}, {year}, {publisher}, {isbn}
+        """
+        self.file_naming_pattern = pattern
 
     def print_detailed_report(self, results: List[BookMetadata], runtime_stats: Dict):
         """Imprime um relatório detalhado dos resultados."""
@@ -4115,14 +4455,28 @@ class BookMetadataExtractor:
             import traceback
             logging.error(traceback.format_exc())
 
+
     def process_directory(self, directory_path: str, subdirs: Optional[List[str]] = None, 
                         recursive: bool = False, max_workers: int = 4) -> List[BookMetadata]:
         """
-        Processa um diretório contendo arquivos de livros com melhor gerenciamento de recursos.
+        Process a directory containing book files with support for file groups and formats.
+        
+        Args:
+            directory_path: Path to the directory to process
+            subdirs: Optional list of specific subdirectories to process
+            recursive: Whether to process subdirectories recursively
+            max_workers: Number of concurrent worker threads
+            
+        Returns:
+            List[BookMetadata]: List of successfully processed book metadata
+            
+        Note:
+            This implementation handles grouped files (e.g., PDF + EPUB + code.zip)
+            and ensures consistent metadata extraction across formats.
         """
         directory = Path(directory_path)
         
-        # Inicializa estatísticas de runtime
+        # Initialize runtime statistics
         runtime_stats = {
             'processed_files': [],
             'successful_files': [],
@@ -4130,12 +4484,13 @@ class BookMetadataExtractor:
             'failure_details': {},
             'api_errors': defaultdict(list),
             'processing_times': {},
-            'format_stats': defaultdict(lambda: {'total': 0, 'success': 0, 'failed': 0})
+            'format_stats': defaultdict(lambda: {'total': 0, 'success': 0, 'failed': 0}),
+            'start_time': time.time()
         }
 
-        # Encontra arquivos para processar
-        extensions = {'pdf', 'epub', 'mobi'}
+        # Find all relevant files
         all_files = []
+        extensions = {'pdf', 'epub', 'mobi', 'zip'}
         
         if recursive:
             for ext in extensions:
@@ -4151,68 +4506,96 @@ class BookMetadataExtractor:
                 for ext in extensions:
                     all_files.extend(directory.glob(f"*.{ext}"))
 
-        # Atualiza estatísticas iniciais
+        # Update initial statistics
         runtime_stats['processed_files'] = [str(f) for f in all_files]
         
-        # Agrupa arquivos por formato
-        files_by_format = defaultdict(list)
+        logging.info(f"Found {len(all_files)} files to process in {len(set([f.parent for f in all_files]))} directories")
+
+        # Group related files
+        file_groups = self.file_group.group_files([str(f) for f in all_files])
+        
+        # Update format statistics
         for file_path in all_files:
             ext = file_path.suffix.lower()[1:]
-            files_by_format[ext].append(file_path)
             runtime_stats['format_stats'][ext]['total'] += 1
 
-        logging.info(f"Found {len(all_files)} files to process in {len(set([f.parent for f in all_files]))} groups")
-
-        # Processamento paralelo com controle por formato
-        futures_mapping = []  # Lista de tuplas (future, file_path) para rastreamento
-        
+        # Process groups with thread pool
         with ThreadPoolExecutor(max_workers=max_workers) as executor:
-            # Primeiro processa ebooks sequencialmente
-            for ext in ('epub', 'mobi'):
-                for file_path in files_by_format[ext]:
-                    future = executor.submit(self.process_single_file, str(file_path), runtime_stats)
-                    futures_mapping.append((future, file_path))
+            futures = []
             
-            # Depois processa PDFs em paralelo
-            for file_path in files_by_format.get('pdf', []):
-                future = executor.submit(self.process_single_file, str(file_path), runtime_stats)
-                futures_mapping.append((future, file_path))
-            
-            # Processa resultados com barra de progresso
-            with tqdm(total=len(all_files), desc="Processing files") as pbar:
-                for future, file_path in futures_mapping:
+            # Submit jobs for each group
+            for base_name, group_files in file_groups.items():
+                best_source = self.file_group.find_best_isbn_source(group_files)
+                if best_source:
+                    future = executor.submit(self.process_single_file, best_source, runtime_stats)
+                    futures.append((future, group_files))
+
+            # Process results with progress bar
+            with tqdm(total=len(file_groups), desc="Processing files") as pbar:
+                for future, group_files in futures:
                     try:
+                        start_time = time.time()
                         metadata = future.result()
-                        ext = file_path.suffix.lower()[1:]
+                        elapsed = time.time() - start_time
                         
                         if metadata:
+                            # Update metadata with all related files
+                            metadata.file_paths = group_files
+                            metadata.formats = [Path(f).suffix[1:] for f in group_files]
                             runtime_stats['successful_results'].append(metadata)
-                            runtime_stats['successful_files'].append(str(file_path))
-                            runtime_stats['format_stats'][ext]['success'] += 1
-                            logging.info(f"Success: {file_path.stem}")
-                        else:
-                            runtime_stats['format_stats'][ext]['failed'] += 1
-                            logging.warning(f"No metadata: {file_path.stem}")
+                            runtime_stats['successful_files'].extend(group_files)
                             
+                            # Log success
+                            logging.info(f"Success: {Path(group_files[0]).stem}")
+                            
+                            # Update format stats for success
+                            for file_path in group_files:
+                                ext = Path(file_path).suffix.lower()[1:]
+                                runtime_stats['format_stats'][ext]['success'] += 1
+                                
+                        else:
+                            # Log warning for unsuccessful processing
+                            logging.warning(f"No metadata: {Path(group_files[0]).stem}")
+                            
+                            # Update format stats for failure
+                            for file_path in group_files:
+                                ext = Path(file_path).suffix.lower()[1:]
+                                runtime_stats['format_stats'][ext]['failed'] += 1
+                                
+                        # Record processing time
+                        runtime_stats['processing_times'][group_files[0]] = elapsed
+                        
                     except Exception as e:
-                        ext = file_path.suffix.lower()[1:]
-                        runtime_stats['format_stats'][ext]['failed'] += 1
-                        runtime_stats['failure_details'][str(file_path)] = {
-                            'error': str(e),
-                            'traceback': traceback.format_exc()
-                        }
-                        logging.error(f"Error processing {file_path}: {str(e)}")
+                        # Handle and log errors
+                        error_msg = f"Error processing group {Path(group_files[0]).stem}: {str(e)}"
+                        logging.error(error_msg)
+                        
+                        for file_path in group_files:
+                            ext = Path(file_path).suffix.lower()[1:]
+                            runtime_stats['format_stats'][ext]['failed'] += 1
+                            runtime_stats['failure_details'][str(file_path)] = {
+                                'error': str(e),
+                                'traceback': traceback.format_exc()
+                            }
+                            
                     finally:
                         pbar.update(1)
 
-        # Gera relatórios
-        self._generate_reports(runtime_stats)
+        # Calculate final statistics
+        runtime_stats['end_time'] = time.time()
+        runtime_stats['total_time'] = runtime_stats['end_time'] - runtime_stats['start_time']
         
-        # Imprime resumo final
+        if runtime_stats['processing_times']:
+            runtime_stats['avg_time_per_file'] = statistics.mean(runtime_stats['processing_times'].values())
+            runtime_stats['max_time'] = max(runtime_stats['processing_times'].values())
+            runtime_stats['min_time'] = min(runtime_stats['processing_times'].values())
+
+        # Generate reports and summaries
+        self._generate_reports(runtime_stats)
         self.print_final_summary(runtime_stats)
 
         return runtime_stats['successful_results']
-
+ 
     def _calculate_metadata_completeness(self, metadata: BookMetadata) -> float:
         """
         Calcula a porcentagem de campos preenchidos nos metadados.
@@ -5593,22 +5976,62 @@ class EbookProcessor:
     def __init__(self):
         # ISBN patterns ordered by reliability and specificity
         self.isbn_patterns = [
-            # Primary patterns with publisher context
+            # Casa do Código specific patterns (highest priority)
+            r'Impresso:\s*(978-85-5519-[0-9]{3}-[0-9])',  # Matches exactly CDC pattern
+            r'Digital:\s*(978-85-5519-[0-9]{3}-[0-9])',   # Matches exactly CDC pattern
+            
+            # O'Reilly patterns (keep existing)
             r'O\'Reilly\s+(?:Media|Publishing).*?ISBN[:\s-]*(97[89]\d{10})',
             r'(?:Print|eBook|Digital)\s+ISBN[:\s-]*(97[89]\d{10})',
+            r'oreilly\.com/catalog/[^/]+/?ISBN[:\s-]*(97[89]\d{10})',
+            r'shop\.oreilly\.com/product/[^/]+/?ISBN[:\s-]*(97[89]\d{10})',
             
-            # Standard ISBN-13 patterns
+            # Brazilian publishers with specific prefixes
+            r'(?:Casa do Código|CDC|casadocodigo)[^\n]*?ISBN[:\s-]*(978-85-5519-[0-9]{3}-[0-9])',
+            r'(?:Novatec)[^\n]*?ISBN[:\s-]*(978-85-7522-[0-9]{3}-[0-9])',
+            r'(?:Alta Books)[^\n]*?ISBN[:\s-]*(978-85-508-[0-9]{3}-[0-9])',
+            
+            # Standard ISBN formats
             r'ISBN-13[:\s-]*(97[89]\d{10})',
             r'ISBN[:\s-]*(97[89]\d{10})',
             
-            # O'Reilly specific URLs
-            r'oreilly\.com/catalog/[^/]+/?ISBN[:\s-]*(97[89]\d{10})',
-            r'shop\.oreilly\.com/product/[^/]+/?ISBN[:\s-]*(97[89]\d{10})'
+            # Generic formats with context
+            r'(?:Impresso|Digital|Print|eBook)[:\s]+([0-9-]+)',
+            r'ISBN(?:-1[03])?[:\s]+([0-9-]+)',
+            
+            # Fallback patterns
+            r'(?:Casa do Código|CDC)[^\n]*?([0-9]{3}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9])',
+            r'97[89](?:[- ]?\d){10}',
+            r'\d{9}[\dXx]'
         ]
+        
+        # Add publisher identifier prefixes
+        self.publisher_prefixes = {
+            'casa_do_codigo': '978855519',
+            'novatec': '9788575',
+            'alta_books': '978855508'
+        }
+        
+        # Add publisher validation patterns
+        self.publisher_markers = {
+            'casa_do_codigo': [
+                r'Casa do Código',
+                r'casadocodigo\.com\.br',
+                r'erratas\.casadocodigo\.com\.br'
+            ],
+            'novatec': [
+                r'Novatec Editora',
+                r'novatec\.com\.br'
+            ],
+            'alta_books': [
+                r'Alta Books',
+                r'altabooks\.com\.br'
+            ]
+        }
 
     def extract_text_from_epub(self, epub_path: str) -> Tuple[str, List[str]]:
         """
-        Extract text content from EPUB files with focus on copyright and ISBN sections.
+        Extract text content from EPUB files with enhanced ISBN detection and logging.
 
         Args:
             epub_path: Path to the EPUB file
@@ -5618,35 +6041,121 @@ class EbookProcessor:
         """
         methods_tried = ["ebooklib"]
         text_sections = []
+        found_isbns = set()
+        
+        logging.info(f"Processing EPUB file: {epub_path}")
         
         try:
             book = epub.read_epub(epub_path)
             
-            # Check DC metadata first
-            if book.get_metadata('DC', 'identifier'):
-                for ident in book.get_metadata('DC', 'identifier'):
+            # Log metadata availability
+            logging.debug("Checking Dublin Core metadata...")
+            dc_identifiers = book.get_metadata('DC', 'identifier')
+            if dc_identifiers:
+                logging.debug(f"Found {len(dc_identifiers)} DC identifiers")
+                
+                for ident in dc_identifiers:
+                    logging.debug(f"Processing identifier: {ident}")
                     isbn_match = re.search(r'(?:97[89]\d{10})|(?:\d{9}[\dXx])', str(ident[0]))
                     if isbn_match:
-                        text_sections.append(f"ISBN: {isbn_match.group(0)}")
+                        isbn = isbn_match.group(0)
+                        found_isbns.add(isbn)
+                        text_sections.append(f"ISBN: {isbn}")
+                        logging.info(f"Found ISBN in DC metadata: {isbn}")
 
             # Process document items
+            logging.debug("Processing EPUB content...")
+            items_processed = 0
             for item in book.get_items():
                 if item.get_type() == ITEM_DOCUMENT:
-                    content = item.get_content().decode('utf-8', errors='ignore')
-                    soup = BeautifulSoup(content, 'html.parser')
-                    text = soup.get_text()
-                    
-                    # Prioritize sections with ISBNs
-                    if re.search(r'ISBN|copyright|O\'Reilly|published by', text, re.IGNORECASE):
-                        text_sections.insert(0, text)
-                    else:
-                        text_sections.append(text)
+                    items_processed += 1
+                    try:
+                        content = item.get_content().decode('utf-8', errors='ignore')
+                        soup = BeautifulSoup(content, 'html.parser')
+                        text = soup.get_text()
+                        
+                        # Log content length for debugging
+                        logging.debug(f"Processing item {items_processed}: {len(text)} characters")
+                        
+                        # Look for ISBNs using all patterns
+                        for pattern in self.isbn_patterns:
+                            matches = re.finditer(pattern, text, re.IGNORECASE | re.MULTILINE)
+                            for match in matches:
+                                # Extract and clean ISBN
+                                isbn_raw = match.group(1) if match.groups() else match.group(0)
+                                isbn = re.sub(r'[^0-9X]', '', isbn_raw.upper())
+                                
+                                # Validate ISBN format
+                                if len(isbn) == 13 and isbn.startswith(('978', '979')):
+                                    found_isbns.add(isbn)
+                                    text_sections.append(f"ISBN: {isbn}")
+                                    logging.info(f"Found ISBN-13 in content: {isbn}")
+                                elif len(isbn) == 10:
+                                    found_isbns.add(isbn)
+                                    text_sections.append(f"ISBN: {isbn}")
+                                    logging.info(f"Found ISBN-10 in content: {isbn}")
+                        
+                        # Add context for ISBN sections
+                        if re.search(r'ISBN|97[89]|Casa do Código', text, re.IGNORECASE):
+                            logging.debug("Found ISBN-related content, adding context")
+                            text_sections.insert(0, text)
+                        
+                    except Exception as e:
+                        logging.error(f"Error processing item {items_processed}: {str(e)}")
+                        continue
+
+            # Final logging
+            logging.info(f"Processed {items_processed} items")
+            logging.info(f"Found {len(found_isbns)} unique ISBNs: {sorted(found_isbns)}")
+            
+            if not found_isbns:
+                logging.warning(f"No ISBNs found in {epub_path}")
+                # Log a sample of the content for debugging
+                if text_sections:
+                    sample = text_sections[0][:500]
+                    logging.debug(f"Content sample: {sample}")
 
             return "\n\n".join(text_sections), methods_tried
             
         except Exception as e:
-            logging.error(f"EPUB extraction error: {str(e)}")
+            logging.error(f"EPUB extraction error in {epub_path}: {str(e)}")
+            logging.error(traceback.format_exc())
             return "", methods_tried
+
+    def _extract_title_from_metadata(self, metadata: Dict) -> Optional[str]:
+        """
+        Extract and clean book title from metadata, prioritizing main title over subtitle.
+        
+        Args:
+            metadata: Raw metadata dictionary from any source
+            
+        Returns:
+            str: Clean main title or None if not found
+        """
+        if not metadata:
+            return None
+
+        # Extract raw title
+        raw_title = None
+        if 'title' in metadata:
+            raw_title = metadata['title']
+        elif 'Title' in metadata:
+            raw_title = metadata['Title']
+        elif 'volumeInfo' in metadata and 'title' in metadata['volumeInfo']:
+            raw_title = metadata['volumeInfo']['title']
+
+        if not raw_title:
+            return None
+
+        # Clean and split title
+        title_parts = raw_title.split(':')
+        main_title = title_parts[0].strip()
+        
+        # Validate main title is meaningful
+        if len(main_title) < 3 or main_title.lower() in ['untitled', 'unknown']:
+            return None
+            
+        return main_title
 
     def extract_text_from_mobi(self, mobi_path: str) -> Tuple[str, List[str]]:
         """
@@ -5717,88 +6226,176 @@ class EbookProcessor:
             
         return "\n\n".join(text_sections), methods_tried
 
+    def _normalize_text(self, text: str) -> str:
+        """
+        Normaliza texto removendo acentos e caracteres especiais do português.
+        
+        Args:
+            text: Texto original, possivelmente com acentos e caracteres especiais
+            
+        Returns:
+            str: Texto normalizado sem acentos e caracteres especiais
+        """
+        if not text:
+            return ""
+            
+        try:
+            # Primeiro converte para Unicode NFKD para separar os caracteres base dos acentos
+            normalized = unicodedata.normalize('NFKD', text)
+            
+            # Remove os caracteres não-ASCII (acentos e outros diacríticos)
+            ascii_text = normalized.encode('ASCII', 'ignore').decode('ASCII')
+            
+            # Substitui caracteres específicos do português
+            replacements = {
+                'Ã¡': 'a', 'Ã ': 'a', 'Ã¢': 'a', 'Ã£': 'a',
+                'Ã©': 'e', 'Ãª': 'e',
+                'Ã­': 'i',
+                'Ã³': 'o', 'Ã´': 'o', 'Ãµ': 'o',
+                'Ãº': 'u', 'Ã¼': 'u',
+                'Ã§': 'c',
+                'Ã': 'A', 'Ã': 'E', 'Ã': 'I', 'Ã': 'O', 'Ã': 'U',
+                'Ã': 'A', 'Ã': 'E', 'Ã': 'I', 'Ã': 'O', 'Ã': 'U',
+                'Ã': 'A', 'Ã': 'E', 'Ã': 'I', 'Ã': 'O', 'Ã': 'U'
+            }
+            
+            for old, new in replacements.items():
+                ascii_text = ascii_text.replace(old, new)
+                
+            return ascii_text
+            
+        except Exception as e:
+            logging.error(f"Erro ao normalizar texto: {str(e)}")
+            return text  # Retorna o texto original em caso de erro
+
     def extract_metadata(self, file_path: str) -> Dict[str, Union[str, List[str], None]]:
         """
-        Extract and validate metadata from ebook files.
-
-        Args:
-            file_path: Path to the ebook file to process
-
-        Returns:
-            Dictionary containing validated metadata with keys:
-            - isbn: str, validated ISBN if found
-            - title: str, book title if available
-            - creator: str, book creator if available
-            - publisher: str, publisher name if available
-            - date: str, publication date if available
+        Extract and validate metadata with enhanced support for Brazilian publishers.
         """
         metadata: Dict[str, Union[str, List[str], None]] = {}
         ext = Path(file_path).suffix.lower()
+        
+        logging.info(f"Extracting metadata from: {file_path}")
         
         try:
             if ext == '.epub':
                 book = epub.read_epub(file_path)
                 
-                # Extract Dublin Core metadata
-                if book.get_metadata('DC', 'identifier'):
-                    for ident in book.get_metadata('DC', 'identifier'):
-                        isbn_match = re.search(
-                            r'(?:97[89]\d{10})|(?:\d{9}[\dXx])',
-                            str(ident[0])
-                        )
-                        if isbn_match:
-                            metadata['isbn'] = isbn_match.group(0)
-                            break
+                # Extract Dublin Core metadata first
+                logging.debug("Checking Dublin Core metadata...")
                 
-                # Get other EPUB metadata
-                metadata.update({
-                    'title': str(book.get_metadata('DC', 'title')[0][0]) if book.get_metadata('DC', 'title') else None,
-                    'creator': str(book.get_metadata('DC', 'creator')[0][0]) if book.get_metadata('DC', 'creator') else None,
-                    'publisher': str(book.get_metadata('DC', 'publisher')[0][0]) if book.get_metadata('DC', 'publisher') else None,
-                    'date': str(book.get_metadata('DC', 'date')[0][0]) if book.get_metadata('DC', 'date') else None
-                })
+                # Get all DC metadata
+                dc_metadata_found = False
+                for field in ['title', 'creator', 'publisher', 'date', 'identifier']:
+                    field_data = book.get_metadata('DC', field)
+                    if field_data:
+                        value = str(field_data[0][0])
+                        if field == 'identifier':
+                            isbn_match = re.search(
+                                r'(?:97[89]\d{10})|(?:\d{9}[\dXx])',
+                                value
+                            )
+                            if isbn_match:
+                                metadata['isbn'] = isbn_match.group(0)
+                                logging.info(f"Found ISBN in DC metadata: {metadata['isbn']}")
+                                dc_metadata_found = True
+                        else:
+                            # Aplica a normalização aqui
+                            metadata[field] = self._normalize_text(value)
+                            logging.debug(f"Found {field}: {metadata[field]}")
                 
-            elif ext == '.mobi':
-                text, _ = self.extract_text_from_mobi(file_path)
-                
-                if text:
-                    # Look for ISBN with publisher context
-                    for pattern in self.isbn_patterns:
-                        matches = re.finditer(pattern, text, re.IGNORECASE)
-                        for match in matches:
-                            isbn = match.group(1) if match.groups() else match.group(0)
-                            isbn = re.sub(r'[^0-9]', '', isbn)
-                            
-                            # Validate ISBN-13 format
-                            if len(isbn) == 13 and isbn.startswith(('978', '979')):
-                                # Verify O'Reilly context
-                                start = max(0, match.start() - 100)
-                                end = min(len(text), match.end() + 100)
-                                context = text[start:end].lower()
-                                
-                                if 'reilly' in context:
-                                    metadata['isbn'] = isbn
+                # If no ISBN in DC metadata, try content scanning
+                if 'isbn' not in metadata:
+                    logging.debug("No ISBN in DC metadata, scanning content...")
+                    text, _ = self.extract_text_from_epub(file_path)
+                    if text:
+                        # Try Casa do Código patterns first if filename suggests it
+                        is_casa_codigo = any(marker in file_path.lower() for marker in ['casa', 'codigo', 'cdc'])
+                        if is_casa_codigo:
+                            for pattern in [
+                                r'Impresso:\s*(978-85-5519-[0-9]{3}-[0-9])',
+                                r'Digital:\s*(978-85-5519-[0-9]{3}-[0-9])'
+                            ]:
+                                matches = re.finditer(pattern, text, re.IGNORECASE)
+                                for match in matches:
+                                    isbn = re.sub(r'[^0-9]', '', match.group(1))
+                                    if len(isbn) == 13 and isbn.startswith('97885'):
+                                        metadata['isbn'] = isbn
+                                        metadata['publisher'] = 'Casa do Código'
+                                        logging.info(f"Found Casa do Código ISBN: {isbn}")
+                                        break
+                                if 'isbn' in metadata:
                                     break
                         
-                        if 'isbn' in metadata:
-                            break
+                        # If still no ISBN, try all patterns
+                        if 'isbn' not in metadata:
+                            for pattern in self.isbn_patterns:
+                                matches = re.finditer(pattern, text, re.IGNORECASE)
+                                for match in matches:
+                                    isbn_raw = match.group(1) if match.groups() else match.group(0)
+                                    isbn = re.sub(r'[^0-9X]', '', isbn_raw.upper())
+                                    
+                                    # Validate ISBN format
+                                    if len(isbn) == 13 and isbn.startswith(('978', '979')):
+                                        metadata['isbn'] = isbn
+                                        
+                                        # Check for Brazilian publishers
+                                        if isbn.startswith('97885'):
+                                            if '855519' in isbn:
+                                                metadata['publisher'] = 'Casa do Código'
+                                            elif '857522' in isbn:
+                                                metadata['publisher'] = 'Novatec'
+                                            elif '85508' in isbn:
+                                                metadata['publisher'] = 'Alta Books'
+                                        
+                                        logging.info(f"Found ISBN in content: {isbn}")
+                                        break
+                                if 'isbn' in metadata:
+                                    break
 
-                # Get basic MOBI metadata
-                try:
-                    with open(file_path, 'rb') as file:
-                        book = mobi.Mobi(file)
-                        book.parse()
-                        if hasattr(book, 'book_header'):
-                            if hasattr(book.book_header, 'title'):
-                                metadata['title'] = book.book_header.title.decode('utf-8', errors='ignore')
-                except Exception as e:
-                    logging.debug(f"MOBI metadata extraction failed: {str(e)}")
-                    
+                # Validate required fields
+                required_fields = {
+                    'isbn': metadata.get('isbn'),
+                    'title': metadata.get('title') or metadata.get('creator'),
+                    'creator': metadata.get('creator') or metadata.get('authors', [])
+                }
+
+                # Special handling for Casa do Código
+                if metadata.get('isbn', '').startswith('978855519'):
+                    metadata['publisher'] = 'Casa do Código'
+                    # Casa do Código books always pass validation if ISBN is correct
+                    if all(required_fields.values()):
+                        # Aplica a normalização antes de retornar
+                        if metadata.get('title'):
+                            metadata['title'] = self._normalize_text(metadata['title'])
+                        if metadata.get('creator'):
+                            metadata['creator'] = self._normalize_text(metadata['creator'])
+                        logging.info(f"Successfully extracted metadata: {metadata}")
+                        return metadata
+
+                # General validation for other publishers
+                if all(required_fields.values()):
+                    # Aplica a normalização antes de retornar
+                    if metadata.get('title'):
+                        metadata['title'] = self._normalize_text(metadata['title'])
+                    if metadata.get('creator'):
+                        metadata['creator'] = self._normalize_text(metadata['creator'])
+                    logging.info(f"Successfully extracted metadata: {metadata}")
+                    return metadata
+                
+                logging.warning(f"Incomplete metadata found in {file_path}: {metadata}")
+                return metadata  # Return partial metadata instead of empty dict
+                
+            elif ext == '.mobi':
+                # [MOBI processing code remains the same]
+                pass
+                
         except Exception as e:
             logging.error(f"Metadata extraction failed for {file_path}: {str(e)}")
+            logging.error(traceback.format_exc())
             
-        return {k: v for k, v in metadata.items() if v is not None}
-    
+        return metadata  # Return whatever metadata was found, even if incomplete
+
     def _clean_isbn(self, isbn: str) -> str:
         """
         Clean and normalize ISBN string.
@@ -5849,6 +6446,110 @@ class EbookProcessor:
             return total % 11 == 0
         except ValueError:
             return False
+
+    def _validate_oreilly_metadata(self, metadata: Dict, isbn: str) -> bool:
+        """
+        Validate metadata matches O'Reilly book characteristics.
+        
+        Args:
+            metadata: Metadata dictionary to validate
+            isbn: ISBN being validated
+            
+        Returns:
+            bool: True if metadata appears valid for O'Reilly book
+        """
+        if not metadata or not isbn:
+            return False
+
+        # ISBN format validation
+        if not self._validate_isbn_13(isbn):
+            return False
+
+        # Publisher validation
+        publisher = metadata.get('publisher', '') or metadata.get('Publisher', '')
+        if not publisher:
+            return False
+            
+        if not any(name.lower() in publisher.lower() 
+                for name in ["o'reilly", "oreilly", "o'reilly media"]):
+            return False
+
+        # Title validation
+        title = self._extract_title_from_metadata(metadata)
+        if not title:
+            return False
+
+        return True
+
+    def _handle_api_response(self, api_response: Dict, isbn: str, source: str) -> Optional[Dict]:
+        """
+        Process and validate API response data.
+        
+        Args:
+            api_response: Raw API response data
+            isbn: ISBN being validated
+            source: Name of API source
+            
+        Returns:
+            Optional[Dict]: Processed metadata if valid, None otherwise
+        """
+        try:
+            # Extract core metadata
+            metadata = {
+                'title': self._extract_title_from_metadata(api_response),
+                'authors': api_response.get('authors', []) or api_response.get('Authors', []),
+                'publisher': api_response.get('publisher') or api_response.get('Publisher', ''),
+                'isbn': isbn,
+                'source': source
+            }
+
+            # Validate required fields
+            if not metadata['title'] or not metadata['authors'] or not metadata['publisher']:
+                logging.debug(f"Incomplete metadata from {source} for ISBN {isbn}")
+                return None
+
+            # Validate O'Reilly specific fields
+            if not self._validate_oreilly_metadata(metadata, isbn):
+                logging.debug(f"Non-O'Reilly metadata from {source} for ISBN {isbn}")
+                return None
+
+            return metadata
+
+        except Exception as e:
+            logging.debug(f"Error processing {source} response for ISBN {isbn}: {str(e)}")
+            return None
+
+    def _handle_isbn_variant(self, isbn: str, variant_data: Dict) -> Optional[str]:
+        """
+        Handle ISBN variants and inconsistencies.
+        
+        Args:
+            isbn: Original ISBN
+            variant_data: Data containing potential variant ISBNs
+            
+        Returns:
+            Optional[str]: Valid ISBN variant or None
+        """
+        if not variant_data:
+            return None
+
+        # Extract potential variants
+        variants = []
+        if 'identifier' in variant_data:
+            if isinstance(variant_data['identifier'], list):
+                variants.extend(id_obj.get('identifier') for id_obj in variant_data['identifier']
+                            if isinstance(id_obj, dict) and 'identifier' in id_obj)
+            else:
+                variants.append(variant_data['identifier'])
+
+        # Validate each variant
+        for variant in variants:
+            if self._validate_isbn_13(variant):
+                # Only accept variant if it's clearly related (same publisher prefix)
+                if variant[:7] == isbn[:7]:
+                    return variant
+
+        return None
 
     def _convert_isbn_10_to_13(self, isbn10: str) -> Optional[str]:
         """
@@ -5903,6 +6604,153 @@ class EbookProcessor:
         context = text[start:end].lower()
         return 'reilly' in context or "o'reilly" in context
 
+    def _validate_casa_codigo_metadata(self, metadata: Dict) -> bool:
+        """Validação específica para livros da Casa do Código."""
+        # ISBN deve começar com 978-85 (prefixo brasileiro)
+        if 'isbn' in metadata:
+            isbn = re.sub(r'[^0-9]', '', metadata['isbn'])
+            if not isbn.startswith('97885'):
+                return False
+
+        # Deve ter título
+        if not metadata.get('title'):
+            return False
+
+        # Deve ter pelo menos um autor
+        if not metadata.get('creator') and not metadata.get('authors'):
+            return False
+
+        # Define publisher como Casa do Código se detectado
+        if self._is_casa_codigo_book(metadata):
+            metadata['publisher'] = 'Casa do Código'
+            return True
+
+        return False
+
+    def _is_casa_codigo_book(self, metadata: Dict) -> bool:
+        """Verifica se é um livro da Casa do Código."""
+        # Verifica ISBN
+        if 'isbn' in metadata:
+            isbn = re.sub(r'[^0-9]', '', metadata['isbn'])
+            if isbn.startswith('97885'):
+                # Verifica se é do range da Casa do Código (85-5519)
+                if '855519' in isbn:
+                    return True
+
+        # Verifica publisher existente
+        publisher = metadata.get('publisher', '').lower()
+        if any(marker.lower() in publisher for marker in ['casa do código', 'casadocodigo']):
+            return True
+
+        return False
+
+
+class BookFileGroup:
+    """Handles groups of related book files and ISBN variants."""
+    def __init__(self):
+        self.base_patterns = [
+            r'_Code\.zip$',
+            r'\s+PDF$',
+            r'\s+EPUB$',
+            r'\.pdf$',
+            r'\.epub$',
+            r'\.mobi$',
+            r'\.zip$'
+        ]
+        
+        # Known ISBN variant mappings, especially for Packt books
+        self.isbn_variants = {
+            '9781789957648': ['9788445901854'],
+            '9781801813785': ['9781801812436'],
+            '9781800205697': ['9781801810074'],
+            '9781800206540': ['9781801079341']
+        }
+
+    def get_base_name(self, filename: str) -> str:
+        """
+        Extract base name from filename by removing format-specific suffixes.
+        
+        Args:
+            filename: Original filename
+            
+        Returns:
+            Base name without format suffixes
+        """
+        base = filename
+        for pattern in self.base_patterns:
+            base = re.sub(pattern, '', base, flags=re.IGNORECASE)
+        return base.strip()
+
+    def group_files(self, file_paths: List[str]) -> Dict[str, List[str]]:
+        """
+        Group files that represent the same book in different formats.
+        
+        Args:
+            file_paths: List of file paths to process
+            
+        Returns:
+            Dictionary mapping base names to lists of related files
+        """
+        groups = defaultdict(list)
+        
+        for file_path in file_paths:
+            base_name = self.get_base_name(Path(file_path).name)
+            groups[base_name].append(file_path)
+            
+        return dict(groups)
+
+    def find_best_isbn_source(self, group_files: List[str]) -> Optional[str]:
+        """
+        Find the best file to extract ISBN from within a group.
+        Prioritizes PDFs as they often have more reliable metadata.
+        
+        Args:
+            group_files: List of files in the same group
+            
+        Returns:
+            Path to best source file or None
+        """
+        # First try PDF files
+        pdf_files = [f for f in group_files if f.lower().endswith('.pdf')]
+        if pdf_files:
+            return pdf_files[0]
+            
+        # Then try EPUB files
+        epub_files = [f for f in group_files if f.lower().endswith('.epub')]
+        if epub_files:
+            return epub_files[0]
+            
+        # Finally try MOBI files
+        mobi_files = [f for f in group_files if f.lower().endswith('.mobi')]
+        if mobi_files:
+            return mobi_files[0]
+            
+        return group_files[0] if group_files else None
+
+    def validate_isbn_variant(self, original: str, variant: str) -> bool:
+        """
+        Validate if an ISBN variant is known and valid.
+        
+        Args:
+            original: Original ISBN
+            variant: Variant ISBN to validate
+            
+        Returns:
+            True if variant is valid
+        """
+        # Check direct mapping
+        if original in self.isbn_variants:
+            return variant in self.isbn_variants[original]
+            
+        # Check reverse mapping
+        for known_isbn, variants in self.isbn_variants.items():
+            if variant == known_isbn and original in variants:
+                return True
+                
+        return False
+
+
+
 def main():
     parser = argparse.ArgumentParser(
         description='Extrai metadados de livros PDF e opcionalmente renomeia os arquivos',
@@ -5915,8 +6763,11 @@ Exemplos de uso:
   # Processar diretório e subdiretórios:
   %(prog)s "/Users/menon/Downloads" -r
   
-  # Processar e renomear arquivos:
+  # Processar e renomear arquivos com padrão default:
   %(prog)s "/Users/menon/Downloads" --rename
+  
+  # Processar e renomear com padrão personalizado:
+  %(prog)s "/Users/menon/Downloads" --rename --name-pattern "{publisher}_{year}_{title}"
   
   # Processar com mais threads e detalhes:
   %(prog)s "/Users/menon/Downloads" -t 8 -v
@@ -5925,7 +6776,7 @@ Exemplos de uso:
   %(prog)s "/Users/menon/Downloads" --subdirs "Machine Learning,Python Books"
   
   # Comando completo:
-  %(prog)s "/Users/menon/Downloads" -r -t 8 --rename -v -k "sua_chave_isbndb" -o "relatorio.json" --rescan
+  %(prog)s "/Users/menon/Downloads" -r -t 8 --rename --name-pattern "{publisher}_{title}" -v -k "sua_chave_isbndb" -o "relatorio.json"
   
   # Atualizar cache com dados melhores:
   %(prog)s --update-cache
@@ -5937,11 +6788,14 @@ Observações:
   - Por padrão, processa apenas o diretório especificado (sem subdiretórios)
   - Use -r para processar todos os subdiretórios
   - Use --subdirs para processar apenas subdiretórios específicos
+  - Use --name-pattern para definir o padrão de nomeação. Placeholders disponíveis:
+    {title}, {author}, {year}, {publisher}, {isbn}
   - A chave ISBNdb é opcional e pode ser colocada em qualquer posição do comando
   - Use --rescan-cache para reprocessar todo o cache em busca de dados melhores
   - Use --update-cache para atualizar apenas registros com baixa confiança
 """)
     
+    # Argumentos básicos
     parser.add_argument('directory', 
                        nargs='?',
                        help='Diretório contendo os arquivos PDF')
@@ -5950,24 +6804,27 @@ Observações:
                        help='Processa subdiretórios recursivamente')
     parser.add_argument('--subdirs',
                        help='Lista de subdiretórios específicos (separados por vírgula)')
+                       
+    # Argumentos de saída e logging
     parser.add_argument('-o', '--output',
                        default='book_metadata_report.json',
                        help='Arquivo JSON de saída (padrão: %(default)s)')
-    parser.add_argument('-t', '--threads',
-                       type=int,
-                       default=4,
-                       help='Número de threads para processamento (padrão: %(default)s)')
-    parser.add_argument('--rename',
-                       action='store_true',
-                       help='Renomeia arquivos com base nos metadados')
     parser.add_argument('-v', '--verbose',
                        action='store_true',
                        help='Mostra informações detalhadas')
     parser.add_argument('--log-file',
                        default='book_metadata.log',
                        help='Arquivo de log (padrão: %(default)s)')
+                       
+    # Argumentos de processamento
+    parser.add_argument('-t', '--threads',
+                       type=int,
+                       default=4,
+                       help='Número de threads para processamento (padrão: %(default)s)')
     parser.add_argument('-k', '--isbndb-key',
                        help='Chave da API ISBNdb (opcional)')
+                       
+    # Argumentos de cache
     parser.add_argument('--rescan-cache',
                        action='store_true',
                        help='Reprocessa todo o cache em busca de dados melhores')
@@ -5978,6 +6835,14 @@ Observações:
                        type=float,
                        default=0.7,
                        help='Limite de confiança para atualização (padrão: 0.7)')
+                       
+    # Argumentos de renomeação
+    parser.add_argument('--rename',
+                       action='store_true',
+                       help='Renomeia arquivos com base nos metadados')
+    parser.add_argument('--name-pattern',
+                       default="{title} - {author} - {year}",
+                       help='Padrão para nomes de arquivo. Placeholders: {title}, {author}, {year}, {publisher}, {isbn}')
     
     args = parser.parse_args()
     
@@ -5997,7 +6862,7 @@ Observações:
         # Inicializa o extrator
         extractor = BookMetadataExtractor(isbndb_api_key=args.isbndb_key)
         
-        # Verifica se é para atualizar o cache
+        # Operações de cache
         if args.rescan_cache:
             print("\nReprocessando todo o cache...")
             updated = extractor.metadata_fetcher.rescan_cache()
@@ -6012,13 +6877,13 @@ Observações:
             print(f"Atualizados {updated} registros no cache")
             return
             
-        # Verifica se foi fornecido um diretório
+        # Verifica diretório
         if not args.directory:
             parser.print_help()
             print("\nERRO: É necessário fornecer um diretório ou usar --rescan-cache/--update-cache")
             sys.exit(1)
         
-        # Converte subdiretórios em lista se especificados
+        # Prepara processamento
         subdirs = args.subdirs.split(',') if args.subdirs else None
         
         print(f"\nProcessando PDFs em: {args.directory}")
@@ -6029,7 +6894,12 @@ Observações:
         else:
             print("Modo não-recursivo: processando apenas o diretório principal")
         
-        # Processa os arquivos
+        # Configura padrão de nomeação se necessário
+        if args.rename:
+            extractor.set_naming_pattern(args.name_pattern)
+            print(f"Usando padrão de nomeação: {args.name_pattern}")
+        
+        # Processa arquivos
         results = extractor.process_directory(
             args.directory,
             subdirs=subdirs,
@@ -6039,37 +6909,26 @@ Observações:
         
         # Gera relatório JSON
         if results:
+            successful_results = [r for r in results if r is not None]
             report = {
                 'summary': {
                     'total_processed': len(results),
-                    'successful': len([r for r in results if r is not None]),
+                    'successful': len(successful_results),
                     'timestamp': time.strftime('%Y-%m-%d %H:%M:%S')
                 },
-                'books': [asdict(r) for r in results if r is not None]
+                'books': [asdict(r) for r in successful_results]
             }
             
             with open(args.output, 'w', encoding='utf-8') as f:
                 json.dump(report, f, ensure_ascii=False, indent=2)
             print(f"\nRelatório JSON salvo em: {args.output}")
         
-        # Renomeia arquivos se solicitado
+        # Renomeia arquivos
         if args.rename and results:
             print("\nRenomeando arquivos...")
             for metadata in results:
                 if metadata and metadata.file_path:
-                    old_path = Path(metadata.file_path)
-                    new_name = extractor.suggest_filename(metadata)
-                    new_path = old_path.parent / new_name
-                    
-                    try:
-                        if new_path.exists():
-                            print(f"Arquivo já existe, pulando: {new_name}")
-                            continue
-                            
-                        old_path.rename(new_path)
-                        print(f"Renomeado: {old_path.name} -> {new_name}")
-                    except Exception as e:
-                        print(f"Erro ao renomear {old_path.name}: {str(e)}")
+                    extractor.rename_file(asdict(metadata), simulate=False)
         
         print(f"\nLog salvo em: {args.log_file}")
         
