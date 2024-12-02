@@ -8,6 +8,9 @@ import argparse
 import functools
 import json
 import textwrap
+from rich.console import Console
+from rich.table import Table
+from rich.progress import Progress, BarColumn, TextColumn
 import logging
 import os
 import re
@@ -4246,7 +4249,7 @@ class BookMetadataExtractor:
             pattern: Padrão usando placeholders {title}, {author}, {year}, {publisher}, {isbn}
         """
         self.file_naming_pattern = pattern
-
+      
     def print_detailed_report(self, results: List[BookMetadata], runtime_stats: Dict):
         """Imprime um relatório detalhado dos resultados."""
         try:
@@ -4356,24 +4359,25 @@ class BookMetadataExtractor:
             logging.error(f"Erro ao gerar relatório: {str(e)}")
             import traceback
             logging.error(traceback.format_exc())
-
+    
 
     def process_directory(self, directory_path: str, subdirs: Optional[List[str]] = None, 
                         recursive: bool = False, max_workers: int = 4) -> List[BookMetadata]:
         """
         Process a directory containing book files with detailed progress tracking and summary.
-        
+
         Args:
             directory_path: Path to the directory to process
             subdirs: Optional list of specific subdirectories to process
             recursive: Whether to process subdirectories recursively
             max_workers: Number of concurrent worker threads
-            
+
         Returns:
             List[BookMetadata]: List of successfully processed book metadata
         """
         directory = Path(directory_path)
-        
+        console = Console()
+
         # Initialize runtime statistics
         runtime_stats = {
             'processed_files': [],
@@ -4383,41 +4387,48 @@ class BookMetadataExtractor:
             'api_errors': defaultdict(list),
             'processing_times': {},
             'format_stats': defaultdict(lambda: {'total': 0, 'success': 0, 'failed': 0}),
-            'file_summaries': [],  # Lista para armazenar sumários de cada arquivo
+            'file_summaries': [],
             'start_time': time.time()
         }
 
         # Find all relevant files
         all_files = []
         extensions = {'pdf', 'epub', 'mobi', 'zip'}
-        
-        with tqdm(desc="Finding files", unit="dir") as pbar:
+
+        with Progress(
+            TextColumn("[bold white]Finding files...", justify="right"),
+            BarColumn(),
+            "[progress.percentage]{task.percentage:>3.1f}%",
+            "•",
+            "{task.completed}/{task.total} directories scanned",
+        ) as progress:
+            task = progress.add_task("Scanning directories...", total=len(extensions))
+
             if recursive:
                 for ext in extensions:
                     files = list(directory.rglob(f"*.{ext}"))
                     all_files.extend(files)
-                    pbar.update()
+                    progress.update(task, advance=1)
             else:
                 if subdirs:
                     for subdir in subdirs:
-                        pbar.set_description(f"Scanning {subdir}")
                         subdir_path = directory / subdir
                         if subdir_path.exists():
                             for ext in extensions:
                                 files = list(subdir_path.glob(f"*.{ext}"))
                                 all_files.extend(files)
-                                pbar.update()
+                                progress.update(task, advance=1)
                 else:
                     for ext in extensions:
                         files = list(directory.glob(f"*.{ext}"))
                         all_files.extend(files)
-                        pbar.update()
+                        progress.update(task, advance=1)
 
-        print(f"\nEncontrados {len(all_files)} arquivos em {len(set([f.parent for f in all_files]))} diretórios")
+        console.print(f"\n[bold white]Encontrados {len(all_files)} arquivos em {len(set([f.parent for f in all_files]))} diretórios[/bold white]")
 
         # Update initial statistics
         runtime_stats['processed_files'] = [str(f) for f in all_files]
-        
+
         # Update format statistics
         for file_path in all_files:
             ext = file_path.suffix.lower()[1:]
@@ -4425,28 +4436,34 @@ class BookMetadataExtractor:
 
         # Group related files
         file_groups = self.file_group.group_files([str(f) for f in all_files])
-        print(f"Agrupados em {len(file_groups)} grupos de arquivos relacionados")
+        console.print(f"[bold white]Agrupados em {len(file_groups)} grupos de arquivos relacionados[/bold white]")
 
         # Process groups with thread pool
-        with ThreadPoolExecutor(max_workers=max_workers) as executor:
-            futures = []
-            
-            # Submit jobs for each group
-            for base_name, group_files in file_groups.items():
-                best_source = self.file_group.find_best_isbn_source(group_files)
-                if best_source:
-                    future = executor.submit(self.process_single_file, best_source, runtime_stats)
-                    futures.append((future, group_files))
+        with Progress(
+            TextColumn("[white]{task.description}", justify="right"),
+            BarColumn(),
+            "[progress.percentage]{task.percentage:>3.1f}%",
+            "•",
+            "{task.completed}/{task.total} arquivos processados",
+        ) as progress:
+            task = progress.add_task("Processando arquivos...", total=len(file_groups))
 
-            # Process results with enhanced progress bar
-            with tqdm(total=len(file_groups), desc="Processing files", 
-                    bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{elapsed}<{remaining}, {rate_fmt}]") as pbar:
+            with ThreadPoolExecutor(max_workers=max_workers) as executor:
+                futures = []
+
+                # Submit jobs for each group
+                for base_name, group_files in file_groups.items():
+                    best_source = self.file_group.find_best_isbn_source(group_files)
+                    if best_source:
+                        future = executor.submit(self.process_single_file, best_source, runtime_stats)
+                        futures.append((future, group_files))
+
                 for future, group_files in futures:
                     try:
                         start_time = time.time()
                         metadata = future.result()
                         elapsed = time.time() - start_time
-                        
+
                         main_file = Path(group_files[0]).name
                         summary = {
                             'file': main_file,
@@ -4456,20 +4473,19 @@ class BookMetadataExtractor:
                         }
 
                         if metadata:
-                            # Update progress description with success
-                            pbar.set_description(f"✓ {main_file}")
-                            
+                            progress.update(task, advance=1)
+
                             # Update metadata with all related files
                             metadata.file_paths = group_files
                             metadata.formats = [Path(f).suffix[1:] for f in group_files]
                             runtime_stats['successful_results'].append(metadata)
                             runtime_stats['successful_files'].extend(group_files)
-                            
+
                             # Update format stats for success
                             for file_path in group_files:
                                 ext = Path(file_path).suffix.lower()[1:]
                                 runtime_stats['format_stats'][ext]['success'] += 1
-                            
+
                             # Update summary
                             summary.update({
                                 'status': 'success',
@@ -4477,37 +4493,35 @@ class BookMetadataExtractor:
                             })
 
                         else:
-                            # Update progress description with failure
-                            pbar.set_description(f"✗ {main_file}")
-                            
+                            progress.update(task, advance=1)
+
                             # Update format stats for failure
                             for file_path in group_files:
                                 ext = Path(file_path).suffix.lower()[1:]
                                 runtime_stats['format_stats'][ext]['failed'] += 1
-                            
+
                             # Update summary with failure details
                             details = runtime_stats['failure_details'].get(str(group_files[0]), {})
                             summary.update({
                                 'status': 'failed',
                                 'details': details.get('error', 'Unknown error')
                             })
-                        
+
                         # Record processing time
                         runtime_stats['processing_times'][group_files[0]] = elapsed
-                        
+
                     except Exception as e:
-                        # Handle and log errors with visual indicator
-                        pbar.set_description(f"! Erro em {Path(group_files[0]).name}")
+                        progress.update(task, advance=1)
                         error_msg = f"Error processing group {Path(group_files[0]).stem}: {str(e)}"
                         logging.error(error_msg)
-                        
+
                         summary = {
                             'file': main_file,
                             'status': 'error',
                             'time': time.time() - start_time,
                             'details': str(e)
                         }
-                        
+
                         for file_path in group_files:
                             ext = Path(file_path).suffix.lower()[1:]
                             runtime_stats['format_stats'][ext]['failed'] += 1
@@ -4515,38 +4529,47 @@ class BookMetadataExtractor:
                                 'error': str(e),
                                 'traceback': traceback.format_exc()
                             }
-                    
+
                     finally:
                         runtime_stats['file_summaries'].append(summary)
-                        pbar.update(1)
 
         # Print file processing summary
-        print("\nSumário de Processamento:")
-        print("-" * 160)
-        print(f"{'Arquivo':<60} {'Status':<10} {'Tempo':<10} {'Detalhes':<40}")
-        print("-" * 160)
+        table = Table(title="Sumário de Processamento")
+
+        table.add_column("Arquivo", justify="left", style="white", width=60)
+        table.add_column("Status", justify="center", style="green", width=10)
+        table.add_column("Tempo", justify="center", style="white", width=8)
+        table.add_column("Detalhes", justify="left", style="white", no_wrap=True)
+
         for summary in runtime_stats['file_summaries']:
-            status_symbol = "✓" if summary['status'] == 'success' else "✗" if summary['status'] == 'failed' else "!"
-            status_text = f"{status_symbol} {summary['status']}"
+            status_symbol = "✓" if summary['status'] == 'success' else "✗"
+            status_color = "green" if summary['status'] == 'success' else "red"
+            status_text = f"[{status_color}]{status_symbol} {summary['status']}[/{status_color}]"
             details = summary['details'][:50] + "..." if len(summary['details']) > 50 else summary['details']
-            print(f"{summary['file']:<50} {status_text:<10} {summary['time']:.2f}s     {details}")
-        print("-" * 160)
+            table.add_row(summary['file'], status_text, f"{summary['time']:.2f}s", details)
+
+        console.print(table)
 
         # Calculate final statistics
         runtime_stats['end_time'] = time.time()
         runtime_stats['total_time'] = runtime_stats['end_time'] - runtime_stats['start_time']
-        
+
         if runtime_stats['processing_times']:
             runtime_stats['avg_time_per_file'] = statistics.mean(runtime_stats['processing_times'].values())
             runtime_stats['max_time'] = max(runtime_stats['processing_times'].values())
             runtime_stats['min_time'] = min(runtime_stats['processing_times'].values())
 
-        # Generate reports and summaries
+        # Final statistics summary
+        console.print("[bold white]Estatísticas Finais:[/bold white]")
+        console.print(f"[white]Tempo Total:[/] {runtime_stats['total_time']:.2f}s")
+        console.print(f"[green]Arquivos Sucesso:[/] {len(runtime_stats['successful_results'])}")
+        console.print(f"[red]Arquivos com Falha:[/] {len(runtime_stats['failure_details'])}")
+        
         self._generate_reports(runtime_stats)
-        self.print_final_summary(runtime_stats)
 
         return runtime_stats['successful_results']
- 
+
+
     def _calculate_metadata_completeness(self, metadata: BookMetadata) -> float:
         """
         Calcula a porcentagem de campos preenchidos nos metadados.
@@ -5157,7 +5180,13 @@ class BookMetadataExtractor:
             ]
             
             logging.info(f"Reports generated successfully in {self.reports_dir}")
-            
+            # Print report locations
+            print("\nArquivos Gerados:")
+            print("-" * 40)
+            print(f"HTML {html_path}")
+            print(f"JSON {json_path}") 
+            print(f"LOG  {log_path}")
+                        
         except Exception as e:
             logging.error(f"Error generating reports: {str(e)}")
             logging.error(traceback.format_exc())

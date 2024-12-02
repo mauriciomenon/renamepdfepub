@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <title>Book Metadata Report</title>
+            <style>
+                
+            body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
+            .card { background: #fff; padding: 20px; margin: 20px 0; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+            table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+            th, td { padding: 12px 8px; text-align: left; border-bottom: 1px solid #ddd; }
+            th { background-color: #f5f5f5; }
+            .success { color: #28a745; }
+            .failure { color: #dc3545; }
+            .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        
+            </style>
+        </head>
+        <body>
+            <h1>Book Metadata Report</h1>
+            
+            <div class="card">
+                <h2>Summary</h2>
+                <div class="stats-grid">
+                    <table>
+                        <tr><th>Total Files</th><td>16</td></tr>
+                        <tr><th>Successful</th><td class="success">13</td></tr>
+                        <tr><th>Failed</th><td class="failure">3</td></tr>
+                        <tr><th>Success Rate</th><td>81.2%</td></tr>
+                        <tr><th>Average Time</th><td>0.29s</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Format Statistics</h2>
+                <table>
+                    <tr>
+                        <th>Format</th>
+                        <th>Total</th>
+                        <th>Success</th>
+                        <th>Failed</th>
+                        <th>Success Rate</th>
+                    </tr>
+                    
+                <tr>
+                    <td>MOBI</td>
+                    <td>1</td>
+                    <td class="success">1</td>
+                    <td class="failure">0</td>
+                    <td>100.0%</td>
+                </tr>
+                <tr>
+                    <td>EPUB</td>
+                    <td>4</td>
+                    <td class="success">4</td>
+                    <td class="failure">0</td>
+                    <td>100.0%</td>
+                </tr>
+                <tr>
+                    <td>PDF</td>
+                    <td>11</td>
+                    <td class="success">8</td>
+                    <td class="failure">3</td>
+                    <td>72.7%</td>
+                </tr>
+                </table>
+            </div>
+
+            <div class="card">
+                <h2>Successful Extractions</h2>
+                <table>
+                    <tr>
+                        <th>File</th>
+                        <th>Title</th>
+                        <th>Authors</th>
+                        <th>ISBN</th>
+                        <th>Source</th>
+                    </tr>
+                    
+                <tr>
+                    <td>OReilly_2021_Java_to_Kotlin_Duncan_McGregor-_Nat_Pryce_9781492082279.mobi</td>
+                    <td>Java to Kotlin</td>
+                    <td>Duncan McGregor, Nat Pryce</td>
+                    <td>9781492082279</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538.epub</td>
+                    <td>Learning Java</td>
+                    <td>Marc Loy, Patrick Niemeyer, Daniel Leuck</td>
+                    <td>9781098145538</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>No_Starch_Press_2022_Cybersecurity_for_Small_Networks_Seth_Enoka_9781718501485.epub</td>
+                    <td>Cybersecurity for Small Networks</td>
+                    <td>Seth Enoka</td>
+                    <td>9781718501485</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060.epub</td>
+                    <td>Tensorflow Deep Learning Projects</td>
+                    <td>Alberto Boschetti, Luca Massaron, Abhishek Thakur</td>
+                    <td>9781788398060</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1).epub</td>
+                    <td>Series temporais com Prophet: Analise e previsao de dados com Python</td>
+                    <td>Allan Spadini e Valquiria Alencar</td>
+                    <td>9788555193149</td>
+                    <td>epub_metadata</td>
+                </tr>
+                <tr>
+                    <td>Wiley_2023_The_Active_Defender_Dr._Catherine_J._Ullman_9781119895213.pdf</td>
+                    <td>The Active Defender</td>
+                    <td>Dr. Catherine J. Ullman</td>
+                    <td>9781119895213</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>Wiley_2023_Software_Transparency_Chris_Hughes-_Tony_Turner_9781394158485.pdf</td>
+                    <td>Software Transparency</td>
+                    <td>Chris Hughes, Tony Turner</td>
+                    <td>9781394158485</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>OReilly_bash_Cookbook_Carl_Albing-_JP_Vossen_9781491975336.pdf</td>
+                    <td>bash Cookbook</td>
+                    <td>Carl Albing, JP Vossen</td>
+                    <td>9781491975336</td>
+                    <td>openlibrary</td>
+                </tr>
+                <tr>
+                    <td>OReilly_2022_Ansible_Up_and_Running_Bas_Meijer-_Lorin_Hochstein_9781098109158.pdf</td>
+                    <td>Ansible: Up and Running</td>
+                    <td>Bas Meijer, Lorin Hochstein, René Moser</td>
+                    <td>9781098109158</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>National_Geographic_Books_2021_Bug_Bounty_Bootcamp_Vickie_Li_9781718501546.pdf</td>
+                    <td>Bug Bounty Bootcamp</td>
+                    <td>Vickie Li</td>
+                    <td>9781718501546</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>OReilly_2020_Java_Performance_Scott_Oaks_9781492056119.pdf</td>
+                    <td>Java Performance</td>
+                    <td>Scott Oaks</td>
+                    <td>9781492056119</td>
+                    <td>openlibrary</td>
+                </tr>
+                <tr>
+                    <td>Packt_2022_Applied_Machine_Learning_and_High-Performance_Comp_Mani_Khanuja-_Farooq_Sabir_9781803237015.pdf</td>
+                    <td>Applied Machine Learning and High-Performance Computing on AWS</td>
+                    <td>Mani Khanuja, Farooq Sabir, Shreyas Subramanian, Trenton Potgieter</td>
+                    <td>9781803237015</td>
+                    <td>openlibrary</td>
+                </tr>
+                <tr>
+                    <td>No_Starch_Press_2021_The_Hardware_Hacking_Handbook_Jasper_van_Woudenberg-_Colin_O'Flynn_9781593278748.pdf</td>
+                    <td>The Hardware Hacking Handbook</td>
+                    <td>Jasper van Woudenberg, Colin O'Flynn</td>
+                    <td>9781593278748</td>
+                    <td>google_books</td>
+                </tr>
+                </table>
+            </div>
+
+            <div class="card">
+                <h2>Failed Extractions</h2>
+                <table>
+                    <tr>
+                        <th>File</th>
+                        <th>Error</th>
+                        <th>Details</th>
+                    </tr>
+                    
+                <tr>
+                    <td>computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf</td>
+                    <td>metadata_fetch_failed</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Hands-On Artificial Intelligence for Banking.pdf</td>
+                    <td>no_isbn_found</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf</td>
+                    <td>metadata_fetch_failed</td>
+                    <td></td>
+                </tr>
+                </table>
+            </div>
+        </body>
+        </html>
