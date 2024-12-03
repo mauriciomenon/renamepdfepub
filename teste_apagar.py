@@ -24,6 +24,13 @@ import unicodedata
 import warnings
 import xml.etree.ElementTree as ET
 from collections import Counter, defaultdict
+from rich.progress import (
+    Progress,
+    TextColumn,
+    BarColumn,
+    SpinnerColumn,
+    TimeElapsedColumn,
+)
 from concurrent import futures
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, asdict
@@ -75,14 +82,14 @@ class DependencyManager:
             import pdfplumber
             self.available_extractors['pdfplumber'] = True
         except ImportError:
-            logging.debug("pdfplumber não está instalado. Usando alternativas.")
+            self.logger.debug("pdfplumber não está instalado. Usando alternativas.")
 
         # Verifica pdfminer
         try:
             from pdfminer.high_level import extract_text
             self.available_extractors['pdfminer'] = True
         except ImportError:
-            logging.debug("pdfminer.six não está instalado. Usando alternativas.")
+            self.logger.debug("pdfminer.six não está instalado. Usando alternativas.")
 
         # Verifica Tesseract
         try:
@@ -90,14 +97,14 @@ class DependencyManager:
             pytesseract.get_tesseract_version()
             self.available_extractors['tesseract'] = True
         except:
-            logging.debug("Tesseract OCR não está instalado/configurado.")
+            self.logger.debug("Tesseract OCR não está instalado/configurado.")
 
         # Verifica pdf2image
         try:
             import pdf2image
             self.available_extractors['pdf2image'] = True
         except ImportError:
-            logging.debug("pdf2image não está instalado.")
+            self.logger.debug("pdf2image não está instalado.")
 
     def get_available_extractors(self) -> List[str]:
         """Retorna lista de extractors disponíveis."""
@@ -198,6 +205,7 @@ class MetadataCache:
             db_path: Path to SQLite database file
         """
         self.db_path = db_path
+        self._init_logging() 
         
         # If database exists and has issues, remove it
         if Path(db_path).exists():
@@ -206,11 +214,34 @@ class MetadataCache:
                 conn.execute("SELECT * FROM metadata_cache LIMIT 1")
                 conn.close()
             except sqlite3.Error:
-                logging.info(f"Removing corrupted database: {db_path}")
+                self.logger.info(f"Removing corrupted database: {db_path}")
                 os.remove(db_path)
         
         self._init_db()
         self._check_and_update_schema()
+
+    def _init_logging(self):
+        """Initialize logging configuration."""
+        self.logger = logging.getLogger('metadata_cache')  # Use o nome específico da classe
+        self.logger.setLevel(logging.DEBUG)  # Nível detalhado para o arquivo
+        
+        if not self.logger.handlers:
+            # File handler - captura tudo para o arquivo
+            file_handler = logging.FileHandler('metadata_cache.log')
+            file_handler.setFormatter(logging.Formatter(
+                '%(asctime)s - %(levelname)s - %(message)s'
+            ))
+            file_handler.setLevel(logging.DEBUG)
+            
+            # Console handler - apenas warnings e erros
+            console_handler = logging.StreamHandler()
+            console_handler.setFormatter(logging.Formatter(
+                '%(levelname)s - %(message)s'
+            ))
+            console_handler.setLevel(logging.WARNING)
+            
+            self.logger.addHandler(file_handler)
+            self.logger.addHandler(console_handler)
 
     def _init_db(self):
         """Initialize database with required schema."""
@@ -248,10 +279,10 @@ class MetadataCache:
                     conn.execute("CREATE INDEX IF NOT EXISTS idx_isbn_10 ON metadata_cache(isbn_10)")
                     conn.execute("CREATE INDEX IF NOT EXISTS idx_isbn_13 ON metadata_cache(isbn_13)")
 
-                logging.info("Database initialized successfully with schema verified")
+                self.logger.info("Database initialized successfully with schema verified")
                 
         except sqlite3.Error as e:
-            logging.error(f"Database initialization error: {str(e)}")
+            self.logger.error(f"Database initialization error: {str(e)}")
             # Delete database if initialization fails
             if Path(self.db_path).exists():
                 os.remove(self.db_path)
@@ -277,9 +308,9 @@ class MetadataCache:
                 if 'last_error' not in columns:
                     conn.execute("ALTER TABLE metadata_cache ADD COLUMN last_error TEXT")
                 
-                logging.info("Schema verification completed successfully")
+                self.logger.info("Schema verification completed successfully")
         except sqlite3.Error as e:
-            logging.error(f"Schema verification error: {str(e)}")
+            self.logger.error(f"Schema verification error: {str(e)}")
             raise
         
     def get_all(self) -> List[Dict]:
@@ -310,7 +341,7 @@ class MetadataCache:
                 ]
                 
         except sqlite3.Error as e:
-            logging.error(f"Error retrieving all metadata: {str(e)}")
+            self.logger.error(f"Error retrieving all metadata: {str(e)}")
             return []
 
     def get(self, isbn: str) -> Optional[Dict]:
@@ -341,7 +372,7 @@ class MetadataCache:
                         try:
                             return json.loads(result[9])
                         except json.JSONDecodeError:
-                            logging.warning(f"Invalid JSON in cache for ISBN {isbn}")
+                            self.logger.warning(f"Invalid JSON in cache for ISBN {isbn}")
                     
                     # Fallback to structured data
                     return {
@@ -357,7 +388,7 @@ class MetadataCache:
                     }
                     
         except sqlite3.Error as e:
-            logging.error(f"Cache retrieval error for ISBN {isbn}: {str(e)}")
+            self.logger.error(f"Cache retrieval error for ISBN {isbn}: {str(e)}")
             return None
             
         return None
@@ -392,7 +423,7 @@ class MetadataCache:
                 )
                 
         except sqlite3.Error as e:
-            logging.error(f"Cache storage error: {str(e)}")
+            self.logger.error(f"Cache storage error: {str(e)}")
             raise
 
     def rescan_and_update(self):
@@ -435,10 +466,10 @@ class MetadataCache:
                         ))
                         updated_count += 1
                 except Exception as e:
-                    logging.error(f"Erro ao atualizar metadados para ISBN {isbn}: {str(e)}")
+                    self.logger.error(f"Erro ao atualizar metadados para ISBN {isbn}: {str(e)}")
                     continue
             
-            logging.info(f"Rescan concluído. {updated_count} registros atualizados.")
+            self.logger.info(f"Rescan concluído. {updated_count} registros atualizados.")
             return updated_count
 
     def update_error_count(self, isbn: str, error: str):
@@ -452,7 +483,7 @@ class MetadataCache:
                     WHERE isbn_10 = ? OR isbn_13 = ?
                 """, (error, isbn, isbn))
         except sqlite3.Error as e:
-            logging.error(f"Error updating error count for ISBN {isbn}: {str(e)}")
+            self.logger.error(f"Error updating error count for ISBN {isbn}: {str(e)}")
 
 
     def update(self, metadata: Dict):
@@ -548,6 +579,7 @@ class ApiMonitor:
 class APIHandler:
     """Handler para requisições HTTP."""
     def __init__(self):
+        self._init_logging()
         self.session = requests.Session()
         
         retry_strategy = Retry(
@@ -576,6 +608,29 @@ class APIHandler:
             'Connection': 'keep-alive',
             'Cache-Control': 'no-cache'
         })
+
+    def _init_logging(self):
+        """Initialize logging configuration."""
+        self.logger = logging.getLogger('api_handler')  # Use o nome específico da classe
+        self.logger.setLevel(logging.DEBUG)  # Nível detalhado para o arquivo
+        
+        if not self.logger.handlers:
+            # File handler - captura tudo para o arquivo
+            file_handler = logging.FileHandler('api_handler.log')
+            file_handler.setFormatter(logging.Formatter(
+                '%(asctime)s - %(levelname)s - %(message)s'
+            ))
+            file_handler.setLevel(logging.DEBUG)
+            
+            # Console handler - apenas warnings e erros
+            console_handler = logging.StreamHandler()
+            console_handler.setFormatter(logging.Formatter(
+                '%(levelname)s - %(message)s'
+            ))
+            console_handler.setLevel(logging.WARNING)
+            
+            self.logger.addHandler(file_handler)
+            self.logger.addHandler(console_handler)
 
     def get(self, url: str, params: Dict = None, timeout: int = 10, verify: bool = True) -> requests.Response:
         """GET request com melhor tratamento de erros."""
@@ -613,23 +668,8 @@ class APIHandler:
             return self.session.post(url, data=data, json=json, timeout=timeout, verify=False)
 
 class ISBNExtractor:
-    def _quick_isbn_validation(self, isbn: str) -> bool:
-        """Validação rápida antes de chamar APIs."""
-        if not isbn or not isinstance(isbn, str):
-            return False
-            
-        # Remove caracteres não numéricos exceto X
-        isbn = ''.join(c for c in isbn.upper() if c.isdigit() or c == 'X')
-        
-        # Verifica tamanho e prefixo básico
-        if len(isbn) == 13:
-            return isbn.startswith(('978', '979'))
-        elif len(isbn) == 10:
-            return isbn[:-1].isdigit() and (isbn[-1].isdigit() or isbn[-1] == 'X')
-            
-        return False
-    
     def __init__(self):
+        self._init_logging()
         # Padrões de ISBN
         self.isbn_patterns = [
             # ISBN-13 com prefixo
@@ -764,6 +804,45 @@ class ISBNExtractor:
             '|': '1'
         }
 
+    def _init_logging(self):
+        """Initialize logging configuration."""
+        self.logger = logging.getLogger('isbn_extractor')  # Use o nome específico da classe
+        self.logger.setLevel(logging.DEBUG)  # Nível detalhado para o arquivo
+        
+        if not self.logger.handlers:
+            # File handler - captura tudo para o arquivo
+            file_handler = logging.FileHandler('isbn_extractor.log')
+            file_handler.setFormatter(logging.Formatter(
+                '%(asctime)s - %(levelname)s - %(message)s'
+            ))
+            file_handler.setLevel(logging.DEBUG)
+            
+            # Console handler - apenas warnings e erros
+            console_handler = logging.StreamHandler()
+            console_handler.setFormatter(logging.Formatter(
+                '%(levelname)s - %(message)s'
+            ))
+            console_handler.setLevel(logging.WARNING)
+            
+            self.logger.addHandler(file_handler)
+            self.logger.addHandler(console_handler)
+
+    def _quick_isbn_validation(self, isbn: str) -> bool:
+        """Validação rápida antes de chamar APIs."""
+        if not isbn or not isinstance(isbn, str):
+            return False
+            
+        # Remove caracteres não numéricos exceto X
+        isbn = ''.join(c for c in isbn.upper() if c.isdigit() or c == 'X')
+        
+        # Verifica tamanho e prefixo básico
+        if len(isbn) == 13:
+            return isbn.startswith(('978', '979'))
+        elif len(isbn) == 10:
+            return isbn[:-1].isdigit() and (isbn[-1].isdigit() or isbn[-1] == 'X')
+            
+        return False
+
     def identify_publisher(self, text: str) -> Tuple[str, float]:
         """Identifica a editora no texto."""
         text = text.lower()
@@ -851,7 +930,7 @@ class ISBNExtractor:
             }
             return metadata
         except Exception as e:
-            logging.debug(f"Erro ao extrair metadados EPUB: {str(e)}")
+            self.logger.debug(f"Erro ao extrair metadados EPUB: {str(e)}")
             return {}
 
     def _extract_digital_isbns(self, text: str) -> Set[str]:
@@ -896,7 +975,7 @@ class ISBNExtractor:
                 
                 return found_isbns
         except Exception as e:
-            logging.debug(f"Erro ao extrair metadados do PDF: {str(e)}")
+            self.logger.debug(f"Erro ao extrair metadados do PDF: {str(e)}")
             return set()
 
     def extract_from_text(self, text: str, source_path: str = None) -> Set[str]:
@@ -996,7 +1075,7 @@ class ISBNExtractor:
                                 if isbn13:
                                     found_isbns.add(isbn13)
                     except Exception as e:
-                        logging.debug(f"Erro ao processar match: {str(e)}")
+                        self.logger.debug(f"Erro ao processar match: {str(e)}")
                         continue
                 
                 # Se encontrou ISBNs válidos, não precisa tentar outras versões do texto
@@ -1043,7 +1122,7 @@ class ISBNExtractor:
                                 break
                     return text
             except Exception as e:
-                logging.error(f"Erro ao extrair texto de PDF Packt: {str(e)}")
+                self.logger.error(f"Erro ao extrair texto de PDF Packt: {str(e)}")
                 return ""
                 
         # Se não for Packt, usa extração normal
@@ -1168,6 +1247,7 @@ class ISBNExtractor:
 
 class MetadataFetcher:
     def __init__(self, isbndb_api_key: Optional[str] = None):
+        self._init_logging()
         self.cache = MetadataCache()
         self.api = APIHandler()
         self.session = requests.Session()
@@ -1221,6 +1301,29 @@ class MetadataFetcher:
             'isbnlib_info': 0.95,
             'crossref': 0.80,
         } 
+
+    def _init_logging(self):
+        """Initialize logging configuration."""
+        self.logger = logging.getLogger('metadata_fetcher')  # Use o nome específico da classe
+        self.logger.setLevel(logging.DEBUG)  # Nível detalhado para o arquivo
+        
+        if not self.logger.handlers:
+            # File handler - captura tudo para o arquivo
+            file_handler = logging.FileHandler('metadata_fetcher.log')
+            file_handler.setFormatter(logging.Formatter(
+                '%(asctime)s - %(levelname)s - %(message)s'
+            ))
+            file_handler.setLevel(logging.DEBUG)
+            
+            # Console handler - apenas warnings e erros
+            console_handler = logging.StreamHandler()
+            console_handler.setFormatter(logging.Formatter(
+                '%(levelname)s - %(message)s'
+            ))
+            console_handler.setLevel(logging.WARNING)
+            
+            self.logger.addHandler(file_handler)
+            self.logger.addHandler(console_handler)
 
     def _make_request(self, api_name: str, url: str, **kwargs) -> requests.Response:
         """Make HTTP request with error handling and rate limiting."""
@@ -1426,7 +1529,7 @@ class MetadataFetcher:
                         errors[api_name].append('timeout')
                         self.metrics.add_error(api_name, 'timeout')
                         if retry_count < max_retries:
-                            logging.warning(f"{api_name} timeout for ISBN {isbn}, retry {retry_count}/{max_retries}")
+                            self.logger.warning(f"{api_name} timeout for ISBN {isbn}, retry {retry_count}/{max_retries}")
                             time.sleep(retry_count)  # Backoff exponencial
                     
                     except requests.ConnectionError as e:
@@ -1466,9 +1569,9 @@ class MetadataFetcher:
         # Registra falhas se nenhum resultado foi encontrado
         if errors:
             for api_name, api_errors in errors.items():
-                logging.error(f"Failed to fetch metadata for ISBN {isbn}")
+                self.logger.error(f"Failed to fetch metadata for ISBN {isbn}")
                 for error in api_errors:
-                    logging.error(f"{api_name}: {error}")
+                    self.logger.error(f"{api_name}: {error}")
             self.cache.update_error_count(isbn, str(errors))
 
         return None
@@ -1547,7 +1650,7 @@ class MetadataFetcher:
                     self.metrics.add_metric(api_name, elapsed, False)
                     self.metrics.add_error(api_name, type(e).__name__)
                     errors[api_name].append(str(e))
-                    logging.error(f"Error in {api_name} for ISBN {isbn}: {str(e)}")
+                    self.logger.error(f"Error in {api_name} for ISBN {isbn}: {str(e)}")
                     continue
 
             all_results.extend(group_results)
@@ -1562,9 +1665,9 @@ class MetadataFetcher:
         # Log all errors if no results found
         if not all_results:
             for api_name, api_errors in errors.items():
-                logging.error(f"All attempts failed for ISBN {isbn}")
+                self.logger.error(f"All attempts failed for ISBN {isbn}")
                 for error in api_errors:
-                    logging.error(f"{api_name}: {error}")
+                    self.logger.error(f"{api_name}: {error}")
 
         return max(all_results, key=lambda x: x.confidence_score) if all_results else None
 
@@ -1677,7 +1780,7 @@ class MetadataFetcher:
 
     def _fetch_casa_codigo_metadata(self, isbn: str) -> Optional[BookMetadata]:
         """Fetch metadata specifically for Casa do Código books."""
-        logging.info(f"Processing Casa do Código ISBN: {isbn}")
+        self.logger.info(f"Processing Casa do Código ISBN: {isbn}")
         
         # Try APIs in priority order for Casa do Código
         for api_name in ['google_books', 'openlibrary', 'worldcat']:
@@ -1697,7 +1800,7 @@ class MetadataFetcher:
                         return metadata
                         
             except Exception as e:
-                logging.error(f"Error with {api_name} for ISBN {isbn}: {str(e)}")
+                self.logger.error(f"Error with {api_name} for ISBN {isbn}: {str(e)}")
                 continue
                 
         return None
@@ -1895,7 +1998,7 @@ class MetadataFetcher:
             
         except Exception as e:
             if 'isbn request != isbn response' in str(e):
-                logging.warning(f"ISBNlib info: ISBN variant detected for {isbn}: {str(e)}")
+                self.logger.warning(f"ISBNlib info: ISBN variant detected for {isbn}: {str(e)}")
                 return None
             self._handle_api_error('isbnlib_info', e, isbn)
             return None
@@ -2228,7 +2331,7 @@ class MetadataFetcher:
             response = self._make_request('worldcat', url)
             
             if response.status_code == 403:
-                logging.warning(f"WorldCat: Access forbidden for ISBN {isbn}")
+                self.logger.warning(f"WorldCat: Access forbidden for ISBN {isbn}")
                 return None
                 
             if response.status_code == 200:
@@ -2610,7 +2713,7 @@ class MetadataFetcher:
         if not publisher_info:
             return None
             
-        logging.info(f"Processing {publisher_info['name']} ISBN: {isbn}")
+        self.logger.info(f"Processing {publisher_info['name']} ISBN: {isbn}")
         
         # Try APIs in priority order
         for api_name in publisher_info['api_priority']:
@@ -2630,7 +2733,7 @@ class MetadataFetcher:
                         return metadata
                         
             except Exception as e:
-                logging.error(f"Error with {api_name} for ISBN {isbn}: {str(e)}")
+                self.logger.error(f"Error with {api_name} for ISBN {isbn}: {str(e)}")
                 continue
                 
         return None
@@ -2751,7 +2854,7 @@ class MetadataFetcher:
             avg_time = self._get_avg_response_time(api_name)
             success_rate = self._get_api_success_rate(api_name)
             
-            logging.warning(
+            self.logger.warning(
                 f'API call failed: {api_name}\n'
                 f'Average response time: {avg_time:.2f}s\n'
                 f'Success rate: {success_rate:.1f}%'
@@ -2761,7 +2864,7 @@ class MetadataFetcher:
         """Configura logging com níveis de detalhe diferentes."""
         # Logger principal
         logger = logging.getLogger('metadata_fetcher')
-        logger.setLevel(logging.INFO)
+        logger.setLevel(self.logger.info)
 
         # Handler para arquivo
         file_handler = logging.FileHandler('metadata_fetcher.log')
@@ -2875,7 +2978,7 @@ class MetadataFetcher:
                         if returned_isbn and returned_isbn != isbn:
                             if self._validate_isbn_variant(isbn, returned_isbn):
                                 metadata.confidence_score += 0.1
-                                logging.info(f"ISBN variant accepted: {isbn} -> {returned_isbn}")
+                                self.logger.info(f"ISBN variant accepted: {isbn} -> {returned_isbn}")
                             else:
                                 continue
                                 
@@ -2962,7 +3065,7 @@ class MetadataFetcher:
         if success_rate < 50:  # API com problemas
             config['timeout'] = min(30, config.get('timeout', 5) * 1.5)
             config['retries'] += 1
-            logging.warning(f"API {api_name} health check: Poor performance detected. "
+            self.logger.warning(f"API {api_name} health check: Poor performance detected. "
                         f"Success rate: {success_rate:.1f}%, Avg time: {avg_time:.2f}s")
             return False
             
@@ -2997,7 +3100,7 @@ class MetadataFetcher:
                 break
                 
         if not valid_variant and returned_isbns:
-            logging.warning(f"ISBN variant mismatch: requested {isbn}, got {returned_isbns}")
+            self.logger.warning(f"ISBN variant mismatch: requested {isbn}, got {returned_isbns}")
             return None
             
         # Processa metadados
@@ -3020,7 +3123,7 @@ class MetadataFetcher:
             return BookMetadata(**metadata_dict)
             
         except Exception as e:
-            logging.error(f"Error processing metadata from {source}: {str(e)}")
+            self.logger.error(f"Error processing metadata from {source}: {str(e)}")
             return None
 
     def validate_isbn_variant(self, original: str, variant: str) -> bool:
@@ -3049,7 +3152,7 @@ class MetadataFetcher:
                 return True
                 
         except Exception as e:
-            logging.debug(f"Erro na validação de variante ISBN: {str(e)}")
+            self.logger.debug(f"Erro na validação de variante ISBN: {str(e)}")
             
             # Fallback: compara prefixos se a conversão falhar
             if len(original) == len(variant):
@@ -3149,11 +3252,35 @@ class MetadataFetcher:
 
 class PDFProcessor:
     def __init__(self):
+        self._init_logging() 
         self.isbn_extractor = ISBNExtractor()
         self.dependency_manager = DependencyManager()
-        logging.info(f"Extractores disponíveis: {', '.join(self.dependency_manager.get_available_extractors())}")
+        self.logger.info(f"Extractores disponíveis: {', '.join(self.dependency_manager.get_available_extractors())}")
         if self.dependency_manager.has_ocr_support:
-            logging.info("Suporte a OCR está disponível")
+            self.logger.info("Suporte a OCR está disponível")
+
+    def _init_logging(self):
+        """Initialize logging configuration."""
+        self.logger = logging.getLogger('pdf_processor')  # Use o nome específico da classe
+        self.logger.setLevel(logging.DEBUG)  # Nível detalhado para o arquivo
+        
+        if not self.logger.handlers:
+            # File handler - captura tudo para o arquivo
+            file_handler = logging.FileHandler('pdf_processor.log')
+            file_handler.setFormatter(logging.Formatter(
+                '%(asctime)s - %(levelname)s - %(message)s'
+            ))
+            file_handler.setLevel(logging.DEBUG)
+            
+            # Console handler - apenas warnings e erros
+            console_handler = logging.StreamHandler()
+            console_handler.setFormatter(logging.Formatter(
+                '%(levelname)s - %(message)s'
+            ))
+            console_handler.setLevel(logging.WARNING)
+            
+            self.logger.addHandler(file_handler)
+            self.logger.addHandler(console_handler)
 
     def extract_text_from_pdf(self, pdf_path: str, max_pages: int = 10) -> Tuple[str, List[str]]:
         """Extrai texto do PDF usando múltiplos métodos."""
@@ -3173,7 +3300,7 @@ class PDFProcessor:
                 if text.strip():
                     methods_succeeded.append('PyPDF2')
         except Exception as e:
-            logging.debug(f"PyPDF2 extraction failed: {str(e)}")
+            self.logger.debug(f"PyPDF2 extraction failed: {str(e)}")
         
         # 2. pdfplumber se PyPDF2 falhar
         if not text.strip() and 'pdfplumber' in self.dependency_manager.get_available_extractors():
@@ -3188,7 +3315,7 @@ class PDFProcessor:
                     if text.strip():
                         methods_succeeded.append('pdfplumber')
             except Exception as e:
-                logging.debug(f"pdfplumber extraction failed: {str(e)}")
+                self.logger.debug(f"pdfplumber extraction failed: {str(e)}")
         
         # 3. OCR se texto ainda não foi extraído
         if not text.strip() and self.dependency_manager.has_ocr_support:
@@ -3207,7 +3334,7 @@ class PDFProcessor:
                     text = ocr_text
                     methods_succeeded.append('OCR')
             except Exception as e:
-                logging.debug(f"OCR extraction failed: {str(e)}")
+                self.logger.debug(f"OCR extraction failed: {str(e)}")
         
         return self._clean_text(text), methods_tried
 
@@ -3369,7 +3496,7 @@ class PDFProcessor:
 
     def extract_metadata_from_pdf(self, pdf_path: str) -> Dict:
         """Extrai metadados internos do PDF."""
-        logging.info(f"Extraindo metadados de: {pdf_path}")
+        self.logger.info(f"Extraindo metadados de: {pdf_path}")
         try:
             with open(pdf_path, 'rb') as file:
                 reader = PyPDF2.PdfReader(file)
@@ -3379,14 +3506,14 @@ class PDFProcessor:
                     isbn = re.sub(r'[^0-9X]', '', metadata['ISBN'].upper())
                     if not (self.isbn_extractor.validate_isbn_10(isbn) or 
                            self.isbn_extractor.validate_isbn_13(isbn)):
-                        logging.warning(f"ISBN inválido encontrado nos metadados: {isbn}")
+                        self.logger.warning(f"ISBN inválido encontrado nos metadados: {isbn}")
                         del metadata['ISBN']
                     else:
-                        logging.info(f"ISBN válido encontrado nos metadados: {isbn}")
+                        self.logger.info(f"ISBN válido encontrado nos metadados: {isbn}")
                         
                 return metadata
         except Exception as e:
-            logging.error(f"Erro ao extrair metadados de {pdf_path}: {str(e)}")
+            self.logger.error(f"Erro ao extrair metadados de {pdf_path}: {str(e)}")
             return {}
         
 class BookMetadataExtractor:
@@ -3397,148 +3524,67 @@ class BookMetadataExtractor:
         Args:
             isbndb_api_key: Optional API key for ISBNdb service
         """
+        # Set up reports directory first
+        self.reports_dir = Path("reports")
+        self.reports_dir.mkdir(exist_ok=True)
+        
+        # Initialize logging before other components
+        self._setup_logging()
+        
+        # Initialize core components
+        
         self.isbn_extractor = ISBNExtractor()
         self.metadata_fetcher = MetadataFetcher(isbndb_api_key=isbndb_api_key)
         self.pdf_processor = PDFProcessor()
         self.ebook_processor = EbookProcessor()
-        self.reports_dir = Path("reports")
-        self.reports_dir.mkdir(exist_ok=True)
         self.cache = MetadataCache()
         self.api = APIHandler()
+        self.packt_processor = PacktBookProcessor()
         self.session = requests.Session()
         self.isbndb_api_key = isbndb_api_key
-        self.file_naming_pattern = "{title} - {author} - {year}"  # Padrão default
+        self.file_naming_pattern = "{title} - {author} - {year} - {ISBN}"  # Default pattern
         
         # Initialize file grouping support
         self.file_group = BookFileGroup()
-        
-        # Configure logging to write to reports directory
+
+    def _setup_logging(self):
+        """Initialize logging with correct file location."""
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         log_path = self.reports_dir / f"report_{timestamp}_metadata.log"
         
-        logging.basicConfig(
-            level=logging.INFO,
-            format='%(asctime)s - %(levelname)s - %(message)s',
-            handlers=[
-                logging.StreamHandler(),
-                logging.FileHandler(str(log_path))
-            ]
-        )
-
-    def print_final_summary(self, runtime_stats):
-        """Imprime um resumo final com proteção total contra divisão por zero e valores nulos."""
+        # Create logger
+        self.logger = logging.getLogger('book_metadata')
+        self.logger.setLevel(logging.INFO)
         
-        # Verifica se runtime_stats existe
-        if not runtime_stats:
-            print("\nErro: Nenhuma estatística disponível")
+        # Create handlers
+        file_handler = logging.FileHandler(str(log_path))
+        console_handler = logging.StreamHandler()
+        
+        # Create formatters and add it to handlers
+        formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+        file_handler.setFormatter(formatter)
+        console_handler.setFormatter(formatter)
+        
+        # Add handlers to the logger
+        self.logger.addHandler(file_handler)
+        self.logger.addHandler(console_handler)
+
+    def _add_publisher_stats(self, metadata: Dict, runtime_stats: Dict):
+        """Adiciona estatísticas por editora aos runtime stats sem modificar estrutura existente."""
+        if not metadata or 'publisher' not in metadata:
             return
             
-        try:
-            # Inicializa contadores com valores seguros
-            extension_stats = defaultdict(lambda: {'total': 0, 'success': 0, 'failed': 0, 'success_rate': 0.0})
-            total_files = 0
-            total_success = 0
+        if 'publisher_stats' not in runtime_stats:
+            runtime_stats['publisher_stats'] = defaultdict(lambda: {'total': 0, 'success': 0, 'failed': 0})
             
-            # Conta total de arquivos por extensão com verificações de segurança
-            processed_files = runtime_stats.get('processed_files', [])
-            if processed_files:
-                for file_path in processed_files:
-                    if not file_path:  # Pula entradas vazias
-                        continue
-                    try:
-                        if isinstance(file_path, str):
-                            ext = Path(file_path).suffix.lower()[1:]
-                            if ext in {'pdf', 'epub', 'mobi'}:
-                                extension_stats[ext]['total'] += 1
-                                total_files += 1
-                    except Exception as e:
-                        logging.debug(f"Ignorando arquivo inválido: {str(e)}")
-                        continue
-            
-            # Conta sucessos por extensão com verificações de segurança
-            successful_results = runtime_stats.get('successful_results', [])
-            if successful_results:
-                for result in successful_results:
-                    if not result or not hasattr(result, 'file_path') or not result.file_path:
-                        continue
-                    try:
-                        ext = Path(result.file_path).suffix.lower()[1:]
-                        if ext in extension_stats:
-                            extension_stats[ext]['success'] += 1
-                            total_success += 1
-                    except Exception as e:
-                        logging.debug(f"Ignorando resultado inválido: {str(e)}")
-                        continue
-            
-            # Calcula estatísticas com proteção contra divisão por zero
-            for ext in extension_stats:
-                stats = extension_stats[ext]
-                stats['failed'] = stats['total'] - stats['success']
-                try:
-                    if stats['total'] > 0:
-                        stats['success_rate'] = (stats['success'] / stats['total']) * 100
-                except Exception:
-                    stats['success_rate'] = 0.0
-            
-            # Calcula taxa geral de sucesso com proteção
-            try:
-                overall_rate = (total_success / total_files * 100) if total_files > 0 else 0.0
-            except Exception:
-                overall_rate = 0.0
-            
-            # Imprime o relatório
-            print("\n" + "=" * 60)
-            print(f"{'RESUMO DO PROCESSAMENTO':^60}")
-            print("=" * 60)
-            
-            # Estatísticas gerais
-            print("\nEstatísticas Gerais:")
-            print("-" * 40)
-            print(f"Total de arquivos processados: {total_files}")
-            print(f"Total de sucessos: {total_success}")
-            print(f"Total de falhas: {total_files - total_success}")
-            print(f"Taxa de sucesso geral: {overall_rate:.1f}%")
-            
-            # Estatísticas por tipo de arquivo
-            if any(stats['total'] > 0 for stats in extension_stats.values()):
-                print("\nEstatísticas por tipo de arquivo:")
-                print("-" * 40)
-                
-                for ext in sorted(extension_stats.keys()):
-                    stats = extension_stats[ext]
-                    if stats['total'] > 0:  # Só mostra extensões com arquivos
-                        print(f"\n{ext.upper()}:")
-                        print(f"  Total: {stats['total']}")
-                        print(f"  Sucessos: {stats['success']}")
-                        print(f"  Falhas: {stats['failed']}")
-                        print(f"  Taxa de Sucesso: {stats['success_rate']:.1f}%")
-            
-            # Arquivos gerados
-            try:
-                print("\nArquivos Gerados:")
-                print("-" * 40)
-                
-                report_files = {
-                    'HTML': next((r.get('path', '') for r in runtime_stats.get('generated_reports', []) 
-                                if r.get('type') == 'HTML'), None),
-                    'JSON': next((r.get('path', '') for r in runtime_stats.get('generated_reports', []) 
-                                if r.get('type') == 'JSON'), None),
-                    'Log': runtime_stats.get('log_file', '')
-                }
-                
-                for report_type, path in report_files.items():
-                    if path:
-                        print(f"{report_type + ':':5} {path}")
-            except Exception as e:
-                logging.error(f"Erro ao processar informações de arquivos gerados: {str(e)}")
-            
-            print("\n" + "=" * 60)
-            
-        except Exception as e:
-            print(f"\nErro ao gerar resumo: {str(e)}")
-            logging.error(f"Erro ao gerar resumo: {str(e)}")
-            import traceback
-            logging.debug(traceback.format_exc())
+        publisher = metadata.get('publisher', 'Unknown').strip()
+        format_ext = Path(metadata.get('file_path', '')).suffix.lower()[1:]
+        
+        stats = runtime_stats['publisher_stats'][publisher]
+        stats['total'] += 1
+        stats['success'] += 1
+        stats[f'{format_ext}_success'] = stats.get(f'{format_ext}_success', 0) + 1
+
 
     def _clean_filename(self, filename: str) -> str:
         """
@@ -3582,7 +3628,7 @@ class BookMetadataExtractor:
             return filename.strip()
             
         except Exception as e:
-            logging.error(f"Erro ao limpar nome de arquivo: {str(e)}")
+            self.logger.error(f"Erro ao limpar nome de arquivo: {str(e)}")
             return "unnamed_file"  # Nome seguro em caso de erro
             
 
@@ -3617,22 +3663,22 @@ class BookMetadataExtractor:
             old_name = Path(old_path).name
             new_name = Path(new_path).name
             
-            logging.info(f"File operation: {operation}")
-            logging.info(f"  Original filename: {old_name}")
-            logging.info(f"  New filename: {new_name}")
-            logging.info(f"  Size: {old_size:.2f}MB")
-            logging.info(f"  Original path: {old_path}")
-            logging.info(f"  New path: {new_path}")
+            self.logger.info(f"File operation: {operation}")
+            self.logger.info(f"  Original filename: {old_name}")
+            self.logger.info(f"  New filename: {new_name}")
+            self.logger.info(f"  Size: {old_size:.2f}MB")
+            self.logger.info(f"  Original path: {old_path}")
+            self.logger.info(f"  New path: {new_path}")
             
             # Adiciona logs de validação
             if operation == "rename":
                 if Path(new_path).exists():
-                    logging.warning(f"  Target file already exists: {new_path}")
+                    self.logger.warning(f"  Target file already exists: {new_path}")
                 if not Path(old_path).exists():
-                    logging.error(f"  Source file not found: {old_path}")
+                    self.logger.error(f"  Source file not found: {old_path}")
                     
         except Exception as e:
-            logging.error(f"Error logging file operation: {str(e)}")
+            self.logger.error(f"Error logging file operation: {str(e)}")
 
     def rename_file(self, metadata: Union[Dict, BookMetadata], simulate: bool = True) -> bool:
         """
@@ -3711,7 +3757,7 @@ class BookMetadataExtractor:
             for old_path in files_to_rename:
                 old_path = Path(old_path)
                 if not old_path.exists():
-                    logging.error(f"Arquivo não encontrado: {old_path}")
+                    self.logger.error(f"Arquivo não encontrado: {old_path}")
                     success = False
                     continue
                     
@@ -3727,7 +3773,7 @@ class BookMetadataExtractor:
                 
                 if not simulate:
                     if new_path.exists():
-                        logging.error(f"Arquivo já existe: {new_path}")
+                        self.logger.error(f"Arquivo já existe: {new_path}")
                         success = False
                         continue
                         
@@ -3737,21 +3783,21 @@ class BookMetadataExtractor:
             if not simulate and success and renames:
                 for old_path, new_path in renames:
                     old_path.rename(new_path)
-                    logging.info(f"Arquivo renomeado: {new_path}")
+                    self.logger.info(f"Arquivo renomeado: {new_path}")
                     
             return success
             
         except Exception as e:
-            logging.error(f"Erro ao renomear arquivos: {str(e)}")
+            self.logger.error(f"Erro ao renomear arquivos: {str(e)}")
             return False
 
     def process_single_file(self, file_path: str, runtime_stats: Dict) -> Optional[BookMetadata]:
         """
-        Processa um único arquivo extraindo metadados com tratamento especial para Casa do Código.
+        Processa um único arquivo extraindo metadados com tratamento especial para Casa do Código e Packt.
         """
         start_time = time.time()
         file_ext = Path(file_path).suffix.lower()[1:]
-        logging.info(f"Processing: {file_path}")
+        self.logger.info(f" {file_path}")
         
         try:
             # Extrai texto baseado no tipo de arquivo
@@ -3780,6 +3826,26 @@ class BookMetadataExtractor:
                             file_path=str(file_path)
                         )
                         runtime_stats['successful_files'].append(file_path)
+                        return metadata
+                        
+                # Se for livro Packt, tenta processar com tratamento especial
+                if file_ext == 'epub' and self.packt_processor.is_packt_book(file_path):
+                    enhanced_metadata = self.packt_processor.enhance_metadata(file_metadata, text)
+                    if enhanced_metadata and enhanced_metadata.get('isbn'):
+                        metadata = BookMetadata(
+                            title=enhanced_metadata.get('title', ''),
+                            authors=[enhanced_metadata.get('creator')] if 'creator' in enhanced_metadata 
+                                else enhanced_metadata.get('authors', []),
+                            publisher='Packt Publishing',
+                            published_date=enhanced_metadata.get('date', 'Unknown'),
+                            isbn_13=enhanced_metadata.get('isbn'),
+                            isbn_10=None,
+                            confidence_score=0.95,
+                            source='packt_processor',
+                            file_path=str(file_path)
+                        )
+                        runtime_stats['successful_files'].append(file_path)
+                        self._add_publisher_stats(asdict(metadata), runtime_stats)
                         return metadata
             else:
                 runtime_stats['failure_details'][file_path] = {
@@ -3814,6 +3880,15 @@ class BookMetadataExtractor:
                     if metadata:
                         metadata.file_path = str(file_path)
                         runtime_stats['successful_files'].append(file_path)
+                        # Adiciona estatística por editora
+                        publisher = metadata.publisher or 'Unknown'
+                        if 'publisher_stats' not in runtime_stats:
+                            runtime_stats['publisher_stats'] = defaultdict(lambda: {'total': 0, 'success': 0})
+                        stats = runtime_stats['publisher_stats'][publisher]
+                        stats['total'] += 1
+                        stats['success'] += 1
+                        ext = Path(file_path).suffix.lower()[1:]
+                        stats[f'{ext}_success'] = stats.get(f'{ext}_success', 0) + 1
                         return metadata
                 except Exception as e:
                     runtime_stats['api_errors'][file_path].append(f"ISBN {isbn}: {str(e)}")
@@ -3829,7 +3904,7 @@ class BookMetadataExtractor:
                 'error': str(e),
                 'traceback': traceback.format_exc()
             }
-            logging.error(f"Error processing {file_path}: {str(e)}")
+            self.logger.error(f"Error processing {file_path}: {str(e)}")
             return None
         finally:
             runtime_stats['processing_times'][file_path] = time.time() - start_time
@@ -3861,7 +3936,7 @@ class BookMetadataExtractor:
 
     def _process_casa_codigo_isbn(self, isbn: str, pdf_path: str, runtime_stats: Dict, details: Dict) -> Optional[BookMetadata]:
         """Handle Casa do Código ISBN processing."""
-        logging.info(f"Detected Casa do Código ISBN: {isbn}")
+        self.logger.info(f"Detected Casa do Código ISBN: {isbn}")
         
         try:
             metadata = self.metadata_fetcher.fetch_metadata(isbn)
@@ -3875,18 +3950,18 @@ class BookMetadataExtractor:
         except Exception as e:
             error_msg = f"ISBN {isbn}: {str(e)}"
             runtime_stats['api_errors'][pdf_path].append(error_msg)
-            logging.error(error_msg)
+            self.logger.error(error_msg)
         
         return None
 
     def _fetch_with_publisher_priority(self, isbn: str, publisher_info: Dict) -> Optional[BookMetadata]:
         """Busca metadados usando prioridade específica da editora."""
-        logging.info(f"Tentando busca prioritária para ISBN {isbn} da editora {publisher_info['name']}")
+        self.logger.info(f"Tentando busca prioritária para ISBN {isbn} da editora {publisher_info['name']}")
         
         errors = []
         for api_name in publisher_info['api_priority']:
             try:
-                logging.info(f"Tentando API {api_name}")
+                self.logger.info(f"Tentando API {api_name}")
                 
                 if api_name == 'google_books_br':
                     metadata = self.fetch_google_books(isbn, country='BR', lang='pt-BR')
@@ -3904,11 +3979,11 @@ class BookMetadataExtractor:
                         
             except Exception as e:
                 error_msg = f"Erro em {api_name}: {str(e)}"
-                logging.error(error_msg)
+                self.logger.error(error_msg)
                 errors.append(error_msg)
                 continue
                 
-        logging.error(f"Falha em todas as APIs para ISBN {isbn}:\n" + "\n".join(errors))
+        self.logger.error(f"Falha em todas as APIs para ISBN {isbn}:\n" + "\n".join(errors))
         return None
 
     def _detect_brazilian_publisher(self, isbn: str, text: str = None) -> Optional[Dict]:
@@ -4173,11 +4248,11 @@ class BookMetadataExtractor:
             with open(output_file, 'w', encoding='utf-8') as f:
                 json.dump(json_data, f, indent=2, ensure_ascii=False)
                 
-            logging.info(f"JSON report successfully generated: {output_file}")
+            self.logger.info(f"JSON report successfully generated: {output_file}")
             
         except Exception as e:
-            logging.error(f"Error generating JSON report: {str(e)}")
-            logging.error(traceback.format_exc())
+            self.logger.error(f"Error generating JSON report: {str(e)}")
+            self.logger.error(traceback.format_exc())
             raise
 
     def suggest_filename(self, metadata: Dict) -> str:
@@ -4356,29 +4431,28 @@ class BookMetadataExtractor:
             print("\n" + "="*80)
 
         except Exception as e:
-            logging.error(f"Erro ao gerar relatório: {str(e)}")
+            self.logger.error(f"Erro ao gerar relatório: {str(e)}")
             import traceback
-            logging.error(traceback.format_exc())
-    
+            self.logger.error(traceback.format_exc())
 
     def process_directory(self, directory_path: str, subdirs: Optional[List[str]] = None, 
                         recursive: bool = False, max_workers: int = 4) -> List[BookMetadata]:
         """
-        Process a directory containing book files with detailed progress tracking and summary.
-
+        Process a directory containing book files with clean progress display.
+        
         Args:
-            directory_path: Path to the directory to process
+            directory_path: Path to directory containing book files
             subdirs: Optional list of specific subdirectories to process
             recursive: Whether to process subdirectories recursively
             max_workers: Number of concurrent worker threads
-
+            
         Returns:
             List[BookMetadata]: List of successfully processed book metadata
         """
         directory = Path(directory_path)
         console = Console()
 
-        # Initialize runtime statistics
+        # Initialize runtime stats
         runtime_stats = {
             'processed_files': [],
             'successful_files': [],
@@ -4387,71 +4461,57 @@ class BookMetadataExtractor:
             'api_errors': defaultdict(list),
             'processing_times': {},
             'format_stats': defaultdict(lambda: {'total': 0, 'success': 0, 'failed': 0}),
-            'file_summaries': [],
             'start_time': time.time()
         }
 
-        # Find all relevant files
+        # Find all files
         all_files = []
-        extensions = {'pdf', 'epub', 'mobi', 'zip'}
-
-        with Progress(
-            TextColumn("[bold white]Finding files...", justify="right"),
-            BarColumn(),
-            "[progress.percentage]{task.percentage:>3.1f}%",
-            "•",
-            "{task.completed}/{task.total} directories scanned",
-        ) as progress:
-            task = progress.add_task("Scanning directories...", total=len(extensions))
-
-            if recursive:
-                for ext in extensions:
-                    files = list(directory.rglob(f"*.{ext}"))
-                    all_files.extend(files)
-                    progress.update(task, advance=1)
+        extensions = {'pdf', 'epub', 'mobi'}
+        
+        self.logger.debug("Scanning for files...")
+        if recursive:
+            for ext in extensions:
+                files = list(directory.rglob(f"*.{ext}"))
+                all_files.extend(files)
+                runtime_stats['format_stats'][ext]['total'] += len(files)
+        else:
+            if subdirs:
+                for subdir in subdirs:
+                    subdir_path = directory / subdir
+                    if subdir_path.exists():
+                        for ext in extensions:
+                            files = list(subdir_path.glob(f"*.{ext}"))
+                            all_files.extend(files)
+                            runtime_stats['format_stats'][ext]['total'] += len(files)
             else:
-                if subdirs:
-                    for subdir in subdirs:
-                        subdir_path = directory / subdir
-                        if subdir_path.exists():
-                            for ext in extensions:
-                                files = list(subdir_path.glob(f"*.{ext}"))
-                                all_files.extend(files)
-                                progress.update(task, advance=1)
-                else:
-                    for ext in extensions:
-                        files = list(directory.glob(f"*.{ext}"))
-                        all_files.extend(files)
-                        progress.update(task, advance=1)
+                for ext in extensions:
+                    files = list(directory.glob(f"*.{ext}"))
+                    all_files.extend(files)
+                    runtime_stats['format_stats'][ext]['total'] += len(files)
 
-        console.print(f"\n[bold white]Encontrados {len(all_files)} arquivos em {len(set([f.parent for f in all_files]))} diretórios[/bold white]")
-
-        # Update initial statistics
         runtime_stats['processed_files'] = [str(f) for f in all_files]
-
-        # Update format statistics
-        for file_path in all_files:
-            ext = file_path.suffix.lower()[1:]
-            runtime_stats['format_stats'][ext]['total'] += 1
-
-        # Group related files
         file_groups = self.file_group.group_files([str(f) for f in all_files])
-        console.print(f"[bold white]Agrupados em {len(file_groups)} grupos de arquivos relacionados[/bold white]")
+        self.logger.debug(f"Found {len(all_files)} files in {len(file_groups)} groups")
 
-        # Process groups with thread pool
+        # Single progress bar with corrected columns
         with Progress(
-            TextColumn("[white]{task.description}", justify="right"),
+            SpinnerColumn(),
+            TextColumn("[progress.description]{task.description}"),
             BarColumn(),
-            "[progress.percentage]{task.percentage:>3.1f}%",
-            "•",
-            "{task.completed}/{task.total} arquivos processados",
+            TextColumn("[progress.percentage]{task.percentage:>3.0f}%"),
+            TextColumn("•"),
+            TimeElapsedColumn(),
+            console=console,
+            transient=True
         ) as progress:
-            task = progress.add_task("Processando arquivos...", total=len(file_groups))
+            process_task = progress.add_task(
+                "Processing files...", 
+                total=len(file_groups)
+            )
 
             with ThreadPoolExecutor(max_workers=max_workers) as executor:
                 futures = []
 
-                # Submit jobs for each group
                 for base_name, group_files in file_groups.items():
                     best_source = self.file_group.find_best_isbn_source(group_files)
                     if best_source:
@@ -4464,111 +4524,238 @@ class BookMetadataExtractor:
                         metadata = future.result()
                         elapsed = time.time() - start_time
 
-                        main_file = Path(group_files[0]).name
-                        summary = {
-                            'file': main_file,
-                            'status': None,
-                            'time': elapsed,
-                            'details': None
-                        }
-
                         if metadata:
-                            progress.update(task, advance=1)
-
-                            # Update metadata with all related files
-                            metadata.file_paths = group_files
-                            metadata.formats = [Path(f).suffix[1:] for f in group_files]
                             runtime_stats['successful_results'].append(metadata)
-                            runtime_stats['successful_files'].extend(group_files)
-
-                            # Update format stats for success
-                            for file_path in group_files:
-                                ext = Path(file_path).suffix.lower()[1:]
-                                runtime_stats['format_stats'][ext]['success'] += 1
-
-                            # Update summary
-                            summary.update({
-                                'status': 'success',
-                                'details': f"ISBN: {metadata.isbn_13 or metadata.isbn_10} | Source: {metadata.source}"
-                            })
-
+                            ext = Path(group_files[0]).suffix.lower()[1:]
+                            runtime_stats['format_stats'][ext]['success'] += 1
                         else:
-                            progress.update(task, advance=1)
+                            ext = Path(group_files[0]).suffix.lower()[1:]
+                            runtime_stats['format_stats'][ext]['failed'] += 1
 
-                            # Update format stats for failure
-                            for file_path in group_files:
-                                ext = Path(file_path).suffix.lower()[1:]
-                                runtime_stats['format_stats'][ext]['failed'] += 1
-
-                            # Update summary with failure details
-                            details = runtime_stats['failure_details'].get(str(group_files[0]), {})
-                            summary.update({
-                                'status': 'failed',
-                                'details': details.get('error', 'Unknown error')
-                            })
-
-                        # Record processing time
                         runtime_stats['processing_times'][group_files[0]] = elapsed
+                        self.logger.debug(f"Processed: {Path(group_files[0]).name}")
 
                     except Exception as e:
-                        progress.update(task, advance=1)
-                        error_msg = f"Error processing group {Path(group_files[0]).stem}: {str(e)}"
-                        logging.error(error_msg)
-
-                        summary = {
-                            'file': main_file,
-                            'status': 'error',
-                            'time': time.time() - start_time,
-                            'details': str(e)
-                        }
-
-                        for file_path in group_files:
-                            ext = Path(file_path).suffix.lower()[1:]
-                            runtime_stats['format_stats'][ext]['failed'] += 1
-                            runtime_stats['failure_details'][str(file_path)] = {
-                                'error': str(e),
-                                'traceback': traceback.format_exc()
-                            }
-
+                        self.logger.error(f"Error processing {Path(group_files[0]).name}: {str(e)}")
                     finally:
-                        runtime_stats['file_summaries'].append(summary)
+                        progress.advance(process_task)
 
-        # Print file processing summary
-        table = Table(title="Sumário de Processamento")
-
-        table.add_column("Arquivo", justify="left", style="white", width=60)
-        table.add_column("Status", justify="center", style="green", width=10)
-        table.add_column("Tempo", justify="center", style="white", width=8)
-        table.add_column("Detalhes", justify="left", style="white", no_wrap=True)
-
-        for summary in runtime_stats['file_summaries']:
-            status_symbol = "✓" if summary['status'] == 'success' else "✗"
-            status_color = "green" if summary['status'] == 'success' else "red"
-            status_text = f"[{status_color}]{status_symbol} {summary['status']}[/{status_color}]"
-            details = summary['details'][:50] + "..." if len(summary['details']) > 50 else summary['details']
-            table.add_row(summary['file'], status_text, f"{summary['time']:.2f}s", details)
-
-        console.print(table)
-
-        # Calculate final statistics
-        runtime_stats['end_time'] = time.time()
-        runtime_stats['total_time'] = runtime_stats['end_time'] - runtime_stats['start_time']
-
-        if runtime_stats['processing_times']:
-            runtime_stats['avg_time_per_file'] = statistics.mean(runtime_stats['processing_times'].values())
-            runtime_stats['max_time'] = max(runtime_stats['processing_times'].values())
-            runtime_stats['min_time'] = min(runtime_stats['processing_times'].values())
-
-        # Final statistics summary
-        console.print("[bold white]Estatísticas Finais:[/bold white]")
-        console.print(f"[white]Tempo Total:[/] {runtime_stats['total_time']:.2f}s")
-        console.print(f"[green]Arquivos Sucesso:[/] {len(runtime_stats['successful_results'])}")
-        console.print(f"[red]Arquivos com Falha:[/] {len(runtime_stats['failure_details'])}")
-        
-        self._generate_reports(runtime_stats)
-
+        self._print_summary(runtime_stats)
         return runtime_stats['successful_results']
 
+    def _print_summary(self, runtime_stats: Dict):
+        """
+        Print final processing summary with clean formatting.
+        
+        Args:
+            runtime_stats: Dictionary containing runtime statistics
+        """
+        total_files = len(runtime_stats['processed_files'])
+        successful = len(runtime_stats['successful_results'])
+        failed = total_files - successful
+        success_rate = (successful / total_files * 100) if total_files > 0 else 0
+
+        table = Table(title="Processing Summary")
+        table.add_column("Category", style="blue")
+        table.add_column("Count", justify="right")
+        table.add_column("Percentage", justify="right")
+
+        table.add_row(
+            "Total Files",
+            str(total_files),
+            "100%"
+        )
+        table.add_row(
+            "Successful",
+            str(successful),
+            f"{success_rate:.1f}%"
+        )
+        table.add_row(
+            "Failed",
+            str(failed),
+            f"{(100 - success_rate):.1f}%"
+        )
+
+        print("\nFormat Statistics:")
+        format_table = Table()
+        format_table.add_column("Format")
+        format_table.add_column("Total")
+        format_table.add_column("Success")
+        format_table.add_column("Failed")
+        format_table.add_column("Success Rate")
+
+        for fmt, stats in runtime_stats['format_stats'].items():
+            if stats['total'] > 0:
+                success_rate = (stats['success'] / stats['total'] * 100)
+                format_table.add_row(
+                    fmt.upper(),
+                    str(stats['total']),
+                    str(stats['success']),
+                    str(stats['failed']),
+                    f"{success_rate:.1f}%"
+                )
+
+        Console().print(table)
+        Console().print(format_table)
+
+    def print_final_summary(self, runtime_stats: Dict):
+        """Print final processing summary with format and publisher statistics."""
+        # Keep existing statistics
+        total_time = runtime_stats.get('total_time', 0)
+        successful = len(runtime_stats.get('successful_results', []))
+        failed = len(runtime_stats.get('failure_details', {}))
+
+        print("\nEstatísticas Finais:")
+        print(f"Tempo Total: {total_time:.2f}s")
+        print(f"Arquivos Sucesso: {successful}")
+        print(f"Arquivos com Falha: {failed}")
+
+        # Add format and publisher stats
+        if 'publisher_stats' in runtime_stats:
+            print("\nDistribuição por Editora:")
+            for publisher, stats in runtime_stats['publisher_stats'].items():
+                success_rate = (stats['success'] / stats['total'] * 100) if stats['total'] > 0 else 0
+                print(f"\n{publisher}:")
+                print(f"  Total: {stats['total']}")
+                print(f"  Taxa de Sucesso: {success_rate:.1f}%")
+                
+                # Format breakdown
+                formats = []
+                for fmt in ['pdf', 'epub', 'mobi']:
+                    count = stats.get(f'{fmt}_count', 0)
+                    if count > 0:
+                        formats.append(f"{fmt.upper()}: {count}")
+                if formats:
+                    print(f"  Formatos: {', '.join(formats)}")
+
+        # Keep existing report files output
+        print("\nArquivos Gerados:")
+        print("-" * 40)
+        for report in runtime_stats.get('generated_reports', []):
+            print(f"{report['type']:4} {report['path']}")       
+            
+
+    '''
+    def print_final_summary(self, runtime_stats):
+        """Imprime um resumo final com proteção total contra divisão por zero e valores nulos."""
+        
+        # Verifica se runtime_stats existe
+        if not runtime_stats:
+            print("\nErro: Nenhuma estatística disponível")
+            return
+            
+        try:
+            # Inicializa contadores com valores seguros
+            extension_stats = defaultdict(lambda: {'total': 0, 'success': 0, 'failed': 0, 'success_rate': 0.0})
+            total_files = 0
+            total_success = 0
+            
+            # Conta total de arquivos por extensão com verificações de segurança
+            processed_files = runtime_stats.get('processed_files', [])
+            if processed_files:
+                for file_path in processed_files:
+                    if not file_path:  # Pula entradas vazias
+                        continue
+                    try:
+                        if isinstance(file_path, str):
+                            ext = Path(file_path).suffix.lower()[1:]
+                            if ext in {'pdf', 'epub', 'mobi'}:
+                                extension_stats[ext]['total'] += 1
+                                total_files += 1
+                    except Exception as e:
+                        self.logger.debug(f"Ignorando arquivo inválido: {str(e)}")
+                        continue
+            
+            # Conta sucessos por extensão com verificações de segurança
+            successful_results = runtime_stats.get('successful_results', [])
+            if successful_results:
+                for result in successful_results:
+                    if not result or not hasattr(result, 'file_path') or not result.file_path:
+                        continue
+                    try:
+                        ext = Path(result.file_path).suffix.lower()[1:]
+                        if ext in extension_stats:
+                            extension_stats[ext]['success'] += 1
+                            total_success += 1
+                    except Exception as e:
+                        self.logger.debug(f"Ignorando resultado inválido: {str(e)}")
+                        continue
+            
+            # Calcula estatísticas com proteção contra divisão por zero
+            for ext in extension_stats:
+                stats = extension_stats[ext]
+                stats['failed'] = stats['total'] - stats['success']
+                try:
+                    if stats['total'] > 0:
+                        stats['success_rate'] = (stats['success'] / stats['total']) * 100
+                except Exception:
+                    stats['success_rate'] = 0.0
+            
+            # Calcula taxa geral de sucesso com proteção
+            try:
+                overall_rate = (total_success / total_files * 100) if total_files > 0 else 0.0
+            except Exception:
+                overall_rate = 0.0
+            
+            # Imprime o relatório
+            print("\n" + "=" * 60)
+            print(f"{'RESUMO DO PROCESSAMENTO':^60}")
+            print("=" * 60)
+            
+            # Estatísticas gerais
+            print("\nEstatísticas Gerais:")
+            print("-" * 40)
+            print(f"Total de arquivos processados: {total_files}")
+            print(f"Total de sucessos: {total_success}")
+            print(f"Total de falhas: {total_files - total_success}")
+            print(f"Taxa de sucesso geral: {overall_rate:.1f}%")
+            
+            # Estatísticas por tipo de arquivo
+            if any(stats['total'] > 0 for stats in extension_stats.values()):
+                print("\nEstatísticas por tipo de arquivo:")
+                print("-" * 40)
+                
+                for ext in sorted(extension_stats.keys()):
+                    stats = extension_stats[ext]
+                    if stats['total'] > 0:  # Só mostra extensões com arquivos
+                        print(f"\n{ext.upper()}:")
+                        print(f"  Total: {stats['total']}")
+                        print(f"  Sucessos: {stats['success']}")
+                        print(f"  Falhas: {stats['failed']}")
+                        print(f"  Taxa de Sucesso: {stats['success_rate']:.1f}%")
+            
+            if 'publisher_stats' in runtime_stats:
+                print("\nEstatísticas por Editora:")
+                for publisher, stats in runtime_stats['publisher_stats'].items():
+                    print(f"{publisher}: {stats['success']}/{stats['total']} sucessos")
+            
+            # Arquivos gerados
+            try:
+                print("\nArquivos Gerados:")
+                print("-" * 40)
+                
+                report_files = {
+                    'HTML': next((r.get('path', '') for r in runtime_stats.get('generated_reports', []) 
+                                if r.get('type') == 'HTML'), None),
+                    'JSON': next((r.get('path', '') for r in runtime_stats.get('generated_reports', []) 
+                                if r.get('type') == 'JSON'), None),
+                    'Log': runtime_stats.get('log_file', '')
+                }
+                
+                for report_type, path in report_files.items():
+                    if path:
+                        print(f"{report_type + ':':5} {path}")
+            except Exception as e:
+                self.logger.error(f"Erro ao processar informações de arquivos gerados: {str(e)}")
+            
+            print("\n" + "=" * 60)
+            
+        except Exception as e:
+            print(f"\nErro ao gerar resumo: {str(e)}")
+            self.logger.error(f"Erro ao gerar resumo: {str(e)}")
+            import traceback
+            self.logger.debug(traceback.format_exc())
+    '''
 
     def _calculate_metadata_completeness(self, metadata: BookMetadata) -> float:
         """
@@ -4811,7 +4998,7 @@ class BookMetadataExtractor:
                     isbns = self.isbn_extractor.extract_from_text(text)
                     combined_isbns.update(isbns)
             except Exception as e:
-                logging.error(f"Erro processando {file_path}: {str(e)}")
+                self.logger.error(f"Erro processando {file_path}: {str(e)}")
                 continue
         
         # Se encontrou ISBNs em qualquer arquivo do grupo
@@ -4824,7 +5011,7 @@ class BookMetadataExtractor:
                         metadata.file_paths = [str(f) for f in files]
                         return metadata
                 except Exception as e:
-                    logging.error(f"Erro obtendo metadados para ISBN {isbn}: {str(e)}")
+                    self.logger.error(f"Erro obtendo metadados para ISBN {isbn}: {str(e)}")
                     
         return metadata
 
@@ -5130,7 +5317,7 @@ class BookMetadataExtractor:
         All files use consistent timestamp and are stored in reports directory.
         """
         if not runtime_stats:
-            logging.error("Invalid runtime_stats data")
+            self.logger.error("Invalid runtime_stats data")
             return
 
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -5179,7 +5366,7 @@ class BookMetadataExtractor:
                 {'type': 'LOG', 'path': str(log_path)}
             ]
             
-            logging.info(f"Reports generated successfully in {self.reports_dir}")
+            self.logger.info(f"Reports generated successfully in {self.reports_dir}")
             # Print report locations
             print("\nArquivos Gerados:")
             print("-" * 40)
@@ -5188,24 +5375,31 @@ class BookMetadataExtractor:
             print(f"LOG  {log_path}")
                         
         except Exception as e:
-            logging.error(f"Error generating reports: {str(e)}")
-            logging.error(traceback.format_exc())
+            self.logger.error(f"Error generating reports: {str(e)}")
+            self.logger.error(traceback.format_exc())
 
     def _init_logging(self):
-        """Initialize logging with correct file location."""
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        log_path = self.reports_dir / f"report_{timestamp}_metadata.log"
+        """Initialize logging configuration."""
+        self.logger = logging.getLogger('book_metadata_extractor')  # Use o nome específico da classe
+        self.logger.setLevel(logging.DEBUG)  # Nível detalhado para o arquivo
         
-        handlers = [
-            logging.StreamHandler(),
-            logging.FileHandler(str(log_path))
-        ]
-        
-        logging.basicConfig(
-            level=logging.INFO,
-            format='%(asctime)s - %(levelname)s - %(message)s',
-            handlers=handlers
-        )
+        if not self.logger.handlers:
+            # File handler - captura tudo para o arquivo
+            file_handler = logging.FileHandler('book_metadata_extractor.log')
+            file_handler.setFormatter(logging.Formatter(
+                '%(asctime)s - %(levelname)s - %(message)s'
+            ))
+            file_handler.setLevel(logging.DEBUG)
+            
+            # Console handler - apenas warnings e erros
+            console_handler = logging.StreamHandler()
+            console_handler.setFormatter(logging.Formatter(
+                '%(levelname)s - %(message)s'
+            ))
+            console_handler.setLevel(logging.WARNING)
+            
+            self.logger.addHandler(file_handler)
+            self.logger.addHandler(console_handler)
     
     def _generate_html_report(self, data: Dict, output_file: Path):
         """Gera relatório HTML usando nomes de parâmetros consistentes."""
@@ -5497,29 +5691,6 @@ class BookMetadataExtractor:
             for file_path, error in failures.items()
         )
 
-    def print_final_summary(self, runtime_stats: Dict):
-        """
-        Print final summary with consistent file paths.
-        
-        Args:
-            runtime_stats: Dictionary containing runtime statistics
-        """
-        # ... [previous summary code remains the same until file listing] ...
-
-        # Print generated files section with consistent formatting
-        print("\nArquivos Gerados:")
-        print("-" * 40)
-        
-        if reports := runtime_stats.get('generated_reports', []):
-            # Sort by type to ensure consistent order
-            for report in sorted(reports, key=lambda x: x['type']):
-                report_type = report['type']
-                path = Path(report['path'])
-                # Align output using consistent spacing
-                print(f"{report_type:4} {path}")
-        
-        print("\n" + "=" * 60)
-    
     def suggest_filename(self, metadata: BookMetadata) -> str:
             """
             Sugere um nome de arquivo baseado nos metadados do livro.
@@ -5675,6 +5846,7 @@ class RateLimitCache:
 class MetadataValidator:
     """Validação centralizada de metadados."""
     def __init__(self):
+        self._init_logging()
         self.publisher_patterns = {
             'springer': [r'springer', r'apress'],
             'oreilly': [r"o'reilly", r'oreilly'],
@@ -5684,7 +5856,29 @@ class MetadataValidator:
             'novatec': [r'novatec'],
             'alta_books': [r'alta\s+books']
         }
-    
+
+    def _init_logging(self):
+        """Initialize logging configuration."""
+        self.logger = logging.getLogger('metadata_validator')  # Use o nome específico da classe
+        self.logger.setLevel(logging.DEBUG)  # Nível detalhado para o arquivo
+        
+        if not self.logger.handlers:
+            # File handler - captura tudo para o arquivo
+            file_handler = logging.FileHandler('metadata_validator.log')
+            file_handler.setFormatter(logging.Formatter(
+                '%(asctime)s - %(levelname)s - %(message)s'
+            ))
+            file_handler.setLevel(logging.DEBUG)
+            
+            # Console handler - apenas warnings e erros
+            console_handler = logging.StreamHandler()
+            console_handler.setFormatter(logging.Formatter(
+                '%(levelname)s - %(message)s'
+            ))
+            console_handler.setLevel(logging.WARNING)
+            
+            self.logger.addHandler(file_handler)
+            self.logger.addHandler(console_handler)
 
     def validate_metadata(self, metadata: Dict[str, Any], source: str, isbn: str = None, source_api: str = None) -> bool:
         """Validação centralizada de metadados."""
@@ -5769,6 +5963,7 @@ class MetadataValidator:
 
 class ErrorHandler:
     def __init__(self):
+        self._init_logging()
         self.error_counts = defaultdict(Counter)
         self.last_errors = defaultdict(dict)
         self.error_thresholds = {
@@ -5777,6 +5972,29 @@ class ErrorHandler:
             'api': 3,
             'validation': 2
         }
+
+    def _init_logging(self):
+        """Initialize logging configuration."""
+        self.logger = logging.getLogger('error_handler')  # Use o nome específico da classe
+        self.logger.setLevel(logging.DEBUG)  # Nível detalhado para o arquivo
+        
+        if not self.logger.handlers:
+            # File handler - captura tudo para o arquivo
+            file_handler = logging.FileHandler('error_handler.log')
+            file_handler.setFormatter(logging.Formatter(
+                '%(asctime)s - %(levelname)s - %(message)s'
+            ))
+            file_handler.setLevel(logging.DEBUG)
+            
+            # Console handler - apenas warnings e erros
+            console_handler = logging.StreamHandler()
+            console_handler.setFormatter(logging.Formatter(
+                '%(levelname)s - %(message)s'
+            ))
+            console_handler.setLevel(logging.WARNING)
+            
+            self.logger.addHandler(file_handler)
+            self.logger.addHandler(console_handler)
 
     def handle_api_error(self, api_name: str, error: Exception, isbn: str) -> bool:
         """
@@ -5805,7 +6023,7 @@ class ErrorHandler:
         }
 
         # Log error with context
-        logging.error(
+        self.logger.error(
             f"API Error in {api_name} for ISBN {isbn}\n"
             f"Category: {category}\n"
             f"Error: {error_msg}\n"
@@ -5815,7 +6033,7 @@ class ErrorHandler:
         # Check if should retry based on error category and count
         threshold = self.error_thresholds.get(category, 3)
         if self.error_counts[api_name][category] >= threshold:
-            logging.warning(
+            self.logger.warning(
                 f"Error threshold reached for {api_name} ({category}). "
                 f"Temporarily disabling API."
             )
@@ -5832,7 +6050,7 @@ class ErrorHandler:
         )
 
         if total_errors > 10 or recent_errors > 5:
-            logging.warning(f"API {api_name} shows poor health. Consider alternative.")
+            self.logger.warning(f"API {api_name} shows poor health. Consider alternative.")
             return False
         return True
 
@@ -5859,6 +6077,7 @@ class ErrorHandler:
 class MetricsCollector:
     """Coleta e análise de métricas."""
     def __init__(self):
+        self._init_logging()
         self.metrics = defaultdict(list)
         self.errors = defaultdict(Counter)
         
@@ -5868,7 +6087,30 @@ class MetricsCollector:
             'response_time': response_time,
             'success': success
         })
+
+    def _init_logging(self):
+        """Initialize logging configuration."""
+        self.logger = logging.getLogger('metrics_collector')  # Use o nome específico da classe
+        self.logger.setLevel(logging.DEBUG)  # Nível detalhado para o arquivo
         
+        if not self.logger.handlers:
+            # File handler - captura tudo para o arquivo
+            file_handler = logging.FileHandler('metrics_collector.lower.log')
+            file_handler.setFormatter(logging.Formatter(
+                '%(asctime)s - %(levelname)s - %(message)s'
+            ))
+            file_handler.setLevel(logging.DEBUG)
+            
+            # Console handler - apenas warnings e erros
+            console_handler = logging.StreamHandler()
+            console_handler.setFormatter(logging.Formatter(
+                '%(levelname)s - %(message)s'
+            ))
+            console_handler.setLevel(logging.WARNING)
+            
+            self.logger.addHandler(file_handler)
+            self.logger.addHandler(console_handler)
+
     def add_error(self, api_name: str, error_type: str):
         self.errors[api_name][error_type] += 1
         
@@ -5903,13 +6145,16 @@ class EbookProcessor:
     """Enhanced processor for ebook files (EPUB and MOBI) with working implementation from isbn_diagnostic."""
     
     def __init__(self):
+        """Initialize the ebook processor with logging support."""
+        self._init_logging()
+        
         # ISBN patterns ordered by reliability and specificity
         self.isbn_patterns = [
             # Casa do Código specific patterns (highest priority)
             r'Impresso:\s*(978-85-5519-[0-9]{3}-[0-9])',  # Matches exactly CDC pattern
             r'Digital:\s*(978-85-5519-[0-9]{3}-[0-9])',   # Matches exactly CDC pattern
             
-            # O'Reilly patterns (keep existing)
+            # O'Reilly patterns
             r'O\'Reilly\s+(?:Media|Publishing).*?ISBN[:\s-]*(97[89]\d{10})',
             r'(?:Print|eBook|Digital)\s+ISBN[:\s-]*(97[89]\d{10})',
             r'oreilly\.com/catalog/[^/]+/?ISBN[:\s-]*(97[89]\d{10})',
@@ -5958,6 +6203,29 @@ class EbookProcessor:
             ]
         }
 
+    def _init_logging(self):
+        """Initialize logging configuration."""
+        self.logger = logging.getLogger('ebook_processor')  # Use o nome específico da classe
+        self.logger.setLevel(logging.DEBUG)  # Nível detalhado para o arquivo
+        
+        if not self.logger.handlers:
+            # File handler - captura tudo para o arquivo
+            file_handler = logging.FileHandler('ebook_processor.log')
+            file_handler.setFormatter(logging.Formatter(
+                '%(asctime)s - %(levelname)s - %(message)s'
+            ))
+            file_handler.setLevel(logging.DEBUG)
+            
+            # Console handler - apenas warnings e erros
+            console_handler = logging.StreamHandler()
+            console_handler.setFormatter(logging.Formatter(
+                '%(levelname)s - %(message)s'
+            ))
+            console_handler.setLevel(logging.WARNING)
+            
+            self.logger.addHandler(file_handler)
+            self.logger.addHandler(console_handler)
+
     def extract_text_from_epub(self, epub_path: str) -> Tuple[str, List[str]]:
         """
         Extract text content from EPUB files with enhanced ISBN detection and logging.
@@ -5972,28 +6240,28 @@ class EbookProcessor:
         text_sections = []
         found_isbns = set()
         
-        logging.info(f"Processing EPUB file: {epub_path}")
+        self.logger.info(f"Processing EPUB file: {epub_path}")
         
         try:
             book = epub.read_epub(epub_path)
             
             # Log metadata availability
-            logging.debug("Checking Dublin Core metadata...")
+            self.logger.debug("Checking Dublin Core metadata...")
             dc_identifiers = book.get_metadata('DC', 'identifier')
             if dc_identifiers:
-                logging.debug(f"Found {len(dc_identifiers)} DC identifiers")
+                self.logger.debug(f"Found {len(dc_identifiers)} DC identifiers")
                 
                 for ident in dc_identifiers:
-                    logging.debug(f"Processing identifier: {ident}")
+                    self.logger.debug(f"Processing identifier: {ident}")
                     isbn_match = re.search(r'(?:97[89]\d{10})|(?:\d{9}[\dXx])', str(ident[0]))
                     if isbn_match:
                         isbn = isbn_match.group(0)
                         found_isbns.add(isbn)
                         text_sections.append(f"ISBN: {isbn}")
-                        logging.info(f"Found ISBN in DC metadata: {isbn}")
+                        self.logger.info(f"Found ISBN in DC metadata: {isbn}")
 
             # Process document items
-            logging.debug("Processing EPUB content...")
+            self.logger.debug("Processing EPUB content...")
             items_processed = 0
             for item in book.get_items():
                 if item.get_type() == ITEM_DOCUMENT:
@@ -6004,7 +6272,7 @@ class EbookProcessor:
                         text = soup.get_text()
                         
                         # Log content length for debugging
-                        logging.debug(f"Processing item {items_processed}: {len(text)} characters")
+                        self.logger.debug(f"Processing item {items_processed}: {len(text)} characters")
                         
                         # Look for ISBNs using all patterns
                         for pattern in self.isbn_patterns:
@@ -6018,37 +6286,37 @@ class EbookProcessor:
                                 if len(isbn) == 13 and isbn.startswith(('978', '979')):
                                     found_isbns.add(isbn)
                                     text_sections.append(f"ISBN: {isbn}")
-                                    logging.info(f"Found ISBN-13 in content: {isbn}")
+                                    self.logger.info(f"Found ISBN-13 in content: {isbn}")
                                 elif len(isbn) == 10:
                                     found_isbns.add(isbn)
                                     text_sections.append(f"ISBN: {isbn}")
-                                    logging.info(f"Found ISBN-10 in content: {isbn}")
+                                    self.logger.info(f"Found ISBN-10 in content: {isbn}")
                         
                         # Add context for ISBN sections
                         if re.search(r'ISBN|97[89]|Casa do Código', text, re.IGNORECASE):
-                            logging.debug("Found ISBN-related content, adding context")
+                            self.logger.debug("Found ISBN-related content, adding context")
                             text_sections.insert(0, text)
                         
                     except Exception as e:
-                        logging.error(f"Error processing item {items_processed}: {str(e)}")
+                        self.logger.error(f"Error processing item {items_processed}: {str(e)}")
                         continue
 
             # Final logging
-            logging.info(f"Processed {items_processed} items")
-            logging.info(f"Found {len(found_isbns)} unique ISBNs: {sorted(found_isbns)}")
+            self.logger.info(f"Processed {items_processed} items")
+            self.logger.info(f"Found {len(found_isbns)} unique ISBNs: {sorted(found_isbns)}")
             
             if not found_isbns:
-                logging.warning(f"No ISBNs found in {epub_path}")
+                self.logger.warning(f"No ISBNs found in {epub_path}")
                 # Log a sample of the content for debugging
                 if text_sections:
                     sample = text_sections[0][:500]
-                    logging.debug(f"Content sample: {sample}")
+                    self.logger.debug(f"Content sample: {sample}")
 
             return "\n\n".join(text_sections), methods_tried
             
         except Exception as e:
-            logging.error(f"EPUB extraction error in {epub_path}: {str(e)}")
-            logging.error(traceback.format_exc())
+            self.logger.error(f"EPUB extraction error in {epub_path}: {str(e)}")
+            self.logger.error(traceback.format_exc())
             return "", methods_tried
 
     def _extract_title_from_metadata(self, metadata: Dict) -> Optional[str]:
@@ -6087,72 +6355,47 @@ class EbookProcessor:
         return main_title
 
     def extract_text_from_mobi(self, mobi_path: str) -> Tuple[str, List[str]]:
-        """
-        Extract text content from MOBI files with reliable ISBN detection.
-
-        Args:
-            mobi_path: Path to the MOBI file
-
-        Returns:
-            Tuple containing extracted text and list of methods attempted
-        """
-        methods_tried = []
+        """Extract text content from MOBI files."""
+        methods_tried = ["mobi-raw"]
         text_sections = []
 
         try:
-            methods_tried.append("mobi-raw")
             with open(mobi_path, 'rb') as file:
-                raw_content = file.read()
-                
-                # Try multiple encodings for content extraction
-                for encoding in ['utf-8', 'latin-1', 'cp1252']:
+                # Tenta múltiplos encodings comuns em MOBIs
+                for encoding in ['utf-8', 'cp1252', 'latin1', 'iso-8859-1']:
                     try:
-                        content = raw_content.decode(encoding, errors='ignore')
+                        content = file.read().decode(encoding, errors='ignore')
+                        file.seek(0)  # Reset para próxima tentativa
                         
-                        # Look for copyright section first
-                        copyright_section = re.search(
-                            r'(?:Copyright|\u00A9|©).*?(?=\n\n|\Z)',
+                        # Procura primeiro por seção de copyright que geralmente tem ISBN
+                        copyright_match = re.search(
+                            r'(?:Copyright|\u00A9|©).{0,500}?(?=\n\n|\Z)',
                             content,
                             re.IGNORECASE | re.DOTALL
                         )
-                        if copyright_section:
-                            text_sections.append(copyright_section.group(0))
-                        
-                        # Find ISBN sections
-                        isbn_sections = re.finditer(
-                            r'(?:ISBN[-: ]?13?|Print ISBN|eBook ISBN).*?(?:\n\n|\Z)',
-                            content,
-                            re.IGNORECASE | re.DOTALL
-                        )
-                        for section in isbn_sections:
-                            text_sections.append(section.group(0))
-                            
-                        if text_sections:
+                        if copyright_match:
+                            text_sections.append(copyright_match.group(0))
                             break
-                            
-                    except Exception as e:
-                        logging.debug(f"Failed with {encoding} encoding: {str(e)}")
+                    except:
                         continue
 
-                # Try MOBI parsing as backup
+            # Processamento existente como fallback
+            if not text_sections:
+                methods_tried.append("mobi-structured")
                 try:
-                    methods_tried.append("mobi-structured")
                     book = mobi.Mobi(file)
                     book.parse()
-                    
                     if hasattr(book, 'book_header'):
                         if hasattr(book.book_header, 'title'):
                             text_sections.append(
                                 book.book_header.title.decode('utf-8', errors='ignore')
                             )
-                        
-                except Exception as e:
-                    logging.debug(f"MOBI parsing failed: {str(e)}")
-                    
+                except:
+                    pass
+
         except Exception as e:
-            logging.error(f"MOBI extraction failed for {mobi_path}: {str(e)}")
-            return "", methods_tried
-            
+            self.logger.error(f"MOBI extraction failed for {mobi_path}: {str(e)}")
+        
         return "\n\n".join(text_sections), methods_tried
 
     def _normalize_text(self, text: str) -> str:
@@ -6194,7 +6437,7 @@ class EbookProcessor:
             return ascii_text
             
         except Exception as e:
-            logging.error(f"Erro ao normalizar texto: {str(e)}")
+            self.logger.error(f"Erro ao normalizar texto: {str(e)}")
             return text  # Retorna o texto original em caso de erro
 
     def extract_metadata(self, file_path: str) -> Dict[str, Union[str, List[str], None]]:
@@ -6204,14 +6447,14 @@ class EbookProcessor:
         metadata: Dict[str, Union[str, List[str], None]] = {}
         ext = Path(file_path).suffix.lower()
         
-        logging.info(f"Extracting metadata from: {file_path}")
+        self.logger.info(f"Extracting metadata from: {file_path}")
         
         try:
             if ext == '.epub':
                 book = epub.read_epub(file_path)
                 
                 # Extract Dublin Core metadata first
-                logging.debug("Checking Dublin Core metadata...")
+                self.logger.debug("Checking Dublin Core metadata...")
                 
                 # Get all DC metadata
                 dc_metadata_found = False
@@ -6226,16 +6469,16 @@ class EbookProcessor:
                             )
                             if isbn_match:
                                 metadata['isbn'] = isbn_match.group(0)
-                                logging.info(f"Found ISBN in DC metadata: {metadata['isbn']}")
+                                self.logger.info(f"Found ISBN in DC metadata: {metadata['isbn']}")
                                 dc_metadata_found = True
                         else:
                             # Aplica a normalização aqui
                             metadata[field] = self._normalize_text(value)
-                            logging.debug(f"Found {field}: {metadata[field]}")
+                            self.logger.debug(f"Found {field}: {metadata[field]}")
                 
                 # If no ISBN in DC metadata, try content scanning
                 if 'isbn' not in metadata:
-                    logging.debug("No ISBN in DC metadata, scanning content...")
+                    self.logger.debug("No ISBN in DC metadata, scanning content...")
                     text, _ = self.extract_text_from_epub(file_path)
                     if text:
                         # Try Casa do Código patterns first if filename suggests it
@@ -6251,7 +6494,7 @@ class EbookProcessor:
                                     if len(isbn) == 13 and isbn.startswith('97885'):
                                         metadata['isbn'] = isbn
                                         metadata['publisher'] = 'Casa do Código'
-                                        logging.info(f"Found Casa do Código ISBN: {isbn}")
+                                        self.logger.info(f"Found Casa do Código ISBN: {isbn}")
                                         break
                                 if 'isbn' in metadata:
                                     break
@@ -6277,7 +6520,7 @@ class EbookProcessor:
                                             elif '85508' in isbn:
                                                 metadata['publisher'] = 'Alta Books'
                                         
-                                        logging.info(f"Found ISBN in content: {isbn}")
+                                        self.logger.info(f"Found ISBN in content: {isbn}")
                                         break
                                 if 'isbn' in metadata:
                                     break
@@ -6299,7 +6542,7 @@ class EbookProcessor:
                             metadata['title'] = self._normalize_text(metadata['title'])
                         if metadata.get('creator'):
                             metadata['creator'] = self._normalize_text(metadata['creator'])
-                        logging.info(f"Successfully extracted metadata: {metadata}")
+                        self.logger.info(f"Successfully extracted metadata: {metadata}")
                         return metadata
 
                 # General validation for other publishers
@@ -6309,10 +6552,10 @@ class EbookProcessor:
                         metadata['title'] = self._normalize_text(metadata['title'])
                     if metadata.get('creator'):
                         metadata['creator'] = self._normalize_text(metadata['creator'])
-                    logging.info(f"Successfully extracted metadata: {metadata}")
+                    self.logger.info(f"Successfully extracted metadata: {metadata}")
                     return metadata
                 
-                logging.warning(f"Incomplete metadata found in {file_path}: {metadata}")
+                self.logger.warning(f"Incomplete metadata found in {file_path}: {metadata}")
                 return metadata  # Return partial metadata instead of empty dict
                 
             elif ext == '.mobi':
@@ -6320,8 +6563,8 @@ class EbookProcessor:
                 pass
                 
         except Exception as e:
-            logging.error(f"Metadata extraction failed for {file_path}: {str(e)}")
-            logging.error(traceback.format_exc())
+            self.logger.error(f"Metadata extraction failed for {file_path}: {str(e)}")
+            self.logger.error(traceback.format_exc())
             
         return metadata  # Return whatever metadata was found, even if incomplete
 
@@ -6434,18 +6677,18 @@ class EbookProcessor:
 
             # Validate required fields
             if not metadata['title'] or not metadata['authors'] or not metadata['publisher']:
-                logging.debug(f"Incomplete metadata from {source} for ISBN {isbn}")
+                self.logger.debug(f"Incomplete metadata from {source} for ISBN {isbn}")
                 return None
 
             # Validate O'Reilly specific fields
             if not self._validate_oreilly_metadata(metadata, isbn):
-                logging.debug(f"Non-O'Reilly metadata from {source} for ISBN {isbn}")
+                self.logger.debug(f"Non-O'Reilly metadata from {source} for ISBN {isbn}")
                 return None
 
             return metadata
 
         except Exception as e:
-            logging.debug(f"Error processing {source} response for ISBN {isbn}: {str(e)}")
+            self.logger.debug(f"Error processing {source} response for ISBN {isbn}: {str(e)}")
             return None
 
     def _handle_isbn_variant(self, isbn: str, variant_data: Dict) -> Optional[str]:
@@ -6574,9 +6817,90 @@ class EbookProcessor:
         return False
 
 
+class PacktBookProcessor:
+    """Processador especializado para livros da Packt."""
+    
+    def __init__(self):
+        self._init_logging()
+        # Padrões específicos da Packt para complementar a extração existente
+        self.packt_patterns = {
+            'isbn': [
+                r'eBook:\s*ISBN[:\s-]*(97[89][-\s]*(?:\d[-\s]*){9}\d)',
+                r'Print\s+ISBN[:\s-]*(97[89][-\s]*(?:\d[-\s]*){9}\d)',
+                r'ISBN\s+13:[:\s-]*(97[89][-\s]*(?:\d[-\s]*){9}\d)'
+            ]
+        }
+        
+        self.packt_char_fixes = {
+            '@': '9',
+            '>': '7',
+            '?': '8',
+            '_': '-'
+        }
+
+    def _init_logging(self):
+        """Initialize logging configuration."""
+        self.logger = logging.getLogger('packt_processor')  # Use o nome específico da classe
+        self.logger.setLevel(logging.DEBUG)  # Nível detalhado para o arquivo
+        
+        if not self.logger.handlers:
+            # File handler - captura tudo para o arquivo
+            file_handler = logging.FileHandler('packt_processor.log')
+            file_handler.setFormatter(logging.Formatter(
+                '%(asctime)s - %(levelname)s - %(message)s'
+            ))
+            file_handler.setLevel(logging.DEBUG)
+            
+            # Console handler - apenas warnings e erros
+            console_handler = logging.StreamHandler()
+            console_handler.setFormatter(logging.Formatter(
+                '%(levelname)s - %(message)s'
+            ))
+            console_handler.setLevel(logging.WARNING)
+            
+            self.logger.addHandler(file_handler)
+            self.logger.addHandler(console_handler)
+
+    def enhance_metadata(self, file_metadata: Dict, text: str) -> Dict:
+        """
+        Aprimora os metadados existentes com informações específicas da Packt.
+        Não substitui o processamento padrão, apenas complementa.
+        """
+        if not isinstance(file_metadata, dict):
+            file_metadata = {}
+            
+        # Se já temos ISBN, apenas corrige caracteres Packt
+        if 'isbn' in file_metadata:
+            isbn = file_metadata['isbn']
+            for old, new in self.packt_char_fixes.items():
+                isbn = isbn.replace(old, new)
+            file_metadata['isbn'] = isbn
+            return file_metadata
+            
+        # Procura ISBN no texto com padrões Packt
+        for pattern in self.packt_patterns['isbn']:
+            matches = re.finditer(pattern, text)
+            for match in matches:
+                isbn = match.group(1)
+                # Aplica correções Packt
+                for old, new in self.packt_char_fixes.items():
+                    isbn = isbn.replace(old, new)
+                isbn = re.sub(r'[^0-9X]', '', isbn)
+                if len(isbn) == 13 and isbn.startswith('978'):
+                    file_metadata['isbn'] = isbn
+                    break
+                    
+        return file_metadata
+
+    def is_packt_book(self, file_path: str) -> bool:
+        """Verifica se é um livro da Packt."""
+        return ('packt' in file_path.lower() or 
+                'hands-on' in file_path.lower())
+
 class BookFileGroup:
     """Handles groups of related book files and ISBN variants."""
     def __init__(self):
+        self._init_logging()
         self.base_patterns = [
             r'_Code\.zip$',
             r'\s+PDF$',
@@ -6594,6 +6918,29 @@ class BookFileGroup:
             '9781800205697': ['9781801810074'],
             '9781800206540': ['9781801079341']
         }
+
+    def _init_logging(self):
+        """Initialize logging configuration."""
+        self.logger = logging.getLogger('book_file_group')  # Use o nome específico da classe
+        self.logger.setLevel(logging.DEBUG)  # Nível detalhado para o arquivo
+        
+        if not self.logger.handlers:
+            # File handler - captura tudo para o arquivo
+            file_handler = logging.FileHandler('book_file_group.log')
+            file_handler.setFormatter(logging.Formatter(
+                '%(asctime)s - %(levelname)s - %(message)s'
+            ))
+            file_handler.setLevel(logging.DEBUG)
+            
+            # Console handler - apenas warnings e erros
+            console_handler = logging.StreamHandler()
+            console_handler.setFormatter(logging.Formatter(
+                '%(levelname)s - %(message)s'
+            ))
+            console_handler.setLevel(logging.WARNING)
+            
+            self.logger.addHandler(file_handler)
+            self.logger.addHandler(console_handler)
 
     def get_base_name(self, filename: str) -> str:
         """
