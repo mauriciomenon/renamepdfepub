@@ -13,6 +13,17 @@ from rich.table import Table
 from rich.progress import Progress, SpinnerColumn, BarColumn, TextColumn
 import logging
 import os
+import logging
+from datetime import datetime
+from pathlib import Path
+from typing import Dict, List, Optional
+from rich.progress import Progress, SpinnerColumn, BarColumn, TextColumn
+from rich.console import Console
+from concurrent.futures import ThreadPoolExecutor
+from collections import defaultdict
+import logging
+from datetime import datetime
+from pathlib import Path
 import re
 import shutil
 import sqlite3
@@ -2860,26 +2871,40 @@ class MetadataFetcher:
                 f'Success rate: {success_rate:.1f}%'
             )
 
-    def _setup_logging(self):
-        """Configura logging com níveis de detalhe diferentes."""
-        # Logger principal
-        logger = logging.getLogger('metadata_fetcher')
-        logger.setLevel(self.logger.info)
+    def _setup_logging(self) -> None:
+        """
+        Initialize logging configuration with file and console handlers.
+        File handler captures debug level logs while console shows warnings.
+        """
+        if not hasattr(self, 'logger'):
+            self.logger = logging.getLogger('book_metadata')
+            self.logger.setLevel(logging.DEBUG)
 
-        # Handler para arquivo
-        file_handler = logging.FileHandler('metadata_fetcher.log')
+        # Clear any existing handlers
+        if self.logger.handlers:
+            self.logger.handlers.clear()
+
+        # Create reports directory
+        reports_dir = Path("reports")
+        reports_dir.mkdir(exist_ok=True)
+
+        # File handler for detailed logging
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        log_path = reports_dir / f"report_{timestamp}_metadata.log"
+        
+        file_handler = logging.FileHandler(log_path)
+        file_handler.setLevel(logging.DEBUG)
         file_handler.setFormatter(logging.Formatter(
             '%(asctime)s - %(levelname)s - %(message)s'
         ))
-        logger.addHandler(file_handler)
+        self.logger.addHandler(file_handler)
 
-        # Handler para console
+        # Console handler for warnings only
         console_handler = logging.StreamHandler()
-        console_handler.setFormatter(logging.Formatter(
-            '%(asctime)s - %(levelname)s - %(message)s'
-        ))
-        logger.addHandler(console_handler)
-
+        console_handler.setLevel(logging.WARNING)
+        console_handler.setFormatter(logging.Formatter('%(message)s'))
+        self.logger.addHandler(console_handler)
+    
     def _advanced_fallback(self, isbn: str, file_path: str = None) -> Optional[BookMetadata]:
         """Sistema avançado de fallback com tratamento especial para editoras conhecidas."""
         # Define estratégias baseadas no tipo de ISBN e nome do arquivo
@@ -3529,10 +3554,9 @@ class BookMetadataExtractor:
         self.reports_dir.mkdir(exist_ok=True)
         
         # Initialize logging before other components
-        self._setup_logging()
+        self._init_logging()
         
         # Initialize core components
-        
         self.isbn_extractor = ISBNExtractor()
         self.metadata_fetcher = MetadataFetcher(isbndb_api_key=isbndb_api_key)
         self.pdf_processor = PDFProcessor()
@@ -3546,28 +3570,6 @@ class BookMetadataExtractor:
         
         # Initialize file grouping support
         self.file_group = BookFileGroup()
-
-    def _setup_logging(self):
-        """Initialize logging with correct file location."""
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        log_path = self.reports_dir / f"report_{timestamp}_metadata.log"
-        
-        # Create logger
-        self.logger = logging.getLogger('book_metadata')
-        self.logger.setLevel(logging.INFO)
-        
-        # Create handlers
-        file_handler = logging.FileHandler(str(log_path))
-        console_handler = logging.StreamHandler()
-        
-        # Create formatters and add it to handlers
-        formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-        file_handler.setFormatter(formatter)
-        console_handler.setFormatter(formatter)
-        
-        # Add handlers to the logger
-        self.logger.addHandler(file_handler)
-        self.logger.addHandler(console_handler)
 
     def _add_publisher_stats(self, metadata: Dict, runtime_stats: Dict):
         """Adiciona estatísticas por editora aos runtime stats sem modificar estrutura existente."""
@@ -4435,6 +4437,26 @@ class BookMetadataExtractor:
             import traceback
             self.logger.error(traceback.format_exc())
 
+
+    def _initialize_runtime_stats(self) -> Dict:
+        """
+        Initialize runtime statistics dictionary.
+        
+        Returns:
+            Dict containing initialized statistics tracking
+        """
+        return {
+            'processed_files': [],
+            'successful_files': [],
+            'successful_results': [],
+            'failure_details': {},
+            'api_errors': defaultdict(list),
+            'processing_times': {},
+            'format_stats': defaultdict(lambda: {'total': 0, 'success': 0, 'failed': 0}),
+            'start_time': datetime.now(),
+            'generated_reports': []
+        }
+
     def process_directory(self, directory_path: str, subdirs: Optional[List[str]] = None, 
                          recursive: bool = False, max_workers: int = 4) -> List[BookMetadata]:
         """
@@ -4450,20 +4472,8 @@ class BookMetadataExtractor:
             List[BookMetadata]: List of successfully processed book metadata
         """
         directory = Path(directory_path)
-        console = Console()
+        runtime_stats = self._initialize_runtime_stats()
         
-        # Initialize runtime stats
-        runtime_stats = {
-            'processed_files': [],
-            'successful_files': [],
-            'successful_results': [],
-            'failure_details': {},
-            'api_errors': defaultdict(list),
-            'processing_times': {},
-            'format_stats': defaultdict(lambda: {'total': 0, 'success': 0, 'failed': 0}),
-            'start_time': time.time()
-        }
-
         # Find and group files
         file_groups = self._collect_files(directory, subdirs, recursive, runtime_stats)
         if not file_groups:
@@ -4473,10 +4483,12 @@ class BookMetadataExtractor:
         # Process files with progress display
         results = self._process_with_progress(file_groups, runtime_stats, max_workers)
         
-        # Generate final reports
+        # Generate reports and print summary
+        self._generate_reports(runtime_stats)
         self.print_final_summary(runtime_stats)
+        
         return results
-
+    
     def _collect_files(self, directory: Path, subdirs: Optional[List[str]], 
                       recursive: bool, runtime_stats: Dict) -> Dict[str, List[str]]:
         """
@@ -4522,7 +4534,7 @@ class BookMetadataExtractor:
     def _process_with_progress(self, file_groups: Dict[str, List[str]], 
                              runtime_stats: Dict, max_workers: int) -> List[BookMetadata]:
         """
-        Process files with progress display using rich progress bar.
+        Process files with progress display.
         
         Args:
             file_groups: Dictionary of file groups to process
@@ -4530,53 +4542,58 @@ class BookMetadataExtractor:
             max_workers: Number of concurrent worker threads
             
         Returns:
-            List of successfully processed BookMetadata objects
+            List[BookMetadata]: Successfully processed metadata
         """
         with Progress(
             SpinnerColumn(),
             TextColumn("[progress.description]{task.description}"),
             BarColumn(),
             TextColumn("[progress.percentage]{task.percentage:>3.0f}%"),
+            TextColumn("•"),
+            TextColumn("{task.fields[current_file]}"),
             console=Console(),
             transient=True
         ) as progress:
             task = progress.add_task(
-                f"Processing {len(file_groups)} files...",
-                total=len(file_groups)
+                "Processing",
+                total=len(file_groups),
+                current_file="Starting..."
             )
 
             with ThreadPoolExecutor(max_workers=max_workers) as executor:
                 futures = []
-
-                # Submit all tasks
+                
+                # Submit tasks
                 for base_name, group_files in file_groups.items():
                     best_source = self.file_group.find_best_isbn_source(group_files)
                     if best_source:
-                        future = executor.submit(
-                            self.process_single_file,
-                            best_source,
-                            runtime_stats
-                        )
+                        future = executor.submit(self.process_single_file, best_source, runtime_stats)
                         futures.append((future, group_files))
 
                 # Process results
                 for future, group_files in futures:
                     try:
+                        current_file = Path(group_files[0]).name
+                        progress.update(task, current_file=current_file)
+                        
                         metadata = future.result()
                         if metadata:
                             runtime_stats['successful_results'].append(metadata)
+                            runtime_stats['successful_files'].append(group_files[0])
                             ext = Path(group_files[0]).suffix.lower()[1:]
                             runtime_stats['format_stats'][ext]['success'] += 1
+                            self.logger.debug(f"Successfully processed: {current_file}")
                         else:
                             ext = Path(group_files[0]).suffix.lower()[1:]
                             runtime_stats['format_stats'][ext]['failed'] += 1
+                            self.logger.debug(f"Failed to process: {current_file}")
                     except Exception as e:
-                        self.logger.debug(f"Error processing {group_files[0]}: {str(e)}")
+                        self.logger.error(f"Error processing {group_files[0]}: {str(e)}")
                     finally:
                         progress.advance(task)
 
         return runtime_stats['successful_results']
-
+    
     def _print_summary(self, runtime_stats: Dict):
         """
         Print final processing summary with clean formatting.
@@ -5475,103 +5492,63 @@ class BookMetadataExtractor:
             }}
         ]"""
 
-    def _generate_reports(self, runtime_stats: Dict):
+    def _generate_reports(self, runtime_stats: Dict) -> None:
         """
-        Generate all reports (HTML, JSON, and log) in the reports directory with consistent naming.
+        Generate HTML and JSON reports from runtime statistics.
         
         Args:
-            runtime_stats: Dictionary containing runtime statistics
-            
-        Generates:
-            - HTML report
-            - JSON report with full metadata
-            - Log file
-        All files use consistent timestamp and are stored in reports directory.
+            runtime_stats: Dictionary containing processing statistics and results
         """
-        if not runtime_stats:
-            self.logger.error("Invalid runtime_stats data")
-            return
-
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        
         try:
-            # Ensure reports directory exists
+            # Create reports directory if it doesn't exist
             self.reports_dir.mkdir(exist_ok=True)
-            
-            # Define consistent file paths
-            html_path = self.reports_dir / f"report_{timestamp}.html"
-            json_path = self.reports_dir / f"report_{timestamp}.json"
-            log_path = self.reports_dir / f"report_{timestamp}_metadata.log"
-            
-            # Generate reports
-            report_data = self._prepare_report_data(runtime_stats)
-            
-            # Generate HTML report
-            self._generate_html_report(report_data, html_path)
-            
-            # Generate JSON report (combined format)
-            json_data = {
-                "report_metadata": {
-                    "generated_at": datetime.now().isoformat(),
-                    "total_files_processed": len(runtime_stats['processed_files']),
-                    "successful_extractions": len(runtime_stats['successful_results']),
-                    "failed_extractions": len(runtime_stats['failure_details'])
-                },
-                "summary_statistics": report_data['summary'],
-                "format_statistics": report_data['details']['format_stats'],
-                "successful_extractions": report_data['details']['successful'],
-                "failed_extractions": runtime_stats['failure_details']
-            }
-            
+
+            # Generate timestamp for report files
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            base_path = self.reports_dir / f"report_{timestamp}"
+
+            # Generate JSON report
+            json_data = self._prepare_json_data(runtime_stats)
+            json_path = base_path.with_suffix('.json')
             with open(json_path, 'w', encoding='utf-8') as f:
                 json.dump(json_data, f, indent=2, ensure_ascii=False)
-                
-            # Move log file to reports directory
-            log_file = Path("book_metadata.log")
-            if log_file.exists():
-                shutil.move(log_file, log_path)
-                
-            # Update runtime stats with file locations
-            runtime_stats['generated_reports'] = [
-                {'type': 'HTML', 'path': str(html_path)},
-                {'type': 'JSON', 'path': str(json_path)},
-                {'type': 'LOG', 'path': str(log_path)}
-            ]
+
+            # Generate HTML report
+            html_content = self._generate_html_content(runtime_stats)
+            html_path = base_path.with_suffix('.html')
+            with open(html_path, 'w', encoding='utf-8') as f:
+                f.write(html_content)
+
+            self.logger.info(f"Reports generated successfully: {base_path}")
             
-            self.logger.info(f"Reports generated successfully in {self.reports_dir}")
-            # Print report locations
-            print("\nArquivos Gerados:")
-            print("-" * 40)
-            print(f"HTML {html_path}")
-            print(f"JSON {json_path}") 
-            print(f"LOG  {log_path}")
-                        
         except Exception as e:
             self.logger.error(f"Error generating reports: {str(e)}")
-            self.logger.error(traceback.format_exc())
-
-    def _init_logging(self):
-        """Initialize logging configuration."""
-        self.logger = logging.getLogger('book_metadata_extractor')  # Use o nome específico da classe
-        self.logger.setLevel(logging.DEBUG)  # Nível detalhado para o arquivo
+            raise
         
-        if not self.logger.handlers:
-            # File handler - captura tudo para o arquivo
-            file_handler = logging.FileHandler('book_metadata_extractor.log')
-            file_handler.setFormatter(logging.Formatter(
-                '%(asctime)s - %(levelname)s - %(message)s'
-            ))
-            file_handler.setLevel(logging.DEBUG)
-            
-            # Console handler - apenas warnings e erros
-            console_handler = logging.StreamHandler()
-            console_handler.setFormatter(logging.Formatter(
-                '%(levelname)s - %(message)s'
-            ))
-            console_handler.setLevel(logging.WARNING)
-            
-            self.logger.addHandler(file_handler)
-            self.logger.addHandler(console_handler)
+    def _init_logging(self):
+        """Initialize logging configuration with file and console handlers."""
+        self.logger = logging.getLogger('book_metadata')
+        self.logger.setLevel(logging.DEBUG)
+        
+        # Clear existing handlers
+        self.logger.handlers.clear()
+
+        # File handler - captures all logs
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        log_path = self.reports_dir / f"report_{timestamp}_metadata.log"
+        
+        file_handler = logging.FileHandler(log_path)
+        file_handler.setLevel(logging.DEBUG)
+        file_handler.setFormatter(logging.Formatter(
+            '%(asctime)s - %(levelname)s - %(message)s'
+        ))
+        self.logger.addHandler(file_handler)
+
+        # Console handler - warnings only
+        console_handler = logging.StreamHandler()
+        console_handler.setLevel(logging.WARNING)
+        console_handler.setFormatter(logging.Formatter('%(message)s'))
+        self.logger.addHandler(console_handler)
     
     def _generate_html_report(self, data: Dict, output_file: Path):
         """Gera relatório HTML usando nomes de parâmetros consistentes."""
@@ -5579,6 +5556,7 @@ class BookMetadataExtractor:
         html_content = self._generate_html_content(data)
         output_file.write_text(html_content)
 
+    '''
     def _generate_html_content(self, data: Dict) -> str:
         """
         Generates HTML content for the report using a safer approach to string formatting.
@@ -5700,6 +5678,89 @@ class BookMetadataExtractor:
         </html>"""
 
         return html
+    '''
+    
+    def _generate_html_content(self, runtime_stats: Dict) -> str:
+        """
+        Generate HTML report content with statistics and processing details.
+        
+        Args:
+            runtime_stats: Dictionary containing processing statistics and results
+            
+        Returns:
+            str: Complete HTML document as string
+        """
+        total_files = len(runtime_stats['processed_files'])
+        successful = len(runtime_stats['successful_results'])
+        failed = total_files - successful
+        
+        # Basic HTML structure with minimized inline CSS to avoid formatting issues
+        content = f"""<!DOCTYPE html>
+    <html>
+    <head>
+    <title>Book Metadata Report</title>
+    <style>
+    body{{font-family:sans-serif;margin:20px}}
+    table{{border-collapse:collapse;width:100%;margin:10px 0}}
+    th,td{{border:1px solid #ddd;padding:8px;text-align:left}}
+    th{{background:#f5f5f5}}
+    .success{{color:green}}
+    .failure{{color:red}}
+    </style>
+    </head>
+    <body>
+    <h1>Book Metadata Report</h1>
+
+    <h2>Summary</h2>
+    <table>
+    <tr><th>Total Files</th><td>{total_files}</td></tr>
+    <tr><th>Successful</th><td class="success">{successful}</td></tr>
+    <tr><th>Failed</th><td class="failure">{failed}</td></tr>
+    </table>
+
+    <h2>Format Statistics</h2>
+    <table>
+    <tr><th>Format</th><th>Total</th><th>Success</th><th>Failed</th></tr>"""
+
+        # Add format statistics
+        for fmt, stats in runtime_stats.get('format_stats', {}).items():
+            content += f"""
+    <tr><td>{fmt.upper()}</td><td>{stats['total']}</td>
+    <td>{stats['success']}</td><td>{stats['failed']}</td></tr>"""
+
+        content += """
+    </table>
+
+    <h2>Processing Details</h2>
+    <table>
+    <tr><th>File</th><th>Status</th><th>Details</th></tr>"""
+
+        # Add file processing details
+        for file_path in runtime_stats['processed_files']:
+            file_name = Path(file_path).name
+            success = any(r.file_path == file_path for r in runtime_stats['successful_results'])
+            
+            if success:
+                status = '<span class="success">Success</span>'
+                for result in runtime_stats['successful_results']:
+                    if result.file_path == file_path:
+                        details = f"ISBN: {result.isbn_13 or result.isbn_10}"
+                        break
+            else:
+                status = '<span class="failure">Failed</span>'
+                details = "ISBN: Not found"
+
+            content += f"""
+    <tr><td>{file_name}</td><td>{status}</td><td>{details}</td></tr>"""
+
+        # Close HTML structure
+        content += f"""
+    </table>
+    <footer><p>Generated: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}</p></footer>
+    </body>
+    </html>"""
+
+        return content
 
     def _generate_json_report(self, data: Dict, output_file: Path):
         """Gera relatório JSON usando nomes de parâmetros consistentes."""
@@ -5739,73 +5800,42 @@ class BookMetadataExtractor:
             
         return dict(format_stats)
 
-    def _prepare_json_data(self, data: Dict) -> Dict:
+    def _prepare_json_data(self, runtime_stats: Dict) -> Dict:
         """
-        Prepares data for JSON report by organizing and structuring the information.
+        Prepare data structure for JSON report.
         
-        This method transforms the raw processing data into a well-organized JSON structure
-        that's both readable and useful for later analysis.
+        Args:
+            runtime_stats: Dictionary containing processing statistics
+            
+        Returns:
+            Dictionary ready for JSON serialization
         """
-        # Get basic statistics
-        successful_results = data['details']['successful']
-        format_stats = data['details']['format_stats']
+        successful_results = runtime_stats.get('successful_results', [])
         
-        # Calculate additional metrics
-        api_usage = Counter(result['source'] for result in successful_results)
-        publishers = Counter(result['publisher'] for result in successful_results)
-        
-        # Organize data into a structured format
-        json_data = {
-            "report_metadata": {
-                "generated_at": datetime.now().isoformat(),
-                "total_files_processed": data['summary']['total_files'],
-                "processing_duration": f"{data['summary']['average_time']:.2f}s"
+        return {
+            "summary": {
+                "total_files": len(runtime_stats['processed_files']),
+                "successful": len(successful_results),
+                "failed": len(runtime_stats['processed_files']) - len(successful_results),
+                "timestamp": datetime.now().isoformat()
             },
-            "summary_statistics": {
-                "total_files": data['summary']['total_files'],
-                "successful_extractions": data['summary']['successful'],
-                "failed_extractions": data['summary']['failed'],
-                "success_rate_percentage": round(data['summary']['success_rate'], 2),
-                "average_processing_time": round(data['summary']['average_time'], 2)
-            },
-            "format_statistics": {
-                fmt: {
-                    "total": stats["total"],
-                    "successful": stats["success"],
-                    "failed": stats["failed"],
-                    "success_rate_percentage": round((stats["success"] / stats["total"] * 100) if stats["total"] > 0 else 0, 2)
-                } for fmt, stats in format_stats.items()
-            },
-            "api_statistics": {
-                "sources_used": dict(api_usage),
-                "most_successful_source": api_usage.most_common(1)[0][0] if api_usage else "None"
-            },
-            "publisher_statistics": {
-                "total_publishers": len(publishers),
-                "publisher_distribution": dict(publishers)
-            },
-            "successful_extractions": [
-                {
-                    "filename": Path(result["file_path"]).name,
-                    "title": result["title"],
-                    "authors": result["authors"],
-                    "publisher": result["publisher"],
-                    "isbn": result["isbn_13"] or result["isbn_10"] or "N/A",
-                    "source": result["source"],
-                    "confidence_score": round(result["confidence_score"], 2)
-                } for result in successful_results
-            ],
-            "failed_extractions": [
-                {
-                    "filename": Path(file_path).name,
-                    "error_type": error.get("error", "Unknown error"),
-                    "error_details": error.get("details", "No details available")
-                } for file_path, error in data["details"]["failures"].items()
-            ]
+            "format_statistics": runtime_stats.get('format_stats', {}),
+            "processing_details": {
+                "successful_files": [
+                    {
+                        "file": str(Path(result.file_path).name),
+                        "isbn": result.isbn_13 or result.isbn_10,
+                        "title": result.title,
+                        "authors": result.authors,
+                        "publisher": result.publisher
+                    }
+                    for result in successful_results
+                ],
+                "failed_files": runtime_stats.get('failure_details', {})
+            }
         }
-        
-        return json_data
-
+    
+       
     def _generate_format_stats_rows(self, format_stats: Dict) -> str:
         """Gera linhas HTML para estatísticas de formato."""
         rows = []

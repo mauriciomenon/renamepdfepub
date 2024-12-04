@@ -1,0 +1,222 @@
+{
+  "summary": {
+    "total_files": 26,
+    "successful": 15,
+    "failed": 11,
+    "timestamp": "2024-12-03T23:29:34.337366"
+  },
+  "format_statistics": {
+    "pdf": {
+      "total": 14,
+      "success": 9,
+      "failed": 5
+    },
+    "epub": {
+      "total": 7,
+      "success": 6,
+      "failed": 0
+    },
+    "mobi": {
+      "total": 5,
+      "success": 0,
+      "failed": 3
+    }
+  },
+  "processing_details": {
+    "successful_files": [
+      {
+        "file": "Wiley_2023_The_Active_Defender_Dr._Catherine_J._Ullman_9781119895213.pdf",
+        "isbn": "9781119895213",
+        "title": "The Active Defender",
+        "authors": [
+          "Dr. Catherine J. Ullman"
+        ],
+        "publisher": "Wiley"
+      },
+      {
+        "file": "Wiley_2023_Software_Transparency_Chris_Hughes-_Tony_Turner_9781394158485.pdf",
+        "isbn": "9781394158485",
+        "title": "Software Transparency",
+        "authors": [
+          "Chris Hughes",
+          "Tony Turner"
+        ],
+        "publisher": "Wiley"
+      },
+      {
+        "file": "OReilly_bash_Cookbook_Carl_Albing-_JP_Vossen_9781491975336.pdf",
+        "isbn": "9781491975336",
+        "title": "bash Cookbook",
+        "authors": [
+          "Carl Albing",
+          "JP Vossen"
+        ],
+        "publisher": "O'Reilly Media"
+      },
+      {
+        "file": "OReilly_2022_Ansible_Up_and_Running_Bas_Meijer-_Lorin_Hochstein_9781098109158.pdf",
+        "isbn": "9781098109158",
+        "title": "Ansible: Up and Running",
+        "authors": [
+          "Bas Meijer",
+          "Lorin Hochstein",
+          "René Moser"
+        ],
+        "publisher": "O'Reilly Media"
+      },
+      {
+        "file": "pythonforcybersecurity_usingpythonforcyberoffenseanddefense.pdf",
+        "isbn": "9781119850656",
+        "title": "Python for Cybersecurity",
+        "authors": [
+          "Howard E. Poston, III"
+        ],
+        "publisher": "John Wiley & Sons"
+      },
+      {
+        "file": "National_Geographic_Books_2021_Bug_Bounty_Bootcamp_Vickie_Li_9781718501546.pdf",
+        "isbn": "9781718501546",
+        "title": "Bug Bounty Bootcamp",
+        "authors": [
+          "Vickie Li"
+        ],
+        "publisher": "National Geographic Books"
+      },
+      {
+        "file": "OReilly_2020_Java_Performance_Scott_Oaks_9781492056119.pdf",
+        "isbn": "9781492056119",
+        "title": "Java Performance",
+        "authors": [
+          "Scott Oaks"
+        ],
+        "publisher": "O'Reilly Media, Incorporated"
+      },
+      {
+        "file": "Packt_2022_Applied_Machine_Learning_and_High-Performance_Comp_Mani_Khanuja-_Farooq_Sabir_9781803237015.pdf",
+        "isbn": "9781803237015",
+        "title": "Applied Machine Learning and High-Performance Computing on AWS",
+        "authors": [
+          "Mani Khanuja",
+          "Farooq Sabir",
+          "Shreyas Subramanian",
+          "Trenton Potgieter"
+        ],
+        "publisher": "Packt Publishing, Limited"
+      },
+      {
+        "file": "No_Starch_Press_2021_The_Hardware_Hacking_Handbook_Jasper_van_Woudenberg-_Colin_O'Flynn_9781593278748.pdf",
+        "isbn": "9781593278748",
+        "title": "The Hardware Hacking Handbook",
+        "authors": [
+          "Jasper van Woudenberg",
+          "Colin O'Flynn"
+        ],
+        "publisher": "No Starch Press"
+      },
+      {
+        "file": "Hands-On Data Structures and Algorithms with Python  Third Edition EPUB.epub",
+        "isbn": "9781788995573",
+        "title": "Hands-On Data Structures and Algorithms with Python, Third Edition",
+        "authors": [
+          "Dr. Basant Agarwal"
+        ],
+        "publisher": "Packt Publishing"
+      },
+      {
+        "file": "OReilly_2023_Learning_Java_Marc_Loy-_Patrick_Niemeyer_9781098145538.epub",
+        "isbn": "9781098145538",
+        "title": "Learning Java",
+        "authors": [
+          "Marc Loy",
+          "Patrick Niemeyer",
+          "Daniel Leuck"
+        ],
+        "publisher": "O'Reilly Media"
+      },
+      {
+        "file": "No_Starch_Press_2022_Cybersecurity_for_Small_Networks_Seth_Enoka_9781718501485.epub",
+        "isbn": "9781718501485",
+        "title": "Cybersecurity for Small Networks",
+        "authors": [
+          "Seth Enoka"
+        ],
+        "publisher": "No Starch Press"
+      },
+      {
+        "file": "Clean Code in JavaScript.epub",
+        "isbn": "9781788838108",
+        "title": "Web Development with Angular and Bootstrap",
+        "authors": [
+          "Sridhar Rao Chivukula",
+          "Aki Iskandar"
+        ],
+        "publisher": "Unknown"
+      },
+      {
+        "file": "Packt_2018_Tensorflow_Deep_Learning_Projects_Alberto_Boschetti-_Luca_Massaron_9781788398060.epub",
+        "isbn": "9781788836067",
+        "title": "Hands-On Deep Learning for IoT",
+        "authors": [
+          "Mohammad Abdur Razzaque, PhD"
+        ],
+        "publisher": "Packt Publishing"
+      },
+      {
+        "file": "series-temporais-com-prophet-analise-e-previsao-de-dados-com-python (1).epub",
+        "isbn": "9788555193149",
+        "title": "Series temporais com Prophet: Analise e previsao de dados com Python",
+        "authors": [
+          "Allan Spadini e Valquiria Alencar"
+        ],
+        "publisher": "Casa do Código"
+      }
+    ],
+    "failed_files": {
+      "/Users/menon/Downloads/0_teste_livros_scan/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf": {
+        "error": "metadata_fetch_failed",
+        "isbns_found": [
+          "9786586110357",
+          "9786586110364",
+          "9786586110340"
+        ]
+      },
+      "/Users/menon/Downloads/0_teste_livros_scan/Hands-On Artificial Intelligence for Banking.pdf": {
+        "error": "no_isbn_found",
+        "text_sample": "+DQGV 2Q $UWLdFLDO ,0WH111JH0FH1RU %DQNLQJA practical guide to building 1nte1119ent ﬁnancial app11cat10n5using machine learning tec4n19ue5-HcUH\\ 1J &)$6XEKDVK 6KDK %,50,1*+$0 080%$, +DQGV 2Q $UWLILFLDO ,0WH111JH0FH IRU %DQNLQJ +,5.%#$0`©`9797` '0` 1 (%/$%*# ((`.%#$0/`.!/!.2! K` +`, .0`+\"`0$%/` ++'`) 5` !`.!,.+ 1 ! L`/0+.! `%*` `.!0.%!2 (`/5/0!)L`+.`0. */)%00! `%*` *5`\"+.)+.` 5` *5`)! */L`3%0$+10`0$!`,.%+.`3.%00!*`,!.)%//%+*`+\"`0$!`,1 (%/$!.L`!4 !,0`%*`0$!` /!`+\"` .%!\"`-1+0 0%+*/!) ! ! `%*` .%0% "
+      },
+      "/Users/menon/Downloads/0_teste_livros_scan/series-temporais-com-prophet-analise-e-previsao-de-dados-com-python.pdf": {
+        "error": "metadata_fetch_failed",
+        "isbns_found": [
+          "9788555193149",
+          "9788555193125"
+        ]
+      },
+      "/Users/menon/Downloads/0_teste_livros_scan/machine-learning-introducao-a-classificacao.pdf": {
+        "error": "metadata_fetch_failed",
+        "isbns_found": [
+          "9788594188205",
+          "9788594188199",
+          "9788594188182"
+        ]
+      },
+      "/Users/menon/Downloads/0_teste_livros_scan/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf": {
+        "error": "metadata_fetch_failed",
+        "isbns_found": [
+          "9788575227510"
+        ]
+      },
+      "/Users/menon/Downloads/0_teste_livros_scan/java-9-interativo-reativo-e-modularizado.mobi": {
+        "error": "no_isbn_found",
+        "text_sample": "Copyright Apple Inc., 2017\u0000\u0000XYZ \u0000\u0000\u0000\u0000\u0000\u0000\u0016\u0000\u0001\u0000\u0000\u0000\u0001\u0016XYZ \u0000\u0000\u0000\u0000\u0000\u0000q\u0000\u00009\u0000\u0000\u0001gXYZ \u0000\u0000\u0000\u0000\u0000\u0000a#\u0000\u0000\u0000\u0000\u0013XYZ \u0000\u0000\u0000\u0000\u0000\u0000#\u0000\u0000\f\u0000\u0000curv\u0000\u0000\u0000\u0000\u0000\u0000\u0004\u0000\u0000\u0000\u0000\u0005\u0000\n\u0000\u000f\u0000\u0014\u0000\u0019\u0000\u001e\u0000#\u0000(\u0000-\u00002\u00006\u0000;\u0000@\u0000E\u0000J\u0000O\u0000T\u0000Y\u0000^\u0000c\u0000h\u0000m\u0000r\u0000w\u0000|\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0001\u0001\u0001\u0007\u0001\r\u0001\u0013\u0001\u0019\u0001\u001f\u0001%\u0001+\u00012\u00018\u0001>\u0001E\u0001L\u0001R\u0001Y\u0001`\u0001g\u0001n\u0001u\u0001|\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0002\u0003\u0002\f\u0002\u0014\u0002\u001d\u0002&\u0002/\u00028\u0002A\u0002K\u0002T\u0002]\u0002g\u0002q\u0002z\u0002\u0002\u0002\u0002\u0002\u0002\u0002\u0002\u0002\u0002\u0002\u0002\u0003\u0000\u0003\u000b\u0003\u0016\u0003!\u0003-\u00038\u0003C\u0003O\u0003Z\u0003f\u0003r\u0003~\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0004\u0006\u0004\u0013\u0004 \u0004-\u0004;\u0004H\u0004U\u0004c\u0004q\u0004~\u0004\u0004\u0004\u0004\u0004\u0004\u0004\u0004\u0004\u0005\r\u0005\u001c\u0005+\u0005:\u0005I\u0005X\u0005g\u0005w\u0005\u0005\u0005\u0005\u0005\u0005\u0005\u0005\u0006\u0006\u0006\u0016\u0006'\u00067\u0006H\u0006Y\u0006j\u0006{\u0006\u0006\u0006\u0006\u0006\u0006\u0006\u0007\u0007\u0007\u0019\u0007+\u0007=\u0007O\u0007a\u0007t\u0007\u0007\u0007\u0007\u0007\u0007\u0007\b\u000b\b\u001f\b2\bF\bZ\bn\b\b\b\b\b\b\b\t\u0010\t%\t:\tO\td\ty\t\t\t\t\t\t\n\u0011\n'\n=\nT\nj"
+      },
+      "/Users/menon/Downloads/0_teste_livros_scan/orientacao-a-objetos-aprenda-seus-conceitos-e-suas-aplicabilidades-de-forma-efetiva.mobi": {
+        "error": "no_isbn_found",
+        "text_sample": "©N\u0013\u0019\u0018\u0011\ff\u00176Fk!\u001c|A\u0016Lf\u0016Ft\u001cb-(rS9h\u0001\fv:\u001cF\u0014J\u001fGG\rs0KI\u00137\u0014Lt!\u001eBSP\u00138%s,BIŔNT\u001c\u0000iBlҧ:e,1l\u001cN\u000bP\u001f\u001c悧:Ƨ<\u0017\u0017!\u001eP3US!\u001c~x\u0017&\u0004\u001c!*\u001d0tSWU\u001d>Z\u0015VcUVgVkVo\u0015WsUWwW{W\u0015Xm$ \u0000\u0000;GIF89aU\u0001U\u0001\u0000\u0000\u0000\u0000\u0000\u0004\u000b\u0004"
+      },
+      "/Users/menon/Downloads/0_teste_livros_scan/OReilly_2021_Java_to_Kotlin_Duncan_McGregor-_Nat_Pryce_9781492082279.mobi": {
+        "error": "no_isbn_found",
+        "text_sample": "©ix)i\u000bq(%@cz}\u001eOIdj+$\u0012m,NA='\u001a//\u0018J¿/\u001829ђ#U\u0000\u001aOJO\\\u0010\u0000\u001f\u00179ːֳ4\u0005w\u0002_$_\u000b\u001aiq<}<e<\tMe.!?$w%.zK?߱;w\u0011?-}\u0014]؟J\n\u0004z3%~\u0013\b>Ҙt\u0011\u001f>\u000f7&<ƍKS!_W\u0014/]D)fT8\u0002%L\u0015l%\u0005\u001boCUylWFuwiQ%8Z^@N,U\u0014U\n+f,\u0005h\u001b)aks\u001av\u000fGH]Ё#\\\u001c77\nz-9h|(\u000b˚6)\u001dV6U7hH\u0019-\f\u0004m&o[0\u001a\u001ej;OUC\u000f\u000f8\u00123Fe,I\"+H1krB?\u0016W\u0012\u001aE?\u0002CVPQ<\u000b\u0017ɴ4,<1Y\u001e`z;X3y\u0003߮#3c\u001b\u000e||yϾ\u0003f]\r*oҞ^jnc)Ka{k\u0013J\u001b\u0016ٳ!\u001f2L\u001db_Q\u0001qEic\u0014ue(m@^-\u0002Y\u001e!M\b\u0010r\u0004\u0001\u0011:Lqm,+1\u0001{=e\u0014gU\u001b\u000ea2\bA\u0014քdAYܙOA\u0016i+ev:뀤\u00148Cq@$>\u0012\n T$Ru96{lY\u0007N~ڗ;&8p\u0016o\u001fg\u0001u {*Z\u0003\u0005\u0000aL΂}\u0003c\u0011h\u0004zb<\u00145φ굹\\v/{\nR\u0016-P0\u0000<\u001d+|zdG^ZܠQ\bE\"]\u001eM֧rԴ\u0001Oo7\u001c@\"ۑ{~ \u000fB4XETҰ\u0001ݛ*W+"
+      }
+    }
+  }
+}
