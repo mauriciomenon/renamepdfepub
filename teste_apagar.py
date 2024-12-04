@@ -4774,25 +4774,6 @@ class BookMetadataExtractor:
     '''
 
 
-    def print_final_summary(self, runtime_stats: Dict) -> None:
-        """
-        Main entry point for printing summary information. 
-        Maintains backward compatibility while using new modular approach.
-        
-        Args:
-            runtime_stats: Dictionary containing all processing statistics and results
-        """
-        if not runtime_stats:
-            self.logger.warning("No runtime statistics available for summary")
-            return
-            
-        try:
-            self._print_full_summary(runtime_stats)
-        except Exception as e:
-            self.logger.error(f"Error printing summary: {str(e)}")
-            # Fallback to original format if available
-            self._print_legacy_summary(runtime_stats)
-
     def _print_full_summary(self, runtime_stats: Dict) -> None:
         """
         Orchestrates the display of all summary tables and statistics in new format.
@@ -4936,15 +4917,121 @@ class BookMetadataExtractor:
 
     def print_final_summary(self, runtime_stats: Dict) -> None:
         """
-        Orchestrates the display of all summary tables and statistics.
+        Print processing summary with detailed file listing first, followed by statistics.
+        Maintains all existing functionality but reorders the display sequence.
         
         Args:
-            runtime_stats: Dictionary containing all processing statistics and results
+            runtime_stats: Dictionary containing processing statistics and results
         """
-        self._print_processing_summary_table(runtime_stats)
-        self._print_format_statistics_table(runtime_stats)
-        self._print_file_processing_results(runtime_stats)
-        self._print_report_paths()
+        try:
+            # 1. File Processing Details (Moved to top)
+            print("\nSumário de Processamento")
+            print("=" * 80)
+            
+            console = Console()
+            table = Table(show_header=True)
+            table.add_column("Arquivo", no_wrap=True)
+            table.add_column("Status", justify="center")
+            table.add_column("Tempo", justify="right")
+            table.add_column("Detalhes")
+            
+            for file_path in runtime_stats['processed_files']:
+                file_name = Path(file_path).name
+                time_taken = runtime_stats['processing_times'].get(file_path, 0.0)
+                success = any(result.file_path == file_path for result in runtime_stats['successful_results'])
+                
+                if success:
+                    status = "[green]✓ success[/green]"
+                    for result in runtime_stats['successful_results']:
+                        if result.file_path == file_path:
+                            details = f"ISBN: {result.isbn_13 or result.isbn_10}"
+                            break
+                else:
+                    status = "[red]✗ failed[/red]"
+                    details = "ISBN: Not found"
+                    
+                table.add_row(
+                    file_name,
+                    status,
+                    f"{time_taken:.2f}s",
+                    details
+                )
+            
+            console.print(table)
+            print("\n" + "=" * 80)
+            
+            # 2. Format Statistics
+            print("\nFormat Statistics:")
+            print("-" * 40)
+            format_table = Table()
+            format_table.add_column("Format")
+            format_table.add_column("Total", justify="right")
+            format_table.add_column("Success", justify="right")
+            format_table.add_column("Failed", justify="right")
+            format_table.add_column("Success Rate", justify="right")
+            
+            format_stats = runtime_stats.get('format_stats', {})
+            for fmt, stats in format_stats.items():
+                if stats['total'] > 0:
+                    success_rate = (stats['success'] / stats['total'] * 100)
+                    format_table.add_row(
+                        fmt.upper(),
+                        str(stats['total']),
+                        str(stats['success']),
+                        str(stats['failed']),
+                        f"{success_rate:.1f}%"
+                    )
+            
+            console.print(format_table)
+            
+            # 3. Overall Summary (Moved to end)
+            total_files = len(runtime_stats['processed_files'])
+            successful = len(runtime_stats['successful_results'])
+            failed = total_files - successful
+            
+            print("\nProcessing Summary")
+            print("-" * 40)
+            summary_table = Table()
+            summary_table.add_column("Category")
+            summary_table.add_column("Count", justify="right")
+            summary_table.add_column("Percentage", justify="right")
+            
+            success_rate = (successful / total_files * 100) if total_files > 0 else 0
+            
+            summary_table.add_row(
+                "Total Files",
+                str(total_files),
+                "100%"
+            )
+            summary_table.add_row(
+                "Successful",
+                str(successful),
+                f"{success_rate:.1f}%"
+            )
+            summary_table.add_row(
+                "Failed",
+                str(failed),
+                f"{(100 - success_rate):.1f}%"
+            )
+            
+            console.print(summary_table)
+            
+            # 4. Report Paths
+            print("\nGenerated Reports:")
+            print("-" * 40)
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            report_files = {
+                'HTML': f"reports/report_{timestamp}.html",
+                'JSON': f"reports/report_{timestamp}.json",
+                'Log': f"reports/report_{timestamp}_metadata.log"
+            }
+            
+            for report_type, path in report_files.items():
+                print(f"{report_type:<4} {path}")
+                
+        except Exception as e:
+            self.logger.error(f"Error printing summary: {str(e)}")
+            self.logger.debug(traceback.format_exc())
 
     def _calculate_metadata_completeness(self, metadata: BookMetadata) -> float:
         """
@@ -5761,13 +5848,6 @@ class BookMetadataExtractor:
     </html>"""
 
         return content
-
-    def _generate_json_report(self, data: Dict, output_file: Path):
-        """Gera relatório JSON usando nomes de parâmetros consistentes."""
-        # O resto do método permanece o mesmo, apenas mudando json_path para output_file
-        json_data = self._prepare_json_data(data)
-        with open(output_file, 'w', encoding='utf-8') as f:
-            json.dump(json_data, f, indent=2, ensure_ascii=False)
             
     def _calculate_format_stats(self, runtime_stats: Dict) -> Dict[str, Dict[str, int]]:
         """
