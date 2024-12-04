@@ -430,3 +430,99 @@
 2024-12-03 15:55:49,051 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Packt_2022_Applied_Machine_Learning_and_High-Performance_Comp_Mani_Khanuja-_Farooq_Sabir_9781803237015.pdf
 2024-12-03 15:55:49,091 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2021_The_Hardware_Hacking_Handbook_Jasper_van_Woudenberg-_Colin_O'Flynn_9781593278748.pdf
 2024-12-03 15:55:49,295 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-12-03 16:04:20,803 - INFO - Extractores disponíveis: pypdf2, pdfplumber, pdfminer, tesseract, pdf2image
+2024-12-03 16:04:20,803 - INFO - Suporte a OCR está disponível
+2024-12-03 16:04:21,004 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/series-temporais-com-prophet-analise-e-previsao-de-dados-com-python.pdf
+2024-12-03 16:04:21,140 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/machine-learning-introducao-a-classificacao.pdf
+2024-12-03 16:04:21,258 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-12-03 16:04:21,284 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_The_Active_Defender_Dr._Catherine_J._Ullman_9781119895213.pdf
+2024-12-03 16:04:21,308 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_Software_Transparency_Chris_Hughes-_Tony_Turner_9781394158485.pdf
+2024-12-03 16:04:21,347 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Hands-On Artificial Intelligence for Banking.pdf
+2024-12-03 16:04:21,389 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_bash_Cookbook_Carl_Albing-_JP_Vossen_9781491975336.pdf
+2024-12-03 16:04:21,460 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2022_Ansible_Up_and_Running_Bas_Meijer-_Lorin_Hochstein_9781098109158.pdf
+2024-12-03 16:04:21,612 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/pythonforcybersecurity_usingpythonforcyberoffenseanddefense.pdf
+2024-12-03 16:04:21,716 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/National_Geographic_Books_2021_Bug_Bounty_Bootcamp_Vickie_Li_9781718501546.pdf
+2024-12-03 16:04:21,754 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2020_Java_Performance_Scott_Oaks_9781492056119.pdf
+2024-12-03 16:04:21,836 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Packt_2022_Applied_Machine_Learning_and_High-Performance_Comp_Mani_Khanuja-_Farooq_Sabir_9781803237015.pdf
+2024-12-03 16:04:21,876 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2021_The_Hardware_Hacking_Handbook_Jasper_van_Woudenberg-_Colin_O'Flynn_9781593278748.pdf
+2024-12-03 16:04:22,078 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-12-03 16:13:30,884 - INFO - Extractores disponíveis: pypdf2, pdfplumber, pdfminer, tesseract, pdf2image
+2024-12-03 16:13:30,884 - INFO - Suporte a OCR está disponível
+2024-12-03 16:13:30,978 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_The_Active_Defender_Dr._Catherine_J._Ullman_9781119895213.pdf
+2024-12-03 16:13:31,025 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_Software_Transparency_Chris_Hughes-_Tony_Turner_9781394158485.pdf
+2024-12-03 16:13:31,089 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Hands-On Artificial Intelligence for Banking.pdf
+2024-12-03 16:13:31,201 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-12-03 16:13:31,255 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/series-temporais-com-prophet-analise-e-previsao-de-dados-com-python.pdf
+2024-12-03 16:13:31,304 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_bash_Cookbook_Carl_Albing-_JP_Vossen_9781491975336.pdf
+2024-12-03 16:13:31,490 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2022_Ansible_Up_and_Running_Bas_Meijer-_Lorin_Hochstein_9781098109158.pdf
+2024-12-03 16:13:31,514 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/pythonforcybersecurity_usingpythonforcyberoffenseanddefense.pdf
+2024-12-03 16:13:31,622 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/National_Geographic_Books_2021_Bug_Bounty_Bootcamp_Vickie_Li_9781718501546.pdf
+2024-12-03 16:13:31,654 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2020_Java_Performance_Scott_Oaks_9781492056119.pdf
+2024-12-03 16:13:31,787 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Packt_2022_Applied_Machine_Learning_and_High-Performance_Comp_Mani_Khanuja-_Farooq_Sabir_9781803237015.pdf
+2024-12-03 16:13:31,788 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/machine-learning-introducao-a-classificacao.pdf
+2024-12-03 16:13:31,827 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2021_The_Hardware_Hacking_Handbook_Jasper_van_Woudenberg-_Colin_O'Flynn_9781593278748.pdf
+2024-12-03 16:13:32,092 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-12-03 16:17:51,834 - INFO - Extractores disponíveis: pypdf2, pdfplumber, pdfminer, tesseract, pdf2image
+2024-12-03 16:17:51,835 - INFO - Suporte a OCR está disponível
+2024-12-03 16:17:52,030 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/series-temporais-com-prophet-analise-e-previsao-de-dados-com-python.pdf
+2024-12-03 16:17:52,162 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/machine-learning-introducao-a-classificacao.pdf
+2024-12-03 16:17:53,855 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/pythonforcybersecurity_usingpythonforcyberoffenseanddefense.pdf
+2024-12-03 16:17:59,001 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-12-03 16:17:59,048 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_The_Active_Defender_Dr._Catherine_J._Ullman_9781119895213.pdf
+2024-12-03 16:17:59,090 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_Software_Transparency_Chris_Hughes-_Tony_Turner_9781394158485.pdf
+2024-12-03 16:17:59,184 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Hands-On Artificial Intelligence for Banking.pdf
+2024-12-03 16:17:59,247 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_bash_Cookbook_Carl_Albing-_JP_Vossen_9781491975336.pdf
+2024-12-03 16:17:59,345 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2022_Ansible_Up_and_Running_Bas_Meijer-_Lorin_Hochstein_9781098109158.pdf
+2024-12-03 16:17:59,437 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/National_Geographic_Books_2021_Bug_Bounty_Bootcamp_Vickie_Li_9781718501546.pdf
+2024-12-03 16:17:59,515 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2020_Java_Performance_Scott_Oaks_9781492056119.pdf
+2024-12-03 16:17:59,627 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Packt_2022_Applied_Machine_Learning_and_High-Performance_Comp_Mani_Khanuja-_Farooq_Sabir_9781803237015.pdf
+2024-12-03 16:17:59,687 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2021_The_Hardware_Hacking_Handbook_Jasper_van_Woudenberg-_Colin_O'Flynn_9781593278748.pdf
+2024-12-03 16:17:59,988 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-12-03 16:20:14,379 - INFO - Extractores disponíveis: pypdf2, pdfplumber, pdfminer, tesseract, pdf2image
+2024-12-03 16:20:14,379 - INFO - Suporte a OCR está disponível
+2024-12-03 16:20:14,577 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/series-temporais-com-prophet-analise-e-previsao-de-dados-com-python.pdf
+2024-12-03 16:20:14,712 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/machine-learning-introducao-a-classificacao.pdf
+2024-12-03 16:20:14,830 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-12-03 16:20:14,853 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_The_Active_Defender_Dr._Catherine_J._Ullman_9781119895213.pdf
+2024-12-03 16:20:14,877 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_Software_Transparency_Chris_Hughes-_Tony_Turner_9781394158485.pdf
+2024-12-03 16:20:14,918 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Hands-On Artificial Intelligence for Banking.pdf
+2024-12-03 16:20:14,962 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_bash_Cookbook_Carl_Albing-_JP_Vossen_9781491975336.pdf
+2024-12-03 16:20:15,032 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2022_Ansible_Up_and_Running_Bas_Meijer-_Lorin_Hochstein_9781098109158.pdf
+2024-12-03 16:20:15,183 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/pythonforcybersecurity_usingpythonforcyberoffenseanddefense.pdf
+2024-12-03 16:20:15,287 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/National_Geographic_Books_2021_Bug_Bounty_Bootcamp_Vickie_Li_9781718501546.pdf
+2024-12-03 16:20:15,325 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2020_Java_Performance_Scott_Oaks_9781492056119.pdf
+2024-12-03 16:20:15,407 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Packt_2022_Applied_Machine_Learning_and_High-Performance_Comp_Mani_Khanuja-_Farooq_Sabir_9781803237015.pdf
+2024-12-03 16:20:15,445 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2021_The_Hardware_Hacking_Handbook_Jasper_van_Woudenberg-_Colin_O'Flynn_9781593278748.pdf
+2024-12-03 16:20:15,648 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-12-03 22:42:41,678 - INFO - Extractores disponíveis: pypdf2, pdfplumber, pdfminer, tesseract, pdf2image
+2024-12-03 22:42:41,678 - INFO - Suporte a OCR está disponível
+2024-12-03 22:42:41,728 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_The_Active_Defender_Dr._Catherine_J._Ullman_9781119895213.pdf
+2024-12-03 22:42:41,772 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_Software_Transparency_Chris_Hughes-_Tony_Turner_9781394158485.pdf
+2024-12-03 22:42:41,861 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Hands-On Artificial Intelligence for Banking.pdf
+2024-12-03 22:42:41,942 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-12-03 22:42:42,028 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/series-temporais-com-prophet-analise-e-previsao-de-dados-com-python.pdf
+2024-12-03 22:42:42,057 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_bash_Cookbook_Carl_Albing-_JP_Vossen_9781491975336.pdf
+2024-12-03 22:42:42,212 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2022_Ansible_Up_and_Running_Bas_Meijer-_Lorin_Hochstein_9781098109158.pdf
+2024-12-03 22:42:42,320 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/National_Geographic_Books_2021_Bug_Bounty_Bootcamp_Vickie_Li_9781718501546.pdf
+2024-12-03 22:42:42,337 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/pythonforcybersecurity_usingpythonforcyberoffenseanddefense.pdf
+2024-12-03 22:42:42,419 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2020_Java_Performance_Scott_Oaks_9781492056119.pdf
+2024-12-03 22:42:42,567 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Packt_2022_Applied_Machine_Learning_and_High-Performance_Comp_Mani_Khanuja-_Farooq_Sabir_9781803237015.pdf
+2024-12-03 22:42:42,576 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/machine-learning-introducao-a-classificacao.pdf
+2024-12-03 22:42:42,581 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2021_The_Hardware_Hacking_Handbook_Jasper_van_Woudenberg-_Colin_O'Flynn_9781593278748.pdf
+2024-12-03 22:42:42,792 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf
+2024-12-03 22:49:44,026 - INFO - Extractores disponíveis: pypdf2, pdfplumber, pdfminer, tesseract, pdf2image
+2024-12-03 22:49:44,027 - INFO - Suporte a OCR está disponível
+2024-12-03 22:49:44,215 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/series-temporais-com-prophet-analise-e-previsao-de-dados-com-python.pdf
+2024-12-03 22:49:44,345 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/machine-learning-introducao-a-classificacao.pdf
+2024-12-03 22:49:44,464 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/computacao-evolucionaria-aplique-os-algoritmos-geneticos-com-python-e-numpy.pdf
+2024-12-03 22:49:44,488 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_The_Active_Defender_Dr._Catherine_J._Ullman_9781119895213.pdf
+2024-12-03 22:49:44,513 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Wiley_2023_Software_Transparency_Chris_Hughes-_Tony_Turner_9781394158485.pdf
+2024-12-03 22:49:44,555 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Hands-On Artificial Intelligence for Banking.pdf
+2024-12-03 22:49:44,598 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_bash_Cookbook_Carl_Albing-_JP_Vossen_9781491975336.pdf
+2024-12-03 22:49:44,668 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2022_Ansible_Up_and_Running_Bas_Meijer-_Lorin_Hochstein_9781098109158.pdf
+2024-12-03 22:49:44,821 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/pythonforcybersecurity_usingpythonforcyberoffenseanddefense.pdf
+2024-12-03 22:49:44,924 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/National_Geographic_Books_2021_Bug_Bounty_Bootcamp_Vickie_Li_9781718501546.pdf
+2024-12-03 22:49:44,963 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/OReilly_2020_Java_Performance_Scott_Oaks_9781492056119.pdf
+2024-12-03 22:49:45,047 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/Packt_2022_Applied_Machine_Learning_and_High-Performance_Comp_Mani_Khanuja-_Farooq_Sabir_9781803237015.pdf
+2024-12-03 22:49:45,086 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/No_Starch_Press_2021_The_Hardware_Hacking_Handbook_Jasper_van_Woudenberg-_Colin_O'Flynn_9781593278748.pdf
+2024-12-03 22:49:45,285 - INFO - Extraindo metadados de: /Users/menon/Downloads/0_teste_livros_scan/pdfcoffee.com_python-para-analise-de-dados-wes-mckinney-pdf-free.pdf

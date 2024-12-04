@@ -10,7 +10,7 @@ import json
 import textwrap
 from rich.console import Console
 from rich.table import Table
-from rich.progress import Progress, BarColumn, TextColumn
+from rich.progress import Progress, SpinnerColumn, BarColumn, TextColumn
 import logging
 import os
 import re
@@ -4436,9 +4436,9 @@ class BookMetadataExtractor:
             self.logger.error(traceback.format_exc())
 
     def process_directory(self, directory_path: str, subdirs: Optional[List[str]] = None, 
-                        recursive: bool = False, max_workers: int = 4) -> List[BookMetadata]:
+                         recursive: bool = False, max_workers: int = 4) -> List[BookMetadata]:
         """
-        Process a directory containing book files with clean progress display.
+        Process a directory containing book files.
         
         Args:
             directory_path: Path to directory containing book files
@@ -4451,7 +4451,7 @@ class BookMetadataExtractor:
         """
         directory = Path(directory_path)
         console = Console()
-
+        
         # Initialize runtime stats
         runtime_stats = {
             'processed_files': [],
@@ -4464,11 +4464,38 @@ class BookMetadataExtractor:
             'start_time': time.time()
         }
 
-        # Find all files
+        # Find and group files
+        file_groups = self._collect_files(directory, subdirs, recursive, runtime_stats)
+        if not file_groups:
+            self.logger.warning(f"No files found in {directory_path}")
+            return []
+
+        # Process files with progress display
+        results = self._process_with_progress(file_groups, runtime_stats, max_workers)
+        
+        # Generate final reports
+        self.print_final_summary(runtime_stats)
+        return results
+
+    def _collect_files(self, directory: Path, subdirs: Optional[List[str]], 
+                      recursive: bool, runtime_stats: Dict) -> Dict[str, List[str]]:
+        """
+        Collect and group files from the specified directory.
+        
+        Args:
+            directory: Base directory path
+            subdirs: Optional list of subdirectories to process
+            recursive: Whether to process recursively
+            runtime_stats: Dictionary to store runtime statistics
+            
+        Returns:
+            Dictionary mapping base names to lists of related files
+        """
         all_files = []
         extensions = {'pdf', 'epub', 'mobi'}
         
         self.logger.debug("Scanning for files...")
+        
         if recursive:
             for ext in extensions:
                 files = list(directory.rglob(f"*.{ext}"))
@@ -4490,40 +4517,52 @@ class BookMetadataExtractor:
                     runtime_stats['format_stats'][ext]['total'] += len(files)
 
         runtime_stats['processed_files'] = [str(f) for f in all_files]
-        file_groups = self.file_group.group_files([str(f) for f in all_files])
-        self.logger.debug(f"Found {len(all_files)} files in {len(file_groups)} groups")
+        return self.file_group.group_files([str(f) for f in all_files])
 
-        # Single progress bar with corrected columns
+    def _process_with_progress(self, file_groups: Dict[str, List[str]], 
+                             runtime_stats: Dict, max_workers: int) -> List[BookMetadata]:
+        """
+        Process files with progress display using rich progress bar.
+        
+        Args:
+            file_groups: Dictionary of file groups to process
+            runtime_stats: Dictionary to store runtime statistics
+            max_workers: Number of concurrent worker threads
+            
+        Returns:
+            List of successfully processed BookMetadata objects
+        """
         with Progress(
             SpinnerColumn(),
             TextColumn("[progress.description]{task.description}"),
             BarColumn(),
             TextColumn("[progress.percentage]{task.percentage:>3.0f}%"),
-            TextColumn("•"),
-            TimeElapsedColumn(),
-            console=console,
+            console=Console(),
             transient=True
         ) as progress:
-            process_task = progress.add_task(
-                "Processing files...", 
+            task = progress.add_task(
+                f"Processing {len(file_groups)} files...",
                 total=len(file_groups)
             )
 
             with ThreadPoolExecutor(max_workers=max_workers) as executor:
                 futures = []
 
+                # Submit all tasks
                 for base_name, group_files in file_groups.items():
                     best_source = self.file_group.find_best_isbn_source(group_files)
                     if best_source:
-                        future = executor.submit(self.process_single_file, best_source, runtime_stats)
+                        future = executor.submit(
+                            self.process_single_file,
+                            best_source,
+                            runtime_stats
+                        )
                         futures.append((future, group_files))
 
+                # Process results
                 for future, group_files in futures:
                     try:
-                        start_time = time.time()
                         metadata = future.result()
-                        elapsed = time.time() - start_time
-
                         if metadata:
                             runtime_stats['successful_results'].append(metadata)
                             ext = Path(group_files[0]).suffix.lower()[1:]
@@ -4531,16 +4570,11 @@ class BookMetadataExtractor:
                         else:
                             ext = Path(group_files[0]).suffix.lower()[1:]
                             runtime_stats['format_stats'][ext]['failed'] += 1
-
-                        runtime_stats['processing_times'][group_files[0]] = elapsed
-                        self.logger.debug(f"Processed: {Path(group_files[0]).name}")
-
                     except Exception as e:
-                        self.logger.error(f"Error processing {Path(group_files[0]).name}: {str(e)}")
+                        self.logger.debug(f"Error processing {group_files[0]}: {str(e)}")
                     finally:
-                        progress.advance(process_task)
+                        progress.advance(task)
 
-        self._print_summary(runtime_stats)
         return runtime_stats['successful_results']
 
     def _print_summary(self, runtime_stats: Dict):
@@ -4598,42 +4632,7 @@ class BookMetadataExtractor:
         Console().print(table)
         Console().print(format_table)
 
-    def print_final_summary(self, runtime_stats: Dict):
-        """Print final processing summary with format and publisher statistics."""
-        # Keep existing statistics
-        total_time = runtime_stats.get('total_time', 0)
-        successful = len(runtime_stats.get('successful_results', []))
-        failed = len(runtime_stats.get('failure_details', {}))
 
-        print("\nEstatísticas Finais:")
-        print(f"Tempo Total: {total_time:.2f}s")
-        print(f"Arquivos Sucesso: {successful}")
-        print(f"Arquivos com Falha: {failed}")
-
-        # Add format and publisher stats
-        if 'publisher_stats' in runtime_stats:
-            print("\nDistribuição por Editora:")
-            for publisher, stats in runtime_stats['publisher_stats'].items():
-                success_rate = (stats['success'] / stats['total'] * 100) if stats['total'] > 0 else 0
-                print(f"\n{publisher}:")
-                print(f"  Total: {stats['total']}")
-                print(f"  Taxa de Sucesso: {success_rate:.1f}%")
-                
-                # Format breakdown
-                formats = []
-                for fmt in ['pdf', 'epub', 'mobi']:
-                    count = stats.get(f'{fmt}_count', 0)
-                    if count > 0:
-                        formats.append(f"{fmt.upper()}: {count}")
-                if formats:
-                    print(f"  Formatos: {', '.join(formats)}")
-
-        # Keep existing report files output
-        print("\nArquivos Gerados:")
-        print("-" * 40)
-        for report in runtime_stats.get('generated_reports', []):
-            print(f"{report['type']:4} {report['path']}")       
-            
 
     '''
     def print_final_summary(self, runtime_stats):
@@ -4756,6 +4755,179 @@ class BookMetadataExtractor:
             import traceback
             self.logger.debug(traceback.format_exc())
     '''
+
+
+    def print_final_summary(self, runtime_stats: Dict) -> None:
+        """
+        Main entry point for printing summary information. 
+        Maintains backward compatibility while using new modular approach.
+        
+        Args:
+            runtime_stats: Dictionary containing all processing statistics and results
+        """
+        if not runtime_stats:
+            self.logger.warning("No runtime statistics available for summary")
+            return
+            
+        try:
+            self._print_full_summary(runtime_stats)
+        except Exception as e:
+            self.logger.error(f"Error printing summary: {str(e)}")
+            # Fallback to original format if available
+            self._print_legacy_summary(runtime_stats)
+
+    def _print_full_summary(self, runtime_stats: Dict) -> None:
+        """
+        Orchestrates the display of all summary tables and statistics in new format.
+        
+        Args:
+            runtime_stats: Dictionary containing processing statistics and results
+        """
+        # Print each section using modular methods
+        self._print_processing_summary_table(runtime_stats)
+        self._print_format_statistics_table(runtime_stats)
+        self._print_file_processing_results(runtime_stats)
+        self._print_report_paths()
+
+    def _print_legacy_summary(self, runtime_stats: Dict) -> None:
+        """
+        Fallback method using original summary format if needed.
+        
+        Args:
+            runtime_stats: Dictionary containing processing statistics and results
+        """
+        total_files = len(runtime_stats.get('processed_files', []))
+        successful = len(runtime_stats.get('successful_results', []))
+        
+        print("\nProcessing Summary:")
+        print(f"Total Files: {total_files}")
+        print(f"Successful: {successful}")
+        print(f"Failed: {total_files - successful}")
+
+    def _print_processing_summary_table(self, runtime_stats: Dict) -> None:
+        """
+        Displays the main processing summary table showing total files and success rates.
+        
+        Args:
+            runtime_stats: Dictionary containing runtime statistics including processed files and results
+        """
+        total_files = len(runtime_stats['processed_files'])
+        successful = len(runtime_stats['successful_results'])
+        failed = total_files - successful
+
+        # Create and configure the main summary table
+        table = Table(title="Processing Summary")
+        table.add_column("Category")
+        table.add_column("Count", justify="right")
+        table.add_column("Percentage", justify="right")
+
+        # Calculate percentages
+        success_rate = (successful / total_files * 100) if total_files > 0 else 0
+        failure_rate = (failed / total_files * 100) if total_files > 0 else 0
+
+        # Add rows with proper styling
+        table.add_row("Total Files", str(total_files), "100%", style="bright_blue")
+        table.add_row("Successful", str(successful), f"{success_rate:.1f}%", style="bright_blue")
+        table.add_row("Failed", str(failed), f"{failure_rate:.1f}%", style="bright_blue")
+
+        Console().print("\nFormat Statistics:")
+        Console().print(table)
+
+    def _print_format_statistics_table(self, runtime_stats: Dict) -> None:
+        """
+        Displays detailed statistics breakdown by file format.
+        
+        Args:
+            runtime_stats: Dictionary containing format-specific statistics
+        """
+        table = Table()
+        table.add_column("Format")
+        table.add_column("Total", justify="center")
+        table.add_column("Success", justify="center")
+        table.add_column("Failed", justify="center")
+        table.add_column("Success Rate", justify="center")
+
+        format_stats = runtime_stats.get('format_stats', defaultdict(lambda: {'total': 0, 'success': 0, 'failed': 0}))
+        
+        # Add rows for each format
+        for fmt in ['MOBI', 'EPUB', 'PDF']:
+            stats = format_stats.get(fmt.lower(), {'total': 0, 'success': 0, 'failed': 0})
+            success_rate = (stats['success'] / stats['total'] * 100) if stats['total'] > 0 else 0
+            
+            table.add_row(
+                fmt,
+                str(stats['total']),
+                str(stats['success']),
+                str(stats['failed']),
+                f"{success_rate:.1f}%"
+            )
+
+        Console().print(table)
+        Console().print()
+
+    def _print_file_processing_results(self, runtime_stats: Dict) -> None:
+        """
+        Displays detailed results table for each processed file.
+        
+        Args:
+            runtime_stats: Dictionary containing per-file processing results and metadata
+        """
+        table = Table(show_header=True, title="Sumário de Processamento")
+        table.add_column("Arquivo", no_wrap=True)
+        table.add_column("Status", justify="center")
+        table.add_column("Tempo", justify="right")
+        table.add_column("Detalhes")
+
+        # Process each file result
+        for file_path in runtime_stats['processed_files']:
+            file_name = Path(file_path).name
+            time_taken = runtime_stats['processing_times'].get(file_path, 0.0)
+            
+            # Determine status and details
+            success = any(result.file_path == file_path for result in runtime_stats['successful_results'])
+            
+            if success:
+                status = "[green]✓ success[/green]"
+                for result in runtime_stats['successful_results']:
+                    if result.file_path == file_path:
+                        details = f"ISBN: {result.isbn_13 or result.isbn_10}"
+                        break
+            else:
+                status = "[red]✗ failed[/red]"
+                details = "ISBN: Not found"
+
+            table.add_row(
+                file_name,
+                status,
+                f"{time_taken:.2f}s",
+                details
+            )
+
+        Console().print(table)
+
+    def _print_report_paths(self) -> None:
+        """
+        Displays paths to generated report files.
+        """
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        base_path = f"reports/report_{timestamp}"
+        
+        for report_type in ["HTML", "JSON", "LOG"]:
+            suffix = "_metadata.log" if report_type == "LOG" else f".{report_type.lower()}"
+            path = f"{base_path}{suffix}"
+            Console().print(f"{report_type:<4} {path}")
+
+    def print_final_summary(self, runtime_stats: Dict) -> None:
+        """
+        Orchestrates the display of all summary tables and statistics.
+        
+        Args:
+            runtime_stats: Dictionary containing all processing statistics and results
+        """
+        self._print_processing_summary_table(runtime_stats)
+        self._print_format_statistics_table(runtime_stats)
+        self._print_file_processing_results(runtime_stats)
+        self._print_report_paths()
 
     def _calculate_metadata_completeness(self, metadata: BookMetadata) -> float:
         """
