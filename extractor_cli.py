@@ -2,7 +2,6 @@
 Generates a JSON report with one entry per file.
 """
 import argparse
-import os
 import json
 import logging
 from pathlib import Path

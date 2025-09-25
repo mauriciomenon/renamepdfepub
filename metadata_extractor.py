@@ -8,7 +8,7 @@ from __future__ import annotations
 import re
 import os
 import json
-from typing import Dict, Optional, Tuple, List
+from typing import Dict, Optional
 
 # PDF handling
 try:
@@ -122,7 +122,7 @@ def extract_from_pdf(path: str, pages_to_scan: int = 7) -> Dict[str, Optional[st
             result['isbn10'] = m10.group(1)
 
     # Title heuristics: first line with >4 chars
-    lines = [l.strip() for l in cleaned.split('\n') if l.strip()]
+    lines = [ln.strip() for ln in cleaned.split('\n') if ln.strip()]
     if lines:
         if len(lines[0]) > 5:
             # try split title/subtitle by ':' or ' - '
@@ -138,8 +138,8 @@ def extract_from_pdf(path: str, pages_to_scan: int = 7) -> Dict[str, Optional[st
             else:
                 result['title'] = normalize_spaces(first)
         # try to find author after title (line that contains 'by ')
-        for l in lines[:10]:
-            m = re.search(r'by\s+([A-Za-z0-9\,\.\-\s]+)', l, re.I)
+        for line in lines[:10]:
+            m = re.search(r'by\s+([A-Za-z0-9\,\.\-\s]+)', line, re.I)
             if m:
                 result['authors'] = normalize_spaces(m.group(1))
                 break

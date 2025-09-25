@@ -3,7 +3,6 @@ Supports --dry-run and --copy.
 """
 import argparse
 import json
-import os
 import shutil
 import re
 import logging
@@ -71,8 +70,12 @@ def apply_changes(proposals, copy=False):
 def main():
     parser = argparse.ArgumentParser(description='Rename files according to metadata report')
     parser.add_argument('report', help='JSON report produced by extractor_cli.py')
-    parser.add_argument('--pattern', default='{publisher}_{year}_{title}_{author}_{isbn}', help='Naming pattern')
-    parser.add_argument('--dry-run', action='store_true', default=True, help='Only show proposals (default)')
+    parser.add_argument(
+        '--pattern',
+        default='{publisher}_{year}_{title}_{author}_{isbn}',
+        help='Naming pattern',
+    )
+    parser.add_argument('--dry-run', action='store_true', default=False, help='Only show proposals (use --apply to perform)')
     parser.add_argument('--apply', action='store_true', help='Apply renaming')
     parser.add_argument('--copy', action='store_true', help='Copy files instead of rename')
     args = parser.parse_args()

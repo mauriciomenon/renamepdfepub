@@ -52,7 +52,10 @@ class MetadataCache:
             return None
         isbn_clean = isbn.replace('-', '').strip()
         cur = self._conn.cursor()
-        cur.execute('SELECT metadata_json FROM metadata WHERE isbn10 = ? OR isbn13 = ? LIMIT 1', (isbn_clean, isbn_clean))
+        cur.execute(
+            'SELECT metadata_json FROM metadata WHERE isbn10 = ? OR isbn13 = ? LIMIT 1',
+            (isbn_clean, isbn_clean),
+        )
         row = cur.fetchone()
         if not row:
             return None
