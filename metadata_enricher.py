@@ -76,7 +76,13 @@ def enrich_by_isbn(isbn: str) -> Optional[Dict]:
 
 if __name__ == '__main__':
     import sys
+    import logging
+    from logging_config import configure_logging
+
+    configure_logging()
+    logger = logging.getLogger(__name__)
+
     if len(sys.argv) < 2:
-        print('usage: metadata_enricher.py <ISBN>')
+        logger.error('usage: metadata_enricher.py <ISBN>')
         sys.exit(1)
-    print(enrich_by_isbn(sys.argv[1]))
+    logger.info('%s', enrich_by_isbn(sys.argv[1]))

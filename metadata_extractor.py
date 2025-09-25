@@ -206,17 +206,23 @@ def extract_from_amazon_html(path_or_html: str, is_html: bool = False) -> Dict[s
 if __name__ == '__main__':
     # Quick smoke test
     import sys
+    import logging
+    from logging_config import configure_logging
+
+    configure_logging()
+    logger = logging.getLogger(__name__)
+
     p = sys.argv[1] if len(sys.argv) > 1 else None
     if not p:
-        print('metadata_extractor: pass path to pdf/epub/html to test')
+        logger.info('metadata_extractor: pass path to pdf/epub/html to test')
         sys.exit(0)
     ext = os.path.splitext(p)[1].lower()
     if ext == '.epub':
-        print(json.dumps(extract_from_epub(p), indent=2, ensure_ascii=False))
+        logger.info(json.dumps(extract_from_epub(p), indent=2, ensure_ascii=False))
     elif ext == '.pdf':
-        print(json.dumps(extract_from_pdf(p), indent=2, ensure_ascii=False))
+        logger.info(json.dumps(extract_from_pdf(p), indent=2, ensure_ascii=False))
     elif ext in ('.html', '.htm'):
-        print(json.dumps(extract_from_amazon_html(p), indent=2, ensure_ascii=False))
+        logger.info(json.dumps(extract_from_amazon_html(p), indent=2, ensure_ascii=False))
     else:
         # try as HTML content
-        print(json.dumps(extract_from_amazon_html(p, is_html=True), indent=2, ensure_ascii=False))
+        logger.info(json.dumps(extract_from_amazon_html(p, is_html=True), indent=2, ensure_ascii=False))

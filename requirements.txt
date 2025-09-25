@@ -1,18 +1,29 @@
 # Core Python dependencies (install into a virtualenv)
-PyPDF2
-pdfplumber
-pdfminer.six
-pdf2image
-pytesseract
-ebooklib
-beautifulsoup4
-requests
-tqdm
-rich
-plotly
-# Optional: mobi/Kindle related processing (may require different packages)
-mobi
+# Core Python dependencies (install into a virtualenv)
+# Use minimum-version constraints (>=) rather than exact pins
+# Adjust these minimums if you know a version constraint that works better for your environment.
+# Core Python dependencies (install into a virtualenv)
+# Use minimum-version constraints (>=) rather than exact pins
+# Adjust these minimums if you know a version constraint that works better for your environment.
+pypdf>=3.0.0          # modern replacement for PyPDF2
+pdfplumber>=0.8.0
+pdfminer.six>=20221105
+pdf2image>=1.16.0
+pytesseract>=0.3.10
+ebooklib>=0.18
+beautifulsoup4>=4.11.1
+requests>=2.28.0
+tqdm>=4.64.0
+rich>=12.6.0
+plotly>=5.8.0
+Pillow>=9.0.0          # imaging dependency used by pdf2image
+pypdfium2>=1.0.0      # optional: faster PDF rendering if used
+
+# Optional: mobi/Kindle related processing (may require different packages or system tools)
+# Keep as optional; install only if you need it.
+# mobi
 
 # Notes:
 # - Some packages (pdf2image) require system libraries (poppler).
 # - pytesseract requires Tesseract OCR installed on the OS.
+# - If you prefer PyPDF2, pypdf provides the modern package name; older code may still import PyPDF2.
