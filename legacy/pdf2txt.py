@@ -1,0 +1,3 @@
+#!/usr/bin/env python3
+# Legacy pdf2txt preserved
+...

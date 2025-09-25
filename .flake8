@@ -1,3 +1,3 @@
 [flake8]
 max-line-length = 120
-exclude = .venv_project, build, reports, __pycache__, teste_apagar.py, teste.py, pdf2txt.spec, renomeia_livro_renew_v4.py, renomeia_livro_renew_v5.py, renomeia_livro_renew_v2.py, renomeia_livro_renew_v3.py, tempCodeRunnerFile.py, templates/metadata_web.py
+exclude = .venv_project, build, reports, __pycache__, teste_apagar.py, teste.py, pdf2txt.spec, renomeia_livro_renew_v4.py, renomeia_livro_renew_v5.py, renomeia_livro_renew_v2.py, renomeia_livro_renew_v3.py, tempCodeRunnerFile.py, templates/metadata_web.py, legacy/

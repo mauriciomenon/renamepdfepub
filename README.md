@@ -1,4 +1,8 @@
 # renamepdfepub
+This repository contains tools to extract metadata from ebooks (PDF/EPUB), enrich it and rename files.
+
+Note: legacy/ad-hoc scripts have been moved into the `legacy/` folder. Linters exclude that folder by default.
+# renamepdfepub
 codigo para renomear meus livros comprados, a maioria da o'reilly e packt. Trabalhando em adaptar para outras editoras, além de tornar o codigo mais genérico.
 
 ## Setup rápido

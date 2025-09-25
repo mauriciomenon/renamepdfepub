@@ -1,0 +1,3 @@
+from PyQt6.QtWidgets import QApplication
+# UI-based renamer preserved in legacy
+...

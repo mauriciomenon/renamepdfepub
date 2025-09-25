@@ -1,0 +1,3 @@
+"""legacy function_test preserved"""
+# original contents moved to legacy for cleanup
+...

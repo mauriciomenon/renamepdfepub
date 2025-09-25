@@ -16,10 +16,19 @@ try:
 except Exception:
     pdfplumber = None
 
+# Prefer modern 'pypdf' package (replacement for PyPDF2). Fall back to PyPDF2 if
+# pypdf isn't available. We expose a PdfReader symbol compatible with both.
+PdfReader = None
 try:
-    import PyPDF2
+    # pypdf uses the same API name PdfReader
+    from pypdf import PdfReader as _PdfReader  # type: ignore
+    PdfReader = _PdfReader
 except Exception:
-    PyPDF2 = None
+    try:
+        import PyPDF2  # type: ignore
+        PdfReader = PyPDF2.PdfReader
+    except Exception:
+        PdfReader = None
 
 # EPUB handling
 try:
@@ -90,10 +99,11 @@ def extract_from_pdf(path: str, pages_to_scan: int = 7) -> Dict[str, Optional[st
                 for p in pdf.pages[:pages_to_scan]:
                     t = p.extract_text() or ''
                     text += '\n' + t
-        elif PyPDF2:
+        elif PdfReader:
             with open(path, 'rb') as f:
-                reader = PyPDF2.PdfReader(f)
+                reader = PdfReader(f)
                 for p in reader.pages[:pages_to_scan]:
+                    # pypdf and PyPDF2 expose extract_text on page objects
                     t = p.extract_text() or ''
                     text += '\n' + t
         else:
@@ -101,11 +111,12 @@ def extract_from_pdf(path: str, pages_to_scan: int = 7) -> Dict[str, Optional[st
     except Exception:
         # fallback: try PyPDF2 if pdfplumber failed
         try:
-            with open(path, 'rb') as f:
-                reader = PyPDF2.PdfReader(f)
-                for p in reader.pages[:pages_to_scan]:
-                    t = p.extract_text() or ''
-                    text += '\n' + t
+            if PdfReader:
+                with open(path, 'rb') as f:
+                    reader = PdfReader(f)
+                    for p in reader.pages[:pages_to_scan]:
+                        t = p.extract_text() or ''
+                        text += '\n' + t
         except Exception:
             return result
 

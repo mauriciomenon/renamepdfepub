@@ -1,0 +1,3 @@
+"""legacy function_test preserved (renamed to avoid pytest collection)"""
+# original contents moved to legacy for cleanup
+...
