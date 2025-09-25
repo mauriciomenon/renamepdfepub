@@ -1,0 +1,6 @@
+/.venv_project/
+*.pyc
+__pycache__/
+books/
+test_metadata_report.json
+project.log

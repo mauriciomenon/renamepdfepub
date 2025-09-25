@@ -46,19 +46,54 @@ from urllib3.util.retry import Retry
 from tqdm import tqdm
 
 # Third-party Imports: PDF Processing
-import PyPDF2
-import pdfplumber
-from pdf2image import convert_from_path
-from pdfminer.high_level import extract_text as pdfminer_extract
-import pytesseract
+# Optional heavy imports are guarded - if missing, the code will fallback or notify
+try:
+    import PyPDF2
+except Exception:
+    PyPDF2 = None
+
+try:
+    import pdfplumber
+except Exception:
+    pdfplumber = None
+
+try:
+    from pdf2image import convert_from_path
+except Exception:
+    convert_from_path = None
+
+try:
+    from pdfminer.high_level import extract_text as pdfminer_extract
+except Exception:
+    pdfminer_extract = None
+
+try:
+    import pytesseract
+except Exception:
+    pytesseract = None
 
 # Third-party Imports: E-book Processing
-from bs4 import BeautifulSoup
-from ebooklib import epub, ITEM_DOCUMENT
-import mobi
+try:
+    from bs4 import BeautifulSoup
+except Exception:
+    BeautifulSoup = None
+
+try:
+    from ebooklib import epub, ITEM_DOCUMENT
+except Exception:
+    epub = None
+    ITEM_DOCUMENT = None
+
+try:
+    import mobi
+except Exception:
+    mobi = None
 
 # Third-party Imports: Data Visualization
-import plotly.graph_objects as go
+try:
+    import plotly.graph_objects as go
+except Exception:
+    go = None
 
 # Configure warnings
 warnings.filterwarnings("ignore", category=UserWarning, module="ebooklib.epub")
@@ -66,6 +101,9 @@ warnings.filterwarnings("ignore", category=UserWarning, module="ebooklib.epub")
 
 class DependencyManager:
     def __init__(self):
+        # Initialize a logger early so helper methods can use it safely
+        self._init_logging()
+
         self.available_extractors = {
             'pypdf2': True,  # Já sabemos que está disponível pois é requisito
             'pdfplumber': False,
@@ -105,6 +143,20 @@ class DependencyManager:
             self.available_extractors['pdf2image'] = True
         except ImportError:
             self.logger.debug("pdf2image não está instalado.")
+
+    def _init_logging(self):
+        """Initialize a simple logger for the DependencyManager."""
+        self.logger = logging.getLogger('dependency_manager')
+        self.logger.setLevel(logging.DEBUG)
+        if not self.logger.handlers:
+            fh = logging.FileHandler('dependency_manager.log')
+            fh.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
+            fh.setLevel(logging.DEBUG)
+            ch = logging.StreamHandler()
+            ch.setFormatter(logging.Formatter('%(levelname)s - %(message)s'))
+            ch.setLevel(logging.WARNING)
+            self.logger.addHandler(fh)
+            self.logger.addHandler(ch)
 
     def get_available_extractors(self) -> List[str]:
         """Retorna lista de extractors disponíveis."""
@@ -516,6 +568,9 @@ class MetadataCache:
         conn.execute("PRAGMA foreign_keys = ON")
         conn.execute("PRAGMA journal_mode = WAL")
         return conn
+
+    # Expose get_connection as a staticmethod for convenience
+    get_connection = staticmethod(get_connection)
 
 class ApiStatistics:
     """Classe para coletar e analisar estatísticas de APIs."""

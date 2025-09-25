@@ -1,0 +1,18 @@
+# Core Python dependencies (install into a virtualenv)
+PyPDF2
+pdfplumber
+pdfminer.six
+pdf2image
+pytesseract
+ebooklib
+beautifulsoup4
+requests
+tqdm
+rich
+plotly
+# Optional: mobi/Kindle related processing (may require different packages)
+mobi
+
+# Notes:
+# - Some packages (pdf2image) require system libraries (poppler).
+# - pytesseract requires Tesseract OCR installed on the OS.
