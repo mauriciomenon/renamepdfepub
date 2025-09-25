@@ -10,6 +10,7 @@ from logging_config import configure_logging
 from metadata_extractor import extract_from_pdf, extract_from_epub, extract_from_amazon_html
 from metadata_enricher import enrich_by_isbn
 from renamer import dry_run, apply_changes
+from metadata_cache import MetadataCache
 
 
 def process_path(p: Path):
@@ -47,7 +48,21 @@ def main():
 
     root = Path(args.directory)
     logger.info('Scanning %s (recursive=%s)', root, args.recursive)
+    cache = MetadataCache('metadata_cache.db')
     report = scan_directory(root, recursive=args.recursive)
+    # upsert into cache and consult cache when extraction is empty
+    for entry in report:
+        md = entry.get('metadata') or {}
+        # if no useful metadata, try cache
+        if not any(md.get(k) for k in ('isbn10', 'isbn13', 'title')):
+            # try lookup by filename in cache
+            cached = cache.get_by_path(entry['path'])
+            if cached:
+                entry['metadata'] = cached
+                continue
+        # otherwise, upsert what we have
+        cache.upsert(entry['path'], md)
+
     logger.info('Found %d files', len(report))
 
     # try to enrich where possible
@@ -80,6 +95,7 @@ def main():
         res = apply_changes(proposals, copy=args.copy)
         for r in res:
             logger.info('%s', r)
+    cache.close()
 
 
 if __name__ == '__main__':
