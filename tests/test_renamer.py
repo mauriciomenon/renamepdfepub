@@ -1,8 +1,5 @@
 import json
-import os
 from pathlib import Path
-
-import pytest
 
 from renamer import dry_run, apply_changes
 
@@ -15,8 +12,26 @@ def test_dry_run_and_apply_copy(tmp_path):
     f2.write_text("y")
 
     report = [
-        {"path": str(f1), "metadata": {"title": "Title One", "authors": "A. Author", "publisher": "Pub", "year": "2020", "isbn10": "1234567890"}},
-        {"path": str(f2), "metadata": {"title": "Second Book", "authors": "B. Writer", "publisher": "Pub2", "year": "2019", "isbn10": "0987654321"}},
+        {
+            "path": str(f1),
+            "metadata": {
+                "title": "Title One",
+                "authors": "A. Author",
+                "publisher": "Pub",
+                "year": "2020",
+                "isbn10": "1234567890",
+            },
+        },
+        {
+            "path": str(f2),
+            "metadata": {
+                "title": "Second Book",
+                "authors": "B. Writer",
+                "publisher": "Pub2",
+                "year": "2019",
+                "isbn10": "0987654321",
+            },
+        },
     ]
 
     report_file = tmp_path / "report.json"

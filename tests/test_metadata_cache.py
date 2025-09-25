@@ -1,6 +1,4 @@
-import os
-import json
-import tempfile
+# minor: keep imports minimal for test clarity
 
 from metadata_cache import MetadataCache
 

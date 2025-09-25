@@ -48,7 +48,15 @@ from tqdm import tqdm
 # Third-party Imports: PDF Processing
 # Optional heavy imports are guarded - if missing, the code will fallback or notify
 try:
-    import PyPDF2
+    try:
+        # Prefer modern package name 'pypdf' but keep the old 'PyPDF2' name for
+        # compatibility with existing call sites.
+        import pypdf as PyPDF2  # type: ignore
+    except Exception:
+        try:
+            import PyPDF2  # type: ignore
+        except Exception:
+            PyPDF2 = None
 except Exception:
     PyPDF2 = None
 

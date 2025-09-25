@@ -2,7 +2,10 @@ import sys
 import os
 from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QFileDialog, QTextEdit
 from PyQt6.QtCore import Qt
-from PyPDF2 import PdfReader
+try:
+    from pypdf import PdfReader  # type: ignore
+except Exception:
+    from PyPDF2 import PdfReader  # type: ignore
 import re
 import unicodedata
 import requests

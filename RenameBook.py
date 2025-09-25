@@ -13,7 +13,16 @@ from PyQt6.QtCore import Qt, QDir
 import os
 import re
 import shutil
-import PyPDF2
+try:
+    try:
+        import pypdf as PyPDF2  # type: ignore
+    except Exception:
+        try:
+            import PyPDF2  # type: ignore
+        except Exception:
+            PyPDF2 = None
+except Exception:
+    PyPDF2 = None
 from ebooklib import epub
 
 

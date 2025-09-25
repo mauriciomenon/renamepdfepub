@@ -44,7 +44,16 @@ from urllib3.util.retry import Retry
 import xml.etree.ElementTree as ET
 
 # Bibliotecas de terceiros - Processamento de PDF
-import PyPDF2
+try:
+    try:
+        import pypdf as PyPDF2  # type: ignore
+    except Exception:
+        try:
+            import PyPDF2  # type: ignore
+        except Exception:
+            PyPDF2 = None
+except Exception:
+    PyPDF2 = None
 import pdfplumber
 from pdfminer.high_level import extract_text as pdfminer_extract
 import pytesseract

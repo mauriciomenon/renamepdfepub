@@ -1,7 +1,4 @@
-import json
 import types
-
-import pytest
 
 import metadata_enricher
 

@@ -11,7 +11,16 @@ from PyQt6.QtCore import Qt, QDir
 from functools import partial
 import sys
 import os
-import PyPDF2
+try:
+    try:
+        import pypdf as PyPDF2  # type: ignore
+    except Exception:
+        try:
+            import PyPDF2  # type: ignore
+        except Exception:
+            PyPDF2 = None
+except Exception:
+    PyPDF2 = None
 
 MAX_FILE_SIZE_MB = 150  # Limite de tamanho de arquivo em MB
 MAX_PAGES = 1000  # Limite de número de páginas

@@ -57,7 +57,16 @@ from urllib3.util.retry import Retry
 from tqdm import tqdm
 
 # Third-party Imports: PDF Processing
-import PyPDF2
+try:
+    try:
+        import pypdf as PyPDF2  # type: ignore
+    except Exception:
+        try:
+            import PyPDF2  # type: ignore
+        except Exception:
+            PyPDF2 = None
+except Exception:
+    PyPDF2 = None
 import pdfplumber
 from pdf2image import convert_from_path
 from pdfminer.high_level import extract_text as pdfminer_extract
