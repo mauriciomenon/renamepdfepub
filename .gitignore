@@ -4,3 +4,10 @@ __pycache__/
 books/
 test_metadata_report.json
 project.log
+logs/
+!logs/
+!logs/.gitkeep
+*.log
+metadata_cache.db
+.pytest_cache/
+.DS_Store

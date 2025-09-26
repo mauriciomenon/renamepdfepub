@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.10.0] - 2024-12-05
+
+### Reestruturação
+- Consolidado `metadata_cache`, `metadata_extractor`, `metadata_enricher`, `renamer` e `logging_config` em um pacote `src/renamepdfepub/`.
+- Ajustados imports dos testes e do código legado para utilizarem o pacote.
+- Atualizado `pytest.ini` para expor `src/` no `PYTHONPATH`.
+- Movidos arquivos de log residuais para `logs/` e detalhada a nova topologia no `README.md`.
+
+### Infraestrutura
+- Preparado terreno para decompor o monolito `renomeia_livro.py` em módulos menores em etapas futuras.
+
 ## [0.9.1] - 2024-12-04
 
 ### Organizações

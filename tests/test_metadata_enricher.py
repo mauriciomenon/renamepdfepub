@@ -1,6 +1,7 @@
+import importlib
 import types
 
-import metadata_enricher
+metadata_enricher = importlib.import_module('renamepdfepub.metadata_enricher')
 
 
 class DummyResp:

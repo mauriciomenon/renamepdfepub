@@ -1,6 +1,6 @@
 # minor: keep imports minimal for test clarity
 
-from metadata_cache import MetadataCache
+from renamepdfepub.metadata_cache import MetadataCache
 
 
 def test_cache_upsert_and_get(tmp_path):

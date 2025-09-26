@@ -35,12 +35,19 @@ python3 renomeia_livro.py --help
 
 Observações: sem as dependências Python e de sistema instaladas, o script pode falhar na importação (ModuleNotFoundError) ou na execução de OCR/pdf2image.
 
+5. Rodar a suíte de testes:
+
+```bash
+pytest -q
+```
+
 ### Estrutura do projeto
 
 - `renomeia_livro.py`: script principal com a lógica de extração/enriquecimento de metadados e renomeação.
-- `metadata_*.py`, `renamer.py`: módulos de suporte consumidos pelo script principal.
-- `logs/`: arquivos de log rotacionados pelo pipeline.
+- `src/renamepdfepub/`: pacote Python com os módulos reutilizáveis (`metadata_cache`, `metadata_extractor`, `metadata_enricher`, `renamer`, `logging_config`).
+- `tests/`: suíte de testes unitários que valida os utilitários do pacote.
+- `logs/`: diretório para logs gerados em runtime (mantido vazio no repositório, com `.gitkeep`).
 - `legacy/`: scripts antigos e utilitários mantidos apenas para referência histórica.
 - `reports/`: relatórios de execução e notas de reorganização.
 
-A maior parte dos utilitários experimentais e relatórios soltos foi movida para `legacy/` e `reports/` para manter o diretório raiz mais limpo. Consulte `reports/reorganization_20241204.md` para um resumo das mudanças.
+A maior parte dos utilitários experimentais e relatórios soltos foi movida para `legacy/` e `reports/` para manter o diretório raiz mais limpo. Consulte `reports/reorganization_20241204.md` para um resumo das mudanças. A refatoração atual consolida os módulos reutilizáveis em um pacote `renamepdfepub`, preparando futuras extrações de funcionalidades do script principal.

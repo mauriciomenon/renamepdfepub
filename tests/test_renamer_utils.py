@@ -1,4 +1,4 @@
-from renamer import sanitize_name, format_name
+from renamepdfepub.renamer import sanitize_name, format_name
 
 
 def test_sanitize_name_basic():

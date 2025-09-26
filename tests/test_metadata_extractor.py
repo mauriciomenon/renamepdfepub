@@ -1,4 +1,4 @@
-from metadata_extractor import extract_from_amazon_html
+from renamepdfepub.metadata_extractor import extract_from_amazon_html
 
 
 def test_extract_from_report_html():
@@ -12,7 +12,7 @@ def test_extract_from_report_html():
 
 
 def test_extract_from_pdf_missing_file_returns_structure():
-    from metadata_extractor import extract_from_pdf
+    from renamepdfepub.metadata_extractor import extract_from_pdf
 
     # calling with a non-existing path should return the metadata dict structure
     res = extract_from_pdf('/path/does/not/exist.pdf')

@@ -2,11 +2,33 @@
 Generates a JSON report with one entry per file.
 """
 import argparse
+import importlib
 import json
 import logging
+import sys
 from pathlib import Path
-from metadata_extractor import extract_from_pdf, extract_from_epub, extract_from_amazon_html
-from logging_config import configure_logging
+
+
+def _load_package_modules():
+    try:
+        metadata_module = importlib.import_module("renamepdfepub.metadata_extractor")
+        logging_module = importlib.import_module("renamepdfepub.logging_config")
+        return metadata_module, logging_module
+    except ModuleNotFoundError:  # pragma: no cover - fallback for local execution
+        current_dir = Path(__file__).resolve().parent
+        src_dir = current_dir.parent / "src"
+        if str(src_dir) not in sys.path:
+            sys.path.insert(0, str(src_dir))
+        metadata_module = importlib.import_module("renamepdfepub.metadata_extractor")
+        logging_module = importlib.import_module("renamepdfepub.logging_config")
+        return metadata_module, logging_module
+
+
+metadata_extractor_module, logging_config_module = _load_package_modules()
+extract_from_pdf = metadata_extractor_module.extract_from_pdf
+extract_from_epub = metadata_extractor_module.extract_from_epub
+extract_from_amazon_html = metadata_extractor_module.extract_from_amazon_html
+configure_logging = logging_config_module.configure_logging
 
 
 def process_file(path: str) -> dict:

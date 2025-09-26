@@ -1,4 +1,4 @@
-from metadata_extractor import extract_from_amazon_html
+from renamepdfepub.metadata_extractor import extract_from_amazon_html
 from pathlib import Path
 
 

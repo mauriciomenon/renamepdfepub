@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from renamer import dry_run, apply_changes
+from renamepdfepub.renamer import dry_run, apply_changes
 
 
 def test_dry_run_and_apply_copy(tmp_path):
