@@ -3,7 +3,7 @@ from copy import deepcopy
 
 import pytest
 
-from renomeia_livro_renew_v5 import BookMetadata, MetadataFetcher
+from renomeia_livro import BookMetadata, MetadataFetcher
 
 
 class FakeCache:

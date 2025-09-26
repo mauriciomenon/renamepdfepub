@@ -167,17 +167,33 @@ def extract_from_pdf(path: str, pages_to_scan: int = 7) -> Dict[str, Optional[st
 
 
 def extract_from_amazon_html(path_or_html: str, is_html: bool = False) -> Dict[str, Optional[str]]:
-    """If is_html True, path_or_html is an HTML string; otherwise treat as file path and read file."""
+    """Extract metadata fields from an Amazon product page (or generated HTML report).
+
+    Falls back to lightweight regex heuristics when BeautifulSoup is unavailable so tests can run
+    in minimal environments (e.g., CI without optional dependencies).
+    """
     result = {k: None for k in ['title', 'subtitle', 'authors', 'publisher', 'year', 'isbn10', 'isbn13']}
-    if BeautifulSoup is None:
-        return result
     try:
         if is_html:
             html = path_or_html
         else:
             with open(path_or_html, 'r', encoding='utf-8', errors='ignore') as f:
                 html = f.read()
-        soup = BeautifulSoup(html, 'lxml')
+    except Exception:
+        return result
+
+    if BeautifulSoup is None:
+        # Minimal fallback: try to grab the <title> tag so callers get at least the document title.
+        title_match = re.search(r'<title>(.*?)</title>', html, re.IGNORECASE | re.DOTALL)
+        if title_match:
+            result['title'] = normalize_spaces(title_match.group(1))
+        return result
+
+    try:
+        try:
+            soup = BeautifulSoup(html, 'lxml')
+        except Exception:
+            soup = BeautifulSoup(html, 'html.parser')
         # Title
         title_tag = soup.find(id='productTitle') or soup.find('h1')
         if title_tag:

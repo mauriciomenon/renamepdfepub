@@ -30,7 +30,17 @@ sudo apt install -y poppler-utils tesseract-ocr libtesseract-dev
 4. Executar o analisador principal (exemplo):
 
 ```bash
-python3 renomeia_livro_renew_v5.py --help
+python3 renomeia_livro.py --help
 ```
 
 Observações: sem as dependências Python e de sistema instaladas, o script pode falhar na importação (ModuleNotFoundError) ou na execução de OCR/pdf2image.
+
+### Estrutura do projeto
+
+- `renomeia_livro.py`: script principal com a lógica de extração/enriquecimento de metadados e renomeação.
+- `metadata_*.py`, `renamer.py`: módulos de suporte consumidos pelo script principal.
+- `logs/`: arquivos de log rotacionados pelo pipeline.
+- `legacy/`: scripts antigos e utilitários mantidos apenas para referência histórica.
+- `reports/`: relatórios de execução e notas de reorganização.
+
+A maior parte dos utilitários experimentais e relatórios soltos foi movida para `legacy/` e `reports/` para manter o diretório raiz mais limpo. Consulte `reports/reorganization_20241204.md` para um resumo das mudanças.

@@ -1,10 +1,11 @@
 import logging
 from collections import defaultdict
 from dataclasses import asdict
+from typing import Optional
 
 import pytest
 
-from renomeia_livro_renew_v5 import (
+from renomeia_livro import (
     BookMetadata,
     MetadataRecoveryEngine,
     NORMALIZED_PUBLISHERS,
@@ -36,7 +37,7 @@ class DummyISBNExtractor:
 
 
 class DummyMetadataFetcher:
-    def __init__(self, metadata: BookMetadata | None):
+    def __init__(self, metadata: Optional[BookMetadata]):
         self._metadata = metadata
 
     def fetch_metadata(self, isbn: str):
