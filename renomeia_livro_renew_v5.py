@@ -6,6 +6,7 @@
 # Standard Library Imports
 import argparse
 import functools
+import importlib
 import json
 import textwrap
 from rich.console import Console
@@ -36,7 +37,7 @@ from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, asdict
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Set, Tuple, Union
+from typing import Any, Callable, Dict, List, Optional, Set, Tuple, Union
 from urllib.parse import quote
 
 # Third-party Imports: HTTP and API Related
@@ -214,9 +215,18 @@ INTERNATIONAL_PUBLISHERS = {
 NORMALIZED_PUBLISHERS = {
     # O'Reilly variants
     "O'REILLY": "OReilly",
+    "O’REILLY": "OReilly",
     "O'REILLY MEDIA": "OReilly",
+    "O’REILLY MEDIA": "OReilly",
+    "O'REILLY MEDIA, INC": "OReilly",
+    "O'REILLY MEDIA, INC.": "OReilly",
+    "O'REILLY MEDIA INC": "OReilly",
     "O'REILLY PUBLISHING": "OReilly",
+    "O'REILLY & ASSOCIATES": "OReilly",
     "OREILLY": "OReilly",
+    "OREILLY MEDIA": "OReilly",
+    "OREILLY MEDIA INC": "OReilly",
+    "OREILLY MEDIA, INC": "OReilly",
     
     # Manning variants
     "MANNING PUBLICATIONS": "Manning",
@@ -639,6 +649,473 @@ class ApiMonitor:
     def get_all_stats(self) -> Dict[str, Dict[str, Any]]:
         return {name: stats.get_stats() for name, stats in self.stats.items()}
 
+
+class MetadataTextAnalyzer:
+    """Applies heuristic analysis to PDF/eBook text to recover metadata."""
+
+    TITLE_BLACKLIST_PREFIXES = (
+        'chapter ', 'table of contents', 'contents', 'preface', 'copyright',
+        'acknowledgments', 'dedication', 'introduction', 'published', 'isbn',
+        'www.', 'http', 'all rights reserved'
+    )
+
+    def __init__(self):
+        self._publisher_variants = [
+            (self._normalize_text_key(variant), normalized)
+            for variant, normalized in NORMALIZED_PUBLISHERS.items()
+        ]
+        self._filename_stopwords = {
+            'ebook', 'edition', 'ed', 'revised', 'rev', 'oreilly', 'manning',
+            'packt', 'novatec', 'alta', 'books', 'book', 'press', 'media',
+            'volume', 'vol', 'pt', 'pdf', 'clean', 'sample', 'preview'
+        }
+
+    @staticmethod
+    def _normalize_text_key(text: str) -> str:
+        return re.sub(r'[^a-z0-9]', '', text.lower()) if text else ''
+
+    @staticmethod
+    def _clean_candidate(line: str) -> str:
+        cleaned = re.sub(r'\s+', ' ', line).strip()
+        cleaned = re.sub(r'^[\d\W_]+', '', cleaned)
+        return cleaned
+
+    def extract_title(self, text: str, fallback: str) -> str:
+        if not text:
+            return fallback
+
+        candidates: List[Tuple[float, str]] = []
+        for idx, raw_line in enumerate(line for line in text.splitlines() if line.strip()):
+            raw_lower = raw_line.lower()
+            if idx > 200:  # Plenty of lines to evaluate, avoid going too deep
+                break
+
+            line = self._clean_candidate(raw_line)
+            if len(line) < 5 or len(line) > 140:
+                continue
+
+            lower = line.lower()
+            if any(lower.startswith(prefix) for prefix in self.TITLE_BLACKLIST_PREFIXES):
+                continue
+
+            if lower in {'copyright', 'isbn', 'table of contents'}:
+                continue
+
+            if re.search(r'(isbn|copyright|©|all rights reserved)', lower) or '©' in raw_lower:
+                continue
+
+            if lower.startswith('by ') or raw_lower.strip().startswith('by '):
+                # Author attribution lines are handled separately
+                continue
+
+            score = 1.0
+            if idx < 6:
+                score += 0.6
+            if line.isupper():
+                score += 0.2
+            if len(line.split()) >= 3:
+                score += 0.3
+            if len(line.split()) <= 6:
+                score += 0.1
+            else:
+                score -= 0.1
+            if line.endswith('.'):
+                score -= 0.25
+            if re.match(r"^[A-Z][A-Za-z0-9'\-]+(?:\s+[A-Z][A-Za-z0-9'\-]+){1,5}$", line):
+                score += 0.4
+            if ':' in line or '-' in line:
+                score -= 0.2
+
+            candidates.append((score, line.title() if line.isupper() else line))
+
+        if candidates:
+            candidates.sort(key=lambda item: item[0], reverse=True)
+            return candidates[0][1]
+
+        return fallback
+
+    def extract_authors(self, text: str, max_authors: int = 3) -> List[str]:
+        if not text:
+            return []
+
+        patterns = [
+            r"by\s+([A-Z][A-Za-z\-']+(?:\s+[A-Z][A-Za-z\-']+){0,3})",
+            r'autor(?:es)?\s*[:\-]\s*([A-Z][^\n]+)',
+            r'author(?:s)?\s*[:\-]\s*([A-Z][^\n]+)'
+        ]
+
+        candidates: List[str] = []
+        for pattern in patterns:
+            for match in re.finditer(pattern, text, re.IGNORECASE):
+                raw = match.group(1)
+                names = re.split(r',| and | & | e ', raw)
+                for name in names:
+                    cleaned = re.sub(r'\s+', ' ', name).strip()
+                    cleaned = re.sub(r'[^A-Za-z\s\-\']', '', cleaned)
+                    if len(cleaned) < 4 or len(cleaned.split()) > 4:
+                        continue
+                    if cleaned.lower() in {'authors', 'author', 'by'}:
+                        continue
+                    formatted = ' '.join(word.capitalize() for word in cleaned.split())
+                    if formatted and formatted not in candidates:
+                        candidates.append(formatted)
+
+        return candidates[:max_authors]
+
+    def authors_from_filename(self, stem: str) -> List[str]:
+        if not stem:
+            return []
+
+        parts = re.split(r'[-_]', stem)
+        candidates: List[str] = []
+        for part in parts:
+            part = re.sub(r'\s+', ' ', part).strip()
+            if not part or any(char.isdigit() for char in part):
+                continue
+            lower = part.lower()
+            if lower in self._filename_stopwords:
+                continue
+            words = part.split()
+            if len(words) < 2 or len(words) > 4:
+                continue
+            if not all(word[0].isalpha() for word in words):
+                continue
+            formatted = ' '.join(word.capitalize() for word in words)
+            if formatted not in candidates:
+                candidates.append(formatted)
+
+        return candidates[:2]
+
+    def infer_publisher(self, text: str) -> Optional[str]:
+        if not text:
+            return None
+
+        normalized_text = self._normalize_text_key(text[:6000])
+        for variant, normalized in self._publisher_variants:
+            if variant and variant in normalized_text:
+                return normalized
+        return None
+
+    @staticmethod
+    def extract_year(text: str) -> Optional[str]:
+        if not text:
+            return None
+
+        patterns = [
+            r'(?:©|copyright|published)\s*(?:in\s*)?(20\d{2}|19\d{2})',
+            r'(20\d{2}|19\d{2})\s*(?:edition|edição)'
+        ]
+        for pattern in patterns:
+            match = re.search(pattern, text, re.IGNORECASE)
+            if match:
+                return match.group(1)
+
+        fallback = re.findall(r'(20\d{2}|19\d{2})', text)
+        return fallback[0] if fallback else None
+
+    @staticmethod
+    def title_from_filename(stem: str) -> str:
+        if not stem:
+            return "Unknown"
+        cleaned = re.sub(r'[_-]+', ' ', stem)
+        cleaned = re.sub(r'\s+', ' ', cleaned).strip()
+        return cleaned.title() if cleaned else "Unknown"
+
+
+class MetadataRecoveryEngine:
+    """Attempts a second pass on failed files to recover metadata heuristically."""
+
+    def __init__(
+        self,
+        pdf_processor: 'PDFProcessor',
+        ebook_processor: 'EbookProcessor',
+        isbn_extractor: 'ISBNExtractor',
+        metadata_fetcher: 'MetadataFetcher',
+    normalize_publisher: Callable[[str], str],
+    add_publisher_stats: Callable[[Dict, Dict], None],
+        logger: logging.Logger
+    ):
+        self.pdf_processor = pdf_processor
+        self.ebook_processor = ebook_processor
+        self.isbn_extractor = isbn_extractor
+        self.metadata_fetcher = metadata_fetcher
+        self.normalize_publisher = normalize_publisher
+        self.add_publisher_stats = add_publisher_stats
+        self.logger = logger.getChild('recovery')
+        self.text_analyzer = MetadataTextAnalyzer()
+
+    def recover_missing_metadata(self, runtime_stats: Dict) -> List[BookMetadata]:
+        failure_details = runtime_stats.get('failure_details', {})
+        if not failure_details:
+            return []
+
+        recovered_items: List[BookMetadata] = []
+        runtime_stats.setdefault('recovery_stats', {'attempted': 0, 'recovered': 0})
+        recovered_registry = runtime_stats.setdefault('recovered_details', {})
+
+        for file_path, details in list(failure_details.items()):
+            if file_path in runtime_stats.get('successful_files', []):
+                continue
+
+            runtime_stats['recovery_stats']['attempted'] += 1
+            metadata = self._attempt_recovery(file_path, details, runtime_stats)
+            if not metadata:
+                continue
+
+            metadata.publisher = self.normalize_publisher(metadata.publisher)
+            metadata.file_path = str(file_path)
+
+            runtime_stats['successful_results'].append(metadata)
+            runtime_stats['successful_files'].append(file_path)
+
+            ext = Path(file_path).suffix.lower().lstrip('.')
+            format_stats = runtime_stats.setdefault('format_stats', defaultdict(lambda: {'total': 0, 'success': 0, 'failed': 0}))
+            stats = format_stats[ext]
+            stats['success'] += 1
+            if stats['failed'] > 0:
+                stats['failed'] -= 1
+
+            details['status'] = 'Recovered'
+            details['recovery_source'] = metadata.source
+            details['recovery_confidence'] = metadata.confidence_score
+            recovered_registry[file_path] = details
+            failure_details.pop(file_path, None)
+
+            try:
+                self.add_publisher_stats(asdict(metadata), runtime_stats)
+            except Exception:
+                pass
+
+            runtime_stats['recovery_stats']['recovered'] += 1
+            recovered_items.append(metadata)
+
+            self.logger.info("Recovered metadata for %s using %s", file_path, metadata.source)
+
+        return recovered_items
+
+    def _attempt_recovery(self, file_path: str, details: Dict, runtime_stats: Dict) -> Optional[BookMetadata]:
+        text, methods = self._extract_text_for_recovery(file_path)
+
+        details.setdefault('recovery_attempts', []).append({
+            'stage': 'text_extraction',
+            'methods': methods,
+            'characters': len(text)
+        })
+
+        if not text:
+            self.logger.debug("No text available for recovery from %s", file_path)
+            return None
+
+        metadata = self._recover_using_isbn(text, file_path, details, runtime_stats)
+        if metadata:
+            metadata.source = f"recovery:{metadata.source}"
+            metadata.confidence_score = max(metadata.confidence_score, 0.7)
+            return metadata
+
+        metadata = self._rebuild_from_text(text, file_path, details)
+        return metadata
+
+    def _extract_text_for_recovery(self, file_path: str) -> Tuple[str, List[str]]:
+        path = Path(file_path)
+        ext = path.suffix.lower()
+
+        if ext == '.pdf':
+            return self.pdf_processor.extract_text_from_pdf(str(path), max_pages=40)
+        if ext == '.epub':
+            return self.ebook_processor.extract_text_from_epub(str(path))
+        if ext == '.mobi':
+            return self.ebook_processor.extract_text_from_mobi(str(path))
+
+        return "", []
+
+    def _recover_using_isbn(self, text: str, file_path: str, details: Dict, runtime_stats: Dict) -> Optional[BookMetadata]:
+        existing_isbns = set(details.get('isbns_found', []))
+        candidates = self.isbn_extractor.extract_from_text(text, source_path=file_path)
+        candidates = {isbn for isbn in candidates if isbn not in existing_isbns}
+
+        if not candidates:
+            return None
+
+        details['recovery_attempts'].append({
+            'stage': 'isbn_search',
+            'candidate_isbns': sorted(candidates)
+        })
+
+        for isbn in sorted(candidates):
+            try:
+                metadata = self.metadata_fetcher.fetch_metadata(isbn)
+                if metadata:
+                    details.setdefault('recovered_isbns', []).append(isbn)
+                    return metadata
+            except Exception as exc:
+                runtime_stats.setdefault('api_errors', defaultdict(list))
+                runtime_stats['api_errors'][file_path].append(f"recovery {isbn}: {exc}")
+                self.logger.debug("Recovery API error for %s (%s): %s", file_path, isbn, exc)
+
+        return None
+
+    def _rebuild_from_text(self, text: str, file_path: str, details: Dict) -> Optional[BookMetadata]:
+        snippet = text[:8000]
+        stem = Path(file_path).stem
+        fallback_title = self.text_analyzer.title_from_filename(stem)
+        title = self.text_analyzer.extract_title(snippet, fallback_title)
+
+        authors = self.text_analyzer.extract_authors(snippet)
+        if not authors:
+            authors = self.text_analyzer.authors_from_filename(stem)
+
+        publisher = self.text_analyzer.infer_publisher(snippet) or 'Unknown'
+        year = self.text_analyzer.extract_year(snippet) or 'Unknown'
+
+        if not title or title == 'Unknown':
+            return None
+
+        if not authors:
+            authors = ['Unknown Author']
+
+        confidence = 0.45
+        if authors and authors[0] != 'Unknown Author':
+            confidence += 0.15
+        if publisher != 'Unknown':
+            confidence += 0.1
+        if year != 'Unknown':
+            confidence += 0.05
+        confidence = min(confidence, 0.75)
+
+        metadata = BookMetadata(
+            title=title,
+            authors=authors,
+            publisher=publisher,
+            published_date=year,
+            isbn_10=None,
+            isbn_13=None,
+            confidence_score=confidence,
+            source='secondary_text_analysis',
+            file_path=str(file_path)
+        )
+
+        details.setdefault('recovery_summary', {}).update({
+            'title': title,
+            'authors': authors,
+            'publisher': publisher,
+            'published_date': year
+        })
+
+        return metadata
+
+class FastMetadataPreprocessor:
+    """Executes a fast heuristic pass to seed metadata before deep extraction."""
+
+    ISBN_PATTERN = re.compile(r"97[89][0-9\-]{10,}|\b[0-9]{9}[0-9Xx]\b")
+
+    def __init__(
+        self,
+        pdf_processor: 'PDFProcessor',
+        ebook_processor: 'EbookProcessor',
+        logger: logging.Logger,
+    ) -> None:
+        self.pdf_processor = pdf_processor
+        self.ebook_processor = ebook_processor
+        self.logger = logger.getChild('preprocessor')
+        self.text_analyzer = MetadataTextAnalyzer()
+
+    def generate_hints(self, file_groups: Dict[str, List[str]]) -> Tuple[Dict[str, Dict[str, Any]], Dict[str, int]]:
+        hints: Dict[str, Dict[str, Any]] = {}
+        stats = {
+            'scanned': 0,
+            'with_text': 0,
+            'filename_only': 0,
+            'isbn_hits': 0,
+            'applied': 0,
+            'promoted': 0,
+        }
+
+        for group_files in file_groups.values():
+            for file_path in group_files:
+                stats['scanned'] += 1
+                hint = self._hint_from_filename(Path(file_path).stem)
+                text_hint = self._quick_scan(file_path)
+                if text_hint:
+                    stats['with_text'] += 1
+                    if text_hint.get('isbn'):
+                        stats['isbn_hits'] += 1
+                    hint.update({k: v for k, v in text_hint.items() if v})
+                else:
+                    stats['filename_only'] += 1
+
+                hints[file_path] = self._finalize_hint(hint)
+
+        return hints, stats
+
+    def _hint_from_filename(self, stem: str) -> Dict[str, Any]:
+        if not stem:
+            return {}
+
+        title = self.text_analyzer.title_from_filename(stem)
+        authors = self.text_analyzer.authors_from_filename(stem)
+        publisher = self.text_analyzer.infer_publisher(stem)
+        year_match = re.search(r'(20\d{2}|19\d{2})', stem)
+
+        return {
+            'title': None if title == 'Unknown' else title,
+            'authors': authors,
+            'publisher': publisher,
+            'published_date': year_match.group(1) if year_match else None,
+            'confidence': 0.35 if authors or title else 0.0,
+        }
+
+    def _quick_scan(self, file_path: str) -> Dict[str, Any]:
+        suffix = Path(file_path).suffix.lower()
+        text = ""
+
+        try:
+            if suffix == '.pdf':
+                text, _ = self.pdf_processor.extract_text_from_pdf(file_path, max_pages=4)
+            elif suffix == '.epub':
+                text, _ = self.ebook_processor.extract_text_from_epub(file_path)
+            elif suffix == '.mobi':
+                text, _ = self.ebook_processor.extract_text_from_mobi(file_path)
+        except Exception as exc:
+            self.logger.debug("Fast scan failed for %s: %s", file_path, exc)
+            return {}
+
+        if not text:
+            return {}
+
+        snippet = text[:6000]
+        title = self.text_analyzer.extract_title(snippet, "") or None
+        authors = self.text_analyzer.extract_authors(snippet)
+        publisher = self.text_analyzer.infer_publisher(snippet)
+        year = self.text_analyzer.extract_year(snippet)
+        isbn = self._extract_first_isbn(snippet)
+
+        return {
+            'title': title,
+            'authors': authors,
+            'publisher': publisher,
+            'published_date': year,
+            'isbn': isbn,
+            'confidence': 0.55 if isbn else 0.45 if authors or title else 0.0,
+        }
+
+    def _extract_first_isbn(self, text: str) -> Optional[str]:
+        for match in self.ISBN_PATTERN.finditer(text):
+            raw = re.sub(r'[^0-9Xx]', '', match.group(0))
+            if len(raw) == 13 and raw.startswith(('978', '979')):
+                return raw
+            if len(raw) == 10:
+                return raw.upper()
+        return None
+
+    def _finalize_hint(self, hint: Dict[str, Any]) -> Dict[str, Any]:
+        cleaned = dict(hint)
+        authors = cleaned.get('authors') or []
+        cleaned['authors'] = [a for a in authors if a]
+        cleaned['publisher'] = cleaned.get('publisher') or None
+        cleaned['published_date'] = cleaned.get('published_date') or None
+        cleaned['confidence'] = cleaned.get('confidence', 0.0)
+        return cleaned
+
 class APIHandler:
     """Handler para requisições HTTP."""
     def __init__(self):
@@ -734,6 +1211,9 @@ class ISBNExtractor:
     def __init__(self):
         self._init_logging()
         # Padrões de ISBN
+        self._ebooklib_missing_logged = False
+        self._bs4_missing_logged = False
+
         self.isbn_patterns = [
             # ISBN-13 com prefixo
             r'ISBN[:\s-]*(97[89](?:[- ]?\d){10})',
@@ -982,6 +1462,14 @@ class ISBNExtractor:
 
     def _extract_info_from_epub(self, epub_path: str) -> Dict:
         """Extração mais robusta de metadados EPUB."""
+        if epub is None:
+            if not self._ebooklib_missing_logged:
+                self.logger.warning(
+                    "Dependência opcional 'ebooklib' não encontrada. Extração de metadados EPUB será ignorada."
+                )
+                self._ebooklib_missing_logged = True
+            return {}
+
         try:
             book = epub.read_epub(epub_path)
             metadata = {
@@ -1349,21 +1837,67 @@ class MetadataFetcher:
         
         # API configurations
         self.API_CONFIGS = {
-            'openlibrary': {'enabled': True, 'timeout': 5, 'retries': 3},
-            'google_books': {'enabled': True, 'timeout': 5, 'retries': 3},
-            'worldcat': {'enabled': True, 'timeout': 8, 'retries': 2},
-            'isbnlib_info': {'enabled': True, 'timeout': 3, 'retries': 2},
-            'crossref': {'enabled': True, 'timeout': 6, 'retries': 2},
+            'openlibrary': {'enabled': True, 'timeout': 5, 'retries': 3, 'backoff_factor': 1.5},
+            'google_books': {'enabled': True, 'timeout': 5, 'retries': 3, 'backoff_factor': 1.5},
+            'google_books_br': {'enabled': True, 'timeout': 5, 'retries': 3, 'backoff_factor': 1.5},
+            'worldcat': {'enabled': True, 'timeout': 8, 'retries': 2, 'backoff_factor': 2.0},
+            'isbnlib_info': {'enabled': True, 'timeout': 3, 'retries': 2, 'backoff_factor': 1.5},
+            'isbnlib_desc': {'enabled': True, 'timeout': 3, 'retries': 2, 'backoff_factor': 1.5},
+            'isbnlib_goom': {'enabled': True, 'timeout': 3, 'retries': 2, 'backoff_factor': 1.5},
+            'isbnlib_meta': {'enabled': True, 'timeout': 3, 'retries': 2, 'backoff_factor': 1.5},
+            'isbnlib_default': {'enabled': True, 'timeout': 3, 'retries': 2, 'backoff_factor': 1.5},
+            'isbnlib_editions': {'enabled': True, 'timeout': 3, 'retries': 2, 'backoff_factor': 1.5},
+            'isbnlib_isbn10': {'enabled': True, 'timeout': 3, 'retries': 2, 'backoff_factor': 1.5},
+            'isbnlib_isbn13': {'enabled': True, 'timeout': 3, 'retries': 2, 'backoff_factor': 1.5},
+            'isbnlib_mask': {'enabled': True, 'timeout': 3, 'retries': 2, 'backoff_factor': 1.5},
+            'crossref': {'enabled': True, 'timeout': 6, 'retries': 2, 'backoff_factor': 2.0},
+            'loc': {'enabled': True, 'timeout': 6, 'retries': 3, 'backoff_factor': 2.0},
+            'mercado_editorial': {'enabled': True, 'timeout': 6, 'retries': 2, 'backoff_factor': 1.8},
+            'cbl': {'enabled': True, 'timeout': 6, 'retries': 2, 'backoff_factor': 1.8},
+            'internet_archive': {'enabled': True, 'timeout': 6, 'retries': 2, 'backoff_factor': 1.6},
+            'zbib': {'enabled': True, 'timeout': 6, 'retries': 2, 'backoff_factor': 1.6},
+            'ebook_de': {'enabled': True, 'timeout': 6, 'retries': 2, 'backoff_factor': 1.6},
+            'springer': {'enabled': True, 'timeout': 6, 'retries': 2, 'backoff_factor': 1.8},
+            'oreilly': {'enabled': True, 'timeout': 6, 'retries': 2, 'backoff_factor': 1.8},
+            'mybib': {'enabled': True, 'timeout': 6, 'retries': 2, 'backoff_factor': 1.6}
         }
 
         # Confidence adjustments
         self.confidence_adjustments = {
             'openlibrary': 0.85,
             'google_books': 0.90,
+            'google_books_br': 0.90,
             'worldcat': 0.80,
             'isbnlib_info': 0.95,
+            'isbnlib_desc': 0.90,
+            'isbnlib_goom': 0.88,
+            'isbnlib_meta': 0.87,
+            'isbnlib_default': 0.82,
+            'isbnlib_editions': 0.86,
+            'isbnlib_isbn10': 0.84,
+            'isbnlib_isbn13': 0.84,
+            'isbnlib_mask': 0.83,
             'crossref': 0.80,
+            'loc': 0.78,
+            'mercado_editorial': 0.82,
+            'cbl': 0.84,
+            'internet_archive': 0.70,
+            'zbib': 0.72,
+            'ebook_de': 0.75,
+            'springer': 0.88,
+            'oreilly': 0.92,
+            'mybib': 0.74,
         } 
+
+        # Optional dependency tracking
+        self._isbnlib_module = None
+        self._isbnlib_checked = False
+        self._isbnlib_missing_logged = False
+        self._disabled_apis_due_to_dependencies: Set[str] = set()
+
+        self._bs4_missing_logged = False
+
+        self._check_optional_dependencies()
 
     def _init_logging(self):
         """Initialize logging configuration."""
@@ -1388,6 +1922,59 @@ class MetadataFetcher:
             self.logger.addHandler(file_handler)
             self.logger.addHandler(console_handler)
 
+    def _check_optional_dependencies(self) -> None:
+        """Verifica dependências opcionais e desabilita integrações indisponíveis."""
+        # Apenas tenta resolver isbnlib uma vez para ajustar configurações
+        self._get_isbnlib_module()
+
+    def _disable_isbnlib_apis(self) -> None:
+        """Desativa APIs baseadas em isbnlib quando a dependência não está disponível."""
+        isbnlib_apis = {
+            'isbnlib_info',
+            'isbnlib_mask',
+            'isbnlib_desc',
+            'isbnlib_editions',
+            'isbnlib_isbn10',
+            'isbnlib_isbn13',
+            'isbnlib_default',
+            'isbnlib_goom',
+            'isbnlib_meta'
+        }
+
+        for api in isbnlib_apis:
+            config = self.API_CONFIGS.setdefault(api, {'enabled': True, 'timeout': 5, 'retries': 0})
+            config['enabled'] = False
+
+        self._disabled_apis_due_to_dependencies.update(isbnlib_apis)
+
+    def _get_isbnlib_module(self):
+        """Retorna o módulo isbnlib se disponível, ajustando configurações caso contrário."""
+        if not self._isbnlib_checked:
+            try:
+                self._isbnlib_module = importlib.import_module('isbnlib')
+            except ImportError:
+                self._isbnlib_module = None
+                if not self._isbnlib_missing_logged:
+                    self.logger.warning(
+                        "Dependência opcional 'isbnlib' não encontrada. As integrações baseadas nela serão ignoradas."
+                    )
+                    self._isbnlib_missing_logged = True
+                self._disable_isbnlib_apis()
+            finally:
+                self._isbnlib_checked = True
+
+        return self._isbnlib_module
+
+    def _should_skip_api(self, api_name: str) -> bool:
+        """Determina se uma API deve ser ignorada por falta de dependências opcionais."""
+        if api_name in self._disabled_apis_due_to_dependencies:
+            return True
+
+        if api_name.startswith('isbnlib') and self._get_isbnlib_module() is None:
+            return True
+
+        return False
+
     def _make_request(self, api_name: str, url: str, **kwargs) -> requests.Response:
         """Make HTTP request with error handling and rate limiting."""
         if not self._check_api_health(api_name):
@@ -1395,41 +1982,76 @@ class MetadataFetcher:
 
         start_time = time.time()
         config = self.API_CONFIGS.get(api_name, {})
+        retries = config.get('retries', 0)
+        backoff_factor = config.get('backoff_factor', 1.5)
+        attempt = 0
+        last_error: Optional[Exception] = None
         
-        # Rate limiting
-        wait_time = self.rate_limiter.should_wait(api_name)
-        if wait_time > 0:
-            time.sleep(wait_time)
-            
-        try:
-            # Dynamic timeout based on performance
-            stats = self.metrics.get_api_stats(api_name)
-            avg_time = stats.get('avg_response_time', 5.0)
-            dynamic_timeout = min(max(avg_time * 2, config.get('timeout', 5)), 30)
+        while attempt <= retries:
+            wait_time = self.rate_limiter.should_wait(api_name)
+            if wait_time > 0:
+                time.sleep(wait_time)
 
-            # Make request
-            response = self.api.get(
-                url,
-                timeout=dynamic_timeout,
-                **kwargs
-            )
-            
-            elapsed = time.time() - start_time
-            
-            # Update statistics
-            success = response.status_code == 200
-            self.rate_limiter.update_stats(api_name, success, elapsed)
-            self.metrics.add_metric(api_name, elapsed, success)
-            
-            response.raise_for_status()
-            return response
-            
-        except Exception as e:
-            elapsed = time.time() - start_time
-            self.rate_limiter.update_stats(api_name, False, elapsed)
-            self.metrics.add_metric(api_name, elapsed, False)
-            self.metrics.add_error(api_name, type(e).__name__)
-            raise       
+            try:
+                stats = self.metrics.get_api_stats(api_name)
+                avg_time = stats.get('avg_response_time', config.get('timeout', 5))
+                dynamic_timeout = min(max(avg_time * 2, config.get('timeout', 5)), 30)
+
+                response = self.api.get(
+                    url,
+                    timeout=dynamic_timeout,
+                    **kwargs
+                )
+
+                elapsed = time.time() - start_time
+                success = response.status_code == 200
+                self.rate_limiter.update_stats(api_name, success, elapsed)
+                self.metrics.add_metric(api_name, elapsed, success)
+
+                response.raise_for_status()
+                return response
+
+            except requests.exceptions.HTTPError as http_error:
+                last_error = http_error
+                status = getattr(http_error.response, 'status_code', None)
+                retryable = status in {429, 500, 502, 503, 504}
+                elapsed = time.time() - start_time
+                self.rate_limiter.update_stats(api_name, False, elapsed)
+                self.metrics.add_metric(api_name, elapsed, False)
+                self.metrics.add_error(api_name, type(http_error).__name__)
+
+                if retryable and attempt < retries:
+                    time.sleep(min(backoff_factor ** attempt, 10))
+                    attempt += 1
+                    continue
+                raise
+
+            except requests.exceptions.RequestException as req_error:
+                last_error = req_error
+                elapsed = time.time() - start_time
+                self.rate_limiter.update_stats(api_name, False, elapsed)
+                self.metrics.add_metric(api_name, elapsed, False)
+                self.metrics.add_error(api_name, type(req_error).__name__)
+                if attempt < retries:
+                    time.sleep(min(backoff_factor ** attempt, 10))
+                    attempt += 1
+                    continue
+                raise
+            except Exception as e:
+                last_error = e
+                elapsed = time.time() - start_time
+                self.rate_limiter.update_stats(api_name, False, elapsed)
+                self.metrics.add_metric(api_name, elapsed, False)
+                self.metrics.add_error(api_name, type(e).__name__)
+                if attempt < retries:
+                    time.sleep(min(backoff_factor ** attempt, 10))
+                    attempt += 1
+                    continue
+                raise
+
+        if last_error:
+            raise last_error
+        raise Exception(f"Failed to fetch {api_name} after {retries + 1} attempts")      
 
     def _configure_apis(self):
         """Configure API settings and Brazilian publishers."""
@@ -1455,11 +2077,29 @@ class MetadataFetcher:
         }
         
         self.API_CONFIGS = {
-            'openlibrary': {'enabled': True, 'timeout': 5, 'retries': 3},
-            'google_books': {'enabled': True, 'timeout': 5, 'retries': 3}, 
-            'worldcat': {'enabled': True, 'timeout': 8, 'retries': 2},
-            'isbnlib_info': {'enabled': True, 'timeout': 3, 'retries': 2},
-            'crossref': {'enabled': True, 'timeout': 6, 'retries': 2}
+            'openlibrary': {'enabled': True, 'timeout': 5, 'retries': 3, 'backoff_factor': 1.5},
+            'google_books': {'enabled': True, 'timeout': 5, 'retries': 3, 'backoff_factor': 1.5},
+            'google_books_br': {'enabled': True, 'timeout': 5, 'retries': 3, 'backoff_factor': 1.5},
+            'worldcat': {'enabled': True, 'timeout': 8, 'retries': 2, 'backoff_factor': 2.0},
+            'isbnlib_info': {'enabled': True, 'timeout': 3, 'retries': 2, 'backoff_factor': 1.5},
+            'isbnlib_desc': {'enabled': True, 'timeout': 3, 'retries': 2, 'backoff_factor': 1.5},
+            'isbnlib_goom': {'enabled': True, 'timeout': 3, 'retries': 2, 'backoff_factor': 1.5},
+            'isbnlib_meta': {'enabled': True, 'timeout': 3, 'retries': 2, 'backoff_factor': 1.5},
+            'isbnlib_default': {'enabled': True, 'timeout': 3, 'retries': 2, 'backoff_factor': 1.5},
+            'isbnlib_editions': {'enabled': True, 'timeout': 3, 'retries': 2, 'backoff_factor': 1.5},
+            'isbnlib_isbn10': {'enabled': True, 'timeout': 3, 'retries': 2, 'backoff_factor': 1.5},
+            'isbnlib_isbn13': {'enabled': True, 'timeout': 3, 'retries': 2, 'backoff_factor': 1.5},
+            'isbnlib_mask': {'enabled': True, 'timeout': 3, 'retries': 2, 'backoff_factor': 1.5},
+            'crossref': {'enabled': True, 'timeout': 6, 'retries': 2, 'backoff_factor': 2.0},
+            'loc': {'enabled': True, 'timeout': 6, 'retries': 3, 'backoff_factor': 2.0},
+            'mercado_editorial': {'enabled': True, 'timeout': 6, 'retries': 2, 'backoff_factor': 1.8},
+            'cbl': {'enabled': True, 'timeout': 6, 'retries': 2, 'backoff_factor': 1.8},
+            'internet_archive': {'enabled': True, 'timeout': 6, 'retries': 2, 'backoff_factor': 1.6},
+            'zbib': {'enabled': True, 'timeout': 6, 'retries': 2, 'backoff_factor': 1.6},
+            'ebook_de': {'enabled': True, 'timeout': 6, 'retries': 2, 'backoff_factor': 1.6},
+            'springer': {'enabled': True, 'timeout': 6, 'retries': 2, 'backoff_factor': 1.8},
+            'oreilly': {'enabled': True, 'timeout': 6, 'retries': 2, 'backoff_factor': 1.8},
+            'mybib': {'enabled': True, 'timeout': 6, 'retries': 2, 'backoff_factor': 1.6}
         }
 
     def _configure_confidence_scores(self):
@@ -1467,12 +2107,30 @@ class MetadataFetcher:
         self.confidence_adjustments = {
             'openlibrary': 0.85,
             'google_books': 0.90,
+            'google_books_br': 0.90,
             'worldcat': 0.80,
             'isbnlib_info': 0.95,
+            'isbnlib_desc': 0.90,
+            'isbnlib_goom': 0.88,
+            'isbnlib_meta': 0.87,
+            'isbnlib_default': 0.82,
+            'isbnlib_editions': 0.86,
+            'isbnlib_isbn10': 0.84,
+            'isbnlib_isbn13': 0.84,
+            'isbnlib_mask': 0.83,
             'crossref': 0.80,
+            'loc': 0.78,
+            'mercado_editorial': 0.82,
+            'cbl': 0.84,
+            'internet_archive': 0.70,
+            'zbib': 0.72,
+            'ebook_de': 0.75,
+            'springer': 0.88,
+            'oreilly': 0.92,
+            'mybib': 0.74,
         }
 
-    def fetch_metadata(self, isbn: str) -> Optional[BookMetadata]:
+    def fetch_metadata(self, isbn: str, force_refresh: bool = False) -> Optional[BookMetadata]:
         """
         Busca metadados de um livro usando múltiplas fontes com sistema otimizado 
         de retentativas e fallback.
@@ -1483,9 +2141,14 @@ class MetadataFetcher:
         Returns:
             BookMetadata opcional com os metadados encontrados
         """
-        # Verifica cache primeiro
+        # Normaliza ISBN para evitar falhas de busca
+        normalized_isbn = self._normalize_isbn(isbn)
+        if normalized_isbn:
+            isbn = normalized_isbn
+
+        # Verifica cache primeiro (a menos que force_refresh esteja ativo)
         cached = self.cache.get(isbn)
-        if cached:
+        if cached and not force_refresh:
             return BookMetadata(**cached)
 
         # Configurações de retentativa
@@ -1545,6 +2208,10 @@ class MetadataFetcher:
 
             for api_name, api_method in group['apis']:
                 if api_name in tried_apis:
+                    continue
+
+                if self._should_skip_api(api_name):
+                    self.logger.debug(f"API '{api_name}' ignorada por falta de dependências opcionais.")
                     continue
 
                 tried_apis.add(api_name)
@@ -1671,7 +2338,8 @@ class MetadataFetcher:
             available_apis = [
                 api for api in group['apis']
                 if api not in tried_apis and
-                self.API_CONFIGS.get(api, {}).get('enabled', True)
+                self.API_CONFIGS.get(api, {}).get('enabled', True) and
+                not self._should_skip_api(api)
             ]
 
             if not available_apis:
@@ -1734,44 +2402,44 @@ class MetadataFetcher:
 
         return max(all_results, key=lambda x: x.confidence_score) if all_results else None
 
-    def _fetch_google_books(self, isbn: str) -> Optional[BookMetadata]:
-        """Fetch metadata from Google Books API."""
-        try:
-            url = "https://www.googleapis.com/books/v1/volumes"
-            params = {'q': f'isbn:{isbn}', 'maxResults': 1}
-            
-            response = self._make_request('google_books', url, params=params)
-            data = response.json()
-            
-            if 'items' not in data:
-                return None
-                
-            book_info = data['items'][0]['volumeInfo']
-            
-            metadata_dict = {
-                'title': book_info.get('title', ''),
-                'authors': book_info.get('authors', []),
-                'publisher': book_info.get('publisher', 'Unknown'),
-                'published_date': book_info.get('publishedDate', 'Unknown'),
-                'isbn_13': isbn if len(isbn) == 13 else None,
-                'isbn_10': isbn if len(isbn) == 10 else None,
-                'confidence_score': self.confidence_adjustments['google_books'],
-                'source': 'google_books'
-            }
-            
-            if not self.validator.validate_metadata(metadata_dict, 'google_books', isbn):
-                return None
-                
-            return BookMetadata(**metadata_dict)
-            
-        except Exception as e:
-            self._handle_api_error('google_books', e, isbn)
+    def fetch_isbnlib_info(self, isbn: str) -> Optional[BookMetadata]:
+        """Fetch usando isbnlib com melhor suporte a variantes."""
+        isbnlib = self._get_isbnlib_module()
+        if isbnlib is None:
             return None
 
-    def _fetch_openlibrary(self, isbn: str) -> Optional[BookMetadata]:
-        """Fetch metadata from Open Library API."""
         try:
-            url = "https://openlibrary.org/api/books"
+            if not (isbnlib.is_isbn13(isbn) or isbnlib.is_isbn10(isbn)):
+                return None
+
+            services = ['default', 'goob', 'merge']
+            metadata = None
+
+            for service in services:
+                try:
+                    metadata = isbnlib.meta(isbn, service=service)
+                    if metadata:
+                        break
+                except Exception:
+                    continue
+
+            if not metadata:
+                return None
+
+            return BookMetadata(
+                title=metadata.get('Title', '').strip(),
+                authors=[a.strip() for a in metadata.get('Authors', [])],
+                publisher=metadata.get('Publisher', '').strip(),
+                published_date=metadata.get('Year', 'Unknown'),
+                isbn_13=isbn if len(isbn) == 13 else isbnlib.to_isbn13(isbn),
+                isbn_10=isbn if len(isbn) == 10 else isbnlib.to_isbn10(isbn),
+                confidence_score=self.confidence_adjustments['isbnlib_info'],
+                source='isbnlib_info'
+            )
+
+        except Exception as e:
+            self._handle_api_error('isbnlib_info', e, isbn)
+            return None
             params = {
                 'bibkeys': f'ISBN:{isbn}',
                 'format': 'json',
@@ -1813,7 +2481,14 @@ class MetadataFetcher:
             response = self._make_request('worldcat', url)
             
             if response.status_code == 200:
-                from bs4 import BeautifulSoup
+                if BeautifulSoup is None:
+                    if not self._bs4_missing_logged:
+                        self.logger.warning(
+                            "Dependência opcional 'beautifulsoup4' não encontrada. Integração WorldCat será ignorada."
+                        )
+                        self._bs4_missing_logged = True
+                    return None
+
                 soup = BeautifulSoup(response.text, 'html.parser')
                 
                 title = soup.find('h1', {'class': 'title'})
@@ -1981,17 +2656,24 @@ class MetadataFetcher:
                         date = root.find('.//marc:datafield[@tag="260"]/marc:subfield[@code="c"]', ns)
                         
                     except ET.ParseError:
-                        try:
-                            # Se falhar, tenta parsing mais tolerante
-                            from bs4 import BeautifulSoup
-                            soup = BeautifulSoup(xml_text, 'xml')
-                            
-                            title = soup.find('subfield', {'code': 'a', 'tag': '245'})
-                            authors = soup.find_all('subfield', {'code': 'a', 'tag': '100'})
-                            publisher = soup.find('subfield', {'code': 'b', 'tag': '260'})
-                            date = soup.find('subfield', {'code': 'c', 'tag': '260'})
-                        except:
+                        if BeautifulSoup is None:
+                            if not self._bs4_missing_logged:
+                                self.logger.warning(
+                                    "Dependência opcional 'beautifulsoup4' não encontrada. Parser tolerante da Library of Congress será ignorado."
+                                )
+                                self._bs4_missing_logged = True
                             return None
+
+                        try:
+                            # Se falhar, tenta parsing mais tolerante com BeautifulSoup
+                            soup = BeautifulSoup(xml_text, 'xml')
+                        except Exception:
+                            return None
+
+                        title = soup.find('subfield', {'code': 'a', 'tag': '245'})
+                        authors = soup.find_all('subfield', {'code': 'a', 'tag': '100'})
+                        publisher = soup.find('subfield', {'code': 'b', 'tag': '260'})
+                        date = soup.find('subfield', {'code': 'c', 'tag': '260'})
                     
                     metadata_dict = {
                         'title': title.text.strip() if title is not None else '',
@@ -2020,34 +2702,36 @@ class MetadataFetcher:
  
     def fetch_isbnlib_info(self, isbn: str) -> Optional[BookMetadata]:
         """Fetch usando isbnlib.info() com melhor tratamento de variantes."""
+        isbnlib = self._get_isbnlib_module()
+        if isbnlib is None:
+            return None
+
         try:
-            import isbnlib
-            
             # Validação inicial do ISBN
             if not isbnlib.is_isbn13(isbn) and not isbnlib.is_isbn10(isbn):
                 return None
-                
+
             # Obtém informações básicas
             info = isbnlib.info(isbn)
             if not info:
                 return None
-                
+
             # Busca metadados completos
             metadata = isbnlib.meta(isbn)
             if not metadata:
                 return None
-                
+
             metadata_dict = {
                 'title': metadata.get('Title', '').strip(),
                 'authors': [a.strip() for a in metadata.get('Authors', [])],
                 'publisher': metadata.get('Publisher', '').strip(),
                 'published_date': metadata.get('Year', 'Unknown')
             }
-            
+
             # Validação dos dados
             if not self.validator.validate_metadata(metadata_dict, 'isbnlib_info', isbn=isbn):
                 return None
-                
+
             return BookMetadata(
                 title=metadata_dict['title'],
                 authors=metadata_dict['authors'],
@@ -2058,7 +2742,7 @@ class MetadataFetcher:
                 confidence_score=self.confidence_adjustments['isbnlib_info'],
                 source='isbnlib_info'
             )
-            
+
         except Exception as e:
             if 'isbn request != isbn response' in str(e):
                 self.logger.warning(f"ISBNlib info: ISBN variant detected for {isbn}: {str(e)}")
@@ -2398,7 +3082,14 @@ class MetadataFetcher:
                 return None
                 
             if response.status_code == 200:
-                from bs4 import BeautifulSoup
+                if BeautifulSoup is None:
+                    if not self._bs4_missing_logged:
+                        self.logger.warning(
+                            "Dependência opcional 'beautifulsoup4' não encontrada. Integração WorldCat será ignorada."
+                        )
+                        self._bs4_missing_logged = True
+                    return None
+
                 soup = BeautifulSoup(response.text, 'html.parser')
                 
                 title = soup.find('h1', {'class': 'title'})
@@ -2475,32 +3166,32 @@ class MetadataFetcher:
         
     def fetch_isbnlib_mask(self, isbn: str) -> Optional[BookMetadata]:
         """Fetch usando isbnlib.mask() com validação aprimorada."""
+        isbnlib = self._get_isbnlib_module()
+        if isbnlib is None:
+            return None
+
         try:
-            import isbnlib
             if not isbnlib.is_isbn13(isbn) and not isbnlib.is_isbn10(isbn):
                 return None
-                
-            # Formata o ISBN no formato canônico
+
             masked_isbn = isbnlib.mask(isbn)
             if not masked_isbn:
                 return None
-                
-            # Busca metadados usando o ISBN formatado
+
             metadata = isbnlib.meta(masked_isbn)
             if not metadata:
                 return None
-                
+
             metadata_dict = {
                 'title': metadata.get('Title', '').strip(),
                 'authors': [a.strip() for a in metadata.get('Authors', [])],
                 'publisher': metadata.get('Publisher', '').strip(),
                 'published_date': metadata.get('Year', 'Unknown')
             }
-            
-            # Validação
+
             if not self.validator.validate_metadata(metadata_dict, 'isbnlib_mask', isbn=isbn):
                 return None
-                
+
             return BookMetadata(
                 title=metadata_dict['title'],
                 authors=metadata_dict['authors'],
@@ -2511,39 +3202,39 @@ class MetadataFetcher:
                 confidence_score=self.confidence_adjustments['isbnlib_mask'],
                 source='isbnlib_mask'
             )
-            
+
         except Exception as e:
             self._handle_api_error('isbnlib_mask', e, isbn)
             return None
 
     def fetch_isbnlib_desc(self, isbn: str) -> Optional[BookMetadata]:
         """Fetch usando isbnlib.desc() com validação aprimorada."""
+        isbnlib = self._get_isbnlib_module()
+        if isbnlib is None:
+            return None
+
         try:
-            import isbnlib
             if not isbnlib.is_isbn13(isbn) and not isbnlib.is_isbn10(isbn):
                 return None
-                
-            # Obtém descrição detalhada
+
             desc = isbnlib.desc(isbn)
             if not desc:
                 return None
-                
-            # Busca metadados completos
+
             metadata = isbnlib.meta(isbn)
             if not metadata:
                 return None
-                
+
             metadata_dict = {
                 'title': metadata.get('Title', '').strip(),
                 'authors': [a.strip() for a in metadata.get('Authors', [])],
                 'publisher': metadata.get('Publisher', '').strip(),
                 'published_date': metadata.get('Year', 'Unknown')
             }
-            
-            # Validação
+
             if not self.validator.validate_metadata(metadata_dict, 'isbnlib_desc', isbn=isbn):
                 return None
-                
+
             return BookMetadata(
                 title=metadata_dict['title'],
                 authors=metadata_dict['authors'],
@@ -2554,39 +3245,39 @@ class MetadataFetcher:
                 confidence_score=self.confidence_adjustments['isbnlib_desc'],
                 source='isbnlib_desc'
             )
-            
+
         except Exception as e:
             self._handle_api_error('isbnlib_desc', e, isbn)
             return None
 
     def fetch_isbnlib_editions(self, isbn: str) -> Optional[BookMetadata]:
         """Fetch usando isbnlib.editions() com validação aprimorada."""
+        isbnlib = self._get_isbnlib_module()
+        if isbnlib is None:
+            return None
+
         try:
-            import isbnlib
             if not isbnlib.is_isbn13(isbn) and not isbnlib.is_isbn10(isbn):
                 return None
-                
-            # Obtém todas as edições
+
             editions = isbnlib.editions(isbn)
             if not editions:
                 return None
-                
-            # Usa o ISBN original para buscar metadados
+
             metadata = isbnlib.meta(isbn)
             if not metadata:
                 return None
-                
+
             metadata_dict = {
                 'title': metadata.get('Title', '').strip(),
                 'authors': [a.strip() for a in metadata.get('Authors', [])],
                 'publisher': metadata.get('Publisher', '').strip(),
                 'published_date': metadata.get('Year', 'Unknown')
             }
-            
-            # Validação
+
             if not self.validator.validate_metadata(metadata_dict, 'isbnlib_editions', isbn=isbn):
                 return None
-                
+
             return BookMetadata(
                 title=metadata_dict['title'],
                 authors=metadata_dict['authors'],
@@ -2597,39 +3288,39 @@ class MetadataFetcher:
                 confidence_score=self.confidence_adjustments['isbnlib_editions'],
                 source='isbnlib_editions'
             )
-            
+
         except Exception as e:
             self._handle_api_error('isbnlib_editions', e, isbn)
             return None
 
     def fetch_isbnlib_isbn10(self, isbn: str) -> Optional[BookMetadata]:
         """Fetch usando isbnlib para ISBN-10 com validação aprimorada."""
+        isbnlib = self._get_isbnlib_module()
+        if isbnlib is None:
+            return None
+
         try:
-            import isbnlib
             if not isbnlib.is_isbn13(isbn) and not isbnlib.is_isbn10(isbn):
                 return None
-                
-            # Converte para ISBN-10 se necessário
+
             isbn10 = isbnlib.to_isbn10(isbn) if len(isbn) == 13 else isbn
             if not isbn10:
                 return None
-                
-            # Busca metadados usando ISBN-10
+
             metadata = isbnlib.meta(isbn10)
             if not metadata:
                 return None
-                
+
             metadata_dict = {
                 'title': metadata.get('Title', '').strip(),
                 'authors': [a.strip() for a in metadata.get('Authors', [])],
                 'publisher': metadata.get('Publisher', '').strip(),
                 'published_date': metadata.get('Year', 'Unknown')
             }
-            
-            # Validação
+
             if not self.validator.validate_metadata(metadata_dict, 'isbnlib_isbn10', isbn=isbn):
                 return None
-                
+
             return BookMetadata(
                 title=metadata_dict['title'],
                 authors=metadata_dict['authors'],
@@ -2640,39 +3331,39 @@ class MetadataFetcher:
                 confidence_score=self.confidence_adjustments['isbnlib_isbn10'],
                 source='isbnlib_isbn10'
             )
-            
+
         except Exception as e:
             self._handle_api_error('isbnlib_isbn10', e, isbn)
             return None
 
     def fetch_isbnlib_isbn13(self, isbn: str) -> Optional[BookMetadata]:
         """Fetch usando isbnlib para ISBN-13 com validação aprimorada."""
+        isbnlib = self._get_isbnlib_module()
+        if isbnlib is None:
+            return None
+
         try:
-            import isbnlib
             if not isbnlib.is_isbn13(isbn) and not isbnlib.is_isbn10(isbn):
                 return None
-                
-            # Converte para ISBN-13 se necessário
+
             isbn13 = isbnlib.to_isbn13(isbn) if len(isbn) == 10 else isbn
             if not isbn13:
                 return None
-                
-            # Busca metadados usando ISBN-13
+
             metadata = isbnlib.meta(isbn13)
             if not metadata:
                 return None
-                
+
             metadata_dict = {
                 'title': metadata.get('Title', '').strip(),
                 'authors': [a.strip() for a in metadata.get('Authors', [])],
                 'publisher': metadata.get('Publisher', '').strip(),
                 'published_date': metadata.get('Year', 'Unknown')
             }
-            
-            # Validação
+
             if not self.validator.validate_metadata(metadata_dict, 'isbnlib_isbn13', isbn=isbn):
                 return None
-                
+
             return BookMetadata(
                 title=metadata_dict['title'],
                 authors=metadata_dict['authors'],
@@ -2683,34 +3374,35 @@ class MetadataFetcher:
                 confidence_score=self.confidence_adjustments['isbnlib_isbn13'],
                 source='isbnlib_isbn13'
             )
-            
+
         except Exception as e:
             self._handle_api_error('isbnlib_isbn13', e, isbn)
             return None
 
     def fetch_isbnlib_default(self, isbn: str) -> Optional[BookMetadata]:
         """Fetch usando serviço padrão do isbnlib com validação aprimorada."""
+        isbnlib = self._get_isbnlib_module()
+        if isbnlib is None:
+            return None
+
         try:
-            import isbnlib
             if not isbnlib.is_isbn13(isbn) and not isbnlib.is_isbn10(isbn):
                 return None
-                
-            # Usa o serviço padrão do isbnlib
+
             metadata = isbnlib.meta(isbn, service='default')
             if not metadata:
                 return None
-                
+
             metadata_dict = {
                 'title': metadata.get('Title', '').strip(),
                 'authors': [a.strip() for a in metadata.get('Authors', [])],
                 'publisher': metadata.get('Publisher', '').strip(),
                 'published_date': metadata.get('Year', 'Unknown')
             }
-            
-            # Validação
+
             if not self.validator.validate_metadata(metadata_dict, 'isbnlib_default', isbn=isbn):
                 return None
-                
+
             return BookMetadata(
                 title=metadata_dict['title'],
                 authors=metadata_dict['authors'],
@@ -2721,7 +3413,7 @@ class MetadataFetcher:
                 confidence_score=self.confidence_adjustments['isbnlib_default'],
                 source='isbnlib_default'
             )
-            
+
         except Exception as e:
             self._handle_api_error('isbnlib_default', e, isbn)
             return None
@@ -2736,19 +3428,21 @@ class MetadataFetcher:
         Returns:
             BookMetadata if successful, None otherwise
         """
+        isbnlib = self._get_isbnlib_module()
+        if isbnlib is None:
+            return None
+
         try:
-            import isbnlib
             metadata = isbnlib.goom(isbn)
-            
-            # goom can return a list - take first item if so
+
             if isinstance(metadata, list) and metadata:
                 metadata = metadata[0]
             elif not metadata:
                 return None
-                
+
             if not isinstance(metadata, dict):
                 return None
-                
+
             return BookMetadata(
                 title=metadata.get('Title', '').strip(),
                 authors=[a.strip() for a in metadata.get('Authors', [])],
@@ -2759,7 +3453,7 @@ class MetadataFetcher:
                 confidence_score=self.confidence_adjustments['isbnlib_goom'],
                 source='isbnlib_goom'
             )
-            
+
         except Exception as e:
             self._handle_api_error('isbnlib_goom', e, isbn)
             return None
@@ -2803,23 +3497,25 @@ class MetadataFetcher:
 
     def fetch_isbnlib_meta(self, isbn: str) -> Optional[BookMetadata]:
         """Fetch usando isbnlib.meta() com validação aprimorada."""
+        isbnlib = self._get_isbnlib_module()
+        if isbnlib is None:
+            return None
+
         try:
-            import isbnlib
             metadata = isbnlib.meta(isbn)
             if not metadata:
                 return None
-                
+
             metadata_dict = {
                 'title': metadata.get('Title', '').strip(),
                 'authors': [a.strip() for a in metadata.get('Authors', [])],
                 'publisher': metadata.get('Publisher', '').strip(),
                 'published_date': metadata.get('Year', 'Unknown')
             }
-            
-            # Validação
+
             if not self.validator.validate_metadata(metadata_dict, 'isbnlib_meta', isbn=isbn):
                 return None
-                
+
             return BookMetadata(
                 title=metadata_dict['title'],
                 authors=metadata_dict['authors'],
@@ -2830,7 +3526,7 @@ class MetadataFetcher:
                 confidence_score=self.confidence_adjustments['isbnlib_meta'],
                 source='isbnlib_meta'
             )
-            
+
         except Exception as e:
             self._handle_api_error('isbnlib_meta', e, isbn)
             return None
@@ -2885,7 +3581,7 @@ class MetadataFetcher:
         # Update dynamic API adjustments based on performance
         stats = self.metrics.get_api_stats(api_name)
         if stats.get('success_rate', 0) < 30:  # If success rate is very low
-            config = self.API_CONFIGS.get(api_name, {})
+            config = self.API_CONFIGS.setdefault(api_name, {'enabled': True})
             # Increase retries and backoff for problematic APIs
             config['retries'] = min(5, config.get('retries', 2) + 1)
             config['backoff'] = min(4.0, config.get('backoff', 1.5) * 1.5)
@@ -3005,12 +3701,16 @@ class MetadataFetcher:
             available_apis = [
                 api for api in strategy['apis']
                 if api not in tried_apis and
-                self.API_CONFIGS.get(api, {}).get('enabled', True)
+                self.API_CONFIGS.get(api, {}).get('enabled', True) and
+                not self._should_skip_api(api)
             ]
             
             for api_name in available_apis:
                 tried_apis.add(api_name)
                 
+                if self._should_skip_api(api_name):
+                    continue
+
                 try:
                     fetcher = getattr(self, f'fetch_{api_name}')
                     start_time = time.time()
@@ -3123,18 +3823,19 @@ class MetadataFetcher:
         avg_time = stats.get('avg_response_time', 0)
         
         # Ajusta configurações baseado na performance
-        config = self.API_CONFIGS.get(api_name, {})
+        config = self.API_CONFIGS.setdefault(api_name, {'enabled': True})
         
         if success_rate < 50:  # API com problemas
             config['timeout'] = min(30, config.get('timeout', 5) * 1.5)
-            config['retries'] += 1
+            config['retries'] = config.get('retries', 2) + 1
             self.logger.warning(f"API {api_name} health check: Poor performance detected. "
                         f"Success rate: {success_rate:.1f}%, Avg time: {avg_time:.2f}s")
             return False
             
         elif success_rate > 90 and avg_time < 2:  # API saudável
             config['timeout'] = max(3, config.get('timeout', 5) * 0.8)
-            config['retries'] = max(2, config['retries'] - 1)
+            current_retries = config.get('retries', 2)
+            config['retries'] = max(2, current_retries - 1)
             return True
             
         return True
@@ -3199,9 +3900,13 @@ class MetadataFetcher:
         if original == variant:
             return True
             
+        isbnlib = self._get_isbnlib_module()
+        if isbnlib is None:
+            if len(original) == len(variant):
+                return original[:-1] == variant[:-1]
+            return False
+
         try:
-            import isbnlib
-            
             # Converte ambos para ISBN-13 para comparação
             isbn13_original = original if len(original) == 13 else isbnlib.to_isbn13(original)
             isbn13_variant = variant if len(variant) == 13 else isbnlib.to_isbn13(variant)
@@ -3313,6 +4018,190 @@ class MetadataFetcher:
             reverse=True
         )
 
+    def _normalize_isbn(self, isbn: Optional[str]) -> Optional[str]:
+        """Normaliza entradas de ISBN removendo caracteres não numéricos."""
+        if not isbn:
+            return isbn
+
+        cleaned = ''.join(c for c in isbn.upper() if c.isdigit() or c == 'X')
+        if len(cleaned) in (10, 13):
+            return cleaned
+
+        fallback = re.sub(r'[^0-9X]', '', isbn.upper())
+        return fallback or isbn.replace('-', '').strip()
+
+    def _prepare_metadata_for_cache(self, metadata: BookMetadata, existing: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        """Combina novo metadata com campos existentes antes de salvar no cache."""
+        metadata_dict = asdict(metadata)
+
+        if existing:
+            for key in ('file_path', 'file_paths', 'formats'):
+                if existing.get(key) and not metadata_dict.get(key):
+                    metadata_dict[key] = existing[key]
+
+            # Garante que autores permaneçam como lista
+            authors = existing.get('authors')
+            if not metadata_dict.get('authors') and authors:
+                if isinstance(authors, str):
+                    metadata_dict['authors'] = [a.strip() for a in authors.split(',') if a.strip()]
+                else:
+                    metadata_dict['authors'] = list(authors)
+
+        return metadata_dict
+
+    def _metadata_has_new_information(self, existing: Dict[str, Any], candidate: Dict[str, Any]) -> bool:
+        """Verifica se os novos metadados possuem informações inéditas relevantes."""
+        comparable_fields = ('title', 'publisher', 'published_date')
+
+        for field in comparable_fields:
+            old_value = (existing.get(field) or '').strip()
+            new_value = (candidate.get(field) or '').strip()
+            if new_value and new_value != old_value:
+                return True
+
+        existing_authors = existing.get('authors') or []
+        if isinstance(existing_authors, str):
+            existing_authors = [a.strip() for a in existing_authors.split(',') if a.strip()]
+
+        candidate_authors = candidate.get('authors') or []
+        if isinstance(candidate_authors, str):
+            candidate_authors = [a.strip() for a in candidate_authors.split(',') if a.strip()]
+
+        if candidate_authors and sorted(existing_authors) != sorted(candidate_authors):
+            return True
+
+        return False
+
+    def update_low_confidence_records(
+        self,
+        confidence_threshold: float = 0.7,
+        max_records: Optional[int] = None
+    ) -> int:
+        """Atualiza registros do cache com baixa confiança."""
+        records = self.cache.get_all()
+        if not records:
+            self.logger.info("Nenhum registro no cache para atualizar.")
+            return 0
+
+        low_confidence = [
+            record for record in records
+            if float(record.get('confidence_score') or 0.0) < confidence_threshold
+        ]
+
+        if not low_confidence:
+            self.logger.info(
+                "Nenhum registro com confiança inferior a %.2f encontrado no cache.",
+                confidence_threshold
+            )
+            return 0
+
+        # Ordena do menor score para o maior para priorizar os piores registros
+        low_confidence.sort(key=lambda r: float(r.get('confidence_score') or 0.0))
+
+        if max_records:
+            low_confidence = low_confidence[:max_records]
+
+        total_candidates = len(low_confidence)
+        iterator = (
+            tqdm(low_confidence, desc="Atualizando cache (baixa confiança)", unit="registro")
+            if total_candidates > 5 else low_confidence
+        )
+
+        updated = 0
+
+        for record in iterator:
+            isbn = record.get('isbn_13') or record.get('isbn_10')
+            if not isbn:
+                continue
+
+            current_score = float(record.get('confidence_score') or 0.0)
+
+            try:
+                new_metadata = self.fetch_metadata(isbn, force_refresh=True)
+            except Exception as exc:
+                self.logger.error(f"Erro ao atualizar registro do ISBN {isbn}: {exc}")
+                continue
+
+            if not new_metadata:
+                continue
+
+            new_score = float(new_metadata.confidence_score or 0.0)
+
+            if new_score > current_score + 1e-6:
+                metadata_dict = self._prepare_metadata_for_cache(new_metadata, record)
+                self.cache.set(metadata_dict)
+                updated += 1
+            else:
+                # Reverte para os dados antigos se o novo resultado não melhorar
+                original_copy = dict(record)
+                if isinstance(original_copy.get('authors'), list):
+                    original_copy['authors'] = list(original_copy['authors'])
+                self.cache.set(original_copy)
+
+        self.logger.info(
+            "Atualização de baixa confiança concluída: %d/%d registros melhorados (limite %.2f).",
+            updated,
+            total_candidates,
+            confidence_threshold
+        )
+        return updated
+
+    def rescan_cache(self, max_records: Optional[int] = None) -> int:
+        """Reprocessa todo o cache em busca de metadados melhores."""
+        records = self.cache.get_all()
+        if not records:
+            self.logger.info("Nenhum registro no cache para reprocessar.")
+            return 0
+
+        total_records = len(records)
+
+        if max_records:
+            records = records[:max_records]
+
+        total_candidates = len(records)
+        iterator = (
+            tqdm(records, desc="Reprocessando cache", unit="registro")
+            if total_candidates > 5 else records
+        )
+
+        updated = 0
+
+        for record in iterator:
+            isbn = record.get('isbn_13') or record.get('isbn_10')
+            if not isbn:
+                continue
+
+            current_score = float(record.get('confidence_score') or 0.0)
+
+            try:
+                new_metadata = self.fetch_metadata(isbn, force_refresh=True)
+            except Exception as exc:
+                self.logger.error(f"Erro ao reprocessar registro do ISBN {isbn}: {exc}")
+                continue
+
+            if not new_metadata:
+                continue
+
+            metadata_dict = self._prepare_metadata_for_cache(new_metadata, record)
+            new_score = float(metadata_dict.get('confidence_score') or 0.0)
+
+            if new_score > current_score + 1e-6 or self._metadata_has_new_information(record, metadata_dict):
+                self.cache.set(metadata_dict)
+                updated += 1
+            else:
+                original_copy = dict(record)
+                if isinstance(original_copy.get('authors'), list):
+                    original_copy['authors'] = list(original_copy['authors'])
+                self.cache.set(original_copy)
+
+        self.logger.info(
+            "Rescan do cache concluído: %d/%d registros melhorados (cache completo: %d).",
+            updated,
+            total_candidates,
+            total_records
+        )
+        return updated
+
 class PDFProcessor:
     def __init__(self):
         self._init_logging() 
@@ -3367,37 +4256,40 @@ class PDFProcessor:
         
         # 2. pdfplumber se PyPDF2 falhar
         if not text.strip() and 'pdfplumber' in self.dependency_manager.get_available_extractors():
-            try:
-                import pdfplumber
-                methods_tried.append('pdfplumber')
-                
-                with pdfplumber.open(pdf_path) as pdf:
-                    for page in pdf.pages[:max_pages]:
-                        text += page.extract_text() + "\n"
-                        
-                    if text.strip():
-                        methods_succeeded.append('pdfplumber')
-            except Exception as e:
-                self.logger.debug(f"pdfplumber extraction failed: {str(e)}")
+            if pdfplumber is None:
+                self.logger.debug("pdfplumber marcado como disponível, mas o módulo não pôde ser importado.")
+            else:
+                try:
+                    methods_tried.append('pdfplumber')
+
+                    with pdfplumber.open(pdf_path) as pdf:
+                        for page in pdf.pages[:max_pages]:
+                            text += page.extract_text() + "\n"
+
+                        if text.strip():
+                            methods_succeeded.append('pdfplumber')
+                except Exception as e:
+                    self.logger.debug(f"pdfplumber extraction failed: {str(e)}")
         
         # 3. OCR se texto ainda não foi extraído
         if not text.strip() and self.dependency_manager.has_ocr_support:
-            try:
-                import pytesseract
-                from pdf2image import convert_from_path
-                methods_tried.append('OCR')
-                
-                images = convert_from_path(pdf_path, last_page=max_pages)
-                ocr_text = ""
-                
-                for image in images:
-                    ocr_text += pytesseract.image_to_string(image) + "\n"
-                    
-                if ocr_text.strip():
-                    text = ocr_text
-                    methods_succeeded.append('OCR')
-            except Exception as e:
-                self.logger.debug(f"OCR extraction failed: {str(e)}")
+            if pytesseract is None or convert_from_path is None:
+                self.logger.debug("Suporte a OCR sinalizado, mas dependências 'pytesseract' ou 'pdf2image' não estão disponíveis.")
+            else:
+                try:
+                    methods_tried.append('OCR')
+
+                    images = convert_from_path(pdf_path, last_page=max_pages)
+                    ocr_text = ""
+
+                    for image in images:
+                        ocr_text += pytesseract.image_to_string(image) + "\n"
+
+                    if ocr_text.strip():
+                        text = ocr_text
+                        methods_succeeded.append('OCR')
+                except Exception as e:
+                    self.logger.debug(f"OCR extraction failed: {str(e)}")
         
         return self._clean_text(text), methods_tried
 
@@ -3442,87 +4334,69 @@ class PDFProcessor:
         if not text:
             return ""
 
-        # Mapeamento expandido de caracteres para limpeza
         char_replacements = {
-            # Caracteres de controle e espaços especiais
-            '\x0c': ' ',  # Form feed
-            '\xa0': ' ',  # Non-breaking space
-            '\u200b': '',  # Zero-width space
-            '\t': ' ',    # Tab
-            '\v': ' ',    # Vertical tab
-            '\f': ' ',    # Form feed
-            '\r': ' ',    # Carriage return
-            
-            # Caracteres tipográficos comuns em PDFs
-            ''': "'",
-            ''': "'",
-            '"': '"',
-            '"': '"',
-            '…': '...',
-            '–': '-',
-            '—': '-',
-            '­': '',      # Soft hyphen
-            
-            # Caracteres acentuados comumente mal interpretados
-            'à': 'a',
-            'á': 'a',
-            'ã': 'a',
-            'â': 'a',
-            'é': 'e',
-            'ê': 'e',
-            'í': 'i',
-            'ó': 'o',
-            'ô': 'o',
-            'õ': 'o',
-            'ú': 'u',
-            'ü': 'u',
-            'ç': 'c'
+            "\xa0": " ",  # Non-breaking space
+            "\u200b": "",  # Zero-width space
+            "\t": " ",    # Tab
+            "\v": " ",    # Vertical tab
+            "\f": " ",    # Form feed
+            "\r": " ",    # Carriage return
+            "’": "'",
+            "‘": "'",
+            "“": '"',
+            "”": '"',
+            "…": "...",
+            "–": "-",
+            "—": "-",
+            "­": "",
+            "à": "a",
+            "á": "a",
+            "ã": "a",
+            "â": "a",
+            "é": "e",
+            "ê": "e",
+            "í": "i",
+            "ó": "o",
+            "ô": "o",
+            "õ": "o",
+            "ú": "u",
+            "ü": "u",
+            "ç": "c"
         }
 
-        # Correções específicas para OCR em ISBNs
         isbn_ocr_replacements = {
-            'l': '1', 'I': '1', 'O': '0', 'o': '0',
-            'S': '5', 'Z': '2', 'B': '8', 'G': '6',
-            '+': '7', '@': '9', '>': '7', '?': '8',
-            'd': 'fi', '00': '11', '#': '8',
-            'Q': '0', 'D': '0', 'U': '0',
-            'i': '1', 'L': '1',
-            'z': '2',
-            'E': '3',
-            'h': '4',
-            's': '5',
-            'b': '6', 'G': '6',
-            'T': '7',
-            'B': '8',
-            'g': '9', 'q': '9'
+            "l": "1", "I": "1", "O": "0", "o": "0",
+            "S": "5", "Z": "2", "B": "8", "G": "6",
+            "+": "7", "@": "9", ">": "7", "?": "8",
+            "d": "fi", "00": "11", "#": "8",
+            "Q": "0", "D": "0", "U": "0",
+            "i": "1", "L": "1",
+            "z": "2",
+            "E": "3",
+            "h": "4",
+            "s": "5",
+            "b": "6",
+            "T": "7",
+            "g": "9", "q": "9"
         }
 
-        # Primeira passada: limpeza básica
-        text = ''.join(char_replacements.get(c, c) for c in text)
-        
-        # Remove caracteres de controle mantendo apenas printáveis e espaços
-        text = ''.join(c if c.isprintable() or c.isspace() else ' ' for c in text)
-        
-        # Normaliza espaços
-        text = ' '.join(text.split())
+        text = "".join(char_replacements.get(c, c) for c in text)
+        text = "".join(c if c.isprintable() or c.isspace() else " " for c in text)
+        text = " ".join(text.split())
 
-        # Função para substituir caracteres em números (especialmente ISBNs)
-        def replace_in_numbers(match):
+        def replace_in_numbers(match: re.Match) -> str:
             number = match.group()
-            # Aplica substituições apenas em sequências que parecem ISBNs
             if len(number) >= 10:
                 for old, new in isbn_ocr_replacements.items():
                     number = number.replace(old, new)
             return number
 
-        # Padrões expandidos para identificar potenciais ISBNs
         isbn_patterns = [
-            r'(?:ISBN[-: ]?)?[0-9A-Za-z-]{10,13}',
-            r'(?:ISBN)?[-: ]?(?:[0-9A-Za-z-]{9}[0-9X])',
-            r'(?:ISBN)?[-: ]?(?:97[89][- ]?[0-9A-Za-z-]{10})'
+            r"(?:ISBN[-: ]?)?[0-9A-Za-z-]{10,13}",
+            r"(?:ISBN)?[-: ]?(?:[0-9A-Za-z-]{9}[0-9X])",
+            r"(?:ISBN)?[-: ]?(?:97[89][- ]?[0-9A-Za-z-]{10})"
         ]
-        
-        # Aplica correções específicas para ISBNs
+
         for pattern in isbn_patterns:
             text = re.sub(pattern, replace_in_numbers, text, flags=re.IGNORECASE)
 
@@ -3609,6 +4483,24 @@ class BookMetadataExtractor:
         
         # Initialize file grouping support
         self.file_group = BookFileGroup()
+
+        # Fast heuristic preprocessor
+        self.fast_preprocessor = FastMetadataPreprocessor(
+            pdf_processor=self.pdf_processor,
+            ebook_processor=self.ebook_processor,
+            logger=self.logger
+        )
+
+        # Secondary recovery engine for failed files
+        self.recovery_engine = MetadataRecoveryEngine(
+            pdf_processor=self.pdf_processor,
+            ebook_processor=self.ebook_processor,
+            isbn_extractor=self.isbn_extractor,
+            metadata_fetcher=self.metadata_fetcher,
+            normalize_publisher=self.normalize_publisher,
+            add_publisher_stats=self._add_publisher_stats,
+            logger=self.logger
+        )
 
     def _setup_logging(self):
         """Initialize logging with correct file location."""
@@ -3863,6 +4755,31 @@ class BookMetadataExtractor:
         self.logger.info(f" {file_path}")
         
         try:
+            hints = runtime_stats.get('preprocessed_hints', {})
+            preprocessor_stats = runtime_stats.get('preprocessor_stats', {})
+            hint = hints.get(file_path, {})
+            if hint:
+                preprocessor_stats['applied'] = preprocessor_stats.get('applied', 0) + 1
+                fast_isbn = hint.get('isbn')
+                if fast_isbn:
+                    runtime_stats['api_errors'].setdefault(file_path, [])
+                    try:
+                        metadata = self.metadata_fetcher.fetch_metadata(fast_isbn)
+                        if metadata:
+                            metadata.file_path = str(file_path)
+                            runtime_stats['successful_files'].append(file_path)
+                            preprocessor_stats['promoted'] = preprocessor_stats.get('promoted', 0) + 1
+                            try:
+                                self._add_publisher_stats(asdict(metadata), runtime_stats)
+                            except Exception:
+                                pass
+                            return metadata
+                    except Exception as fast_exc:
+                        runtime_stats['api_errors'][file_path].append(
+                            f"fast_preprocessor ISBN {fast_isbn}: {fast_exc}"
+                        )
+                        self.logger.debug("Fast ISBN fetch failed for %s: %s", file_path, fast_exc)
+
             # Extrai texto baseado no tipo de arquivo
             if file_ext == 'pdf':
                 text, methods = self.pdf_processor.extract_text_from_pdf(file_path)
@@ -3955,6 +4872,26 @@ class BookMetadataExtractor:
                         return metadata
                 except Exception as e:
                     runtime_stats['api_errors'][file_path].append(f"ISBN {isbn}: {str(e)}")
+
+            if hint and (hint.get('title') or hint.get('authors')):
+                preprocessor_stats['promoted'] = preprocessor_stats.get('promoted', 0) + 1
+                metadata = BookMetadata(
+                    title=hint.get('title') or 'Unknown',
+                    authors=hint.get('authors') or ['Unknown Author'],
+                    publisher=self.normalize_publisher(hint.get('publisher') or 'Unknown'),
+                    published_date=hint.get('published_date') or 'Unknown',
+                    isbn_13=hint.get('isbn') if hint.get('isbn') and len(hint['isbn']) == 13 else None,
+                    isbn_10=hint.get('isbn') if hint.get('isbn') and len(hint['isbn']) == 10 else None,
+                    confidence_score=max(hint.get('confidence', 0.0), 0.45),
+                    source='fast_preprocessor',
+                    file_path=str(file_path)
+                )
+                runtime_stats['successful_files'].append(file_path)
+                try:
+                    self._add_publisher_stats(asdict(metadata), runtime_stats)
+                except Exception:
+                    pass
+                return metadata
 
             runtime_stats['failure_details'][file_path] = {
                 'error': 'metadata_fetch_failed',
@@ -4097,6 +5034,16 @@ class BookMetadataExtractor:
         """
         successful_results = runtime_stats.get('successful_results', [])
         processed_files = runtime_stats.get('processed_files', [])
+        preprocessor_stats = runtime_stats.get('preprocessor_stats', {}) or {}
+        preprocessed_hints = runtime_stats.get('preprocessed_hints', {}) or {}
+
+        hint_summary = {
+            'total_hints': len(preprocessed_hints),
+            'isbn_hints': sum(1 for hint in preprocessed_hints.values() if hint.get('isbn')),
+            'title_hints': sum(1 for hint in preprocessed_hints.values() if hint.get('title')),
+            'author_hints': sum(1 for hint in preprocessed_hints.values() if hint.get('authors')),
+            'publisher_hints': sum(1 for hint in preprocessed_hints.values() if hint.get('publisher')),
+        }
         
         total_files = len(processed_files)
         successful = len(successful_results)
@@ -4119,7 +5066,10 @@ class BookMetadataExtractor:
                 'successful': [asdict(r) for r in successful_results],
                 'failures': runtime_stats.get('failure_details', {}),
                 'format_stats': runtime_stats.get('format_stats', {}),
-                'api_stats': runtime_stats.get('api_stats', {})
+                'api_stats': runtime_stats.get('api_stats', {}),
+                'recovery': [asdict(r) for r in runtime_stats.get('recovery_results', [])],
+                'preprocessor_stats': preprocessor_stats,
+                'preprocessor_hint_summary': hint_summary
             }
         }
 
@@ -4194,6 +5144,25 @@ class BookMetadataExtractor:
                             {format_stats}
                         </table>
                     </div>
+
+                    <div>
+                        <h3>Preprocessor Impact</h3>
+                        <table>
+                            <tr>
+                                <th>Metric</th>
+                                <th>Value</th>
+                            </tr>
+                            {preprocessor_stats_rows}
+                        </table>
+                        <h4>Hint Coverage</h4>
+                        <table>
+                            <tr>
+                                <th>Hint Type</th>
+                                <th>Count</th>
+                            </tr>
+                            {preprocessor_hint_rows}
+                        </table>
+                    </div>
                 </div>
             </div>
 
@@ -4251,6 +5220,54 @@ class BookMetadataExtractor:
                 </tr>
             """)
 
+        # Estatísticas do pré-processador
+        preprocessor_stats = data['details'].get('preprocessor_stats', {}) or {}
+        preprocessor_metrics = [
+            ('scanned', 'Files Scanned'),
+            ('with_text', 'With Text Extracted'),
+            ('filename_only', 'Filename Only Hints'),
+            ('isbn_hits', 'ISBN Hints'),
+            ('applied', 'Hints Applied'),
+            ('promoted', 'Hints Promoted')
+        ]
+        preprocessor_stats_rows = []
+        for key, label in preprocessor_metrics:
+            value = preprocessor_stats.get(key, 0)
+            preprocessor_stats_rows.append(f"""
+                <tr>
+                    <td>{label}</td>
+                    <td>{value}</td>
+                </tr>
+            """)
+
+        if not preprocessor_stats_rows:
+            preprocessor_stats_rows.append("""
+                <tr><td colspan=\"2\">No preprocessor activity recorded</td></tr>
+            """)
+
+        hint_summary = data['details'].get('preprocessor_hint_summary', {}) or {}
+        hint_metrics = [
+            ('total_hints', 'Total Hints'),
+            ('isbn_hints', 'Hints with ISBN'),
+            ('title_hints', 'Hints with Title'),
+            ('author_hints', 'Hints with Authors'),
+            ('publisher_hints', 'Hints with Publisher')
+        ]
+        preprocessor_hint_rows = []
+        for key, label in hint_metrics:
+            value = hint_summary.get(key, 0)
+            preprocessor_hint_rows.append(f"""
+                <tr>
+                    <td>{label}</td>
+                    <td>{value}</td>
+                </tr>
+            """)
+
+        if not preprocessor_hint_rows:
+            preprocessor_hint_rows.append("""
+                <tr><td colspan=\"2\">No hints generated</td></tr>
+            """)
+
         # Gera linhas de sucessos
         success_rows = []
         for book in sorted(data['details']['successful'], key=lambda x: x['confidence_score'], reverse=True):
@@ -4288,6 +5305,8 @@ class BookMetadataExtractor:
             avg_time=data['summary']['average_time'],
             timestamp=data['summary']['timestamp'],
             format_stats='\n'.join(format_stats_rows),
+            preprocessor_stats_rows='\n'.join(preprocessor_stats_rows),
+            preprocessor_hint_rows='\n'.join(preprocessor_hint_rows),
             success_rows='\n'.join(success_rows) if success_rows else '<tr><td colspan="7">No successful extractions</td></tr>',
             error_rows='\n'.join(error_rows) if error_rows else '<tr><td colspan="3">No errors reported</td></tr>'
         )
@@ -4524,7 +5543,8 @@ class BookMetadataExtractor:
             'api_errors': defaultdict(list),
             'processing_times': {},
             'format_stats': defaultdict(lambda: {'total': 0, 'success': 0, 'failed': 0}),
-            'start_time': time.time()
+            'start_time': time.time(),
+            'recovery_stats': {'attempted': 0, 'recovered': 0}
         }
 
         # Find and group files
@@ -4533,9 +5553,26 @@ class BookMetadataExtractor:
             self.logger.warning(f"No files found in {directory_path}")
             return []
 
+        self._run_preprocessor(file_groups, runtime_stats)
+
         # Process files with progress display
         results = self._process_with_progress(file_groups, runtime_stats, max_workers)
+
+        # Secondary recovery pass
+        recovered_results = self.recovery_engine.recover_missing_metadata(runtime_stats)
+        if recovered_results:
+            runtime_stats['recovery_results'] = recovered_results
+            self.logger.info(
+                "Secondary recovery identified %d additional metadata entries",
+                len(recovered_results)
+            )
         
+        # Generate reports before printing summary
+        try:
+            self._generate_reports(runtime_stats)
+        except Exception as report_error:
+            self.logger.error(f"Falha ao gerar relatórios: {report_error}")
+
         # Generate final reports
         self.print_final_summary(runtime_stats)
         return results
@@ -4581,6 +5618,27 @@ class BookMetadataExtractor:
 
         runtime_stats['processed_files'] = [str(f) for f in all_files]
         return self.file_group.group_files([str(f) for f in all_files])
+
+    def _run_preprocessor(self, file_groups: Dict[str, List[str]], runtime_stats: Dict) -> None:
+        """Execute the fast metadata preprocessor and persist its hints."""
+        if not file_groups:
+            runtime_stats['preprocessed_hints'] = {}
+            runtime_stats['preprocessor_stats'] = {'scanned': 0, 'with_text': 0, 'filename_only': 0, 'isbn_hits': 0, 'applied': 0, 'promoted': 0}
+            return
+
+        try:
+            hints, stats = self.fast_preprocessor.generate_hints(file_groups)
+            runtime_stats['preprocessed_hints'] = hints
+            runtime_stats['preprocessor_stats'] = stats
+            self.logger.info(
+                "Fast preprocessor generated hints for %d files (%d ISBN hits)",
+                stats.get('scanned', 0),
+                stats.get('isbn_hits', 0)
+            )
+        except Exception as exc:
+            self.logger.error(f"Fast preprocessor failed: {exc}")
+            runtime_stats['preprocessed_hints'] = {}
+            runtime_stats['preprocessor_stats'] = {'scanned': 0, 'with_text': 0, 'filename_only': 0, 'isbn_hits': 0, 'applied': 0, 'promoted': 0}
 
     def _process_with_progress(self, file_groups: Dict[str, List[str]], 
                              runtime_stats: Dict, max_workers: int) -> List[BookMetadata]:
@@ -4877,6 +5935,8 @@ class BookMetadataExtractor:
         total_files = len(runtime_stats['processed_files'])
         successful = len(runtime_stats['successful_results'])
         failed = total_files - successful
+        recovery_stats = runtime_stats.get('recovery_stats', {'attempted': 0, 'recovered': 0})
+        recovered = recovery_stats.get('recovered', 0)
 
         # Create and configure the main summary table
         table = Table(title="Processing Summary")
@@ -4891,6 +5951,9 @@ class BookMetadataExtractor:
         # Add rows with proper styling
         table.add_row("Total Files", str(total_files), "100%", style="bright_blue")
         table.add_row("Successful", str(successful), f"{success_rate:.1f}%", style="bright_blue")
+        if recovered:
+            recovered_rate = (recovered / total_files * 100) if total_files > 0 else 0
+            table.add_row("Recovered (secondary)", str(recovered), f"{recovered_rate:.1f}%", style="bright_blue")
         table.add_row("Failed", str(failed), f"{failure_rate:.1f}%", style="bright_blue")
 
         Console().print("\nFormat Statistics:")
@@ -4941,23 +6004,31 @@ class BookMetadataExtractor:
         table.add_column("Tempo", justify="right")
         table.add_column("Detalhes")
 
-        # Process each file result
+        success_index = {result.file_path: result for result in runtime_stats['successful_results']}
+        recovered_files = set(runtime_stats.get('recovered_details', {}).keys())
+
         for file_path in runtime_stats['processed_files']:
             file_name = Path(file_path).name
             time_taken = runtime_stats['processing_times'].get(file_path, 0.0)
-            
-            # Determine status and details
-            success = any(result.file_path == file_path for result in runtime_stats['successful_results'])
-            
-            if success:
-                status = "[green]✓ success[/green]"
-                for result in runtime_stats['successful_results']:
-                    if result.file_path == file_path:
-                        details = f"ISBN: {result.isbn_13 or result.isbn_10}"
-                        break
+
+            result = success_index.get(file_path)
+            if result:
+                is_recovered = file_path in recovered_files
+                status = "[yellow]△ recovered[/yellow]" if is_recovered else "[green]✓ success[/green]"
+
+                detail_parts = []
+                if result.isbn_13 or result.isbn_10:
+                    detail_parts.append(f"ISBN: {result.isbn_13 or result.isbn_10}")
+                if result.publisher:
+                    detail_parts.append(f"Publisher: {result.publisher}")
+                if result.authors:
+                    detail_parts.append(f"Authors: {', '.join(result.authors[:2])}")
+                details = " | ".join(detail_parts) if detail_parts else "Metadados recuperados"
             else:
                 status = "[red]✗ failed[/red]"
-                details = "ISBN: Not found"
+                failure_info = runtime_stats.get('failure_details', {}).get(file_path, {})
+                error_desc = failure_info.get('error', 'No metadata found')
+                details = f"Erro: {error_desc}"
 
             table.add_row(
                 file_name,
@@ -4968,17 +6039,26 @@ class BookMetadataExtractor:
 
         Console().print(table)
 
-    def _print_report_paths(self) -> None:
+    def _print_report_paths(self, runtime_stats: Dict) -> None:
         """
-        Displays paths to generated report files.
+        Displays paths to generated report files using actual runtime information.
         """
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        base_path = f"reports/report_{timestamp}"
-        
-        for report_type in ["HTML", "JSON", "LOG"]:
-            suffix = "_metadata.log" if report_type == "LOG" else f".{report_type.lower()}"
-            path = f"{base_path}{suffix}"
-            Console().print(f"{report_type:<4} {path}")
+        reports = runtime_stats.get('generated_reports', [])
+
+        if not reports:
+            Console().print("Nenhum relatório gerado nesta execução.")
+            return
+
+        Console().print("\nArquivos Gerados:")
+        Console().print("-" * 40)
+
+        for report in reports:
+            report_type = report.get('type', 'UNKNOWN')
+            path = report.get('path')
+            if path:
+                Console().print(f"{report_type:<4} {path}")
+            else:
+                Console().print(f"{report_type:<4} caminho não disponível")
 
     def print_final_summary(self, runtime_stats: Dict) -> None:
         """
@@ -4990,7 +6070,7 @@ class BookMetadataExtractor:
         self._print_processing_summary_table(runtime_stats)
         self._print_format_statistics_table(runtime_stats)
         self._print_file_processing_results(runtime_stats)
-        self._print_report_paths()
+        self._print_report_paths(runtime_stats)
 
     def _calculate_metadata_completeness(self, metadata: BookMetadata) -> float:
         """
@@ -5085,9 +6165,11 @@ class BookMetadataExtractor:
 
     def fetch_isbnlib_info(self, isbn: str) -> Optional[BookMetadata]:
         """Fetch usando isbnlib com melhor suporte a variantes."""
+        isbnlib = self._get_isbnlib_module()
+        if isbnlib is None:
+            return None
+
         try:
-            import isbnlib
-            
             # Validação inicial
             if not (isbnlib.is_isbn13(isbn) or isbnlib.is_isbn10(isbn)):
                 return None
@@ -5582,6 +6664,9 @@ class BookMetadataExtractor:
                 },
                 "summary_statistics": report_data['summary'],
                 "format_statistics": report_data['details']['format_stats'],
+                "preprocessor_statistics": report_data['details'].get('preprocessor_stats', {}),
+                "preprocessor_hint_summary": report_data['details'].get('preprocessor_hint_summary', {}),
+                "preprocessor_hints": runtime_stats.get('preprocessed_hints', {}),
                 "successful_extractions": report_data['details']['successful'],
                 "failed_extractions": runtime_stats['failure_details']
             }
@@ -6382,6 +7467,8 @@ class EbookProcessor:
     def __init__(self):
         """Initialize the ebook processor with logging support."""
         self._init_logging()
+        self._ebooklib_missing_logged = False
+        self._bs4_missing_logged = False
         
         # ISBN patterns ordered by reliability and specificity
         self.isbn_patterns = [
@@ -6471,10 +7558,26 @@ class EbookProcessor:
         Returns:
             Tuple containing extracted text and list of methods attempted
         """
+        if epub is None or ITEM_DOCUMENT is None:
+            if not self._ebooklib_missing_logged:
+                self.logger.warning(
+                    "Dependência opcional 'ebooklib' não encontrada. Extração de texto EPUB será ignorada."
+                )
+                self._ebooklib_missing_logged = True
+            return "", []
+
+        if BeautifulSoup is None:
+            if not self._bs4_missing_logged:
+                self.logger.warning(
+                    "Dependência opcional 'beautifulsoup4' não encontrada. Extração de texto EPUB será ignorada."
+                )
+                self._bs4_missing_logged = True
+            return "", []
+
         methods_tried = ["ebooklib"]
         text_sections = []
         found_isbns = set()
-        
+
         self.logger.info(f"Processing EPUB file: {epub_path}")
         
         try:
@@ -6686,6 +7789,22 @@ class EbookProcessor:
         
         try:
             if ext == '.epub':
+                if epub is None:
+                    if not self._ebooklib_missing_logged:
+                        self.logger.warning(
+                            "Dependência opcional 'ebooklib' não encontrada. Extração de metadados EPUB será ignorada."
+                        )
+                        self._ebooklib_missing_logged = True
+                    return metadata
+
+                if BeautifulSoup is None:
+                    if not self._bs4_missing_logged:
+                        self.logger.warning(
+                            "Dependência opcional 'beautifulsoup4' não encontrada. Extração de metadados EPUB será ignorada."
+                        )
+                        self._bs4_missing_logged = True
+                    return metadata
+
                 book = epub.read_epub(file_path)
                 
                 # Extract Dublin Core metadata first

@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <title>Book Metadata Report</title>
+            <style>
+                
+            body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
+            .card { background: #fff; padding: 20px; margin: 20px 0; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+            table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+            th, td { padding: 12px 8px; text-align: left; border-bottom: 1px solid #ddd; }
+            th { background-color: #f5f5f5; }
+            .success { color: #28a745; }
+            .failure { color: #dc3545; }
+            .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        
+            </style>
+        </head>
+        <body>
+            <h1>Book Metadata Report</h1>
+            
+            <div class="card">
+                <h2>Summary</h2>
+                <div class="stats-grid">
+                    <table>
+                        <tr><th>Total Files</th><td>90</td></tr>
+                        <tr><th>Successful</th><td class="success">82</td></tr>
+                        <tr><th>Failed</th><td class="failure">8</td></tr>
+                        <tr><th>Success Rate</th><td>91.1%</td></tr>
+                        <tr><th>Average Time</th><td>2.57s</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Format Statistics</h2>
+                <table>
+                    <tr>
+                        <th>Format</th>
+                        <th>Total</th>
+                        <th>Success</th>
+                        <th>Failed</th>
+                        <th>Success Rate</th>
+                    </tr>
+                    
+                <tr>
+                    <td>EPUB</td>
+                    <td>11</td>
+                    <td class="success">10</td>
+                    <td class="failure">1</td>
+                    <td>90.9%</td>
+                </tr>
+                <tr>
+                    <td>MOBI</td>
+                    <td>0</td>
+                    <td class="success">0</td>
+                    <td class="failure">0</td>
+                    <td>0.0%</td>
+                </tr>
+                <tr>
+                    <td>PDF</td>
+                    <td>79</td>
+                    <td class="success">72</td>
+                    <td class="failure">0</td>
+                    <td>91.1%</td>
+                </tr>
+                </table>
+            </div>
+
+            <div class="card">
+                <h2>Successful Extractions</h2>
+                <table>
+                    <tr>
+                        <th>File</th>
+                        <th>Title</th>
+                        <th>Authors</th>
+                        <th>ISBN</th>
+                        <th>Source</th>
+                    </tr>
+                    
+                <tr>
+                    <td>efficientmysqlperformance.pdf</td>
+                    <td>Efficient MySQL Performance</td>
+                    <td>Daniel Nichter</td>
+                    <td>9781098105099</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>ciandcddesignpatterns.pdf</td>
+                    <td>CI/CD Design Patterns</td>
+                    <td>Garima Bajpai, Michel Schildmeijer, Muktesh Mishra, Pawel Piwosz, Helen Beal</td>
+                    <td>9781835889640</td>
+                    <td>openlibrary</td>
+                </tr>
+                <tr>
+                    <td>angularforbusiness.epub</td>
+                    <td>Angular for Business</td>
+                    <td>Michael D. Callaghan</td>
+                    <td>9781484296080</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>architectingdataandmachinelearningplatforms.pdf</td>
+                    <td>Architecting Data and Machine Learning Platforms</td>
+                    <td>Marco Tranquillin, Valliappa Lakshmanan, Firat Tekiner</td>
+                    <td>9781098151614</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>fuzzydatamatchingwithsql.pdf</td>
+                    <td>Fuzzy Data Matching with SQL</td>
+                    <td>Jim Lehmer</td>
+                    <td>9781098152277</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>machinelearninginterviews.pdf</td>
+                    <td>Machine Learning Interviews</td>
+                    <td>Susan Shu Chang</td>
+                    <td>9781098146542</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>penetrationtesting.epub</td>
+                    <td>Life Markets</td>
+                    <td>Vishaal B. Bhuyan</td>
+                    <td>9780470412343</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>postgresql_upandrunning.pdf</td>
+                    <td>PostgreSQL: Up and Running</td>
+                    <td>Regina O. Obe, Leo S. Hsu</td>
+                    <td>9781491963418</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>getprogrammingwithjavascript.pdf</td>
+                    <td>Get Programming with Javascript</td>
+                    <td>John R. Larsen</td>
+                    <td>9781617293108</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>justreact.epub</td>
+                    <td>Just React!</td>
+                    <td>Hari Narayn</td>
+                    <td>9781484282939</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>Modern_C_Third_Edition.pdf</td>
+                    <td>Modern C, Third Edition</td>
+                    <td>Jens Gustedt</td>
+                    <td>9781633437777</td>
+                    <td>openlibrary</td>
+                </tr>
+                <tr>
+                    <td>evasivemalware.pdf</td>
+                    <td>Evasive Malware</td>
+                    <td>Kyle Cucci</td>
+                    <td>9781718503267</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>Python_Workout.pdf</td>
+                    <td>Python Workout</td>
+                    <td>Reuven M. Lerner</td>
+                    <td>9781617295508</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>hacksleaksandrevelations.pdf</td>
+                    <td>Hacks, Leaks, and Revelations</td>
+                    <td>Micah Lee</td>
+                    <td>9781718503137</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>Exploring_Algorithms.pdf</td>
+                    <td>Advanced Algorithms and Data Structures</td>
+                    <td>Marcello La Rocca</td>
+                    <td>9781617295485</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>Exploring_Security_Privacy_and_Trust.pdf</td>
+                    <td>Interpretable AI</td>
+                    <td>Ajay Thampi</td>
+                    <td>9781617297649</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>Cloud_Native_Applications.pdf</td>
+                    <td>Cloud Native Applications</td>
+                    <td>Michael Wittig, Andreas, Manning Pu</td>
+                    <td>9781617294310</td>
+                    <td>fast_preprocessor</td>
+                </tr>
+                <tr>
+                    <td>learningphpmysqlandjavascript7e.pdf</td>
+                    <td>Learning Php, MySQL & JavaScript</td>
+                    <td>Nixon, Robin</td>
+                    <td>9781098152352</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>database-drivenwebdevelopment.pdf</td>
+                    <td>Database-Driven Web Development</td>
+                    <td>Thomas Valentine</td>
+                    <td>9781484259696</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>pythonobject-orientedprogrammingfourthedition.pdf</td>
+                    <td>Python Object-Oriented Programming - Fourth Edition</td>
+                    <td>Steven F. Lott, Dusty Phillips</td>
+                    <td>9781801077262</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>Exploring_Functional_Programming.pdf</td>
+                    <td>Grokking Simplicity</td>
+                    <td>Eric Normand</td>
+                    <td>9781617296208</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>cloudnativeanti-patterns.pdf</td>
+                    <td>Cloud Native Anti-Patterns</td>
+                    <td>Gerald Bachlmayr, Aiden Ziegelaar, Alan Blockley, Bojan Zivic</td>
+                    <td>9781836200598</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>learncprogramming.pdf</td>
+                    <td>Learn C Programming</td>
+                    <td>JEFF. SZUHAY</td>
+                    <td>9781801078450</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>Modern_C.pdf</td>
+                    <td>Modern C</td>
+                    <td>Jens Gustedt</td>
+                    <td>9781617295812</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>Exploring_Data_Science.pdf</td>
+                    <td>Exploring Data Science</td>
+                    <td>John Mount, Nina, Manning Pu</td>
+                    <td>9781617294181</td>
+                    <td>fast_preprocessor</td>
+                </tr>
+                <tr>
+                    <td>analyticsengineeringwithsqlanddbt.pdf</td>
+                    <td>Analytics Engineering with SQL and DBT</td>
+                    <td>Rui Machado, Helder Russa</td>
+                    <td>9781098142384</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>databaseinternals.pdf</td>
+                    <td>Database Internals</td>
+                    <td>Alex Petrov</td>
+                    <td>9781492040347</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>hands-onlargelanguagemodels.pdf</td>
+                    <td>Hands-On Large Language Models</td>
+                    <td>Jay Alammar, Maarten Grootendorst</td>
+                    <td>9781098150969</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>buildawebsitewithchatgpt.pdf</td>
+                    <td>Build a Website with ChatGPT</td>
+                    <td>Paul McFedries</td>
+                    <td>9781633436961</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>attackingnetworkprotocols.pdf</td>
+                    <td>Attacking Network Protocols</td>
+                    <td>James Forshaw</td>
+                    <td>9781593277505</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>developersplaybookforlargelanguagemodelsecurity.pdf</td>
+                    <td>The Developer's Playbook for Large Language Model Security</td>
+                    <td>Steve Wilson</td>
+                    <td>9781098162207</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>highperformancemysql.pdf</td>
+                    <td>High Performance MySQL</td>
+                    <td>Silvia Botros, Jeremy Tinley</td>
+                    <td>9781492080510</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>cassandra_thedefinitiveguide3e.pdf</td>
+                    <td>Cassandra: the Definitive Guide</td>
+                    <td>Jeff Carpenter, Eben Hewitt</td>
+                    <td>9781098115166</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>artofunittesting3e.pdf</td>
+                    <td>The Art of Unit Testing, Third Edition</td>
+                    <td>Roy Osherove, Vladimir Khorikov</td>
+                    <td>9781617297489</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>Inherently_Secure_API_Design.pdf</td>
+                    <td>The Design of Web APIs</td>
+                    <td>Arnaud Lauret</td>
+                    <td>9781617295102</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>Exploring_Productivity_Tools.pdf</td>
+                    <td>The Programmer's Brain</td>
+                    <td>Felienne Hermans</td>
+                    <td>9781617298677</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>Exploring_Python_Basics.pdf</td>
+                    <td>Exploring Python Basics</td>
+                    <td>Naomi Ceder Manning Author, Manning Pu, Means</td>
+                    <td>9781617296581</td>
+                    <td>fast_preprocessor</td>
+                </tr>
+                <tr>
+                    <td>Exploring_Microservice_Development.pdf</td>
+                    <td>Exploring Microservice Development</td>
+                    <td>John Carnell Manning Author, Manning Pu, Means</td>
+                    <td>9781617295591</td>
+                    <td>fast_preprocessor</td>
+                </tr>
+                <tr>
+                    <td>grokkingwebapplicationsecurity.pdf</td>
+                    <td>Grokking Web Application Security</td>
+                    <td>Malcolm McDonald</td>
+                    <td>9781633438262</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>learningsnowflakesqlandscripting.pdf</td>
+                    <td>Learning Snowflake SQL and Scripting</td>
+                    <td>Alan Beaulieu</td>
+                    <td>9781098140328</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>Principles_of_Cloud_Design.pdf</td>
+                    <td>Learn Amazon Web Services in a Month of Lunches</td>
+                    <td>David Clinton</td>
+                    <td>9781617294440</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>linuxbasicsforhackers.pdf</td>
+                    <td>Linux Basics for Hackers</td>
+                    <td>OccupyTheWeb</td>
+                    <td>9781593278557</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>evadingedr.pdf</td>
+                    <td>Evading EDR</td>
+                    <td>Matt Hand</td>
+                    <td>9781718503342</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>learningmysql.pdf</td>
+                    <td>Learning MySQL</td>
+                    <td>Vinicius M. Grippa, Sergey Kuzmichev</td>
+                    <td>9781492085928</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>functionalprogrammingwithjavascript.pdf</td>
+                    <td>Functional Programming in JavaScript</td>
+                    <td>Luis Atencio</td>
+                    <td>9781617292828</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>mysqlcookbook.pdf</td>
+                    <td>MySQL Cookbook</td>
+                    <td>Sveta Smirnova, Alkin Tezuysal</td>
+                    <td>9781492093169</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>ethicalhacking.pdf</td>
+                    <td>Ethical Hacking</td>
+                    <td>Daniel G. Graham</td>
+                    <td>9781718501874</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>artofmacmalware.pdf</td>
+                    <td>The Art of Mac Malware, Volume 1</td>
+                    <td>Patrick Wardle</td>
+                    <td>9781718501942</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>designofwebapisfirstedition.pdf</td>
+                    <td>The Design of Web APIs</td>
+                    <td>Arnaud Lauret</td>
+                    <td>9781617295102</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>blackhatgo.pdf</td>
+                    <td>Black Hat Go</td>
+                    <td>Tom Steele, Chris Patten, Dan Kottmann</td>
+                    <td>9781593278656</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>Exploring_Testing_Java_Microservices.pdf</td>
+                    <td>Enterprise Java Microservices</td>
+                    <td>Ken Finnigan</td>
+                    <td>9781617294242</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>malwaredatascience.pdf</td>
+                    <td>Malware Data Science</td>
+                    <td>Joshua Saxe, Hillary Sanders</td>
+                    <td>9781593278601</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>Exploring_Ethereum_Dapps.pdf</td>
+                    <td>Building Ethereum DApps</td>
+                    <td>Roberto Infante</td>
+                    <td>9781617295157</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>Exploring_Bitcoin.pdf</td>
+                    <td>Grokking Bitcoin</td>
+                    <td>Kalle Rosenbaum</td>
+                    <td>9781617294648</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>Exploring_.NET_Core.pdf</td>
+                    <td>Exploring .Net Core</td>
+                    <td>Dustin Metzgar Manning Author, Manning Pu, Means</td>
+                    <td>9781617295089</td>
+                    <td>fast_preprocessor</td>
+                </tr>
+                <tr>
+                    <td>fullstackgraphqlapplications_withreactnodejsandneo4j.pdf</td>
+                    <td>Full Stack GraphQL Applications</td>
+                    <td>William Lyon</td>
+                    <td>9781617297038</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>mongodbthedefinitiveguide.pdf</td>
+                    <td>MongoDB</td>
+                    <td>Shannon Bradshaw, Kristina Chodorow</td>
+                    <td>9781491954461</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>Microservices_Stability.pdf</td>
+                    <td>Microservices Patterns</td>
+                    <td>Chris Richardson</td>
+                    <td>9781617294549</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>naturallanguageprocessingwithtransformersrevisededition.pdf</td>
+                    <td>Natural Language Processing with Transformers</td>
+                    <td>Lewis Tunstall, Leandro von Werra, Thomas Wolf</td>
+                    <td>9781098103248</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>Exploring_Modern_Cryptography.pdf</td>
+                    <td>Real-World Cryptography</td>
+                    <td>David Wong</td>
+                    <td>9781617296710</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>buildafrontendframeworkfromscratch.pdf</td>
+                    <td>Build a Frontend Web Framework (From Scratch)</td>
+                    <td>Ángel Sola Orbaiceta</td>
+                    <td>9781633438064</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>aiengineering.pdf</td>
+                    <td>AI Engineering</td>
+                    <td>Chip Huyen</td>
+                    <td>9781098166304</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>machinelearningwithpythoncookbook_secondedition_V5.pdf</td>
+                    <td>Machine Learning with Python Cookbook</td>
+                    <td>Kyle Gallatin, Chris Albon</td>
+                    <td>9781098135720</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>hands-onmysqladministration.pdf</td>
+                    <td>Hands-On MySQL Administration</td>
+                    <td>Arunjith Aravindan, Jeyaram Ayyalusamy</td>
+                    <td>9781098155896</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>essentialtypescript5.pdf</td>
+                    <td>Essential TypeScript 5, Third Edition</td>
+                    <td>Adam Freeman</td>
+                    <td>9781633437319</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>Exploring_Deep_Learning_for_Language.pdf</td>
+                    <td>Natural Language Processing in Action</td>
+                    <td>Hobson Lane, Cole Howard, Hannes Hapke</td>
+                    <td>9781617294631</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>d3jsinaction2e.pdf</td>
+                    <td>D3.js in Action</td>
+                    <td>Elijah Meeks</td>
+                    <td>9781617292118</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>designingapiswithswaggerandopenapi.pdf</td>
+                    <td>Designing APIs with Swagger and OpenAPI</td>
+                    <td>Joshua S. Ponelat, Lukas L. Rosenstock</td>
+                    <td>9781617296284</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>learninglangchain.pdf</td>
+                    <td>Learning LangChain</td>
+                    <td>Mayo Oshin, Nuno Campos</td>
+                    <td>9781098167288</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>Exploring_Kubernetes.pdf</td>
+                    <td>Exploring Kubernetes</td>
+                    <td>Marko Luk, Manning Pu, Means</td>
+                    <td>9781617295539</td>
+                    <td>fast_preprocessor</td>
+                </tr>
+                <tr>
+                    <td>learningsql.pdf</td>
+                    <td>Learning SQL</td>
+                    <td>Alan Beaulieu</td>
+                    <td>9781492057611</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>Exploring_Cloud_Computing.pdf</td>
+                    <td>Exploring Cloud Computing</td>
+                    <td>Michael Wittig and Andreas Wittig</td>
+                    <td>9781617294877</td>
+                    <td>openlibrary</td>
+                </tr>
+                <tr>
+                    <td>ghidrabook.pdf</td>
+                    <td>The Ghidra Book</td>
+                    <td>Chris Eagle, Kara Nance</td>
+                    <td>9781718501027</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>Exploring_dbatools.pdf</td>
+                    <td>Learn Dbatools in a Month of Lunches</td>
+                    <td>Chrissy LeMaire, Rob Sewell, Cláudio Silva, Jess Pomfret</td>
+                    <td>9781617296703</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>androidmalwarebook.pdf</td>
+                    <td>The Android Malware Handbook</td>
+                    <td>Qian Han, Salvador Mandujano, Sebastian Porst, V.S. Subrahmanian, Sai Deep Tetali, Yanhai Xiong</td>
+                    <td>9781718503304</td>
+                    <td>google_books</td>
+                </tr>
+                <tr>
+                    <td>Build_Python_Web_Apps_with_Streamlit_v7_MEAP.pdf</td>
+                    <td>Build Python Web Apps With Streamlit V7 Meap</td>
+                    <td>Picking Up This Book, Adding Frontend</td>
+                    <td>N/A</td>
+                    <td>secondary_text_analysis</td>
+                </tr>
+                <tr>
+                    <td>AI_Agents_and_Applications_v7_MEAP.pdf</td>
+                    <td>Ai Agents And Applications V7 Meap</td>
+                    <td>Large Language Models, The End Of This, An Active</td>
+                    <td>N/A</td>
+                    <td>secondary_text_analysis</td>
+                </tr>
+                <tr>
+                    <td>foundationsofinformationsecurity.pdf</td>
+                    <td>Foundationsofinformationsecurity</td>
+                    <td>Jason Andress San Francisco, Jason Andress, Any Means</td>
+                    <td>N/A</td>
+                    <td>secondary_text_analysis</td>
+                </tr>
+                <tr>
+                    <td>c31e9e33-6aa4-411f-a688-f996a0efcbd0.pdf</td>
+                    <td>C31E9E33 6Aa4 411F A688 F996A0Efcbd0</td>
+                    <td>Unknown Author</td>
+                    <td>N/A</td>
+                    <td>secondary_text_analysis</td>
+                </tr>
+                <tr>
+                    <td>Python_Workout_Second_Edition_v3_MEAP.pdf</td>
+                    <td>Python Workout Second Edition V3 Meap</td>
+                    <td>Input Is An Empty</td>
+                    <td>N/A</td>
+                    <td>secondary_text_analysis</td>
+                </tr>
+                <tr>
+                    <td>Little guide to building Large Language Models in 2024.pdf</td>
+                    <td>Little Guide To Building Large Language Models In 2024</td>
+                    <td>You Updates, Changes, Decreased Cost From</td>
+                    <td>N/A</td>
+                    <td>secondary_text_analysis</td>
+                </tr>
+                <tr>
+                    <td>CNH-e.pdf.pdf</td>
+                    <td>Cnh E.Pdf</td>
+                    <td>Unknown Author</td>
+                    <td>N/A</td>
+                    <td>secondary_text_analysis</td>
+                </tr>
+                </table>
+            </div>
+
+            <div class="card">
+                <h2>Failed Extractions</h2>
+                <table>
+                    <tr>
+                        <th>File</th>
+                        <th>Error</th>
+                        <th>Details</th>
+                    </tr>
+                    
+                </table>
+            </div>
+        </body>
+        </html>

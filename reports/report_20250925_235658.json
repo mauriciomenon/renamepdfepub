@@ -1,0 +1,2270 @@
+{
+  "report_metadata": {
+    "generated_at": "2025-09-25T23:56:58.636443",
+    "total_files_processed": 90,
+    "successful_extractions": 82,
+    "failed_extractions": 0
+  },
+  "summary_statistics": {
+    "total_files": 90,
+    "successful": 82,
+    "failed": 8,
+    "success_rate": 91.11111111111111,
+    "average_time": 2.568010940784361,
+    "timestamp": "2025-09-25T23:56:58.633596"
+  },
+  "format_statistics": {
+    "epub": {
+      "total": 11,
+      "success": 10,
+      "failed": 1
+    },
+    "mobi": {
+      "total": 0,
+      "success": 0,
+      "failed": 0
+    },
+    "pdf": {
+      "total": 79,
+      "success": 72,
+      "failed": 0
+    }
+  },
+  "preprocessor_statistics": {
+    "scanned": 90,
+    "with_text": 90,
+    "filename_only": 0,
+    "isbn_hits": 56,
+    "applied": 82,
+    "promoted": 50
+  },
+  "preprocessor_hint_summary": {
+    "total_hints": 90,
+    "isbn_hints": 56,
+    "title_hints": 90,
+    "author_hints": 71,
+    "publisher_hints": 24
+  },
+  "preprocessor_hints": {
+    "/Users/menon/Downloads/livros/efficientmysqlperformance.epub": {
+      "title": "Using Code Examples",
+      "authors": [
+        "Silvia Botros",
+        "Jeremy",
+        "Reading The Mysql Reference"
+      ],
+      "publisher": "OReilly",
+      "published_date": "2022",
+      "confidence": 0.55,
+      "isbn": "9781098105099"
+    },
+    "/Users/menon/Downloads/livros/efficientmysqlperformance.pdf": {
+      "title": "Efficientmysqlperformance",
+      "authors": [
+        "Daniel Nichter Copyright",
+        "O'reilly Media"
+      ],
+      "publisher": "OReilly",
+      "published_date": "2022",
+      "confidence": 0.55,
+      "isbn": "9781098105099"
+    },
+    "/Users/menon/Downloads/livros/ciandcddesignpatterns.epub": {
+      "title": "Garima Bajpai",
+      "authors": [
+        "Any Means",
+        "Ensuring",
+        "The Authors"
+      ],
+      "publisher": "Packt",
+      "published_date": "2024",
+      "confidence": 0.55,
+      "isbn": "9781835889640"
+    },
+    "/Users/menon/Downloads/livros/ciandcddesignpatterns.pdf": {
+      "title": "Ciandcddesignpatterns",
+      "authors": [
+        "Any Means",
+        "Ensuring",
+        "The Authors"
+      ],
+      "publisher": "Packt",
+      "published_date": "2024",
+      "confidence": 0.55,
+      "isbn": "9781835889640"
+    },
+    "/Users/menon/Downloads/livros/angularforbusiness.epub": {
+      "title": "M. D. Callaghan",
+      "authors": [
+        "Portrait Or Landscape Orientation",
+        "Category",
+        "Istock"
+      ],
+      "publisher": null,
+      "published_date": "2024",
+      "confidence": 0.55,
+      "isbn": "9781484296097"
+    },
+    "/Users/menon/Downloads/livros/architectingdataandmachinelearningplatforms.epub": {
+      "title": "Why Do You Need a Cloud Data Platform?",
+      "authors": [
+        "Answering These Common Questions",
+        "Taking Advantage Of Built-in",
+        "Creating"
+      ],
+      "publisher": null,
+      "published_date": "2016",
+      "confidence": 0.45
+    },
+    "/Users/menon/Downloads/livros/architectingdataandmachinelearningplatforms.pdf": {
+      "title": "Architectingdataandmachinelearningplatforms",
+      "authors": [],
+      "publisher": null,
+      "published_date": null,
+      "confidence": 0.55,
+      "isbn": "9781098151614"
+    },
+    "/Users/menon/Downloads/livros/fuzzydatamatchingwithsql.epub": {
+      "title": "Identify new prospects",
+      "authors": [
+        "The Time You Are",
+        "Covering How To"
+      ],
+      "publisher": null,
+      "published_date": null,
+      "confidence": 0.45
+    },
+    "/Users/menon/Downloads/livros/fuzzydatamatchingwithsql.pdf": {
+      "title": "Fuzzydatamatchingwithsql",
+      "authors": [
+        "Jim Lehmer Copyright",
+        "O'reilly Media"
+      ],
+      "publisher": "OReilly",
+      "published_date": "2024",
+      "confidence": 0.55,
+      "isbn": "9781098152277"
+    },
+    "/Users/menon/Downloads/livros/Build_Python_Web_Apps_with_Streamlit_v7_MEAP.epub": {
+      "title": "Build Python Web Apps With Streamlit V7 Meap",
+      "authors": [],
+      "publisher": null,
+      "published_date": null,
+      "confidence": 0.55,
+      "isbn": "9781633436015"
+    },
+    "/Users/menon/Downloads/livros/Build_Python_Web_Apps_with_Streamlit_v7_MEAP.pdf": {
+      "title": "Build Python Web Apps With Streamlit V7 Meap",
+      "authors": [],
+      "publisher": null,
+      "published_date": "2025",
+      "confidence": 0.35
+    },
+    "/Users/menon/Downloads/livros/machinelearninginterviews.epub": {
+      "title": "Machine Learning Interviews",
+      "authors": [
+        "Susan Shu Chang Copyright"
+      ],
+      "publisher": "OReilly",
+      "published_date": "2024",
+      "confidence": 0.55,
+      "isbn": "9781098146542"
+    },
+    "/Users/menon/Downloads/livros/machinelearninginterviews.pdf": {
+      "title": "Machinelearninginterviews",
+      "authors": [
+        "Sharing Hard-won Lessons She's",
+        "Studying Common Ml Interview",
+        "Susan Shu Chang Copyright"
+      ],
+      "publisher": "OReilly",
+      "published_date": "2024",
+      "confidence": 0.55,
+      "isbn": "9781098146542"
+    },
+    "/Users/menon/Downloads/livros/penetrationtesting.epub": {
+      "title": "Using Burp Proxy",
+      "authors": [
+        "Default",
+        "Burp Proxy",
+        "Clicking The Forward Button"
+      ],
+      "publisher": null,
+      "published_date": null,
+      "confidence": 0.45
+    },
+    "/Users/menon/Downloads/livros/postgresql_upandrunning.epub": {
+      "title": "PostgreSQL bills itself as the world’s most advanced open source",
+      "authors": [
+        "Itself",
+        "The User"
+      ],
+      "publisher": null,
+      "published_date": null,
+      "confidence": 0.45
+    },
+    "/Users/menon/Downloads/livros/postgresql_upandrunning.pdf": {
+      "title": "Postgresql Upandrunning",
+      "authors": [
+        "Regina",
+        "O'reilly Media"
+      ],
+      "publisher": "OReilly",
+      "published_date": "2018",
+      "confidence": 0.55,
+      "isbn": "9781491963418"
+    },
+    "/Users/menon/Downloads/livros/getprogrammingwithjavascript.epub": {
+      "title": "This chapter covers",
+      "authors": [
+        "Using The Concatenation Operator",
+        "Philip Pullman",
+        "Mark Twain Listing"
+      ],
+      "publisher": null,
+      "published_date": "1937",
+      "confidence": 0.45
+    },
+    "/Users/menon/Downloads/livros/getprogrammingwithjavascript.pdf": {
+      "title": "Getprogrammingwithjavascript",
+      "authors": [
+        "Each Player Arrays"
+      ],
+      "publisher": null,
+      "published_date": null,
+      "confidence": 0.45
+    },
+    "/Users/menon/Downloads/livros/justreact.epub": {
+      "title": "New Reactions",
+      "authors": [
+        "Discussing The New Root",
+        "Default",
+        "Switching Back The Versions"
+      ],
+      "publisher": null,
+      "published_date": "2022",
+      "confidence": 0.55,
+      "isbn": "9781484282946"
+    },
+    "/Users/menon/Downloads/livros/Modern_C_Third_Edition.pdf": {
+      "title": "Modern C Third Edition",
+      "authors": [
+        "Your Side"
+      ],
+      "publisher": null,
+      "published_date": null,
+      "confidence": 0.45
+    },
+    "/Users/menon/Downloads/livros/evasivemalware.pdf": {
+      "title": "Evasivemalware",
+      "authors": [
+        "Today's Malicious Software And"
+      ],
+      "publisher": null,
+      "published_date": null,
+      "confidence": 0.45
+    },
+    "/Users/menon/Downloads/livros/Python_Workout.pdf": {
+      "title": "Python Workout",
+      "authors": [],
+      "publisher": null,
+      "published_date": null,
+      "confidence": 0.35
+    },
+    "/Users/menon/Downloads/livros/hacksleaksandrevelations.pdf": {
+      "title": "Hacksleaksandrevelations",
+      "authors": [
+        "The Technical Details"
+      ],
+      "publisher": null,
+      "published_date": null,
+      "confidence": 0.45
+    },
+    "/Users/menon/Downloads/livros/Exploring_Algorithms.pdf": {
+      "title": "Exploring Algorithms",
+      "authors": [
+        "Marcello La Rocca",
+        "Dzejla Mef",
+        "Rishal Hurbans"
+      ],
+      "publisher": null,
+      "published_date": "2021",
+      "confidence": 0.55,
+      "isbn": "9781617295485"
+    },
+    "/Users/menon/Downloads/livros/AI_Agents_and_Applications_v7_MEAP.pdf": {
+      "title": "Ai Agents And Applications V7 Meap",
+      "authors": [],
+      "publisher": null,
+      "published_date": "2025",
+      "confidence": 0.35
+    },
+    "/Users/menon/Downloads/livros/Exploring_Security_Privacy_and_Trust.pdf": {
+      "title": "Exploring Security Privacy And Trust",
+      "authors": [
+        "Ajay Thampi",
+        "Nishant Bhajaria",
+        "Alex Preuk"
+      ],
+      "publisher": null,
+      "published_date": "2021",
+      "confidence": 0.55,
+      "isbn": "9781617297649"
+    },
+    "/Users/menon/Downloads/livros/Cloud_Native_Applications.pdf": {
+      "title": "Cloud Native Applications",
+      "authors": [
+        "Michael Wittig",
+        "Andreas",
+        "Manning Pu"
+      ],
+      "publisher": null,
+      "published_date": "2016",
+      "confidence": 0.55,
+      "isbn": "9781617294310"
+    },
+    "/Users/menon/Downloads/livros/learningphpmysqlandjavascript7e.pdf": {
+      "title": "Learningphpmysqlandjavascript7E",
+      "authors": [
+        "Acquiring Css Skills",
+        "The Music Copyright Holders",
+        "Robin Nixon Copyright"
+      ],
+      "publisher": "OReilly",
+      "published_date": "2025",
+      "confidence": 0.55,
+      "isbn": "9781098152352"
+    },
+    "/Users/menon/Downloads/livros/database-drivenwebdevelopment.pdf": {
+      "title": "Database Drivenwebdevelopment",
+      "authors": [
+        "Thomas Valentine This Work",
+        "The Publisher",
+        "Similar Or"
+      ],
+      "publisher": null,
+      "published_date": "2021",
+      "confidence": 0.55,
+      "isbn": "9781484259696"
+    },
+    "/Users/menon/Downloads/livros/pythonobject-orientedprogrammingfourthedition.pdf": {
+      "title": "Pythonobject Orientedprogrammingfourthedition",
+      "authors": [
+        "Any Means",
+        "This Book",
+        "The Appr"
+      ],
+      "publisher": "OReilly",
+      "published_date": "2021",
+      "confidence": 0.55,
+      "isbn": "9781801077262"
+    },
+    "/Users/menon/Downloads/livros/Exploring_Functional_Programming.pdf": {
+      "title": "Exploring Functional Programming",
+      "authors": [
+        "Eric Normand",
+        "Enrico Buonanno",
+        "Micha"
+      ],
+      "publisher": null,
+      "published_date": "2021",
+      "confidence": 0.55,
+      "isbn": "9781617296208"
+    },
+    "/Users/menon/Downloads/livros/cloudnativeanti-patterns.pdf": {
+      "title": "Cloudnativeanti Patterns",
+      "authors": [
+        "Any Means",
+        "This Book",
+        "The Appr"
+      ],
+      "publisher": "Packt",
+      "published_date": "2025",
+      "confidence": 0.55,
+      "isbn": "9781836200598"
+    },
+    "/Users/menon/Downloads/livros/learncprogramming.pdf": {
+      "title": "Learncprogramming",
+      "authors": [
+        "Any Means",
+        "This Book",
+        "The Appr"
+      ],
+      "publisher": "Packt",
+      "published_date": "2022",
+      "confidence": 0.55,
+      "isbn": "9781801078450"
+    },
+    "/Users/menon/Downloads/livros/Modern_C.pdf": {
+      "title": "Modern C",
+      "authors": [
+        "Means",
+        "Manufacturer"
+      ],
+      "publisher": null,
+      "published_date": "2020",
+      "confidence": 0.55,
+      "isbn": "9781617295812"
+    },
+    "/Users/menon/Downloads/livros/Exploring_Data_Science.pdf": {
+      "title": "Exploring Data Science",
+      "authors": [
+        "John Mount",
+        "Nina",
+        "Manning Pu"
+      ],
+      "publisher": null,
+      "published_date": "2016",
+      "confidence": 0.55,
+      "isbn": "9781617294181"
+    },
+    "/Users/menon/Downloads/livros/analyticsengineeringwithsqlanddbt.pdf": {
+      "title": "Analyticsengineeringwithsqlanddbt",
+      "authors": [
+        "Focusing More On Value",
+        "Rui Machado",
+        "Helder"
+      ],
+      "publisher": "OReilly",
+      "published_date": "2024",
+      "confidence": 0.55,
+      "isbn": "9781098142384"
+    },
+    "/Users/menon/Downloads/livros/databaseinternals.pdf": {
+      "title": "Databaseinternals",
+      "authors": [
+        "Alex Petrov Copyright",
+        "O'reilly Media"
+      ],
+      "publisher": "OReilly",
+      "published_date": "2019",
+      "confidence": 0.55,
+      "isbn": "9781492040347"
+    },
+    "/Users/menon/Downloads/livros/foundationsofinformationsecurity.pdf": {
+      "title": "Foundationsofinformationsecurity",
+      "authors": [],
+      "publisher": null,
+      "published_date": null,
+      "confidence": 0.35
+    },
+    "/Users/menon/Downloads/livros/hands-onlargelanguagemodels.pdf": {
+      "title": "Hands Onlargelanguagemodels",
+      "authors": [
+        "Rapid Advances In Deep",
+        "The Final Chapters"
+      ],
+      "publisher": null,
+      "published_date": "1941",
+      "confidence": 0.55,
+      "isbn": "9781098150969"
+    },
+    "/Users/menon/Downloads/livros/buildawebsitewithchatgpt.pdf": {
+      "title": "Buildawebsitewithchatgpt",
+      "authors": [],
+      "publisher": null,
+      "published_date": null,
+      "confidence": 0.35
+    },
+    "/Users/menon/Downloads/livros/attackingnetworkprotocols.pdf": {
+      "title": "Attackingnetworkprotocols",
+      "authors": [
+        "Katie"
+      ],
+      "publisher": null,
+      "published_date": null,
+      "confidence": 0.45
+    },
+    "/Users/menon/Downloads/livros/developersplaybookforlargelanguagemodelsecurity.pdf": {
+      "title": "Developersplaybookforlargelanguagemodelsecurity",
+      "authors": [
+        "The Father Of Llm"
+      ],
+      "publisher": null,
+      "published_date": null,
+      "confidence": 0.55,
+      "isbn": "9781098162207"
+    },
+    "/Users/menon/Downloads/livros/highperformancemysql.pdf": {
+      "title": "Highperformancemysql",
+      "authors": [
+        "Jeremy Cole Fourth Edition"
+      ],
+      "publisher": null,
+      "published_date": null,
+      "confidence": 0.45
+    },
+    "/Users/menon/Downloads/livros/cassandra_thedefinitiveguide3e.pdf": {
+      "title": "Cassandra Thedefinitiveguide3E",
+      "authors": [
+        "Jeff Carpenter",
+        "Eben",
+        "O'reilly Media"
+      ],
+      "publisher": "OReilly",
+      "published_date": "2020",
+      "confidence": 0.55,
+      "isbn": "9781098115166"
+    },
+    "/Users/menon/Downloads/livros/artofunittesting3e.pdf": {
+      "title": "Artofunittesting3E",
+      "authors": [
+        "Robert"
+      ],
+      "publisher": null,
+      "published_date": null,
+      "confidence": 0.45
+    },
+    "/Users/menon/Downloads/livros/Inherently_Secure_API_Design.pdf": {
+      "title": "Inherently Secure Api Design",
+      "authors": [
+        "Arnaud Lauret",
+        "Design By Dan Bergh",
+        "Justin Richer"
+      ],
+      "publisher": "Manning",
+      "published_date": "2021",
+      "confidence": 0.55,
+      "isbn": "9781617295102"
+    },
+    "/Users/menon/Downloads/livros/Exploring_Productivity_Tools.pdf": {
+      "title": "Exploring Productivity Tools",
+      "authors": [
+        "Felienne Hermans",
+        "Tom Long",
+        "Christian Clausen"
+      ],
+      "publisher": null,
+      "published_date": "2021",
+      "confidence": 0.55,
+      "isbn": "9781617298677"
+    },
+    "/Users/menon/Downloads/livros/Exploring_Python_Basics.pdf": {
+      "title": "Exploring Python Basics",
+      "authors": [
+        "Naomi Ceder Manning Author",
+        "Manning Pu",
+        "Means"
+      ],
+      "publisher": null,
+      "published_date": "2018",
+      "confidence": 0.55,
+      "isbn": "9781617296581"
+    },
+    "/Users/menon/Downloads/livros/Exploring_Microservice_Development.pdf": {
+      "title": "Exploring Microservice Development",
+      "authors": [
+        "John Carnell Manning Author",
+        "Manning Pu",
+        "Means"
+      ],
+      "publisher": null,
+      "published_date": "2018",
+      "confidence": 0.55,
+      "isbn": "9781617295591"
+    },
+    "/Users/menon/Downloads/livros/grokkingwebapplicationsecurity.pdf": {
+      "title": "Grokkingwebapplicationsecurity",
+      "authors": [
+        "Stuart Mcclure Grokking Web",
+        "Stuart Mcclure Manning Shelter"
+      ],
+      "publisher": null,
+      "published_date": null,
+      "confidence": 0.45
+    },
+    "/Users/menon/Downloads/livros/learningsnowflakesqlandscripting.pdf": {
+      "title": "Learningsnowflakesqlandscripting",
+      "authors": [
+        "Alan Beaulieu Copyright",
+        "O'reilly Media"
+      ],
+      "publisher": "OReilly",
+      "published_date": "2024",
+      "confidence": 0.55,
+      "isbn": "9781098140328"
+    },
+    "/Users/menon/Downloads/livros/Principles_of_Cloud_Design.pdf": {
+      "title": "Principles Of Cloud Design",
+      "authors": [
+        "David Clinton",
+        "Yan Cui Course Duration",
+        "Michael Wittig"
+      ],
+      "publisher": null,
+      "published_date": "2019",
+      "confidence": 0.55,
+      "isbn": "9781617294440"
+    },
+    "/Users/menon/Downloads/livros/linuxbasicsforhackers.pdf": {
+      "title": "Linux Basics For Hackers",
+      "authors": [],
+      "publisher": null,
+      "published_date": null,
+      "confidence": 0.45
+    },
+    "/Users/menon/Downloads/livros/evadingedr.pdf": {
+      "title": "Evadingedr",
+      "authors": [],
+      "publisher": null,
+      "published_date": null,
+      "confidence": 0.35
+    },
+    "/Users/menon/Downloads/livros/learningmysql.pdf": {
+      "title": "Learningmysql",
+      "authors": [],
+      "publisher": "OReilly",
+      "published_date": null,
+      "confidence": 0.35
+    },
+    "/Users/menon/Downloads/livros/functionalprogrammingwithjavascript.pdf": {
+      "title": "Funct10na1 Pr09ramm1n9 in Java5cr1pt Funct10na1 Pr09ramm1n9 in Java5cr1pt LUIS ATENCIO MANNING SHELTER ISLAND",
+      "authors": [],
+      "publisher": null,
+      "published_date": null,
+      "confidence": 0.45
+    },
+    "/Users/menon/Downloads/livros/c31e9e33-6aa4-411f-a688-f996a0efcbd0.pdf": {
+      "title": "C31E9E33 6Aa4 411F A688 F996A0Efcbd0",
+      "authors": [],
+      "publisher": null,
+      "published_date": "2025",
+      "confidence": 0.35
+    },
+    "/Users/menon/Downloads/livros/mysqlcookbook.pdf": {
+      "title": "Mysqlcookbook",
+      "authors": [
+        "Sugu",
+        "Long-time Mysql Experts Makes"
+      ],
+      "publisher": null,
+      "published_date": null,
+      "confidence": 0.55,
+      "isbn": "9781492093169"
+    },
+    "/Users/menon/Downloads/livros/ethicalhacking.pdf": {
+      "title": "Ethicalhacking",
+      "authors": [
+        "Juan Gilbert"
+      ],
+      "publisher": null,
+      "published_date": null,
+      "confidence": 0.45
+    },
+    "/Users/menon/Downloads/livros/artofmacmalware.pdf": {
+      "title": "Artofmacmalware",
+      "authors": [
+        "Jonathan Levin Volume"
+      ],
+      "publisher": null,
+      "published_date": null,
+      "confidence": 0.45
+    },
+    "/Users/menon/Downloads/livros/Python_Workout_Second_Edition_v3_MEAP.pdf": {
+      "title": "Python Workout Second Edition V3 Meap",
+      "authors": [],
+      "publisher": null,
+      "published_date": "2025",
+      "confidence": 0.35
+    },
+    "/Users/menon/Downloads/livros/designofwebapisfirstedition.pdf": {
+      "title": "Designofwebapisfirstedition",
+      "authors": [
+        "Design",
+        "Kin Lane",
+        "Kin Lane Api Design"
+      ],
+      "publisher": null,
+      "published_date": "2019",
+      "confidence": 0.55,
+      "isbn": "9781617295102"
+    },
+    "/Users/menon/Downloads/livros/blackhatgo.pdf": {
+      "title": "Blackhatgo",
+      "authors": [
+        "Hackers For Its",
+        "Hd Moore Black Hat"
+      ],
+      "publisher": null,
+      "published_date": null,
+      "confidence": 0.45
+    },
+    "/Users/menon/Downloads/livros/Exploring_Testing_Java_Microservices.pdf": {
+      "title": "Exploring Testing Java Microservices",
+      "authors": [
+        "Ken Finnigan",
+        "Brandon Byars",
+        "Nicolai Parlog"
+      ],
+      "publisher": null,
+      "published_date": "2019",
+      "confidence": 0.55,
+      "isbn": "9781617294242"
+    },
+    "/Users/menon/Downloads/livros/malwaredatascience.pdf": {
+      "title": "Malwaredatascience",
+      "authors": [
+        "Anup Ghosh",
+        "The Same Ad Versary",
+        "Building Your Ow"
+      ],
+      "publisher": null,
+      "published_date": null,
+      "confidence": 0.45
+    },
+    "/Users/menon/Downloads/livros/Exploring_Ethereum_Dapps.pdf": {
+      "title": "Exploring Ethereum Dapps",
+      "authors": [
+        "Roberto Infante",
+        "Julien Klepatch Duration",
+        "Kalle Rosenbaum"
+      ],
+      "publisher": null,
+      "published_date": "2019",
+      "confidence": 0.55,
+      "isbn": "9781617295157"
+    },
+    "/Users/menon/Downloads/livros/Exploring_Bitcoin.pdf": {
+      "title": "Exploring Bitcoin",
+      "authors": [
+        "Kalle Rosenbaum",
+        "Roberto Infante",
+        "Julien Klepatch Estimated Full"
+      ],
+      "publisher": null,
+      "published_date": "2019",
+      "confidence": 0.55,
+      "isbn": "9781617294648"
+    },
+    "/Users/menon/Downloads/livros/Exploring_.NET_Core.pdf": {
+      "title": "Exploring .Net Core",
+      "authors": [
+        "Dustin Metzgar Manning Author",
+        "Manning Pu",
+        "Means"
+      ],
+      "publisher": null,
+      "published_date": "2017",
+      "confidence": 0.55,
+      "isbn": "9781617295089"
+    },
+    "/Users/menon/Downloads/livros/fullstackgraphqlapplications_withreactnodejsandneo4j.pdf": {
+      "title": "Fullstackgraphqlapplications Withreactnodejsandneo4J",
+      "authors": [],
+      "publisher": null,
+      "published_date": "2003",
+      "confidence": 0.35
+    },
+    "/Users/menon/Downloads/livros/mongodbthedefinitiveguide.pdf": {
+      "title": "Mongodbthedefinitiveguide",
+      "authors": [
+        "Shannon Bradshaw",
+        "O'reilly Media"
+      ],
+      "publisher": "OReilly",
+      "published_date": "2020",
+      "confidence": 0.55,
+      "isbn": "9781491954461"
+    },
+    "/Users/menon/Downloads/livros/Microservices_Stability.pdf": {
+      "title": "Microservices Stability",
+      "authors": [
+        "Chris",
+        "Morgan Bruce",
+        "Brandon Byars"
+      ],
+      "publisher": null,
+      "published_date": "2019",
+      "confidence": 0.55,
+      "isbn": "9781617294549"
+    },
+    "/Users/menon/Downloads/livros/naturallanguageprocessingwithtransformersrevisededition.pdf": {
+      "title": "Naturallanguageprocessingwithtransformersrevisededition",
+      "authors": [
+        "Storm"
+      ],
+      "publisher": null,
+      "published_date": "2017",
+      "confidence": 0.55,
+      "isbn": "9781098103248"
+    },
+    "/Users/menon/Downloads/livros/Exploring_Modern_Cryptography.pdf": {
+      "title": "Exploring Modern Cryptography",
+      "authors": [
+        "David Wong",
+        "Manning Pu",
+        "Means"
+      ],
+      "publisher": null,
+      "published_date": "2021",
+      "confidence": 0.55,
+      "isbn": "9781617296710"
+    },
+    "/Users/menon/Downloads/livros/buildafrontendframeworkfromscratch.pdf": {
+      "title": "Buildafrontendframeworkfromscratch",
+      "authors": [
+        "The Frontend Framework You'll",
+        "Manning Pu",
+        "Means"
+      ],
+      "publisher": null,
+      "published_date": "2024",
+      "confidence": 0.55,
+      "isbn": "9781633438064"
+    },
+    "/Users/menon/Downloads/livros/aiengineering.pdf": {
+      "title": "Aiengineering",
+      "authors": [],
+      "publisher": "OReilly",
+      "published_date": "1941",
+      "confidence": 0.55,
+      "isbn": "9781098166304"
+    },
+    "/Users/menon/Downloads/livros/machinelearningwithpythoncookbook_secondedition_V5.pdf": {
+      "title": "Machinelearningwithpythoncookbook Secondedition V5",
+      "authors": [
+        "Learning The Nuts And",
+        "Kyle Gallatin",
+        "Chris"
+      ],
+      "publisher": "OReilly",
+      "published_date": "2023",
+      "confidence": 0.55,
+      "isbn": "9781098135720"
+    },
+    "/Users/menon/Downloads/livros/hands-onmysqladministration.pdf": {
+      "title": "Hands Onmysqladministration",
+      "authors": [
+        "Examples",
+        "Numerous Images",
+        "Dbas"
+      ],
+      "publisher": "OReilly",
+      "published_date": "2024",
+      "confidence": 0.55,
+      "isbn": "9781098155896"
+    },
+    "/Users/menon/Downloads/livros/essentialtypescript5.pdf": {
+      "title": "Essentialtypescript5",
+      "authors": [],
+      "publisher": null,
+      "published_date": null,
+      "confidence": 0.35
+    },
+    "/Users/menon/Downloads/livros/Exploring_Deep_Learning_for_Language.pdf": {
+      "title": "Exploring Deep Learning For Language",
+      "authors": [
+        "Hobson Lane",
+        "Jeff Smith Isbn",
+        "Tommaso Teofili Isbn"
+      ],
+      "publisher": null,
+      "published_date": "2019",
+      "confidence": 0.55,
+      "isbn": "9781617294631"
+    },
+    "/Users/menon/Downloads/livros/d3jsinaction2e.pdf": {
+      "title": "D3Jsinaction2E",
+      "authors": [
+        "Manning Pu",
+        "Means",
+        "Manufacturer"
+      ],
+      "publisher": null,
+      "published_date": "2015",
+      "confidence": 0.55,
+      "isbn": "9781617292118"
+    },
+    "/Users/menon/Downloads/livros/designingapiswithswaggerandopenapi.pdf": {
+      "title": "Designingapiswithswaggerandopenapi",
+      "authors": [
+        "Tony Tam Openapi"
+      ],
+      "publisher": null,
+      "published_date": null,
+      "confidence": 0.45
+    },
+    "/Users/menon/Downloads/livros/Little guide to building Large Language Models in 2024.pdf": {
+      "title": "Little Guide To Building Large Language Models In 2024",
+      "authors": [],
+      "publisher": "OReilly",
+      "published_date": "2024",
+      "confidence": 0.35
+    },
+    "/Users/menon/Downloads/livros/learninglangchain.pdf": {
+      "title": "Learninglangchain",
+      "authors": [
+        "Several Leading Companies",
+        "Breaking Down Flexible Arc"
+      ],
+      "publisher": null,
+      "published_date": null,
+      "confidence": 0.55,
+      "isbn": "9781098167288"
+    },
+    "/Users/menon/Downloads/livros/Exploring_Kubernetes.pdf": {
+      "title": "Exploring Kubernetes",
+      "authors": [
+        "Marko Luk",
+        "Manning Pu",
+        "Means"
+      ],
+      "publisher": null,
+      "published_date": "2017",
+      "confidence": 0.55,
+      "isbn": "9781617295539"
+    },
+    "/Users/menon/Downloads/livros/learningsql.pdf": {
+      "title": "Learningsql",
+      "authors": [
+        "Alan Beaulieu Copyright",
+        "O'reilly Media"
+      ],
+      "publisher": "OReilly",
+      "published_date": "2020",
+      "confidence": 0.55,
+      "isbn": "9781492057611"
+    },
+    "/Users/menon/Downloads/livros/Exploring_Cloud_Computing.pdf": {
+      "title": "Exploring Cloud Computing",
+      "authors": [
+        "Michael Wittig",
+        "Andreas",
+        "Manning Pu"
+      ],
+      "publisher": null,
+      "published_date": "2017",
+      "confidence": 0.55,
+      "isbn": "9781617294877"
+    },
+    "/Users/menon/Downloads/livros/ghidrabook.pdf": {
+      "title": "Ghidrabook",
+      "authors": [
+        "Chris Eagle",
+        "Kara",
+        "Any Means"
+      ],
+      "publisher": null,
+      "published_date": "2020",
+      "confidence": 0.55,
+      "isbn": "9781718501027"
+    },
+    "/Users/menon/Downloads/livros/Exploring_dbatools.pdf": {
+      "title": "Exploring Dbatools",
+      "authors": [
+        "Chrissy Lemaire",
+        "Manning Pu",
+        "Means"
+      ],
+      "publisher": null,
+      "published_date": "2021",
+      "confidence": 0.55,
+      "isbn": "9781617296703"
+    },
+    "/Users/menon/Downloads/livros/androidmalwarebook.pdf": {
+      "title": "The Android Malware Handbook",
+      "authors": [],
+      "publisher": null,
+      "published_date": null,
+      "confidence": 0.45
+    },
+    "/Users/menon/Downloads/livros/CNH-e.pdf.pdf": {
+      "title": "Cnh E.Pdf",
+      "authors": [],
+      "publisher": null,
+      "published_date": "2001",
+      "confidence": 0.35
+    }
+  },
+  "successful_extractions": [
+    {
+      "title": "Efficient MySQL Performance",
+      "authors": [
+        "Daniel Nichter"
+      ],
+      "publisher": "O'Reilly Media",
+      "published_date": "2021-12-31",
+      "isbn_10": null,
+      "isbn_13": "9781098105099",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/efficientmysqlperformance.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "CI/CD Design Patterns",
+      "authors": [
+        "Garima Bajpai",
+        "Michel Schildmeijer",
+        "Muktesh Mishra",
+        "Pawel Piwosz",
+        "Helen Beal"
+      ],
+      "publisher": "Packt Publishing, Limited",
+      "published_date": "2024",
+      "isbn_10": null,
+      "isbn_13": "9781835889640",
+      "confidence_score": 0.9,
+      "source": "openlibrary",
+      "file_path": "/Users/menon/Downloads/livros/ciandcddesignpatterns.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Angular for Business",
+      "authors": [
+        "Michael D. Callaghan"
+      ],
+      "publisher": "Apress",
+      "published_date": "2023-11-28",
+      "isbn_10": null,
+      "isbn_13": "9781484296080",
+      "confidence_score": 0.9500000000000001,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/angularforbusiness.epub",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Architecting Data and Machine Learning Platforms",
+      "authors": [
+        "Marco Tranquillin",
+        "Valliappa Lakshmanan",
+        "Firat Tekiner"
+      ],
+      "publisher": "Unknown",
+      "published_date": "2024-01-30",
+      "isbn_10": null,
+      "isbn_13": "9781098151614",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/architectingdataandmachinelearningplatforms.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Fuzzy Data Matching with SQL",
+      "authors": [
+        "Jim Lehmer"
+      ],
+      "publisher": "Unknown",
+      "published_date": "2023-10-31",
+      "isbn_10": null,
+      "isbn_13": "9781098152277",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/fuzzydatamatchingwithsql.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Machine Learning Interviews",
+      "authors": [
+        "Susan Shu Chang"
+      ],
+      "publisher": "Unknown",
+      "published_date": "2024-01-30",
+      "isbn_10": null,
+      "isbn_13": "9781098146542",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/machinelearninginterviews.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Life Markets",
+      "authors": [
+        "Vishaal B. Bhuyan"
+      ],
+      "publisher": "John Wiley & Sons",
+      "published_date": "2009-08-17",
+      "isbn_10": null,
+      "isbn_13": "9780470412343",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/penetrationtesting.epub",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "PostgreSQL: Up and Running",
+      "authors": [
+        "Regina O. Obe",
+        "Leo S. Hsu"
+      ],
+      "publisher": "Unknown",
+      "published_date": "2017-10-25",
+      "isbn_10": null,
+      "isbn_13": "9781491963418",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/postgresql_upandrunning.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Get Programming with Javascript",
+      "authors": [
+        "John R. Larsen"
+      ],
+      "publisher": "Manning Publications",
+      "published_date": "2016",
+      "isbn_10": null,
+      "isbn_13": "9781617293108",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/getprogrammingwithjavascript.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Just React!",
+      "authors": [
+        "Hari Narayn"
+      ],
+      "publisher": "Apress",
+      "published_date": "2022-09-15",
+      "isbn_10": null,
+      "isbn_13": "9781484282939",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/justreact.epub",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Modern C, Third Edition",
+      "authors": [
+        "Jens Gustedt"
+      ],
+      "publisher": "Manning Publications Co. LLC",
+      "published_date": "2024",
+      "isbn_10": null,
+      "isbn_13": "9781633437777",
+      "confidence_score": 0.9,
+      "source": "openlibrary",
+      "file_path": "/Users/menon/Downloads/livros/Modern_C_Third_Edition.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Evasive Malware",
+      "authors": [
+        "Kyle Cucci"
+      ],
+      "publisher": "No Starch Press",
+      "published_date": "2024-09-10",
+      "isbn_10": null,
+      "isbn_13": "9781718503267",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/evasivemalware.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Python Workout",
+      "authors": [
+        "Reuven M. Lerner"
+      ],
+      "publisher": "Manning",
+      "published_date": "2020-08-04",
+      "isbn_10": null,
+      "isbn_13": "9781617295508",
+      "confidence_score": 0.9500000000000001,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/Python_Workout.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Hacks, Leaks, and Revelations",
+      "authors": [
+        "Micah Lee"
+      ],
+      "publisher": "No Starch Press",
+      "published_date": "2024-01-09",
+      "isbn_10": null,
+      "isbn_13": "9781718503137",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/hacksleaksandrevelations.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Advanced Algorithms and Data Structures",
+      "authors": [
+        "Marcello La Rocca"
+      ],
+      "publisher": "Simon and Schuster",
+      "published_date": "2021-06-29",
+      "isbn_10": null,
+      "isbn_13": "9781617295485",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/Exploring_Algorithms.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Interpretable AI",
+      "authors": [
+        "Ajay Thampi"
+      ],
+      "publisher": "Simon and Schuster",
+      "published_date": "2022-07-05",
+      "isbn_10": null,
+      "isbn_13": "9781617297649",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/Exploring_Security_Privacy_and_Trust.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Cloud Native Applications",
+      "authors": [
+        "Michael Wittig",
+        "Andreas",
+        "Manning Pu"
+      ],
+      "publisher": "Unknown",
+      "published_date": "2016",
+      "isbn_10": null,
+      "isbn_13": "9781617294310",
+      "confidence_score": 0.55,
+      "source": "fast_preprocessor",
+      "file_path": "/Users/menon/Downloads/livros/Cloud_Native_Applications.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Learning Php, MySQL & JavaScript",
+      "authors": [
+        "Nixon, Robin"
+      ],
+      "publisher": "Unknown",
+      "published_date": "2024-10",
+      "isbn_10": null,
+      "isbn_13": "9781098152352",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/learningphpmysqlandjavascript7e.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Database-Driven Web Development",
+      "authors": [
+        "Thomas Valentine"
+      ],
+      "publisher": "Apress",
+      "published_date": "2021-05-29",
+      "isbn_10": null,
+      "isbn_13": "9781484259696",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/database-drivenwebdevelopment.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Python Object-Oriented Programming - Fourth Edition",
+      "authors": [
+        "Steven F. Lott",
+        "Dusty Phillips"
+      ],
+      "publisher": "Unknown",
+      "published_date": "2021-06-29",
+      "isbn_10": null,
+      "isbn_13": "9781801077262",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/pythonobject-orientedprogrammingfourthedition.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Grokking Simplicity",
+      "authors": [
+        "Eric Normand"
+      ],
+      "publisher": "Simon and Schuster",
+      "published_date": "2021-05-18",
+      "isbn_10": null,
+      "isbn_13": "9781617296208",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/Exploring_Functional_Programming.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Cloud Native Anti-Patterns",
+      "authors": [
+        "Gerald Bachlmayr",
+        "Aiden Ziegelaar",
+        "Alan Blockley",
+        "Bojan Zivic"
+      ],
+      "publisher": "Packt Publishing",
+      "published_date": "2025-03-28",
+      "isbn_10": null,
+      "isbn_13": "9781836200598",
+      "confidence_score": 0.9500000000000001,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/cloudnativeanti-patterns.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Learn C Programming",
+      "authors": [
+        "JEFF. SZUHAY"
+      ],
+      "publisher": "Unknown",
+      "published_date": "2022-07",
+      "isbn_10": null,
+      "isbn_13": "9781801078450",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/learncprogramming.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Modern C",
+      "authors": [
+        "Jens Gustedt"
+      ],
+      "publisher": "Manning",
+      "published_date": "2019-10-07",
+      "isbn_10": null,
+      "isbn_13": "9781617295812",
+      "confidence_score": 0.9500000000000001,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/Modern_C.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Exploring Data Science",
+      "authors": [
+        "John Mount",
+        "Nina",
+        "Manning Pu"
+      ],
+      "publisher": "Unknown",
+      "published_date": "2016",
+      "isbn_10": null,
+      "isbn_13": "9781617294181",
+      "confidence_score": 0.55,
+      "source": "fast_preprocessor",
+      "file_path": "/Users/menon/Downloads/livros/Exploring_Data_Science.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Analytics Engineering with SQL and DBT",
+      "authors": [
+        "Rui Machado",
+        "Helder Russa"
+      ],
+      "publisher": "O'Reilly Media",
+      "published_date": "2023-12-29",
+      "isbn_10": null,
+      "isbn_13": "9781098142384",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/analyticsengineeringwithsqlanddbt.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Database Internals",
+      "authors": [
+        "Alex Petrov"
+      ],
+      "publisher": "O'Reilly Media",
+      "published_date": "2019-10",
+      "isbn_10": null,
+      "isbn_13": "9781492040347",
+      "confidence_score": 0.9500000000000001,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/databaseinternals.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Hands-On Large Language Models",
+      "authors": [
+        "Jay Alammar",
+        "Maarten Grootendorst"
+      ],
+      "publisher": "Unknown",
+      "published_date": "2024-12-03",
+      "isbn_10": null,
+      "isbn_13": "9781098150969",
+      "confidence_score": 0.9500000000000001,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/hands-onlargelanguagemodels.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Build a Website with ChatGPT",
+      "authors": [
+        "Paul McFedries"
+      ],
+      "publisher": "Simon and Schuster",
+      "published_date": "2024-08-27",
+      "isbn_10": null,
+      "isbn_13": "9781633436961",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/buildawebsitewithchatgpt.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Attacking Network Protocols",
+      "authors": [
+        "James Forshaw"
+      ],
+      "publisher": "No Starch Press",
+      "published_date": "2017-12-08",
+      "isbn_10": null,
+      "isbn_13": "9781593277505",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/attackingnetworkprotocols.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "The Developer's Playbook for Large Language Model Security",
+      "authors": [
+        "Steve Wilson"
+      ],
+      "publisher": "Unknown",
+      "published_date": "2024-10-29",
+      "isbn_10": null,
+      "isbn_13": "9781098162207",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/developersplaybookforlargelanguagemodelsecurity.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "High Performance MySQL",
+      "authors": [
+        "Silvia Botros",
+        "Jeremy Tinley"
+      ],
+      "publisher": "O'Reilly Media",
+      "published_date": "2022-02-15",
+      "isbn_10": null,
+      "isbn_13": "9781492080510",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/highperformancemysql.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Cassandra: the Definitive Guide",
+      "authors": [
+        "Jeff Carpenter",
+        "Eben Hewitt"
+      ],
+      "publisher": "O'Reilly Media",
+      "published_date": "2020-07-31",
+      "isbn_10": null,
+      "isbn_13": "9781098115166",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/cassandra_thedefinitiveguide3e.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "The Art of Unit Testing, Third Edition",
+      "authors": [
+        "Roy Osherove",
+        "Vladimir Khorikov"
+      ],
+      "publisher": "Simon and Schuster",
+      "published_date": "2024-03-26",
+      "isbn_10": null,
+      "isbn_13": "9781617297489",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/artofunittesting3e.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "The Design of Web APIs",
+      "authors": [
+        "Arnaud Lauret"
+      ],
+      "publisher": "Manning",
+      "published_date": "2019-11-06",
+      "isbn_10": null,
+      "isbn_13": "9781617295102",
+      "confidence_score": 0.9500000000000001,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/Inherently_Secure_API_Design.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "The Programmer's Brain",
+      "authors": [
+        "Felienne Hermans"
+      ],
+      "publisher": "Simon and Schuster",
+      "published_date": "2021-09-07",
+      "isbn_10": null,
+      "isbn_13": "9781617298677",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/Exploring_Productivity_Tools.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Exploring Python Basics",
+      "authors": [
+        "Naomi Ceder Manning Author",
+        "Manning Pu",
+        "Means"
+      ],
+      "publisher": "Unknown",
+      "published_date": "2018",
+      "isbn_10": null,
+      "isbn_13": "9781617296581",
+      "confidence_score": 0.55,
+      "source": "fast_preprocessor",
+      "file_path": "/Users/menon/Downloads/livros/Exploring_Python_Basics.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Exploring Microservice Development",
+      "authors": [
+        "John Carnell Manning Author",
+        "Manning Pu",
+        "Means"
+      ],
+      "publisher": "Unknown",
+      "published_date": "2018",
+      "isbn_10": null,
+      "isbn_13": "9781617295591",
+      "confidence_score": 0.55,
+      "source": "fast_preprocessor",
+      "file_path": "/Users/menon/Downloads/livros/Exploring_Microservice_Development.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Grokking Web Application Security",
+      "authors": [
+        "Malcolm McDonald"
+      ],
+      "publisher": "Simon and Schuster",
+      "published_date": "2024-06-11",
+      "isbn_10": null,
+      "isbn_13": "9781633438262",
+      "confidence_score": 0.9500000000000001,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/grokkingwebapplicationsecurity.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Learning Snowflake SQL and Scripting",
+      "authors": [
+        "Alan Beaulieu"
+      ],
+      "publisher": "Unknown",
+      "published_date": "2024-01-30",
+      "isbn_10": null,
+      "isbn_13": "9781098140328",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/learningsnowflakesqlandscripting.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Learn Amazon Web Services in a Month of Lunches",
+      "authors": [
+        "David Clinton"
+      ],
+      "publisher": "Manning Publications",
+      "published_date": "2017-08-31",
+      "isbn_10": null,
+      "isbn_13": "9781617294440",
+      "confidence_score": 0.9500000000000001,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/Principles_of_Cloud_Design.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Linux Basics for Hackers",
+      "authors": [
+        "OccupyTheWeb"
+      ],
+      "publisher": "No Starch Press",
+      "published_date": "2018-12-04",
+      "isbn_10": null,
+      "isbn_13": "9781593278557",
+      "confidence_score": 0.9500000000000001,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/linuxbasicsforhackers.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Evading EDR",
+      "authors": [
+        "Matt Hand"
+      ],
+      "publisher": "No Starch Press",
+      "published_date": "2023-10-31",
+      "isbn_10": null,
+      "isbn_13": "9781718503342",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/evadingedr.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Learning MySQL",
+      "authors": [
+        "Vinicius M. Grippa",
+        "Sergey Kuzmichev"
+      ],
+      "publisher": "O'Reilly Media",
+      "published_date": "2021-11-16",
+      "isbn_10": null,
+      "isbn_13": "9781492085928",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/learningmysql.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Functional Programming in JavaScript",
+      "authors": [
+        "Luis Atencio"
+      ],
+      "publisher": "Manning",
+      "published_date": "2016-06-18",
+      "isbn_10": null,
+      "isbn_13": "9781617292828",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/functionalprogrammingwithjavascript.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "MySQL Cookbook",
+      "authors": [
+        "Sveta Smirnova",
+        "Alkin Tezuysal"
+      ],
+      "publisher": "O'Reilly Media",
+      "published_date": "2022-09-20",
+      "isbn_10": null,
+      "isbn_13": "9781492093169",
+      "confidence_score": 0.9500000000000001,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/mysqlcookbook.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Ethical Hacking",
+      "authors": [
+        "Daniel G. Graham"
+      ],
+      "publisher": "No Starch Press",
+      "published_date": "2021-11-02",
+      "isbn_10": null,
+      "isbn_13": "9781718501874",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/ethicalhacking.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "The Art of Mac Malware, Volume 1",
+      "authors": [
+        "Patrick Wardle"
+      ],
+      "publisher": "No Starch Press",
+      "published_date": "2022-07-12",
+      "isbn_10": null,
+      "isbn_13": "9781718501942",
+      "confidence_score": 0.9500000000000001,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/artofmacmalware.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "The Design of Web APIs",
+      "authors": [
+        "Arnaud Lauret"
+      ],
+      "publisher": "Manning",
+      "published_date": "2019-11-06",
+      "isbn_10": null,
+      "isbn_13": "9781617295102",
+      "confidence_score": 0.9500000000000001,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/designofwebapisfirstedition.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Black Hat Go",
+      "authors": [
+        "Tom Steele",
+        "Chris Patten",
+        "Dan Kottmann"
+      ],
+      "publisher": "No Starch Press",
+      "published_date": "2020-01-24",
+      "isbn_10": null,
+      "isbn_13": "9781593278656",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/blackhatgo.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Enterprise Java Microservices",
+      "authors": [
+        "Ken Finnigan"
+      ],
+      "publisher": "Pearson Professional",
+      "published_date": "2018-08",
+      "isbn_10": null,
+      "isbn_13": "9781617294242",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/Exploring_Testing_Java_Microservices.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Malware Data Science",
+      "authors": [
+        "Joshua Saxe",
+        "Hillary Sanders"
+      ],
+      "publisher": "No Starch Press",
+      "published_date": "2018-09-25",
+      "isbn_10": null,
+      "isbn_13": "9781593278601",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/malwaredatascience.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Building Ethereum DApps",
+      "authors": [
+        "Roberto Infante"
+      ],
+      "publisher": "Manning",
+      "published_date": "2019-03-09",
+      "isbn_10": null,
+      "isbn_13": "9781617295157",
+      "confidence_score": 0.9500000000000001,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/Exploring_Ethereum_Dapps.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Grokking Bitcoin",
+      "authors": [
+        "Kalle Rosenbaum"
+      ],
+      "publisher": "Manning",
+      "published_date": "2019-04-28",
+      "isbn_10": null,
+      "isbn_13": "9781617294648",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/Exploring_Bitcoin.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Exploring .Net Core",
+      "authors": [
+        "Dustin Metzgar Manning Author",
+        "Manning Pu",
+        "Means"
+      ],
+      "publisher": "Unknown",
+      "published_date": "2017",
+      "isbn_10": null,
+      "isbn_13": "9781617295089",
+      "confidence_score": 0.55,
+      "source": "fast_preprocessor",
+      "file_path": "/Users/menon/Downloads/livros/Exploring_.NET_Core.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Full Stack GraphQL Applications",
+      "authors": [
+        "William Lyon"
+      ],
+      "publisher": "Simon and Schuster",
+      "published_date": "2022-09-27",
+      "isbn_10": null,
+      "isbn_13": "9781617297038",
+      "confidence_score": 0.9500000000000001,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/fullstackgraphqlapplications_withreactnodejsandneo4j.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "MongoDB",
+      "authors": [
+        "Shannon Bradshaw",
+        "Kristina Chodorow"
+      ],
+      "publisher": "O'Reilly Media",
+      "published_date": "2019-07-05",
+      "isbn_10": null,
+      "isbn_13": "9781491954461",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/mongodbthedefinitiveguide.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Microservices Patterns",
+      "authors": [
+        "Chris Richardson"
+      ],
+      "publisher": "Manning Publications",
+      "published_date": "2018-11-19",
+      "isbn_10": null,
+      "isbn_13": "9781617294549",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/Microservices_Stability.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Natural Language Processing with Transformers",
+      "authors": [
+        "Lewis Tunstall",
+        "Leandro von Werra",
+        "Thomas Wolf"
+      ],
+      "publisher": "O'Reilly Media",
+      "published_date": "2022-03-31",
+      "isbn_10": null,
+      "isbn_13": "9781098103248",
+      "confidence_score": 0.9500000000000001,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/naturallanguageprocessingwithtransformersrevisededition.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Real-World Cryptography",
+      "authors": [
+        "David Wong"
+      ],
+      "publisher": "Simon and Schuster",
+      "published_date": "2021-10-12",
+      "isbn_10": null,
+      "isbn_13": "9781617296710",
+      "confidence_score": 0.9500000000000001,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/Exploring_Modern_Cryptography.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Build a Frontend Web Framework (From Scratch)",
+      "authors": [
+        "Ángel Sola Orbaiceta"
+      ],
+      "publisher": "Simon and Schuster",
+      "published_date": "2024-05-21",
+      "isbn_10": null,
+      "isbn_13": "9781633438064",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/buildafrontendframeworkfromscratch.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "AI Engineering",
+      "authors": [
+        "Chip Huyen"
+      ],
+      "publisher": "Unknown",
+      "published_date": "2025-04",
+      "isbn_10": null,
+      "isbn_13": "9781098166304",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/aiengineering.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Machine Learning with Python Cookbook",
+      "authors": [
+        "Kyle Gallatin",
+        "Chris Albon"
+      ],
+      "publisher": "O'Reilly Media",
+      "published_date": "2023-10-31",
+      "isbn_10": null,
+      "isbn_13": "9781098135720",
+      "confidence_score": 0.9500000000000001,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/machinelearningwithpythoncookbook_secondedition_V5.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Hands-On MySQL Administration",
+      "authors": [
+        "Arunjith Aravindan",
+        "Jeyaram Ayyalusamy"
+      ],
+      "publisher": "Unknown",
+      "published_date": "2024-07-30",
+      "isbn_10": null,
+      "isbn_13": "9781098155896",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/hands-onmysqladministration.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Essential TypeScript 5, Third Edition",
+      "authors": [
+        "Adam Freeman"
+      ],
+      "publisher": "Simon and Schuster",
+      "published_date": "2023-10-10",
+      "isbn_10": null,
+      "isbn_13": "9781633437319",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/essentialtypescript5.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Natural Language Processing in Action",
+      "authors": [
+        "Hobson Lane",
+        "Cole Howard",
+        "Hannes Hapke"
+      ],
+      "publisher": "Pearson Professional",
+      "published_date": "2019-02-28",
+      "isbn_10": null,
+      "isbn_13": "9781617294631",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/Exploring_Deep_Learning_for_Language.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "D3.js in Action",
+      "authors": [
+        "Elijah Meeks"
+      ],
+      "publisher": "Manning Publications",
+      "published_date": "2015-03-03",
+      "isbn_10": null,
+      "isbn_13": "9781617292118",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/d3jsinaction2e.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Designing APIs with Swagger and OpenAPI",
+      "authors": [
+        "Joshua S. Ponelat",
+        "Lukas L. Rosenstock"
+      ],
+      "publisher": "Simon and Schuster",
+      "published_date": "2022-07-05",
+      "isbn_10": null,
+      "isbn_13": "9781617296284",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/designingapiswithswaggerandopenapi.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Learning LangChain",
+      "authors": [
+        "Mayo Oshin",
+        "Nuno Campos"
+      ],
+      "publisher": "O'Reilly Media",
+      "published_date": "2025-04-30",
+      "isbn_10": null,
+      "isbn_13": "9781098167288",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/learninglangchain.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Exploring Kubernetes",
+      "authors": [
+        "Marko Luk",
+        "Manning Pu",
+        "Means"
+      ],
+      "publisher": "Unknown",
+      "published_date": "2017",
+      "isbn_10": null,
+      "isbn_13": "9781617295539",
+      "confidence_score": 0.55,
+      "source": "fast_preprocessor",
+      "file_path": "/Users/menon/Downloads/livros/Exploring_Kubernetes.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Learning SQL",
+      "authors": [
+        "Alan Beaulieu"
+      ],
+      "publisher": "O'Reilly Media",
+      "published_date": "2020",
+      "isbn_10": null,
+      "isbn_13": "9781492057611",
+      "confidence_score": 0.9500000000000001,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/learningsql.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Exploring Cloud Computing",
+      "authors": [
+        "Michael Wittig and Andreas Wittig"
+      ],
+      "publisher": "Manning Publications",
+      "published_date": "2017",
+      "isbn_10": null,
+      "isbn_13": "9781617294877",
+      "confidence_score": 0.9,
+      "source": "openlibrary",
+      "file_path": "/Users/menon/Downloads/livros/Exploring_Cloud_Computing.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "The Ghidra Book",
+      "authors": [
+        "Chris Eagle",
+        "Kara Nance"
+      ],
+      "publisher": "No Starch Press",
+      "published_date": "2020-09-01",
+      "isbn_10": null,
+      "isbn_13": "9781718501027",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/ghidrabook.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Learn Dbatools in a Month of Lunches",
+      "authors": [
+        "Chrissy LeMaire",
+        "Rob Sewell",
+        "Cláudio Silva",
+        "Jess Pomfret"
+      ],
+      "publisher": "Simon and Schuster",
+      "published_date": "2022-07-12",
+      "isbn_10": null,
+      "isbn_13": "9781617296703",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/Exploring_dbatools.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "The Android Malware Handbook",
+      "authors": [
+        "Qian Han",
+        "Salvador Mandujano",
+        "Sebastian Porst",
+        "V.S. Subrahmanian",
+        "Sai Deep Tetali",
+        "Yanhai Xiong"
+      ],
+      "publisher": "No Starch Press",
+      "published_date": "2023-11-07",
+      "isbn_10": null,
+      "isbn_13": "9781718503304",
+      "confidence_score": 0.9,
+      "source": "google_books",
+      "file_path": "/Users/menon/Downloads/livros/androidmalwarebook.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Build Python Web Apps With Streamlit V7 Meap",
+      "authors": [
+        "Picking Up This Book",
+        "Adding Frontend"
+      ],
+      "publisher": "Unknown",
+      "published_date": "2025",
+      "isbn_10": null,
+      "isbn_13": null,
+      "confidence_score": 0.65,
+      "source": "secondary_text_analysis",
+      "file_path": "/Users/menon/Downloads/livros/Build_Python_Web_Apps_with_Streamlit_v7_MEAP.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Ai Agents And Applications V7 Meap",
+      "authors": [
+        "Large Language Models",
+        "The End Of This",
+        "An Active"
+      ],
+      "publisher": "Unknown",
+      "published_date": "2025",
+      "isbn_10": null,
+      "isbn_13": null,
+      "confidence_score": 0.65,
+      "source": "secondary_text_analysis",
+      "file_path": "/Users/menon/Downloads/livros/AI_Agents_and_Applications_v7_MEAP.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Foundationsofinformationsecurity",
+      "authors": [
+        "Jason Andress San Francisco",
+        "Jason Andress",
+        "Any Means"
+      ],
+      "publisher": "Unknown",
+      "published_date": "2019",
+      "isbn_10": null,
+      "isbn_13": null,
+      "confidence_score": 0.65,
+      "source": "secondary_text_analysis",
+      "file_path": "/Users/menon/Downloads/livros/foundationsofinformationsecurity.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "C31E9E33 6Aa4 411F A688 F996A0Efcbd0",
+      "authors": [
+        "Unknown Author"
+      ],
+      "publisher": "Unknown",
+      "published_date": "2025",
+      "isbn_10": null,
+      "isbn_13": null,
+      "confidence_score": 0.5,
+      "source": "secondary_text_analysis",
+      "file_path": "/Users/menon/Downloads/livros/c31e9e33-6aa4-411f-a688-f996a0efcbd0.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Python Workout Second Edition V3 Meap",
+      "authors": [
+        "Input Is An Empty"
+      ],
+      "publisher": "Unknown",
+      "published_date": "2025",
+      "isbn_10": null,
+      "isbn_13": null,
+      "confidence_score": 0.65,
+      "source": "secondary_text_analysis",
+      "file_path": "/Users/menon/Downloads/livros/Python_Workout_Second_Edition_v3_MEAP.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Little Guide To Building Large Language Models In 2024",
+      "authors": [
+        "You Updates",
+        "Changes",
+        "Decreased Cost From"
+      ],
+      "publisher": "OReilly",
+      "published_date": "2024",
+      "isbn_10": null,
+      "isbn_13": null,
+      "confidence_score": 0.75,
+      "source": "secondary_text_analysis",
+      "file_path": "/Users/menon/Downloads/livros/Little guide to building Large Language Models in 2024.pdf",
+      "file_paths": null,
+      "formats": null
+    },
+    {
+      "title": "Cnh E.Pdf",
+      "authors": [
+        "Unknown Author"
+      ],
+      "publisher": "Unknown",
+      "published_date": "2001",
+      "isbn_10": null,
+      "isbn_13": null,
+      "confidence_score": 0.5,
+      "source": "secondary_text_analysis",
+      "file_path": "/Users/menon/Downloads/livros/CNH-e.pdf.pdf",
+      "file_paths": null,
+      "formats": null
+    }
+  ],
+  "failed_extractions": {}
+}

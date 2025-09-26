@@ -1,0 +1,92 @@
+2025-09-25 23:55:49,884 - INFO - Fast preprocessor generated hints for 90 files (56 ISBN hits)
+2025-09-25 23:55:49,888 - INFO -  /Users/menon/Downloads/livros/efficientmysqlperformance.pdf
+2025-09-25 23:55:49,888 - INFO -  /Users/menon/Downloads/livros/ciandcddesignpatterns.pdf
+2025-09-25 23:55:49,888 - INFO -  /Users/menon/Downloads/livros/angularforbusiness.epub
+2025-09-25 23:55:49,888 - INFO -  /Users/menon/Downloads/livros/architectingdataandmachinelearningplatforms.pdf
+2025-09-25 23:55:49,890 - INFO -  /Users/menon/Downloads/livros/fuzzydatamatchingwithsql.pdf
+2025-09-25 23:55:49,890 - INFO -  /Users/menon/Downloads/livros/Build_Python_Web_Apps_with_Streamlit_v7_MEAP.pdf
+2025-09-25 23:55:49,890 - INFO -  /Users/menon/Downloads/livros/machinelearninginterviews.pdf
+2025-09-25 23:55:49,890 - INFO -  /Users/menon/Downloads/livros/penetrationtesting.epub
+2025-09-25 23:55:49,892 - INFO -  /Users/menon/Downloads/livros/postgresql_upandrunning.pdf
+2025-09-25 23:55:49,927 - INFO -  /Users/menon/Downloads/livros/getprogrammingwithjavascript.pdf
+2025-09-25 23:55:51,593 - INFO -  /Users/menon/Downloads/livros/justreact.epub
+2025-09-25 23:55:51,768 - INFO -  /Users/menon/Downloads/livros/Modern_C_Third_Edition.pdf
+2025-09-25 23:55:52,087 - INFO -  /Users/menon/Downloads/livros/evasivemalware.pdf
+2025-09-25 23:55:52,805 - INFO -  /Users/menon/Downloads/livros/Python_Workout.pdf
+2025-09-25 23:55:53,001 - INFO -  /Users/menon/Downloads/livros/hacksleaksandrevelations.pdf
+2025-09-25 23:55:53,438 - INFO -  /Users/menon/Downloads/livros/Exploring_Algorithms.pdf
+2025-09-25 23:55:53,711 - INFO -  /Users/menon/Downloads/livros/AI_Agents_and_Applications_v7_MEAP.pdf
+2025-09-25 23:55:54,242 - INFO -  /Users/menon/Downloads/livros/Exploring_Security_Privacy_and_Trust.pdf
+2025-09-25 23:55:55,541 - INFO -  /Users/menon/Downloads/livros/Cloud_Native_Applications.pdf
+2025-09-25 23:55:55,641 - INFO -  /Users/menon/Downloads/livros/learningphpmysqlandjavascript7e.pdf
+2025-09-25 23:55:55,644 - INFO -  /Users/menon/Downloads/livros/database-drivenwebdevelopment.pdf
+2025-09-25 23:55:55,644 - INFO -  /Users/menon/Downloads/livros/pythonobject-orientedprogrammingfourthedition.pdf
+2025-09-25 23:55:55,644 - INFO -  /Users/menon/Downloads/livros/Exploring_Functional_Programming.pdf
+2025-09-25 23:55:57,780 - INFO -  /Users/menon/Downloads/livros/cloudnativeanti-patterns.pdf
+2025-09-25 23:55:57,782 - INFO -  /Users/menon/Downloads/livros/learncprogramming.pdf
+2025-09-25 23:55:57,783 - INFO -  /Users/menon/Downloads/livros/Modern_C.pdf
+2025-09-25 23:55:57,784 - INFO -  /Users/menon/Downloads/livros/Exploring_Data_Science.pdf
+2025-09-25 23:56:05,909 - INFO -  /Users/menon/Downloads/livros/analyticsengineeringwithsqlanddbt.pdf
+2025-09-25 23:56:05,911 - INFO -  /Users/menon/Downloads/livros/databaseinternals.pdf
+2025-09-25 23:56:05,911 - INFO -  /Users/menon/Downloads/livros/foundationsofinformationsecurity.pdf
+2025-09-25 23:56:06,240 - INFO -  /Users/menon/Downloads/livros/hands-onlargelanguagemodels.pdf
+2025-09-25 23:56:06,241 - INFO -  /Users/menon/Downloads/livros/buildawebsitewithchatgpt.pdf
+2025-09-25 23:56:07,066 - INFO -  /Users/menon/Downloads/livros/attackingnetworkprotocols.pdf
+2025-09-25 23:56:07,407 - INFO -  /Users/menon/Downloads/livros/developersplaybookforlargelanguagemodelsecurity.pdf
+2025-09-25 23:56:07,407 - INFO -  /Users/menon/Downloads/livros/highperformancemysql.pdf
+2025-09-25 23:56:07,537 - INFO -  /Users/menon/Downloads/livros/cassandra_thedefinitiveguide3e.pdf
+2025-09-25 23:56:07,538 - INFO -  /Users/menon/Downloads/livros/artofunittesting3e.pdf
+2025-09-25 23:56:07,730 - INFO -  /Users/menon/Downloads/livros/Inherently_Secure_API_Design.pdf
+2025-09-25 23:56:07,730 - INFO -  /Users/menon/Downloads/livros/Exploring_Productivity_Tools.pdf
+2025-09-25 23:56:08,337 - INFO -  /Users/menon/Downloads/livros/Exploring_Python_Basics.pdf
+2025-09-25 23:56:08,786 - INFO -  /Users/menon/Downloads/livros/Exploring_Microservice_Development.pdf
+2025-09-25 23:56:17,271 - INFO -  /Users/menon/Downloads/livros/grokkingwebapplicationsecurity.pdf
+2025-09-25 23:56:17,745 - INFO -  /Users/menon/Downloads/livros/learningsnowflakesqlandscripting.pdf
+2025-09-25 23:56:17,746 - INFO -  /Users/menon/Downloads/livros/Principles_of_Cloud_Design.pdf
+2025-09-25 23:56:18,213 - INFO -  /Users/menon/Downloads/livros/linuxbasicsforhackers.pdf
+2025-09-25 23:56:18,430 - INFO -  /Users/menon/Downloads/livros/evadingedr.pdf
+2025-09-25 23:56:18,671 - INFO -  /Users/menon/Downloads/livros/learningmysql.pdf
+2025-09-25 23:56:19,080 - INFO -  /Users/menon/Downloads/livros/functionalprogrammingwithjavascript.pdf
+2025-09-25 23:56:19,249 - INFO -  /Users/menon/Downloads/livros/c31e9e33-6aa4-411f-a688-f996a0efcbd0.pdf
+2025-09-25 23:56:19,264 - INFO -  /Users/menon/Downloads/livros/mysqlcookbook.pdf
+2025-09-25 23:56:19,265 - INFO -  /Users/menon/Downloads/livros/ethicalhacking.pdf
+2025-09-25 23:56:19,652 - INFO -  /Users/menon/Downloads/livros/artofmacmalware.pdf
+2025-09-25 23:56:20,035 - INFO -  /Users/menon/Downloads/livros/Python_Workout_Second_Edition_v3_MEAP.pdf
+2025-09-25 23:56:20,585 - INFO -  /Users/menon/Downloads/livros/designofwebapisfirstedition.pdf
+2025-09-25 23:56:20,586 - INFO -  /Users/menon/Downloads/livros/blackhatgo.pdf
+2025-09-25 23:56:20,938 - INFO -  /Users/menon/Downloads/livros/Exploring_Testing_Java_Microservices.pdf
+2025-09-25 23:56:22,164 - INFO -  /Users/menon/Downloads/livros/malwaredatascience.pdf
+2025-09-25 23:56:22,528 - INFO -  /Users/menon/Downloads/livros/Exploring_Ethereum_Dapps.pdf
+2025-09-25 23:56:23,556 - INFO -  /Users/menon/Downloads/livros/Exploring_Bitcoin.pdf
+2025-09-25 23:56:23,904 - INFO -  /Users/menon/Downloads/livros/Exploring_.NET_Core.pdf
+2025-09-25 23:56:24,741 - INFO -  /Users/menon/Downloads/livros/fullstackgraphqlapplications_withreactnodejsandneo4j.pdf
+2025-09-25 23:56:24,969 - INFO -  /Users/menon/Downloads/livros/mongodbthedefinitiveguide.pdf
+2025-09-25 23:56:24,969 - INFO -  /Users/menon/Downloads/livros/Microservices_Stability.pdf
+2025-09-25 23:56:26,867 - INFO -  /Users/menon/Downloads/livros/naturallanguageprocessingwithtransformersrevisededition.pdf
+2025-09-25 23:56:26,867 - INFO -  /Users/menon/Downloads/livros/Exploring_Modern_Cryptography.pdf
+2025-09-25 23:56:28,426 - INFO -  /Users/menon/Downloads/livros/buildafrontendframeworkfromscratch.pdf
+2025-09-25 23:56:28,427 - INFO -  /Users/menon/Downloads/livros/aiengineering.pdf
+2025-09-25 23:56:28,428 - INFO -  /Users/menon/Downloads/livros/machinelearningwithpythoncookbook_secondedition_V5.pdf
+2025-09-25 23:56:28,428 - INFO -  /Users/menon/Downloads/livros/hands-onmysqladministration.pdf
+2025-09-25 23:56:28,429 - INFO -  /Users/menon/Downloads/livros/essentialtypescript5.pdf
+2025-09-25 23:56:29,021 - INFO -  /Users/menon/Downloads/livros/Exploring_Deep_Learning_for_Language.pdf
+2025-09-25 23:56:30,452 - INFO -  /Users/menon/Downloads/livros/d3jsinaction2e.pdf
+2025-09-25 23:56:30,454 - INFO -  /Users/menon/Downloads/livros/designingapiswithswaggerandopenapi.pdf
+2025-09-25 23:56:30,806 - INFO -  /Users/menon/Downloads/livros/Little guide to building Large Language Models in 2024.pdf
+2025-09-25 23:56:30,947 - INFO -  /Users/menon/Downloads/livros/learninglangchain.pdf
+2025-09-25 23:56:30,947 - INFO -  /Users/menon/Downloads/livros/Exploring_Kubernetes.pdf
+2025-09-25 23:56:30,977 - INFO -  /Users/menon/Downloads/livros/learningsql.pdf
+2025-09-25 23:56:30,978 - INFO -  /Users/menon/Downloads/livros/Exploring_Cloud_Computing.pdf
+2025-09-25 23:56:30,978 - INFO -  /Users/menon/Downloads/livros/ghidrabook.pdf
+2025-09-25 23:56:30,978 - INFO -  /Users/menon/Downloads/livros/Exploring_dbatools.pdf
+2025-09-25 23:56:33,066 - INFO -  /Users/menon/Downloads/livros/androidmalwarebook.pdf
+2025-09-25 23:56:33,322 - INFO -  /Users/menon/Downloads/livros/CNH-e.pdf.pdf
+2025-09-25 23:56:55,547 - INFO - Recovered metadata for /Users/menon/Downloads/livros/Build_Python_Web_Apps_with_Streamlit_v7_MEAP.pdf using secondary_text_analysis
+2025-09-25 23:56:56,494 - INFO - Recovered metadata for /Users/menon/Downloads/livros/AI_Agents_and_Applications_v7_MEAP.pdf using secondary_text_analysis
+2025-09-25 23:56:57,353 - INFO - Recovered metadata for /Users/menon/Downloads/livros/foundationsofinformationsecurity.pdf using secondary_text_analysis
+2025-09-25 23:56:57,370 - INFO - Recovered metadata for /Users/menon/Downloads/livros/c31e9e33-6aa4-411f-a688-f996a0efcbd0.pdf using secondary_text_analysis
+2025-09-25 23:56:58,314 - INFO - Recovered metadata for /Users/menon/Downloads/livros/Python_Workout_Second_Edition_v3_MEAP.pdf using secondary_text_analysis
+2025-09-25 23:56:58,620 - INFO - Recovered metadata for /Users/menon/Downloads/livros/Little guide to building Large Language Models in 2024.pdf using secondary_text_analysis
+2025-09-25 23:56:58,632 - INFO - Recovered metadata for /Users/menon/Downloads/livros/CNH-e.pdf.pdf using secondary_text_analysis
+2025-09-25 23:56:58,632 - INFO - Secondary recovery identified 7 additional metadata entries
+2025-09-25 23:56:58,638 - INFO - Reports generated successfully in reports
