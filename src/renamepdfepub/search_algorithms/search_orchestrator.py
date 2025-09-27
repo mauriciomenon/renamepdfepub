@@ -1,9 +1,21 @@
 """
-Search Orchestrator - Coordenação inteligente de múltiplos algoritmos de busca.
+Search Orchestrator - Coordenador inteligente de algoritmos de busca.
 
-Gerencia a execução de diferentes algoritmos de busca, combinando resultados
-e selecionando as melhores estratégias baseado no contexto da query.
+Responsável por:
+- Seleção automática de algoritmos baseada na query
+- Execução paralela de múltiplos algoritmos
+- Combinação inteligente de resultados
+- Balanceamento de carga e otimização
 """
+
+import time
+import threading
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from typing import Dict, List, Any, Optional, Tuple
+from .base_search import BaseSearchAlgorithm, SearchQuery, SearchResult
+from .fuzzy_search import FuzzySearchAlgorithm
+from .isbn_search import ISBNSearchAlgorithm
+from .semantic_search import SemanticSearchAlgorithm
 
 import time
 from typing import Dict, List, Any, Optional, Tuple
@@ -22,21 +34,22 @@ class SearchOrchestrator:
     - Aplicar estratégias de fallback
     """
     
-    def __init__(self, max_workers: int = 3):
+    def __init__(self, max_workers: int = 4):
         """
         Inicializa o orquestrador.
         
         Args:
-            max_workers: Número máximo de workers para execução paralela
+            max_workers: Número máximo de workers paralelos
         """
         self.algorithms: Dict[str, BaseSearchAlgorithm] = {}
         self.max_workers = max_workers
-        self.default_strategy = 'adaptive'
-        self.combination_weights = {
-            'score': 0.7,
-            'algorithm_reliability': 0.2,
-            'result_consistency': 0.1
-        }
+        self.default_timeout = 30.0  # seconds
+        self.result_combination_strategy = 'weighted_merge'  # 'weighted_merge', 'best_of_each', 'consensus'
+        self.performance_stats = {}
+        self._lock = threading.Lock()
+        
+        # Initialize default algorithms
+        self._initialize_default_algorithms()
         
     def register_algorithm(self, algorithm: BaseSearchAlgorithm) -> bool:
         """
@@ -475,3 +488,39 @@ class SearchOrchestrator:
         """Reseta estatísticas de todos os algoritmos."""
         for algorithm in self.algorithms.values():
             algorithm.reset_stats()
+    
+    def _initialize_default_algorithms(self):
+        """Inicializa algoritmos padrão."""
+        # Fuzzy Search Algorithm
+        fuzzy_algo = FuzzySearchAlgorithm()
+        fuzzy_config = {
+            'similarity_threshold': 0.6,
+            'use_levenshtein': True,
+            'use_jaro_winkler': True,
+            'levenshtein_weight': 0.6,
+            'jaro_winkler_weight': 0.4
+        }
+        fuzzy_algo.configure(fuzzy_config)
+        self.register_algorithm(fuzzy_algo)
+        
+        # ISBN Search Algorithm
+        isbn_algo = ISBNSearchAlgorithm()
+        isbn_config = {
+            'partial_match_threshold': 0.8,
+            'enable_corruption_fixing': True,
+            'cache': {'clear_on_configure': False}
+        }
+        isbn_algo.configure(isbn_config)
+        self.register_algorithm(isbn_algo)
+        
+        # Semantic Search Algorithm
+        semantic_algo = SemanticSearchAlgorithm()
+        semantic_config = {
+            'min_similarity_threshold': 0.1,
+            'author_ngram_size': 2,
+            'title_weight': 0.6,
+            'author_weight': 0.3,
+            'content_weight': 0.1
+        }
+        semantic_algo.configure(semantic_config)
+        self.register_algorithm(semantic_algo)
