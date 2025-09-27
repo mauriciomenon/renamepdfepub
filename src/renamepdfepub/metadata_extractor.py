@@ -2,12 +2,16 @@
 Focus: title, subtitle, authors, publisher, year, isbn10, isbn13
 
 This is a small, robust implementation intended to be used by the project's CLI.
+Performance optimizations: pre-compiled regex patterns, text caching.
 """
 from __future__ import annotations
 
 import re
 import os
 import json
+import hashlib
+import time
+from pathlib import Path
 from typing import Dict, Optional
 
 # PDF handling
@@ -42,11 +46,54 @@ try:
 except Exception:
     BeautifulSoup = None
 
+# Performance optimization: Pre-compiled regex patterns
 ISBN13_RE = re.compile(r'(97[89][\d\- ]{10,17}[\dXx])')
 ISBN10_RE = re.compile(r'(?<!\d)(\d{9}[\dXx])(?!\d)')
+SPACES_RE = re.compile(r"\s+")
+
+# Text cache for PDF extraction (memory-based, TTL: 5 minutes)
+_PDF_TEXT_CACHE = {}
+_CACHE_TTL = 300  # 5 minutes
+
+def _get_file_hash(file_path: str) -> str:
+    """Generate hash for file based on path, size and mtime for caching."""
+    try:
+        stat = Path(file_path).stat()
+        content = f"{file_path}:{stat.st_size}:{stat.st_mtime}"
+        return hashlib.md5(content.encode()).hexdigest()
+    except Exception:
+        return hashlib.md5(file_path.encode()).hexdigest()
+
+def _get_cached_text(file_path: str) -> Optional[str]:
+    """Get cached text if available and not expired."""
+    file_hash = _get_file_hash(file_path)
+    if file_hash in _PDF_TEXT_CACHE:
+        cached_text, timestamp = _PDF_TEXT_CACHE[file_hash]
+        if time.time() - timestamp < _CACHE_TTL:
+            return cached_text
+        else:
+            # Expired, remove from cache
+            del _PDF_TEXT_CACHE[file_hash]
+    return None
+
+def _cache_text(file_path: str, text: str) -> None:
+    """Cache extracted text with timestamp."""
+    file_hash = _get_file_hash(file_path)
+    _PDF_TEXT_CACHE[file_hash] = (text, time.time())
+    
+    # Simple cleanup: remove old entries if cache gets too large
+    if len(_PDF_TEXT_CACHE) > 100:
+        current_time = time.time()
+        expired_keys = [
+            k for k, (_, ts) in _PDF_TEXT_CACHE.items()
+            if current_time - ts > _CACHE_TTL
+        ]
+        for k in expired_keys:
+            del _PDF_TEXT_CACHE[k]
 
 def normalize_spaces(s: str) -> str:
-    return re.sub(r"\s+", " ", s).strip()
+    """Optimized space normalization using pre-compiled regex."""
+    return SPACES_RE.sub(" ", s).strip()
 
 
 def extract_from_epub(path: str) -> Dict[str, Optional[str]]:
@@ -90,35 +137,46 @@ def extract_from_epub(path: str) -> Dict[str, Optional[str]]:
 
 
 def extract_from_pdf(path: str, pages_to_scan: int = 7) -> Dict[str, Optional[str]]:
+    """Extract metadata from PDF with text caching for performance."""
     result = {k: None for k in ['title', 'subtitle', 'authors', 'publisher', 'year', 'isbn10', 'isbn13']}
-    text = ''
-    # prefer pdfplumber if available
-    try:
-        if pdfplumber:
-            with pdfplumber.open(path) as pdf:
-                for p in pdf.pages[:pages_to_scan]:
-                    t = p.extract_text() or ''
-                    text += '\n' + t
-        elif PdfReader:
-            with open(path, 'rb') as f:
-                reader = PdfReader(f)
-                for p in reader.pages[:pages_to_scan]:
-                    # pypdf and PyPDF2 expose extract_text on page objects
-                    t = p.extract_text() or ''
-                    text += '\n' + t
-        else:
-            return result
-    except Exception:
-        # fallback: try PyPDF2 if pdfplumber failed
+    
+    # Check cache first
+    cached_text = _get_cached_text(path)
+    if cached_text is not None:
+        text = cached_text
+    else:
+        # Extract text and cache it
+        text = ''
         try:
-            if PdfReader:
+            if pdfplumber:
+                with pdfplumber.open(path) as pdf:
+                    for p in pdf.pages[:pages_to_scan]:
+                        t = p.extract_text() or ''
+                        text += '\n' + t
+            elif PdfReader:
                 with open(path, 'rb') as f:
                     reader = PdfReader(f)
                     for p in reader.pages[:pages_to_scan]:
+                        # pypdf and PyPDF2 expose extract_text on page objects
                         t = p.extract_text() or ''
                         text += '\n' + t
+            else:
+                return result
         except Exception:
-            return result
+            # fallback: try PyPDF2 if pdfplumber failed
+            try:
+                if PdfReader:
+                    with open(path, 'rb') as f:
+                        reader = PdfReader(f)
+                        for p in reader.pages[:pages_to_scan]:
+                            t = p.extract_text() or ''
+                            text += '\n' + t
+            except Exception:
+                return result
+        
+        # Cache the extracted text
+        if text.strip():
+            _cache_text(path, text)
 
     # Normalize
     cleaned = normalize_spaces(text)
