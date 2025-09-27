@@ -1,0 +1,495 @@
+2025-09-27 19:15:42,658 - INFO - 🚀 SISTEMA EXECUTIVO DE TESTES INICIADO
+2025-09-27 19:15:42,659 - INFO - 📁 Diretório de resultados: /Users/menon/git/renamepdfepub/executive_results
+2025-09-27 19:15:42,659 - INFO - 🚀 INICIANDO VALIDAÇÃO COMPLETA DO SISTEMA
+2025-09-27 19:15:42,659 - INFO - 📚 Máximo de livros para teste: 80
+2025-09-27 19:15:42,659 - INFO - 
+=== VALIDAÇÃO DA ESTRUTURA ===
+2025-09-27 19:15:42,659 - INFO - 
+📂 Validando algorithms:
+2025-09-27 19:15:42,659 - INFO -   ✅ src/renamepdfepub/search_algorithms/fuzzy_search.py (12,163 bytes)
+2025-09-27 19:15:42,659 - INFO -   ✅ src/renamepdfepub/search_algorithms/isbn_search.py (18,930 bytes)
+2025-09-27 19:15:42,659 - INFO -   ✅ src/renamepdfepub/search_algorithms/semantic_search.py (24,819 bytes)
+2025-09-27 19:15:42,659 - INFO -   ✅ src/renamepdfepub/search_algorithms/search_orchestrator.py (18,357 bytes)
+2025-09-27 19:15:42,659 - INFO - 
+📂 Validando core:
+2025-09-27 19:15:42,659 - INFO -   ✅ src/renamepdfepub/core/multi_layer_cache.py (24,009 bytes)
+2025-09-27 19:15:42,659 - INFO -   ✅ src/renamepdfepub/core/performance_optimization.py (33,893 bytes)
+2025-09-27 19:15:42,659 - INFO -   ✅ src/renamepdfepub/core/production_system.py (27,138 bytes)
+2025-09-27 19:15:42,660 - INFO - 
+📂 Validando cli:
+2025-09-27 19:15:42,660 - INFO -   ✅ src/renamepdfepub/cli/query_preprocessor.py (21,380 bytes)
+2025-09-27 19:15:42,660 - INFO -   ✅ src/renamepdfepub/cli/search_integration.py (19,015 bytes)
+2025-09-27 19:15:42,660 - INFO - 
+📂 Validando tests:
+2025-09-27 19:15:42,660 - INFO -   ✅ tests/test_book_collection.py (25,133 bytes)
+2025-09-27 19:15:42,660 - INFO - 
+📂 Validando external:
+2025-09-27 19:15:42,660 - INFO -   ✅ src/external_metadata_expansion.py (31,873 bytes)
+2025-09-27 19:15:42,663 - INFO - 
+📚 Coleção de livros: 285 arquivos
+2025-09-27 19:15:42,663 - INFO -   ✅ Coleção adequada para testes extensivos
+2025-09-27 19:15:42,663 - INFO - 
+=== CARREGANDO ALGORITMOS ===
+2025-09-27 19:15:42,672 - INFO - ✅ Algoritmos principais carregados:
+2025-09-27 19:15:42,672 - INFO -   • FUZZY
+2025-09-27 19:15:42,672 - INFO -   • ISBN
+2025-09-27 19:15:42,672 - INFO -   • SEMANTIC
+2025-09-27 19:15:42,672 - INFO -   • ORCHESTRATOR
+2025-09-27 19:15:44,764 - WARNING - ⚠️  Sistema externo não disponível: cannot import name 'setup_logging' from 'src.renamepdfepub.logging_config' (/Users/menon/git/renamepdfepub/src/renamepdfepub/logging_config.py)
+2025-09-27 19:15:44,764 - INFO - 
+============================================================
+2025-09-27 19:15:44,764 - INFO - EXECUTANDO TESTES ABRANGENTES
+2025-09-27 19:15:44,764 - INFO - ============================================================
+2025-09-27 19:15:44,764 - INFO - 
+=== SELECIONANDO LIVROS PARA TESTE (max: 80) ===
+2025-09-27 19:15:44,766 - INFO - 📚 Selecionados 80 livros de 285 disponíveis
+2025-09-27 19:15:44,766 - INFO - 📖 Sample dos livros selecionados:
+2025-09-27 19:15:44,767 - INFO -   1. AI_Agents_and_Applications_v7_MEAP.epub
+2025-09-27 19:15:44,767 - INFO -   2. AI_Applications_Made_Easy_v5_MEAP.pdf
+2025-09-27 19:15:44,767 - INFO -   3. Build_Python_Web_Apps_with_Streamlit_v7_MEAP.epub
+2025-09-27 19:15:44,767 - INFO -   4. Cloud_Native_Applications.pdf
+2025-09-27 19:15:44,767 - INFO -   5. Exploring_Algorithms.pdf
+2025-09-27 19:15:44,767 - INFO -   6. Exploring_Data_Science.pdf
+2025-09-27 19:15:44,767 - INFO -   7. Exploring_Functional_Programming.pdf
+2025-09-27 19:15:44,767 - INFO -   8. Exploring_Modern_Cryptography.pdf
+2025-09-27 19:15:44,767 - INFO -   9. Exploring_Security_Privacy_and_Trust.pdf
+2025-09-27 19:15:44,767 - INFO -   10. Fight_Fraud_with_Machine_Learning_v16_MEAP.epub
+2025-09-27 19:15:44,767 - INFO -   ... e mais 70 livros
+2025-09-27 19:15:44,767 - INFO - 
+--- TESTANDO FUZZY ---
+2025-09-27 19:15:44,767 - ERROR -   ❌ Erro testando 'AI_Agents_and_Applications_v7_MEAP.epub': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,767 - ERROR -   ❌ Erro testando 'AI_Applications_Made_Easy_v5_MEAP.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,767 - ERROR -   ❌ Erro testando 'Build_Python_Web_Apps_with_Streamlit_v7_MEAP.epub': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,767 - ERROR -   ❌ Erro testando 'Cloud_Native_Applications.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,767 - ERROR -   ❌ Erro testando 'Exploring_Algorithms.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,767 - ERROR -   ❌ Erro testando 'Exploring_Data_Science.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,767 - ERROR -   ❌ Erro testando 'Exploring_Functional_Programming.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,768 - ERROR -   ❌ Erro testando 'Exploring_Modern_Cryptography.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,768 - ERROR -   ❌ Erro testando 'Exploring_Security_Privacy_and_Trust.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,768 - ERROR -   ❌ Erro testando 'Fight_Fraud_with_Machine_Learning_v16_MEAP.epub': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,768 - ERROR -   ❌ Erro testando 'Learn Computer Forensics - Second Edition.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,768 - ERROR -   ❌ Erro testando 'Little guide to building Large Language Models in 2024.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,768 - ERROR -   ❌ Erro testando 'Modern_C.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,768 - ERROR -   ❌ Erro testando 'Network Automation Cookbook.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,768 - ERROR -   ❌ Erro testando 'Privilege Escalation Techniques.epub': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,768 - ERROR -   ❌ Erro testando 'Python_Workout_Second_Edition_v3_MEAP.epub': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,768 - ERROR -   ❌ Erro testando 'Robotics_for_Programmers_v8_MEAP.epub': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,768 - ERROR -   ❌ Erro testando 'Secrets_of_the_JavaScript_Ninja_Second_.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,768 - ERROR -   ❌ Erro testando 'Software_Design_in_Python_v5_MEAP.epub': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,768 - ERROR -   ❌ Erro testando 'absolutebeginnersguidetohtmlandcss.epub': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,768 - ERROR -   ❌ Erro testando 'analyticsengineeringwithsqlanddbt.epub': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,768 - ERROR -   ❌ Erro testando 'androidmalwarebook.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,768 - ERROR -   ❌ Erro testando 'architectingdataandmachinelearningplatforms.epub': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,768 - ERROR -   ❌ Erro testando 'artofcyberwarfare.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,768 - ERROR -   ❌ Erro testando 'artofmacmalware.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,768 - ERROR -   ❌ Erro testando 'attackingnetworkprotocols.epub': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,768 - ERROR -   ❌ Erro testando 'blackhatgo.epub': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,768 - ERROR -   ❌ Erro testando 'blackhatgraphql.mobi': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,768 - ERROR -   ❌ Erro testando 'buildafrontendframeworkfromscratch.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,768 - ERROR -   ❌ Erro testando 'c31e9e33-6aa4-411f-a688-f996a0efcbd0.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,768 - ERROR -   ❌ Erro testando 'ciandcddesignpatterns.epub': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,768 - ERROR -   ❌ Erro testando 'cloudnativeanti-patterns.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,768 - ERROR -   ❌ Erro testando 'cyberjutsu.mobi': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,768 - ERROR -   ❌ Erro testando 'database-drivenwebdevelopment.epub': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,768 - ERROR -   ❌ Erro testando 'databaseinternals.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,768 - ERROR -   ❌ Erro testando 'designingapiswithswaggerandopenapi.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,769 - ERROR -   ❌ Erro testando 'developersplaybookforlargelanguagemodelsecurity.epub': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,769 - ERROR -   ❌ Erro testando 'developingappswithgpt-4andchatgpt.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,769 - ERROR -   ❌ Erro testando 'efficientmysqlperformance.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,769 - ERROR -   ❌ Erro testando 'essentialtypescript5.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,769 - ERROR -   ❌ Erro testando 'ethicalhacking.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,769 - ERROR -   ❌ Erro testando 'evadingedr.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,769 - ERROR -   ❌ Erro testando 'evasivemalware.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,769 - ERROR -   ❌ Erro testando 'foundationsofinformationsecurity.epub': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,769 - ERROR -   ❌ Erro testando 'fullstackgraphqlapplications_withreactnodejsandneo4j.epub': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,769 - ERROR -   ❌ Erro testando 'functionalprogrammingwithjavascript.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,769 - ERROR -   ❌ Erro testando 'generativeaionaws.epub': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,769 - ERROR -   ❌ Erro testando 'getprogrammingwithjavascript.epub': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,769 - ERROR -   ❌ Erro testando 'ghidrabook.epub': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,769 - ERROR -   ❌ Erro testando 'grokkingwebapplicationsecurity.epub': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,769 - ERROR -   ❌ Erro testando 'hackingapis.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,769 - ERROR -   ❌ Erro testando 'hacksleaksandrevelations.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,769 - ERROR -   ❌ Erro testando 'hands-onlargelanguagemodels.epub': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,769 - ERROR -   ❌ Erro testando 'hands-onmachinelearningwithscikit-learnkerasandtensorflow.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,769 - ERROR -   ❌ Erro testando 'high-performancewebappswithfastapi.epub': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,769 - ERROR -   ❌ Erro testando 'howjavascriptworks.epub': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,769 - ERROR -   ❌ Erro testando 'jamstackbook.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,769 - ERROR -   ❌ Erro testando 'javacodingproblems_secondedition.epub': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,769 - ERROR -   ❌ Erro testando 'javascriptonthings.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,769 - ERROR -   ❌ Erro testando 'learncprogramming.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,770 - ERROR -   ❌ Erro testando 'learninglangchain.epub': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,770 - ERROR -   ❌ Erro testando 'learningmysql.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,770 - ERROR -   ❌ Erro testando 'learningsnowflakesqlandscripting.epub': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,770 - ERROR -   ❌ Erro testando 'learningsql.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,770 - ERROR -   ❌ Erro testando 'linuxbasicsforhackers.mobi': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,770 - ERROR -   ❌ Erro testando 'low-codeai_V4.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,770 - ERROR -   ❌ Erro testando 'machinelearningwithpythoncookbook_secondedition_V2.epub': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,770 - ERROR -   ❌ Erro testando 'malwaredatascience.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,770 - ERROR -   ❌ Erro testando 'masteringthesnowflakesqlapiwithlaravel10.epub': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,770 - ERROR -   ❌ Erro testando 'modernfull-stackdevelopment.epub': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,770 - ERROR -   ❌ Erro testando 'mysql-comece-com-o-principal-banco-de-dados-open-source-do-mercado.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,770 - ERROR -   ❌ Erro testando 'mysqldatabaseservicerevealed.epub': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,773 - ERROR -   ❌ Erro testando 'orientacao-a-objetos-aprenda-seus-conceitos-e-suas-aplicabilidades-de-forma-efetiva.epub': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,774 - ERROR -   ❌ Erro testando 'pandas-python-data-wrangling-para-ciencia-de-dados.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,774 - ERROR -   ❌ Erro testando 'penetrationtesting.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,774 - ERROR -   ❌ Erro testando 'postgresqlskillsdevelopmentoncloud.epub': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,774 - ERROR -   ❌ Erro testando 'practicaliothacking.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,774 - ERROR -   ❌ Erro testando 'promptengineeringforgenerativeai.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,774 - ERROR -   ❌ Erro testando 'prooraclesqldevelopment.epub': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,774 - ERROR -   ❌ Erro testando 'pythonobject-orientedprogrammingfourthedition.pdf': FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,775 - INFO - 
+📊 RESULTADOS FUZZY:
+2025-09-27 19:15:44,775 - INFO -   Testes: 80
+2025-09-27 19:15:44,775 - INFO -   Sucessos: 0
+2025-09-27 19:15:44,776 - INFO -   Falhas: 80
+2025-09-27 19:15:44,776 - INFO -   Taxa de sucesso: 0.0%
+2025-09-27 19:15:44,776 - INFO -   Acurácia média: 0.0%
+2025-09-27 19:15:44,777 - INFO -   Tempo médio: 0.0ms
+2025-09-27 19:15:44,777 - INFO - 
+--- TESTANDO ISBN ---
+2025-09-27 19:15:44,778 - ERROR -   ❌ Erro testando 'AI_Agents_and_Applications_v7_MEAP.epub': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,779 - ERROR -   ❌ Erro testando 'AI_Applications_Made_Easy_v5_MEAP.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,779 - ERROR -   ❌ Erro testando 'Build_Python_Web_Apps_with_Streamlit_v7_MEAP.epub': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,779 - ERROR -   ❌ Erro testando 'Cloud_Native_Applications.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,780 - ERROR -   ❌ Erro testando 'Exploring_Algorithms.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,780 - ERROR -   ❌ Erro testando 'Exploring_Data_Science.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,780 - ERROR -   ❌ Erro testando 'Exploring_Functional_Programming.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,780 - ERROR -   ❌ Erro testando 'Exploring_Modern_Cryptography.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,780 - ERROR -   ❌ Erro testando 'Exploring_Security_Privacy_and_Trust.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,780 - ERROR -   ❌ Erro testando 'Fight_Fraud_with_Machine_Learning_v16_MEAP.epub': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,781 - ERROR -   ❌ Erro testando 'Learn Computer Forensics - Second Edition.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,781 - ERROR -   ❌ Erro testando 'Little guide to building Large Language Models in 2024.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,781 - ERROR -   ❌ Erro testando 'Modern_C.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,781 - ERROR -   ❌ Erro testando 'Network Automation Cookbook.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,781 - ERROR -   ❌ Erro testando 'Privilege Escalation Techniques.epub': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,781 - ERROR -   ❌ Erro testando 'Python_Workout_Second_Edition_v3_MEAP.epub': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,781 - ERROR -   ❌ Erro testando 'Robotics_for_Programmers_v8_MEAP.epub': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,781 - ERROR -   ❌ Erro testando 'Secrets_of_the_JavaScript_Ninja_Second_.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,781 - ERROR -   ❌ Erro testando 'Software_Design_in_Python_v5_MEAP.epub': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,781 - ERROR -   ❌ Erro testando 'absolutebeginnersguidetohtmlandcss.epub': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,781 - ERROR -   ❌ Erro testando 'analyticsengineeringwithsqlanddbt.epub': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,781 - ERROR -   ❌ Erro testando 'androidmalwarebook.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,781 - ERROR -   ❌ Erro testando 'architectingdataandmachinelearningplatforms.epub': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,782 - ERROR -   ❌ Erro testando 'artofcyberwarfare.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,782 - ERROR -   ❌ Erro testando 'artofmacmalware.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,782 - ERROR -   ❌ Erro testando 'attackingnetworkprotocols.epub': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,782 - ERROR -   ❌ Erro testando 'blackhatgo.epub': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,782 - ERROR -   ❌ Erro testando 'blackhatgraphql.mobi': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,782 - ERROR -   ❌ Erro testando 'buildafrontendframeworkfromscratch.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,782 - ERROR -   ❌ Erro testando 'c31e9e33-6aa4-411f-a688-f996a0efcbd0.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,782 - ERROR -   ❌ Erro testando 'ciandcddesignpatterns.epub': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,782 - ERROR -   ❌ Erro testando 'cloudnativeanti-patterns.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,782 - ERROR -   ❌ Erro testando 'cyberjutsu.mobi': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,782 - ERROR -   ❌ Erro testando 'database-drivenwebdevelopment.epub': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,782 - ERROR -   ❌ Erro testando 'databaseinternals.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,782 - ERROR -   ❌ Erro testando 'designingapiswithswaggerandopenapi.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,782 - ERROR -   ❌ Erro testando 'developersplaybookforlargelanguagemodelsecurity.epub': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,782 - ERROR -   ❌ Erro testando 'developingappswithgpt-4andchatgpt.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,782 - ERROR -   ❌ Erro testando 'efficientmysqlperformance.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,782 - ERROR -   ❌ Erro testando 'essentialtypescript5.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,782 - ERROR -   ❌ Erro testando 'ethicalhacking.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,782 - ERROR -   ❌ Erro testando 'evadingedr.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,782 - ERROR -   ❌ Erro testando 'evasivemalware.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,782 - ERROR -   ❌ Erro testando 'foundationsofinformationsecurity.epub': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,783 - ERROR -   ❌ Erro testando 'fullstackgraphqlapplications_withreactnodejsandneo4j.epub': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,783 - ERROR -   ❌ Erro testando 'functionalprogrammingwithjavascript.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,783 - ERROR -   ❌ Erro testando 'generativeaionaws.epub': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,783 - ERROR -   ❌ Erro testando 'getprogrammingwithjavascript.epub': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,783 - ERROR -   ❌ Erro testando 'ghidrabook.epub': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,783 - ERROR -   ❌ Erro testando 'grokkingwebapplicationsecurity.epub': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,783 - ERROR -   ❌ Erro testando 'hackingapis.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,783 - ERROR -   ❌ Erro testando 'hacksleaksandrevelations.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,783 - ERROR -   ❌ Erro testando 'hands-onlargelanguagemodels.epub': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,783 - ERROR -   ❌ Erro testando 'hands-onmachinelearningwithscikit-learnkerasandtensorflow.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,783 - ERROR -   ❌ Erro testando 'high-performancewebappswithfastapi.epub': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,783 - ERROR -   ❌ Erro testando 'howjavascriptworks.epub': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,783 - ERROR -   ❌ Erro testando 'jamstackbook.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,783 - ERROR -   ❌ Erro testando 'javacodingproblems_secondedition.epub': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,783 - ERROR -   ❌ Erro testando 'javascriptonthings.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,783 - ERROR -   ❌ Erro testando 'learncprogramming.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,783 - ERROR -   ❌ Erro testando 'learninglangchain.epub': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,783 - ERROR -   ❌ Erro testando 'learningmysql.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,783 - ERROR -   ❌ Erro testando 'learningsnowflakesqlandscripting.epub': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,783 - ERROR -   ❌ Erro testando 'learningsql.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,783 - ERROR -   ❌ Erro testando 'linuxbasicsforhackers.mobi': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,783 - ERROR -   ❌ Erro testando 'low-codeai_V4.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,783 - ERROR -   ❌ Erro testando 'machinelearningwithpythoncookbook_secondedition_V2.epub': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,783 - ERROR -   ❌ Erro testando 'malwaredatascience.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,783 - ERROR -   ❌ Erro testando 'masteringthesnowflakesqlapiwithlaravel10.epub': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,783 - ERROR -   ❌ Erro testando 'modernfull-stackdevelopment.epub': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,783 - ERROR -   ❌ Erro testando 'mysql-comece-com-o-principal-banco-de-dados-open-source-do-mercado.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,783 - ERROR -   ❌ Erro testando 'mysqldatabaseservicerevealed.epub': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,783 - ERROR -   ❌ Erro testando 'orientacao-a-objetos-aprenda-seus-conceitos-e-suas-aplicabilidades-de-forma-efetiva.epub': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,784 - ERROR -   ❌ Erro testando 'pandas-python-data-wrangling-para-ciencia-de-dados.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,784 - ERROR -   ❌ Erro testando 'penetrationtesting.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,784 - ERROR -   ❌ Erro testando 'postgresqlskillsdevelopmentoncloud.epub': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,784 - ERROR -   ❌ Erro testando 'practicaliothacking.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,784 - ERROR -   ❌ Erro testando 'promptengineeringforgenerativeai.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,784 - ERROR -   ❌ Erro testando 'prooraclesqldevelopment.epub': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,784 - ERROR -   ❌ Erro testando 'pythonobject-orientedprogrammingfourthedition.pdf': ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,784 - INFO - 
+📊 RESULTADOS ISBN:
+2025-09-27 19:15:44,784 - INFO -   Testes: 80
+2025-09-27 19:15:44,784 - INFO -   Sucessos: 0
+2025-09-27 19:15:44,784 - INFO -   Falhas: 80
+2025-09-27 19:15:44,784 - INFO -   Taxa de sucesso: 0.0%
+2025-09-27 19:15:44,784 - INFO -   Acurácia média: 0.0%
+2025-09-27 19:15:44,784 - INFO -   Tempo médio: 0.0ms
+2025-09-27 19:15:44,784 - INFO - 
+--- TESTANDO SEMANTIC ---
+2025-09-27 19:15:44,784 - ERROR -   ❌ Erro testando 'AI_Agents_and_Applications_v7_MEAP.epub': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,784 - ERROR -   ❌ Erro testando 'AI_Applications_Made_Easy_v5_MEAP.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,784 - ERROR -   ❌ Erro testando 'Build_Python_Web_Apps_with_Streamlit_v7_MEAP.epub': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,784 - ERROR -   ❌ Erro testando 'Cloud_Native_Applications.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,784 - ERROR -   ❌ Erro testando 'Exploring_Algorithms.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,784 - ERROR -   ❌ Erro testando 'Exploring_Data_Science.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,784 - ERROR -   ❌ Erro testando 'Exploring_Functional_Programming.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,784 - ERROR -   ❌ Erro testando 'Exploring_Modern_Cryptography.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,784 - ERROR -   ❌ Erro testando 'Exploring_Security_Privacy_and_Trust.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,784 - ERROR -   ❌ Erro testando 'Fight_Fraud_with_Machine_Learning_v16_MEAP.epub': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,784 - ERROR -   ❌ Erro testando 'Learn Computer Forensics - Second Edition.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,784 - ERROR -   ❌ Erro testando 'Little guide to building Large Language Models in 2024.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,784 - ERROR -   ❌ Erro testando 'Modern_C.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,784 - ERROR -   ❌ Erro testando 'Network Automation Cookbook.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,784 - ERROR -   ❌ Erro testando 'Privilege Escalation Techniques.epub': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,784 - ERROR -   ❌ Erro testando 'Python_Workout_Second_Edition_v3_MEAP.epub': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,785 - ERROR -   ❌ Erro testando 'Robotics_for_Programmers_v8_MEAP.epub': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,785 - ERROR -   ❌ Erro testando 'Secrets_of_the_JavaScript_Ninja_Second_.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,785 - ERROR -   ❌ Erro testando 'Software_Design_in_Python_v5_MEAP.epub': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,785 - ERROR -   ❌ Erro testando 'absolutebeginnersguidetohtmlandcss.epub': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,785 - ERROR -   ❌ Erro testando 'analyticsengineeringwithsqlanddbt.epub': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,785 - ERROR -   ❌ Erro testando 'androidmalwarebook.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,785 - ERROR -   ❌ Erro testando 'architectingdataandmachinelearningplatforms.epub': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,785 - ERROR -   ❌ Erro testando 'artofcyberwarfare.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,785 - ERROR -   ❌ Erro testando 'artofmacmalware.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,785 - ERROR -   ❌ Erro testando 'attackingnetworkprotocols.epub': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,785 - ERROR -   ❌ Erro testando 'blackhatgo.epub': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,785 - ERROR -   ❌ Erro testando 'blackhatgraphql.mobi': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,785 - ERROR -   ❌ Erro testando 'buildafrontendframeworkfromscratch.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,785 - ERROR -   ❌ Erro testando 'c31e9e33-6aa4-411f-a688-f996a0efcbd0.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,785 - ERROR -   ❌ Erro testando 'ciandcddesignpatterns.epub': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,785 - ERROR -   ❌ Erro testando 'cloudnativeanti-patterns.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,785 - ERROR -   ❌ Erro testando 'cyberjutsu.mobi': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,785 - ERROR -   ❌ Erro testando 'database-drivenwebdevelopment.epub': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,785 - ERROR -   ❌ Erro testando 'databaseinternals.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,785 - ERROR -   ❌ Erro testando 'designingapiswithswaggerandopenapi.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,785 - ERROR -   ❌ Erro testando 'developersplaybookforlargelanguagemodelsecurity.epub': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,785 - ERROR -   ❌ Erro testando 'developingappswithgpt-4andchatgpt.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,786 - ERROR -   ❌ Erro testando 'efficientmysqlperformance.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,786 - ERROR -   ❌ Erro testando 'essentialtypescript5.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,786 - ERROR -   ❌ Erro testando 'ethicalhacking.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,786 - ERROR -   ❌ Erro testando 'evadingedr.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,786 - ERROR -   ❌ Erro testando 'evasivemalware.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,786 - ERROR -   ❌ Erro testando 'foundationsofinformationsecurity.epub': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,787 - ERROR -   ❌ Erro testando 'fullstackgraphqlapplications_withreactnodejsandneo4j.epub': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,787 - ERROR -   ❌ Erro testando 'functionalprogrammingwithjavascript.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,787 - ERROR -   ❌ Erro testando 'generativeaionaws.epub': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,787 - ERROR -   ❌ Erro testando 'getprogrammingwithjavascript.epub': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,787 - ERROR -   ❌ Erro testando 'ghidrabook.epub': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,788 - ERROR -   ❌ Erro testando 'grokkingwebapplicationsecurity.epub': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,788 - ERROR -   ❌ Erro testando 'hackingapis.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,789 - ERROR -   ❌ Erro testando 'hacksleaksandrevelations.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,789 - ERROR -   ❌ Erro testando 'hands-onlargelanguagemodels.epub': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,789 - ERROR -   ❌ Erro testando 'hands-onmachinelearningwithscikit-learnkerasandtensorflow.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,789 - ERROR -   ❌ Erro testando 'high-performancewebappswithfastapi.epub': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,789 - ERROR -   ❌ Erro testando 'howjavascriptworks.epub': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,789 - ERROR -   ❌ Erro testando 'jamstackbook.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,789 - ERROR -   ❌ Erro testando 'javacodingproblems_secondedition.epub': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,789 - ERROR -   ❌ Erro testando 'javascriptonthings.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,790 - ERROR -   ❌ Erro testando 'learncprogramming.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,790 - ERROR -   ❌ Erro testando 'learninglangchain.epub': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,790 - ERROR -   ❌ Erro testando 'learningmysql.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,790 - ERROR -   ❌ Erro testando 'learningsnowflakesqlandscripting.epub': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,790 - ERROR -   ❌ Erro testando 'learningsql.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,790 - ERROR -   ❌ Erro testando 'linuxbasicsforhackers.mobi': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,790 - ERROR -   ❌ Erro testando 'low-codeai_V4.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,790 - ERROR -   ❌ Erro testando 'machinelearningwithpythoncookbook_secondedition_V2.epub': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,790 - ERROR -   ❌ Erro testando 'malwaredatascience.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,790 - ERROR -   ❌ Erro testando 'masteringthesnowflakesqlapiwithlaravel10.epub': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,791 - ERROR -   ❌ Erro testando 'modernfull-stackdevelopment.epub': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,791 - ERROR -   ❌ Erro testando 'mysql-comece-com-o-principal-banco-de-dados-open-source-do-mercado.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,791 - ERROR -   ❌ Erro testando 'mysqldatabaseservicerevealed.epub': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,791 - ERROR -   ❌ Erro testando 'orientacao-a-objetos-aprenda-seus-conceitos-e-suas-aplicabilidades-de-forma-efetiva.epub': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,791 - ERROR -   ❌ Erro testando 'pandas-python-data-wrangling-para-ciencia-de-dados.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,791 - ERROR -   ❌ Erro testando 'penetrationtesting.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,791 - ERROR -   ❌ Erro testando 'postgresqlskillsdevelopmentoncloud.epub': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,791 - ERROR -   ❌ Erro testando 'practicaliothacking.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,791 - ERROR -   ❌ Erro testando 'promptengineeringforgenerativeai.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,791 - ERROR -   ❌ Erro testando 'prooraclesqldevelopment.epub': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,791 - ERROR -   ❌ Erro testando 'pythonobject-orientedprogrammingfourthedition.pdf': SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,791 - INFO - 
+📊 RESULTADOS SEMANTIC:
+2025-09-27 19:15:44,792 - INFO -   Testes: 80
+2025-09-27 19:15:44,792 - INFO -   Sucessos: 0
+2025-09-27 19:15:44,792 - INFO -   Falhas: 80
+2025-09-27 19:15:44,792 - INFO -   Taxa de sucesso: 0.0%
+2025-09-27 19:15:44,792 - INFO -   Acurácia média: 0.0%
+2025-09-27 19:15:44,793 - INFO -   Tempo médio: 0.0ms
+2025-09-27 19:15:44,793 - INFO - 
+--- TESTANDO ORCHESTRATOR ---
+2025-09-27 19:15:44,793 - ERROR -   ❌ Erro testando 'AI_Agents_and_Applications_v7_MEAP.epub': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,793 - ERROR -   ❌ Erro testando 'AI_Applications_Made_Easy_v5_MEAP.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,793 - ERROR -   ❌ Erro testando 'Build_Python_Web_Apps_with_Streamlit_v7_MEAP.epub': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,793 - ERROR -   ❌ Erro testando 'Cloud_Native_Applications.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,793 - ERROR -   ❌ Erro testando 'Exploring_Algorithms.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,793 - ERROR -   ❌ Erro testando 'Exploring_Data_Science.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,793 - ERROR -   ❌ Erro testando 'Exploring_Functional_Programming.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,793 - ERROR -   ❌ Erro testando 'Exploring_Modern_Cryptography.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,793 - ERROR -   ❌ Erro testando 'Exploring_Security_Privacy_and_Trust.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,793 - ERROR -   ❌ Erro testando 'Fight_Fraud_with_Machine_Learning_v16_MEAP.epub': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,793 - ERROR -   ❌ Erro testando 'Learn Computer Forensics - Second Edition.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,794 - ERROR -   ❌ Erro testando 'Little guide to building Large Language Models in 2024.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,794 - ERROR -   ❌ Erro testando 'Modern_C.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,794 - ERROR -   ❌ Erro testando 'Network Automation Cookbook.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,794 - ERROR -   ❌ Erro testando 'Privilege Escalation Techniques.epub': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,794 - ERROR -   ❌ Erro testando 'Python_Workout_Second_Edition_v3_MEAP.epub': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,794 - ERROR -   ❌ Erro testando 'Robotics_for_Programmers_v8_MEAP.epub': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,795 - ERROR -   ❌ Erro testando 'Secrets_of_the_JavaScript_Ninja_Second_.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,795 - ERROR -   ❌ Erro testando 'Software_Design_in_Python_v5_MEAP.epub': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,795 - ERROR -   ❌ Erro testando 'absolutebeginnersguidetohtmlandcss.epub': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,795 - ERROR -   ❌ Erro testando 'analyticsengineeringwithsqlanddbt.epub': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,795 - ERROR -   ❌ Erro testando 'androidmalwarebook.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,796 - ERROR -   ❌ Erro testando 'architectingdataandmachinelearningplatforms.epub': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,796 - ERROR -   ❌ Erro testando 'artofcyberwarfare.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,796 - ERROR -   ❌ Erro testando 'artofmacmalware.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,796 - ERROR -   ❌ Erro testando 'attackingnetworkprotocols.epub': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,797 - ERROR -   ❌ Erro testando 'blackhatgo.epub': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,798 - ERROR -   ❌ Erro testando 'blackhatgraphql.mobi': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,798 - ERROR -   ❌ Erro testando 'buildafrontendframeworkfromscratch.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,798 - ERROR -   ❌ Erro testando 'c31e9e33-6aa4-411f-a688-f996a0efcbd0.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,798 - ERROR -   ❌ Erro testando 'ciandcddesignpatterns.epub': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,798 - ERROR -   ❌ Erro testando 'cloudnativeanti-patterns.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,798 - ERROR -   ❌ Erro testando 'cyberjutsu.mobi': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,798 - ERROR -   ❌ Erro testando 'database-drivenwebdevelopment.epub': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,798 - ERROR -   ❌ Erro testando 'databaseinternals.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,798 - ERROR -   ❌ Erro testando 'designingapiswithswaggerandopenapi.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,798 - ERROR -   ❌ Erro testando 'developersplaybookforlargelanguagemodelsecurity.epub': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,798 - ERROR -   ❌ Erro testando 'developingappswithgpt-4andchatgpt.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,798 - ERROR -   ❌ Erro testando 'efficientmysqlperformance.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,798 - ERROR -   ❌ Erro testando 'essentialtypescript5.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,798 - ERROR -   ❌ Erro testando 'ethicalhacking.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,799 - ERROR -   ❌ Erro testando 'evadingedr.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,799 - ERROR -   ❌ Erro testando 'evasivemalware.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,799 - ERROR -   ❌ Erro testando 'foundationsofinformationsecurity.epub': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,799 - ERROR -   ❌ Erro testando 'fullstackgraphqlapplications_withreactnodejsandneo4j.epub': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,799 - ERROR -   ❌ Erro testando 'functionalprogrammingwithjavascript.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,799 - ERROR -   ❌ Erro testando 'generativeaionaws.epub': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,799 - ERROR -   ❌ Erro testando 'getprogrammingwithjavascript.epub': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,799 - ERROR -   ❌ Erro testando 'ghidrabook.epub': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,799 - ERROR -   ❌ Erro testando 'grokkingwebapplicationsecurity.epub': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,799 - ERROR -   ❌ Erro testando 'hackingapis.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,799 - ERROR -   ❌ Erro testando 'hacksleaksandrevelations.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,799 - ERROR -   ❌ Erro testando 'hands-onlargelanguagemodels.epub': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,799 - ERROR -   ❌ Erro testando 'hands-onmachinelearningwithscikit-learnkerasandtensorflow.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,799 - ERROR -   ❌ Erro testando 'high-performancewebappswithfastapi.epub': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,799 - ERROR -   ❌ Erro testando 'howjavascriptworks.epub': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,799 - ERROR -   ❌ Erro testando 'jamstackbook.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,799 - ERROR -   ❌ Erro testando 'javacodingproblems_secondedition.epub': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,799 - ERROR -   ❌ Erro testando 'javascriptonthings.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,799 - ERROR -   ❌ Erro testando 'learncprogramming.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,799 - ERROR -   ❌ Erro testando 'learninglangchain.epub': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,799 - ERROR -   ❌ Erro testando 'learningmysql.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,799 - ERROR -   ❌ Erro testando 'learningsnowflakesqlandscripting.epub': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,800 - ERROR -   ❌ Erro testando 'learningsql.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,800 - ERROR -   ❌ Erro testando 'linuxbasicsforhackers.mobi': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,800 - ERROR -   ❌ Erro testando 'low-codeai_V4.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,800 - ERROR -   ❌ Erro testando 'machinelearningwithpythoncookbook_secondedition_V2.epub': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,800 - ERROR -   ❌ Erro testando 'malwaredatascience.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,800 - ERROR -   ❌ Erro testando 'masteringthesnowflakesqlapiwithlaravel10.epub': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,800 - ERROR -   ❌ Erro testando 'modernfull-stackdevelopment.epub': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,800 - ERROR -   ❌ Erro testando 'mysql-comece-com-o-principal-banco-de-dados-open-source-do-mercado.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,800 - ERROR -   ❌ Erro testando 'mysqldatabaseservicerevealed.epub': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,800 - ERROR -   ❌ Erro testando 'orientacao-a-objetos-aprenda-seus-conceitos-e-suas-aplicabilidades-de-forma-efetiva.epub': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,800 - ERROR -   ❌ Erro testando 'pandas-python-data-wrangling-para-ciencia-de-dados.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,800 - ERROR -   ❌ Erro testando 'penetrationtesting.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,800 - ERROR -   ❌ Erro testando 'postgresqlskillsdevelopmentoncloud.epub': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,800 - ERROR -   ❌ Erro testando 'practicaliothacking.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,800 - ERROR -   ❌ Erro testando 'promptengineeringforgenerativeai.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,800 - ERROR -   ❌ Erro testando 'prooraclesqldevelopment.epub': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,800 - ERROR -   ❌ Erro testando 'pythonobject-orientedprogrammingfourthedition.pdf': SearchOrchestrator.search() got an unexpected keyword argument 'limit'
+2025-09-27 19:15:44,801 - INFO - 
+📊 RESULTADOS ORCHESTRATOR:
+2025-09-27 19:15:44,801 - INFO -   Testes: 80
+2025-09-27 19:15:44,801 - INFO -   Sucessos: 0
+2025-09-27 19:15:44,801 - INFO -   Falhas: 80
+2025-09-27 19:15:44,801 - INFO -   Taxa de sucesso: 0.0%
+2025-09-27 19:15:44,801 - INFO -   Acurácia média: 0.0%
+2025-09-27 19:15:44,801 - INFO -   Tempo médio: 0.0ms
+2025-09-27 19:15:44,801 - INFO - 
+============================================================
+2025-09-27 19:15:44,801 - INFO - ANÁLISE DE PROGRESSÃO DE ACURÁCIA
+2025-09-27 19:15:44,801 - INFO - ============================================================
+2025-09-27 19:15:44,801 - INFO - 
+FUZZY:
+2025-09-27 19:15:44,801 - INFO -   Acurácia atual: 0.0%
+2025-09-27 19:15:44,802 - INFO -   Targets atingidos: []
+2025-09-27 19:15:44,802 - INFO -   Próximo target: 10%
+2025-09-27 19:15:44,802 - INFO -   Score combinado: 0.200
+2025-09-27 19:15:44,802 - INFO - 
+ISBN:
+2025-09-27 19:15:44,802 - INFO -   Acurácia atual: 0.0%
+2025-09-27 19:15:44,802 - INFO -   Targets atingidos: []
+2025-09-27 19:15:44,802 - INFO -   Próximo target: 10%
+2025-09-27 19:15:44,802 - INFO -   Score combinado: 0.200
+2025-09-27 19:15:44,802 - INFO - 
+SEMANTIC:
+2025-09-27 19:15:44,802 - INFO -   Acurácia atual: 0.0%
+2025-09-27 19:15:44,803 - INFO -   Targets atingidos: []
+2025-09-27 19:15:44,803 - INFO -   Próximo target: 10%
+2025-09-27 19:15:44,803 - INFO -   Score combinado: 0.200
+2025-09-27 19:15:44,803 - INFO - 
+ORCHESTRATOR:
+2025-09-27 19:15:44,803 - INFO -   Acurácia atual: 0.0%
+2025-09-27 19:15:44,803 - INFO -   Targets atingidos: []
+2025-09-27 19:15:44,803 - INFO -   Próximo target: 10%
+2025-09-27 19:15:44,803 - INFO -   Score combinado: 0.200
+2025-09-27 19:15:44,803 - INFO - 
+🏆 MELHOR ALGORITMO: FUZZY
+2025-09-27 19:15:44,803 - INFO -    Score: 0.200
+2025-09-27 19:15:44,803 - INFO -    Acurácia: 0.0%
+2025-09-27 19:15:44,803 - INFO - 
+💡 RECOMENDAÇÕES:
+2025-09-27 19:15:44,803 - INFO -    🔧 fuzzy: Refinar urgentemente (< 50%)
+2025-09-27 19:15:44,803 - INFO -    🔧 isbn: Refinar urgentemente (< 50%)
+2025-09-27 19:15:44,803 - INFO -    🔧 semantic: Refinar urgentemente (< 50%)
+2025-09-27 19:15:44,803 - INFO -    🔧 orchestrator: Refinar urgentemente (< 50%)
+2025-09-27 19:15:44,803 - INFO - 
+============================================================
+2025-09-27 19:15:44,803 - INFO - TESTANDO INTEGRAÇÃO EXTERNA
+2025-09-27 19:15:44,803 - INFO - ============================================================
+2025-09-27 19:15:44,803 - WARNING - ⚠️  Sistema externo não disponível - pulando testes
+2025-09-27 19:15:44,803 - INFO - 
+============================================================
+2025-09-27 19:15:44,803 - INFO - GERANDO RELATÓRIO EXECUTIVO
+2025-09-27 19:15:44,803 - INFO - ============================================================
+2025-09-27 19:15:44,803 - INFO - 
+=== SELECIONANDO LIVROS PARA TESTE (max: 100) ===
+2025-09-27 19:15:44,805 - INFO - 📚 Selecionados 100 livros de 285 disponíveis
+2025-09-27 19:15:44,805 - INFO - 📖 Sample dos livros selecionados:
+2025-09-27 19:15:44,805 - INFO -   1. AI_Agents_and_Applications_v7_MEAP.epub
+2025-09-27 19:15:44,805 - INFO -   2. AI_Applications_Made_Easy_v5_MEAP.epub
+2025-09-27 19:15:44,805 - INFO -   3. A_Damn_Fine_Stable_Diffusion_Book_v6_MEAP.epub
+2025-09-27 19:15:44,805 - INFO -   4. Build_Python_Web_Apps_with_Streamlit_v7_MEAP.epub
+2025-09-27 19:15:44,805 - INFO -   5. CNH-e.pdf.pdf
+2025-09-27 19:15:44,805 - INFO -   6. Emotional_UX_v3_MEAP.epub
+2025-09-27 19:15:44,805 - INFO -   7. Exploring_Algorithms.pdf
+2025-09-27 19:15:44,805 - INFO -   8. Exploring_Cloud_Computing.pdf
+2025-09-27 19:15:44,805 - INFO -   9. Exploring_Deep_Learning_for_Language.pdf
+2025-09-27 19:15:44,806 - INFO -   10. Exploring_Functional_Programming.pdf
+2025-09-27 19:15:44,806 - INFO -   ... e mais 90 livros
+2025-09-27 19:15:44,811 - INFO - 📊 Relatórios gerados:
+2025-09-27 19:15:44,811 - INFO -   JSON: /Users/menon/git/renamepdfepub/executive_results/executive_report.json
+2025-09-27 19:15:44,811 - INFO -   HTML: /Users/menon/git/renamepdfepub/executive_results/executive_report.html
+2025-09-27 19:15:44,811 - INFO -   Resumo: /Users/menon/git/renamepdfepub/executive_results/executive_summary.txt
+2025-09-27 19:15:44,811 - INFO - 
+================================================================================
+2025-09-27 19:15:44,811 - INFO - 🎉 VALIDAÇÃO COMPLETA CONCLUÍDA COM SUCESSO!
+2025-09-27 19:15:44,812 - INFO - ================================================================================
+2025-09-27 19:15:44,812 - INFO - ⏱️  Tempo total: 2.2s
+2025-09-27 19:15:44,812 - INFO - 🎯 Melhor acurácia: 0.0%
+2025-09-27 19:15:44,812 - INFO - 📊 Testes realizados: 320
+2025-09-27 19:15:44,812 - INFO - ✅ Sucessos: 0
+2025-09-27 19:15:44,812 - INFO - ❌ Falhas: 320
+2025-09-27 19:15:44,812 - INFO - ⚠️  META DE 50% NÃO ATINGIDA - REFINAMENTO NECESSÁRIO
+2025-09-27 19:15:44,812 - INFO - 📁 Relatórios em: /Users/menon/git/renamepdfepub/executive_results
+2025-09-27 19:15:44,812 - INFO - ================================================================================

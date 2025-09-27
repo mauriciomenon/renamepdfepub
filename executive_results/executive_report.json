@@ -1,0 +1,2401 @@
+{
+  "executive_summary": {
+    "test_date": "2025-09-27T19:15:44.803696",
+    "total_execution_time": 2.1448709964752197,
+    "phase": "COMPLETE",
+    "books_tested": 100,
+    "algorithms_tested": 4,
+    "best_accuracy": 0.0,
+    "avg_response_time": 0
+  },
+  "detailed_results": {
+    "fuzzy": {
+      "algorithm": "fuzzy",
+      "total_tests": 80,
+      "successful_tests": 0,
+      "failed_tests": 80,
+      "response_times": [],
+      "accuracy_scores": [],
+      "errors": [
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'"
+      ],
+      "detailed_results": [
+        {
+          "book": "AI_Agents_and_Applications_v7_MEAP.epub",
+          "query": "AI Agents and Applications",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "AI_Applications_Made_Easy_v5_MEAP.pdf",
+          "query": "AI Applications Made Easy",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Build_Python_Web_Apps_with_Streamlit_v7_MEAP.epub",
+          "query": "Build Python Web Apps with Streamlit",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Cloud_Native_Applications.pdf",
+          "query": "Cloud Native Applications",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Exploring_Algorithms.pdf",
+          "query": "Exploring Algorithms",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Exploring_Data_Science.pdf",
+          "query": "Exploring Data Science",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Exploring_Functional_Programming.pdf",
+          "query": "Exploring Functional Programming",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Exploring_Modern_Cryptography.pdf",
+          "query": "Exploring Modern Cryptography",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Exploring_Security_Privacy_and_Trust.pdf",
+          "query": "Exploring Security Privacy and Trust",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Fight_Fraud_with_Machine_Learning_v16_MEAP.epub",
+          "query": "Fight Fraud with Machine Learning",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Learn Computer Forensics - Second Edition.pdf",
+          "query": "Learn Computer Forensics",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Little guide to building Large Language Models in 2024.pdf",
+          "query": "Little guide to building Large Language Models in 2024",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Modern_C.pdf",
+          "query": "Modern C",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Network Automation Cookbook.pdf",
+          "query": "Network Automation Cookbook",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Privilege Escalation Techniques.epub",
+          "query": "Privilege Escalation Techniques",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Python_Workout_Second_Edition_v3_MEAP.epub",
+          "query": "Python Workout",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Robotics_for_Programmers_v8_MEAP.epub",
+          "query": "Robotics for Programmers",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Secrets_of_the_JavaScript_Ninja_Second_.pdf",
+          "query": "Secrets of the JavaScript Ninja Second",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Software_Design_in_Python_v5_MEAP.epub",
+          "query": "Software Design in Python",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "absolutebeginnersguidetohtmlandcss.epub",
+          "query": "absolutebeginnersguidetohtmlandcss",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "analyticsengineeringwithsqlanddbt.epub",
+          "query": "analyticsengineeringwithsqlanddbt",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "androidmalwarebook.pdf",
+          "query": "androidmalwarebook",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "architectingdataandmachinelearningplatforms.epub",
+          "query": "architectingdataandmachinelearningplatforms",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "artofcyberwarfare.pdf",
+          "query": "artofcyberwarfare",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "artofmacmalware.pdf",
+          "query": "artofmacmalware",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "attackingnetworkprotocols.epub",
+          "query": "attackingnetworkprotocols",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "blackhatgo.epub",
+          "query": "blackhatgo",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "blackhatgraphql.mobi",
+          "query": "blackhatgraphql",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "buildafrontendframeworkfromscratch.pdf",
+          "query": "buildafrontendframeworkfromscratch",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "c31e9e33-6aa4-411f-a688-f996a0efcbd0.pdf",
+          "query": "c31e9e33 6aa4 411f a688 f996a0efcbd0",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "ciandcddesignpatterns.epub",
+          "query": "ciandcddesignpatterns",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "cloudnativeanti-patterns.pdf",
+          "query": "cloudnativeanti patterns",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "cyberjutsu.mobi",
+          "query": "cyberjutsu",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "database-drivenwebdevelopment.epub",
+          "query": "database drivenwebdevelopment",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "databaseinternals.pdf",
+          "query": "databaseinternals",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "designingapiswithswaggerandopenapi.pdf",
+          "query": "designingapiswithswaggerandopenapi",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "developersplaybookforlargelanguagemodelsecurity.epub",
+          "query": "developersplaybookforlargelanguagemodelsecurity",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "developingappswithgpt-4andchatgpt.pdf",
+          "query": "developingappswithgpt 4andchatgpt",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "efficientmysqlperformance.pdf",
+          "query": "efficientmysqlperformance",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "essentialtypescript5.pdf",
+          "query": "essentialtypescript5",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "ethicalhacking.pdf",
+          "query": "ethicalhacking",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "evadingedr.pdf",
+          "query": "evadingedr",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "evasivemalware.pdf",
+          "query": "evasivemalware",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "foundationsofinformationsecurity.epub",
+          "query": "foundationsofinformationsecurity",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "fullstackgraphqlapplications_withreactnodejsandneo4j.epub",
+          "query": "fullstackgraphqlapplications withreactnodejsandneo4j",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "functionalprogrammingwithjavascript.pdf",
+          "query": "functionalprogrammingwithjavascript",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "generativeaionaws.epub",
+          "query": "generativeaionaws",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "getprogrammingwithjavascript.epub",
+          "query": "getprogrammingwithjavascript",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "ghidrabook.epub",
+          "query": "ghidrabook",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "grokkingwebapplicationsecurity.epub",
+          "query": "grokkingwebapplicationsecurity",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "hackingapis.pdf",
+          "query": "hackingapis",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "hacksleaksandrevelations.pdf",
+          "query": "hacksleaksandrevelations",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "hands-onlargelanguagemodels.epub",
+          "query": "hands onlargelanguagemodels",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "hands-onmachinelearningwithscikit-learnkerasandtensorflow.pdf",
+          "query": "hands onmachinelearningwithscikit learnkerasandtensorflow",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "high-performancewebappswithfastapi.epub",
+          "query": "high performancewebappswithfastapi",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "howjavascriptworks.epub",
+          "query": "howjavascriptworks",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "jamstackbook.pdf",
+          "query": "jamstackbook",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "javacodingproblems_secondedition.epub",
+          "query": "javacodingproblems secondedition",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "javascriptonthings.pdf",
+          "query": "javascriptonthings",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "learncprogramming.pdf",
+          "query": "learncprogramming",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "learninglangchain.epub",
+          "query": "learninglangchain",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "learningmysql.pdf",
+          "query": "learningmysql",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "learningsnowflakesqlandscripting.epub",
+          "query": "learningsnowflakesqlandscripting",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "learningsql.pdf",
+          "query": "learningsql",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "linuxbasicsforhackers.mobi",
+          "query": "linuxbasicsforhackers",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "low-codeai_V4.pdf",
+          "query": "low codeai",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "machinelearningwithpythoncookbook_secondedition_V2.epub",
+          "query": "machinelearningwithpythoncookbook secondedition",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "malwaredatascience.pdf",
+          "query": "malwaredatascience",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "masteringthesnowflakesqlapiwithlaravel10.epub",
+          "query": "masteringthesnowflakesqlapiwithlaravel10",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "modernfull-stackdevelopment.epub",
+          "query": "modernfull stackdevelopment",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "mysql-comece-com-o-principal-banco-de-dados-open-source-do-mercado.pdf",
+          "query": "mysql comece com o principal banco de dados open source do mercado",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "mysqldatabaseservicerevealed.epub",
+          "query": "mysqldatabaseservicerevealed",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "orientacao-a-objetos-aprenda-seus-conceitos-e-suas-aplicabilidades-de-forma-efetiva.epub",
+          "query": "orientacao a objetos aprenda seus conceitos e suas aplicabilidades de forma efetiva",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "pandas-python-data-wrangling-para-ciencia-de-dados.pdf",
+          "query": "pandas python data wrangling para ciencia de dados",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "penetrationtesting.pdf",
+          "query": "penetrationtesting",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "postgresqlskillsdevelopmentoncloud.epub",
+          "query": "postgresqlskillsdevelopmentoncloud",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "practicaliothacking.pdf",
+          "query": "practicaliothacking",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "promptengineeringforgenerativeai.pdf",
+          "query": "promptengineeringforgenerativeai",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "prooraclesqldevelopment.epub",
+          "query": "prooraclesqldevelopment",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "pythonobject-orientedprogrammingfourthedition.pdf",
+          "query": "pythonobject orientedprogrammingfourthedition",
+          "error": "FuzzySearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        }
+      ],
+      "success_rate": 0.0
+    },
+    "isbn": {
+      "algorithm": "isbn",
+      "total_tests": 80,
+      "successful_tests": 0,
+      "failed_tests": 80,
+      "response_times": [],
+      "accuracy_scores": [],
+      "errors": [
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'"
+      ],
+      "detailed_results": [
+        {
+          "book": "AI_Agents_and_Applications_v7_MEAP.epub",
+          "query": "AI Agents and Applications",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "AI_Applications_Made_Easy_v5_MEAP.pdf",
+          "query": "AI Applications Made Easy",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Build_Python_Web_Apps_with_Streamlit_v7_MEAP.epub",
+          "query": "Build Python Web Apps with Streamlit",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Cloud_Native_Applications.pdf",
+          "query": "Cloud Native Applications",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Exploring_Algorithms.pdf",
+          "query": "Exploring Algorithms",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Exploring_Data_Science.pdf",
+          "query": "Exploring Data Science",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Exploring_Functional_Programming.pdf",
+          "query": "Exploring Functional Programming",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Exploring_Modern_Cryptography.pdf",
+          "query": "Exploring Modern Cryptography",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Exploring_Security_Privacy_and_Trust.pdf",
+          "query": "Exploring Security Privacy and Trust",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Fight_Fraud_with_Machine_Learning_v16_MEAP.epub",
+          "query": "Fight Fraud with Machine Learning",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Learn Computer Forensics - Second Edition.pdf",
+          "query": "Learn Computer Forensics",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Little guide to building Large Language Models in 2024.pdf",
+          "query": "Little guide to building Large Language Models in 2024",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Modern_C.pdf",
+          "query": "Modern C",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Network Automation Cookbook.pdf",
+          "query": "Network Automation Cookbook",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Privilege Escalation Techniques.epub",
+          "query": "Privilege Escalation Techniques",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Python_Workout_Second_Edition_v3_MEAP.epub",
+          "query": "Python Workout",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Robotics_for_Programmers_v8_MEAP.epub",
+          "query": "Robotics for Programmers",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Secrets_of_the_JavaScript_Ninja_Second_.pdf",
+          "query": "Secrets of the JavaScript Ninja Second",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Software_Design_in_Python_v5_MEAP.epub",
+          "query": "Software Design in Python",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "absolutebeginnersguidetohtmlandcss.epub",
+          "query": "absolutebeginnersguidetohtmlandcss",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "analyticsengineeringwithsqlanddbt.epub",
+          "query": "analyticsengineeringwithsqlanddbt",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "androidmalwarebook.pdf",
+          "query": "androidmalwarebook",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "architectingdataandmachinelearningplatforms.epub",
+          "query": "architectingdataandmachinelearningplatforms",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "artofcyberwarfare.pdf",
+          "query": "artofcyberwarfare",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "artofmacmalware.pdf",
+          "query": "artofmacmalware",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "attackingnetworkprotocols.epub",
+          "query": "attackingnetworkprotocols",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "blackhatgo.epub",
+          "query": "blackhatgo",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "blackhatgraphql.mobi",
+          "query": "blackhatgraphql",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "buildafrontendframeworkfromscratch.pdf",
+          "query": "buildafrontendframeworkfromscratch",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "c31e9e33-6aa4-411f-a688-f996a0efcbd0.pdf",
+          "query": "c31e9e33 6aa4 411f a688 f996a0efcbd0",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "ciandcddesignpatterns.epub",
+          "query": "ciandcddesignpatterns",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "cloudnativeanti-patterns.pdf",
+          "query": "cloudnativeanti patterns",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "cyberjutsu.mobi",
+          "query": "cyberjutsu",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "database-drivenwebdevelopment.epub",
+          "query": "database drivenwebdevelopment",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "databaseinternals.pdf",
+          "query": "databaseinternals",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "designingapiswithswaggerandopenapi.pdf",
+          "query": "designingapiswithswaggerandopenapi",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "developersplaybookforlargelanguagemodelsecurity.epub",
+          "query": "developersplaybookforlargelanguagemodelsecurity",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "developingappswithgpt-4andchatgpt.pdf",
+          "query": "developingappswithgpt 4andchatgpt",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "efficientmysqlperformance.pdf",
+          "query": "efficientmysqlperformance",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "essentialtypescript5.pdf",
+          "query": "essentialtypescript5",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "ethicalhacking.pdf",
+          "query": "ethicalhacking",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "evadingedr.pdf",
+          "query": "evadingedr",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "evasivemalware.pdf",
+          "query": "evasivemalware",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "foundationsofinformationsecurity.epub",
+          "query": "foundationsofinformationsecurity",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "fullstackgraphqlapplications_withreactnodejsandneo4j.epub",
+          "query": "fullstackgraphqlapplications withreactnodejsandneo4j",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "functionalprogrammingwithjavascript.pdf",
+          "query": "functionalprogrammingwithjavascript",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "generativeaionaws.epub",
+          "query": "generativeaionaws",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "getprogrammingwithjavascript.epub",
+          "query": "getprogrammingwithjavascript",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "ghidrabook.epub",
+          "query": "ghidrabook",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "grokkingwebapplicationsecurity.epub",
+          "query": "grokkingwebapplicationsecurity",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "hackingapis.pdf",
+          "query": "hackingapis",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "hacksleaksandrevelations.pdf",
+          "query": "hacksleaksandrevelations",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "hands-onlargelanguagemodels.epub",
+          "query": "hands onlargelanguagemodels",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "hands-onmachinelearningwithscikit-learnkerasandtensorflow.pdf",
+          "query": "hands onmachinelearningwithscikit learnkerasandtensorflow",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "high-performancewebappswithfastapi.epub",
+          "query": "high performancewebappswithfastapi",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "howjavascriptworks.epub",
+          "query": "howjavascriptworks",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "jamstackbook.pdf",
+          "query": "jamstackbook",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "javacodingproblems_secondedition.epub",
+          "query": "javacodingproblems secondedition",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "javascriptonthings.pdf",
+          "query": "javascriptonthings",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "learncprogramming.pdf",
+          "query": "learncprogramming",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "learninglangchain.epub",
+          "query": "learninglangchain",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "learningmysql.pdf",
+          "query": "learningmysql",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "learningsnowflakesqlandscripting.epub",
+          "query": "learningsnowflakesqlandscripting",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "learningsql.pdf",
+          "query": "learningsql",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "linuxbasicsforhackers.mobi",
+          "query": "linuxbasicsforhackers",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "low-codeai_V4.pdf",
+          "query": "low codeai",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "machinelearningwithpythoncookbook_secondedition_V2.epub",
+          "query": "machinelearningwithpythoncookbook secondedition",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "malwaredatascience.pdf",
+          "query": "malwaredatascience",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "masteringthesnowflakesqlapiwithlaravel10.epub",
+          "query": "masteringthesnowflakesqlapiwithlaravel10",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "modernfull-stackdevelopment.epub",
+          "query": "modernfull stackdevelopment",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "mysql-comece-com-o-principal-banco-de-dados-open-source-do-mercado.pdf",
+          "query": "mysql comece com o principal banco de dados open source do mercado",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "mysqldatabaseservicerevealed.epub",
+          "query": "mysqldatabaseservicerevealed",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "orientacao-a-objetos-aprenda-seus-conceitos-e-suas-aplicabilidades-de-forma-efetiva.epub",
+          "query": "orientacao a objetos aprenda seus conceitos e suas aplicabilidades de forma efetiva",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "pandas-python-data-wrangling-para-ciencia-de-dados.pdf",
+          "query": "pandas python data wrangling para ciencia de dados",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "penetrationtesting.pdf",
+          "query": "penetrationtesting",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "postgresqlskillsdevelopmentoncloud.epub",
+          "query": "postgresqlskillsdevelopmentoncloud",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "practicaliothacking.pdf",
+          "query": "practicaliothacking",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "promptengineeringforgenerativeai.pdf",
+          "query": "promptengineeringforgenerativeai",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "prooraclesqldevelopment.epub",
+          "query": "prooraclesqldevelopment",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "pythonobject-orientedprogrammingfourthedition.pdf",
+          "query": "pythonobject orientedprogrammingfourthedition",
+          "error": "ISBNSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        }
+      ],
+      "success_rate": 0.0
+    },
+    "semantic": {
+      "algorithm": "semantic",
+      "total_tests": 80,
+      "successful_tests": 0,
+      "failed_tests": 80,
+      "response_times": [],
+      "accuracy_scores": [],
+      "errors": [
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+        "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'"
+      ],
+      "detailed_results": [
+        {
+          "book": "AI_Agents_and_Applications_v7_MEAP.epub",
+          "query": "AI Agents and Applications",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "AI_Applications_Made_Easy_v5_MEAP.pdf",
+          "query": "AI Applications Made Easy",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Build_Python_Web_Apps_with_Streamlit_v7_MEAP.epub",
+          "query": "Build Python Web Apps with Streamlit",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Cloud_Native_Applications.pdf",
+          "query": "Cloud Native Applications",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Exploring_Algorithms.pdf",
+          "query": "Exploring Algorithms",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Exploring_Data_Science.pdf",
+          "query": "Exploring Data Science",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Exploring_Functional_Programming.pdf",
+          "query": "Exploring Functional Programming",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Exploring_Modern_Cryptography.pdf",
+          "query": "Exploring Modern Cryptography",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Exploring_Security_Privacy_and_Trust.pdf",
+          "query": "Exploring Security Privacy and Trust",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Fight_Fraud_with_Machine_Learning_v16_MEAP.epub",
+          "query": "Fight Fraud with Machine Learning",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Learn Computer Forensics - Second Edition.pdf",
+          "query": "Learn Computer Forensics",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Little guide to building Large Language Models in 2024.pdf",
+          "query": "Little guide to building Large Language Models in 2024",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Modern_C.pdf",
+          "query": "Modern C",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Network Automation Cookbook.pdf",
+          "query": "Network Automation Cookbook",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Privilege Escalation Techniques.epub",
+          "query": "Privilege Escalation Techniques",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Python_Workout_Second_Edition_v3_MEAP.epub",
+          "query": "Python Workout",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Robotics_for_Programmers_v8_MEAP.epub",
+          "query": "Robotics for Programmers",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Secrets_of_the_JavaScript_Ninja_Second_.pdf",
+          "query": "Secrets of the JavaScript Ninja Second",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Software_Design_in_Python_v5_MEAP.epub",
+          "query": "Software Design in Python",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "absolutebeginnersguidetohtmlandcss.epub",
+          "query": "absolutebeginnersguidetohtmlandcss",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "analyticsengineeringwithsqlanddbt.epub",
+          "query": "analyticsengineeringwithsqlanddbt",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "androidmalwarebook.pdf",
+          "query": "androidmalwarebook",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "architectingdataandmachinelearningplatforms.epub",
+          "query": "architectingdataandmachinelearningplatforms",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "artofcyberwarfare.pdf",
+          "query": "artofcyberwarfare",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "artofmacmalware.pdf",
+          "query": "artofmacmalware",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "attackingnetworkprotocols.epub",
+          "query": "attackingnetworkprotocols",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "blackhatgo.epub",
+          "query": "blackhatgo",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "blackhatgraphql.mobi",
+          "query": "blackhatgraphql",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "buildafrontendframeworkfromscratch.pdf",
+          "query": "buildafrontendframeworkfromscratch",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "c31e9e33-6aa4-411f-a688-f996a0efcbd0.pdf",
+          "query": "c31e9e33 6aa4 411f a688 f996a0efcbd0",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "ciandcddesignpatterns.epub",
+          "query": "ciandcddesignpatterns",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "cloudnativeanti-patterns.pdf",
+          "query": "cloudnativeanti patterns",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "cyberjutsu.mobi",
+          "query": "cyberjutsu",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "database-drivenwebdevelopment.epub",
+          "query": "database drivenwebdevelopment",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "databaseinternals.pdf",
+          "query": "databaseinternals",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "designingapiswithswaggerandopenapi.pdf",
+          "query": "designingapiswithswaggerandopenapi",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "developersplaybookforlargelanguagemodelsecurity.epub",
+          "query": "developersplaybookforlargelanguagemodelsecurity",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "developingappswithgpt-4andchatgpt.pdf",
+          "query": "developingappswithgpt 4andchatgpt",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "efficientmysqlperformance.pdf",
+          "query": "efficientmysqlperformance",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "essentialtypescript5.pdf",
+          "query": "essentialtypescript5",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "ethicalhacking.pdf",
+          "query": "ethicalhacking",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "evadingedr.pdf",
+          "query": "evadingedr",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "evasivemalware.pdf",
+          "query": "evasivemalware",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "foundationsofinformationsecurity.epub",
+          "query": "foundationsofinformationsecurity",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "fullstackgraphqlapplications_withreactnodejsandneo4j.epub",
+          "query": "fullstackgraphqlapplications withreactnodejsandneo4j",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "functionalprogrammingwithjavascript.pdf",
+          "query": "functionalprogrammingwithjavascript",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "generativeaionaws.epub",
+          "query": "generativeaionaws",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "getprogrammingwithjavascript.epub",
+          "query": "getprogrammingwithjavascript",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "ghidrabook.epub",
+          "query": "ghidrabook",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "grokkingwebapplicationsecurity.epub",
+          "query": "grokkingwebapplicationsecurity",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "hackingapis.pdf",
+          "query": "hackingapis",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "hacksleaksandrevelations.pdf",
+          "query": "hacksleaksandrevelations",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "hands-onlargelanguagemodels.epub",
+          "query": "hands onlargelanguagemodels",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "hands-onmachinelearningwithscikit-learnkerasandtensorflow.pdf",
+          "query": "hands onmachinelearningwithscikit learnkerasandtensorflow",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "high-performancewebappswithfastapi.epub",
+          "query": "high performancewebappswithfastapi",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "howjavascriptworks.epub",
+          "query": "howjavascriptworks",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "jamstackbook.pdf",
+          "query": "jamstackbook",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "javacodingproblems_secondedition.epub",
+          "query": "javacodingproblems secondedition",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "javascriptonthings.pdf",
+          "query": "javascriptonthings",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "learncprogramming.pdf",
+          "query": "learncprogramming",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "learninglangchain.epub",
+          "query": "learninglangchain",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "learningmysql.pdf",
+          "query": "learningmysql",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "learningsnowflakesqlandscripting.epub",
+          "query": "learningsnowflakesqlandscripting",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "learningsql.pdf",
+          "query": "learningsql",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "linuxbasicsforhackers.mobi",
+          "query": "linuxbasicsforhackers",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "low-codeai_V4.pdf",
+          "query": "low codeai",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "machinelearningwithpythoncookbook_secondedition_V2.epub",
+          "query": "machinelearningwithpythoncookbook secondedition",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "malwaredatascience.pdf",
+          "query": "malwaredatascience",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "masteringthesnowflakesqlapiwithlaravel10.epub",
+          "query": "masteringthesnowflakesqlapiwithlaravel10",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "modernfull-stackdevelopment.epub",
+          "query": "modernfull stackdevelopment",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "mysql-comece-com-o-principal-banco-de-dados-open-source-do-mercado.pdf",
+          "query": "mysql comece com o principal banco de dados open source do mercado",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "mysqldatabaseservicerevealed.epub",
+          "query": "mysqldatabaseservicerevealed",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "orientacao-a-objetos-aprenda-seus-conceitos-e-suas-aplicabilidades-de-forma-efetiva.epub",
+          "query": "orientacao a objetos aprenda seus conceitos e suas aplicabilidades de forma efetiva",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "pandas-python-data-wrangling-para-ciencia-de-dados.pdf",
+          "query": "pandas python data wrangling para ciencia de dados",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "penetrationtesting.pdf",
+          "query": "penetrationtesting",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "postgresqlskillsdevelopmentoncloud.epub",
+          "query": "postgresqlskillsdevelopmentoncloud",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "practicaliothacking.pdf",
+          "query": "practicaliothacking",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "promptengineeringforgenerativeai.pdf",
+          "query": "promptengineeringforgenerativeai",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "prooraclesqldevelopment.epub",
+          "query": "prooraclesqldevelopment",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "pythonobject-orientedprogrammingfourthedition.pdf",
+          "query": "pythonobject orientedprogrammingfourthedition",
+          "error": "SemanticSearchAlgorithm.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        }
+      ],
+      "success_rate": 0.0
+    },
+    "orchestrator": {
+      "algorithm": "orchestrator",
+      "total_tests": 80,
+      "successful_tests": 0,
+      "failed_tests": 80,
+      "response_times": [],
+      "accuracy_scores": [],
+      "errors": [
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+        "SearchOrchestrator.search() got an unexpected keyword argument 'limit'"
+      ],
+      "detailed_results": [
+        {
+          "book": "AI_Agents_and_Applications_v7_MEAP.epub",
+          "query": "AI Agents and Applications",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "AI_Applications_Made_Easy_v5_MEAP.pdf",
+          "query": "AI Applications Made Easy",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Build_Python_Web_Apps_with_Streamlit_v7_MEAP.epub",
+          "query": "Build Python Web Apps with Streamlit",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Cloud_Native_Applications.pdf",
+          "query": "Cloud Native Applications",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Exploring_Algorithms.pdf",
+          "query": "Exploring Algorithms",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Exploring_Data_Science.pdf",
+          "query": "Exploring Data Science",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Exploring_Functional_Programming.pdf",
+          "query": "Exploring Functional Programming",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Exploring_Modern_Cryptography.pdf",
+          "query": "Exploring Modern Cryptography",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Exploring_Security_Privacy_and_Trust.pdf",
+          "query": "Exploring Security Privacy and Trust",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Fight_Fraud_with_Machine_Learning_v16_MEAP.epub",
+          "query": "Fight Fraud with Machine Learning",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Learn Computer Forensics - Second Edition.pdf",
+          "query": "Learn Computer Forensics",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Little guide to building Large Language Models in 2024.pdf",
+          "query": "Little guide to building Large Language Models in 2024",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Modern_C.pdf",
+          "query": "Modern C",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Network Automation Cookbook.pdf",
+          "query": "Network Automation Cookbook",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Privilege Escalation Techniques.epub",
+          "query": "Privilege Escalation Techniques",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Python_Workout_Second_Edition_v3_MEAP.epub",
+          "query": "Python Workout",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Robotics_for_Programmers_v8_MEAP.epub",
+          "query": "Robotics for Programmers",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Secrets_of_the_JavaScript_Ninja_Second_.pdf",
+          "query": "Secrets of the JavaScript Ninja Second",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "Software_Design_in_Python_v5_MEAP.epub",
+          "query": "Software Design in Python",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "absolutebeginnersguidetohtmlandcss.epub",
+          "query": "absolutebeginnersguidetohtmlandcss",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "analyticsengineeringwithsqlanddbt.epub",
+          "query": "analyticsengineeringwithsqlanddbt",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "androidmalwarebook.pdf",
+          "query": "androidmalwarebook",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "architectingdataandmachinelearningplatforms.epub",
+          "query": "architectingdataandmachinelearningplatforms",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "artofcyberwarfare.pdf",
+          "query": "artofcyberwarfare",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "artofmacmalware.pdf",
+          "query": "artofmacmalware",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "attackingnetworkprotocols.epub",
+          "query": "attackingnetworkprotocols",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "blackhatgo.epub",
+          "query": "blackhatgo",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "blackhatgraphql.mobi",
+          "query": "blackhatgraphql",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "buildafrontendframeworkfromscratch.pdf",
+          "query": "buildafrontendframeworkfromscratch",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "c31e9e33-6aa4-411f-a688-f996a0efcbd0.pdf",
+          "query": "c31e9e33 6aa4 411f a688 f996a0efcbd0",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "ciandcddesignpatterns.epub",
+          "query": "ciandcddesignpatterns",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "cloudnativeanti-patterns.pdf",
+          "query": "cloudnativeanti patterns",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "cyberjutsu.mobi",
+          "query": "cyberjutsu",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "database-drivenwebdevelopment.epub",
+          "query": "database drivenwebdevelopment",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "databaseinternals.pdf",
+          "query": "databaseinternals",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "designingapiswithswaggerandopenapi.pdf",
+          "query": "designingapiswithswaggerandopenapi",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "developersplaybookforlargelanguagemodelsecurity.epub",
+          "query": "developersplaybookforlargelanguagemodelsecurity",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "developingappswithgpt-4andchatgpt.pdf",
+          "query": "developingappswithgpt 4andchatgpt",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "efficientmysqlperformance.pdf",
+          "query": "efficientmysqlperformance",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "essentialtypescript5.pdf",
+          "query": "essentialtypescript5",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "ethicalhacking.pdf",
+          "query": "ethicalhacking",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "evadingedr.pdf",
+          "query": "evadingedr",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "evasivemalware.pdf",
+          "query": "evasivemalware",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "foundationsofinformationsecurity.epub",
+          "query": "foundationsofinformationsecurity",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "fullstackgraphqlapplications_withreactnodejsandneo4j.epub",
+          "query": "fullstackgraphqlapplications withreactnodejsandneo4j",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "functionalprogrammingwithjavascript.pdf",
+          "query": "functionalprogrammingwithjavascript",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "generativeaionaws.epub",
+          "query": "generativeaionaws",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "getprogrammingwithjavascript.epub",
+          "query": "getprogrammingwithjavascript",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "ghidrabook.epub",
+          "query": "ghidrabook",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "grokkingwebapplicationsecurity.epub",
+          "query": "grokkingwebapplicationsecurity",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "hackingapis.pdf",
+          "query": "hackingapis",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "hacksleaksandrevelations.pdf",
+          "query": "hacksleaksandrevelations",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "hands-onlargelanguagemodels.epub",
+          "query": "hands onlargelanguagemodels",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "hands-onmachinelearningwithscikit-learnkerasandtensorflow.pdf",
+          "query": "hands onmachinelearningwithscikit learnkerasandtensorflow",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "high-performancewebappswithfastapi.epub",
+          "query": "high performancewebappswithfastapi",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "howjavascriptworks.epub",
+          "query": "howjavascriptworks",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "jamstackbook.pdf",
+          "query": "jamstackbook",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "javacodingproblems_secondedition.epub",
+          "query": "javacodingproblems secondedition",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "javascriptonthings.pdf",
+          "query": "javascriptonthings",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "learncprogramming.pdf",
+          "query": "learncprogramming",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "learninglangchain.epub",
+          "query": "learninglangchain",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "learningmysql.pdf",
+          "query": "learningmysql",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "learningsnowflakesqlandscripting.epub",
+          "query": "learningsnowflakesqlandscripting",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "learningsql.pdf",
+          "query": "learningsql",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "linuxbasicsforhackers.mobi",
+          "query": "linuxbasicsforhackers",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "low-codeai_V4.pdf",
+          "query": "low codeai",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "machinelearningwithpythoncookbook_secondedition_V2.epub",
+          "query": "machinelearningwithpythoncookbook secondedition",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "malwaredatascience.pdf",
+          "query": "malwaredatascience",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "masteringthesnowflakesqlapiwithlaravel10.epub",
+          "query": "masteringthesnowflakesqlapiwithlaravel10",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "modernfull-stackdevelopment.epub",
+          "query": "modernfull stackdevelopment",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "mysql-comece-com-o-principal-banco-de-dados-open-source-do-mercado.pdf",
+          "query": "mysql comece com o principal banco de dados open source do mercado",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "mysqldatabaseservicerevealed.epub",
+          "query": "mysqldatabaseservicerevealed",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "orientacao-a-objetos-aprenda-seus-conceitos-e-suas-aplicabilidades-de-forma-efetiva.epub",
+          "query": "orientacao a objetos aprenda seus conceitos e suas aplicabilidades de forma efetiva",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "pandas-python-data-wrangling-para-ciencia-de-dados.pdf",
+          "query": "pandas python data wrangling para ciencia de dados",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "penetrationtesting.pdf",
+          "query": "penetrationtesting",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "postgresqlskillsdevelopmentoncloud.epub",
+          "query": "postgresqlskillsdevelopmentoncloud",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "practicaliothacking.pdf",
+          "query": "practicaliothacking",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "promptengineeringforgenerativeai.pdf",
+          "query": "promptengineeringforgenerativeai",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "prooraclesqldevelopment.epub",
+          "query": "prooraclesqldevelopment",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        },
+        {
+          "book": "pythonobject-orientedprogrammingfourthedition.pdf",
+          "query": "pythonobject orientedprogrammingfourthedition",
+          "error": "SearchOrchestrator.search() got an unexpected keyword argument 'limit'",
+          "success": false
+        }
+      ],
+      "success_rate": 0.0
+    }
+  },
+  "progression_analysis": {
+    "targets": [
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      0.9
+    ],
+    "algorithm_performance": {
+      "fuzzy": {
+        "accuracy": 0,
+        "response_time": 0,
+        "success_rate": 0.0,
+        "combined_score": 0.2
+      },
+      "isbn": {
+        "accuracy": 0,
+        "response_time": 0,
+        "success_rate": 0.0,
+        "combined_score": 0.2
+      },
+      "semantic": {
+        "accuracy": 0,
+        "response_time": 0,
+        "success_rate": 0.0,
+        "combined_score": 0.2
+      },
+      "orchestrator": {
+        "accuracy": 0,
+        "response_time": 0,
+        "success_rate": 0.0,
+        "combined_score": 0.2
+      }
+    },
+    "progression_status": {
+      "fuzzy": {
+        "current_accuracy": 0,
+        "targets_met": [],
+        "highest_target": 0,
+        "next_target": 0.5
+      },
+      "isbn": {
+        "current_accuracy": 0,
+        "targets_met": [],
+        "highest_target": 0,
+        "next_target": 0.5
+      },
+      "semantic": {
+        "current_accuracy": 0,
+        "targets_met": [],
+        "highest_target": 0,
+        "next_target": 0.5
+      },
+      "orchestrator": {
+        "current_accuracy": 0,
+        "targets_met": [],
+        "highest_target": 0,
+        "next_target": 0.5
+      }
+    },
+    "best_algorithm": {
+      "name": "fuzzy",
+      "score": 0.2,
+      "performance": {
+        "accuracy": 0,
+        "response_time": 0,
+        "success_rate": 0.0,
+        "combined_score": 0.2
+      }
+    },
+    "recommendations": [
+      "🔧 fuzzy: Refinar urgentemente (< 50%)",
+      "🔧 isbn: Refinar urgentemente (< 50%)",
+      "🔧 semantic: Refinar urgentemente (< 50%)",
+      "🔧 orchestrator: Refinar urgentemente (< 50%)"
+    ]
+  },
+  "external_integration": {
+    "publishers_tested": [],
+    "amazon_domains_tested": [],
+    "isbn_databases_tested": [],
+    "successful_connections": 0,
+    "failed_connections": 0,
+    "sample_results": []
+  },
+  "final_status": {
+    "phase": "TESTS_COMPLETED",
+    "current_test": "orchestrator",
+    "progress": 0,
+    "total_tests": 320,
+    "successful_tests": 0,
+    "failed_tests": 320,
+    "accuracy_achieved": 0.0,
+    "response_times": [],
+    "errors": []
+  }
+}
