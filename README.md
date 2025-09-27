@@ -41,9 +41,31 @@ Observações: sem as dependências Python e de sistema instaladas, o script pod
 pytest -q
 ```
 
+## Interface gráfica opcional
+
+Para quem prefere uma interface visual simples:
+
+1. Instale as dependências extras:
+
+```bash
+pip install PyQt6
+```
+
+2. Execute o aplicativo:
+
+```bash
+python gui_RenameBook.py
+```
+
+A GUI reutiliza o pacote `renamepdfepub` para extrair metadados; bibliotecas opcionais como `pypdf`/`pdfplumber` e `ebooklib` continuam melhorando a precisão da leitura.
+As preferências básicas (campos selecionados, modo copiar e limite de caracteres) ficam registradas entre execuções.
+O histórico da última execução aparece em um painel dentro da janela, com atalhos para copiar o resultado e abrir rapidamente a pasta processada.
+Ao executar `gui_RenameBook.py` diretamente no repositório, o script adiciona automaticamente a pasta `src/` ao `PYTHONPATH`, dispensando a instalação em modo editable (`pip install -e .`).
+
 ### Estrutura do projeto
 
 - `renomeia_livro.py`: script principal com a lógica de extração/enriquecimento de metadados e renomeação.
+- `gui_RenameBook.py`: interface gráfica em PyQt6 que aproveita o pacote para renomear arquivos interativamente.
 - `src/renamepdfepub/`: pacote Python com os módulos reutilizáveis (`metadata_cache`, `metadata_extractor`, `metadata_enricher`, `renamer`, `logging_config`).
 - `tests/`: suíte de testes unitários que valida os utilitários do pacote.
 - `logs/`: diretório para logs gerados em runtime (mantido vazio no repositório, com `.gitkeep`).
