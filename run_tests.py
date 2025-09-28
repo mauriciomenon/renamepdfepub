@@ -1,6 +1,35 @@
 #!/usr/bin/env python3
 """
-Script para executar testes do projeto RenamePDFEPUB
+EXECUTOR PRINCIPAL DE TESTES - RenamePDFEPUB
+===========================================
+
+Este e o executor PRINCIPAL de testes que usa pytest para executar
+a suite completa de testes automatizados do projeto.
+
+DIFERENCA ENTRE OS TIPOS DE TESTE:
+
+1. run_tests.py (ESTE ARQUIVO) - PRINCIPAL
+   - Executor pytest padrao e oficial
+   - Suite completa de testes automatizados 
+   - 60 testes organizados em 6 categorias
+   - Usado para validacao continua do sistema
+
+2. scripts/basic_system_testing.py (ex: run_simple_tests.py)
+   - Testes basicos SEM pytest
+   - Validacao rapida de entry points
+   - Verificacao de sintaxe e imports
+   - Usado para diagnostico rapido
+
+3. scripts/algorithm_comprehensive_testing.py (ex: run_comprehensive_tests.py)  
+   - Testes ESPECIFICOS dos algoritmos de busca
+   - Analise de performance e acuracia
+   - Testes progressivos 50% -> 90%
+   - Usado para desenvolvimento de algoritmos
+
+USO RECOMENDADO:
+- Desenvolvimento diario: python3 run_tests.py
+- Diagnostico rapido: python3 scripts/basic_system_testing.py  
+- Algoritmos: python3 scripts/algorithm_comprehensive_testing.py
 """
 import subprocess
 import sys
