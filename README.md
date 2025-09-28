@@ -36,26 +36,37 @@ python3 run_tests.py
 
 ## Estrutura do Projeto
 
+## Estrutura do Projeto
+
 ```
 renamepdfepub/
- start_web.py        # Interface Web Streamlit - PRINCIPAL
- start_html.py       # Relatorios HTML - "Pagina Antiga"
- start_cli.py        # Interface CLI - Linha de Comando
- start_gui.py        # Interface Grafica Desktop
- run_tests.py        # Testes automatizados
-
- src/                # Codigo fonte organizado
-    core/          # Algoritmos e logica principal
-    cli/           # Interface linha de comando  
-    gui/           # Interfaces graficas (Streamlit, GUI)
-
- utils/             # Utilitarios e ferramentas auxiliares
- tests/             # Testes automatizados com pytest
- docs/              # Documentacao tecnica
- reports/           # Relatorios HTML e performance
- data/              # Cache de metadados e resultados
- logs/              # Arquivos de log centralizados
-```
+├── start_web.py        # Interface Web Streamlit - PRINCIPAL
+├── start_html.py       # Relatorios HTML - "Pagina Antiga"
+├── start_cli.py        # Interface CLI - Linha de Comando
+├── start_gui.py        # Interface Grafica Desktop
+├── run_tests.py        # Testes automatizados
+│
+├── src/                # Codigo fonte organizado
+│   ├── core/          # Algoritmos e logica principal
+│   ├── cli/           # Interface linha de comando  
+│   └── gui/           # Interfaces graficas (Streamlit, GUI)
+│
+├── docs/               # Documentacao tecnica organizada
+│   ├── structure/     # Documentacao da arquitetura
+│   ├── testing/       # Relatorios e analises de testes
+│   ├── reports/       # Relatorios de implementacao
+│   └── releases/      # Notas de versao
+│
+├── data/               # Dados e resultados organizados
+│   ├── results/       # Resultados de analises
+│   ├── algorithm_results/ # Resultados dos algoritmos
+│   ├── enhanced_results/  # Analises avancadas
+│   └── cache/         # Cache de metadados
+│
+├── utils/             # Utilitarios e ferramentas auxiliares
+├── tests/             # Testes automatizados com pytest
+├── reports/           # Relatorios HTML e performance
+└── logs/              # Arquivos de log centralizados
 
 ## Pontos de Entrada
 
@@ -278,9 +289,26 @@ src/gui/            # Interfaces graficas
 
 MIT License - veja LICENSE para detalhes.
 
+## Documentacao Organizada
+
+### Estrutura e Arquitetura
+- **Estrutura do Projeto**: [docs/structure/project_structure.md](docs/structure/project_structure.md)
+- **Layout do Repositorio**: [docs/structure/repository_layout.md](docs/structure/repository_layout.md)
+- **Analise Completa**: [docs/structure/complete_analysis.md](docs/structure/complete_analysis.md)
+
+### Testes e Validacao
+- **Suite de Testes**: [docs/testing/test_suite_report.md](docs/testing/test_suite_report.md)
+- **Relatorio Final**: [docs/testing/final_test_report.md](docs/testing/final_test_report.md)
+- **Analise Abrangente**: [docs/testing/comprehensive_test_report.md](docs/testing/comprehensive_test_report.md)
+
+### Relatorios de Implementacao
+- **Validacao de Referencias**: [docs/reports/reference_validation.md](docs/reports/reference_validation.md)
+- **Resumo da Reorganizacao**: [docs/reports/reorganization_summary.md](docs/reports/reorganization_summary.md)
+- **Correcoes Implementadas**: [docs/reports/implementation_fixes.md](docs/reports/implementation_fixes.md)
+
 ## Suporte
 
-- **Documentacao**: [docs/](docs/)
+- **Documentacao Completa**: [docs/](docs/)
+- **Organizacao do Projeto**: [docs/PROJECT_ORGANIZATION.md](docs/PROJECT_ORGANIZATION.md)
 - **Testes**: `python3 run_tests.py`
 - **Issues**: GitHub Issues
-- **Estrutura**: STRUCTURE.md

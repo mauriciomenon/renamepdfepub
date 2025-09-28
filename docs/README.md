@@ -1,6 +1,27 @@
-#  Documentacao RenamePDFEPUB
+# Documentacao RenamePDFEPUB
 
-##  TL;DR - Uso Rapido
+## Indice da Documentacao Organizada
+
+### 📁 Estrutura e Arquitetura
+- **[Estrutura do Projeto](structure/project_structure.md)** - Visao geral da organizacao
+- **[Layout do Repositorio](structure/repository_layout.md)** - Detalhes da estrutura de diretorios
+- **[Analise Completa](structure/complete_analysis.md)** - Analise arquitetural completa
+
+### 🧪 Testes e Validacao
+- **[Suite de Testes](testing/test_suite_report.md)** - Relatorio da suite de testes final
+- **[Relatorio Final de Testes](testing/final_test_report.md)** - Relatorio final de melhorias
+- **[Analise Abrangente](testing/comprehensive_test_report.md)** - Relatorio completo de testes
+- **[Analise de Testes](testing/test_analysis.md)** - Analise detalhada dos testes
+
+### 📊 Relatorios de Implementacao  
+- **[Validacao de Referencias](reports/reference_validation.md)** - Validacao final de referencias
+- **[Resumo da Reorganizacao](reports/reorganization_summary.md)** - Resumo da reorganizacao completa
+- **[Correcoes Implementadas](reports/implementation_fixes.md)** - Relatorio de correcoes implementadas
+
+### 📋 Organizacao do Projeto
+- **[Organizacao Geral](PROJECT_ORGANIZATION.md)** - Guia completo da nova organizacao
+
+## TL;DR - Uso Rapido
 
 **O que faz:** Sistema avancado de renomeacao automatica de PDFs e EPUBs usando metadados extraidos com 5 algoritmos especializados.
 
