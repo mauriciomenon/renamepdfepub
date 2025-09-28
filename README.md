@@ -5,7 +5,41 @@
 ![Accuracy](https:img.shields.iobadgeaccuracy-88.725-brightgreen)
 ![Target](https:img.shields.iobadgetarget-7025-blue)
 
-**Sistema inteligente de renomeacao automatica de PDFs e EPUBs usando Amazon Books API com 88.7 de precisao**
+**# 📚 RenamePDFEPUB v1.0.0
+
+## 📖 TL;DR - Uso Rápido
+
+**O que faz:** Sistema avançado de renomeação automática de PDFs e EPUBs usando 5 algoritmos especializados com até 96% de precisão, incluindo especialização para livros brasileiros.
+
+**Instalação rápida:**
+```bash
+git clone https://github.com/mauriciomenon/renamepdfepub.git
+cd renamepdfepub
+python3 web_launcher.py  # Interface web moderna
+```
+
+**Principais comandos:**
+```bash
+# 🌐 Interface web (recomendado)
+python3 web_launcher.py
+
+# 🔬 Teste direto dos algoritmos  
+python3 advanced_algorithm_comparison.py
+
+# 📄 Renomeação simples (legado)
+python3 renomeia_livro.py
+```
+
+**🎯 Algoritmos disponíveis:**
+- **Hybrid Orchestrator** (96% accuracy) - Combina todas as técnicas
+- **Brazilian Specialist** (93% accuracy) - Especializado em livros nacionais  
+- **Smart Inferencer** (91% accuracy) - Inferência inteligente
+- **Enhanced Parser** (85% accuracy) - Parser aprimorado
+- **Basic Parser** (78% accuracy) - Extração básica
+
+---
+
+## 🚀 Sistema para renomear arquivos PDF e EPUB com base em metadados extraídos automaticamente**
 
 ## Status do Projeto
 

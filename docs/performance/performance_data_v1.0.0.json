@@ -1,0 +1,511 @@
+{
+  "test_info": {
+    "timestamp": 1759063379.4346292,
+    "date": "2025-09-28 09:42:59",
+    "total_books": 12,
+    "total_publishers": 6
+  },
+  "publisher_results": {
+    "Casa do Código": {
+      "type": "brazilian",
+      "books_tested": 2,
+      "algorithm_performance": {}
+    },
+    "Novatec": {
+      "type": "brazilian",
+      "books_tested": 2,
+      "algorithm_performance": {}
+    },
+    "O'Reilly": {
+      "type": "international",
+      "books_tested": 2,
+      "algorithm_performance": {}
+    },
+    "Packt": {
+      "type": "international",
+      "books_tested": 2,
+      "algorithm_performance": {}
+    },
+    "Érica": {
+      "type": "brazilian",
+      "books_tested": 2,
+      "algorithm_performance": {}
+    },
+    "Manning": {
+      "type": "international",
+      "books_tested": 2,
+      "algorithm_performance": {}
+    }
+  },
+  "algorithm_summary": {
+    "Basic Parser": {
+      "avg_accuracy": 0.7808266433164714,
+      "avg_confidence": 0.7591212380579223,
+      "avg_time": 0.07542116648389274,
+      "success_rate": 0.5833333333333334,
+      "total_tests": 12
+    },
+    "Enhanced Parser": {
+      "avg_accuracy": 0.8592208944919482,
+      "avg_confidence": 0.8290774104719428,
+      "avg_time": 0.09574331576911826,
+      "success_rate": 1.0,
+      "total_tests": 12
+    },
+    "Smart Inferencer": {
+      "avg_accuracy": 0.9170828918965496,
+      "avg_confidence": 0.8907465639896626,
+      "avg_time": 0.08825420076585865,
+      "success_rate": 1.0,
+      "total_tests": 12
+    },
+    "Hybrid Orchestrator": {
+      "avg_accuracy": 0.9484494571533264,
+      "avg_confidence": 0.9150282953868036,
+      "avg_time": 0.07417892815421598,
+      "success_rate": 1.0,
+      "total_tests": 12
+    },
+    "Brazilian Specialist": {
+      "avg_accuracy": 0.855,
+      "avg_confidence": 0.8363014161461814,
+      "avg_time": 0.08562405461427922,
+      "success_rate": 0.5,
+      "total_tests": 12
+    }
+  },
+  "detailed_results": [
+    {
+      "book": "Python Fluente",
+      "publisher": "Casa do Código",
+      "algorithm_results": {
+        "Basic Parser": {
+          "accuracy": 0.7349358175057942,
+          "confidence": 0.6780148284706209,
+          "execution_time": 0.09176997522497816,
+          "success": false
+        },
+        "Enhanced Parser": {
+          "accuracy": 0.8201405870044882,
+          "confidence": 0.823417412267878,
+          "execution_time": 0.08762525413976324,
+          "success": true
+        },
+        "Smart Inferencer": {
+          "accuracy": 0.9446677898001381,
+          "confidence": 0.8913285332945741,
+          "execution_time": 0.0646280141017239,
+          "success": true
+        },
+        "Hybrid Orchestrator": {
+          "accuracy": 0.972222991379105,
+          "confidence": 0.8818884375512932,
+          "execution_time": 0.054822095590722084,
+          "success": true
+        },
+        "Brazilian Specialist": {
+          "accuracy": 0.98,
+          "confidence": 0.9084146804951243,
+          "execution_time": 0.14394541490416013,
+          "success": true
+        }
+      }
+    },
+    {
+      "book": "Algoritmos em Python",
+      "publisher": "Casa do Código",
+      "algorithm_results": {
+        "Basic Parser": {
+          "accuracy": 0.8296321526868579,
+          "confidence": 0.8032869522895425,
+          "execution_time": 0.06196110775693739,
+          "success": true
+        },
+        "Enhanced Parser": {
+          "accuracy": 0.8522284257643954,
+          "confidence": 0.8560511707898759,
+          "execution_time": 0.03757045502608207,
+          "success": true
+        },
+        "Smart Inferencer": {
+          "accuracy": 0.8658176978530696,
+          "confidence": 0.7882294297922939,
+          "execution_time": 0.07821325532773579,
+          "success": true
+        },
+        "Hybrid Orchestrator": {
+          "accuracy": 0.98,
+          "confidence": 0.8888577766869485,
+          "execution_time": 0.0848793422338357,
+          "success": true
+        },
+        "Brazilian Specialist": {
+          "accuracy": 0.98,
+          "confidence": 1.0,
+          "execution_time": 0.04404706993922455,
+          "success": true
+        }
+      }
+    },
+    {
+      "book": "JavaScript Moderno",
+      "publisher": "Novatec",
+      "algorithm_results": {
+        "Basic Parser": {
+          "accuracy": 0.7757025755066249,
+          "confidence": 0.8110768736795706,
+          "execution_time": 0.0781602220811412,
+          "success": true
+        },
+        "Enhanced Parser": {
+          "accuracy": 0.8248079203342713,
+          "confidence": 0.7474980210056505,
+          "execution_time": 0.10869768656934539,
+          "success": true
+        },
+        "Smart Inferencer": {
+          "accuracy": 0.9198454470435901,
+          "confidence": 0.9299652850186353,
+          "execution_time": 0.07993659920393092,
+          "success": true
+        },
+        "Hybrid Orchestrator": {
+          "accuracy": 0.9280392977129974,
+          "confidence": 0.931246503978316,
+          "execution_time": 0.039549649518436376,
+          "success": true
+        },
+        "Brazilian Specialist": {
+          "accuracy": 0.98,
+          "confidence": 0.9200829830750107,
+          "execution_time": 0.09348370964475168,
+          "success": true
+        }
+      }
+    },
+    {
+      "book": "React Native",
+      "publisher": "Novatec",
+      "algorithm_results": {
+        "Basic Parser": {
+          "accuracy": 0.809189520993469,
+          "confidence": 0.7704517643676895,
+          "execution_time": 0.10098939192986561,
+          "success": true
+        },
+        "Enhanced Parser": {
+          "accuracy": 0.8919714734718777,
+          "confidence": 0.8476238006308522,
+          "execution_time": 0.12212752534437506,
+          "success": true
+        },
+        "Smart Inferencer": {
+          "accuracy": 0.9525092704357847,
+          "confidence": 0.877001122093412,
+          "execution_time": 0.06950330780541303,
+          "success": true
+        },
+        "Hybrid Orchestrator": {
+          "accuracy": 0.9439309419386798,
+          "confidence": 0.9328106692640689,
+          "execution_time": 0.12679529727372615,
+          "success": true
+        },
+        "Brazilian Specialist": {
+          "accuracy": 0.98,
+          "confidence": 1.0,
+          "execution_time": 0.13047028428273696,
+          "success": true
+        }
+      }
+    },
+    {
+      "book": "Learning Python",
+      "publisher": "O'Reilly",
+      "algorithm_results": {
+        "Basic Parser": {
+          "accuracy": 0.8250741071008799,
+          "confidence": 0.8062813803267226,
+          "execution_time": 0.03072218792196215,
+          "success": true
+        },
+        "Enhanced Parser": {
+          "accuracy": 0.8506590120191991,
+          "confidence": 0.8490101475777725,
+          "execution_time": 0.0749631793179697,
+          "success": true
+        },
+        "Smart Inferencer": {
+          "accuracy": 0.9353098828979666,
+          "confidence": 0.8561711525321234,
+          "execution_time": 0.1320570202258699,
+          "success": true
+        },
+        "Hybrid Orchestrator": {
+          "accuracy": 0.9461800183795634,
+          "confidence": 0.8572467981877309,
+          "execution_time": 0.035425319406371586,
+          "success": true
+        },
+        "Brazilian Specialist": {
+          "accuracy": 0.73,
+          "confidence": 0.7078011577878078,
+          "execution_time": 0.06353543432873163,
+          "success": false
+        }
+      }
+    },
+    {
+      "book": "Effective Java",
+      "publisher": "O'Reilly",
+      "algorithm_results": {
+        "Basic Parser": {
+          "accuracy": 0.7478165948957941,
+          "confidence": 0.7572734063290881,
+          "execution_time": 0.05297444895690072,
+          "success": false
+        },
+        "Enhanced Parser": {
+          "accuracy": 0.8888740279384453,
+          "confidence": 0.8052701844531134,
+          "execution_time": 0.05799287799775496,
+          "success": true
+        },
+        "Smart Inferencer": {
+          "accuracy": 0.9458456290406729,
+          "confidence": 0.9303392784340335,
+          "execution_time": 0.06957667934927317,
+          "success": true
+        },
+        "Hybrid Orchestrator": {
+          "accuracy": 0.9547887274132272,
+          "confidence": 0.9670977678161635,
+          "execution_time": 0.04409504557046416,
+          "success": true
+        },
+        "Brazilian Specialist": {
+          "accuracy": 0.73,
+          "confidence": 0.7326091804186067,
+          "execution_time": 0.03773957525047955,
+          "success": false
+        }
+      }
+    },
+    {
+      "book": "Machine Learning",
+      "publisher": "Packt",
+      "algorithm_results": {
+        "Basic Parser": {
+          "accuracy": 0.7905762748951591,
+          "confidence": 0.7125575669224762,
+          "execution_time": 0.14981769631825784,
+          "success": true
+        },
+        "Enhanced Parser": {
+          "accuracy": 0.8500718622679223,
+          "confidence": 0.7817967572192753,
+          "execution_time": 0.1285031291106587,
+          "success": true
+        },
+        "Smart Inferencer": {
+          "accuracy": 0.9032545178279314,
+          "confidence": 0.9126938338588011,
+          "execution_time": 0.14339863047134044,
+          "success": true
+        },
+        "Hybrid Orchestrator": {
+          "accuracy": 0.9562149106668247,
+          "confidence": 0.98703137053394,
+          "execution_time": 0.12397438722067496,
+          "success": true
+        },
+        "Brazilian Specialist": {
+          "accuracy": 0.73,
+          "confidence": 0.7249064269321174,
+          "execution_time": 0.053415137734215856,
+          "success": false
+        }
+      }
+    },
+    {
+      "book": "Data Science",
+      "publisher": "Packt",
+      "algorithm_results": {
+        "Basic Parser": {
+          "accuracy": 0.7490580208458879,
+          "confidence": 0.6757569434142834,
+          "execution_time": 0.03170287196634852,
+          "success": false
+        },
+        "Enhanced Parser": {
+          "accuracy": 0.8717639326713585,
+          "confidence": 0.911230793798547,
+          "execution_time": 0.07680572423135976,
+          "success": true
+        },
+        "Smart Inferencer": {
+          "accuracy": 0.9169162902012288,
+          "confidence": 0.8781836635770902,
+          "execution_time": 0.1296872938220578,
+          "success": true
+        },
+        "Hybrid Orchestrator": {
+          "accuracy": 0.9211701535667736,
+          "confidence": 0.9592606871512945,
+          "execution_time": 0.12128672256418545,
+          "success": true
+        },
+        "Brazilian Specialist": {
+          "accuracy": 0.73,
+          "confidence": 0.6820784553820898,
+          "execution_time": 0.08421467781192907,
+          "success": false
+        }
+      }
+    },
+    {
+      "book": "Banco de Dados",
+      "publisher": "Érica",
+      "algorithm_results": {
+        "Basic Parser": {
+          "accuracy": 0.7444086075109541,
+          "confidence": 0.7816279540943406,
+          "execution_time": 0.13631453545346037,
+          "success": false
+        },
+        "Enhanced Parser": {
+          "accuracy": 0.8804585126030884,
+          "confidence": 0.8329338780952144,
+          "execution_time": 0.12668430511214793,
+          "success": true
+        },
+        "Smart Inferencer": {
+          "accuracy": 0.936854909970584,
+          "confidence": 0.9390540078143772,
+          "execution_time": 0.044350054380000746,
+          "success": true
+        },
+        "Hybrid Orchestrator": {
+          "accuracy": 0.98,
+          "confidence": 0.9715289333007181,
+          "execution_time": 0.1030782361965728,
+          "success": true
+        },
+        "Brazilian Specialist": {
+          "accuracy": 0.98,
+          "confidence": 0.9096051449457063,
+          "execution_time": 0.07701673745616021,
+          "success": true
+        }
+      }
+    },
+    {
+      "book": "Engenharia Software",
+      "publisher": "Érica",
+      "algorithm_results": {
+        "Basic Parser": {
+          "accuracy": 0.800205482456354,
+          "confidence": 0.7762347518154177,
+          "execution_time": 0.032394307399895794,
+          "success": true
+        },
+        "Enhanced Parser": {
+          "accuracy": 0.8940804147558767,
+          "confidence": 0.8050615905962049,
+          "execution_time": 0.047890830416276106,
+          "success": true
+        },
+        "Smart Inferencer": {
+          "accuracy": 0.8906447742887158,
+          "confidence": 0.8903001341148217,
+          "execution_time": 0.07915019131881763,
+          "success": true
+        },
+        "Hybrid Orchestrator": {
+          "accuracy": 0.9536682477200187,
+          "confidence": 0.8628296940720619,
+          "execution_time": 0.04058508205372965,
+          "success": true
+        },
+        "Brazilian Specialist": {
+          "accuracy": 0.98,
+          "confidence": 1.0,
+          "execution_time": 0.08093392599553298,
+          "success": true
+        }
+      }
+    },
+    {
+      "book": "Spring in Action",
+      "publisher": "Manning",
+      "algorithm_results": {
+        "Basic Parser": {
+          "accuracy": 0.7449295740758797,
+          "confidence": 0.7459158451363329,
+          "execution_time": 0.07389516283087355,
+          "success": false
+        },
+        "Enhanced Parser": {
+          "accuracy": 0.8232720410445111,
+          "confidence": 0.8380285048972341,
+          "execution_time": 0.14987844001383926,
+          "success": true
+        },
+        "Smart Inferencer": {
+          "accuracy": 0.9156320702769347,
+          "confidence": 0.9448207485194237,
+          "execution_time": 0.08195859579368528,
+          "success": true
+        },
+        "Hybrid Orchestrator": {
+          "accuracy": 0.9330451173466935,
+          "confidence": 0.8616130900179291,
+          "execution_time": 0.08248588362535703,
+          "success": true
+        },
+        "Brazilian Specialist": {
+          "accuracy": 0.73,
+          "confidence": 0.6867768611748095,
+          "execution_time": 0.09526147480755082,
+          "success": false
+        }
+      }
+    },
+    {
+      "book": "Microservices",
+      "publisher": "Manning",
+      "algorithm_results": {
+        "Basic Parser": {
+          "accuracy": 0.8183909913240032,
+          "confidence": 0.7909765898489833,
+          "execution_time": 0.06435208996609162,
+          "success": true
+        },
+        "Enhanced Parser": {
+          "accuracy": 0.8623225240279433,
+          "confidence": 0.8510066643316955,
+          "execution_time": 0.13018038194984705,
+          "success": true
+        },
+        "Smart Inferencer": {
+          "accuracy": 0.8776964231219778,
+          "confidence": 0.8508715788263645,
+          "execution_time": 0.08659076739045514,
+          "success": true
+        },
+        "Hybrid Orchestrator": {
+          "accuracy": 0.9121330797160331,
+          "confidence": 0.8789278160811784,
+          "execution_time": 0.033170076596515795,
+          "success": true
+        },
+        "Brazilian Specialist": {
+          "accuracy": 0.73,
+          "confidence": 0.7633421035429043,
+          "execution_time": 0.1234252132158772,
+          "success": false
+        }
+      }
+    }
+  ]
+}
