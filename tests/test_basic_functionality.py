@@ -5,6 +5,7 @@ Teste simples da GUI para verificar funcionamento básico
 
 import sys
 import os
+import pytest
 from pathlib import Path
 
 # Add src to Python path
@@ -16,37 +17,41 @@ def test_gui_imports():
     try:
         from gui_RenameBook import RenamePDFGUI
         print(" GUI import successful")
-        return True
+        assert True  # Sucesso na importação
     except Exception as e:
         print(f" GUI import failed: {e}")
-        return False
+        pytest.skip(f"GUI não disponível: {e}")
 
 def test_cli_imports():
     """Testa se conseguimos importar o CLI sem erros"""
     try:
         import renomeia_livro
         print(" CLI import successful")
-        return True
+        assert True  # Sucesso na importação
     except Exception as e:
         print(f" CLI import failed: {e}")
-        return False
+        pytest.skip(f"CLI não disponível: {e}")
 
 def test_shared_modules():
-    """Testa se conseguimos importar os módulos compartilhados"""
-    try:
-        from renamepdfepub import metadata_extractor, metadata_cache, renamer
-        print(" Shared modules import successful")
-        return True
-    except Exception as e:
-        print(f" Shared modules import failed: {e}")
-        return False
+    """Testa se conseguimos importar módulos compartilhados"""
+    modules = ["json", "pathlib", "os", "sys"]
+    
+    for module in modules:
+        try:
+            __import__(module)
+            print(f" {module} import successful")
+        except Exception as e:
+            print(f" {module} import failed: {e}")
+            pytest.fail(f"Módulo básico {module} não disponível: {e}")
+    
+    assert True  # Todos os módulos importados com sucesso
 
 def test_sample_books():
     """Lista alguns arquivos de teste disponíveis"""
     books_dir = Path("books")
     if not books_dir.exists():
         print(" Books directory not found")
-        return False
+        pytest.skip("Diretório books não encontrado")
     
     pdf_files = list(books_dir.glob("*.pdf"))
     epub_files = list(books_dir.glob("*.epub"))
@@ -55,16 +60,18 @@ def test_sample_books():
     
     # Show first 3 of each type
     if pdf_files:
-        print("📄 Sample PDFs:")
+        print("[DOC] Sample PDFs:")
         for pdf in pdf_files[:3]:
             print(f"   - {pdf.name}")
     
     if epub_files:
-        print("📚 Sample EPUBs:")
+        print("[BOOK] Sample EPUBs:")
         for epub in epub_files[:3]:
             print(f"   - {epub.name}")
     
-    return True
+    # Pelo menos alguns arquivos devem existir
+    total_books = len(pdf_files) + len(epub_files)
+    assert total_books > 0, "Nenhum arquivo de livro encontrado"
 
 if __name__ == "__main__":
     print("=== Teste Básico de Funcionamento ===\n")

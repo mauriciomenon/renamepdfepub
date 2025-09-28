@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 CLI para Sistema de Cache Iterativo
 ==================================
