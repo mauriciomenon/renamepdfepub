@@ -339,15 +339,15 @@ def main():
     try:
         with open('final_v3_results.json', 'r') as f:
             v3_data = json.load(f)
-        print("✅ Dados V3 carregados")
+        print(" Dados V3 carregados")
     except FileNotFoundError:
-        print("❌ Execute final_v3_test.py primeiro")
+        print(" Execute final_v3_test.py primeiro")
         return
     
     # Construir base de dados
     books_dir = Path("books")
     if not books_dir.exists():
-        print("❌ Diretório 'books' não encontrado!")
+        print(" Diretório 'books' não encontrado!")
         return
     
     # Carregar metadados dos livros
@@ -448,7 +448,7 @@ def main():
                     print(f"        Consensus bonus: +{best['consensus_bonus']:.3f}")
             
         except Exception as e:
-            print(f"  ❌ ERRO: {e}")
+            print(f"   ERRO: {e}")
     
     # Relatório final de performance
     print(f"\n=== PERFORMANCE FINAL V3 ===")
@@ -500,9 +500,9 @@ def main():
     
     print(f"\n=== PRÓXIMOS PASSOS ===")
     if success:
-        print("✅ Meta 70% atingida - Pronto para implementar APIs Amazon/Google")
-        print("✅ Sistema robusto - Pode processar 200+ livros")
-        print("✅ Base sólida - Pronto para produção")
+        print(" Meta 70% atingida - Pronto para implementar APIs Amazon/Google")
+        print(" Sistema robusto - Pode processar 200+ livros")
+        print(" Base sólida - Pronto para produção")
     else:
         print("🔧 Continuar otimização para atingir 70%")
         print("🔧 Ajustar weights e thresholds")

@@ -147,34 +147,39 @@ def generate_sample_data():
     with open(sample_file, 'w', encoding='utf-8') as f:
         json.dump(sample_data, f, indent=2, ensure_ascii=False)
     
-    print(f"✅ Dados de exemplo gerados: {sample_file}")
+    print(f" Dados de exemplo gerados: {sample_file}")
 
 def launch_streamlit():
     """Executa a interface Streamlit"""
-    print("🚀 Iniciando interface Streamlit...")
-    print("🌐 A interface será aberta no navegador automaticamente")
-    print("⏹️  Pressione Ctrl+C para parar o servidor")
+    print("Iniciando interface Streamlit...")
+    print("A interface sera aberta no navegador automaticamente")
+    print("Pressione Ctrl+C para parar o servidor")
+    
+    # Caminho correto para o arquivo
+    streamlit_file = Path(__file__).parent / "streamlit_interface.py"
     
     try:
         subprocess.run([
             sys.executable, "-m", "streamlit", "run", 
-            "streamlit_interface.py",
+            str(streamlit_file),
             "--server.port=8501",
             "--server.address=localhost",
             "--browser.gatherUsageStats=false"
         ])
     except KeyboardInterrupt:
-        print("\n👋 Interface encerrada")
+        print("\nInterface encerrada")
     except Exception as e:
-        print(f"❌ Erro ao executar Streamlit: {e}")
+        print(f"Erro ao executar Streamlit: {e}")
 
 def generate_simple_report():
-    """Gera relatório HTML simples"""
-    print("[INFO] Gerando relatório HTML...")
+    """Gera relatorio HTML simples"""
+    print("[INFO] Gerando relatorio HTML...")
     try:
-        subprocess.run([sys.executable, "simple_report_generator.py"])
+        # Caminho correto para o gerador
+        report_generator = Path(__file__).parent.parent.parent / "reports" / "simple_report_generator.py"
+        subprocess.run([sys.executable, str(report_generator)])
     except Exception as e:
-        print(f"[WARNING] Erro ao gerar relatório: {e}")
+        print(f"[WARNING] Erro ao gerar relatorio: {e}")
 
 def main():
     """Função principal"""
@@ -212,7 +217,9 @@ def main():
         elif choice == "3":
             print("[INFO] Executando teste de algoritmos...")
             try:
-                subprocess.run([sys.executable, "advanced_algorithm_comparison.py"])
+                # Caminho correto para o algoritmo
+                algorithm_file = Path(__file__).parent.parent / "core" / "advanced_algorithm_comparison.py"
+                subprocess.run([sys.executable, str(algorithm_file)])
             except Exception as e:
                 print(f"[ERROR] Erro: {e}")
                 

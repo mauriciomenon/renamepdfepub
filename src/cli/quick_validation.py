@@ -65,18 +65,18 @@ def check_project_structure():
     for dir_path in required_dirs:
         full_path = project_root / dir_path
         if full_path.exists():
-            logger.info(f"✅ {dir_path}")
+            logger.info(f" {dir_path}")
         else:
-            logger.error(f"❌ {dir_path} - AUSENTE")
+            logger.error(f" {dir_path} - AUSENTE")
             structure_ok = False
     
     # Verificar arquivos
     for file_path in required_files:
         full_path = project_root / file_path
         if full_path.exists():
-            logger.info(f"✅ {file_path}")
+            logger.info(f" {file_path}")
         else:
-            logger.error(f"❌ {file_path} - AUSENTE")
+            logger.error(f" {file_path} - AUSENTE")
             structure_ok = False
     
     return structure_ok
@@ -87,7 +87,7 @@ def check_books_collection():
     
     books_dir = project_root / "books"
     if not books_dir.exists():
-        logger.error("❌ Diretório books/ não encontrado")
+        logger.error(" Diretório books/ não encontrado")
         return False, 0, {}
     
     # Contar livros por extensão
@@ -106,9 +106,9 @@ def check_books_collection():
     
     # Verificar se há livros suficientes para teste
     if total_books < 10:
-        logger.warning(f"⚠️  Poucos livros para teste ({total_books}). Recomendado: pelo menos 50")
+        logger.warning(f"⚠  Poucos livros para teste ({total_books}). Recomendado: pelo menos 50")
     else:
-        logger.info(f"✅ Coleção adequada para testes ({total_books} livros)")
+        logger.info(f" Coleção adequada para testes ({total_books} livros)")
     
     return total_books >= 10, total_books, extensions
 
@@ -123,7 +123,7 @@ def quick_algorithm_test(sample_size: int = 20):
         from renamepdfepub.search_algorithms.semantic_search import SemanticSearchAlgorithm
         from renamepdfepub.search_algorithms.search_orchestrator import SearchOrchestrator
     except ImportError as e:
-        logger.error(f"❌ Erro importando algoritmos: {e}") 
+        logger.error(f" Erro importando algoritmos: {e}") 
         return False, {}
     
     # Inicializar algoritmos
@@ -140,10 +140,10 @@ def quick_algorithm_test(sample_size: int = 20):
             'orchestrator': orchestrator
         }
         
-        logger.info("✅ Algoritmos carregados com sucesso")
+        logger.info(" Algoritmos carregados com sucesso")
         
     except Exception as e:
-        logger.error(f"❌ Erro inicializando algoritmos: {e}")
+        logger.error(f" Erro inicializando algoritmos: {e}")
         return False, {}
     
     # Obter sample de livros para teste
@@ -156,7 +156,7 @@ def quick_algorithm_test(sample_size: int = 20):
     
     if len(books) < sample_size:
         sample_size = len(books)
-        logger.warning(f"⚠️  Reduzindo sample para {sample_size} (todos os livros disponíveis)")
+        logger.warning(f"⚠  Reduzindo sample para {sample_size} (todos os livros disponíveis)")
     
     test_books = random.sample(books, sample_size)
     logger.info(f"📖 Testando com {len(test_books)} livros")
@@ -240,7 +240,7 @@ def analyze_results(results: Dict[str, Any]):
     logger.info("\n=== ANÁLISE DOS RESULTADOS ===")
     
     if not results:
-        logger.error("❌ Nenhum resultado para analisar")
+        logger.error(" Nenhum resultado para analisar")
         return
     
     # Resumo geral
@@ -268,14 +268,14 @@ def analyze_results(results: Dict[str, Any]):
         
         # Análise de performance
         if success_rate >= 0.5:
-            logger.info(f"  ✅ Meta de 50% ATINGIDA")
+            logger.info(f"   Meta de 50% ATINGIDA")
         else:
-            logger.info(f"  ❌ Meta de 50% NÃO atingida")
+            logger.info(f"   Meta de 50% NÃO atingida")
         
         if avg_time <= 100:
-            logger.info(f"  ✅ Performance adequada (< 100ms)")
+            logger.info(f"   Performance adequada (< 100ms)")
         else:
-            logger.info(f"  ⚠️  Performance lenta (> 100ms)")
+            logger.info(f"  ⚠  Performance lenta (> 100ms)")
     
     # Melhor algoritmo
     logger.info(f"\n🏆 MELHOR ALGORITMO: {best_algorithm.upper()} (score: {best_score:.3f})")
@@ -338,10 +338,10 @@ def save_validation_report(structure_ok: bool, books_info: Dict, algorithm_resul
         with open(report_file, 'w', encoding='utf-8') as f:
             json.dump(report, f, indent=2, ensure_ascii=False)
         
-        logger.info(f"✅ Relatório salvo: {report_file}")
+        logger.info(f" Relatório salvo: {report_file}")
         
     except Exception as e:
-        logger.error(f"❌ Erro salvando relatório: {e}")
+        logger.error(f" Erro salvando relatório: {e}")
 
 def main():
     """Função principal"""
@@ -356,7 +356,7 @@ def main():
     if args.verbose:
         logging.getLogger().setLevel(logging.DEBUG)
     
-    logger.info("🚀 INICIANDO VALIDAÇÃO RÁPIDA DO PROJETO")
+    logger.info(" INICIANDO VALIDAÇÃO RÁPIDA DO PROJETO")
     logger.info(f"Sample size: {args.sample_size}")
     
     start_time = time.time()
@@ -380,9 +380,9 @@ def main():
         if algorithms_ok:
             analyze_results(algorithm_results)
         else:
-            logger.error("❌ Falha nos testes dos algoritmos")
+            logger.error(" Falha nos testes dos algoritmos")
     else:
-        logger.error("❌ Estrutura do projeto com problemas - pulando testes")
+        logger.error(" Estrutura do projeto com problemas - pulando testes")
     
     # 4. Salvar relatório
     save_validation_report(structure_ok, books_info, algorithm_results)
@@ -393,10 +393,10 @@ def main():
     logger.info(f"\n{'='*60}")
     logger.info("RESUMO DA VALIDAÇÃO")
     logger.info(f"{'='*60}")
-    logger.info(f"⏱️  Tempo total: {total_time:.2f}s")
-    logger.info(f"📁 Estrutura: {'✅ OK' if structure_ok else '❌ PROBLEMAS'}")
-    logger.info(f"📚 Livros: {'✅ ADEQUADO' if books_adequate else '⚠️  INSUFICIENTE'} ({total_books})")
-    logger.info(f"🔍 Algoritmos: {'✅ FUNCIONAIS' if algorithm_results else '❌ PROBLEMAS'}")
+    logger.info(f"⏱  Tempo total: {total_time:.2f}s")
+    logger.info(f"📁 Estrutura: {' OK' if structure_ok else ' PROBLEMAS'}")
+    logger.info(f"📚 Livros: {' ADEQUADO' if books_adequate else '⚠  INSUFICIENTE'} ({total_books})")
+    logger.info(f"🔍 Algoritmos: {' FUNCIONAIS' if algorithm_results else ' PROBLEMAS'}")
     
     if structure_ok and books_adequate and algorithm_results:
         # Calcular melhor taxa de sucesso
@@ -411,10 +411,10 @@ def main():
             logger.info("2. Analisar relatório HTML gerado")
             logger.info("3. Refinar algoritmos com base nos resultados")
         else:
-            logger.info("⚠️  ALGORITMOS PRECISAM DE REFINAMENTO")
+            logger.info("⚠  ALGORITMOS PRECISAM DE REFINAMENTO")
             logger.info("Executar testes individuais para diagnóstico")
     else:
-        logger.info("❌ PROJETO PRECISA DE CORREÇÕES ANTES DOS TESTES")
+        logger.info(" PROJETO PRECISA DE CORREÇÕES ANTES DOS TESTES")
     
     logger.info(f"{'='*60}")
 

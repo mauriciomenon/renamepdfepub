@@ -13,11 +13,11 @@ def main():
         if books_dir.exists():
             pdf_files = list(books_dir.glob("*.pdf"))
             epub_files = list(books_dir.glob("*.epub"))
-            print(f"✅ Books directory: {len(pdf_files)} PDFs, {len(epub_files)} EPUBs")
+            print(f" Books directory: {len(pdf_files)} PDFs, {len(epub_files)} EPUBs")
         else:
-            print("❌ Books directory not found")
+            print(" Books directory not found")
     except Exception as e:
-        print(f"❌ Books test failed: {e}")
+        print(f" Books test failed: {e}")
     
     # Test 2: Shared modules
     try:
@@ -27,9 +27,9 @@ def main():
         import renamepdfepub.metadata_extractor
         import renamepdfepub.metadata_cache  
         import renamepdfepub.renamer
-        print("✅ Shared modules imported successfully")
+        print(" Shared modules imported successfully")
     except Exception as e:
-        print(f"❌ Shared modules failed: {e}")
+        print(f" Shared modules failed: {e}")
     
     # Test 3: CLI classes exist
     try:
@@ -45,12 +45,12 @@ def main():
             if cls in content:
                 found.append(cls)
         
-        print(f"✅ CLI classes found: {len(found)}/{len(classes)}")
+        print(f" CLI classes found: {len(found)}/{len(classes)}")
         for cls in found:
             print(f"   - {cls}")
             
     except Exception as e:
-        print(f"❌ CLI class check failed: {e}")
+        print(f" CLI class check failed: {e}")
     
     # Test 4: GUI imports (logic only)
     try:
@@ -59,19 +59,19 @@ def main():
             content = f.read()
             
         if "import renamepdfepub.metadata_extractor" in content:
-            print("✅ GUI uses shared metadata_extractor")
+            print(" GUI uses shared metadata_extractor")
         else:
-            print("❌ GUI doesn't import shared modules correctly")
+            print(" GUI doesn't import shared modules correctly")
             
     except Exception as e:
-        print(f"❌ GUI check failed: {e}")
+        print(f" GUI check failed: {e}")
     
     print("\n=== Architecture Status ===")
-    print("✅ GUI: Clean architecture using shared modules")
-    print("⚠️  CLI: Monolithic but functional (needs refactoring)")
-    print("✅ Shared: Modular components ready for enhancement")
-    print("✅ Tests: 13/13 passing (pytest)")
-    print("✅ Data: 100+ test files available")
+    print(" GUI: Clean architecture using shared modules")
+    print("⚠  CLI: Monolithic but functional (needs refactoring)")
+    print(" Shared: Modular components ready for enhancement")
+    print(" Tests: 13/13 passing (pytest)")
+    print(" Data: 100+ test files available")
     
     print("\n🎯 Ready for Phase 2: Search Algorithms Implementation")
 

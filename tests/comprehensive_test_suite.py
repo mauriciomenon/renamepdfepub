@@ -27,7 +27,7 @@ try:
     from simple_report_generator import SimpleReportGenerator
     from demo_system import create_demo_data, generate_html_report
 except ImportError as e:
-    print(f"⚠️ Erro de importação: {e}")
+    print(f"⚠ Erro de importação: {e}")
     print("Executando testes básicos...")
 
 class TestAlgorithmSystem(unittest.TestCase):
@@ -359,7 +359,7 @@ def run_comprehensive_tests():
         stream=sys.stdout
     )
     
-    print(f"\n🚀 Iniciando {suite.countTestCases()} testes...")
+    print(f"\n Iniciando {suite.countTestCases()} testes...")
     result = runner.run(suite)
     
     # Relatório final
@@ -373,10 +373,10 @@ def run_comprehensive_tests():
     skipped = len(result.skipped) if hasattr(result, 'skipped') else 0
     success = total_tests - failures - errors - skipped
     
-    print(f"✅ Sucessos: {success}")
-    print(f"❌ Falhas: {failures}")
+    print(f" Sucessos: {success}")
+    print(f" Falhas: {failures}")
     print(f"🔥 Erros: {errors}")
-    print(f"⏭️ Pulados: {skipped}")
+    print(f"⏭ Pulados: {skipped}")
     print(f"📈 Taxa de Sucesso: {(success/total_tests)*100:.1f}%")
     
     if failures > 0:
@@ -394,7 +394,7 @@ def run_comprehensive_tests():
         print(f"\n🎉 TESTES APROVADOS! ({success_rate:.1f}% de sucesso)")
         return True
     else:
-        print(f"\n⚠️ ATENÇÃO: Taxa de sucesso baixa ({success_rate:.1f}%)")
+        print(f"\n⚠ ATENÇÃO: Taxa de sucesso baixa ({success_rate:.1f}%)")
         return False
 
 def main():
@@ -405,10 +405,10 @@ def main():
     success = run_comprehensive_tests()
     
     if success:
-        print("\n✅ Todos os testes principais passaram!")
-        print("🚀 Sistema pronto para release!")
+        print("\n Todos os testes principais passaram!")
+        print(" Sistema pronto para release!")
     else:
-        print("\n⚠️ Alguns testes falharam.")
+        print("\n⚠ Alguns testes falharam.")
         print("🔧 Verifique os logs acima para detalhes.")
     
     return 0 if success else 1

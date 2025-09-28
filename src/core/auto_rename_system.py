@@ -187,7 +187,7 @@ class FileRenamer:
             return True
             
         except Exception as e:
-            self.logger.error(f"❌ Erro ao criar backup para {file_path}: {e}")
+            self.logger.error(f" Erro ao criar backup para {file_path}: {e}")
             return False
 
     async def rename_single_file(self, file_path: Path) -> Tuple[bool, str, Optional[BookMetadata]]:
@@ -237,13 +237,13 @@ class FileRenamer:
             # Renomeia arquivo
             file_path.rename(new_path)
             
-            success_msg = f"✅ Renomeado: {file_path.name} → {new_path.name}"
+            success_msg = f" Renomeado: {file_path.name} → {new_path.name}"
             self.logger.info(success_msg)
             
             return True, success_msg, metadata
             
         except Exception as e:
-            error_msg = f"❌ Erro ao processar {file_path.name}: {e}"
+            error_msg = f" Erro ao processar {file_path.name}: {e}"
             self.logger.error(error_msg)
             return False, error_msg, None
 
@@ -286,7 +286,7 @@ class AutoRenameSystem:
             return book_files
             
         except Exception as e:
-            self.logger.error(f"❌ Erro ao descobrir arquivos em {directory}: {e}")
+            self.logger.error(f" Erro ao descobrir arquivos em {directory}: {e}")
             return []
 
     async def process_directory(self, directory_path: str) -> Dict:
@@ -473,7 +473,7 @@ class AutoRenameSystem:
             self.logger.info(f"📊 Relatório salvo: {output_path}")
             
         except Exception as e:
-            self.logger.error(f"❌ Erro ao salvar relatório: {e}")
+            self.logger.error(f" Erro ao salvar relatório: {e}")
 
 def print_banner():
     """Imprime banner do sistema"""
@@ -481,9 +481,9 @@ def print_banner():
 🎯 Sistema Automático de Renomeação de PDFs e EPUBs
 ════════════════════════════════════════════════════
 Versão: 1.0.0 - Produção
-Sistema V3 com 88.7% de precisão ✅
-Amazon Books API Integration ✅
-Processamento em Lote ✅
+Sistema V3 com 88.7% de precisão 
+Amazon Books API Integration 
+Processamento em Lote 
 """)
 
 def print_report(report: Dict):
@@ -494,19 +494,19 @@ def print_report(report: Dict):
     print("📊 RELATÓRIO FINAL")
     print("="*60)
     print(f"📚 Total de arquivos: {summary['total_files']}")
-    print(f"✅ Sucessos: {summary['successful']}")
-    print(f"❌ Falhas: {summary['failed']}")
+    print(f" Sucessos: {summary['successful']}")
+    print(f" Falhas: {summary['failed']}")
     print(f"📈 Taxa de sucesso: {summary['success_rate']:.1f}%")
     
     if summary['duration_seconds']:
-        print(f"⏱️ Tempo total: {summary['duration_seconds']:.1f}s")
+        print(f"⏱ Tempo total: {summary['duration_seconds']:.1f}s")
     
     # Detalhes dos resultados se disponível
     if 'results' in report and len(report['results']) <= 10:  # Só mostra detalhes para poucos arquivos
         print(f"\n📋 Detalhes:")
         for result in report['results']:
             file_name = Path(result['file']).name
-            status = "✅" if result['success'] else "❌"
+            status = "" if result['success'] else ""
             print(f"   {status} {file_name[:50]}")
             if result['metadata'] and result['success']:
                 metadata = result['metadata']
@@ -568,10 +568,10 @@ Exemplos de uso:
         print(f"\n🎉 Processamento concluído!")
         
     except KeyboardInterrupt:
-        print(f"\n⚠️ Operação interrompida pelo usuário")
+        print(f"\n⚠ Operação interrompida pelo usuário")
         return 1
     except Exception as e:
-        print(f"\n❌ Erro: {e}")
+        print(f"\n Erro: {e}")
         return 1
     
     return 0

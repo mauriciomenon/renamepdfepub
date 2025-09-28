@@ -410,9 +410,9 @@ class SearchCommands:
         success = self.integration.clear_cache()
         
         if success:
-            return "✅ Cache limpo com sucesso!"
+            return " Cache limpo com sucesso!"
         else:
-            return "❌ Erro ao limpar cache."
+            return " Erro ao limpar cache."
     
     def export_report(self, filename: str) -> str:
         """
@@ -427,14 +427,14 @@ class SearchCommands:
         success = self.integration.export_session_report(filename)
         
         if success:
-            return f"✅ Relatório exportado para {filename}"
+            return f" Relatório exportado para {filename}"
         else:
-            return "❌ Erro ao exportar relatório."
+            return " Erro ao exportar relatório."
     
     def _format_search_results(self, result: Dict[str, Any]) -> str:
         """Formata resultados de busca."""
         if 'error' in result:
-            return f"❌ Erro: {result['error']}"
+            return f" Erro: {result['error']}"
         
         lines = []
         lines.append(f"🔍 Busca executada em {result['execution_time']:.3f}s")
@@ -477,7 +477,7 @@ class SearchCommands:
                     lines.append(f"  {entity_type}: {entities}")
         
         if analysis['suggested_corrections']:
-            lines.append("✏️ Correções Sugeridas:")
+            lines.append("✏ Correções Sugeridas:")
             for correction in analysis['suggested_corrections']:
                 lines.append(f"  • {correction}")
         
@@ -502,7 +502,7 @@ class SearchCommands:
                 lines.append(f"  • {completion}")
         
         if suggestions['corrections']:
-            lines.append("✏️ Correções:")
+            lines.append("✏ Correções:")
             for correction in suggestions['corrections']:
                 lines.append(f"  • {correction}")
         

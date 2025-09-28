@@ -33,21 +33,21 @@ def print_banner():
 🎯 DEMONSTRAÇÃO COMPLETA - RenamePDFEpub v2.0
 ════════════════════════════════════════════════════════════════
 Versão: 2.0.0 - Sistema de Produção
-Meta Original: 70% de precisão ✅
-Resultado Alcançado: 88.7% de precisão 🚀
-Status: PRONTO PARA PRODUÇÃO ✅
+Meta Original: 70% de precisão 
+Resultado Alcançado: 88.7% de precisão 
+Status: PRONTO PARA PRODUÇÃO 
 
 Componentes Implementados:
-✅ Sistema V3 Ultimate Orchestrator (88.7% precisão)
-✅ Amazon Books API Integration
-✅ Google Books API Fallback
-✅ Sistema de Cache Inteligente
-✅ Processamento em Lote (200+ livros)
-✅ Interface Gráfica Moderna
-✅ Sistema de Backup Automático
-✅ Relatórios Detalhados
-✅ Rate Limiting e Retry Logic
-✅ Validação Multi-algoritmo
+ Sistema V3 Ultimate Orchestrator (88.7% precisão)
+ Amazon Books API Integration
+ Google Books API Fallback
+ Sistema de Cache Inteligente
+ Processamento em Lote (200+ livros)
+ Interface Gráfica Moderna
+ Sistema de Backup Automático
+ Relatórios Detalhados
+ Rate Limiting e Retry Logic
+ Validação Multi-algoritmo
 ════════════════════════════════════════════════════════════════
 """)
 
@@ -63,14 +63,14 @@ async def demo_v3_system():
         with open('v3_complete_results.json', 'r') as f:
             v3_results = json.load(f)
         
-        print("✅ Resultados V3 carregados com sucesso!")
+        print(" Resultados V3 carregados com sucesso!")
         
         # Mostra estatísticas principais
         final_perf = v3_results['final_performance']
         print(f"\n📈 PERFORMANCE VALIDADA:")
         print(f"   🎯 Ultimate Orchestrator: {final_perf['percentage']:.1f}%")
         print(f"   🎯 Meta original: 70%")
-        print(f"   🎯 Status: {'🎯 META SUPERADA!' if final_perf['target_achieved'] else '⚠️ Abaixo da meta'}")
+        print(f"   🎯 Status: {'🎯 META SUPERADA!' if final_perf['target_achieved'] else '⚠ Abaixo da meta'}")
         
         # Mostra algoritmos individuais
         summary = v3_results['results_summary']
@@ -90,10 +90,10 @@ async def demo_v3_system():
             print(f"   ... e mais {len(v3_results['test_queries']) - 5} queries")
         
         print(f"\n⚡ Tempo de execução validado: {v3_results['execution_time']:.3f}s")
-        print(f"✅ 100% das queries retornaram resultados!")
+        print(f" 100% das queries retornaram resultados!")
         
     except FileNotFoundError:
-        print("⚠️ Arquivo v3_complete_results.json não encontrado")
+        print("⚠ Arquivo v3_complete_results.json não encontrado")
         print("💡 Executando demonstração com dados simulados...")
         
         # Simulação baseada nos resultados conhecidos
@@ -104,7 +104,7 @@ async def demo_v3_system():
         print(f"   🎯 Meta original: 70%")
         print(f"   🎯 Status: 🎯 META SUPERADA!")
         print(f"   ⚡ Tempo médio por query: ~0.13s")
-        print(f"   ✅ Taxa de sucesso: 100%")
+        print(f"    Taxa de sucesso: 100%")
 
 async def demo_amazon_api():
     """Demonstra integração Amazon Books API"""
@@ -127,7 +127,7 @@ async def demo_amazon_api():
             search_time = time.time() - start_time
             
             if result:
-                print(f"✅ Encontrado em {search_time:.3f}s")
+                print(f" Encontrado em {search_time:.3f}s")
                 print(f"   📚 Título: {result.title}")
                 print(f"   👥 Autores: {', '.join(result.authors)}")
                 print(f"   🏢 Publisher: {result.publisher}")
@@ -142,7 +142,7 @@ async def demo_amazon_api():
                     cache_time = time.time() - cache_start
                     print(f"   💾 Cache hit em {cache_time:.3f}s (fonte: {cached_result.source_api})")
             else:
-                print(f"❌ Não encontrado em {search_time:.3f}s")
+                print(f" Não encontrado em {search_time:.3f}s")
 
 def create_demo_files():
     """Cria arquivos de demonstração"""
@@ -171,7 +171,7 @@ def create_demo_files():
         created_files.append(file_path)
         print(f"📄 Criado: {filename}")
     
-    print(f"\n✅ {len(created_files)} arquivos de demonstração criados em: {demo_dir}")
+    print(f"\n {len(created_files)} arquivos de demonstração criados em: {demo_dir}")
     return demo_dir, created_files
 
 async def demo_auto_rename():
@@ -186,7 +186,7 @@ async def demo_auto_rename():
     rename_system = AutoRenameSystem()
     rename_system.file_renamer.backup_enabled = False  # Para demo, sem backup
     
-    print(f"\n🚀 Processando {len(demo_files)} arquivos...")
+    print(f"\n Processando {len(demo_files)} arquivos...")
     
     # Processa diretório
     start_time = time.time()
@@ -196,10 +196,10 @@ async def demo_auto_rename():
     # Mostra resultados
     summary = report['summary']
     print(f"\n📊 RESULTADOS DA RENOMEAÇÃO:")
-    print(f"   ⏱️ Tempo total: {process_time:.1f}s")
+    print(f"   ⏱ Tempo total: {process_time:.1f}s")
     print(f"   📚 Total processado: {summary['total_files']}")
-    print(f"   ✅ Sucessos: {summary['successful']}")
-    print(f"   ❌ Falhas: {summary['failed']}")
+    print(f"    Sucessos: {summary['successful']}")
+    print(f"    Falhas: {summary['failed']}")
     print(f"   📈 Taxa de sucesso: {summary['success_rate']:.1f}%")
     
     # Mostra detalhes dos arquivos renomeados
@@ -211,7 +211,7 @@ async def demo_auto_rename():
                 # Verifica nome atual do arquivo
                 current_files = list(demo_dir.glob("*"))
                 if current_files:
-                    print(f"   ✅ {original_name[:40]}")
+                    print(f"    {original_name[:40]}")
                     if result['metadata']:
                         metadata = result['metadata']
                         if isinstance(metadata, dict):
@@ -222,7 +222,7 @@ async def demo_auto_rename():
                             authors = ', '.join(metadata.authors)
                         print(f"      → {title} - {authors}")
             else:
-                print(f"   ❌ {original_name[:40]} - {result['message']}")
+                print(f"    {original_name[:40]} - {result['message']}")
     
     # Limpa arquivos de demo
     import shutil
@@ -250,7 +250,7 @@ async def demo_batch_processing():
     
     batch_processor = BatchBookProcessor(batch_size=3, max_concurrent=2)
     
-    print(f"🚀 Processando {len(large_book_list)} livros em lote...")
+    print(f" Processando {len(large_book_list)} livros em lote...")
     print(f"   📦 Tamanho do lote: 3 livros")
     print(f"   ⚡ Concorrência máxima: 2 threads")
     
@@ -263,10 +263,10 @@ async def demo_batch_processing():
     success_rate = (successful / len(results)) * 100
     
     print(f"\n📊 RESULTADOS PROCESSAMENTO EM LOTE:")
-    print(f"   ⏱️ Tempo total: {process_time:.1f}s")
+    print(f"   ⏱ Tempo total: {process_time:.1f}s")
     print(f"   📚 Total processado: {len(results)}")
-    print(f"   ✅ Sucessos: {successful}")
-    print(f"   ❌ Falhas: {len(results) - successful}")
+    print(f"    Sucessos: {successful}")
+    print(f"    Falhas: {len(results) - successful}")
     print(f"   📈 Taxa de sucesso: {success_rate:.1f}%")
     print(f"   ⚡ Velocidade: {len(results)/process_time:.1f} livros/segundo")
     
@@ -274,19 +274,19 @@ async def demo_batch_processing():
     print(f"\n📋 EXEMPLOS DE RESULTADOS:")
     for i, (query, result) in enumerate(results[:3], 1):
         if result:
-            print(f"   {i}. ✅ {query}")
+            print(f"   {i}.  {query}")
             print(f"      → {result.title}")
             print(f"      → Fonte: {result.source_api}")
             print(f"      → Score: {result.confidence_score:.3f}")
         else:
-            print(f"   {i}. ❌ {query} - Não encontrado")
+            print(f"   {i}.  {query} - Não encontrado")
 
 def demo_gui_info():
     """Demonstra informações sobre a GUI"""
-    print("\n🖥️ 6. INTERFACE GRÁFICA MODERNA")
+    print("\n🖥 6. INTERFACE GRÁFICA MODERNA")
     print("="*60)
     
-    print("✅ Interface gráfica moderna implementada em gui_modern.py")
+    print(" Interface gráfica moderna implementada em gui_modern.py")
     print("\n🎨 CARACTERÍSTICAS:")
     print("   • Interface intuitiva com Tkinter moderno")
     print("   • Processamento assíncrono com feedback visual")
@@ -298,7 +298,7 @@ def demo_gui_info():
     print("   • Salvamento automático de relatórios")
     print("   • Sistema de backup configurável")
     
-    print("\n🚀 PARA EXECUTAR A GUI:")
+    print("\n PARA EXECUTAR A GUI:")
     print("   python gui_modern.py")
     
     print("\n📱 PARA EXECUTAR VIA LINHA DE COMANDO:")
@@ -314,8 +314,8 @@ def show_performance_comparison():
     print("🎯 EVOLUÇÃO DO PROJETO:")
     print("   V1 Inicial:    ~45% precisão")
     print("   V2 Melhorado:  ~65% precisão") 
-    print("   V3 Ultimate:   88.7% precisão 🚀")
-    print("   Meta Original: 70% precisão ✅")
+    print("   V3 Ultimate:   88.7% precisão ")
+    print("   Meta Original: 70% precisão ")
     
     print("\n⚡ PERFORMANCE ATUAL:")
     print("   • Busca individual: ~0.13s por livro")
@@ -333,10 +333,10 @@ def show_performance_comparison():
 
 def show_production_readiness():
     """Mostra status de produção"""
-    print("\n🚀 8. STATUS DE PRODUÇÃO")
+    print("\n 8. STATUS DE PRODUÇÃO")
     print("="*60)
     
-    print("✅ COMPONENTES PRONTOS PARA PRODUÇÃO:")
+    print(" COMPONENTES PRONTOS PARA PRODUÇÃO:")
     print("   • Sistema V3 validado com dados reais (80 livros)")
     print("   • Amazon Books API integrado e testado")
     print("   • Google Books API como fallback")
@@ -383,12 +383,12 @@ async def main():
         print("\n" + "="*60)
         print("🎉 DEMONSTRAÇÃO COMPLETA FINALIZADA!")
         print("="*60)
-        print("✅ Todos os componentes funcionando perfeitamente")
-        print("🚀 Sistema pronto para produção com 88.7% de precisão")
+        print(" Todos os componentes funcionando perfeitamente")
+        print(" Sistema pronto para produção com 88.7% de precisão")
         print("📈 Meta de 70% SUPERADA em 18.7 pontos percentuais!")
         print("🎯 RenamePDFEpub v2.0 está pronto para uso!")
         
-        print("\n🚀 PARA USAR O SISTEMA:")
+        print("\n PARA USAR O SISTEMA:")
         print("   Interface Gráfica: python gui_modern.py")
         print("   Linha de Comando:  python auto_rename_system.py --help")
         print("   API Integration:   python amazon_api_integration.py")
@@ -397,9 +397,9 @@ async def main():
         print("Todos os objetivos alcançados e superados! 🎯✨")
         
     except KeyboardInterrupt:
-        print("\n⚠️ Demonstração interrompida pelo usuário")
+        print("\n⚠ Demonstração interrompida pelo usuário")
     except Exception as e:
-        print(f"\n❌ Erro durante demonstração: {e}")
+        print(f"\n Erro durante demonstração: {e}")
         import traceback
         traceback.print_exc()
 

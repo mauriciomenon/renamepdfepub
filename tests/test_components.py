@@ -18,19 +18,19 @@ def test_gui_logic():
         
         # Test shared modules import
         import renamepdfepub.metadata_extractor as extractor
-        print("✅ metadata_extractor import successful")
+        print(" metadata_extractor import successful")
         
         # Test a basic function
         result = extractor.extract_from_epub("nonexistent.epub")
         expected_keys = ['title', 'subtitle', 'authors', 'publisher', 'year', 'isbn10', 'isbn13']
         if all(key in result for key in expected_keys):
-            print("✅ metadata_extractor.extract_from_epub returns expected structure")
+            print(" metadata_extractor.extract_from_epub returns expected structure")
         else:
-            print("❌ Unexpected structure from extract_from_epub")
+            print(" Unexpected structure from extract_from_epub")
             
         return True
     except Exception as e:
-        print(f"❌ GUI logic test failed: {e}")
+        print(f" GUI logic test failed: {e}")
         return False
 
 def test_cli_functionality():
@@ -40,19 +40,19 @@ def test_cli_functionality():
         sys.path.insert(0, "/Users/menon/git/renamepdfepub")
         import renomeia_livro
         
-        print("✅ CLI import successful")
+        print(" CLI import successful")
         
         # Test if main classes exist
         if hasattr(renomeia_livro, 'DependencyManager'):
-            print("✅ DependencyManager class found")
+            print(" DependencyManager class found")
         if hasattr(renomeia_livro, 'MetadataCache'):
-            print("✅ MetadataCache class found") 
+            print(" MetadataCache class found") 
         if hasattr(renomeia_livro, 'BookMetadataExtractor'):
-            print("✅ BookMetadataExtractor class found")
+            print(" BookMetadataExtractor class found")
             
         return True
     except Exception as e:
-        print(f"❌ CLI functionality test failed: {e}")
+        print(f" CLI functionality test failed: {e}")
         return False
 
 def test_shared_modules_detailed():
@@ -70,13 +70,13 @@ def test_shared_modules_detailed():
             try:
                 __import__(f'renamepdfepub.{module}')
                 imported.append(module)
-                print(f"✅ {module} imported successfully")
+                print(f" {module} imported successfully")
             except Exception as e:
-                print(f"❌ {module} import failed: {e}")
+                print(f" {module} import failed: {e}")
         
         return len(imported) == len(modules)
     except Exception as e:
-        print(f"❌ Shared modules test failed: {e}")
+        print(f" Shared modules test failed: {e}")
         return False
 
 if __name__ == "__main__":
@@ -92,4 +92,4 @@ if __name__ == "__main__":
     if all(results):
         print("🎉 Todos os componentes estão funcionando!")
     else:
-        print("⚠️  Alguns componentes apresentaram problemas")
+        print("⚠  Alguns componentes apresentaram problemas")

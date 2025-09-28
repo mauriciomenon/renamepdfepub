@@ -133,7 +133,7 @@ python3 renomeia_livro.py
 
 ## 📂 Estrutura da Documentação
 
-### 🚀 [Releases](releases/)
+###  [Releases](releases/)
 - [CHANGELOG.md](releases/CHANGELOG.md) - Histórico de mudanças
 - [Release Notes v0.11.0](releases/RELEASE_NOTES_v0.11.0_ADVANCED_ALGORITHMS.md) - Release atual
 - [Releases anteriores](releases/) - Histórico completo
@@ -172,7 +172,7 @@ python3 renomeia_livro.py
 - **Padrões:** Nomes brasileiros, português, formatos locais
 - **Especialização:** 93% de accuracy em conteúdo nacional
 
-## 🌐 Interface Web
+##  Interface Web
 
 - **Dashboard Streamlit:** Visualizações interativas em tempo real
 - **Relatórios HTML:** Análises detalhadas sem dependências
@@ -207,7 +207,7 @@ python3 renomeia_livro.py
     with open('docs/README.md', 'w', encoding='utf-8') as f:
         f.write(index_content)
     
-    print("✅ Criado: docs/README.md")
+    print(" Criado: docs/README.md")
 
 def main():
     """Função principal"""
@@ -220,7 +220,7 @@ def main():
     # Cria índice
     create_docs_index()
     
-    print(f"\n✅ Organizados {len(moved_files)} arquivos:")
+    print(f"\n Organizados {len(moved_files)} arquivos:")
     for file_info in moved_files:
         print(f"  📄 {file_info}")
     

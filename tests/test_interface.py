@@ -21,7 +21,7 @@ def test_web_launcher_clean_output():
         content = launcher_file.read_text(encoding='utf-8')
         
         # Lista de emojis que não devem estar presentes
-        forbidden_emojis = ["🚀", "🌐", "📄", "🔬", "📊", "❌", "📝", "✅", "👋"]
+        forbidden_emojis = ["", "", "📄", "🔬", "📊", "", "📝", "", ""]
         
         for emoji in forbidden_emojis:
             assert emoji not in content, f"Emoji {emoji} encontrado no web launcher"

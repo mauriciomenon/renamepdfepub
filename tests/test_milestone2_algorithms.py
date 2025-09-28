@@ -35,10 +35,10 @@ def print_section(title: str):
 def print_results(results: List[SearchResult], max_results: int = 5):
     """Imprime resultados de busca formatados."""
     if not results:
-        print("❌ Nenhum resultado encontrado")
+        print(" Nenhum resultado encontrado")
         return
     
-    print(f"✅ {len(results)} resultados encontrados:")
+    print(f" {len(results)} resultados encontrados:")
     for i, result in enumerate(results[:max_results]):
         print(f"\n{i+1}. Score: {result.score:.3f} | Algoritmo: {result.algorithm}")
         print(f"   Título: {result.metadata.get('title', 'N/A')}")
@@ -68,7 +68,7 @@ def test_isbn_validator():
         is_valid_10 = ISBNValidator.is_valid_isbn10(isbn)
         is_valid = is_valid_13 or is_valid_10
         
-        status = "✅" if is_valid == expected else "❌"
+        status = "" if is_valid == expected else ""
         print(f"{status} {description}: {isbn} -> {is_valid}")
     
     # Test corruption fixing
@@ -81,7 +81,7 @@ def test_isbn_validator():
     
     for corrupted in corrupted_isbns:
         fixed = ISBNValidator.fix_corrupted_isbn(corrupted)
-        status = "✅" if fixed else "❌"
+        status = "" if fixed else ""
         print(f"{status} {corrupted} -> {fixed}")
     
     # Test ISBN extraction from text
@@ -93,7 +93,7 @@ def test_isbn_validator():
     """
     
     extracted = ISBNValidator.extract_isbns_from_text(test_text)
-    print(f"✅ ISBNs extraídos: {extracted}")
+    print(f" ISBNs extraídos: {extracted}")
 
 
 def test_text_normalizer():
@@ -110,7 +110,7 @@ def test_text_normalizer():
     print("\n📝 Testando normalização de texto:")
     for text, language in test_texts:
         tokens = TextNormalizer.normalize_text(text, language)
-        print(f"✅ {language}: '{text}' -> {tokens}")
+        print(f" {language}: '{text}' -> {tokens}")
     
     # Test author variants
     print("\n👤 Testando variantes de autores:")
@@ -118,16 +118,16 @@ def test_text_normalizer():
     
     for author in authors:
         variants = TextNormalizer.extract_author_variants(author)
-        print(f"✅ '{author}' -> {list(variants)[:3]}...")  # Show first 3 variants
+        print(f" '{author}' -> {list(variants)[:3]}...")  # Show first 3 variants
     
     # Test N-grams
     print("\n🔤 Testando geração de N-gramas:")
     tokens = ['machine', 'learning', 'python', 'programming']
     bigrams = TextNormalizer.generate_ngrams(tokens, 2)
     trigrams = TextNormalizer.generate_ngrams(tokens, 3)
-    print(f"✅ Tokens: {tokens}")
-    print(f"✅ Bigramas: {bigrams}")
-    print(f"✅ Trigramas: {trigrams}")
+    print(f" Tokens: {tokens}")
+    print(f" Bigramas: {bigrams}")
+    print(f" Trigramas: {trigrams}")
 
 
 def test_isbn_search_algorithm():
@@ -170,7 +170,7 @@ def test_isbn_search_algorithm():
         
         # Check suitability
         suitable = algorithm.is_suitable_for_query(test_case['query'])
-        print(f"   Adequado: {'✅' if suitable else '❌'}")
+        print(f"   Adequado: {'' if suitable else ''}")
         
         if suitable:
             results = algorithm.search(test_case['query'])
@@ -229,7 +229,7 @@ def test_semantic_search_algorithm():
         
         # Check suitability
         suitable = algorithm.is_suitable_for_query(test_case['query'])
-        print(f"   Adequado: {'✅' if suitable else '❌'}")
+        print(f"   Adequado: {'' if suitable else ''}")
         
         if suitable:
             results = algorithm.search(test_case['query'])
@@ -336,7 +336,7 @@ def test_edge_cases_and_error_handling():
 
 def run_comprehensive_validation():
     """Executa validação abrangente de todos os componentes."""
-    print("🚀 INICIANDO VALIDAÇÃO COMPLETA DO MILESTONE 2")
+    print(" INICIANDO VALIDAÇÃO COMPLETA DO MILESTONE 2")
     print("Phase 2 Search Algorithms - ISBN Intelligence & Semantic Search")
     
     start_time = time.time()
@@ -352,9 +352,9 @@ def run_comprehensive_validation():
         
         total_time = time.time() - start_time
         
-        print_section("VALIDAÇÃO COMPLETA ✅")
+        print_section("VALIDAÇÃO COMPLETA ")
         print(f"🎉 Todos os testes executados com sucesso!")
-        print(f"⏱️  Tempo total: {total_time:.2f} segundos")
+        print(f"⏱  Tempo total: {total_time:.2f} segundos")
         print(f"📊 Milestone 2 IMPLEMENTADO COM SUCESSO!")
         print(f"\n✨ Algoritmos implementados:")
         print(f"   • ISBNSearchAlgorithm - Validação e correção inteligente de ISBNs")
@@ -365,7 +365,7 @@ def run_comprehensive_validation():
         return True
         
     except Exception as e:
-        print(f"\n❌ ERRO durante a validação: {e}")
+        print(f"\n ERRO durante a validação: {e}")
         import traceback
         traceback.print_exc()
         return False

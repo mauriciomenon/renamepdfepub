@@ -62,7 +62,7 @@ def test_v3():
     
     # Meta: Author 40%+, Publisher 25%+, Year 30%+
     success = author_found >= 2 and publisher_found >= 1 and year_found >= 1
-    status = "✅ SUCESSO" if success else "❌ PRECISA MELHORIA"
+    status = " SUCESSO" if success else " PRECISA MELHORIA"
     print(f"\nStatus V3: {status}")
 
 if __name__ == "__main__":

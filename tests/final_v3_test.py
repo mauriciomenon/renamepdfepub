@@ -250,7 +250,7 @@ def main():
     # Verificar diretório de livros
     books_dir = Path("books")
     if not books_dir.exists():
-        print("❌ Diretório 'books' não encontrado!")
+        print(" Diretório 'books' não encontrado!")
         return
     
     # Criar extrator V3
@@ -304,9 +304,9 @@ def main():
     publisher_pct = stats['with_publisher'] / stats['total_books'] * 100
     
     print(f"\n=== AVALIAÇÃO CONTRA METAS ===")
-    print(f"Autor (meta 40%): {'✅' if author_pct >= 40 else '❌'} {author_pct:.1f}%")
-    print(f"Ano (meta 30%): {'✅' if year_pct >= 30 else '❌'} {year_pct:.1f}%")
-    print(f"Publisher (meta 25%): {'✅' if publisher_pct >= 25 else '❌'} {publisher_pct:.1f}%")
+    print(f"Autor (meta 40%): {'' if author_pct >= 40 else ''} {author_pct:.1f}%")
+    print(f"Ano (meta 30%): {'' if year_pct >= 30 else ''} {year_pct:.1f}%")
+    print(f"Publisher (meta 25%): {'' if publisher_pct >= 25 else ''} {publisher_pct:.1f}%")
     
     # Salvar resultados
     results = {

@@ -126,7 +126,7 @@ class QualityValidator:
                     'lines': len(content.splitlines()),
                     'has_headers': bool(re.search(r'^#+ ', content, re.MULTILINE)),
                     'has_code_blocks': bool(re.search(r'```', content)),
-                    'has_emojis': bool(re.search(r'[🚀📚🔍✅❌⚠️🎉]', content))
+                    'has_emojis': bool(re.search(r'[📚🔍⚠🎉]', content))
                 }
             else:
                 results[filename] = {'exists': False}
@@ -136,7 +136,7 @@ class QualityValidator:
     
     def validate_functionality(self) -> Dict[str, Any]:
         """Valida funcionalidades principais"""
-        print("⚙️ Validando funcionalidades...")
+        print("⚙ Validando funcionalidades...")
         
         results = {
             'algorithm_system': self.test_algorithm_imports(),
@@ -297,25 +297,25 @@ class QualityValidator:
 """
         
         for filename, info in doc_results.items():
-            status = "✅" if info.get('exists', False) else "❌"
+            status = "" if info.get('exists', False) else ""
             lines = info.get('lines', 0)
             report += f"- **{filename}**: {status} ({lines} linhas)\n"
         
-        report += "\n### ⚙️ Funcionalidades\n"
+        report += "\n### ⚙ Funcionalidades\n"
         
         for feature, result in func_results.items():
             if isinstance(result, dict):
                 passed = sum(1 for v in result.values() if v)
                 total = len(result)
-                status = "✅" if passed == total else "⚠️"
+                status = "" if passed == total else "⚠"
                 report += f"- **{feature}**: {status} ({passed}/{total})\n"
             else:
-                status = "✅" if result else "❌"
+                status = "" if result else ""
                 report += f"- **{feature}**: {status}\n"
         
         # Issues encontrados
         if self.issues:
-            report += "\n### ⚠️ Issues Encontrados\n"
+            report += "\n### ⚠ Issues Encontrados\n"
             for category, issues in self.issues.items():
                 if issues:
                     report += f"\n**{category.replace('_', ' ').title()}:**\n"
@@ -327,11 +327,11 @@ class QualityValidator:
         report += f"\n### 🎯 Pontuação Geral: {score:.1f}/100\n"
         
         if score >= 80:
-            report += "✅ **APROVADO PARA RELEASE**\n"
+            report += " **APROVADO PARA RELEASE**\n"
         elif score >= 60:
-            report += "⚠️ **PRECISA DE MELHORIAS**\n"
+            report += "⚠ **PRECISA DE MELHORIAS**\n"
         else:
-            report += "❌ **NÃO RECOMENDADO PARA RELEASE**\n"
+            report += " **NÃO RECOMENDADO PARA RELEASE**\n"
         
         return report
     

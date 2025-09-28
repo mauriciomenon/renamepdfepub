@@ -43,4 +43,4 @@ print("Autor: Mark Lutz")
 print("Ano: 2023") 
 print("Publisher: Não detectado (correto)")
 
-print("\n✅ Patterns funcionando!")
+print("\n Patterns funcionando!")

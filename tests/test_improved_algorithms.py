@@ -39,7 +39,7 @@ class ImprovedSearchAlgorithms:
         database = []
         
         if not books_dir.exists():
-            logger.warning("⚠️  Pasta 'books' não encontrada")
+            logger.warning("⚠  Pasta 'books' não encontrada")
             return []
         
         for file_path in books_dir.iterdir():
@@ -405,7 +405,7 @@ class ImprovedTestRunner:
     
     def run_improved_tests(self, max_books: int = 50):
         """Executar testes melhorados"""
-        logger.info("🚀 INICIANDO TESTES DOS ALGORITMOS MELHORADOS")
+        logger.info(" INICIANDO TESTES DOS ALGORITMOS MELHORADOS")
         
         # Obter livros
         test_books = self.get_test_books(max_books)
@@ -472,10 +472,10 @@ class ImprovedTestRunner:
             
             # Avaliar performance contra meta de 50%
             if accuracy >= 0.5:
-                logger.info(f"  ✅ META DE 50% ATINGIDA!")
+                logger.info(f"   META DE 50% ATINGIDA!")
                 
                 if accuracy >= 0.8:
-                    logger.info(f"  🚀 EXCELENTE! Pronto para produção!")
+                    logger.info(f"   EXCELENTE! Pronto para produção!")
                 elif accuracy >= 0.7:
                     logger.info(f"  🎉 MUITO BOM! Quase perfeito!")
                 elif accuracy >= 0.6:
@@ -484,7 +484,7 @@ class ImprovedTestRunner:
                     logger.info(f"  🔧 ADEQUADO! Otimizações recomendadas.")
             else:
                 improvement_needed = 0.5 - accuracy
-                logger.info(f"  ❌ Meta de 50% não atingida (faltam {improvement_needed:.1%})")
+                logger.info(f"   Meta de 50% não atingida (faltam {improvement_needed:.1%})")
             
             if accuracy > best_accuracy:
                 best_accuracy = accuracy
@@ -497,7 +497,7 @@ class ImprovedTestRunner:
         # Avaliação geral do projeto
         if best_accuracy >= 0.5:
             logger.info("🎉 SUCESSO! Meta de 50% atingida!")
-            logger.info("✅ Sistema pronto para próxima fase de otimização")
+            logger.info(" Sistema pronto para próxima fase de otimização")
             
             # Sugestões baseadas na performance
             if best_accuracy >= 0.8:
@@ -516,7 +516,7 @@ class ImprovedTestRunner:
                 logger.info("   - Melhorar normalização de texto")
                 logger.info("   - Adicionar sinônimos e variações")
         else:
-            logger.info("⚠️  META DE 50% NÃO ATINGIDA")
+            logger.info("⚠  META DE 50% NÃO ATINGIDA")
             logger.info("🔧 Refinamentos CRÍTICOS necessários:")
             logger.info("   - Melhorar algoritmos de similaridade")
             logger.info("   - Expandir critérios de correspondência")
@@ -524,7 +524,7 @@ class ImprovedTestRunner:
 
 def main():
     """Função principal"""
-    print("🚀 TESTE DOS ALGORITMOS MELHORADOS - RENAMEPDFEPUB")
+    print(" TESTE DOS ALGORITMOS MELHORADOS - RENAMEPDFEPUB")
     print("=" * 70)
     
     runner = ImprovedTestRunner()
@@ -544,10 +544,10 @@ def main():
         print(f"📊 Acurácia média: {avg_accuracy:.1%}")
         
         if best_accuracy >= 0.5:
-            print("✅ TESTE PASSOU! Sistema funcional e pronto!")
+            print(" TESTE PASSOU! Sistema funcional e pronto!")
             
             if best_accuracy >= 0.8:
-                print("🚀 PERFORMANCE EXCEPCIONAL! Pronto para produção!")
+                print(" PERFORMANCE EXCEPCIONAL! Pronto para produção!")
             elif best_accuracy >= 0.7:
                 print("🎉 PERFORMANCE ALTA! Quase perfeito!")
             elif best_accuracy >= 0.6:
@@ -556,7 +556,7 @@ def main():
                 print("🔧 PERFORMANCE ADEQUADA! Meta atingida.")
         else:
             improvement_needed = 0.5 - best_accuracy
-            print(f"❌ TESTE FALHOU! Refinamento necessário (+{improvement_needed:.1%})")
+            print(f" TESTE FALHOU! Refinamento necessário (+{improvement_needed:.1%})")
         
         print(f"📊 Relatórios detalhados em: improved_test_results/")
         

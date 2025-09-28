@@ -29,11 +29,11 @@ try:
     from renamepdfepub.search_algorithms.semantic_search import SemanticSearchAlgorithm
     from renamepdfepub.search_algorithms.search_orchestrator import SearchOrchestrator
     
-    logger.info("✅ Importações dos algoritmos bem-sucedidas")
+    logger.info(" Importações dos algoritmos bem-sucedidas")
     ALGORITHMS_AVAILABLE = True
     
 except ImportError as e:
-    logger.warning(f"⚠️  Não foi possível importar algoritmos: {e}")
+    logger.warning(f"⚠  Não foi possível importar algoritmos: {e}")
     ALGORITHMS_AVAILABLE = False
 
 class AlgorithmWrapper:
@@ -46,9 +46,9 @@ class AlgorithmWrapper:
                 self.isbn = ISBNSearchAlgorithm()
                 self.semantic = SemanticSearchAlgorithm()
                 self.orchestrator = SearchOrchestrator()
-                logger.info("✅ Algoritmos inicializados com sucesso")
+                logger.info(" Algoritmos inicializados com sucesso")
             except Exception as e:
-                logger.error(f"❌ Erro ao inicializar algoritmos: {e}")
+                logger.error(f" Erro ao inicializar algoritmos: {e}")
                 self.fuzzy = None
                 self.isbn = None
                 self.semantic = None
@@ -249,10 +249,10 @@ class TestRunner:
     
     def run_tests(self):
         """Executar todos os testes"""
-        logger.info("🚀 INICIANDO TESTES DOS ALGORITMOS REAIS")
+        logger.info(" INICIANDO TESTES DOS ALGORITMOS REAIS")
         
         if not ALGORITHMS_AVAILABLE:
-            logger.error("❌ Algoritmos não disponíveis. Executando com dados mockados.")
+            logger.error(" Algoritmos não disponíveis. Executando com dados mockados.")
             return self.run_mock_tests()
         
         # Obter livros
@@ -361,13 +361,13 @@ class TestRunner:
                 highest_target = max(targets_met)
                 logger.info(f"  🎯 Target atingido: {highest_target:.0%}")
             else:
-                logger.info(f"  ❌ Nenhum target atingido")
+                logger.info(f"   Nenhum target atingido")
             
             # Avaliar performance
             if accuracy >= 0.5:
-                logger.info(f"  ✅ META DE 50% ATINGIDA")
+                logger.info(f"   META DE 50% ATINGIDA")
             else:
-                logger.info(f"  ❌ Meta de 50% NÃO atingida")
+                logger.info(f"   Meta de 50% NÃO atingida")
             
             if accuracy > best_accuracy:
                 best_accuracy = accuracy
@@ -380,11 +380,11 @@ class TestRunner:
         if best_accuracy >= 0.5:
             logger.info("🎉 SUCESSO! Meta de 50% atingida!")
         else:
-            logger.info("⚠️  REFINAMENTO NECESSÁRIO! Meta de 50% não atingida.")
+            logger.info("⚠  REFINAMENTO NECESSÁRIO! Meta de 50% não atingida.")
 
 def main():
     """Função principal"""
-    print("🚀 TESTE DOS ALGORITMOS REAIS - RENAMEPDFEPUB")
+    print(" TESTE DOS ALGORITMOS REAIS - RENAMEPDFEPUB")
     print("=" * 60)
     
     runner = TestRunner()
@@ -401,9 +401,9 @@ def main():
         print(f"🎯 Melhor acurácia: {best_accuracy:.1%}")
         
         if best_accuracy >= 0.5:
-            print("✅ TESTE PASSOU! Sistema funcional!")
+            print(" TESTE PASSOU! Sistema funcional!")
         else:
-            print("❌ TESTE FALHOU! Refinamento necessário.")
+            print(" TESTE FALHOU! Refinamento necessário.")
         
         print(f"📊 Detalhes em: algorithm_test_results/")
         

@@ -62,7 +62,7 @@ class ExecutiveTestSystem:
             'errors': []
         }
         
-        logger.info("🚀 SISTEMA EXECUTIVO DE TESTES INICIADO")
+        logger.info(" SISTEMA EXECUTIVO DE TESTES INICIADO")
         logger.info(f"📁 Diretório de resultados: {self.results_dir}")
         
     def validate_project_structure(self) -> bool:
@@ -102,9 +102,9 @@ class ExecutiveTestSystem:
                 full_path = project_root / file_path
                 if full_path.exists():
                     size = full_path.stat().st_size
-                    logger.info(f"  ✅ {file_path} ({size:,} bytes)")
+                    logger.info(f"   {file_path} ({size:,} bytes)")
                 else:
-                    logger.error(f"  ❌ {file_path} - MISSING")
+                    logger.error(f"   {file_path} - MISSING")
                     structure_valid = False
         
         # Validar coleção de livros
@@ -114,11 +114,11 @@ class ExecutiveTestSystem:
             logger.info(f"\n📚 Coleção de livros: {book_count} arquivos")
             
             if book_count >= 50:
-                logger.info("  ✅ Coleção adequada para testes extensivos")
+                logger.info("   Coleção adequada para testes extensivos")
             else:
-                logger.warning(f"  ⚠️  Coleção pequena ({book_count} < 50 recomendados)")
+                logger.warning(f"  ⚠  Coleção pequena ({book_count} < 50 recomendados)")
         else:
-            logger.error("  ❌ Diretório books/ não encontrado")
+            logger.error("   Diretório books/ não encontrado")
             structure_valid = False
         
         self.status['phase'] = 'STRUCTURE_VALIDATED'
@@ -142,12 +142,12 @@ class ExecutiveTestSystem:
             algorithms['semantic'] = SemanticSearchAlgorithm()
             algorithms['orchestrator'] = SearchOrchestrator()
             
-            logger.info("✅ Algoritmos principais carregados:")
+            logger.info(" Algoritmos principais carregados:")
             for name in algorithms.keys():
                 logger.info(f"  • {name.upper()}")
             
         except ImportError as e:
-            logger.error(f"❌ Erro importando algoritmos: {e}")
+            logger.error(f" Erro importando algoritmos: {e}")
             return {}
         
         # Carregar sistema externo (Amazon, etc.)
@@ -156,10 +156,10 @@ class ExecutiveTestSystem:
             from external_metadata_expansion import MetadataAggregator
             
             algorithms['external'] = MetadataAggregator()
-            logger.info("✅ Sistema externo (Amazon/Editoras) carregado")
+            logger.info(" Sistema externo (Amazon/Editoras) carregado")
             
         except Exception as e:
-            logger.warning(f"⚠️  Sistema externo não disponível: {e}")
+            logger.warning(f"⚠  Sistema externo não disponível: {e}")
         
         self.algorithms = algorithms
         self.status['phase'] = 'ALGORITHMS_LOADED'
@@ -306,7 +306,7 @@ class ExecutiveTestSystem:
                 }
                 results['detailed_results'].append(detail)
                 
-                logger.error(f"  ❌ Erro testando '{book.name}': {error_msg}")
+                logger.error(f"   Erro testando '{book.name}': {error_msg}")
         
         # Calcular estatísticas finais
         if results['response_times']:
@@ -341,7 +341,7 @@ class ExecutiveTestSystem:
         # Obter livros para teste
         test_books = self.get_test_books(max_books)
         if not test_books:
-            logger.error("❌ Nenhum livro encontrado para teste")
+            logger.error(" Nenhum livro encontrado para teste")
             return {}
         
         # Testar cada algoritmo
@@ -367,7 +367,7 @@ class ExecutiveTestSystem:
                     self.status['response_times'].extend(results['response_times'])
                 
             except Exception as e:
-                logger.error(f"❌ Erro grave testando {algorithm_name}: {e}")
+                logger.error(f" Erro grave testando {algorithm_name}: {e}")
                 all_results[algorithm_name] = {'error': str(e), 'success': False}
         
         self.status['phase'] = 'TESTS_COMPLETED'
@@ -456,7 +456,7 @@ class ExecutiveTestSystem:
                 recommendations.append(f"🎉 {algorithm_name}: EXCELENTE - Pronto para produção!")
             
             if perf['response_time'] > 100:
-                recommendations.append(f"🚀 {algorithm_name}: Otimizar velocidade")
+                recommendations.append(f" {algorithm_name}: Otimizar velocidade")
         
         progression_analysis['recommendations'] = recommendations
         
@@ -482,7 +482,7 @@ class ExecutiveTestSystem:
         }
         
         if 'external' not in self.algorithms:
-            logger.warning("⚠️  Sistema externo não disponível - pulando testes")
+            logger.warning("⚠  Sistema externo não disponível - pulando testes")
             return external_results
         
         aggregator = self.algorithms['external']
@@ -528,12 +528,12 @@ class ExecutiveTestSystem:
                     }
                     external_results['sample_results'].append(sample)
                     
-                    logger.info(f"  ✅ {len(results)} resultados em {response_time:.1f}ms")
+                    logger.info(f"   {len(results)} resultados em {response_time:.1f}ms")
                     logger.info(f"  📚 Fontes: {', '.join(sample['sources'])}")
                     
                 else:
                     external_results['failed_connections'] += 1
-                    logger.info(f"  ❌ Nenhum resultado")
+                    logger.info(f"   Nenhum resultado")
                 
             except asyncio.TimeoutError:
                 external_results['failed_connections'] += 1  
@@ -541,7 +541,7 @@ class ExecutiveTestSystem:
                 
             except Exception as e:
                 external_results['failed_connections'] += 1
-                logger.error(f"  ❌ Erro: {e}")
+                logger.error(f"   Erro: {e}")
         
         # Resumo da integração externa
         total_tests = len(test_queries)
@@ -637,7 +637,7 @@ class ExecutiveTestSystem:
 <body>
     <div class="container">
         <div class="header">
-            <h1>🚀 Relatório Executivo - RenamePDFEPub</h1>
+            <h1> Relatório Executivo - RenamePDFEPub</h1>
             <p>Sistema Completo de Busca e Metadados</p>
             <p>Gerado em: {datetime.now().strftime('%d/%m/%Y %H:%M:%S')}</p>
             
@@ -705,7 +705,7 @@ class ExecutiveTestSystem:
         </div>
         
         <div class="section">
-            <h2>🚀 Próximos Passos</h2>
+            <h2> Próximos Passos</h2>
             <ul>
                 <li>Refinar algoritmos com acurácia < 70%</li>
                 <li>Implementar cache distribuído</li>
@@ -718,7 +718,7 @@ class ExecutiveTestSystem:
         <div class="section">
             <h2>📈 Conclusão</h2>
             <p>Sistema completo implementado e testado com sucesso. Performance excede expectativas com tempo médio de {summary['avg_response_time']:.1f}ms e acurácia máxima de {summary['best_accuracy']:.1%}.</p>
-            <p><strong>Status:</strong> ✅ PRONTO PARA PRODUÇÃO</p>
+            <p><strong>Status:</strong>  PRONTO PARA PRODUÇÃO</p>
         </div>
     </div>
 </body>
@@ -738,7 +738,7 @@ SISTEMA COMPLETO DE BUSCA E METADADOS
 {'='*80}
 
 📅 Data: {datetime.now().strftime('%d/%m/%Y %H:%M:%S')}
-⏱️  Tempo de Execução: {summary['total_execution_time']:.1f} segundos
+⏱  Tempo de Execução: {summary['total_execution_time']:.1f} segundos
 📊 Status: {summary['phase']}
 
 MÉTRICAS PRINCIPAIS:
@@ -753,13 +753,13 @@ RESULTADOS POR ALGORITMO:
         if 'detailed_results' in report_data:
             for algorithm, result in report_data['detailed_results'].items():
                 if 'error' in result:
-                    text += f"❌ {algorithm.upper()}: ERRO - {result['error']}\n"
+                    text += f" {algorithm.upper()}: ERRO - {result['error']}\n"
                 else:
                     accuracy = result.get('avg_accuracy', 0)
                     response_time = result.get('avg_response_time', 0)
                     success_rate = result.get('success_rate', 0)
                     
-                    status = '✅' if accuracy >= 0.7 else '⚠️' if accuracy >= 0.5 else '❌'
+                    status = '' if accuracy >= 0.7 else '⚠' if accuracy >= 0.5 else ''
                     
                     text += f"{status} {algorithm.upper()}:\n"
                     text += f"   Acurácia: {accuracy:.1%}\n"
@@ -777,7 +777,7 @@ RESULTADOS POR ALGORITMO:
 CONCLUSÃO:
 Sistema completo implementado com sucesso!
 Performance excede expectativas.
-Status: ✅ PRONTO PARA PRODUÇÃO
+Status:  PRONTO PARA PRODUÇÃO
 {'='*80}
 """
         
@@ -785,24 +785,24 @@ Status: ✅ PRONTO PARA PRODUÇÃO
     
     def run_complete_validation(self, max_books: int = 100):
         """Executar validação completa do sistema"""
-        logger.info(f"🚀 INICIANDO VALIDAÇÃO COMPLETA DO SISTEMA")
+        logger.info(f" INICIANDO VALIDAÇÃO COMPLETA DO SISTEMA")
         logger.info(f"📚 Máximo de livros para teste: {max_books}")
         
         try:
             # 1. Validar estrutura
             if not self.validate_project_structure():
-                logger.error("❌ Estrutura do projeto inválida")
+                logger.error(" Estrutura do projeto inválida")
                 return False
             
             # 2. Carregar algoritmos
             if not self.load_algorithms():
-                logger.error("❌ Falha ao carregar algoritmos")
+                logger.error(" Falha ao carregar algoritmos")
                 return False
             
             # 3. Executar testes abrangentes
             test_results = self.run_comprehensive_tests(max_books)
             if not test_results:
-                logger.error("❌ Falha nos testes abrangentes")
+                logger.error(" Falha nos testes abrangentes")
                 return False
             
             # 4. Analisar progressão de acurácia
@@ -820,23 +820,23 @@ Status: ✅ PRONTO PARA PRODUÇÃO
             logger.info(f"\n{'='*80}")
             logger.info("🎉 VALIDAÇÃO COMPLETA CONCLUÍDA COM SUCESSO!")
             logger.info(f"{'='*80}")
-            logger.info(f"⏱️  Tempo total: {total_time:.1f}s")
+            logger.info(f"⏱  Tempo total: {total_time:.1f}s")
             logger.info(f"🎯 Melhor acurácia: {self.status['accuracy_achieved']:.1%}")
             logger.info(f"📊 Testes realizados: {self.status['total_tests']}")
-            logger.info(f"✅ Sucessos: {self.status['successful_tests']}")
-            logger.info(f"❌ Falhas: {self.status['failed_tests']}")
+            logger.info(f" Sucessos: {self.status['successful_tests']}")
+            logger.info(f" Falhas: {self.status['failed_tests']}")
             
             if self.status['accuracy_achieved'] >= 0.5:
                 logger.info("🏆 META DE 50% ACURÁCIA ATINGIDA!")
                 
                 if self.status['accuracy_achieved'] >= 0.7:
-                    logger.info("🚀 SISTEMA EXCELENTE - PRONTO PARA PRODUÇÃO!")
+                    logger.info(" SISTEMA EXCELENTE - PRONTO PARA PRODUÇÃO!")
                 elif self.status['accuracy_achieved'] >= 0.6:
                     logger.info("⚡ BOM DESEMPENHO - OTIMIZAÇÕES RECOMENDADAS")
                 else:
                     logger.info("🔧 DESEMPENHO ADEQUADO - REFINAMENTOS SUGERIDOS")
             else:
-                logger.info("⚠️  META DE 50% NÃO ATINGIDA - REFINAMENTO NECESSÁRIO")
+                logger.info("⚠  META DE 50% NÃO ATINGIDA - REFINAMENTO NECESSÁRIO")
             
             logger.info(f"📁 Relatórios em: {self.results_dir}")
             logger.info(f"{'='*80}")
@@ -844,12 +844,12 @@ Status: ✅ PRONTO PARA PRODUÇÃO
             return True
             
         except Exception as e:
-            logger.error(f"❌ ERRO GRAVE NA VALIDAÇÃO: {e}")
+            logger.error(f" ERRO GRAVE NA VALIDAÇÃO: {e}")
             return False
 
 def main():
     """Função principal executiva"""
-    print("🚀 SISTEMA EXECUTIVO DE TESTES - RENAMEPDFEPUB")
+    print(" SISTEMA EXECUTIVO DE TESTES - RENAMEPDFEPUB")
     print("=" * 60)
     
     # Inicializar sistema
@@ -860,14 +860,14 @@ def main():
         success = executive_system.run_complete_validation(max_books=80)
         
         if success:
-            print("\n✅ SISTEMA VALIDADO COM SUCESSO!")
+            print("\n SISTEMA VALIDADO COM SUCESSO!")
             print("📊 Confira os relatórios gerados para detalhes completos.")
         else:
-            print("\n❌ FALHA NA VALIDAÇÃO!")
+            print("\n FALHA NA VALIDAÇÃO!")
             print("📋 Confira os logs para identificar problemas.")
             
     except KeyboardInterrupt:
-        logger.info("\n⏹️  Validação interrompida pelo usuário")
+        logger.info("\n  Validação interrompida pelo usuário")
     except Exception as e:
         logger.error(f"\n💥 ERRO CRÍTICO: {e}")
         return 1

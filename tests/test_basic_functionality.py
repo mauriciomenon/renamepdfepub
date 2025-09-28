@@ -15,43 +15,43 @@ def test_gui_imports():
     """Testa se conseguimos importar a GUI sem erros"""
     try:
         from gui_RenameBook import RenamePDFGUI
-        print("✅ GUI import successful")
+        print(" GUI import successful")
         return True
     except Exception as e:
-        print(f"❌ GUI import failed: {e}")
+        print(f" GUI import failed: {e}")
         return False
 
 def test_cli_imports():
     """Testa se conseguimos importar o CLI sem erros"""
     try:
         import renomeia_livro
-        print("✅ CLI import successful")
+        print(" CLI import successful")
         return True
     except Exception as e:
-        print(f"❌ CLI import failed: {e}")
+        print(f" CLI import failed: {e}")
         return False
 
 def test_shared_modules():
     """Testa se conseguimos importar os módulos compartilhados"""
     try:
         from renamepdfepub import metadata_extractor, metadata_cache, renamer
-        print("✅ Shared modules import successful")
+        print(" Shared modules import successful")
         return True
     except Exception as e:
-        print(f"❌ Shared modules import failed: {e}")
+        print(f" Shared modules import failed: {e}")
         return False
 
 def test_sample_books():
     """Lista alguns arquivos de teste disponíveis"""
     books_dir = Path("books")
     if not books_dir.exists():
-        print("❌ Books directory not found")
+        print(" Books directory not found")
         return False
     
     pdf_files = list(books_dir.glob("*.pdf"))
     epub_files = list(books_dir.glob("*.epub"))
     
-    print(f"✅ Found {len(pdf_files)} PDF files and {len(epub_files)} EPUB files")
+    print(f" Found {len(pdf_files)} PDF files and {len(epub_files)} EPUB files")
     
     # Show first 3 of each type
     if pdf_files:
@@ -80,5 +80,5 @@ if __name__ == "__main__":
     if all(results):
         print("🎉 Todos os componentes estão funcionando!")
     else:
-        print("⚠️  Alguns componentes apresentaram problemas")
+        print("⚠  Alguns componentes apresentaram problemas")
         sys.exit(1)

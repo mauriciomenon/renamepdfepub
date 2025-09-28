@@ -97,12 +97,12 @@ def create_demo_data():
     with open('demo_results.json', 'w', encoding='utf-8') as f:
         json.dump(demo_data, f, indent=2, ensure_ascii=False)
     
-    print("✅ Dados salvos em: demo_results.json")
+    print(" Dados salvos em: demo_results.json")
     return demo_data
 
 def generate_html_report(data):
     """Gera relatório HTML"""
-    print("🌐 Gerando relatório HTML...")
+    print(" Gerando relatório HTML...")
     
     html = f"""
 <!DOCTYPE html>
@@ -236,7 +236,7 @@ def generate_html_report(data):
 <body>
     <div class="container">
         <div class="header">
-            <h1>🚀 RenamePDFEPUB</h1>
+            <h1> RenamePDFEPUB</h1>
             <div class="subtitle">Relatório de Análise de Algoritmos</div>
             <div class="subtitle">Gerado em: {time.strftime('%d/%m/%Y às %H:%M:%S')}</div>
         </div>
@@ -318,7 +318,7 @@ def generate_html_report(data):
         
         <div class="footer">
             <p>© 2025 RenamePDFEPUB - Sistema de Análise de Algoritmos</p>
-            <p>Desenvolvido com ❤️ para otimização de metadados de livros</p>
+            <p>Desenvolvido com ❤ para otimização de metadados de livros</p>
         </div>
     </div>
 </body>
@@ -329,7 +329,7 @@ def generate_html_report(data):
     with open('demo_report.html', 'w', encoding='utf-8') as f:
         f.write(html)
     
-    print("✅ Relatório HTML salvo em: demo_report.html")
+    print(" Relatório HTML salvo em: demo_report.html")
 
 def show_summary():
     """Mostra resumo das funcionalidades"""
@@ -337,7 +337,7 @@ def show_summary():
     print("🎉 SISTEMA RENAMEPDFEPUB - IMPLEMENTAÇÃO COMPLETA")
     print("="*70)
     
-    print("\n🚀 ALGORITMOS IMPLEMENTADOS:")
+    print("\n ALGORITMOS IMPLEMENTADOS:")
     print("  1. Basic Parser - Extração básica com regex")
     print("  2. Enhanced Parser - Parser aprimorado com validação") 
     print("  3. Smart Inferencer - Inferência inteligente")
@@ -369,23 +369,23 @@ def show_summary():
     print("  • web_launcher.py - Launcher com instalação automática")
     print("  • demo_system.py - Este arquivo de demonstração")
     
-    print("\n🌐 PARA USAR A INTERFACE WEB:")
+    print("\n PARA USAR A INTERFACE WEB:")
     print("  1. Execute: python3 web_launcher.py")
     print("  2. Escolha opção 1 (Streamlit) ou 2 (HTML)")
     print("  3. Interface abrirá automaticamente no navegador")
     
     print("\n✨ MELHORIAS IMPLEMENTADAS:")
-    print("  ✅ Renomeado 'Ultimate Extractor' para 'Hybrid Orchestrator'")
-    print("  ✅ Criado algoritmo especializado para livros brasileiros")
-    print("  ✅ Sistema de relatórios avançado com visualizações")
-    print("  ✅ Interface web moderna com Streamlit")
-    print("  ✅ Instalação automática de dependências")
+    print("   Renomeado 'Ultimate Extractor' para 'Hybrid Orchestrator'")
+    print("   Criado algoritmo especializado para livros brasileiros")
+    print("   Sistema de relatórios avançado com visualizações")
+    print("   Interface web moderna com Streamlit")
+    print("   Instalação automática de dependências")
     
     print("\n" + "="*70)
 
 def main():
     """Função principal da demonstração"""
-    print("🚀 DEMONSTRAÇÃO DO SISTEMA RENAMEPDFEPUB")
+    print(" DEMONSTRAÇÃO DO SISTEMA RENAMEPDFEPUB")
     print("=" * 50)
     
     # Cria dados de demonstração
@@ -399,7 +399,7 @@ def main():
     
     print(f"\n🎊 DEMONSTRAÇÃO CONCLUÍDA!")
     print(f"📄 Abra o arquivo 'demo_report.html' no navegador")
-    print(f"🚀 Execute 'python3 web_launcher.py' para interface completa")
+    print(f" Execute 'python3 web_launcher.py' para interface completa")
 
 if __name__ == "__main__":
     main()

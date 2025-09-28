@@ -571,11 +571,11 @@ def main():
             count += 1
     
     logger.info("\n=== FOCOS DE MELHORIA V3 ===")
-    logger.info("✅ Author extraction patterns expandidos")
-    logger.info("✅ Year extraction patterns robustos")
-    logger.info("✅ Publisher detection melhorado")
-    logger.info("✅ Validation functions implementadas")
-    logger.info("✅ Super categories expandidas")
+    logger.info(" Author extraction patterns expandidos")
+    logger.info(" Year extraction patterns robustos")
+    logger.info(" Publisher detection melhorado")
+    logger.info(" Validation functions implementadas")
+    logger.info(" Super categories expandidas")
     
 if __name__ == "__main__":
     main()

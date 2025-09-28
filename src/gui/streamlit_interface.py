@@ -115,7 +115,7 @@ class StreamlitInterface:
         """Renderiza o cabeçalho principal"""
         st.markdown("""
         <div class="main-header">
-            <h1>🚀 RenamePDFEPUB</h1>
+            <h1> RenamePDFEPUB</h1>
             <h3>Sistema Avançado de Algoritmos para Metadados</h3>
             <p>Interface moderna para análise e comparação de algoritmos</p>
         </div>
@@ -123,7 +123,7 @@ class StreamlitInterface:
 
     def render_sidebar(self, results: Dict[str, Any]):
         """Renderiza a barra lateral com controles"""
-        st.sidebar.header("🎛️ Controles")
+        st.sidebar.header("🎛 Controles")
         
         # Seleção de visualização
         view_mode = st.sidebar.selectbox(
@@ -161,7 +161,7 @@ class StreamlitInterface:
     def render_metrics_overview(self, results: Dict[str, Any]):
         """Renderiza visão geral das métricas"""
         if not results or 'algorithm_summary' not in results:
-            st.warning("⚠️ Dados não disponíveis")
+            st.warning("⚠ Dados não disponíveis")
             return
         
         st.header("📊 Métricas Gerais")
@@ -226,7 +226,7 @@ class StreamlitInterface:
         }
         
         if not filtered_data:
-            st.warning("⚠️ Nenhum algoritmo selecionado ou dados insuficientes")
+            st.warning("⚠ Nenhum algoritmo selecionado ou dados insuficientes")
             return
         
         # Cria cards para cada algoritmo
@@ -307,7 +307,7 @@ class StreamlitInterface:
                 'Arquivo': filename[:60] + "..." if len(filename) > 60 else filename,
                 'Melhor Algoritmo': best_alg,
                 'Accuracy': f"{best_accuracy:.1f}%",
-                'Status': "✅ Sucesso" if best_accuracy > 80 else "⚠️ Revisão"
+                'Status': " Sucesso" if best_accuracy > 80 else "⚠ Revisão"
             })
         
         # Exibe como dataframe
@@ -341,7 +341,7 @@ class StreamlitInterface:
         if not results or 'algorithm_summary' not in results:
             return
         
-        st.header("🚀 Comparação Avançada")
+        st.header(" Comparação Avançada")
         
         tab1, tab2, tab3 = st.tabs(["Performance", "Distribuição", "Correlações"])
         
@@ -420,15 +420,15 @@ class StreamlitInterface:
                 ], capture_output=True, text=True, timeout=30)
                 
                 if result.returncode == 0:
-                    st.success("✅ Teste executado com sucesso!")
+                    st.success(" Teste executado com sucesso!")
                     st.rerun()
                 else:
-                    st.error(f"❌ Erro na execução: {result.stderr}")
+                    st.error(f" Erro na execução: {result.stderr}")
                     
             except subprocess.TimeoutExpired:
-                st.warning("⏱️ Teste em execução (tempo limite atingido)")
+                st.warning("⏱ Teste em execução (tempo limite atingido)")
             except Exception as e:
-                st.error(f"❌ Erro: {e}")
+                st.error(f" Erro: {e}")
 
     def run(self):
         """Executa a interface principal"""
@@ -459,8 +459,8 @@ class StreamlitInterface:
         st.divider()
         st.markdown("""
         <div style="text-align: center; color: #666; padding: 20px;">
-            <p>🚀 <strong>RenamePDFEPUB</strong> - Sistema Avançado de Algoritmos</p>
-            <p>Desenvolvido com ❤️ para otimização de metadados de livros</p>
+            <p> <strong>RenamePDFEPUB</strong> - Sistema Avançado de Algoritmos</p>
+            <p>Desenvolvido com ❤ para otimização de metadados de livros</p>
         </div>
         """, unsafe_allow_html=True)
 

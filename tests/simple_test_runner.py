@@ -274,7 +274,7 @@ class SimpleTestRunner:
     
     def run_simple_tests(self, max_books: int = 50):
         """Executar testes simplificados"""
-        logger.info("🚀 INICIANDO TESTES SIMPLIFICADOS")
+        logger.info(" INICIANDO TESTES SIMPLIFICADOS")
         
         # Obter livros
         test_books = self.get_test_books(max_books)
@@ -333,13 +333,13 @@ class SimpleTestRunner:
                 highest_target = max(targets_met)
                 logger.info(f"  🎯 Target atingido: {highest_target:.0%}")
             else:
-                logger.info(f"  ❌ Nenhum target atingido")
+                logger.info(f"   Nenhum target atingido")
             
             # Avaliar performance
             if accuracy >= 0.5:
-                logger.info(f"  ✅ META DE 50% ATINGIDA")
+                logger.info(f"   META DE 50% ATINGIDA")
             else:
-                logger.info(f"  ❌ Meta de 50% NÃO atingida")
+                logger.info(f"   Meta de 50% NÃO atingida")
             
             if accuracy > best_accuracy:
                 best_accuracy = accuracy
@@ -353,17 +353,17 @@ class SimpleTestRunner:
             logger.info("🎉 SUCESSO! Meta de 50% atingida!")
             
             if best_accuracy >= 0.7:
-                logger.info("🚀 EXCELENTE! Sistema pronto para produção!")
+                logger.info(" EXCELENTE! Sistema pronto para produção!")
             elif best_accuracy >= 0.6:
                 logger.info("⚡ BOM DESEMPENHO! Otimizações recomendadas.")
             else:
                 logger.info("🔧 DESEMPENHO ADEQUADO! Refinamentos sugeridos.")
         else:
-            logger.info("⚠️  REFINAMENTO NECESSÁRIO! Meta de 50% não atingida.")
+            logger.info("⚠  REFINAMENTO NECESSÁRIO! Meta de 50% não atingida.")
 
 def main():
     """Função principal"""
-    print("🚀 TESTE SIMPLIFICADO - RENAMEPDFEPUB")
+    print(" TESTE SIMPLIFICADO - RENAMEPDFEPUB")
     print("=" * 50)
     
     runner = SimpleTestRunner()
@@ -380,9 +380,9 @@ def main():
         print(f"🎯 Melhor acurácia: {best_accuracy:.1%}")
         
         if best_accuracy >= 0.5:
-            print("✅ TESTE PASSOU! Sistema funcional!")
+            print(" TESTE PASSOU! Sistema funcional!")
         else:
-            print("❌ TESTE FALHOU! Refinamento necessário.")
+            print(" TESTE FALHOU! Refinamento necessário.")
         
         print(f"📊 Detalhes em: simple_test_results/")
         

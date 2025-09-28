@@ -265,9 +265,9 @@ Exemplos de uso:
         
         # Relatório
         if isinstance(data, list):
-            print(f"✅ Criada lista com {len(data)} arquivos: {output_path}")
+            print(f" Criada lista com {len(data)} arquivos: {output_path}")
         else:
-            print(f"✅ Criado mapeamento com {len(data)} arquivos remotos: {output_path}")
+            print(f" Criado mapeamento com {len(data)} arquivos remotos: {output_path}")
             
         # Mostra amostra
         print("\n📋 Amostra dos dados:")
@@ -284,7 +284,7 @@ Exemplos de uso:
                 print(f"   • {key} -> {value}")
         
     except Exception as e:
-        print(f"❌ Erro: {e}")
+        print(f" Erro: {e}")
         return 1
     
     return 0

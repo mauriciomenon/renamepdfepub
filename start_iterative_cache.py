@@ -121,10 +121,10 @@ Exemplos de uso:
             status_action(args, cache_dir)
             
     except KeyboardInterrupt:
-        print("\n⚠️  Processamento interrompido pelo usuário")
+        print("\n⚠  Processamento interrompido pelo usuário")
         sys.exit(1)
     except Exception as e:
-        print(f"❌ Erro: {e}")
+        print(f" Erro: {e}")
         if args.verbose:
             import traceback
             traceback.print_exc()
@@ -156,7 +156,7 @@ def create_iteration_config(args) -> IterationConfig:
 
 def run_iterative_processing(args, cache_dir):
     """Executa processamento iterativo principal"""
-    print("🚀 Iniciando Sistema de Cache Iterativo")
+    print(" Iniciando Sistema de Cache Iterativo")
     print("=" * 50)
     
     # Cria sistema
@@ -177,7 +177,7 @@ def run_iterative_processing(args, cache_dir):
     # Verifica se há dados para processar
     predictions_count = get_predictions_count(system)
     if predictions_count == 0:
-        print("⚠️  Nenhum arquivo encontrado para processar.")
+        print("⚠  Nenhum arquivo encontrado para processar.")
         print("   Use --add-files ou --add-remote para adicionar arquivos primeiro.")
         return
     
@@ -193,7 +193,7 @@ def run_iterative_processing(args, cache_dir):
         
         end_time = datetime.now()
         print()
-        print("✅ Processamento concluído!")
+        print(" Processamento concluído!")
         print("=" * 50)
         print(f"⏰ Tempo total: {end_time - start_time}")
         print(f"🔄 Iterações: {final_stats['iterations_completed']}")
@@ -213,18 +213,18 @@ def run_iterative_processing(args, cache_dir):
         print(f"📄 Resumo exportado: {summary_file}")
         
     except Exception as e:
-        print(f"❌ Erro durante processamento: {e}")
+        print(f" Erro durante processamento: {e}")
         raise
 
 def add_files_action(args, cache_dir):
     """Adiciona arquivos de uma lista"""
     if not args.add_files:
-        print("❌ Especifique --add-files com o caminho para o arquivo de lista")
+        print(" Especifique --add-files com o caminho para o arquivo de lista")
         return
     
     list_file = Path(args.add_files)
     if not list_file.exists():
-        print(f"❌ Arquivo não encontrado: {list_file}")
+        print(f" Arquivo não encontrado: {list_file}")
         return
     
     print(f"📝 Adicionando arquivos de: {list_file}")
@@ -239,20 +239,20 @@ def add_files_action(args, cache_dir):
     system = create_iterative_cache_system(cache_dir)
     added_count = system.add_file_list(file_paths, args.source_type)
     
-    print(f"✅ Adicionados {added_count} arquivos como {args.source_type}")
+    print(f" Adicionados {added_count} arquivos como {args.source_type}")
 
 def add_remote_action(args, cache_dir):
     """Adiciona arquivos remotos de mapeamento JSON"""
     if not args.add_remote:
-        print("❌ Especifique --add-remote com o caminho para o arquivo JSON")
+        print(" Especifique --add-remote com o caminho para o arquivo JSON")
         return
     
     json_file = Path(args.add_remote)
     if not json_file.exists():
-        print(f"❌ Arquivo não encontrado: {json_file}")
+        print(f" Arquivo não encontrado: {json_file}")
         return
     
-    print(f"☁️  Adicionando arquivos remotos de: {json_file}")
+    print(f"☁  Adicionando arquivos remotos de: {json_file}")
     
     # Lê mapeamento de arquivos remotos
     with open(json_file, 'r', encoding='utf-8') as f:
@@ -264,7 +264,7 @@ def add_remote_action(args, cache_dir):
     system = create_iterative_cache_system(cache_dir)
     file_paths = system.add_remote_files(remote_files, args.source_type)
     
-    print(f"✅ Adicionados {len(file_paths)} arquivos remotos ({args.source_type})")
+    print(f" Adicionados {len(file_paths)} arquivos remotos ({args.source_type})")
 
 def export_action(args, cache_dir):
     """Exporta resumo do cache"""
@@ -275,7 +275,7 @@ def export_action(args, cache_dir):
     export_file = Path(args.export_file) if args.export_file else None
     summary_file = system.export_cache_summary(export_file)
     
-    print(f"✅ Resumo exportado: {summary_file}")
+    print(f" Resumo exportado: {summary_file}")
 
 def status_action(args, cache_dir):
     """Mostra status atual do cache"""
@@ -309,7 +309,7 @@ def status_action(args, cache_dir):
         print()
         print(f"📈 Performance recente: {trend[0]:.3f}")
         if len(trend) > 1:
-            direction = "📈" if trend[0] > trend[1] else "📉" if trend[0] < trend[1] else "➡️"
+            direction = "📈" if trend[0] > trend[1] else "📉" if trend[0] < trend[1] else "➡"
             print(f"   Tendência: {direction}")
 
 def get_predictions_count(system) -> int:

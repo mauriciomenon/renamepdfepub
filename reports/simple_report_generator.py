@@ -207,7 +207,7 @@ class SimpleReportGenerator:
 <body>
     <div class="container">
         <div class="header">
-            <h1>🚀 Relatório de Algoritmos</h1>
+            <h1> Relatório de Algoritmos</h1>
             <div class="subtitle">Sistema RenamePDFEPUB - Análise Avançada</div>
             <div class="subtitle">Gerado em: {time.strftime('%d/%m/%Y às %H:%M:%S')}</div>
         </div>
@@ -218,7 +218,7 @@ class SimpleReportGenerator:
         
         <div class="footer">
             <p>© 2025 RenamePDFEPUB - Sistema de Análise de Algoritmos</p>
-            <p>Desenvolvido com ❤️ para otimização de metadados de livros</p>
+            <p>Desenvolvido com ❤ para otimização de metadados de livros</p>
         </div>
     </div>
 </body>
@@ -405,9 +405,9 @@ def main():
     if report_file:
         print(f"\n🎉 RELATÓRIO GERADO COM SUCESSO!")
         print(f"📄 Arquivo: {report_file}")
-        print(f"🌐 Abra o arquivo no navegador para visualizar")
+        print(f" Abra o arquivo no navegador para visualizar")
     else:
-        print("❌ Erro ao gerar relatório")
+        print(" Erro ao gerar relatório")
 
 if __name__ == "__main__":
     main()

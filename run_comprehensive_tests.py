@@ -589,7 +589,7 @@ class ComprehensiveTestRunner:
     </div>
     
     <div class="section">
-        <h2>🚀 Próximos Passos</h2>
+        <h2> Próximos Passos</h2>
         {self._generate_html_next_steps(results.get('summary', {}).get('next_steps', []))}
     </div>
 </body>
@@ -639,13 +639,13 @@ class ComprehensiveTestRunner:
                 accuracy = f"{result.get('accuracy_rate', 0):.1%}"
                 success_rate = f"{result.get('success_rate', 0):.1%}"
                 avg_time = f"{result.get('avg_response_time', 0):.1f}ms"
-                status = "✅ Sucesso"
+                status = " Sucesso"
                 row_class = "success"
             else:
                 accuracy = "N/A"
                 success_rate = "N/A"
                 avg_time = "N/A"
-                status = "❌ Erro"
+                status = " Erro"
                 row_class = "error"
             
             html += f'<tr class="{row_class}"><td>{algorithm.title()}</td><td>{accuracy}</td><td>{success_rate}</td><td>{avg_time}</td><td>{status}</td></tr>'
@@ -762,11 +762,11 @@ def main():
                 print(f"Tempo médio: {result['avg_response_time']:.1f}ms")
                 
                 if result['accuracy_rate'] >= args.target_accuracy:
-                    print(f"✅ Meta de {args.target_accuracy:.1%} ATINGIDA!")
+                    print(f" Meta de {args.target_accuracy:.1%} ATINGIDA!")
                 else:
-                    print(f"❌ Meta de {args.target_accuracy:.1%} NÃO atingida")
+                    print(f" Meta de {args.target_accuracy:.1%} NÃO atingida")
             else:
-                print(f"❌ Erro executando {args.algorithm}: {result.get('error', 'Erro desconhecido')}")
+                print(f" Erro executando {args.algorithm}: {result.get('error', 'Erro desconhecido')}")
     
     except KeyboardInterrupt:
         logger.info("Teste interrompido pelo usuário")

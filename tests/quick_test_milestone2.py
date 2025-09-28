@@ -5,7 +5,7 @@ import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent / 'src'))
 
-print("🚀 Testando implementação do Milestone 2...")
+print(" Testando implementação do Milestone 2...")
 
 try:
     # Test imports
@@ -14,7 +14,7 @@ try:
     from renamepdfepub.search_algorithms.search_orchestrator import SearchOrchestrator
     from renamepdfepub.search_algorithms.base_search import SearchQuery
     
-    print("✅ Importações bem-sucedidas!")
+    print(" Importações bem-sucedidas!")
     
     # Test ISBN Validator
     print("\n📚 Testando ISBNValidator...")
@@ -58,7 +58,7 @@ try:
     print("   • SearchOrchestrator - Coordenação de todos os algoritmos")
     
 except Exception as e:
-    print(f"❌ Erro: {e}")
+    print(f" Erro: {e}")
     import traceback
     traceback.print_exc()
     sys.exit(1)

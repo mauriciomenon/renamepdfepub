@@ -421,8 +421,8 @@ class PerformanceAnalyzer:
         {self.generate_detailed_results_section(data)}
         
         <div class="footer">
-            <p>🚀 RenamePDFEPUB v1.0.0 - Sistema de Análise de Performance</p>
-            <p>Desenvolvido com ❤️ para otimização de bibliotecas digitais</p>
+            <p> RenamePDFEPUB v1.0.0 - Sistema de Análise de Performance</p>
+            <p>Desenvolvido com ❤ para otimização de bibliotecas digitais</p>
         </div>
     </div>
 </body>
@@ -625,8 +625,8 @@ class PerformanceAnalyzer:
         with open(report_path, 'w', encoding='utf-8') as f:
             f.write(html_report)
         
-        print(f"✅ Relatório HTML: {report_path}")
-        print(f"✅ Dados JSON: docs/performance/performance_data_v1.0.0.json")
+        print(f" Relatório HTML: {report_path}")
+        print(f" Dados JSON: docs/performance/performance_data_v1.0.0.json")
         
         return report_path
 
@@ -640,7 +640,7 @@ def main():
     
     print(f"\n🎉 ANÁLISE CONCLUÍDA!")
     print(f"📄 Relatório: {report_file}")
-    print(f"🌐 Abra o arquivo no navegador para visualizar")
+    print(f" Abra o arquivo no navegador para visualizar")
     
     return 0
 

@@ -150,7 +150,7 @@ class ModernGUI:
 
     def create_config_frame(self, parent, row):
         """Cria frame de configurações"""
-        config_frame = ttk.LabelFrame(parent, text="⚙️ Configurações", padding="10")
+        config_frame = ttk.LabelFrame(parent, text="⚙ Configurações", padding="10")
         config_frame.grid(row=row, column=0, columnspan=3, sticky=(tk.W, tk.E), pady=(0, 10))
         config_frame.columnconfigure(1, weight=1)
         
@@ -205,11 +205,11 @@ class ModernGUI:
         controls_frame = ttk.Frame(parent)
         controls_frame.grid(row=row, column=0, columnspan=3, pady=(0, 10))
         
-        self.start_button = ttk.Button(controls_frame, text="🚀 Iniciar Processamento", 
+        self.start_button = ttk.Button(controls_frame, text=" Iniciar Processamento", 
                                       command=self.start_processing, style='Accent.TButton')
         self.start_button.pack(side=tk.LEFT, padx=(0, 10))
         
-        self.stop_button = ttk.Button(controls_frame, text="⏹️ Parar", 
+        self.stop_button = ttk.Button(controls_frame, text=" Parar", 
                                      command=self.stop_processing, state='disabled')
         self.stop_button.pack(side=tk.LEFT, padx=(0, 10))
         
@@ -428,7 +428,7 @@ class ModernGUI:
         )
         self.processing_thread.start()
         
-        self.log(f"🚀 Processamento iniciado - Modo: {mode}")
+        self.log(f" Processamento iniciado - Modo: {mode}")
 
     def process_in_thread(self, mode: str, path: str):
         """Executa processamento em thread separada"""
@@ -459,7 +459,7 @@ class ModernGUI:
         self.start_button.config(state='normal')
         self.stop_button.config(state='disabled')
         self.progress_label.config(text="Processamento interrompido")
-        self.log("⏹️ Processamento interrompido pelo usuário")
+        self.log(" Processamento interrompido pelo usuário")
 
     def check_queue(self):
         """Verifica queue de atualizações da thread"""
@@ -482,7 +482,7 @@ class ModernGUI:
                     break
                     
         except Exception as e:
-            self.log(f"❌ Erro na comunicação entre threads: {e}")
+            self.log(f" Erro na comunicação entre threads: {e}")
         
         # Agenda próxima verificação
         self.root.after(100, self.check_queue)
@@ -502,12 +502,12 @@ class ModernGUI:
         self.progress_label.config(text="Processamento concluído!")
         
         # Log final
-        self.log(f"✅ Processamento concluído!")
+        self.log(f" Processamento concluído!")
         self.log(f"📊 Total: {summary['total_files']}, Sucessos: {summary['successful']}, Falhas: {summary['failed']}")
         self.log(f"📈 Taxa de sucesso: {summary['success_rate']:.1f}%")
         
         if summary['duration_seconds']:
-            self.log(f"⏱️ Tempo: {summary['duration_seconds']:.1f}s")
+            self.log(f"⏱ Tempo: {summary['duration_seconds']:.1f}s")
         
         # Salva relatório automaticamente se habilitado
         if self.auto_save_reports.get():
@@ -530,7 +530,7 @@ class ModernGUI:
         self.stop_button.config(state='disabled')
         self.progress_label.config(text="Erro no processamento")
         
-        self.log(f"❌ Erro: {error_message}")
+        self.log(f" Erro: {error_message}")
         messagebox.showerror("Erro", f"Erro no processamento:\n{error_message}")
 
     def save_report_auto(self, report: Dict):
@@ -548,7 +548,7 @@ class ModernGUI:
             self.log(f"💾 Relatório salvo automaticamente: {filename}")
             
         except Exception as e:
-            self.log(f"❌ Erro ao salvar relatório: {e}")
+            self.log(f" Erro ao salvar relatório: {e}")
 
     def prepare_report_for_save(self, report: Dict):
         """Prepara relatório para serialização JSON"""
@@ -614,7 +614,7 @@ class ModernGUI:
             
             for i, result in enumerate(report['results'], 1):
                 file_name = Path(result['file']).name
-                status = "✅" if result['success'] else "❌"
+                status = "" if result['success'] else ""
                 
                 content.append(f"\n{i}. {status} {file_name}")
                 
@@ -686,21 +686,21 @@ class ModernGUI:
             result = loop.run_until_complete(test())
             
             if result:
-                self.update_queue.put(('log', f"✅ API funcionando! Encontrado: {result.title}"))
+                self.update_queue.put(('log', f" API funcionando! Encontrado: {result.title}"))
                 self.update_queue.put(('log', f"   Fonte: {result.source_api}, Score: {result.confidence_score:.3f}"))
             else:
-                self.update_queue.put(('log', "⚠️ API acessível, mas nenhum resultado encontrado"))
+                self.update_queue.put(('log', "⚠ API acessível, mas nenhum resultado encontrado"))
                 
         except Exception as e:
-            self.update_queue.put(('log', f"❌ Erro no teste da API: {e}"))
+            self.update_queue.put(('log', f" Erro no teste da API: {e}"))
         finally:
             loop.close()
 
     def run(self):
         """Executa a aplicação"""
         self.log("🎯 RenamePDFEpub v2.0 iniciado")
-        self.log("Sistema V3 com 88.7% de precisão carregado ✅")
-        self.log("Amazon Books API integrado ✅")
+        self.log("Sistema V3 com 88.7% de precisão carregado ")
+        self.log("Amazon Books API integrado ")
         self.log("Pronto para processar seus livros!")
         
         self.root.mainloop()

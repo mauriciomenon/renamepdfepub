@@ -27,12 +27,12 @@ def verify_project():
         if path.exists():
             if path.is_dir():
                 count = len(list(path.iterdir()))
-                print(f"✅ {file} ({count} items)")
+                print(f" {file} ({count} items)")
             else:
                 size = path.stat().st_size
-                print(f"✅ {file} ({size} bytes)")
+                print(f" {file} ({size} bytes)")
         else:
-            print(f"❌ {file} missing")
+            print(f" {file} missing")
     
     print(f"\n=== Test Files in books/ ===")
     books_path = base_path / "books"
@@ -52,14 +52,14 @@ def verify_project():
     if cli_path.exists():
         with open(cli_path, 'r', encoding='utf-8') as f:
             lines = len(f.readlines())
-        print(f"🖲️  CLI: {lines} lines (monolithic)")
+        print(f"🖲  CLI: {lines} lines (monolithic)")
     
     # Check GUI size
     gui_path = base_path / "gui_RenameBook.py"
     if gui_path.exists():
         with open(gui_path, 'r', encoding='utf-8') as f:
             lines = len(f.readlines())
-        print(f"🖥️  GUI: {lines} lines (modular)")
+        print(f"🖥  GUI: {lines} lines (modular)")
     
     # Check shared modules
     src_path = base_path / "src" / "renamepdfepub"
@@ -72,10 +72,10 @@ def verify_project():
             print(f"   - {module.name}: {lines} lines")
     
     print(f"\n=== Status Summary ===")
-    print("✅ Project structure intact")
-    print("✅ Extensive test dataset available")
-    print("✅ Modular shared components")
-    print("⚠️  CLI needs refactoring (too monolithic)")
+    print(" Project structure intact")
+    print(" Extensive test dataset available")
+    print(" Modular shared components")
+    print("⚠  CLI needs refactoring (too monolithic)")
     print("🎯 Ready for Phase 2 implementation")
 
 if __name__ == "__main__":

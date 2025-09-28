@@ -25,18 +25,18 @@ def test_milestone_1():
         from renamepdfepub.search_algorithms.base_search import SearchQuery
         
         algorithm = FuzzySearchAlgorithm()
-        print("✅ FuzzySearchAlgorithm inicializado")
+        print(" FuzzySearchAlgorithm inicializado")
         
         # Test query
         query = SearchQuery(title="Python Programming")
-        print(f"✅ Query criada: {query.title}")
+        print(f" Query criada: {query.title}")
         
         # Mock some results for testing
-        print("✅ Milestone 1 - PASSED")
+        print(" Milestone 1 - PASSED")
         return True
         
     except Exception as e:
-        print(f"❌ Milestone 1 - FAILED: {e}")
+        print(f" Milestone 1 - FAILED: {e}")
         return False
 
 def test_milestone_2():
@@ -50,64 +50,64 @@ def test_milestone_2():
         
         # Test ISBN Search
         isbn_algo = ISBNSearchAlgorithm()
-        print("✅ ISBNSearchAlgorithm inicializado")
+        print(" ISBNSearchAlgorithm inicializado")
         
         # Test Semantic Search
         semantic_algo = SemanticSearchAlgorithm()
-        print("✅ SemanticSearchAlgorithm inicializado")
+        print(" SemanticSearchAlgorithm inicializado")
         
         # Test Orchestrator
         orchestrator = SearchOrchestrator()
         algorithms = orchestrator.get_registered_algorithms()
-        print(f"✅ SearchOrchestrator com {len(algorithms)} algoritmos")
+        print(f" SearchOrchestrator com {len(algorithms)} algoritmos")
         
         # List algorithms
         for algo in algorithms:
             print(f"   - {algo.name}")
         
-        print("✅ Milestone 2 - PASSED")
+        print(" Milestone 2 - PASSED")
         return True
         
     except Exception as e:
-        print(f"❌ Milestone 2 - FAILED: {e}")
+        print(f" Milestone 2 - FAILED: {e}")
         import traceback
         traceback.print_exc()
         return False
 
 def test_milestone_3():
     """Testa Milestone 3 - Advanced Features & Integration"""
-    print("\n🚀 === TESTE MILESTONE 3: ADVANCED FEATURES ===")
+    print("\n === TESTE MILESTONE 3: ADVANCED FEATURES ===")
     
     try:
         # Test CLI Integration
         from renamepdfepub.cli.search_integration import SearchCLIIntegration
-        print("✅ SearchCLIIntegration importado")
+        print(" SearchCLIIntegration importado")
         
         # Test Query Preprocessor
         from renamepdfepub.cli.query_preprocessor import QueryPreprocessor
         processor = QueryPreprocessor()
-        print("✅ QueryPreprocessor inicializado")
+        print(" QueryPreprocessor inicializado")
         
         # Test Multi-Layer Cache
         from renamepdfepub.core.multi_layer_cache import MultiLayerCache
         cache = MultiLayerCache()
-        print("✅ MultiLayerCache inicializado")
+        print(" MultiLayerCache inicializado")
         
         # Test Performance Optimization
         from renamepdfepub.core.performance_optimization import PerformanceProfiler
         profiler = PerformanceProfiler()
-        print("✅ PerformanceProfiler inicializado")
+        print(" PerformanceProfiler inicializado")
         
         # Test Production System
         from renamepdfepub.core.production_system import StructuredLogger
         logger = StructuredLogger("test")
-        print("✅ StructuredLogger inicializado")
+        print(" StructuredLogger inicializado")
         
-        print("✅ Milestone 3 - PASSED")
+        print(" Milestone 3 - PASSED")
         return True
         
     except Exception as e:
-        print(f"❌ Milestone 3 - FAILED: {e}")
+        print(f" Milestone 3 - FAILED: {e}")
         import traceback
         traceback.print_exc()
         return False
@@ -122,25 +122,25 @@ def test_integration():
         
         # Create integration with minimal config
         integration = SearchCLIIntegration()
-        print("✅ Sistema completo inicializado")
+        print(" Sistema completo inicializado")
         
         # Test query analysis
         analysis = integration.analyze_query("Python programming book")
-        print(f"✅ Query analysis: {analysis['query_type']}")
+        print(f" Query analysis: {analysis['query_type']}")
         
         # Test suggestions
         suggestions = integration.get_query_suggestions("pytho")
-        print(f"✅ Suggestions: {len(suggestions['suggestions'])} sugestões")
+        print(f" Suggestions: {len(suggestions['suggestions'])} sugestões")
         
         # Test stats
         stats = integration.get_comprehensive_stats()
-        print(f"✅ Stats: {stats['session']['queries_processed']} queries processadas")
+        print(f" Stats: {stats['session']['queries_processed']} queries processadas")
         
-        print("✅ Integração Completa - PASSED")
+        print(" Integração Completa - PASSED")
         return True
         
     except Exception as e:
-        print(f"❌ Integração Completa - FAILED: {e}")
+        print(f" Integração Completa - FAILED: {e}")
         import traceback
         traceback.print_exc()
         return False
@@ -164,17 +164,17 @@ def main():
     passed = sum(results)
     total = len(results)
     
-    print(f"✅ Testes Passaram: {passed}/{total}")
+    print(f" Testes Passaram: {passed}/{total}")
     print(f"📈 Taxa de Sucesso: {(passed/total)*100:.1f}%")
     
     if passed == total:
         print("\n🎉 TODOS OS TESTES PASSARAM!")
-        print("🚀 Phase 2 Search Algorithms está COMPLETA e FUNCIONANDO!")
+        print(" Phase 2 Search Algorithms está COMPLETA e FUNCIONANDO!")
         print("\n📋 Componentes Testados:")
-        print("   ✅ Milestone 1: Fuzzy Search Algorithm")
-        print("   ✅ Milestone 2: ISBN Intelligence & Semantic Search")
-        print("   ✅ Milestone 3: Advanced Features & Integration")
-        print("   ✅ Integração Completa do Sistema")
+        print("    Milestone 1: Fuzzy Search Algorithm")
+        print("    Milestone 2: ISBN Intelligence & Semantic Search")
+        print("    Milestone 3: Advanced Features & Integration")
+        print("    Integração Completa do Sistema")
         
         print(f"\n📊 Estatísticas:")
         print(f"   • Linhas de Código: 12,500+")
@@ -183,7 +183,7 @@ def main():
         print(f"   • Features Avançadas: Cache, Monitoring, Auto-tuning")
         
     else:
-        print(f"\n❌ {total-passed} teste(s) falharam")
+        print(f"\n {total-passed} teste(s) falharam")
         print("🔧 Verifique os erros acima para correção")
     
     return passed == total

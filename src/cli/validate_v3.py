@@ -107,21 +107,21 @@ def test_metadata_extraction():
         # Contar sucessos
         if found_author == case['expected_author']:
             results['author_success'] += 1
-            print("✅ Autor correto")
+            print(" Autor correto")
         else:
-            print("❌ Autor incorreto")
+            print(" Autor incorreto")
             
         if found_year == case['expected_year']:
             results['year_success'] += 1
-            print("✅ Ano correto")
+            print(" Ano correto")
         else:
-            print("❌ Ano incorreto")
+            print(" Ano incorreto")
             
         if found_publisher == case['expected_publisher']:
             results['publisher_success'] += 1
-            print("✅ Publisher correto")
+            print(" Publisher correto")
         else:
-            print("❌ Publisher incorreto")
+            print(" Publisher incorreto")
         
         print()
     
@@ -137,9 +137,9 @@ def test_metadata_extraction():
     
     # Avaliação contra metas
     print(f"\n=== AVALIAÇÃO CONTRA METAS V3 ===")
-    print(f"Meta Autor (40%): {'✅' if author_pct >= 40 else '❌'} {author_pct:.1f}%")
-    print(f"Meta Ano (30%): {'✅' if year_pct >= 30 else '❌'} {year_pct:.1f}%")
-    print(f"Meta Publisher (25%): {'✅' if publisher_pct >= 25 else '❌'} {publisher_pct:.1f}%")
+    print(f"Meta Autor (40%): {'' if author_pct >= 40 else ''} {author_pct:.1f}%")
+    print(f"Meta Ano (30%): {'' if year_pct >= 30 else ''} {year_pct:.1f}%")
+    print(f"Meta Publisher (25%): {'' if publisher_pct >= 25 else ''} {publisher_pct:.1f}%")
     
     overall_success = author_pct >= 40 and year_pct >= 30 and publisher_pct >= 25
     print(f"\nResultado V3: {'🎯 METAS ATINGIDAS' if overall_success else '🔧 PRECISA AJUSTES'}")

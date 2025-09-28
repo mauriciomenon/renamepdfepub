@@ -198,11 +198,11 @@ class AmazonBooksAPI:
                     html = await response.text()
                     return self.parse_amazon_response(html, query)
                 else:
-                    self.logger.warning(f"⚠️ Amazon retornou status {response.status} para: {query}")
+                    self.logger.warning(f"⚠ Amazon retornou status {response.status} para: {query}")
                     return None
                     
         except Exception as e:
-            self.logger.error(f"❌ Erro ao buscar na Amazon: {e}")
+            self.logger.error(f" Erro ao buscar na Amazon: {e}")
             return None
 
     def parse_amazon_response(self, html: str, original_query: str) -> Optional[BookMetadata]:
@@ -233,11 +233,11 @@ class AmazonBooksAPI:
                     confidence_score=0.85  # Amazon geralmente tem alta qualidade
                 )
                 
-                self.logger.info(f"✅ Amazon encontrou: {title}")
+                self.logger.info(f" Amazon encontrou: {title}")
                 return metadata
                 
         except Exception as e:
-            self.logger.error(f"❌ Erro ao fazer parse da resposta Amazon: {e}")
+            self.logger.error(f" Erro ao fazer parse da resposta Amazon: {e}")
         
         return None
 
@@ -262,11 +262,11 @@ class AmazonBooksAPI:
                     data = await response.json()
                     return self.parse_google_books_response(data, query)
                 else:
-                    self.logger.warning(f"⚠️ Google Books retornou status {response.status} para: {query}")
+                    self.logger.warning(f"⚠ Google Books retornou status {response.status} para: {query}")
                     return None
                     
         except Exception as e:
-            self.logger.error(f"❌ Erro ao buscar no Google Books: {e}")
+            self.logger.error(f" Erro ao buscar no Google Books: {e}")
             return None
 
     def parse_google_books_response(self, data: dict, original_query: str) -> Optional[BookMetadata]:
@@ -321,11 +321,11 @@ class AmazonBooksAPI:
                 confidence_score=0.75  # Google Books tem boa qualidade
             )
             
-            self.logger.info(f"✅ Google Books encontrou: {title}")
+            self.logger.info(f" Google Books encontrou: {title}")
             return metadata
             
         except Exception as e:
-            self.logger.error(f"❌ Erro ao fazer parse da resposta Google Books: {e}")
+            self.logger.error(f" Erro ao fazer parse da resposta Google Books: {e}")
             return None
 
     def clean_text(self, text: str) -> str:
@@ -384,7 +384,7 @@ class AmazonBooksAPI:
             candidates.append(google_result)
         
         if not candidates:
-            self.logger.warning(f"⚠️ Nenhum resultado encontrado para: {original_query}")
+            self.logger.warning(f"⚠ Nenhum resultado encontrado para: {original_query}")
             return None
         
         # Se só tem um candidato, retorna ele
@@ -419,11 +419,11 @@ class AmazonBooksAPI:
             
             if best_candidate:
                 best_candidate.confidence_score = best_score
-                self.logger.info(f"✅ V3 escolheu melhor resultado com score {best_score:.3f}")
+                self.logger.info(f" V3 escolheu melhor resultado com score {best_score:.3f}")
                 return best_candidate
                 
         except Exception as e:
-            self.logger.error(f"❌ Erro na validação V3: {e}")
+            self.logger.error(f" Erro na validação V3: {e}")
         
         # Fallback: retorna resultado Amazon se disponível, senão Google
         return amazon_result if amazon_result else google_result
@@ -467,7 +467,7 @@ class BatchBookProcessor:
         Processa lista de livros em lotes
         """
         total_books = len(book_queries)
-        self.logger.info(f"🚀 Iniciando processamento em lote de {total_books} livros")
+        self.logger.info(f" Iniciando processamento em lote de {total_books} livros")
         
         results = []
         
@@ -488,7 +488,7 @@ class BatchBookProcessor:
             progress = (processed / total_books) * 100
             self.logger.info(f"📊 Progresso: {processed}/{total_books} ({progress:.1f}%)")
         
-        self.logger.info(f"✅ Processamento completo: {len(results)} livros processados")
+        self.logger.info(f" Processamento completo: {len(results)} livros processados")
         return results
 
     async def process_batch(self, batch_queries: List[str]) -> List[Tuple[str, Optional[BookMetadata]]]:
@@ -506,7 +506,7 @@ class BatchBookProcessor:
         for i, result in enumerate(results):
             query = batch_queries[i]
             if isinstance(result, Exception):
-                self.logger.error(f"❌ Erro ao processar '{query}': {result}")
+                self.logger.error(f" Erro ao processar '{query}': {result}")
                 processed_results.append((query, None))
             else:
                 processed_results.append(result)
@@ -521,7 +521,7 @@ class BatchBookProcessor:
                     result = await api.enhanced_search(query)
                     return (query, result)
             except Exception as e:
-                self.logger.error(f"❌ Erro ao processar '{query}': {e}")
+                self.logger.error(f" Erro ao processar '{query}': {e}")
                 return (query, None)
 
 async def test_amazon_integration():
@@ -548,13 +548,13 @@ async def test_amazon_integration():
             result = await api.enhanced_search(query)
             
             if result:
-                print(f"✅ Encontrado: {result.title}")
+                print(f" Encontrado: {result.title}")
                 print(f"   Autores: {', '.join(result.authors)}")
                 print(f"   Publisher: {result.publisher}")
                 print(f"   Fonte: {result.source_api}")
                 print(f"   Score: {result.confidence_score:.3f}")
             else:
-                print(f"❌ Não encontrado")
+                print(f" Não encontrado")
     
     # Teste em lote
     print(f"\n📦 Teste em Lote ({len(test_queries)} livros):")
@@ -574,9 +574,9 @@ async def test_amazon_integration():
     print(f"\n📋 Detalhes dos Resultados:")
     for query, result in batch_results:
         if result:
-            print(f"✅ {query[:30]:<30} → {result.title[:40]}")
+            print(f" {query[:30]:<30} → {result.title[:40]}")
         else:
-            print(f"❌ {query[:30]:<30} → Não encontrado")
+            print(f" {query[:30]:<30} → Não encontrado")
 
 def main():
     """Função principal"""

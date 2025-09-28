@@ -35,15 +35,15 @@ def test_file_structure():
         if not os.path.exists(file_path):
             missing_files.append(file_path)
         else:
-            print(f"✅ {file_path}")
+            print(f" {file_path}")
     
     if missing_files:
-        print(f"\n❌ Arquivos faltando: {len(missing_files)}")
+        print(f"\n Arquivos faltando: {len(missing_files)}")
         for missing in missing_files:
             print(f"   - {missing}")
         return False
     
-    print(f"\n✅ Todos os {len(required_files)} arquivos encontrados!")
+    print(f"\n Todos os {len(required_files)} arquivos encontrados!")
     return True
 
 def test_documentation():
@@ -61,9 +61,9 @@ def test_documentation():
     
     for doc_file in doc_files:
         if os.path.exists(doc_file):
-            print(f"✅ {doc_file}")
+            print(f" {doc_file}")
         else:
-            print(f"❌ {doc_file}")
+            print(f" {doc_file}")
     
     return True
 
@@ -109,15 +109,15 @@ def test_basic_imports():
     for test in basic_tests:
         try:
             exec(test)
-            print(f"✅ {test}")
+            print(f" {test}")
         except Exception as e:
-            print(f"❌ {test}: {e}")
+            print(f" {test}: {e}")
     
     return True
 
 def main():
     """Executa todos os testes de validação."""
-    print("🚀 === VALIDAÇÃO PHASE 2 SEARCH ALGORITHMS ===")
+    print(" === VALIDAÇÃO PHASE 2 SEARCH ALGORITHMS ===")
     print(f"📅 Data: {os.popen('date').read().strip()}")
     print(f"📁 Diretório: {os.getcwd()}")
     
@@ -141,26 +141,26 @@ def main():
     passed = sum(results)
     total = len(results)
     
-    print(f"✅ Testes Passaram: {passed}/{total}")
+    print(f" Testes Passaram: {passed}/{total}")
     print(f"📊 Taxa de Sucesso: {(passed/total)*100:.1f}%")
     
     if passed == total:
         print("\n🎉 VALIDAÇÃO COMPLETA - PHASE 2 IMPLEMENTADA COM SUCESSO!")
         print("\n📋 Componentes Validados:")
-        print("   ✅ Estrutura de arquivos completa")
-        print("   ✅ Documentação abrangente")
-        print(f"   ✅ {total_lines:,}+ linhas de código")
-        print("   ✅ Imports básicos funcionando")
+        print("    Estrutura de arquivos completa")
+        print("    Documentação abrangente")
+        print(f"    {total_lines:,}+ linhas de código")
+        print("    Imports básicos funcionando")
         
-        print("\n🚀 PHASE 2 SEARCH ALGORITHMS:")
-        print("   • Milestone 1: Fuzzy Search ✅")
-        print("   • Milestone 2: ISBN & Semantic Search ✅")
-        print("   • Milestone 3: Advanced Features ✅")
-        print("   • Documentação Completa ✅")
+        print("\n PHASE 2 SEARCH ALGORITHMS:")
+        print("   • Milestone 1: Fuzzy Search ")
+        print("   • Milestone 2: ISBN & Semantic Search ")
+        print("   • Milestone 3: Advanced Features ")
+        print("   • Documentação Completa ")
         print("\n🏆 STATUS: IMPLEMENTATION COMPLETE!")
         
     else:
-        print(f"\n⚠️  {total-passed} teste(s) com issues - verifique acima")
+        print(f"\n⚠  {total-passed} teste(s) com issues - verifique acima")
     
     return passed == total
 
