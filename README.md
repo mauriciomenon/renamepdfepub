@@ -8,11 +8,17 @@ Sistema automatizado para renomeação de arquivos PDF e EPUB baseado em extraç
 # Instalar dependências
 pip install -r requirements.txt
 
-# Interface Web (Recomendado)
-python3 web.py
+# Interface Web Interativa - Streamlit (RECOMENDADO)
+python3 start_web.py
 
-# Interface CLI
-python3 cli.py algorithms
+# Relatórios HTML Estáticos - "Página Antiga"
+python3 start_html.py
+
+# Interface CLI - Linha de Comando
+python3 start_cli.py algorithms
+
+# Interface Gráfica Desktop
+python3 start_gui.py
 
 # Executar testes
 python3 run_tests.py
@@ -32,9 +38,10 @@ python3 run_tests.py
 
 ```
 renamepdfepub/
-├── web.py              # Interface Web (Streamlit) - PRINCIPAL
-├── cli.py              # Interface CLI
-├── gui.py              # Interface Gráfica
+├── start_web.py        # Interface Web Streamlit - PRINCIPAL
+├── start_html.py       # Relatórios HTML - "Página Antiga"
+├── start_cli.py        # Interface CLI - Linha de Comando
+├── start_gui.py        # Interface Gráfica Desktop
 ├── run_tests.py        # Testes automatizados
 │
 ├── src/                # Código fonte organizado
@@ -42,6 +49,7 @@ renamepdfepub/
 │   ├── cli/           # Interface linha de comando  
 │   └── gui/           # Interfaces gráficas (Streamlit, GUI)
 │
+├── utils/             # Utilitários e ferramentas auxiliares
 ├── tests/             # Testes automatizados com pytest
 ├── docs/              # Documentação técnica
 ├── reports/           # Relatórios HTML e performance
@@ -51,30 +59,54 @@ renamepdfepub/
 
 ## Pontos de Entrada
 
-### 1. Interface Web (Recomendado)
+### 1. Interface Web Interativa (RECOMENDADO)
 ```bash
-python3 web.py
+python3 start_web.py
 ```
-- Dashboard interativo Streamlit
+- **Streamlit Dashboard** - Interface web moderna e interativa
 - Visualizações em tempo real
 - Instalação automática de dependências
-- Interface moderna e responsiva
+- Interface responsiva com widgets
 
-### 2. Interface CLI
+### 2. Relatórios HTML Estáticos
 ```bash
-python3 cli.py algorithms    # Executar algoritmos
-python3 cli.py launch        # Launcher sistema
+python3 start_html.py
+```
+- **"Página Antiga"** - Relatórios HTML sem dependências
+- Funciona offline, abre no navegador
+- Relatórios pré-gerados com gráficos CSS
+- Ideal para apresentações ou compartilhamento
+
+### 3. Interface CLI
+```bash
+python3 start_cli.py algorithms    # Executar algoritmos
+python3 start_cli.py launch        # Launcher sistema
 ```
 - Interface de linha de comando
-- Ideal para automação
+- Ideal para automação e scripts
 - Output limpo e profissional
 
-### 3. Interface Gráfica
+### 4. Interface Gráfica Desktop
 ```bash
-python3 gui.py
+python3 start_gui.py
 ```
-- Interface gráfica desktop
+- Interface gráfica desktop (tkinter)
 - Para usuários menos técnicos
+- Não requer navegador
+
+## Diferença: Streamlit vs HTML
+
+### Interface Streamlit (`start_web.py`) - MODERNA
+- **Interativa**: Widgets, sliders, botões em tempo real
+- **Dinâmica**: Executa algoritmos ao vivo
+- **Requer**: Python rodando, dependências instaladas
+- **Uso**: Desenvolvimento, testes, demonstrações interativas
+
+### Relatórios HTML (`start_html.py`) - ESTÁTICA
+- **Estática**: Relatórios pré-gerados, sem interação
+- **Offline**: Funciona sem Python rodando
+- **Requer**: Apenas navegador web
+- **Uso**: Apresentações, compartilhamento, arquivamento
 
 ## Sistema de 5 Algoritmos
 

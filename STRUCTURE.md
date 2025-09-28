@@ -3,14 +3,17 @@
 ## Pontos de Entrada Principais
 
 ```bash
-# Interface CLI
-python3 cli.py
+# Interface Web Interativa (Streamlit) - PRINCIPAL
+python3 start_web.py
 
-# Interface Web (Streamlit)  
-python3 web.py
+# Relatórios HTML Estáticos - "Página Antiga"
+python3 start_html.py
 
-# Interface Gráfica
-python3 gui.py
+# Interface CLI - Linha de Comando
+python3 start_cli.py
+
+# Interface Gráfica Desktop
+python3 start_gui.py
 
 # Executar testes
 python3 run_tests.py
