@@ -1,0 +1,3284 @@
+{
+  "test_info": {
+    "total_books": 25,
+    "timestamp": "2025-09-28 09:08:39",
+    "algorithms": [
+      "Basic Parser",
+      "Enhanced Parser",
+      "Smart Inferencer",
+      "Hybrid Orchestrator",
+      "Brazilian Specialist"
+    ]
+  },
+  "detailed_results": [
+    {
+      "filename": "Paul McFedries - Build a Website with ChatGPT (2024).epub",
+      "ground_truth": {
+        "title": "Build a Website with ChatGPT",
+        "author": "Paul McFedries",
+        "publisher": "",
+        "year": "2024"
+      },
+      "algorithm_results": [
+        {
+          "filename": "Paul McFedries - Build a Website with ChatGPT (2024).epub",
+          "algorithm_name": "Basic Parser",
+          "title": "Build a Website with ChatGPT",
+          "author": "Paul McFedries",
+          "publisher": "",
+          "year": "2024",
+          "confidence": 0.8500000000000001,
+          "execution_time": 9.012222290039062e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "basic",
+            "features": [
+              "filename_parsing"
+            ]
+          }
+        },
+        {
+          "filename": "Paul McFedries - Build a Website with ChatGPT (2024).epub",
+          "algorithm_name": "Enhanced Parser",
+          "title": "Build a Website with ChatGPT",
+          "author": "Paul McFedries",
+          "publisher": "",
+          "year": "2024",
+          "confidence": 0.92,
+          "execution_time": 7.295608520507812e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "enhanced",
+            "features": [
+              "pattern_recognition",
+              "tech_bonus"
+            ]
+          }
+        },
+        {
+          "filename": "Paul McFedries - Build a Website with ChatGPT (2024).epub",
+          "algorithm_name": "Smart Inferencer",
+          "title": "Build a Website with ChatGPT",
+          "author": "Paul McFedries",
+          "publisher": "",
+          "year": "2024",
+          "confidence": 0.9400000000000001,
+          "execution_time": 0.00011801719665527344,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "smart",
+            "features": [
+              "inference",
+              "heuristics",
+              "context_aware"
+            ]
+          }
+        },
+        {
+          "filename": "Paul McFedries - Build a Website with ChatGPT (2024).epub",
+          "algorithm_name": "Hybrid Orchestrator",
+          "title": "Build a Website with ChatGPT",
+          "author": "Paul McFedries",
+          "publisher": "",
+          "year": "2024",
+          "confidence": 0.9660000000000002,
+          "execution_time": 0.0002880096435546875,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "hybrid",
+            "features": [
+              "multi_algorithm",
+              "ensemble",
+              "orchestration"
+            ]
+          }
+        },
+        {
+          "filename": "Paul McFedries - Build a Website with ChatGPT (2024).epub",
+          "algorithm_name": "Brazilian Specialist",
+          "title": "Build a Website with ChatGPT",
+          "author": "Paul McFedries",
+          "publisher": "",
+          "year": "2024",
+          "confidence": 0.595,
+          "execution_time": 0.00011801719665527344,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "brazilian_specialist",
+            "features": [
+              "national_publishers",
+              "portuguese_detection",
+              "brazilian_names"
+            ],
+            "brazilian_indicators": 0,
+            "brazilian_features": []
+          }
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Hybrid Orchestrator": 1.0,
+        "Brazilian Specialist": 1.0
+      }
+    },
+    {
+      "filename": "Parth Girish Patel et al - Sustainable Cloud Development (2025).epub",
+      "ground_truth": {
+        "title": "Sustainable Cloud Development",
+        "author": "Parth Girish Patel et al",
+        "publisher": "",
+        "year": "2025"
+      },
+      "algorithm_results": [
+        {
+          "filename": "Parth Girish Patel et al - Sustainable Cloud Development (2025).epub",
+          "algorithm_name": "Basic Parser",
+          "title": "Sustainable Cloud Development",
+          "author": "Parth Girish Patel et al",
+          "publisher": "",
+          "year": "2025",
+          "confidence": 0.8500000000000001,
+          "execution_time": 7.176399230957031e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "basic",
+            "features": [
+              "filename_parsing"
+            ]
+          }
+        },
+        {
+          "filename": "Parth Girish Patel et al - Sustainable Cloud Development (2025).epub",
+          "algorithm_name": "Enhanced Parser",
+          "title": "Sustainable Cloud Development",
+          "author": "Parth Girish Patel et al",
+          "publisher": "",
+          "year": "2025",
+          "confidence": 0.92,
+          "execution_time": 7.200241088867188e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "enhanced",
+            "features": [
+              "pattern_recognition",
+              "tech_bonus"
+            ]
+          }
+        },
+        {
+          "filename": "Parth Girish Patel et al - Sustainable Cloud Development (2025).epub",
+          "algorithm_name": "Smart Inferencer",
+          "title": "Sustainable Cloud Development",
+          "author": "Parth Girish Patel et al",
+          "publisher": "",
+          "year": "2025",
+          "confidence": 0.9400000000000001,
+          "execution_time": 0.00011801719665527344,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "smart",
+            "features": [
+              "inference",
+              "heuristics",
+              "context_aware"
+            ]
+          }
+        },
+        {
+          "filename": "Parth Girish Patel et al - Sustainable Cloud Development (2025).epub",
+          "algorithm_name": "Hybrid Orchestrator",
+          "title": "Sustainable Cloud Development",
+          "author": "Parth Girish Patel et al",
+          "publisher": "",
+          "year": "2025",
+          "confidence": 0.9660000000000002,
+          "execution_time": 0.0002918243408203125,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "hybrid",
+            "features": [
+              "multi_algorithm",
+              "ensemble",
+              "orchestration"
+            ]
+          }
+        },
+        {
+          "filename": "Parth Girish Patel et al - Sustainable Cloud Development (2025).epub",
+          "algorithm_name": "Brazilian Specialist",
+          "title": "Sustainable Cloud Development",
+          "author": "Parth Girish Patel et al",
+          "publisher": "",
+          "year": "2025",
+          "confidence": 0.595,
+          "execution_time": 7.724761962890625e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "brazilian_specialist",
+            "features": [
+              "national_publishers",
+              "portuguese_detection",
+              "brazilian_names"
+            ],
+            "brazilian_indicators": 0,
+            "brazilian_features": []
+          }
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Hybrid Orchestrator": 1.0,
+        "Brazilian Specialist": 1.0
+      }
+    },
+    {
+      "filename": "Rodrigo Turini - Java 9 (2017).epub",
+      "ground_truth": {
+        "title": "Java 9",
+        "author": "Rodrigo Turini",
+        "publisher": "",
+        "year": "2017"
+      },
+      "algorithm_results": [
+        {
+          "filename": "Rodrigo Turini - Java 9 (2017).epub",
+          "algorithm_name": "Basic Parser",
+          "title": "Java 9",
+          "author": "Rodrigo Turini",
+          "publisher": "",
+          "year": "2017",
+          "confidence": 0.8500000000000001,
+          "execution_time": 5.412101745605469e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "basic",
+            "features": [
+              "filename_parsing"
+            ]
+          }
+        },
+        {
+          "filename": "Rodrigo Turini - Java 9 (2017).epub",
+          "algorithm_name": "Enhanced Parser",
+          "title": "Java 9",
+          "author": "Rodrigo Turini",
+          "publisher": "",
+          "year": "2017",
+          "confidence": 0.92,
+          "execution_time": 5.412101745605469e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "enhanced",
+            "features": [
+              "pattern_recognition",
+              "tech_bonus"
+            ]
+          }
+        },
+        {
+          "filename": "Rodrigo Turini - Java 9 (2017).epub",
+          "algorithm_name": "Smart Inferencer",
+          "title": "Java 9",
+          "author": "Rodrigo Turini",
+          "publisher": "",
+          "year": "2017",
+          "confidence": 0.9400000000000001,
+          "execution_time": 8.821487426757812e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "smart",
+            "features": [
+              "inference",
+              "heuristics",
+              "context_aware"
+            ]
+          }
+        },
+        {
+          "filename": "Rodrigo Turini - Java 9 (2017).epub",
+          "algorithm_name": "Hybrid Orchestrator",
+          "title": "Java 9",
+          "author": "Rodrigo Turini",
+          "publisher": "",
+          "year": "2017",
+          "confidence": 0.9660000000000002,
+          "execution_time": 0.00022101402282714844,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "hybrid",
+            "features": [
+              "multi_algorithm",
+              "ensemble",
+              "orchestration"
+            ]
+          }
+        },
+        {
+          "filename": "Rodrigo Turini - Java 9 (2017).epub",
+          "algorithm_name": "Brazilian Specialist",
+          "title": "Java 9",
+          "author": "Rodrigo Turini",
+          "publisher": "",
+          "year": "2017",
+          "confidence": 0.595,
+          "execution_time": 5.793571472167969e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "brazilian_specialist",
+            "features": [
+              "national_publishers",
+              "portuguese_detection",
+              "brazilian_names"
+            ],
+            "brazilian_indicators": 0,
+            "brazilian_features": []
+          }
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Hybrid Orchestrator": 1.0,
+        "Brazilian Specialist": 1.0
+      }
+    },
+    {
+      "filename": "Micah Lee - Hacks, Leaks, and Revelations (2024).pdf",
+      "ground_truth": {
+        "title": "Hacks, Leaks, and Revelations",
+        "author": "Micah Lee",
+        "publisher": "",
+        "year": "2024"
+      },
+      "algorithm_results": [
+        {
+          "filename": "Micah Lee - Hacks, Leaks, and Revelations (2024).pdf",
+          "algorithm_name": "Basic Parser",
+          "title": "Hacks, Leaks, and Revelations",
+          "author": "Micah Lee",
+          "publisher": "",
+          "year": "2024",
+          "confidence": 0.8500000000000001,
+          "execution_time": 6.413459777832031e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "basic",
+            "features": [
+              "filename_parsing"
+            ]
+          }
+        },
+        {
+          "filename": "Micah Lee - Hacks, Leaks, and Revelations (2024).pdf",
+          "algorithm_name": "Enhanced Parser",
+          "title": "Hacks, Leaks, and Revelations",
+          "author": "Micah Lee",
+          "publisher": "",
+          "year": "2024",
+          "confidence": 0.9,
+          "execution_time": 6.508827209472656e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "enhanced",
+            "features": [
+              "pattern_recognition",
+              "tech_bonus"
+            ]
+          }
+        },
+        {
+          "filename": "Micah Lee - Hacks, Leaks, and Revelations (2024).pdf",
+          "algorithm_name": "Smart Inferencer",
+          "title": "Hacks, Leaks, and Revelations",
+          "author": "Micah Lee",
+          "publisher": "",
+          "year": "2024",
+          "confidence": 0.92,
+          "execution_time": 0.0001049041748046875,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "smart",
+            "features": [
+              "inference",
+              "heuristics",
+              "context_aware"
+            ]
+          }
+        },
+        {
+          "filename": "Micah Lee - Hacks, Leaks, and Revelations (2024).pdf",
+          "algorithm_name": "Hybrid Orchestrator",
+          "title": "Hacks, Leaks, and Revelations",
+          "author": "Micah Lee",
+          "publisher": "",
+          "year": "2024",
+          "confidence": 0.9500000000000002,
+          "execution_time": 0.00026488304138183594,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "hybrid",
+            "features": [
+              "multi_algorithm",
+              "ensemble",
+              "orchestration"
+            ]
+          }
+        },
+        {
+          "filename": "Micah Lee - Hacks, Leaks, and Revelations (2024).pdf",
+          "algorithm_name": "Brazilian Specialist",
+          "title": "Hacks, Leaks, and Revelations",
+          "author": "Micah Lee",
+          "publisher": "",
+          "year": "2024",
+          "confidence": 0.595,
+          "execution_time": 6.914138793945312e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "brazilian_specialist",
+            "features": [
+              "national_publishers",
+              "portuguese_detection",
+              "brazilian_names"
+            ],
+            "brazilian_indicators": 0,
+            "brazilian_features": []
+          }
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Hybrid Orchestrator": 1.0,
+        "Brazilian Specialist": 1.0
+      }
+    },
+    {
+      "filename": "Mariot Tsitoara - Beginning Git and GitHub (2019).epub",
+      "ground_truth": {
+        "title": "Beginning Git and GitHub",
+        "author": "Mariot Tsitoara",
+        "publisher": "Apress",
+        "year": "2019"
+      },
+      "algorithm_results": [
+        {
+          "filename": "Mariot Tsitoara - Beginning Git and GitHub (2019).epub",
+          "algorithm_name": "Basic Parser",
+          "title": "Beginning Git and GitHub",
+          "author": "Mariot Tsitoara",
+          "publisher": "Apress",
+          "year": "2019",
+          "confidence": 1.0,
+          "execution_time": 5.602836608886719e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "basic",
+            "features": [
+              "filename_parsing"
+            ]
+          }
+        },
+        {
+          "filename": "Mariot Tsitoara - Beginning Git and GitHub (2019).epub",
+          "algorithm_name": "Enhanced Parser",
+          "title": "Beginning Git and GitHub",
+          "author": "Mariot Tsitoara",
+          "publisher": "Apress",
+          "year": "2019",
+          "confidence": 1.0,
+          "execution_time": 5.698204040527344e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "enhanced",
+            "features": [
+              "pattern_recognition",
+              "tech_bonus"
+            ]
+          }
+        },
+        {
+          "filename": "Mariot Tsitoara - Beginning Git and GitHub (2019).epub",
+          "algorithm_name": "Smart Inferencer",
+          "title": "Beginning Git and GitHub",
+          "author": "Mariot Tsitoara",
+          "publisher": "Apress",
+          "year": "2019",
+          "confidence": 1.0,
+          "execution_time": 9.608268737792969e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "smart",
+            "features": [
+              "inference",
+              "heuristics",
+              "context_aware"
+            ]
+          }
+        },
+        {
+          "filename": "Mariot Tsitoara - Beginning Git and GitHub (2019).epub",
+          "algorithm_name": "Hybrid Orchestrator",
+          "title": "Beginning Git and GitHub",
+          "author": "Mariot Tsitoara",
+          "publisher": "Apress",
+          "year": "2019",
+          "confidence": 1.0,
+          "execution_time": 0.0002410411834716797,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "hybrid",
+            "features": [
+              "multi_algorithm",
+              "ensemble",
+              "orchestration"
+            ]
+          }
+        },
+        {
+          "filename": "Mariot Tsitoara - Beginning Git and GitHub (2019).epub",
+          "algorithm_name": "Brazilian Specialist",
+          "title": "Beginning Git and GitHub",
+          "author": "Mariot Tsitoara",
+          "publisher": "Apress",
+          "year": "2019",
+          "confidence": 0.7,
+          "execution_time": 6.198883056640625e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "brazilian_specialist",
+            "features": [
+              "national_publishers",
+              "portuguese_detection",
+              "brazilian_names"
+            ],
+            "brazilian_indicators": 0,
+            "brazilian_features": []
+          }
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Hybrid Orchestrator": 1.0,
+        "Brazilian Specialist": 1.0
+      }
+    },
+    {
+      "filename": "Lyza Gardner - JavaScript on Things (2018).epub",
+      "ground_truth": {
+        "title": "JavaScript on Things",
+        "author": "Lyza Gardner",
+        "publisher": "",
+        "year": "2018"
+      },
+      "algorithm_results": [
+        {
+          "filename": "Lyza Gardner - JavaScript on Things (2018).epub",
+          "algorithm_name": "Basic Parser",
+          "title": "JavaScript on Things",
+          "author": "Lyza Gardner",
+          "publisher": "",
+          "year": "2018",
+          "confidence": 0.8500000000000001,
+          "execution_time": 6.318092346191406e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "basic",
+            "features": [
+              "filename_parsing"
+            ]
+          }
+        },
+        {
+          "filename": "Lyza Gardner - JavaScript on Things (2018).epub",
+          "algorithm_name": "Enhanced Parser",
+          "title": "JavaScript on Things",
+          "author": "Lyza Gardner",
+          "publisher": "",
+          "year": "2018",
+          "confidence": 0.9400000000000001,
+          "execution_time": 6.389617919921875e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "enhanced",
+            "features": [
+              "pattern_recognition",
+              "tech_bonus"
+            ]
+          }
+        },
+        {
+          "filename": "Lyza Gardner - JavaScript on Things (2018).epub",
+          "algorithm_name": "Smart Inferencer",
+          "title": "JavaScript on Things",
+          "author": "Lyza Gardner",
+          "publisher": "",
+          "year": "2018",
+          "confidence": 0.9600000000000001,
+          "execution_time": 0.00010180473327636719,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "smart",
+            "features": [
+              "inference",
+              "heuristics",
+              "context_aware"
+            ]
+          }
+        },
+        {
+          "filename": "Lyza Gardner - JavaScript on Things (2018).epub",
+          "algorithm_name": "Hybrid Orchestrator",
+          "title": "JavaScript on Things",
+          "author": "Lyza Gardner",
+          "publisher": "",
+          "year": "2018",
+          "confidence": 0.9820000000000002,
+          "execution_time": 0.0002760887145996094,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "hybrid",
+            "features": [
+              "multi_algorithm",
+              "ensemble",
+              "orchestration"
+            ]
+          }
+        },
+        {
+          "filename": "Lyza Gardner - JavaScript on Things (2018).epub",
+          "algorithm_name": "Brazilian Specialist",
+          "title": "JavaScript on Things",
+          "author": "Lyza Gardner",
+          "publisher": "",
+          "year": "2018",
+          "confidence": 0.595,
+          "execution_time": 6.723403930664062e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "brazilian_specialist",
+            "features": [
+              "national_publishers",
+              "portuguese_detection",
+              "brazilian_names"
+            ],
+            "brazilian_indicators": 0,
+            "brazilian_features": []
+          }
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Hybrid Orchestrator": 1.0,
+        "Brazilian Specialist": 1.0
+      }
+    },
+    {
+      "filename": "Jean-Philippe Aumasson - Serious Cryptography, 2nd Edition (2024).mobi",
+      "ground_truth": {
+        "title": "Serious Cryptography, 2nd Edition",
+        "author": "Jean-Philippe Aumasson",
+        "publisher": "",
+        "year": "2024"
+      },
+      "algorithm_results": [
+        {
+          "filename": "Jean-Philippe Aumasson - Serious Cryptography, 2nd Edition (2024).mobi",
+          "algorithm_name": "Basic Parser",
+          "title": "Serious Cryptography, 2nd Edition",
+          "author": "Jean-Philippe Aumasson",
+          "publisher": "",
+          "year": "2024",
+          "confidence": 0.8500000000000001,
+          "execution_time": 7.486343383789062e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "basic",
+            "features": [
+              "filename_parsing"
+            ]
+          }
+        },
+        {
+          "filename": "Jean-Philippe Aumasson - Serious Cryptography, 2nd Edition (2024).mobi",
+          "algorithm_name": "Enhanced Parser",
+          "title": "Serious Cryptography, 2nd Edition",
+          "author": "Jean-Philippe Aumasson",
+          "publisher": "",
+          "year": "2024",
+          "confidence": 0.9,
+          "execution_time": 7.390975952148438e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "enhanced",
+            "features": [
+              "pattern_recognition",
+              "tech_bonus"
+            ]
+          }
+        },
+        {
+          "filename": "Jean-Philippe Aumasson - Serious Cryptography, 2nd Edition (2024).mobi",
+          "algorithm_name": "Smart Inferencer",
+          "title": "Serious Cryptography, 2nd Edition",
+          "author": "Jean-Philippe Aumasson",
+          "publisher": "",
+          "year": "2024",
+          "confidence": 0.92,
+          "execution_time": 0.00012111663818359375,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "smart",
+            "features": [
+              "inference",
+              "heuristics",
+              "context_aware"
+            ]
+          }
+        },
+        {
+          "filename": "Jean-Philippe Aumasson - Serious Cryptography, 2nd Edition (2024).mobi",
+          "algorithm_name": "Hybrid Orchestrator",
+          "title": "Serious Cryptography, 2nd Edition",
+          "author": "Jean-Philippe Aumasson",
+          "publisher": "",
+          "year": "2024",
+          "confidence": 0.9500000000000002,
+          "execution_time": 0.0003077983856201172,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "hybrid",
+            "features": [
+              "multi_algorithm",
+              "ensemble",
+              "orchestration"
+            ]
+          }
+        },
+        {
+          "filename": "Jean-Philippe Aumasson - Serious Cryptography, 2nd Edition (2024).mobi",
+          "algorithm_name": "Brazilian Specialist",
+          "title": "Serious Cryptography, 2nd Edition",
+          "author": "Jean-Philippe Aumasson",
+          "publisher": "",
+          "year": "2024",
+          "confidence": 0.595,
+          "execution_time": 7.987022399902344e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "brazilian_specialist",
+            "features": [
+              "national_publishers",
+              "portuguese_detection",
+              "brazilian_names"
+            ],
+            "brazilian_indicators": 0,
+            "brazilian_features": []
+          }
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Hybrid Orchestrator": 1.0,
+        "Brazilian Specialist": 1.0
+      }
+    },
+    {
+      "filename": "Safari, an O'Reilly Media Company - Training Data for Machine Learning Models (2022).epub",
+      "ground_truth": {
+        "title": "Safari, an O Reilly Media Company - Training Data for Machine Learning Models",
+        "author": "",
+        "publisher": "Packt",
+        "year": "2022"
+      },
+      "algorithm_results": [
+        {
+          "filename": "Safari, an O'Reilly Media Company - Training Data for Machine Learning Models (2022).epub",
+          "algorithm_name": "Basic Parser",
+          "title": "Safari, an O Reilly Media Company - Training Data for Machine Learning Models",
+          "author": "",
+          "publisher": "Packt",
+          "year": "2022",
+          "confidence": 0.7000000000000001,
+          "execution_time": 6.890296936035156e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "basic",
+            "features": [
+              "filename_parsing"
+            ]
+          }
+        },
+        {
+          "filename": "Safari, an O'Reilly Media Company - Training Data for Machine Learning Models (2022).epub",
+          "algorithm_name": "Enhanced Parser",
+          "title": "Safari, an O Reilly Media Company - Training Data for Machine Learning Models",
+          "author": "",
+          "publisher": "Packt",
+          "year": "2022",
+          "confidence": 0.79,
+          "execution_time": 6.985664367675781e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "enhanced",
+            "features": [
+              "pattern_recognition",
+              "tech_bonus"
+            ]
+          }
+        },
+        {
+          "filename": "Safari, an O'Reilly Media Company - Training Data for Machine Learning Models (2022).epub",
+          "algorithm_name": "Smart Inferencer",
+          "title": "Safari, an O Reilly Media Company - Training Data for Machine Learning Models",
+          "author": "",
+          "publisher": "Packt",
+          "year": "2022",
+          "confidence": 0.81,
+          "execution_time": 0.00011515617370605469,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "smart",
+            "features": [
+              "inference",
+              "heuristics",
+              "context_aware"
+            ]
+          }
+        },
+        {
+          "filename": "Safari, an O'Reilly Media Company - Training Data for Machine Learning Models (2022).epub",
+          "algorithm_name": "Hybrid Orchestrator",
+          "title": "Safari, an O Reilly Media Company - Training Data for Machine Learning Models",
+          "author": "",
+          "publisher": "Packt",
+          "year": "2022",
+          "confidence": 0.8320000000000001,
+          "execution_time": 0.0002951622009277344,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "hybrid",
+            "features": [
+              "multi_algorithm",
+              "ensemble",
+              "orchestration"
+            ]
+          }
+        },
+        {
+          "filename": "Safari, an O'Reilly Media Company - Training Data for Machine Learning Models (2022).epub",
+          "algorithm_name": "Brazilian Specialist",
+          "title": "Safari, an O Reilly Media Company - Training Data for Machine Learning Models",
+          "author": "",
+          "publisher": "Packt",
+          "year": "2022",
+          "confidence": 0.525,
+          "execution_time": 7.414817810058594e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "brazilian_specialist",
+            "features": [
+              "national_publishers",
+              "portuguese_detection",
+              "brazilian_names"
+            ],
+            "brazilian_indicators": 0,
+            "brazilian_features": []
+          }
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Hybrid Orchestrator": 1.0,
+        "Brazilian Specialist": 1.0
+      }
+    },
+    {
+      "filename": "Malcolm McDonald - Grokking Web Application Security (2024).epub",
+      "ground_truth": {
+        "title": "Grokking Web Application Security",
+        "author": "Malcolm McDonald",
+        "publisher": "Manning",
+        "year": "2024"
+      },
+      "algorithm_results": [
+        {
+          "filename": "Malcolm McDonald - Grokking Web Application Security (2024).epub",
+          "algorithm_name": "Basic Parser",
+          "title": "Grokking Web Application Security",
+          "author": "Malcolm McDonald",
+          "publisher": "Manning",
+          "year": "2024",
+          "confidence": 1.0,
+          "execution_time": 5.2928924560546875e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "basic",
+            "features": [
+              "filename_parsing"
+            ]
+          }
+        },
+        {
+          "filename": "Malcolm McDonald - Grokking Web Application Security (2024).epub",
+          "algorithm_name": "Enhanced Parser",
+          "title": "Grokking Web Application Security",
+          "author": "Malcolm McDonald",
+          "publisher": "Manning",
+          "year": "2024",
+          "confidence": 1.0,
+          "execution_time": 5.4836273193359375e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "enhanced",
+            "features": [
+              "pattern_recognition",
+              "tech_bonus"
+            ]
+          }
+        },
+        {
+          "filename": "Malcolm McDonald - Grokking Web Application Security (2024).epub",
+          "algorithm_name": "Smart Inferencer",
+          "title": "Grokking Web Application Security",
+          "author": "Malcolm McDonald",
+          "publisher": "Manning",
+          "year": "2024",
+          "confidence": 1.0,
+          "execution_time": 9.226799011230469e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "smart",
+            "features": [
+              "inference",
+              "heuristics",
+              "context_aware"
+            ]
+          }
+        },
+        {
+          "filename": "Malcolm McDonald - Grokking Web Application Security (2024).epub",
+          "algorithm_name": "Hybrid Orchestrator",
+          "title": "Grokking Web Application Security",
+          "author": "Malcolm McDonald",
+          "publisher": "Manning",
+          "year": "2024",
+          "confidence": 1.0,
+          "execution_time": 0.0002288818359375,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "hybrid",
+            "features": [
+              "multi_algorithm",
+              "ensemble",
+              "orchestration"
+            ]
+          }
+        },
+        {
+          "filename": "Malcolm McDonald - Grokking Web Application Security (2024).epub",
+          "algorithm_name": "Brazilian Specialist",
+          "title": "Grokking Web Application Security",
+          "author": "Malcolm McDonald",
+          "publisher": "Manning",
+          "year": "2024",
+          "confidence": 0.7,
+          "execution_time": 5.888938903808594e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "brazilian_specialist",
+            "features": [
+              "national_publishers",
+              "portuguese_detection",
+              "brazilian_names"
+            ],
+            "brazilian_indicators": 0,
+            "brazilian_features": []
+          }
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Hybrid Orchestrator": 1.0,
+        "Brazilian Specialist": 1.0
+      }
+    },
+    {
+      "filename": "Matt Hand - Evading EDR (2023).pdf",
+      "ground_truth": {
+        "title": "Evading EDR",
+        "author": "Matt Hand",
+        "publisher": "",
+        "year": "2023"
+      },
+      "algorithm_results": [
+        {
+          "filename": "Matt Hand - Evading EDR (2023).pdf",
+          "algorithm_name": "Basic Parser",
+          "title": "Evading EDR",
+          "author": "Matt Hand",
+          "publisher": "",
+          "year": "2023",
+          "confidence": 0.8500000000000001,
+          "execution_time": 5.2928924560546875e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "basic",
+            "features": [
+              "filename_parsing"
+            ]
+          }
+        },
+        {
+          "filename": "Matt Hand - Evading EDR (2023).pdf",
+          "algorithm_name": "Enhanced Parser",
+          "title": "Evading EDR",
+          "author": "Matt Hand",
+          "publisher": "",
+          "year": "2023",
+          "confidence": 0.9,
+          "execution_time": 5.412101745605469e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "enhanced",
+            "features": [
+              "pattern_recognition",
+              "tech_bonus"
+            ]
+          }
+        },
+        {
+          "filename": "Matt Hand - Evading EDR (2023).pdf",
+          "algorithm_name": "Smart Inferencer",
+          "title": "Evading EDR",
+          "author": "Matt Hand",
+          "publisher": "",
+          "year": "2023",
+          "confidence": 0.92,
+          "execution_time": 8.821487426757812e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "smart",
+            "features": [
+              "inference",
+              "heuristics",
+              "context_aware"
+            ]
+          }
+        },
+        {
+          "filename": "Matt Hand - Evading EDR (2023).pdf",
+          "algorithm_name": "Hybrid Orchestrator",
+          "title": "Evading EDR",
+          "author": "Matt Hand",
+          "publisher": "",
+          "year": "2023",
+          "confidence": 0.9500000000000002,
+          "execution_time": 0.00022101402282714844,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "hybrid",
+            "features": [
+              "multi_algorithm",
+              "ensemble",
+              "orchestration"
+            ]
+          }
+        },
+        {
+          "filename": "Matt Hand - Evading EDR (2023).pdf",
+          "algorithm_name": "Brazilian Specialist",
+          "title": "Evading EDR",
+          "author": "Matt Hand",
+          "publisher": "",
+          "year": "2023",
+          "confidence": 0.595,
+          "execution_time": 5.698204040527344e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "brazilian_specialist",
+            "features": [
+              "national_publishers",
+              "portuguese_detection",
+              "brazilian_names"
+            ],
+            "brazilian_indicators": 0,
+            "brazilian_features": []
+          }
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Hybrid Orchestrator": 1.0,
+        "Brazilian Specialist": 1.0
+      }
+    },
+    {
+      "filename": "Fotios Chantzis et al - Practical IoT Hacking (2021).mobi",
+      "ground_truth": {
+        "title": "Practical IoT Hacking",
+        "author": "Fotios Chantzis et al",
+        "publisher": "NoStarch",
+        "year": "2021"
+      },
+      "algorithm_results": [
+        {
+          "filename": "Fotios Chantzis et al - Practical IoT Hacking (2021).mobi",
+          "algorithm_name": "Basic Parser",
+          "title": "Practical IoT Hacking",
+          "author": "Fotios Chantzis et al",
+          "publisher": "NoStarch",
+          "year": "2021",
+          "confidence": 1.0,
+          "execution_time": 5.3882598876953125e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "basic",
+            "features": [
+              "filename_parsing"
+            ]
+          }
+        },
+        {
+          "filename": "Fotios Chantzis et al - Practical IoT Hacking (2021).mobi",
+          "algorithm_name": "Enhanced Parser",
+          "title": "Practical IoT Hacking",
+          "author": "Fotios Chantzis et al",
+          "publisher": "NoStarch",
+          "year": "2021",
+          "confidence": 1.0,
+          "execution_time": 5.412101745605469e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "enhanced",
+            "features": [
+              "pattern_recognition",
+              "tech_bonus"
+            ]
+          }
+        },
+        {
+          "filename": "Fotios Chantzis et al - Practical IoT Hacking (2021).mobi",
+          "algorithm_name": "Smart Inferencer",
+          "title": "Practical IoT Hacking",
+          "author": "Fotios Chantzis et al",
+          "publisher": "NoStarch",
+          "year": "2021",
+          "confidence": 1.0,
+          "execution_time": 9.107589721679688e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "smart",
+            "features": [
+              "inference",
+              "heuristics",
+              "context_aware"
+            ]
+          }
+        },
+        {
+          "filename": "Fotios Chantzis et al - Practical IoT Hacking (2021).mobi",
+          "algorithm_name": "Hybrid Orchestrator",
+          "title": "Practical IoT Hacking",
+          "author": "Fotios Chantzis et al",
+          "publisher": "NoStarch",
+          "year": "2021",
+          "confidence": 1.0,
+          "execution_time": 0.00033402442932128906,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "hybrid",
+            "features": [
+              "multi_algorithm",
+              "ensemble",
+              "orchestration"
+            ]
+          }
+        },
+        {
+          "filename": "Fotios Chantzis et al - Practical IoT Hacking (2021).mobi",
+          "algorithm_name": "Brazilian Specialist",
+          "title": "Practical IoT Hacking",
+          "author": "Fotios Chantzis et al",
+          "publisher": "NoStarch",
+          "year": "2021",
+          "confidence": 0.7,
+          "execution_time": 6.413459777832031e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "brazilian_specialist",
+            "features": [
+              "national_publishers",
+              "portuguese_detection",
+              "brazilian_names"
+            ],
+            "brazilian_indicators": 0,
+            "brazilian_features": []
+          }
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Hybrid Orchestrator": 1.0,
+        "Brazilian Specialist": 1.0
+      }
+    },
+    {
+      "filename": "AI_Agents_and_Applications_v7_MEAP.epub",
+      "ground_truth": {
+        "title": "AI_Agents_and_Applications_v7_MEAP",
+        "author": "",
+        "publisher": "Manning",
+        "year": ""
+      },
+      "algorithm_results": [
+        {
+          "filename": "AI_Agents_and_Applications_v7_MEAP.epub",
+          "algorithm_name": "Basic Parser",
+          "title": "AI_Agents_and_Applications_v7_MEAP",
+          "author": "",
+          "publisher": "Manning",
+          "year": "",
+          "confidence": 0.65,
+          "execution_time": 3.504753112792969e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "basic",
+            "features": [
+              "filename_parsing"
+            ]
+          }
+        },
+        {
+          "filename": "AI_Agents_and_Applications_v7_MEAP.epub",
+          "algorithm_name": "Enhanced Parser",
+          "title": "AI_Agents_and_Applications_v7_MEAP",
+          "author": "",
+          "publisher": "Manning",
+          "year": "",
+          "confidence": 0.67,
+          "execution_time": 3.5762786865234375e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "enhanced",
+            "features": [
+              "pattern_recognition",
+              "tech_bonus"
+            ]
+          }
+        },
+        {
+          "filename": "AI_Agents_and_Applications_v7_MEAP.epub",
+          "algorithm_name": "Smart Inferencer",
+          "title": "AI_Agents_and_Applications_v7_MEAP",
+          "author": "",
+          "publisher": "Manning",
+          "year": "",
+          "confidence": 0.67,
+          "execution_time": 5.91278076171875e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "smart",
+            "features": [
+              "inference",
+              "heuristics",
+              "context_aware"
+            ]
+          }
+        },
+        {
+          "filename": "AI_Agents_and_Applications_v7_MEAP.epub",
+          "algorithm_name": "Hybrid Orchestrator",
+          "title": "AI_Agents_and_Applications_v7_MEAP",
+          "author": "",
+          "publisher": "Manning",
+          "year": "",
+          "confidence": 0.7160000000000001,
+          "execution_time": 0.00015282630920410156,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "hybrid",
+            "features": [
+              "multi_algorithm",
+              "ensemble",
+              "orchestration"
+            ]
+          }
+        },
+        {
+          "filename": "AI_Agents_and_Applications_v7_MEAP.epub",
+          "algorithm_name": "Brazilian Specialist",
+          "title": "AI_Agents_and_Applications_v7_MEAP",
+          "author": "",
+          "publisher": "Manning",
+          "year": "",
+          "confidence": 0.49,
+          "execution_time": 4.100799560546875e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "brazilian_specialist",
+            "features": [
+              "national_publishers",
+              "portuguese_detection",
+              "brazilian_names"
+            ],
+            "brazilian_indicators": 0,
+            "brazilian_features": []
+          }
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Hybrid Orchestrator": 1.0,
+        "Brazilian Specialist": 1.0
+      }
+    },
+    {
+      "filename": "Vamsee Puligadda - 500 Machine Learning (ML) Interview Questions and Answers.epub",
+      "ground_truth": {
+        "title": "500 Machine Learning (ML) Interview Questions and Answers",
+        "author": "Vamsee Puligadda",
+        "publisher": "Packt",
+        "year": ""
+      },
+      "algorithm_results": [
+        {
+          "filename": "Vamsee Puligadda - 500 Machine Learning (ML) Interview Questions and Answers.epub",
+          "algorithm_name": "Basic Parser",
+          "title": "500 Machine Learning (ML) Interview Questions and Answers",
+          "author": "Vamsee Puligadda",
+          "publisher": "Packt",
+          "year": "",
+          "confidence": 0.9500000000000001,
+          "execution_time": 6.103515625e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "basic",
+            "features": [
+              "filename_parsing"
+            ]
+          }
+        },
+        {
+          "filename": "Vamsee Puligadda - 500 Machine Learning (ML) Interview Questions and Answers.epub",
+          "algorithm_name": "Enhanced Parser",
+          "title": "500 Machine Learning (ML) Interview Questions and Answers",
+          "author": "Vamsee Puligadda",
+          "publisher": "Packt",
+          "year": "",
+          "confidence": 0.9700000000000001,
+          "execution_time": 6.198883056640625e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "enhanced",
+            "features": [
+              "pattern_recognition",
+              "tech_bonus"
+            ]
+          }
+        },
+        {
+          "filename": "Vamsee Puligadda - 500 Machine Learning (ML) Interview Questions and Answers.epub",
+          "algorithm_name": "Smart Inferencer",
+          "title": "500 Machine Learning (ML) Interview Questions and Answers",
+          "author": "Vamsee Puligadda",
+          "publisher": "Packt",
+          "year": "",
+          "confidence": 0.9700000000000001,
+          "execution_time": 0.00010395050048828125,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "smart",
+            "features": [
+              "inference",
+              "heuristics",
+              "context_aware"
+            ]
+          }
+        },
+        {
+          "filename": "Vamsee Puligadda - 500 Machine Learning (ML) Interview Questions and Answers.epub",
+          "algorithm_name": "Hybrid Orchestrator",
+          "title": "500 Machine Learning (ML) Interview Questions and Answers",
+          "author": "Vamsee Puligadda",
+          "publisher": "Packt",
+          "year": "",
+          "confidence": 1.0,
+          "execution_time": 0.00026488304138183594,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "hybrid",
+            "features": [
+              "multi_algorithm",
+              "ensemble",
+              "orchestration"
+            ]
+          }
+        },
+        {
+          "filename": "Vamsee Puligadda - 500 Machine Learning (ML) Interview Questions and Answers.epub",
+          "algorithm_name": "Brazilian Specialist",
+          "title": "500 Machine Learning (ML) Interview Questions and Answers",
+          "author": "Vamsee Puligadda",
+          "publisher": "Packt",
+          "year": "",
+          "confidence": 0.665,
+          "execution_time": 6.890296936035156e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "brazilian_specialist",
+            "features": [
+              "national_publishers",
+              "portuguese_detection",
+              "brazilian_names"
+            ],
+            "brazilian_indicators": 0,
+            "brazilian_features": []
+          }
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Hybrid Orchestrator": 1.0,
+        "Brazilian Specialist": 1.0
+      }
+    },
+    {
+      "filename": "Douglas Crockford - How JavaScript Works (2018).epub",
+      "ground_truth": {
+        "title": "How JavaScript Works",
+        "author": "Douglas Crockford",
+        "publisher": "",
+        "year": "2018"
+      },
+      "algorithm_results": [
+        {
+          "filename": "Douglas Crockford - How JavaScript Works (2018).epub",
+          "algorithm_name": "Basic Parser",
+          "title": "How JavaScript Works",
+          "author": "Douglas Crockford",
+          "publisher": "",
+          "year": "2018",
+          "confidence": 0.8500000000000001,
+          "execution_time": 6.222724914550781e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "basic",
+            "features": [
+              "filename_parsing"
+            ]
+          }
+        },
+        {
+          "filename": "Douglas Crockford - How JavaScript Works (2018).epub",
+          "algorithm_name": "Enhanced Parser",
+          "title": "How JavaScript Works",
+          "author": "Douglas Crockford",
+          "publisher": "",
+          "year": "2018",
+          "confidence": 0.9400000000000001,
+          "execution_time": 6.29425048828125e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "enhanced",
+            "features": [
+              "pattern_recognition",
+              "tech_bonus"
+            ]
+          }
+        },
+        {
+          "filename": "Douglas Crockford - How JavaScript Works (2018).epub",
+          "algorithm_name": "Smart Inferencer",
+          "title": "How JavaScript Works",
+          "author": "Douglas Crockford",
+          "publisher": "",
+          "year": "2018",
+          "confidence": 0.9600000000000001,
+          "execution_time": 0.00010418891906738281,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "smart",
+            "features": [
+              "inference",
+              "heuristics",
+              "context_aware"
+            ]
+          }
+        },
+        {
+          "filename": "Douglas Crockford - How JavaScript Works (2018).epub",
+          "algorithm_name": "Hybrid Orchestrator",
+          "title": "How JavaScript Works",
+          "author": "Douglas Crockford",
+          "publisher": "",
+          "year": "2018",
+          "confidence": 0.9820000000000002,
+          "execution_time": 0.00026917457580566406,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "hybrid",
+            "features": [
+              "multi_algorithm",
+              "ensemble",
+              "orchestration"
+            ]
+          }
+        },
+        {
+          "filename": "Douglas Crockford - How JavaScript Works (2018).epub",
+          "algorithm_name": "Brazilian Specialist",
+          "title": "How JavaScript Works",
+          "author": "Douglas Crockford",
+          "publisher": "",
+          "year": "2018",
+          "confidence": 0.595,
+          "execution_time": 6.985664367675781e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "brazilian_specialist",
+            "features": [
+              "national_publishers",
+              "portuguese_detection",
+              "brazilian_names"
+            ],
+            "brazilian_indicators": 0,
+            "brazilian_features": []
+          }
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Hybrid Orchestrator": 1.0,
+        "Brazilian Specialist": 1.0
+      }
+    },
+    {
+      "filename": "resilientoracleplandsql.epub",
+      "ground_truth": {
+        "title": "resilientoracleplandsql",
+        "author": "",
+        "publisher": "",
+        "year": ""
+      },
+      "algorithm_results": [
+        {
+          "filename": "resilientoracleplandsql.epub",
+          "algorithm_name": "Basic Parser",
+          "title": "resilientoracleplandsql",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "confidence": 0.5,
+          "execution_time": 4.291534423828125e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "basic",
+            "features": [
+              "filename_parsing"
+            ]
+          }
+        },
+        {
+          "filename": "resilientoracleplandsql.epub",
+          "algorithm_name": "Enhanced Parser",
+          "title": "resilientoracleplandsql",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "confidence": 0.52,
+          "execution_time": 4.38690185546875e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "enhanced",
+            "features": [
+              "pattern_recognition",
+              "tech_bonus"
+            ]
+          }
+        },
+        {
+          "filename": "resilientoracleplandsql.epub",
+          "algorithm_name": "Smart Inferencer",
+          "title": "resilientoracleplandsql",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "confidence": 0.52,
+          "execution_time": 7.104873657226562e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "smart",
+            "features": [
+              "inference",
+              "heuristics",
+              "context_aware"
+            ]
+          }
+        },
+        {
+          "filename": "resilientoracleplandsql.epub",
+          "algorithm_name": "Hybrid Orchestrator",
+          "title": "resilientoracleplandsql",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "confidence": 0.5660000000000001,
+          "execution_time": 0.00018286705017089844,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "hybrid",
+            "features": [
+              "multi_algorithm",
+              "ensemble",
+              "orchestration"
+            ]
+          }
+        },
+        {
+          "filename": "resilientoracleplandsql.epub",
+          "algorithm_name": "Brazilian Specialist",
+          "title": "resilientoracleplandsql",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "confidence": 0.385,
+          "execution_time": 4.8160552978515625e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "brazilian_specialist",
+            "features": [
+              "national_publishers",
+              "portuguese_detection",
+              "brazilian_names"
+            ],
+            "brazilian_indicators": 0,
+            "brazilian_features": []
+          }
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Hybrid Orchestrator": 1.0,
+        "Brazilian Specialist": 1.0
+      }
+    },
+    {
+      "filename": "Ajay Mahajan et al - Cloud-Native Applications in Java (2018).pdf",
+      "ground_truth": {
+        "title": "Cloud-Native Applications in Java",
+        "author": "Ajay Mahajan et al",
+        "publisher": "",
+        "year": "2018"
+      },
+      "algorithm_results": [
+        {
+          "filename": "Ajay Mahajan et al - Cloud-Native Applications in Java (2018).pdf",
+          "algorithm_name": "Basic Parser",
+          "title": "Cloud-Native Applications in Java",
+          "author": "Ajay Mahajan et al",
+          "publisher": "",
+          "year": "2018",
+          "confidence": 0.8500000000000001,
+          "execution_time": 9.417533874511719e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "basic",
+            "features": [
+              "filename_parsing"
+            ]
+          }
+        },
+        {
+          "filename": "Ajay Mahajan et al - Cloud-Native Applications in Java (2018).pdf",
+          "algorithm_name": "Enhanced Parser",
+          "title": "Cloud-Native Applications in Java",
+          "author": "Ajay Mahajan et al",
+          "publisher": "",
+          "year": "2018",
+          "confidence": 0.92,
+          "execution_time": 8.225440979003906e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "enhanced",
+            "features": [
+              "pattern_recognition",
+              "tech_bonus"
+            ]
+          }
+        },
+        {
+          "filename": "Ajay Mahajan et al - Cloud-Native Applications in Java (2018).pdf",
+          "algorithm_name": "Smart Inferencer",
+          "title": "Cloud-Native Applications in Java",
+          "author": "Ajay Mahajan et al",
+          "publisher": "",
+          "year": "2018",
+          "confidence": 0.9400000000000001,
+          "execution_time": 0.00011801719665527344,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "smart",
+            "features": [
+              "inference",
+              "heuristics",
+              "context_aware"
+            ]
+          }
+        },
+        {
+          "filename": "Ajay Mahajan et al - Cloud-Native Applications in Java (2018).pdf",
+          "algorithm_name": "Hybrid Orchestrator",
+          "title": "Cloud-Native Applications in Java",
+          "author": "Ajay Mahajan et al",
+          "publisher": "",
+          "year": "2018",
+          "confidence": 0.9660000000000002,
+          "execution_time": 0.00029921531677246094,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "hybrid",
+            "features": [
+              "multi_algorithm",
+              "ensemble",
+              "orchestration"
+            ]
+          }
+        },
+        {
+          "filename": "Ajay Mahajan et al - Cloud-Native Applications in Java (2018).pdf",
+          "algorithm_name": "Brazilian Specialist",
+          "title": "Cloud-Native Applications in Java",
+          "author": "Ajay Mahajan et al",
+          "publisher": "",
+          "year": "2018",
+          "confidence": 0.595,
+          "execution_time": 7.700920104980469e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "brazilian_specialist",
+            "features": [
+              "national_publishers",
+              "portuguese_detection",
+              "brazilian_names"
+            ],
+            "brazilian_indicators": 0,
+            "brazilian_features": []
+          }
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Hybrid Orchestrator": 1.0,
+        "Brazilian Specialist": 1.0
+      }
+    },
+    {
+      "filename": "Michal Zalewski - The Tangled Web (2011).pdf",
+      "ground_truth": {
+        "title": "The Tangled Web",
+        "author": "Michal Zalewski",
+        "publisher": "",
+        "year": "2011"
+      },
+      "algorithm_results": [
+        {
+          "filename": "Michal Zalewski - The Tangled Web (2011).pdf",
+          "algorithm_name": "Basic Parser",
+          "title": "The Tangled Web",
+          "author": "Michal Zalewski",
+          "publisher": "",
+          "year": "2011",
+          "confidence": 0.8500000000000001,
+          "execution_time": 5.888938903808594e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "basic",
+            "features": [
+              "filename_parsing"
+            ]
+          }
+        },
+        {
+          "filename": "Michal Zalewski - The Tangled Web (2011).pdf",
+          "algorithm_name": "Enhanced Parser",
+          "title": "The Tangled Web",
+          "author": "Michal Zalewski",
+          "publisher": "",
+          "year": "2011",
+          "confidence": 0.92,
+          "execution_time": 6.198883056640625e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "enhanced",
+            "features": [
+              "pattern_recognition",
+              "tech_bonus"
+            ]
+          }
+        },
+        {
+          "filename": "Michal Zalewski - The Tangled Web (2011).pdf",
+          "algorithm_name": "Smart Inferencer",
+          "title": "The Tangled Web",
+          "author": "Michal Zalewski",
+          "publisher": "",
+          "year": "2011",
+          "confidence": 0.9400000000000001,
+          "execution_time": 9.799003601074219e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "smart",
+            "features": [
+              "inference",
+              "heuristics",
+              "context_aware"
+            ]
+          }
+        },
+        {
+          "filename": "Michal Zalewski - The Tangled Web (2011).pdf",
+          "algorithm_name": "Hybrid Orchestrator",
+          "title": "The Tangled Web",
+          "author": "Michal Zalewski",
+          "publisher": "",
+          "year": "2011",
+          "confidence": 0.9660000000000002,
+          "execution_time": 0.0002498626708984375,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "hybrid",
+            "features": [
+              "multi_algorithm",
+              "ensemble",
+              "orchestration"
+            ]
+          }
+        },
+        {
+          "filename": "Michal Zalewski - The Tangled Web (2011).pdf",
+          "algorithm_name": "Brazilian Specialist",
+          "title": "The Tangled Web",
+          "author": "Michal Zalewski",
+          "publisher": "",
+          "year": "2011",
+          "confidence": 0.595,
+          "execution_time": 6.4849853515625e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "brazilian_specialist",
+            "features": [
+              "national_publishers",
+              "portuguese_detection",
+              "brazilian_names"
+            ],
+            "brazilian_indicators": 0,
+            "brazilian_features": []
+          }
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Hybrid Orchestrator": 1.0,
+        "Brazilian Specialist": 1.0
+      }
+    },
+    {
+      "filename": "Alan Beaulieu - Learning SQL (2009).pdf",
+      "ground_truth": {
+        "title": "Learning SQL",
+        "author": "Alan Beaulieu",
+        "publisher": "Packt",
+        "year": "2009"
+      },
+      "algorithm_results": [
+        {
+          "filename": "Alan Beaulieu - Learning SQL (2009).pdf",
+          "algorithm_name": "Basic Parser",
+          "title": "Learning SQL",
+          "author": "Alan Beaulieu",
+          "publisher": "Packt",
+          "year": "2009",
+          "confidence": 1.0,
+          "execution_time": 4.1961669921875e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "basic",
+            "features": [
+              "filename_parsing"
+            ]
+          }
+        },
+        {
+          "filename": "Alan Beaulieu - Learning SQL (2009).pdf",
+          "algorithm_name": "Enhanced Parser",
+          "title": "Learning SQL",
+          "author": "Alan Beaulieu",
+          "publisher": "Packt",
+          "year": "2009",
+          "confidence": 1.0,
+          "execution_time": 4.315376281738281e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "enhanced",
+            "features": [
+              "pattern_recognition",
+              "tech_bonus"
+            ]
+          }
+        },
+        {
+          "filename": "Alan Beaulieu - Learning SQL (2009).pdf",
+          "algorithm_name": "Smart Inferencer",
+          "title": "Learning SQL",
+          "author": "Alan Beaulieu",
+          "publisher": "Packt",
+          "year": "2009",
+          "confidence": 1.0,
+          "execution_time": 7.128715515136719e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "smart",
+            "features": [
+              "inference",
+              "heuristics",
+              "context_aware"
+            ]
+          }
+        },
+        {
+          "filename": "Alan Beaulieu - Learning SQL (2009).pdf",
+          "algorithm_name": "Hybrid Orchestrator",
+          "title": "Learning SQL",
+          "author": "Alan Beaulieu",
+          "publisher": "Packt",
+          "year": "2009",
+          "confidence": 1.0,
+          "execution_time": 0.00024580955505371094,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "hybrid",
+            "features": [
+              "multi_algorithm",
+              "ensemble",
+              "orchestration"
+            ]
+          }
+        },
+        {
+          "filename": "Alan Beaulieu - Learning SQL (2009).pdf",
+          "algorithm_name": "Brazilian Specialist",
+          "title": "Learning SQL",
+          "author": "Alan Beaulieu",
+          "publisher": "Packt",
+          "year": "2009",
+          "confidence": 0.7,
+          "execution_time": 0.00033283233642578125,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "brazilian_specialist",
+            "features": [
+              "national_publishers",
+              "portuguese_detection",
+              "brazilian_names"
+            ],
+            "brazilian_indicators": 0,
+            "brazilian_features": []
+          }
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Hybrid Orchestrator": 1.0,
+        "Brazilian Specialist": 1.0
+      }
+    },
+    {
+      "filename": "Alice Zhao - SQL Pocket Guide (2022).epub",
+      "ground_truth": {
+        "title": "SQL Pocket Guide",
+        "author": "Alice Zhao",
+        "publisher": "OReilly",
+        "year": "2022"
+      },
+      "algorithm_results": [
+        {
+          "filename": "Alice Zhao - SQL Pocket Guide (2022).epub",
+          "algorithm_name": "Basic Parser",
+          "title": "SQL Pocket Guide",
+          "author": "Alice Zhao",
+          "publisher": "OReilly",
+          "year": "2022",
+          "confidence": 1.0,
+          "execution_time": 8.893013000488281e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "basic",
+            "features": [
+              "filename_parsing"
+            ]
+          }
+        },
+        {
+          "filename": "Alice Zhao - SQL Pocket Guide (2022).epub",
+          "algorithm_name": "Enhanced Parser",
+          "title": "SQL Pocket Guide",
+          "author": "Alice Zhao",
+          "publisher": "OReilly",
+          "year": "2022",
+          "confidence": 1.0,
+          "execution_time": 5.1975250244140625e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "enhanced",
+            "features": [
+              "pattern_recognition",
+              "tech_bonus"
+            ]
+          }
+        },
+        {
+          "filename": "Alice Zhao - SQL Pocket Guide (2022).epub",
+          "algorithm_name": "Smart Inferencer",
+          "title": "SQL Pocket Guide",
+          "author": "Alice Zhao",
+          "publisher": "OReilly",
+          "year": "2022",
+          "confidence": 1.0,
+          "execution_time": 8.082389831542969e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "smart",
+            "features": [
+              "inference",
+              "heuristics",
+              "context_aware"
+            ]
+          }
+        },
+        {
+          "filename": "Alice Zhao - SQL Pocket Guide (2022).epub",
+          "algorithm_name": "Hybrid Orchestrator",
+          "title": "SQL Pocket Guide",
+          "author": "Alice Zhao",
+          "publisher": "OReilly",
+          "year": "2022",
+          "confidence": 1.0,
+          "execution_time": 0.00020313262939453125,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "hybrid",
+            "features": [
+              "multi_algorithm",
+              "ensemble",
+              "orchestration"
+            ]
+          }
+        },
+        {
+          "filename": "Alice Zhao - SQL Pocket Guide (2022).epub",
+          "algorithm_name": "Brazilian Specialist",
+          "title": "SQL Pocket Guide",
+          "author": "Alice Zhao",
+          "publisher": "OReilly",
+          "year": "2022",
+          "confidence": 0.7,
+          "execution_time": 5.412101745605469e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "brazilian_specialist",
+            "features": [
+              "national_publishers",
+              "portuguese_detection",
+              "brazilian_names"
+            ],
+            "brazilian_indicators": 0,
+            "brazilian_features": []
+          }
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Hybrid Orchestrator": 1.0,
+        "Brazilian Specialist": 1.0
+      }
+    },
+    {
+      "filename": "AI_Agents_and_Applications_v7_MEAP.pdf",
+      "ground_truth": {
+        "title": "AI_Agents_and_Applications_v7_MEAP",
+        "author": "",
+        "publisher": "Manning",
+        "year": ""
+      },
+      "algorithm_results": [
+        {
+          "filename": "AI_Agents_and_Applications_v7_MEAP.pdf",
+          "algorithm_name": "Basic Parser",
+          "title": "AI_Agents_and_Applications_v7_MEAP",
+          "author": "",
+          "publisher": "Manning",
+          "year": "",
+          "confidence": 0.65,
+          "execution_time": 3.409385681152344e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "basic",
+            "features": [
+              "filename_parsing"
+            ]
+          }
+        },
+        {
+          "filename": "AI_Agents_and_Applications_v7_MEAP.pdf",
+          "algorithm_name": "Enhanced Parser",
+          "title": "AI_Agents_and_Applications_v7_MEAP",
+          "author": "",
+          "publisher": "Manning",
+          "year": "",
+          "confidence": 0.67,
+          "execution_time": 3.5762786865234375e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "enhanced",
+            "features": [
+              "pattern_recognition",
+              "tech_bonus"
+            ]
+          }
+        },
+        {
+          "filename": "AI_Agents_and_Applications_v7_MEAP.pdf",
+          "algorithm_name": "Smart Inferencer",
+          "title": "AI_Agents_and_Applications_v7_MEAP",
+          "author": "",
+          "publisher": "Manning",
+          "year": "",
+          "confidence": 0.67,
+          "execution_time": 5.91278076171875e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "smart",
+            "features": [
+              "inference",
+              "heuristics",
+              "context_aware"
+            ]
+          }
+        },
+        {
+          "filename": "AI_Agents_and_Applications_v7_MEAP.pdf",
+          "algorithm_name": "Hybrid Orchestrator",
+          "title": "AI_Agents_and_Applications_v7_MEAP",
+          "author": "",
+          "publisher": "Manning",
+          "year": "",
+          "confidence": 0.7160000000000001,
+          "execution_time": 0.0001518726348876953,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "hybrid",
+            "features": [
+              "multi_algorithm",
+              "ensemble",
+              "orchestration"
+            ]
+          }
+        },
+        {
+          "filename": "AI_Agents_and_Applications_v7_MEAP.pdf",
+          "algorithm_name": "Brazilian Specialist",
+          "title": "AI_Agents_and_Applications_v7_MEAP",
+          "author": "",
+          "publisher": "Manning",
+          "year": "",
+          "confidence": 0.49,
+          "execution_time": 3.981590270996094e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "brazilian_specialist",
+            "features": [
+              "national_publishers",
+              "portuguese_detection",
+              "brazilian_names"
+            ],
+            "brazilian_indicators": 0,
+            "brazilian_features": []
+          }
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Hybrid Orchestrator": 1.0,
+        "Brazilian Specialist": 1.0
+      }
+    },
+    {
+      "filename": "A_Damn_Fine_Stable_Diffusion_Book_v6_MEAP.epub",
+      "ground_truth": {
+        "title": "A_Damn_Fine_Stable_Diffusion_Book_v6_MEAP",
+        "author": "",
+        "publisher": "Manning",
+        "year": ""
+      },
+      "algorithm_results": [
+        {
+          "filename": "A_Damn_Fine_Stable_Diffusion_Book_v6_MEAP.epub",
+          "algorithm_name": "Basic Parser",
+          "title": "A_Damn_Fine_Stable_Diffusion_Book_v6_MEAP",
+          "author": "",
+          "publisher": "Manning",
+          "year": "",
+          "confidence": 0.65,
+          "execution_time": 3.719329833984375e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "basic",
+            "features": [
+              "filename_parsing"
+            ]
+          }
+        },
+        {
+          "filename": "A_Damn_Fine_Stable_Diffusion_Book_v6_MEAP.epub",
+          "algorithm_name": "Enhanced Parser",
+          "title": "A_Damn_Fine_Stable_Diffusion_Book_v6_MEAP",
+          "author": "",
+          "publisher": "Manning",
+          "year": "",
+          "confidence": 0.65,
+          "execution_time": 4.00543212890625e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "enhanced",
+            "features": [
+              "pattern_recognition",
+              "tech_bonus"
+            ]
+          }
+        },
+        {
+          "filename": "A_Damn_Fine_Stable_Diffusion_Book_v6_MEAP.epub",
+          "algorithm_name": "Smart Inferencer",
+          "title": "A_Damn_Fine_Stable_Diffusion_Book_v6_MEAP",
+          "author": "",
+          "publisher": "Manning",
+          "year": "",
+          "confidence": 0.65,
+          "execution_time": 6.508827209472656e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "smart",
+            "features": [
+              "inference",
+              "heuristics",
+              "context_aware"
+            ]
+          }
+        },
+        {
+          "filename": "A_Damn_Fine_Stable_Diffusion_Book_v6_MEAP.epub",
+          "algorithm_name": "Hybrid Orchestrator",
+          "title": "A_Damn_Fine_Stable_Diffusion_Book_v6_MEAP",
+          "author": "",
+          "publisher": "Manning",
+          "year": "",
+          "confidence": 0.7000000000000001,
+          "execution_time": 0.00016689300537109375,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "hybrid",
+            "features": [
+              "multi_algorithm",
+              "ensemble",
+              "orchestration"
+            ]
+          }
+        },
+        {
+          "filename": "A_Damn_Fine_Stable_Diffusion_Book_v6_MEAP.epub",
+          "algorithm_name": "Brazilian Specialist",
+          "title": "A_Damn_Fine_Stable_Diffusion_Book_v6_MEAP",
+          "author": "",
+          "publisher": "Manning",
+          "year": "",
+          "confidence": 0.49,
+          "execution_time": 4.315376281738281e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "brazilian_specialist",
+            "features": [
+              "national_publishers",
+              "portuguese_detection",
+              "brazilian_names"
+            ],
+            "brazilian_indicators": 0,
+            "brazilian_features": []
+          }
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Hybrid Orchestrator": 1.0,
+        "Brazilian Specialist": 1.0
+      }
+    },
+    {
+      "filename": "Cybellium - AWS Certified Developer  Associate (DVA-C02) (2024).pdf",
+      "ground_truth": {
+        "title": "AWS Certified Developer Associate (DVA-C02)",
+        "author": "Cybellium",
+        "publisher": "",
+        "year": "2024"
+      },
+      "algorithm_results": [
+        {
+          "filename": "Cybellium - AWS Certified Developer  Associate (DVA-C02) (2024).pdf",
+          "algorithm_name": "Basic Parser",
+          "title": "AWS Certified Developer Associate (DVA-C02)",
+          "author": "Cybellium",
+          "publisher": "",
+          "year": "2024",
+          "confidence": 0.8500000000000001,
+          "execution_time": 7.390975952148438e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "basic",
+            "features": [
+              "filename_parsing"
+            ]
+          }
+        },
+        {
+          "filename": "Cybellium - AWS Certified Developer  Associate (DVA-C02) (2024).pdf",
+          "algorithm_name": "Enhanced Parser",
+          "title": "AWS Certified Developer Associate (DVA-C02)",
+          "author": "Cybellium",
+          "publisher": "",
+          "year": "2024",
+          "confidence": 0.9,
+          "execution_time": 7.390975952148438e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "enhanced",
+            "features": [
+              "pattern_recognition",
+              "tech_bonus"
+            ]
+          }
+        },
+        {
+          "filename": "Cybellium - AWS Certified Developer  Associate (DVA-C02) (2024).pdf",
+          "algorithm_name": "Smart Inferencer",
+          "title": "AWS Certified Developer Associate (DVA-C02)",
+          "author": "Cybellium",
+          "publisher": "",
+          "year": "2024",
+          "confidence": 0.92,
+          "execution_time": 0.0001201629638671875,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "smart",
+            "features": [
+              "inference",
+              "heuristics",
+              "context_aware"
+            ]
+          }
+        },
+        {
+          "filename": "Cybellium - AWS Certified Developer  Associate (DVA-C02) (2024).pdf",
+          "algorithm_name": "Hybrid Orchestrator",
+          "title": "AWS Certified Developer Associate (DVA-C02)",
+          "author": "Cybellium",
+          "publisher": "",
+          "year": "2024",
+          "confidence": 0.9500000000000002,
+          "execution_time": 0.0002892017364501953,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "hybrid",
+            "features": [
+              "multi_algorithm",
+              "ensemble",
+              "orchestration"
+            ]
+          }
+        },
+        {
+          "filename": "Cybellium - AWS Certified Developer  Associate (DVA-C02) (2024).pdf",
+          "algorithm_name": "Brazilian Specialist",
+          "title": "AWS Certified Developer Associate (DVA-C02)",
+          "author": "Cybellium",
+          "publisher": "",
+          "year": "2024",
+          "confidence": 0.595,
+          "execution_time": 7.43865966796875e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "brazilian_specialist",
+            "features": [
+              "national_publishers",
+              "portuguese_detection",
+              "brazilian_names"
+            ],
+            "brazilian_indicators": 0,
+            "brazilian_features": []
+          }
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Hybrid Orchestrator": 1.0,
+        "Brazilian Specialist": 1.0
+      }
+    },
+    {
+      "filename": "Rui Pedro Machado et al - Analytics Engineering with SQL and dbt (2023).pdf",
+      "ground_truth": {
+        "title": "Analytics Engineering with SQL and dbt",
+        "author": "Rui Pedro Machado et al",
+        "publisher": "",
+        "year": "2023"
+      },
+      "algorithm_results": [
+        {
+          "filename": "Rui Pedro Machado et al - Analytics Engineering with SQL and dbt (2023).pdf",
+          "algorithm_name": "Basic Parser",
+          "title": "Analytics Engineering with SQL and dbt",
+          "author": "Rui Pedro Machado et al",
+          "publisher": "",
+          "year": "2023",
+          "confidence": 0.8500000000000001,
+          "execution_time": 7.724761962890625e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "basic",
+            "features": [
+              "filename_parsing"
+            ]
+          }
+        },
+        {
+          "filename": "Rui Pedro Machado et al - Analytics Engineering with SQL and dbt (2023).pdf",
+          "algorithm_name": "Enhanced Parser",
+          "title": "Analytics Engineering with SQL and dbt",
+          "author": "Rui Pedro Machado et al",
+          "publisher": "",
+          "year": "2023",
+          "confidence": 0.92,
+          "execution_time": 7.700920104980469e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "enhanced",
+            "features": [
+              "pattern_recognition",
+              "tech_bonus"
+            ]
+          }
+        },
+        {
+          "filename": "Rui Pedro Machado et al - Analytics Engineering with SQL and dbt (2023).pdf",
+          "algorithm_name": "Smart Inferencer",
+          "title": "Analytics Engineering with SQL and dbt",
+          "author": "Rui Pedro Machado et al",
+          "publisher": "",
+          "year": "2023",
+          "confidence": 0.9400000000000001,
+          "execution_time": 0.0001251697540283203,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "smart",
+            "features": [
+              "inference",
+              "heuristics",
+              "context_aware"
+            ]
+          }
+        },
+        {
+          "filename": "Rui Pedro Machado et al - Analytics Engineering with SQL and dbt (2023).pdf",
+          "algorithm_name": "Hybrid Orchestrator",
+          "title": "Analytics Engineering with SQL and dbt",
+          "author": "Rui Pedro Machado et al",
+          "publisher": "",
+          "year": "2023",
+          "confidence": 0.9660000000000002,
+          "execution_time": 0.0003058910369873047,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "hybrid",
+            "features": [
+              "multi_algorithm",
+              "ensemble",
+              "orchestration"
+            ]
+          }
+        },
+        {
+          "filename": "Rui Pedro Machado et al - Analytics Engineering with SQL and dbt (2023).pdf",
+          "algorithm_name": "Brazilian Specialist",
+          "title": "Analytics Engineering with SQL and dbt",
+          "author": "Rui Pedro Machado et al",
+          "publisher": "",
+          "year": "2023",
+          "confidence": 0.9000000000000001,
+          "execution_time": 7.724761962890625e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "brazilian_specialist",
+            "features": [
+              "national_publishers",
+              "portuguese_detection",
+              "brazilian_names"
+            ],
+            "brazilian_indicators": 1,
+            "brazilian_features": [
+              "brazilian_name_pedro"
+            ]
+          }
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Hybrid Orchestrator": 1.0,
+        "Brazilian Specialist": 1.0
+      }
+    },
+    {
+      "filename": "Lyron Foster - Hacking APIs - A Comprehensive Guide from Beginner to Intermediate (2023).pdf",
+      "ground_truth": {
+        "title": "Hacking APIs - A Comprehensive Guide from Beginner to Intermediate",
+        "author": "Lyron Foster",
+        "publisher": "NoStarch",
+        "year": "2023"
+      },
+      "algorithm_results": [
+        {
+          "filename": "Lyron Foster - Hacking APIs - A Comprehensive Guide from Beginner to Intermediate (2023).pdf",
+          "algorithm_name": "Basic Parser",
+          "title": "Hacking APIs - A Comprehensive Guide from Beginner to Intermediate",
+          "author": "Lyron Foster",
+          "publisher": "NoStarch",
+          "year": "2023",
+          "confidence": 1.0,
+          "execution_time": 7.200241088867188e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "basic",
+            "features": [
+              "filename_parsing"
+            ]
+          }
+        },
+        {
+          "filename": "Lyron Foster - Hacking APIs - A Comprehensive Guide from Beginner to Intermediate (2023).pdf",
+          "algorithm_name": "Enhanced Parser",
+          "title": "Hacking APIs - A Comprehensive Guide from Beginner to Intermediate",
+          "author": "Lyron Foster",
+          "publisher": "NoStarch",
+          "year": "2023",
+          "confidence": 1.0,
+          "execution_time": 6.985664367675781e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "enhanced",
+            "features": [
+              "pattern_recognition",
+              "tech_bonus"
+            ]
+          }
+        },
+        {
+          "filename": "Lyron Foster - Hacking APIs - A Comprehensive Guide from Beginner to Intermediate (2023).pdf",
+          "algorithm_name": "Smart Inferencer",
+          "title": "Hacking APIs - A Comprehensive Guide from Beginner to Intermediate",
+          "author": "Lyron Foster",
+          "publisher": "NoStarch",
+          "year": "2023",
+          "confidence": 1.0,
+          "execution_time": 0.00011515617370605469,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "smart",
+            "features": [
+              "inference",
+              "heuristics",
+              "context_aware"
+            ]
+          }
+        },
+        {
+          "filename": "Lyron Foster - Hacking APIs - A Comprehensive Guide from Beginner to Intermediate (2023).pdf",
+          "algorithm_name": "Hybrid Orchestrator",
+          "title": "Hacking APIs - A Comprehensive Guide from Beginner to Intermediate",
+          "author": "Lyron Foster",
+          "publisher": "NoStarch",
+          "year": "2023",
+          "confidence": 1.0,
+          "execution_time": 0.0002961158752441406,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "hybrid",
+            "features": [
+              "multi_algorithm",
+              "ensemble",
+              "orchestration"
+            ]
+          }
+        },
+        {
+          "filename": "Lyron Foster - Hacking APIs - A Comprehensive Guide from Beginner to Intermediate (2023).pdf",
+          "algorithm_name": "Brazilian Specialist",
+          "title": "Hacking APIs - A Comprehensive Guide from Beginner to Intermediate",
+          "author": "Lyron Foster",
+          "publisher": "NoStarch",
+          "year": "2023",
+          "confidence": 0.7,
+          "execution_time": 7.581710815429688e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "brazilian_specialist",
+            "features": [
+              "national_publishers",
+              "portuguese_detection",
+              "brazilian_names"
+            ],
+            "brazilian_indicators": 0,
+            "brazilian_features": []
+          }
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Hybrid Orchestrator": 1.0,
+        "Brazilian Specialist": 1.0
+      }
+    },
+    {
+      "filename": "Arnaud Lauret - The Design of Web APIs, Second Edition (2025).epub",
+      "ground_truth": {
+        "title": "The Design of Web APIs, Second Edition",
+        "author": "Arnaud Lauret",
+        "publisher": "",
+        "year": "2025"
+      },
+      "algorithm_results": [
+        {
+          "filename": "Arnaud Lauret - The Design of Web APIs, Second Edition (2025).epub",
+          "algorithm_name": "Basic Parser",
+          "title": "The Design of Web APIs, Second Edition",
+          "author": "Arnaud Lauret",
+          "publisher": "",
+          "year": "2025",
+          "confidence": 0.8500000000000001,
+          "execution_time": 7.176399230957031e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "basic",
+            "features": [
+              "filename_parsing"
+            ]
+          }
+        },
+        {
+          "filename": "Arnaud Lauret - The Design of Web APIs, Second Edition (2025).epub",
+          "algorithm_name": "Enhanced Parser",
+          "title": "The Design of Web APIs, Second Edition",
+          "author": "Arnaud Lauret",
+          "publisher": "",
+          "year": "2025",
+          "confidence": 0.92,
+          "execution_time": 0.00013685226440429688,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "enhanced",
+            "features": [
+              "pattern_recognition",
+              "tech_bonus"
+            ]
+          }
+        },
+        {
+          "filename": "Arnaud Lauret - The Design of Web APIs, Second Edition (2025).epub",
+          "algorithm_name": "Smart Inferencer",
+          "title": "The Design of Web APIs, Second Edition",
+          "author": "Arnaud Lauret",
+          "publisher": "",
+          "year": "2025",
+          "confidence": 0.9400000000000001,
+          "execution_time": 0.00011801719665527344,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "smart",
+            "features": [
+              "inference",
+              "heuristics",
+              "context_aware"
+            ]
+          }
+        },
+        {
+          "filename": "Arnaud Lauret - The Design of Web APIs, Second Edition (2025).epub",
+          "algorithm_name": "Hybrid Orchestrator",
+          "title": "The Design of Web APIs, Second Edition",
+          "author": "Arnaud Lauret",
+          "publisher": "",
+          "year": "2025",
+          "confidence": 0.9660000000000002,
+          "execution_time": 0.0002989768981933594,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "hybrid",
+            "features": [
+              "multi_algorithm",
+              "ensemble",
+              "orchestration"
+            ]
+          }
+        },
+        {
+          "filename": "Arnaud Lauret - The Design of Web APIs, Second Edition (2025).epub",
+          "algorithm_name": "Brazilian Specialist",
+          "title": "The Design of Web APIs, Second Edition",
+          "author": "Arnaud Lauret",
+          "publisher": "",
+          "year": "2025",
+          "confidence": 0.595,
+          "execution_time": 7.510185241699219e-05,
+          "accuracy_score": 1.0,
+          "additional_info": {
+            "type": "brazilian_specialist",
+            "features": [
+              "national_publishers",
+              "portuguese_detection",
+              "brazilian_names"
+            ],
+            "brazilian_indicators": 0,
+            "brazilian_features": []
+          }
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Hybrid Orchestrator": 1.0,
+        "Brazilian Specialist": 1.0
+      }
+    }
+  ],
+  "algorithm_summary": {
+    "Basic Parser": {
+      "accuracies": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "confidences": [
+        0.8500000000000001,
+        0.8500000000000001,
+        0.8500000000000001,
+        0.8500000000000001,
+        1.0,
+        0.8500000000000001,
+        0.8500000000000001,
+        0.7000000000000001,
+        1.0,
+        0.8500000000000001,
+        1.0,
+        0.65,
+        0.9500000000000001,
+        0.8500000000000001,
+        0.5,
+        0.8500000000000001,
+        0.8500000000000001,
+        1.0,
+        1.0,
+        0.65,
+        0.65,
+        0.8500000000000001,
+        0.8500000000000001,
+        1.0,
+        0.8500000000000001
+      ],
+      "times": [
+        9.012222290039062e-05,
+        7.176399230957031e-05,
+        5.412101745605469e-05,
+        6.413459777832031e-05,
+        5.602836608886719e-05,
+        6.318092346191406e-05,
+        7.486343383789062e-05,
+        6.890296936035156e-05,
+        5.2928924560546875e-05,
+        5.2928924560546875e-05,
+        5.3882598876953125e-05,
+        3.504753112792969e-05,
+        6.103515625e-05,
+        6.222724914550781e-05,
+        4.291534423828125e-05,
+        9.417533874511719e-05,
+        5.888938903808594e-05,
+        4.1961669921875e-05,
+        8.893013000488281e-05,
+        3.409385681152344e-05,
+        3.719329833984375e-05,
+        7.390975952148438e-05,
+        7.724761962890625e-05,
+        7.200241088867188e-05,
+        7.176399230957031e-05
+      ],
+      "success_count": 25,
+      "avg_accuracy": 1.0,
+      "avg_confidence": 0.8460000000000001,
+      "avg_time": 6.217002868652344e-05,
+      "success_rate": 1.0
+    },
+    "Enhanced Parser": {
+      "accuracies": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "confidences": [
+        0.92,
+        0.92,
+        0.92,
+        0.9,
+        1.0,
+        0.9400000000000001,
+        0.9,
+        0.79,
+        1.0,
+        0.9,
+        1.0,
+        0.67,
+        0.9700000000000001,
+        0.9400000000000001,
+        0.52,
+        0.92,
+        0.92,
+        1.0,
+        1.0,
+        0.67,
+        0.65,
+        0.9,
+        0.92,
+        1.0,
+        0.92
+      ],
+      "times": [
+        7.295608520507812e-05,
+        7.200241088867188e-05,
+        5.412101745605469e-05,
+        6.508827209472656e-05,
+        5.698204040527344e-05,
+        6.389617919921875e-05,
+        7.390975952148438e-05,
+        6.985664367675781e-05,
+        5.4836273193359375e-05,
+        5.412101745605469e-05,
+        5.412101745605469e-05,
+        3.5762786865234375e-05,
+        6.198883056640625e-05,
+        6.29425048828125e-05,
+        4.38690185546875e-05,
+        8.225440979003906e-05,
+        6.198883056640625e-05,
+        4.315376281738281e-05,
+        5.1975250244140625e-05,
+        3.5762786865234375e-05,
+        4.00543212890625e-05,
+        7.390975952148438e-05,
+        7.700920104980469e-05,
+        6.985664367675781e-05,
+        0.00013685226440429688
+      ],
+      "success_count": 25,
+      "avg_accuracy": 1.0,
+      "avg_confidence": 0.8876000000000001,
+      "avg_time": 6.277084350585937e-05,
+      "success_rate": 1.0
+    },
+    "Smart Inferencer": {
+      "accuracies": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "confidences": [
+        0.9400000000000001,
+        0.9400000000000001,
+        0.9400000000000001,
+        0.92,
+        1.0,
+        0.9600000000000001,
+        0.92,
+        0.81,
+        1.0,
+        0.92,
+        1.0,
+        0.67,
+        0.9700000000000001,
+        0.9600000000000001,
+        0.52,
+        0.9400000000000001,
+        0.9400000000000001,
+        1.0,
+        1.0,
+        0.67,
+        0.65,
+        0.92,
+        0.9400000000000001,
+        1.0,
+        0.9400000000000001
+      ],
+      "times": [
+        0.00011801719665527344,
+        0.00011801719665527344,
+        8.821487426757812e-05,
+        0.0001049041748046875,
+        9.608268737792969e-05,
+        0.00010180473327636719,
+        0.00012111663818359375,
+        0.00011515617370605469,
+        9.226799011230469e-05,
+        8.821487426757812e-05,
+        9.107589721679688e-05,
+        5.91278076171875e-05,
+        0.00010395050048828125,
+        0.00010418891906738281,
+        7.104873657226562e-05,
+        0.00011801719665527344,
+        9.799003601074219e-05,
+        7.128715515136719e-05,
+        8.082389831542969e-05,
+        5.91278076171875e-05,
+        6.508827209472656e-05,
+        0.0001201629638671875,
+        0.0001251697540283203,
+        0.00011515617370605469,
+        0.00011801719665527344
+      ],
+      "success_count": 25,
+      "avg_accuracy": 1.0,
+      "avg_confidence": 0.8988,
+      "avg_time": 9.776115417480469e-05,
+      "success_rate": 1.0
+    },
+    "Hybrid Orchestrator": {
+      "accuracies": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "confidences": [
+        0.9660000000000002,
+        0.9660000000000002,
+        0.9660000000000002,
+        0.9500000000000002,
+        1.0,
+        0.9820000000000002,
+        0.9500000000000002,
+        0.8320000000000001,
+        1.0,
+        0.9500000000000002,
+        1.0,
+        0.7160000000000001,
+        1.0,
+        0.9820000000000002,
+        0.5660000000000001,
+        0.9660000000000002,
+        0.9660000000000002,
+        1.0,
+        1.0,
+        0.7160000000000001,
+        0.7000000000000001,
+        0.9500000000000002,
+        0.9660000000000002,
+        1.0,
+        0.9660000000000002
+      ],
+      "times": [
+        0.0002880096435546875,
+        0.0002918243408203125,
+        0.00022101402282714844,
+        0.00026488304138183594,
+        0.0002410411834716797,
+        0.0002760887145996094,
+        0.0003077983856201172,
+        0.0002951622009277344,
+        0.0002288818359375,
+        0.00022101402282714844,
+        0.00033402442932128906,
+        0.00015282630920410156,
+        0.00026488304138183594,
+        0.00026917457580566406,
+        0.00018286705017089844,
+        0.00029921531677246094,
+        0.0002498626708984375,
+        0.00024580955505371094,
+        0.00020313262939453125,
+        0.0001518726348876953,
+        0.00016689300537109375,
+        0.0002892017364501953,
+        0.0003058910369873047,
+        0.0002961158752441406,
+        0.0002989768981933594
+      ],
+      "success_count": 25,
+      "avg_accuracy": 1.0,
+      "avg_confidence": 0.9222400000000002,
+      "avg_time": 0.0002538585662841797,
+      "success_rate": 1.0
+    },
+    "Brazilian Specialist": {
+      "accuracies": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "confidences": [
+        0.595,
+        0.595,
+        0.595,
+        0.595,
+        0.7,
+        0.595,
+        0.595,
+        0.525,
+        0.7,
+        0.595,
+        0.7,
+        0.49,
+        0.665,
+        0.595,
+        0.385,
+        0.595,
+        0.595,
+        0.7,
+        0.7,
+        0.49,
+        0.49,
+        0.595,
+        0.9000000000000001,
+        0.7,
+        0.595
+      ],
+      "times": [
+        0.00011801719665527344,
+        7.724761962890625e-05,
+        5.793571472167969e-05,
+        6.914138793945312e-05,
+        6.198883056640625e-05,
+        6.723403930664062e-05,
+        7.987022399902344e-05,
+        7.414817810058594e-05,
+        5.888938903808594e-05,
+        5.698204040527344e-05,
+        6.413459777832031e-05,
+        4.100799560546875e-05,
+        6.890296936035156e-05,
+        6.985664367675781e-05,
+        4.8160552978515625e-05,
+        7.700920104980469e-05,
+        6.4849853515625e-05,
+        0.00033283233642578125,
+        5.412101745605469e-05,
+        3.981590270996094e-05,
+        4.315376281738281e-05,
+        7.43865966796875e-05,
+        7.724761962890625e-05,
+        7.581710815429688e-05,
+        7.510185241699219e-05
+      ],
+      "success_count": 25,
+      "avg_accuracy": 1.0,
+      "avg_confidence": 0.6114,
+      "avg_time": 7.711410522460937e-05,
+      "success_rate": 1.0
+    }
+  }
+}

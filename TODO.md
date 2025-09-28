@@ -1,11 +1,11 @@
-# Plano de Ações Futuras
+# Plano de Acoes Futuras
 
-- [ ] Refatorar `renomeia_livro.py` em módulos menores (CLI, extração, enriquecimento, IO) mantendo cobertura de testes.
-	- [ ] Identificar blocos principais (parsing CLI, orquestração, pipelines) e mapeá-los para novos módulos sob `renamepdfepub/`.
-	- [ ] Extrair primeiro o fluxo de entrada/saída (carregamento de relatórios, escrita de logs) mantendo a API compatível.
-	- [ ] Em seguida mover o pipeline de extração/enriquecimento para funções puras testáveis.
-	- [ ] Criar testes unitários adicionais para cada módulo novo antes de remover o código original.
-- [ ] Revisar configurações de logging para suportar rotação e níveis configuráveis por ambiente.
-- [ ] Automatizar geração de relatórios diários na pasta `reports/` com metadados consolidados.
+- [ ] Refatorar `renomeia_livro.py` em modulos menores (CLI, extracao, enriquecimento, IO) mantendo cobertura de testes.
+ - [ ] Identificar blocos principais (parsing CLI, orquestracao, pipelines) e mapea-los para novos modulos sob `renamepdfepub`.
+ - [ ] Extrair primeiro o fluxo de entradasaida (carregamento de relatorios, escrita de logs) mantendo a API compativel.
+ - [ ] Em seguida mover o pipeline de extracaoenriquecimento para funcoes puras testaveis.
+ - [ ] Criar testes unitarios adicionais para cada modulo novo antes de remover o codigo original.
+- [ ] Revisar configuracoes de logging para suportar rotacao e niveis configuraveis por ambiente.
+- [ ] Automatizar geracao de relatorios diarios na pasta `reports` com metadados consolidados.
 - [ ] Revisar requisitos de sistema (OCR, poppler, bibliotecas opcionais) e documentar alternativas multiplataforma.
-- [ ] Incrementar cobertura de testes na pasta `tests/`, iniciando pelos fluxos críticos de renomeação.
+- [ ] Incrementar cobertura de testes na pasta `tests`, iniciando pelos fluxos criticos de renomeacao.

@@ -1,0 +1,3364 @@
+{
+  "timestamp": "2025-09-28 00:42:10",
+  "stats": {
+    "total_books": 80,
+    "with_title": 80,
+    "with_author": 0,
+    "with_publisher": 9,
+    "with_year": 0,
+    "with_category": 69,
+    "avg_confidence": 0.453
+  },
+  "test_queries": [
+    "Python Programming",
+    "JavaScript React",
+    "Machine Learning",
+    "Database SQL",
+    "Security Hacking",
+    "Web Development",
+    "Docker Kubernetes",
+    "Data Science",
+    "Network Security",
+    "Software Engineering",
+    "Algorithm Design",
+    "System Administration",
+    "Cloud Computing",
+    "Mobile Development",
+    "DevOps Practices"
+  ],
+  "results": {
+    "enhanced_fuzzy": [
+      {
+        "query": "Python Programming",
+        "results": [
+          {
+            "title": "Python Workout",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "Python",
+            "filename": "Python_Workout.pdf",
+            "similarity_score": 1.0,
+            "confidence": 0.47000000000000003,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "pythonobject orientedprogrammingfourthedition",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "Python",
+            "filename": "pythonobject-orientedprogrammingfourthedition.pdf",
+            "similarity_score": 1.0,
+            "confidence": 0.5,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "Exploring Functional Programming",
+            "author": "",
+            "publisher": "Manning",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "Functional",
+            "filename": "Exploring_Functional_Programming.pdf",
+            "similarity_score": 1.0,
+            "confidence": 0.64,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "learncprogramming",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "learncprogramming.pdf",
+            "similarity_score": 1.0,
+            "confidence": 0.42000000000000004,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "Python Workout",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "Python",
+            "filename": "Python_Workout_Second_Edition_v3_MEAP.epub",
+            "similarity_score": 1.0,
+            "confidence": 0.5700000000000001,
+            "algorithm": "enhanced_fuzzy"
+          }
+        ],
+        "count": 5,
+        "avg_score": 1.0
+      },
+      {
+        "query": "JavaScript React",
+        "results": [
+          {
+            "title": "secretsofthejavascriptninja2e",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "JavaScript",
+            "filename": "secretsofthejavascriptninja2e.epub",
+            "similarity_score": 0.9888888888888889,
+            "confidence": 0.4845555555555556,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "secretsofthejavascriptninja2e",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "JavaScript",
+            "filename": "secretsofthejavascriptninja2e.pdf",
+            "similarity_score": 0.9888888888888889,
+            "confidence": 0.4845555555555556,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "learningphpmysqlandjavascript7e",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "JavaScript",
+            "filename": "learningphpmysqlandjavascript7e.pdf",
+            "similarity_score": 0.9680851063829787,
+            "confidence": 0.48404255319148937,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "reactquickly2e",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "JavaScript",
+            "filename": "reactquickly2e.pdf",
+            "similarity_score": 0.6833333333333333,
+            "confidence": 0.3348333333333333,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "reacthooksinaction",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "JavaScript",
+            "filename": "reacthooksinaction.pdf",
+            "similarity_score": 0.6441176470588235,
+            "confidence": 0.30273529411764705,
+            "algorithm": "enhanced_fuzzy"
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.8546627729105827
+      },
+      {
+        "query": "Machine Learning",
+        "results": [
+          {
+            "title": "trainingdataformachinelearning",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "subcategory": "",
+            "filename": "trainingdataformachinelearning.epub",
+            "similarity_score": 0.6521739130434783,
+            "confidence": 0.28695652173913044,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "learningsql",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "subcategory": "SQL",
+            "filename": "learningsql.epub",
+            "similarity_score": 0.5925925925925926,
+            "confidence": 0.2785185185185185,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "Exploring Data Science",
+            "author": "",
+            "publisher": "Manning",
+            "year": "",
+            "category": "AI_ML",
+            "subcategory": "",
+            "filename": "Exploring_Data_Science.pdf",
+            "similarity_score": 0.5657894736842106,
+            "confidence": 0.33381578947368423,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "learningmysql",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "subcategory": "SQL",
+            "filename": "learningmysql.epub",
+            "similarity_score": 0.5517241379310345,
+            "confidence": 0.27034482758620687,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "architectingdataandmachinelearningplatforms",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "subcategory": "",
+            "filename": "architectingdataandmachinelearningplatforms.pdf",
+            "similarity_score": 0.5084745762711864,
+            "confidence": 0.21355932203389832,
+            "algorithm": "enhanced_fuzzy"
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.5741509387045005
+      },
+      {
+        "query": "Database SQL",
+        "results": [
+          {
+            "title": "databaseperformanceatscale",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "subcategory": "",
+            "filename": "databaseperformanceatscale.epub",
+            "similarity_score": 1.0,
+            "confidence": 0.44,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "databaseinternals",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "subcategory": "",
+            "filename": "databaseinternals.pdf",
+            "similarity_score": 1.0,
+            "confidence": 0.44,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "database drivenwebdevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "database-drivenwebdevelopment.pdf",
+            "similarity_score": 0.9878048780487805,
+            "confidence": 0.4445121951219512,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "sqlfordataanalysis",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "subcategory": "SQL",
+            "filename": "sqlfordataanalysis.pdf",
+            "similarity_score": 0.9666666666666666,
+            "confidence": 0.4833333333333333,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "fuzzydatamatchingwithsql",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "subcategory": "SQL",
+            "filename": "fuzzydatamatchingwithsql.pdf",
+            "similarity_score": 0.9444444444444444,
+            "confidence": 0.46277777777777773,
+            "algorithm": "enhanced_fuzzy"
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.9797831978319783
+      },
+      {
+        "query": "Security Hacking",
+        "results": [
+          {
+            "title": "Exploring Security Privacy and Trust",
+            "author": "",
+            "publisher": "Manning",
+            "year": "",
+            "category": "Security",
+            "subcategory": "",
+            "filename": "Exploring_Security_Privacy_and_Trust.pdf",
+            "similarity_score": 1.0,
+            "confidence": 0.57,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "practicaliothacking",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "subcategory": "",
+            "filename": "practicaliothacking.epub",
+            "similarity_score": 1.0,
+            "confidence": 0.44,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "Understanding API Security",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "subcategory": "",
+            "filename": "Understanding_API_Security.pdf",
+            "similarity_score": 0.930952380952381,
+            "confidence": 0.4096190476190476,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "windowssecurityinternals",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "subcategory": "",
+            "filename": "windowssecurityinternals.epub",
+            "similarity_score": 0.8500000000000001,
+            "confidence": 0.37400000000000005,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "foundationsofinformationsecurity",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "subcategory": "",
+            "filename": "foundationsofinformationsecurity.mobi",
+            "similarity_score": 0.6833333333333333,
+            "confidence": 0.28700000000000003,
+            "algorithm": "enhanced_fuzzy"
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.8928571428571429
+      },
+      {
+        "query": "Web Development",
+        "results": [
+          {
+            "title": "sustainableclouddevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "sustainableclouddevelopment.epub",
+            "similarity_score": 1.0,
+            "confidence": 0.45,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "sustainableclouddevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "sustainableclouddevelopment.pdf",
+            "similarity_score": 1.0,
+            "confidence": 0.45,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "database drivenwebdevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "database-drivenwebdevelopment.pdf",
+            "similarity_score": 1.0,
+            "confidence": 0.45,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "howtobeawebdeveloper",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "howtobeawebdeveloper.epub",
+            "similarity_score": 1.0,
+            "confidence": 0.44,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "rustwebdevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "rustwebdevelopment.pdf",
+            "similarity_score": 1.0,
+            "confidence": 0.45,
+            "algorithm": "enhanced_fuzzy"
+          }
+        ],
+        "count": 5,
+        "avg_score": 1.0
+      },
+      {
+        "query": "Docker Kubernetes",
+        "results": [
+          {
+            "title": "Learn Docker in a Month of Lunches Seco",
+            "author": "",
+            "publisher": "Manning",
+            "year": "",
+            "category": "DevOps",
+            "subcategory": "",
+            "filename": "Learn_Docker_in_a_Month_of_Lunches_Seco.pdf",
+            "similarity_score": 0.9928571428571429,
+            "confidence": 0.5659285714285714,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "cloudnativeanti patterns",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "DevOps",
+            "subcategory": "",
+            "filename": "cloudnativeanti-patterns.epub",
+            "similarity_score": 0.5414634146341464,
+            "confidence": 0.2274146341463415,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "cloudnativeanti patterns",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "DevOps",
+            "subcategory": "",
+            "filename": "cloudnativeanti-patterns.pdf",
+            "similarity_score": 0.5414634146341464,
+            "confidence": 0.2274146341463415,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "cyberjutsu",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "subcategory": "",
+            "filename": "cyberjutsu.epub",
+            "similarity_score": 0.4444444444444444,
+            "confidence": 0.18666666666666668,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "windowssecurityinternals",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "subcategory": "",
+            "filename": "windowssecurityinternals.epub",
+            "similarity_score": 0.3902439024390244,
+            "confidence": 0.17170731707317075,
+            "algorithm": "enhanced_fuzzy"
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.5820944638017809
+      },
+      {
+        "query": "Data Science",
+        "results": [
+          {
+            "title": "Exploring Data Science",
+            "author": "",
+            "publisher": "Manning",
+            "year": "",
+            "category": "AI_ML",
+            "subcategory": "",
+            "filename": "Exploring_Data_Science.pdf",
+            "similarity_score": 1.0,
+            "confidence": 0.59,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "databaseinternals",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "subcategory": "",
+            "filename": "databaseinternals.pdf",
+            "similarity_score": 0.7017241379310345,
+            "confidence": 0.3087586206896552,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "databaseperformanceatscale",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "subcategory": "",
+            "filename": "databaseperformanceatscale.epub",
+            "similarity_score": 0.6236842105263157,
+            "confidence": 0.2744210526315789,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "database drivenwebdevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "database-drivenwebdevelopment.pdf",
+            "similarity_score": 0.5890243902439024,
+            "confidence": 0.2650609756097561,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "sqlfordataanalysis",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "subcategory": "SQL",
+            "filename": "sqlfordataanalysis.pdf",
+            "similarity_score": 0.55,
+            "confidence": 0.275,
+            "algorithm": "enhanced_fuzzy"
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.6928865477402505
+      },
+      {
+        "query": "Network Security",
+        "results": [
+          {
+            "title": "Exploring Security Privacy and Trust",
+            "author": "",
+            "publisher": "Manning",
+            "year": "",
+            "category": "Security",
+            "subcategory": "",
+            "filename": "Exploring_Security_Privacy_and_Trust.pdf",
+            "similarity_score": 1.0,
+            "confidence": 0.57,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "Understanding API Security",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "subcategory": "",
+            "filename": "Understanding_API_Security.pdf",
+            "similarity_score": 1.0,
+            "confidence": 0.44,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "foundationsofinformationsecurity",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "subcategory": "",
+            "filename": "foundationsofinformationsecurity.mobi",
+            "similarity_score": 0.8500000000000001,
+            "confidence": 0.3570000000000001,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "windowssecurityinternals",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "subcategory": "",
+            "filename": "windowssecurityinternals.epub",
+            "similarity_score": 0.8500000000000001,
+            "confidence": 0.37400000000000005,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "foundationsofinformationsecurity",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "subcategory": "",
+            "filename": "foundationsofinformationsecurity.pdf",
+            "similarity_score": 0.8500000000000001,
+            "confidence": 0.3570000000000001,
+            "algorithm": "enhanced_fuzzy"
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.9100000000000001
+      },
+      {
+        "query": "Software Engineering",
+        "results": [
+          {
+            "title": "extreme programming praticas para o dia a dia no desenvolvimento agil de software",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "extreme-programming-praticas-para-o-dia-a-dia-no-desenvolvimento-agil-de-software.pdf",
+            "similarity_score": 0.7084158415841584,
+            "confidence": 0.3117029702970297,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "promptengineeringforgenerativeai",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "subcategory": "",
+            "filename": "promptengineeringforgenerativeai.epub",
+            "similarity_score": 0.65,
+            "confidence": 0.28600000000000003,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "learncprogramming",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "learncprogramming.pdf",
+            "similarity_score": 0.6324324324324324,
+            "confidence": 0.2656216216216216,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "secretsofthejavascriptninja2e",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "JavaScript",
+            "filename": "secretsofthejavascriptninja2e.epub",
+            "similarity_score": 0.6081632653061224,
+            "confidence": 0.298,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "secretsofthejavascriptninja2e",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "JavaScript",
+            "filename": "secretsofthejavascriptninja2e.pdf",
+            "similarity_score": 0.6081632653061224,
+            "confidence": 0.298,
+            "algorithm": "enhanced_fuzzy"
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.6414349609257671
+      },
+      {
+        "query": "Algorithm Design",
+        "results": [
+          {
+            "title": "Exploring Algorithms",
+            "author": "",
+            "publisher": "Manning",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "Exploring_Algorithms.pdf",
+            "similarity_score": 0.9555555555555557,
+            "confidence": 0.5637777777777778,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "low codeai",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "low-codeai.epub",
+            "similarity_score": 0.6615384615384616,
+            "confidence": 0.2910769230769231,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "angularforbusiness",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "JavaScript",
+            "filename": "angularforbusiness.epub",
+            "similarity_score": 0.611764705882353,
+            "confidence": 0.2875294117647059,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "Exploring Functional Programming",
+            "author": "",
+            "publisher": "Manning",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "Functional",
+            "filename": "Exploring_Functional_Programming.pdf",
+            "similarity_score": 0.5833333333333334,
+            "confidence": 0.37333333333333335,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "reacthooksinaction",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "JavaScript",
+            "filename": "reacthooksinaction.pdf",
+            "similarity_score": 0.5529411764705883,
+            "confidence": 0.2598823529411765,
+            "algorithm": "enhanced_fuzzy"
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.6730266465560584
+      },
+      {
+        "query": "System Administration",
+        "results": [
+          {
+            "title": "Cloud Native Applications",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Mobile",
+            "subcategory": "",
+            "filename": "Cloud_Native_Applications.pdf",
+            "similarity_score": 0.43478260869565216,
+            "confidence": 0.1956521739130435,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "sqlcookbook2ndedition",
+            "author": "",
+            "publisher": "Packt",
+            "year": "",
+            "category": "Database",
+            "subcategory": "SQL",
+            "filename": "sqlcookbook2ndedition.epub",
+            "similarity_score": 0.4309523809523809,
+            "confidence": 0.26719047619047614,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "generativeaionaws",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "AI_ML",
+            "subcategory": "",
+            "filename": "generativeaionaws.epub",
+            "similarity_score": 0.42105263157894735,
+            "confidence": 0.18526315789473682,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "attackingnetworkprotocols",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Systems",
+            "subcategory": "",
+            "filename": "attackingnetworkprotocols.pdf",
+            "similarity_score": 0.4173913043478261,
+            "confidence": 0.17530434782608698,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "reacthooksinaction",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "JavaScript",
+            "filename": "reacthooksinaction.pdf",
+            "similarity_score": 0.41025641025641024,
+            "confidence": 0.19282051282051282,
+            "algorithm": "enhanced_fuzzy"
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.42288706716624336
+      },
+      {
+        "query": "Cloud Computing",
+        "results": [
+          {
+            "title": "Cloud Native Applications",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Mobile",
+            "subcategory": "",
+            "filename": "Cloud_Native_Applications.pdf",
+            "similarity_score": 0.8,
+            "confidence": 0.36000000000000004,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "cloudnativeanti patterns",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "DevOps",
+            "subcategory": "",
+            "filename": "cloudnativeanti-patterns.epub",
+            "similarity_score": 0.7602564102564102,
+            "confidence": 0.31930769230769235,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "cloudnativeanti patterns",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "DevOps",
+            "subcategory": "",
+            "filename": "cloudnativeanti-patterns.pdf",
+            "similarity_score": 0.7602564102564102,
+            "confidence": 0.31930769230769235,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "sustainableclouddevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "sustainableclouddevelopment.epub",
+            "similarity_score": 0.530952380952381,
+            "confidence": 0.23892857142857143,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "sustainableclouddevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "sustainableclouddevelopment.pdf",
+            "similarity_score": 0.530952380952381,
+            "confidence": 0.23892857142857143,
+            "algorithm": "enhanced_fuzzy"
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.6764835164835165
+      },
+      {
+        "query": "Mobile Development",
+        "results": [
+          {
+            "title": "sustainableclouddevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "sustainableclouddevelopment.epub",
+            "similarity_score": 1.0,
+            "confidence": 0.45,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "sustainableclouddevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "sustainableclouddevelopment.pdf",
+            "similarity_score": 1.0,
+            "confidence": 0.45,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "database drivenwebdevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "database-drivenwebdevelopment.pdf",
+            "similarity_score": 1.0,
+            "confidence": 0.45,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "rustwebdevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "rustwebdevelopment.pdf",
+            "similarity_score": 1.0,
+            "confidence": 0.45,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "howtobeawebdeveloper",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "howtobeawebdeveloper.epub",
+            "similarity_score": 0.9289473684210527,
+            "confidence": 0.40873684210526323,
+            "algorithm": "enhanced_fuzzy"
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.9857894736842105
+      },
+      {
+        "query": "DevOps Practices",
+        "results": [
+          {
+            "title": "rustwebdevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "rustwebdevelopment.pdf",
+            "similarity_score": 0.7029411764705882,
+            "confidence": 0.31632352941176467,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "developersplaybookforlargelanguagemodelsecurity",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "developersplaybookforlargelanguagemodelsecurity.epub",
+            "similarity_score": 0.6992063492063492,
+            "confidence": 0.3076507936507936,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "developersplaybookforlargelanguagemodelsecurity",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "developersplaybookforlargelanguagemodelsecurity.pdf",
+            "similarity_score": 0.6992063492063492,
+            "confidence": 0.3076507936507936,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "howtobeawebdeveloper",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "howtobeawebdeveloper.epub",
+            "similarity_score": 0.6833333333333333,
+            "confidence": 0.3006666666666667,
+            "algorithm": "enhanced_fuzzy"
+          },
+          {
+            "title": "reactquickly2e",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "JavaScript",
+            "filename": "reactquickly2e.pdf",
+            "similarity_score": 0.6666666666666667,
+            "confidence": 0.3266666666666667,
+            "algorithm": "enhanced_fuzzy"
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.6902707749766573
+      }
+    ],
+    "enhanced_semantic": [
+      {
+        "query": "Python Programming",
+        "results": [
+          {
+            "title": "Python Workout",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "Python",
+            "filename": "Python_Workout.pdf",
+            "similarity_score": 0.7583333333333333,
+            "confidence": 0.35641666666666666,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "Python Workout",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "Python",
+            "filename": "Python_Workout_Second_Edition_v3_MEAP.epub",
+            "similarity_score": 0.7583333333333333,
+            "confidence": 0.43225,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "Exploring Functional Programming",
+            "author": "",
+            "publisher": "Manning",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "Functional",
+            "filename": "Exploring_Functional_Programming.pdf",
+            "similarity_score": 0.6749999999999999,
+            "confidence": 0.43199999999999994,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "pythonobject orientedprogrammingfourthedition",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "Python",
+            "filename": "pythonobject-orientedprogrammingfourthedition.pdf",
+            "similarity_score": 0.5249999999999999,
+            "confidence": 0.26249999999999996,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "extreme programming praticas para o dia a dia no desenvolvimento agil de software",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "extreme-programming-praticas-para-o-dia-a-dia-no-desenvolvimento-agil-de-software.pdf",
+            "similarity_score": 0.5057692307692307,
+            "confidence": 0.22253846153846152,
+            "algorithm": "enhanced_semantic"
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.6444871794871794
+      },
+      {
+        "query": "JavaScript React",
+        "results": [
+          {
+            "title": "secretsofthejavascriptninja2e",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "JavaScript",
+            "filename": "secretsofthejavascriptninja2e.epub",
+            "similarity_score": 0.4666666666666666,
+            "confidence": 0.22866666666666663,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "learningphpmysqlandjavascript7e",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "JavaScript",
+            "filename": "learningphpmysqlandjavascript7e.pdf",
+            "similarity_score": 0.4666666666666666,
+            "confidence": 0.2333333333333333,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "secretsofthejavascriptninja2e",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "JavaScript",
+            "filename": "secretsofthejavascriptninja2e.pdf",
+            "similarity_score": 0.4666666666666666,
+            "confidence": 0.22866666666666663,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "reacthooksinaction",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "JavaScript",
+            "filename": "reacthooksinaction.pdf",
+            "similarity_score": 0.40833333333333327,
+            "confidence": 0.19191666666666665,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "reactquickly2e",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "JavaScript",
+            "filename": "reactquickly2e.pdf",
+            "similarity_score": 0.40833333333333327,
+            "confidence": 0.2000833333333333,
+            "algorithm": "enhanced_semantic"
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.44333333333333325
+      },
+      {
+        "query": "Machine Learning",
+        "results": [
+          {
+            "title": "Exploring Data Science",
+            "author": "",
+            "publisher": "Manning",
+            "year": "",
+            "category": "AI_ML",
+            "subcategory": "",
+            "filename": "Exploring_Data_Science.pdf",
+            "similarity_score": 0.31499999999999995,
+            "confidence": 0.18584999999999996,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "generativeaionaws",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "AI_ML",
+            "subcategory": "",
+            "filename": "generativeaionaws.epub",
+            "similarity_score": 0.24499999999999997,
+            "confidence": 0.10779999999999999,
+            "algorithm": "enhanced_semantic"
+          }
+        ],
+        "count": 2,
+        "avg_score": 0.27999999999999997
+      },
+      {
+        "query": "Database SQL",
+        "results": [
+          {
+            "title": "sqlcookbook2ndedition",
+            "author": "",
+            "publisher": "Packt",
+            "year": "",
+            "category": "Database",
+            "subcategory": "SQL",
+            "filename": "sqlcookbook2ndedition.epub",
+            "similarity_score": 0.4783333333333332,
+            "confidence": 0.2965666666666666,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "fuzzydatamatchingwithsql",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "subcategory": "SQL",
+            "filename": "fuzzydatamatchingwithsql.pdf",
+            "similarity_score": 0.4666666666666666,
+            "confidence": 0.22866666666666663,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "sqlfordataanalysis",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "subcategory": "SQL",
+            "filename": "sqlfordataanalysis.pdf",
+            "similarity_score": 0.4666666666666666,
+            "confidence": 0.2333333333333333,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "efficientmysqlperformance",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "subcategory": "SQL",
+            "filename": "efficientmysqlperformance.epub",
+            "similarity_score": 0.40833333333333327,
+            "confidence": 0.2000833333333333,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "resilientoracleplandsql",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "subcategory": "SQL",
+            "filename": "resilientoracleplandsql.epub",
+            "similarity_score": 0.40833333333333327,
+            "confidence": 0.19191666666666665,
+            "algorithm": "enhanced_semantic"
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.4456666666666666
+      },
+      {
+        "query": "Security Hacking",
+        "results": [
+          {
+            "title": "Exploring Security Privacy and Trust",
+            "author": "",
+            "publisher": "Manning",
+            "year": "",
+            "category": "Security",
+            "subcategory": "",
+            "filename": "Exploring_Security_Privacy_and_Trust.pdf",
+            "similarity_score": 0.6,
+            "confidence": 0.34199999999999997,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "Understanding API Security",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "subcategory": "",
+            "filename": "Understanding_API_Security.pdf",
+            "similarity_score": 0.5333333333333333,
+            "confidence": 0.23466666666666666,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "practicaliothacking",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "subcategory": "",
+            "filename": "practicaliothacking.epub",
+            "similarity_score": 0.3616666666666666,
+            "confidence": 0.1591333333333333,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "hacksleaksandrevelations",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "subcategory": "",
+            "filename": "hacksleaksandrevelations.pdf",
+            "similarity_score": 0.3033333333333333,
+            "confidence": 0.12739999999999999,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "foundationsofinformationsecurity",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "subcategory": "",
+            "filename": "foundationsofinformationsecurity.mobi",
+            "similarity_score": 0.3033333333333333,
+            "confidence": 0.12739999999999999,
+            "algorithm": "enhanced_semantic"
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.42033333333333334
+      },
+      {
+        "query": "Web Development",
+        "results": [
+          {
+            "title": "database drivenwebdevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "database-drivenwebdevelopment.pdf",
+            "similarity_score": 0.42,
+            "confidence": 0.189,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "rustwebdevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "rustwebdevelopment.pdf",
+            "similarity_score": 0.42,
+            "confidence": 0.189,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "sustainableclouddevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "sustainableclouddevelopment.epub",
+            "similarity_score": 0.3616666666666666,
+            "confidence": 0.16274999999999998,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "sustainableclouddevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "sustainableclouddevelopment.pdf",
+            "similarity_score": 0.3616666666666666,
+            "confidence": 0.16274999999999998,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "howtobeawebdeveloper",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "howtobeawebdeveloper.epub",
+            "similarity_score": 0.3616666666666666,
+            "confidence": 0.1591333333333333,
+            "algorithm": "enhanced_semantic"
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.38499999999999995
+      },
+      {
+        "query": "Docker Kubernetes",
+        "results": [
+          {
+            "title": "Learn Docker in a Month of Lunches Seco",
+            "author": "",
+            "publisher": "Manning",
+            "year": "",
+            "category": "DevOps",
+            "subcategory": "",
+            "filename": "Learn_Docker_in_a_Month_of_Lunches_Seco.pdf",
+            "similarity_score": 0.6194444444444444,
+            "confidence": 0.35308333333333325,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "Zabbix 5 IT Infrastructure Monitoring Cookbook",
+            "author": "",
+            "publisher": "Packt",
+            "year": "",
+            "category": "DevOps",
+            "subcategory": "",
+            "filename": "Zabbix 5 IT Infrastructure Monitoring Cookbook.epub",
+            "similarity_score": 0.31499999999999995,
+            "confidence": 0.17954999999999996,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "cloudnativeanti patterns",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "DevOps",
+            "subcategory": "",
+            "filename": "cloudnativeanti-patterns.epub",
+            "similarity_score": 0.24499999999999997,
+            "confidence": 0.10289999999999999,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "cloudnativeanti patterns",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "DevOps",
+            "subcategory": "",
+            "filename": "cloudnativeanti-patterns.pdf",
+            "similarity_score": 0.24499999999999997,
+            "confidence": 0.10289999999999999,
+            "algorithm": "enhanced_semantic"
+          }
+        ],
+        "count": 4,
+        "avg_score": 0.35611111111111104
+      },
+      {
+        "query": "Data Science",
+        "results": [
+          {
+            "title": "Exploring Data Science",
+            "author": "",
+            "publisher": "Manning",
+            "year": "",
+            "category": "AI_ML",
+            "subcategory": "",
+            "filename": "Exploring_Data_Science.pdf",
+            "similarity_score": 1.0,
+            "confidence": 0.59,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "generativeaionaws",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "AI_ML",
+            "subcategory": "",
+            "filename": "generativeaionaws.epub",
+            "similarity_score": 0.24499999999999997,
+            "confidence": 0.10779999999999999,
+            "algorithm": "enhanced_semantic"
+          }
+        ],
+        "count": 2,
+        "avg_score": 0.6224999999999999
+      },
+      {
+        "query": "Network Security",
+        "results": [
+          {
+            "title": "Exploring Security Privacy and Trust",
+            "author": "",
+            "publisher": "Manning",
+            "year": "",
+            "category": "Security",
+            "subcategory": "",
+            "filename": "Exploring_Security_Privacy_and_Trust.pdf",
+            "similarity_score": 0.6416666666666666,
+            "confidence": 0.3657499999999999,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "Understanding API Security",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "subcategory": "",
+            "filename": "Understanding_API_Security.pdf",
+            "similarity_score": 0.575,
+            "confidence": 0.253,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "foundationsofinformationsecurity",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "subcategory": "",
+            "filename": "foundationsofinformationsecurity.mobi",
+            "similarity_score": 0.33249999999999996,
+            "confidence": 0.13965,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "windowssecurityinternals",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "subcategory": "",
+            "filename": "windowssecurityinternals.epub",
+            "similarity_score": 0.33249999999999996,
+            "confidence": 0.14629999999999999,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "foundationsofinformationsecurity",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "subcategory": "",
+            "filename": "foundationsofinformationsecurity.pdf",
+            "similarity_score": 0.33249999999999996,
+            "confidence": 0.13965,
+            "algorithm": "enhanced_semantic"
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.4428333333333333
+      },
+      {
+        "query": "Software Engineering",
+        "results": [
+          {
+            "title": "extreme programming praticas para o dia a dia no desenvolvimento agil de software",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "extreme-programming-praticas-para-o-dia-a-dia-no-desenvolvimento-agil-de-software.pdf",
+            "similarity_score": 0.5057692307692307,
+            "confidence": 0.22253846153846152,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "Exploring Algorithms",
+            "author": "",
+            "publisher": "Manning",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "Exploring_Algorithms.pdf",
+            "similarity_score": 0.31499999999999995,
+            "confidence": 0.18584999999999996,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "Exploring Functional Programming",
+            "author": "",
+            "publisher": "Manning",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "Functional",
+            "filename": "Exploring_Functional_Programming.pdf",
+            "similarity_score": 0.31499999999999995,
+            "confidence": 0.20159999999999997,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "reacthooksinaction",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "JavaScript",
+            "filename": "reacthooksinaction.pdf",
+            "similarity_score": 0.24499999999999997,
+            "confidence": 0.11514999999999999,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "mastervuejsin6days",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "JavaScript",
+            "filename": "mastervuejsin6days.epub",
+            "similarity_score": 0.24499999999999997,
+            "confidence": 0.12004999999999998,
+            "algorithm": "enhanced_semantic"
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.3251538461538461
+      },
+      {
+        "query": "Algorithm Design",
+        "results": [
+          {
+            "title": "Exploring Algorithms",
+            "author": "",
+            "publisher": "Manning",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "Exploring_Algorithms.pdf",
+            "similarity_score": 0.40249999999999997,
+            "confidence": 0.23747499999999996,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "Exploring Functional Programming",
+            "author": "",
+            "publisher": "Manning",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "Functional",
+            "filename": "Exploring_Functional_Programming.pdf",
+            "similarity_score": 0.31499999999999995,
+            "confidence": 0.20159999999999997,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "reacthooksinaction",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "JavaScript",
+            "filename": "reacthooksinaction.pdf",
+            "similarity_score": 0.24499999999999997,
+            "confidence": 0.11514999999999999,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "mastervuejsin6days",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "JavaScript",
+            "filename": "mastervuejsin6days.epub",
+            "similarity_score": 0.24499999999999997,
+            "confidence": 0.12004999999999998,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "Python Workout",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "Python",
+            "filename": "Python_Workout.pdf",
+            "similarity_score": 0.24499999999999997,
+            "confidence": 0.11514999999999999,
+            "algorithm": "enhanced_semantic"
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.2905
+      },
+      {
+        "query": "System Administration",
+        "results": [
+          {
+            "title": "attackingnetworkprotocols",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Systems",
+            "subcategory": "",
+            "filename": "attackingnetworkprotocols.pdf",
+            "similarity_score": 0.24499999999999997,
+            "confidence": 0.10289999999999999,
+            "algorithm": "enhanced_semantic"
+          }
+        ],
+        "count": 1,
+        "avg_score": 0.24499999999999997
+      },
+      {
+        "query": "Cloud Computing",
+        "results": [
+          {
+            "title": "cloudnativeanti patterns",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "DevOps",
+            "subcategory": "",
+            "filename": "cloudnativeanti-patterns.epub",
+            "similarity_score": 0.42,
+            "confidence": 0.1764,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "cloudnativeanti patterns",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "DevOps",
+            "subcategory": "",
+            "filename": "cloudnativeanti-patterns.pdf",
+            "similarity_score": 0.42,
+            "confidence": 0.1764,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "Cloud Native Applications",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Mobile",
+            "subcategory": "",
+            "filename": "Cloud_Native_Applications.pdf",
+            "similarity_score": 0.35,
+            "confidence": 0.1575,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "Learn Docker in a Month of Lunches Seco",
+            "author": "",
+            "publisher": "Manning",
+            "year": "",
+            "category": "DevOps",
+            "subcategory": "",
+            "filename": "Learn_Docker_in_a_Month_of_Lunches_Seco.pdf",
+            "similarity_score": 0.31499999999999995,
+            "confidence": 0.17954999999999996,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "Zabbix 5 IT Infrastructure Monitoring Cookbook",
+            "author": "",
+            "publisher": "Packt",
+            "year": "",
+            "category": "DevOps",
+            "subcategory": "",
+            "filename": "Zabbix 5 IT Infrastructure Monitoring Cookbook.epub",
+            "similarity_score": 0.31499999999999995,
+            "confidence": 0.17954999999999996,
+            "algorithm": "enhanced_semantic"
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.364
+      },
+      {
+        "query": "Mobile Development",
+        "results": [
+          {
+            "title": "sustainableclouddevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "sustainableclouddevelopment.epub",
+            "similarity_score": 0.3616666666666666,
+            "confidence": 0.16274999999999998,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "sustainableclouddevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "sustainableclouddevelopment.pdf",
+            "similarity_score": 0.3616666666666666,
+            "confidence": 0.16274999999999998,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "database drivenwebdevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "database-drivenwebdevelopment.pdf",
+            "similarity_score": 0.3616666666666666,
+            "confidence": 0.16274999999999998,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "rustwebdevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "rustwebdevelopment.pdf",
+            "similarity_score": 0.3616666666666666,
+            "confidence": 0.16274999999999998,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "Exploring Algorithms",
+            "author": "",
+            "publisher": "Manning",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "Exploring_Algorithms.pdf",
+            "similarity_score": 0.31499999999999995,
+            "confidence": 0.18584999999999996,
+            "algorithm": "enhanced_semantic"
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.3523333333333333
+      },
+      {
+        "query": "DevOps Practices",
+        "results": [
+          {
+            "title": "sustainableclouddevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "sustainableclouddevelopment.epub",
+            "similarity_score": 0.33249999999999996,
+            "confidence": 0.14962499999999998,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "sustainableclouddevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "sustainableclouddevelopment.pdf",
+            "similarity_score": 0.33249999999999996,
+            "confidence": 0.14962499999999998,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "database drivenwebdevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "database-drivenwebdevelopment.pdf",
+            "similarity_score": 0.33249999999999996,
+            "confidence": 0.14962499999999998,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "howtobeawebdeveloper",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "howtobeawebdeveloper.epub",
+            "similarity_score": 0.33249999999999996,
+            "confidence": 0.14629999999999999,
+            "algorithm": "enhanced_semantic"
+          },
+          {
+            "title": "developersplaybookforlargelanguagemodelsecurity",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "developersplaybookforlargelanguagemodelsecurity.epub",
+            "similarity_score": 0.33249999999999996,
+            "confidence": 0.14629999999999999,
+            "algorithm": "enhanced_semantic"
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.33249999999999996
+      }
+    ],
+    "enhanced_orchestrator": [
+      {
+        "query": "Python Programming",
+        "results": [
+          {
+            "title": "Python Workout",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "Python",
+            "filename": "Python_Workout.pdf",
+            "similarity_score": 1.0,
+            "confidence": 0.47000000000000003,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 1.0,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_fuzzy",
+              "enhanced_semantic",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 4
+          },
+          {
+            "title": "Exploring Functional Programming",
+            "author": "",
+            "publisher": "Manning",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "Functional",
+            "filename": "Exploring_Functional_Programming.pdf",
+            "similarity_score": 0.8470000000000001,
+            "confidence": 0.64,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.8470000000000001,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 2
+          },
+          {
+            "title": "pythonobject orientedprogrammingfourthedition",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "Python",
+            "filename": "pythonobject-orientedprogrammingfourthedition.pdf",
+            "similarity_score": 0.781,
+            "confidence": 0.5,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.781,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 2
+          },
+          {
+            "title": "Build Python Web Apps",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Web",
+            "subcategory": "",
+            "filename": "Build_Python_Web_Apps_with_Streamlit_v7_MEAP.pdf",
+            "similarity_score": 0.7602564102564103,
+            "confidence": 0.34211538461538465,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.7602564102564103,
+            "algorithms": [
+              "enhanced_fuzzy"
+            ],
+            "algorithm_count": 1
+          },
+          {
+            "title": "learncprogramming",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "learncprogramming.pdf",
+            "similarity_score": 0.6963,
+            "confidence": 0.42000000000000004,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.6963,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 2
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.816911282051282
+      },
+      {
+        "query": "JavaScript React",
+        "results": [
+          {
+            "title": "secretsofthejavascriptninja2e",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "JavaScript",
+            "filename": "secretsofthejavascriptninja2e.epub",
+            "similarity_score": 0.7782666666666667,
+            "confidence": 0.4845555555555556,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.7782666666666667,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_fuzzy",
+              "enhanced_semantic",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 4
+          },
+          {
+            "title": "learningphpmysqlandjavascript7e",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "JavaScript",
+            "filename": "learningphpmysqlandjavascript7e.pdf",
+            "similarity_score": 0.7377801418439717,
+            "confidence": 0.48404255319148937,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.7377801418439717,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 2
+          },
+          {
+            "title": "reactquickly2e",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "JavaScript",
+            "filename": "reactquickly2e.pdf",
+            "similarity_score": 0.5555000000000001,
+            "confidence": 0.3348333333333333,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.5555000000000001,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 2
+          },
+          {
+            "title": "reacthooksinaction",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "JavaScript",
+            "filename": "reacthooksinaction.pdf",
+            "similarity_score": 0.5339313725490196,
+            "confidence": 0.30273529411764705,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.5339313725490196,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 2
+          },
+          {
+            "title": "database drivenwebdevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "database-drivenwebdevelopment.pdf",
+            "similarity_score": 0.5111111111111111,
+            "confidence": 0.22999999999999998,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.5111111111111111,
+            "algorithms": [
+              "enhanced_fuzzy"
+            ],
+            "algorithm_count": 1
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.6233178584341539
+      },
+      {
+        "query": "Machine Learning",
+        "results": [
+          {
+            "title": "trainingdataformachinelearning",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "subcategory": "",
+            "filename": "trainingdataformachinelearning.epub",
+            "similarity_score": 0.6521739130434783,
+            "confidence": 0.28695652173913044,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.6521739130434783,
+            "algorithms": [
+              "enhanced_fuzzy"
+            ],
+            "algorithm_count": 1
+          },
+          {
+            "title": "learningsql",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "subcategory": "SQL",
+            "filename": "learningsql.epub",
+            "similarity_score": 0.5925925925925926,
+            "confidence": 0.2785185185185185,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.5925925925925926,
+            "algorithms": [
+              "enhanced_fuzzy"
+            ],
+            "algorithm_count": 1
+          },
+          {
+            "title": "architectingdataandmachinelearningplatforms",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "subcategory": "",
+            "filename": "architectingdataandmachinelearningplatforms.pdf",
+            "similarity_score": 0.5593220338983051,
+            "confidence": 0.21355932203389832,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.5593220338983051,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_fuzzy"
+            ],
+            "algorithm_count": 2
+          },
+          {
+            "title": "learningmysql",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "subcategory": "SQL",
+            "filename": "learningmysql.epub",
+            "similarity_score": 0.5517241379310345,
+            "confidence": 0.27034482758620687,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.5517241379310345,
+            "algorithms": [
+              "enhanced_fuzzy"
+            ],
+            "algorithm_count": 1
+          },
+          {
+            "title": "learncprogramming",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "learncprogramming.pdf",
+            "similarity_score": 0.48484848484848486,
+            "confidence": 0.20363636363636367,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.48484848484848486,
+            "algorithms": [
+              "enhanced_fuzzy"
+            ],
+            "algorithm_count": 1
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.5681322324627791
+      },
+      {
+        "query": "Database SQL",
+        "results": [
+          {
+            "title": "databaseperformanceatscale",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "subcategory": "",
+            "filename": "databaseperformanceatscale.epub",
+            "similarity_score": 1.0,
+            "confidence": 0.44,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 1.0,
+            "algorithms": [
+              "enhanced_fuzzy"
+            ],
+            "algorithm_count": 1
+          },
+          {
+            "title": "databaseinternals",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "subcategory": "",
+            "filename": "databaseinternals.pdf",
+            "similarity_score": 1.0,
+            "confidence": 0.44,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 1.0,
+            "algorithms": [
+              "enhanced_fuzzy"
+            ],
+            "algorithm_count": 1
+          },
+          {
+            "title": "database drivenwebdevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "database-drivenwebdevelopment.pdf",
+            "similarity_score": 0.9878048780487805,
+            "confidence": 0.4445121951219512,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.9878048780487805,
+            "algorithms": [
+              "enhanced_fuzzy"
+            ],
+            "algorithm_count": 1
+          },
+          {
+            "title": "sqlfordataanalysis",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "subcategory": "SQL",
+            "filename": "sqlfordataanalysis.pdf",
+            "similarity_score": 0.737,
+            "confidence": 0.4833333333333333,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.737,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 2
+          },
+          {
+            "title": "fuzzydatamatchingwithsql",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "subcategory": "SQL",
+            "filename": "fuzzydatamatchingwithsql.pdf",
+            "similarity_score": 0.7247777777777779,
+            "confidence": 0.46277777777777773,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.7247777777777779,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 2
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.8899165311653118
+      },
+      {
+        "query": "Security Hacking",
+        "results": [
+          {
+            "title": "Exploring Security Privacy and Trust",
+            "author": "",
+            "publisher": "Manning",
+            "year": "",
+            "category": "Security",
+            "subcategory": "",
+            "filename": "Exploring_Security_Privacy_and_Trust.pdf",
+            "similarity_score": 0.8140000000000001,
+            "confidence": 0.57,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.8140000000000001,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 2
+          },
+          {
+            "title": "Understanding API Security",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "subcategory": "",
+            "filename": "Understanding_API_Security.pdf",
+            "similarity_score": 0.7466904761904763,
+            "confidence": 0.4096190476190476,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.7466904761904763,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 2
+          },
+          {
+            "title": "practicaliothacking",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "subcategory": "",
+            "filename": "practicaliothacking.epub",
+            "similarity_score": 0.7091333333333333,
+            "confidence": 0.44,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.7091333333333333,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 2
+          },
+          {
+            "title": "windowssecurityinternals",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "subcategory": "",
+            "filename": "windowssecurityinternals.epub",
+            "similarity_score": 0.6009666666666668,
+            "confidence": 0.37400000000000005,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.6009666666666668,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 2
+          },
+          {
+            "title": "foundationsofinformationsecurity",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "subcategory": "",
+            "filename": "foundationsofinformationsecurity.mobi",
+            "similarity_score": 0.5455233333333334,
+            "confidence": 0.28700000000000003,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.5455233333333334,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_fuzzy",
+              "enhanced_semantic",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 4
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.683262761904762
+      },
+      {
+        "query": "Web Development",
+        "results": [
+          {
+            "title": "database drivenwebdevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "database-drivenwebdevelopment.pdf",
+            "similarity_score": 0.7348000000000001,
+            "confidence": 0.45,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.7348000000000001,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 2
+          },
+          {
+            "title": "rustwebdevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "rustwebdevelopment.pdf",
+            "similarity_score": 0.7348000000000001,
+            "confidence": 0.45,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.7348000000000001,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 2
+          },
+          {
+            "title": "howtobeawebdeveloper",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "howtobeawebdeveloper.epub",
+            "similarity_score": 0.7091333333333333,
+            "confidence": 0.44,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.7091333333333333,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 2
+          },
+          {
+            "title": "sustainableclouddevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "sustainableclouddevelopment.epub",
+            "similarity_score": 0.6909066666666667,
+            "confidence": 0.45,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.6909066666666667,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_fuzzy",
+              "enhanced_semantic",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 4
+          },
+          {
+            "title": "Build Python Web Apps",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Web",
+            "subcategory": "",
+            "filename": "Build_Python_Web_Apps_with_Streamlit_v7_MEAP.pdf",
+            "similarity_score": 0.6277777777777778,
+            "confidence": 0.28250000000000003,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.6277777777777778,
+            "algorithms": [
+              "enhanced_fuzzy"
+            ],
+            "algorithm_count": 1
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.6994835555555555
+      },
+      {
+        "query": "Docker Kubernetes",
+        "results": [
+          {
+            "title": "Learn Docker in a Month of Lunches Seco",
+            "author": "",
+            "publisher": "Manning",
+            "year": "",
+            "category": "DevOps",
+            "subcategory": "",
+            "filename": "Learn_Docker_in_a_Month_of_Lunches_Seco.pdf",
+            "similarity_score": 0.8186269841269842,
+            "confidence": 0.5659285714285714,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.8186269841269842,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 2
+          },
+          {
+            "title": "cyberjutsu",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "subcategory": "",
+            "filename": "cyberjutsu.epub",
+            "similarity_score": 0.4444444444444444,
+            "confidence": 0.18666666666666668,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.4444444444444444,
+            "algorithms": [
+              "enhanced_fuzzy"
+            ],
+            "algorithm_count": 1
+          },
+          {
+            "title": "cloudnativeanti patterns",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "DevOps",
+            "subcategory": "",
+            "filename": "cloudnativeanti-patterns.epub",
+            "similarity_score": 0.43612780487804875,
+            "confidence": 0.2274146341463415,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.43612780487804875,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_fuzzy",
+              "enhanced_semantic",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 4
+          },
+          {
+            "title": "ciandcddesignpatterns",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Web",
+            "subcategory": "",
+            "filename": "ciandcddesignpatterns.epub",
+            "similarity_score": 0.4052631578947368,
+            "confidence": 0.15473684210526317,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.4052631578947368,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_fuzzy"
+            ],
+            "algorithm_count": 2
+          },
+          {
+            "title": "windowssecurityinternals",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "subcategory": "",
+            "filename": "windowssecurityinternals.epub",
+            "similarity_score": 0.3902439024390244,
+            "confidence": 0.17170731707317075,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.3902439024390244,
+            "algorithms": [
+              "enhanced_fuzzy"
+            ],
+            "algorithm_count": 1
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.4989412587566477
+      },
+      {
+        "query": "Data Science",
+        "results": [
+          {
+            "title": "Exploring Data Science",
+            "author": "",
+            "publisher": "Manning",
+            "year": "",
+            "category": "AI_ML",
+            "subcategory": "",
+            "filename": "Exploring_Data_Science.pdf",
+            "similarity_score": 0.9900000000000001,
+            "confidence": 0.59,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.9900000000000001,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 2
+          },
+          {
+            "title": "databaseinternals",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "subcategory": "",
+            "filename": "databaseinternals.pdf",
+            "similarity_score": 0.7017241379310345,
+            "confidence": 0.3087586206896552,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.7017241379310345,
+            "algorithms": [
+              "enhanced_fuzzy"
+            ],
+            "algorithm_count": 1
+          },
+          {
+            "title": "databaseperformanceatscale",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "subcategory": "",
+            "filename": "databaseperformanceatscale.epub",
+            "similarity_score": 0.6236842105263157,
+            "confidence": 0.2744210526315789,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.6236842105263157,
+            "algorithms": [
+              "enhanced_fuzzy"
+            ],
+            "algorithm_count": 1
+          },
+          {
+            "title": "database drivenwebdevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "database-drivenwebdevelopment.pdf",
+            "similarity_score": 0.5890243902439024,
+            "confidence": 0.2650609756097561,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.5890243902439024,
+            "algorithms": [
+              "enhanced_fuzzy"
+            ],
+            "algorithm_count": 1
+          },
+          {
+            "title": "sqlfordataanalysis",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "subcategory": "SQL",
+            "filename": "sqlfordataanalysis.pdf",
+            "similarity_score": 0.55,
+            "confidence": 0.275,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.55,
+            "algorithms": [
+              "enhanced_fuzzy"
+            ],
+            "algorithm_count": 1
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.6908865477402506
+      },
+      {
+        "query": "Network Security",
+        "results": [
+          {
+            "title": "Exploring Security Privacy and Trust",
+            "author": "",
+            "publisher": "Manning",
+            "year": "",
+            "category": "Security",
+            "subcategory": "",
+            "filename": "Exploring_Security_Privacy_and_Trust.pdf",
+            "similarity_score": 0.8323333333333334,
+            "confidence": 0.57,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.8323333333333334,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 2
+          },
+          {
+            "title": "Understanding API Security",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "subcategory": "",
+            "filename": "Understanding_API_Security.pdf",
+            "similarity_score": 0.803,
+            "confidence": 0.44,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.803,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 2
+          },
+          {
+            "title": "foundationsofinformationsecurity",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "subcategory": "",
+            "filename": "foundationsofinformationsecurity.mobi",
+            "similarity_score": 0.6412899999999999,
+            "confidence": 0.3570000000000001,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.6412899999999999,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_fuzzy",
+              "enhanced_semantic",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 4
+          },
+          {
+            "title": "windowssecurityinternals",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "subcategory": "",
+            "filename": "windowssecurityinternals.epub",
+            "similarity_score": 0.6138000000000001,
+            "confidence": 0.37400000000000005,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.6138000000000001,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 2
+          },
+          {
+            "title": "developersplaybookforlargelanguagemodelsecurity",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "developersplaybookforlargelanguagemodelsecurity.epub",
+            "similarity_score": 0.5491269841269841,
+            "confidence": 0.21965079365079365,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.5491269841269841,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_fuzzy"
+            ],
+            "algorithm_count": 2
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.6879100634920635
+      },
+      {
+        "query": "Software Engineering",
+        "results": [
+          {
+            "title": "promptengineeringforgenerativeai",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "subcategory": "",
+            "filename": "promptengineeringforgenerativeai.epub",
+            "similarity_score": 0.65,
+            "confidence": 0.28600000000000003,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.65,
+            "algorithms": [
+              "enhanced_fuzzy"
+            ],
+            "algorithm_count": 1
+          },
+          {
+            "title": "learncprogramming",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "learncprogramming.pdf",
+            "similarity_score": 0.6324324324324324,
+            "confidence": 0.2656216216216216,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.6324324324324324,
+            "algorithms": [
+              "enhanced_fuzzy"
+            ],
+            "algorithm_count": 1
+          },
+          {
+            "title": "developersplaybookforlargelanguagemodelsecurity",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "developersplaybookforlargelanguagemodelsecurity.epub",
+            "similarity_score": 0.6140298507462687,
+            "confidence": 0.24561194029850747,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.6140298507462687,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_fuzzy"
+            ],
+            "algorithm_count": 2
+          },
+          {
+            "title": "extreme programming praticas para o dia a dia no desenvolvimento agil de software",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "extreme-programming-praticas-para-o-dia-a-dia-no-desenvolvimento-agil-de-software.pdf",
+            "similarity_score": 0.6121671744097487,
+            "confidence": 0.3117029702970297,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.6121671744097487,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 2
+          },
+          {
+            "title": "analyticsengineeringwithsqlanddbt",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "subcategory": "SQL",
+            "filename": "analyticsengineeringwithsqlanddbt.pdf",
+            "similarity_score": 0.6028301886792453,
+            "confidence": 0.30141509433962266,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.6028301886792453,
+            "algorithms": [
+              "enhanced_fuzzy"
+            ],
+            "algorithm_count": 1
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.622291929253539
+      },
+      {
+        "query": "Algorithm Design",
+        "results": [
+          {
+            "title": "Exploring Algorithms",
+            "author": "",
+            "publisher": "Manning",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "Exploring_Algorithms.pdf",
+            "similarity_score": 0.7026555555555557,
+            "confidence": 0.5637777777777778,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.7026555555555557,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 2
+          },
+          {
+            "title": "low codeai",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "low-codeai.epub",
+            "similarity_score": 0.6615384615384616,
+            "confidence": 0.2910769230769231,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.6615384615384616,
+            "algorithms": [
+              "enhanced_fuzzy"
+            ],
+            "algorithm_count": 1
+          },
+          {
+            "title": "ciandcddesignpatterns",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Web",
+            "subcategory": "",
+            "filename": "ciandcddesignpatterns.epub",
+            "similarity_score": 0.5812162162162163,
+            "confidence": 0.22191891891891896,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.5812162162162163,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_fuzzy"
+            ],
+            "algorithm_count": 2
+          },
+          {
+            "title": "learncprogramming",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "learncprogramming.pdf",
+            "similarity_score": 0.503030303030303,
+            "confidence": 0.2112727272727273,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.503030303030303,
+            "algorithms": [
+              "enhanced_fuzzy"
+            ],
+            "algorithm_count": 1
+          },
+          {
+            "title": "rustwebdevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "rustwebdevelopment.pdf",
+            "similarity_score": 0.49411764705882355,
+            "confidence": 0.22235294117647061,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.49411764705882355,
+            "algorithms": [
+              "enhanced_fuzzy"
+            ],
+            "algorithm_count": 1
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.588511636679872
+      },
+      {
+        "query": "System Administration",
+        "results": [
+          {
+            "title": "Cloud Native Applications",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Mobile",
+            "subcategory": "",
+            "filename": "Cloud_Native_Applications.pdf",
+            "similarity_score": 0.43478260869565216,
+            "confidence": 0.1956521739130435,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.43478260869565216,
+            "algorithms": [
+              "enhanced_fuzzy"
+            ],
+            "algorithm_count": 1
+          },
+          {
+            "title": "sqlcookbook2ndedition",
+            "author": "",
+            "publisher": "Packt",
+            "year": "",
+            "category": "Database",
+            "subcategory": "SQL",
+            "filename": "sqlcookbook2ndedition.epub",
+            "similarity_score": 0.4309523809523809,
+            "confidence": 0.26719047619047614,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.4309523809523809,
+            "algorithms": [
+              "enhanced_fuzzy"
+            ],
+            "algorithm_count": 1
+          },
+          {
+            "title": "AI Agents and Applications",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Mobile",
+            "subcategory": "",
+            "filename": "AI_Agents_and_Applications_v7_MEAP.epub",
+            "similarity_score": 0.4212765957446809,
+            "confidence": 0.1723404255319149,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.4212765957446809,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_fuzzy"
+            ],
+            "algorithm_count": 2
+          },
+          {
+            "title": "generativeaionaws",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "AI_ML",
+            "subcategory": "",
+            "filename": "generativeaionaws.epub",
+            "similarity_score": 0.42105263157894735,
+            "confidence": 0.18526315789473682,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.42105263157894735,
+            "algorithms": [
+              "enhanced_fuzzy"
+            ],
+            "algorithm_count": 1
+          },
+          {
+            "title": "reacthooksinaction",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "JavaScript",
+            "filename": "reacthooksinaction.pdf",
+            "similarity_score": 0.41025641025641024,
+            "confidence": 0.19282051282051282,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.41025641025641024,
+            "algorithms": [
+              "enhanced_fuzzy"
+            ],
+            "algorithm_count": 1
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.42366412544561427
+      },
+      {
+        "query": "Cloud Computing",
+        "results": [
+          {
+            "title": "cloudnativeanti patterns",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "DevOps",
+            "subcategory": "",
+            "filename": "cloudnativeanti-patterns.epub",
+            "similarity_score": 0.67559,
+            "confidence": 0.31930769230769235,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.67559,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_fuzzy",
+              "enhanced_semantic",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 4
+          },
+          {
+            "title": "Cloud Native Applications",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Mobile",
+            "subcategory": "",
+            "filename": "Cloud_Native_Applications.pdf",
+            "similarity_score": 0.5940000000000001,
+            "confidence": 0.36000000000000004,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.5940000000000001,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 2
+          },
+          {
+            "title": "sustainableclouddevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "sustainableclouddevelopment.epub",
+            "similarity_score": 0.5840476190476191,
+            "confidence": 0.23892857142857143,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.5840476190476191,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_fuzzy"
+            ],
+            "algorithm_count": 2
+          },
+          {
+            "title": "low codeai",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "low-codeai.epub",
+            "similarity_score": 0.48,
+            "confidence": 0.2112,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.48,
+            "algorithms": [
+              "enhanced_fuzzy"
+            ],
+            "algorithm_count": 1
+          },
+          {
+            "title": "Learn Computer Forensics",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "subcategory": "Forensics",
+            "filename": "Learn Computer Forensics - Second Edition.pdf",
+            "similarity_score": 0.46153846153846156,
+            "confidence": 0.27230769230769236,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.46153846153846156,
+            "algorithms": [
+              "enhanced_fuzzy"
+            ],
+            "algorithm_count": 1
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.5590352161172161
+      },
+      {
+        "query": "Mobile Development",
+        "results": [
+          {
+            "title": "database drivenwebdevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "database-drivenwebdevelopment.pdf",
+            "similarity_score": 0.7091333333333333,
+            "confidence": 0.45,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.7091333333333333,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 2
+          },
+          {
+            "title": "rustwebdevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "rustwebdevelopment.pdf",
+            "similarity_score": 0.7091333333333333,
+            "confidence": 0.45,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.7091333333333333,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 2
+          },
+          {
+            "title": "sustainableclouddevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "sustainableclouddevelopment.epub",
+            "similarity_score": 0.6909066666666667,
+            "confidence": 0.45,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.6909066666666667,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_fuzzy",
+              "enhanced_semantic",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 4
+          },
+          {
+            "title": "howtobeawebdeveloper",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "howtobeawebdeveloper.epub",
+            "similarity_score": 0.6443877192982457,
+            "confidence": 0.40873684210526323,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.6443877192982457,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 2
+          },
+          {
+            "title": "developersplaybookforlargelanguagemodelsecurity",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "developersplaybookforlargelanguagemodelsecurity.epub",
+            "similarity_score": 0.5345233333333334,
+            "confidence": 0.2893846153846154,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.5345233333333334,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_fuzzy",
+              "enhanced_semantic",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 4
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.6576168771929825
+      },
+      {
+        "query": "DevOps Practices",
+        "results": [
+          {
+            "title": "reactquickly2e",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "JavaScript",
+            "filename": "reactquickly2e.pdf",
+            "similarity_score": 0.6666666666666667,
+            "confidence": 0.3266666666666667,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.6666666666666667,
+            "algorithms": [
+              "enhanced_fuzzy"
+            ],
+            "algorithm_count": 1
+          },
+          {
+            "title": "developersplaybookforlargelanguagemodelsecurity",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "developersplaybookforlargelanguagemodelsecurity.epub",
+            "similarity_score": 0.5765995238095237,
+            "confidence": 0.3076507936507936,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.5765995238095237,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_fuzzy",
+              "enhanced_semantic",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 4
+          },
+          {
+            "title": "sustainableclouddevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "sustainableclouddevelopment.epub",
+            "similarity_score": 0.5465109302325581,
+            "confidence": 0.2830813953488372,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.5465109302325581,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_fuzzy",
+              "enhanced_semantic",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 4
+          },
+          {
+            "title": "rustwebdevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "rustwebdevelopment.pdf",
+            "similarity_score": 0.5329176470588235,
+            "confidence": 0.31632352941176467,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.5329176470588235,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 2
+          },
+          {
+            "title": "howtobeawebdeveloper",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "subcategory": "",
+            "filename": "howtobeawebdeveloper.epub",
+            "similarity_score": 0.5221333333333333,
+            "confidence": 0.3006666666666667,
+            "algorithm": "enhanced_orchestrator",
+            "combined_score": 0.5221333333333333,
+            "algorithms": [
+              "enhanced_fuzzy",
+              "enhanced_semantic"
+            ],
+            "algorithm_count": 2
+          }
+        ],
+        "count": 5,
+        "avg_score": 0.5689656202201812
+      }
+    ]
+  },
+  "execution_time": 0.2774169445037842
+}

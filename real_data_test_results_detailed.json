@@ -1,0 +1,2408 @@
+{
+  "test_info": {
+    "total_books": 30,
+    "timestamp": "2025-09-28 08:52:16",
+    "algorithms_tested": [
+      "V3 Enhanced Fuzzy",
+      "V3 Semantic Search",
+      "V3 Ultimate Orchestrator"
+    ]
+  },
+  "algorithm_summary": {
+    "V3 Enhanced Fuzzy": {
+      "average_accuracy": 0.3284745624745625,
+      "average_validation": 0.43333333333333335,
+      "average_time": 0.02307420571645101,
+      "best_results": 25,
+      "success_rate": 0.0
+    },
+    "V3 Semantic Search": {
+      "average_accuracy": 0.37933333333333336,
+      "average_validation": 0.4233333333333334,
+      "average_time": 0.001034379005432129,
+      "best_results": 5,
+      "success_rate": 0.0
+    },
+    "V3 Ultimate Orchestrator": {
+      "average_accuracy": 0.3284745624745625,
+      "average_validation": 0.43333333333333335,
+      "average_time": 0.024523464838663737,
+      "best_results": 0,
+      "success_rate": 0.0
+    }
+  },
+  "comparison_table": [
+    {
+      "filename": "Paul McFedries - Build a Website with ChatGPT (202",
+      "ground_truth_title": "Build a Website with ChatGPT",
+      "ground_truth_author": "Paul McFedries",
+      "v3_enhanced_fuzzy_title": "Paul McFedries Build a Website",
+      "v3_enhanced_fuzzy_author": "",
+      "v3_enhanced_fuzzy_accuracy": 0.42000000000000004,
+      "v3_enhanced_fuzzy_validation": 0.4,
+      "v3_semantic_search_title": "Paul McFedries Build a Website",
+      "v3_semantic_search_author": "",
+      "v3_semantic_search_accuracy": 0.42000000000000004,
+      "v3_semantic_search_validation": 0.4,
+      "v3_ultimate_orchestrator_title": "Paul McFedries Build a Website",
+      "v3_ultimate_orchestrator_author": "",
+      "v3_ultimate_orchestrator_accuracy": 0.42000000000000004,
+      "v3_ultimate_orchestrator_validation": 0.4,
+      "best_algorithm": "V3 Enhanced Fuzzy"
+    },
+    {
+      "filename": "Parth Girish Patel et al - Sustainable Cloud Devel",
+      "ground_truth_title": "Sustainable Cloud Development",
+      "ground_truth_author": "Parth Girish Patel e",
+      "v3_enhanced_fuzzy_title": "Parth Girish Patel et al Susta",
+      "v3_enhanced_fuzzy_author": "",
+      "v3_enhanced_fuzzy_accuracy": 0.42000000000000004,
+      "v3_enhanced_fuzzy_validation": 0.4,
+      "v3_semantic_search_title": "Parth Girish Patel et al Susta",
+      "v3_semantic_search_author": "",
+      "v3_semantic_search_accuracy": 0.42000000000000004,
+      "v3_semantic_search_validation": 0.4,
+      "v3_ultimate_orchestrator_title": "Parth Girish Patel et al Susta",
+      "v3_ultimate_orchestrator_author": "",
+      "v3_ultimate_orchestrator_accuracy": 0.42000000000000004,
+      "v3_ultimate_orchestrator_validation": 0.4,
+      "best_algorithm": "V3 Enhanced Fuzzy"
+    },
+    {
+      "filename": "Rodrigo Turini - Java 9 (2017).epub",
+      "ground_truth_title": "Java 9",
+      "ground_truth_author": "Rodrigo Turini",
+      "v3_enhanced_fuzzy_title": "Rodrigo Turini Java 9 ()",
+      "v3_enhanced_fuzzy_author": "",
+      "v3_enhanced_fuzzy_accuracy": 0.42000000000000004,
+      "v3_enhanced_fuzzy_validation": 0.4,
+      "v3_semantic_search_title": "Rodrigo Turini Java 9 ()",
+      "v3_semantic_search_author": "",
+      "v3_semantic_search_accuracy": 0.42000000000000004,
+      "v3_semantic_search_validation": 0.4,
+      "v3_ultimate_orchestrator_title": "Rodrigo Turini Java 9 ()",
+      "v3_ultimate_orchestrator_author": "",
+      "v3_ultimate_orchestrator_accuracy": 0.42000000000000004,
+      "v3_ultimate_orchestrator_validation": 0.4,
+      "best_algorithm": "V3 Enhanced Fuzzy"
+    },
+    {
+      "filename": "Micah Lee - Hacks, Leaks, and Revelations (2024).p",
+      "ground_truth_title": "Hacks, Leaks, and Revelations",
+      "ground_truth_author": "Micah Lee",
+      "v3_enhanced_fuzzy_title": "Micah Lee Hacks, Leaks, and Re",
+      "v3_enhanced_fuzzy_author": "",
+      "v3_enhanced_fuzzy_accuracy": 0.42000000000000004,
+      "v3_enhanced_fuzzy_validation": 0.4,
+      "v3_semantic_search_title": "Micah Lee Hacks, Leaks, and Re",
+      "v3_semantic_search_author": "",
+      "v3_semantic_search_accuracy": 0.42000000000000004,
+      "v3_semantic_search_validation": 0.4,
+      "v3_ultimate_orchestrator_title": "Micah Lee Hacks, Leaks, and Re",
+      "v3_ultimate_orchestrator_author": "",
+      "v3_ultimate_orchestrator_accuracy": 0.42000000000000004,
+      "v3_ultimate_orchestrator_validation": 0.4,
+      "best_algorithm": "V3 Enhanced Fuzzy"
+    },
+    {
+      "filename": "Mariot Tsitoara - Beginning Git and GitHub (2019).",
+      "ground_truth_title": "Beginning Git and GitHub",
+      "ground_truth_author": "Mariot Tsitoara",
+      "v3_enhanced_fuzzy_title": "Mariot Tsitoara Beginning Git ",
+      "v3_enhanced_fuzzy_author": "",
+      "v3_enhanced_fuzzy_accuracy": 0.42000000000000004,
+      "v3_enhanced_fuzzy_validation": 0.4,
+      "v3_semantic_search_title": "Mariot Tsitoara Beginning Git ",
+      "v3_semantic_search_author": "",
+      "v3_semantic_search_accuracy": 0.42000000000000004,
+      "v3_semantic_search_validation": 0.4,
+      "v3_ultimate_orchestrator_title": "Mariot Tsitoara Beginning Git ",
+      "v3_ultimate_orchestrator_author": "",
+      "v3_ultimate_orchestrator_accuracy": 0.42000000000000004,
+      "v3_ultimate_orchestrator_validation": 0.4,
+      "best_algorithm": "V3 Enhanced Fuzzy"
+    },
+    {
+      "filename": "Lyza Gardner - JavaScript on Things (2018).epub",
+      "ground_truth_title": "JavaScript on Things",
+      "ground_truth_author": "Lyza Gardner",
+      "v3_enhanced_fuzzy_title": "Lyza Gardner JavaScript on Thi",
+      "v3_enhanced_fuzzy_author": "",
+      "v3_enhanced_fuzzy_accuracy": 0.42000000000000004,
+      "v3_enhanced_fuzzy_validation": 0.4,
+      "v3_semantic_search_title": "Lyza Gardner JavaScript on Thi",
+      "v3_semantic_search_author": "",
+      "v3_semantic_search_accuracy": 0.42000000000000004,
+      "v3_semantic_search_validation": 0.4,
+      "v3_ultimate_orchestrator_title": "Lyza Gardner JavaScript on Thi",
+      "v3_ultimate_orchestrator_author": "",
+      "v3_ultimate_orchestrator_accuracy": 0.42000000000000004,
+      "v3_ultimate_orchestrator_validation": 0.4,
+      "best_algorithm": "V3 Enhanced Fuzzy"
+    },
+    {
+      "filename": "Jean-Philippe Aumasson - Serious Cryptography, 2nd",
+      "ground_truth_title": "Jean-Philippe Aumasson - Serio",
+      "ground_truth_author": "",
+      "v3_enhanced_fuzzy_title": "Jean Philippe Aumasson Serious",
+      "v3_enhanced_fuzzy_author": "",
+      "v3_enhanced_fuzzy_accuracy": 0.5,
+      "v3_enhanced_fuzzy_validation": 0.4,
+      "v3_semantic_search_title": "Jean Philippe Aumasson Serious",
+      "v3_semantic_search_author": "",
+      "v3_semantic_search_accuracy": 0.5,
+      "v3_semantic_search_validation": 0.4,
+      "v3_ultimate_orchestrator_title": "Jean Philippe Aumasson Serious",
+      "v3_ultimate_orchestrator_author": "",
+      "v3_ultimate_orchestrator_accuracy": 0.5,
+      "v3_ultimate_orchestrator_validation": 0.4,
+      "best_algorithm": "V3 Enhanced Fuzzy"
+    },
+    {
+      "filename": "Safari, an O'Reilly Media Company - Training Data ",
+      "ground_truth_title": "Safari, an O'Reilly Media Comp",
+      "ground_truth_author": "",
+      "v3_enhanced_fuzzy_title": "Safari, an O'Reilly Media Comp",
+      "v3_enhanced_fuzzy_author": "",
+      "v3_enhanced_fuzzy_accuracy": 0.5,
+      "v3_enhanced_fuzzy_validation": 0.6,
+      "v3_semantic_search_title": "Safari, an O'Reilly Media Comp",
+      "v3_semantic_search_author": "",
+      "v3_semantic_search_accuracy": 0.5,
+      "v3_semantic_search_validation": 0.6,
+      "v3_ultimate_orchestrator_title": "Safari, an O'Reilly Media Comp",
+      "v3_ultimate_orchestrator_author": "",
+      "v3_ultimate_orchestrator_accuracy": 0.5,
+      "v3_ultimate_orchestrator_validation": 0.6,
+      "best_algorithm": "V3 Enhanced Fuzzy"
+    },
+    {
+      "filename": "Malcolm McDonald - Grokking Web Application Securi",
+      "ground_truth_title": "Grokking Web Application Secur",
+      "ground_truth_author": "Malcolm McDonald",
+      "v3_enhanced_fuzzy_title": "Malcolm McDonald Grokking Web ",
+      "v3_enhanced_fuzzy_author": "",
+      "v3_enhanced_fuzzy_accuracy": 0.42000000000000004,
+      "v3_enhanced_fuzzy_validation": 0.4,
+      "v3_semantic_search_title": "Malcolm McDonald Grokking Web ",
+      "v3_semantic_search_author": "",
+      "v3_semantic_search_accuracy": 0.42000000000000004,
+      "v3_semantic_search_validation": 0.4,
+      "v3_ultimate_orchestrator_title": "Malcolm McDonald Grokking Web ",
+      "v3_ultimate_orchestrator_author": "",
+      "v3_ultimate_orchestrator_accuracy": 0.42000000000000004,
+      "v3_ultimate_orchestrator_validation": 0.4,
+      "best_algorithm": "V3 Enhanced Fuzzy"
+    },
+    {
+      "filename": "Matt Hand - Evading EDR (2023).pdf",
+      "ground_truth_title": "Evading EDR",
+      "ground_truth_author": "Matt Hand",
+      "v3_enhanced_fuzzy_title": "Matt Hand Evading EDR ()",
+      "v3_enhanced_fuzzy_author": "",
+      "v3_enhanced_fuzzy_accuracy": 0.42000000000000004,
+      "v3_enhanced_fuzzy_validation": 0.4,
+      "v3_semantic_search_title": "Matt Hand Evading EDR ()",
+      "v3_semantic_search_author": "",
+      "v3_semantic_search_accuracy": 0.42000000000000004,
+      "v3_semantic_search_validation": 0.4,
+      "v3_ultimate_orchestrator_title": "Matt Hand Evading EDR ()",
+      "v3_ultimate_orchestrator_author": "",
+      "v3_ultimate_orchestrator_accuracy": 0.42000000000000004,
+      "v3_ultimate_orchestrator_validation": 0.4,
+      "best_algorithm": "V3 Enhanced Fuzzy"
+    },
+    {
+      "filename": "Fotios Chantzis et al - Practical IoT Hacking (202",
+      "ground_truth_title": "Practical IoT Hacking",
+      "ground_truth_author": "Fotios Chantzis et a",
+      "v3_enhanced_fuzzy_title": "Fotios Chantzis et al Practica",
+      "v3_enhanced_fuzzy_author": "",
+      "v3_enhanced_fuzzy_accuracy": 0.42000000000000004,
+      "v3_enhanced_fuzzy_validation": 0.4,
+      "v3_semantic_search_title": "Fotios Chantzis et al Practica",
+      "v3_semantic_search_author": "",
+      "v3_semantic_search_accuracy": 0.42000000000000004,
+      "v3_semantic_search_validation": 0.4,
+      "v3_ultimate_orchestrator_title": "Fotios Chantzis et al Practica",
+      "v3_ultimate_orchestrator_author": "",
+      "v3_ultimate_orchestrator_accuracy": 0.42000000000000004,
+      "v3_ultimate_orchestrator_validation": 0.4,
+      "best_algorithm": "V3 Enhanced Fuzzy"
+    },
+    {
+      "filename": "AI_Agents_and_Applications_v7_MEAP.epub",
+      "ground_truth_title": "AI_Agents_and_Applications_v7_",
+      "ground_truth_author": "",
+      "v3_enhanced_fuzzy_title": "AI Agents and Applications v7 ",
+      "v3_enhanced_fuzzy_author": "",
+      "v3_enhanced_fuzzy_accuracy": 0.0,
+      "v3_enhanced_fuzzy_validation": 0.5,
+      "v3_semantic_search_title": "AI Agents and Applications v7 ",
+      "v3_semantic_search_author": "",
+      "v3_semantic_search_accuracy": 0.0,
+      "v3_semantic_search_validation": 0.5,
+      "v3_ultimate_orchestrator_title": "AI Agents and Applications v7 ",
+      "v3_ultimate_orchestrator_author": "",
+      "v3_ultimate_orchestrator_accuracy": 0.0,
+      "v3_ultimate_orchestrator_validation": 0.5,
+      "best_algorithm": "V3 Enhanced Fuzzy"
+    },
+    {
+      "filename": "Vamsee Puligadda - 500 Machine Learning (ML) Inter",
+      "ground_truth_title": "500 Machine Learning (ML) Inte",
+      "ground_truth_author": "Vamsee Puligadda",
+      "v3_enhanced_fuzzy_title": "Safari, an O'Reilly Media Comp",
+      "v3_enhanced_fuzzy_author": "",
+      "v3_enhanced_fuzzy_accuracy": 0.044444444444444446,
+      "v3_enhanced_fuzzy_validation": 0.6,
+      "v3_semantic_search_title": "Vamsee Puligadda 500 Machine L",
+      "v3_semantic_search_author": "",
+      "v3_semantic_search_accuracy": 0.32000000000000006,
+      "v3_semantic_search_validation": 0.5,
+      "v3_ultimate_orchestrator_title": "Safari, an O'Reilly Media Comp",
+      "v3_ultimate_orchestrator_author": "",
+      "v3_ultimate_orchestrator_accuracy": 0.044444444444444446,
+      "v3_ultimate_orchestrator_validation": 0.6,
+      "best_algorithm": "V3 Semantic Search"
+    },
+    {
+      "filename": "Douglas Crockford - How JavaScript Works (2018).ep",
+      "ground_truth_title": "How JavaScript Works",
+      "ground_truth_author": "Douglas Crockford",
+      "v3_enhanced_fuzzy_title": "Lyza Gardner JavaScript on Thi",
+      "v3_enhanced_fuzzy_author": "",
+      "v3_enhanced_fuzzy_accuracy": 0.15714285714285714,
+      "v3_enhanced_fuzzy_validation": 0.4,
+      "v3_semantic_search_title": "Douglas Crockford How JavaScri",
+      "v3_semantic_search_author": "",
+      "v3_semantic_search_accuracy": 0.42000000000000004,
+      "v3_semantic_search_validation": 0.4,
+      "v3_ultimate_orchestrator_title": "Lyza Gardner JavaScript on Thi",
+      "v3_ultimate_orchestrator_author": "",
+      "v3_ultimate_orchestrator_accuracy": 0.15714285714285714,
+      "v3_ultimate_orchestrator_validation": 0.4,
+      "best_algorithm": "V3 Semantic Search"
+    },
+    {
+      "filename": "resilientoracleplandsql.epub",
+      "ground_truth_title": "resilientoracleplandsql",
+      "ground_truth_author": "",
+      "v3_enhanced_fuzzy_title": "resilientoracleplandsql",
+      "v3_enhanced_fuzzy_author": "",
+      "v3_enhanced_fuzzy_accuracy": 0.4,
+      "v3_enhanced_fuzzy_validation": 0.3,
+      "v3_semantic_search_title": "resilientoracleplandsql",
+      "v3_semantic_search_author": "",
+      "v3_semantic_search_accuracy": 0.4,
+      "v3_semantic_search_validation": 0.3,
+      "v3_ultimate_orchestrator_title": "resilientoracleplandsql",
+      "v3_ultimate_orchestrator_author": "",
+      "v3_ultimate_orchestrator_accuracy": 0.4,
+      "v3_ultimate_orchestrator_validation": 0.3,
+      "best_algorithm": "V3 Enhanced Fuzzy"
+    },
+    {
+      "filename": "Ajay Mahajan et al - Cloud-Native Applications in ",
+      "ground_truth_title": "Cloud-Native Applications in J",
+      "ground_truth_author": "Ajay Mahajan et al",
+      "v3_enhanced_fuzzy_title": "Ajay Mahajan et al Cloud Nativ",
+      "v3_enhanced_fuzzy_author": "",
+      "v3_enhanced_fuzzy_accuracy": 0.42000000000000004,
+      "v3_enhanced_fuzzy_validation": 0.4,
+      "v3_semantic_search_title": "Ajay Mahajan et al Cloud Nativ",
+      "v3_semantic_search_author": "",
+      "v3_semantic_search_accuracy": 0.42000000000000004,
+      "v3_semantic_search_validation": 0.4,
+      "v3_ultimate_orchestrator_title": "Ajay Mahajan et al Cloud Nativ",
+      "v3_ultimate_orchestrator_author": "",
+      "v3_ultimate_orchestrator_accuracy": 0.42000000000000004,
+      "v3_ultimate_orchestrator_validation": 0.4,
+      "best_algorithm": "V3 Enhanced Fuzzy"
+    },
+    {
+      "filename": "Michal Zalewski - The Tangled Web (2011).pdf",
+      "ground_truth_title": "The Tangled Web",
+      "ground_truth_author": "Michal Zalewski",
+      "v3_enhanced_fuzzy_title": "Michal Zalewski The Tangled We",
+      "v3_enhanced_fuzzy_author": "",
+      "v3_enhanced_fuzzy_accuracy": 0.42000000000000004,
+      "v3_enhanced_fuzzy_validation": 0.4,
+      "v3_semantic_search_title": "Michal Zalewski The Tangled We",
+      "v3_semantic_search_author": "",
+      "v3_semantic_search_accuracy": 0.42000000000000004,
+      "v3_semantic_search_validation": 0.4,
+      "v3_ultimate_orchestrator_title": "Michal Zalewski The Tangled We",
+      "v3_ultimate_orchestrator_author": "",
+      "v3_ultimate_orchestrator_accuracy": 0.42000000000000004,
+      "v3_ultimate_orchestrator_validation": 0.4,
+      "best_algorithm": "V3 Enhanced Fuzzy"
+    },
+    {
+      "filename": "Alan Beaulieu - Learning SQL (2009).pdf",
+      "ground_truth_title": "Learning SQL",
+      "ground_truth_author": "Alan Beaulieu",
+      "v3_enhanced_fuzzy_title": "Alan Beaulieu Learning SQL ()",
+      "v3_enhanced_fuzzy_author": "",
+      "v3_enhanced_fuzzy_accuracy": 0.42000000000000004,
+      "v3_enhanced_fuzzy_validation": 0.6,
+      "v3_semantic_search_title": "Alan Beaulieu Learning SQL ()",
+      "v3_semantic_search_author": "",
+      "v3_semantic_search_accuracy": 0.42000000000000004,
+      "v3_semantic_search_validation": 0.6,
+      "v3_ultimate_orchestrator_title": "Alan Beaulieu Learning SQL ()",
+      "v3_ultimate_orchestrator_author": "",
+      "v3_ultimate_orchestrator_accuracy": 0.42000000000000004,
+      "v3_ultimate_orchestrator_validation": 0.6,
+      "best_algorithm": "V3 Enhanced Fuzzy"
+    },
+    {
+      "filename": "Alice Zhao - SQL Pocket Guide (2022).epub",
+      "ground_truth_title": "SQL Pocket Guide",
+      "ground_truth_author": "Alice Zhao",
+      "v3_enhanced_fuzzy_title": "Alan Beaulieu Learning SQL ()",
+      "v3_enhanced_fuzzy_author": "",
+      "v3_enhanced_fuzzy_accuracy": 0.06666666666666667,
+      "v3_enhanced_fuzzy_validation": 0.6,
+      "v3_semantic_search_title": "Alice Zhao SQL Pocket Guide ()",
+      "v3_semantic_search_author": "",
+      "v3_semantic_search_accuracy": 0.42000000000000004,
+      "v3_semantic_search_validation": 0.4,
+      "v3_ultimate_orchestrator_title": "Alan Beaulieu Learning SQL ()",
+      "v3_ultimate_orchestrator_author": "",
+      "v3_ultimate_orchestrator_accuracy": 0.06666666666666667,
+      "v3_ultimate_orchestrator_validation": 0.6,
+      "best_algorithm": "V3 Semantic Search"
+    },
+    {
+      "filename": "AI_Agents_and_Applications_v7_MEAP.pdf",
+      "ground_truth_title": "AI_Agents_and_Applications_v7_",
+      "ground_truth_author": "",
+      "v3_enhanced_fuzzy_title": "AI Agents and Applications v7 ",
+      "v3_enhanced_fuzzy_author": "",
+      "v3_enhanced_fuzzy_accuracy": 0.0,
+      "v3_enhanced_fuzzy_validation": 0.5,
+      "v3_semantic_search_title": "AI Agents and Applications v7 ",
+      "v3_semantic_search_author": "",
+      "v3_semantic_search_accuracy": 0.0,
+      "v3_semantic_search_validation": 0.5,
+      "v3_ultimate_orchestrator_title": "AI Agents and Applications v7 ",
+      "v3_ultimate_orchestrator_author": "",
+      "v3_ultimate_orchestrator_accuracy": 0.0,
+      "v3_ultimate_orchestrator_validation": 0.5,
+      "best_algorithm": "V3 Enhanced Fuzzy"
+    },
+    {
+      "filename": "A_Damn_Fine_Stable_Diffusion_Book_v6_MEAP.epub",
+      "ground_truth_title": "A_Damn_Fine_Stable_Diffusion_B",
+      "ground_truth_author": "",
+      "v3_enhanced_fuzzy_title": "A Damn Fine Stable Diffusion B",
+      "v3_enhanced_fuzzy_author": "",
+      "v3_enhanced_fuzzy_accuracy": 0.0,
+      "v3_enhanced_fuzzy_validation": 0.5,
+      "v3_semantic_search_title": "A Damn Fine Stable Diffusion B",
+      "v3_semantic_search_author": "",
+      "v3_semantic_search_accuracy": 0.0,
+      "v3_semantic_search_validation": 0.5,
+      "v3_ultimate_orchestrator_title": "A Damn Fine Stable Diffusion B",
+      "v3_ultimate_orchestrator_author": "",
+      "v3_ultimate_orchestrator_accuracy": 0.0,
+      "v3_ultimate_orchestrator_validation": 0.5,
+      "best_algorithm": "V3 Enhanced Fuzzy"
+    },
+    {
+      "filename": "Cybellium - AWS Certified Developer  Associate (D",
+      "ground_truth_title": "AWS Certified Developer  Asso",
+      "ground_truth_author": "Cybellium",
+      "v3_enhanced_fuzzy_title": "Cybellium AWS Certified Develo",
+      "v3_enhanced_fuzzy_author": "",
+      "v3_enhanced_fuzzy_accuracy": 0.42000000000000004,
+      "v3_enhanced_fuzzy_validation": 0.4,
+      "v3_semantic_search_title": "Cybellium AWS Certified Develo",
+      "v3_semantic_search_author": "",
+      "v3_semantic_search_accuracy": 0.42000000000000004,
+      "v3_semantic_search_validation": 0.4,
+      "v3_ultimate_orchestrator_title": "Cybellium AWS Certified Develo",
+      "v3_ultimate_orchestrator_author": "",
+      "v3_ultimate_orchestrator_accuracy": 0.42000000000000004,
+      "v3_ultimate_orchestrator_validation": 0.4,
+      "best_algorithm": "V3 Enhanced Fuzzy"
+    },
+    {
+      "filename": "Rui Pedro Machado et al - Analytics Engineering wi",
+      "ground_truth_title": "Analytics Engineering with SQL",
+      "ground_truth_author": "Rui Pedro Machado et",
+      "v3_enhanced_fuzzy_title": "Rui Pedro Machado et al Analyt",
+      "v3_enhanced_fuzzy_author": "",
+      "v3_enhanced_fuzzy_accuracy": 0.42000000000000004,
+      "v3_enhanced_fuzzy_validation": 0.4,
+      "v3_semantic_search_title": "Rui Pedro Machado et al Analyt",
+      "v3_semantic_search_author": "",
+      "v3_semantic_search_accuracy": 0.42000000000000004,
+      "v3_semantic_search_validation": 0.4,
+      "v3_ultimate_orchestrator_title": "Rui Pedro Machado et al Analyt",
+      "v3_ultimate_orchestrator_author": "",
+      "v3_ultimate_orchestrator_accuracy": 0.42000000000000004,
+      "v3_ultimate_orchestrator_validation": 0.4,
+      "best_algorithm": "V3 Enhanced Fuzzy"
+    },
+    {
+      "filename": "Lyron Foster - Hacking APIs - A Comprehensive Guid",
+      "ground_truth_title": "Hacking APIs - A Comprehensive",
+      "ground_truth_author": "Lyron Foster",
+      "v3_enhanced_fuzzy_title": "Lyron Foster Hacking APIs A Co",
+      "v3_enhanced_fuzzy_author": "",
+      "v3_enhanced_fuzzy_accuracy": 0.42000000000000004,
+      "v3_enhanced_fuzzy_validation": 0.4,
+      "v3_semantic_search_title": "Lyron Foster Hacking APIs A Co",
+      "v3_semantic_search_author": "",
+      "v3_semantic_search_accuracy": 0.42000000000000004,
+      "v3_semantic_search_validation": 0.4,
+      "v3_ultimate_orchestrator_title": "Lyron Foster Hacking APIs A Co",
+      "v3_ultimate_orchestrator_author": "",
+      "v3_ultimate_orchestrator_accuracy": 0.42000000000000004,
+      "v3_ultimate_orchestrator_validation": 0.4,
+      "best_algorithm": "V3 Enhanced Fuzzy"
+    },
+    {
+      "filename": "Arnaud Lauret - The Design of Web APIs, Second Edi",
+      "ground_truth_title": "The Design of Web APIs, Second",
+      "ground_truth_author": "Arnaud Lauret",
+      "v3_enhanced_fuzzy_title": "Arnaud Lauret The Design of We",
+      "v3_enhanced_fuzzy_author": "",
+      "v3_enhanced_fuzzy_accuracy": 0.42000000000000004,
+      "v3_enhanced_fuzzy_validation": 0.4,
+      "v3_semantic_search_title": "Arnaud Lauret The Design of We",
+      "v3_semantic_search_author": "",
+      "v3_semantic_search_accuracy": 0.42000000000000004,
+      "v3_semantic_search_validation": 0.4,
+      "v3_ultimate_orchestrator_title": "Arnaud Lauret The Design of We",
+      "v3_ultimate_orchestrator_author": "",
+      "v3_ultimate_orchestrator_accuracy": 0.42000000000000004,
+      "v3_ultimate_orchestrator_validation": 0.4,
+      "best_algorithm": "V3 Enhanced Fuzzy"
+    },
+    {
+      "filename": "Patrick Wardle - The Art of Mac Malware, Volume 1 ",
+      "ground_truth_title": "The Art of Mac Malware, Volume",
+      "ground_truth_author": "Patrick Wardle",
+      "v3_enhanced_fuzzy_title": "Patrick Wardle The Art of Mac ",
+      "v3_enhanced_fuzzy_author": "",
+      "v3_enhanced_fuzzy_accuracy": 0.42000000000000004,
+      "v3_enhanced_fuzzy_validation": 0.4,
+      "v3_semantic_search_title": "Patrick Wardle The Art of Mac ",
+      "v3_semantic_search_author": "",
+      "v3_semantic_search_accuracy": 0.42000000000000004,
+      "v3_semantic_search_validation": 0.4,
+      "v3_ultimate_orchestrator_title": "Patrick Wardle The Art of Mac ",
+      "v3_ultimate_orchestrator_author": "",
+      "v3_ultimate_orchestrator_accuracy": 0.42000000000000004,
+      "v3_ultimate_orchestrator_validation": 0.4,
+      "best_algorithm": "V3 Enhanced Fuzzy"
+    },
+    {
+      "filename": "Ángel Sola Orbaiceta - Build a Frontend Web Framew",
+      "ground_truth_title": "Ángel Sola Orbaiceta - Build a",
+      "ground_truth_author": "",
+      "v3_enhanced_fuzzy_title": "Paul McFedries Build a Website",
+      "v3_enhanced_fuzzy_author": "",
+      "v3_enhanced_fuzzy_accuracy": 0.16153846153846155,
+      "v3_enhanced_fuzzy_validation": 0.4,
+      "v3_semantic_search_title": "Ángel Sola Orbaiceta Build a F",
+      "v3_semantic_search_author": "",
+      "v3_semantic_search_accuracy": 0.42000000000000004,
+      "v3_semantic_search_validation": 0.4,
+      "v3_ultimate_orchestrator_title": "Paul McFedries Build a Website",
+      "v3_ultimate_orchestrator_author": "",
+      "v3_ultimate_orchestrator_accuracy": 0.16153846153846155,
+      "v3_ultimate_orchestrator_validation": 0.4,
+      "best_algorithm": "V3 Semantic Search"
+    },
+    {
+      "filename": "Alex Libby - Practical Next.js for E-Commerce (202",
+      "ground_truth_title": "Practical Next.js for E-Commer",
+      "ground_truth_author": "Alex Libby",
+      "v3_enhanced_fuzzy_title": "Alex Libby Practical Next.js f",
+      "v3_enhanced_fuzzy_author": "",
+      "v3_enhanced_fuzzy_accuracy": 0.42000000000000004,
+      "v3_enhanced_fuzzy_validation": 0.4,
+      "v3_semantic_search_title": "Alex Libby Practical Next.js f",
+      "v3_semantic_search_author": "",
+      "v3_semantic_search_accuracy": 0.42000000000000004,
+      "v3_semantic_search_validation": 0.4,
+      "v3_ultimate_orchestrator_title": "Alex Libby Practical Next.js f",
+      "v3_ultimate_orchestrator_author": "",
+      "v3_ultimate_orchestrator_accuracy": 0.42000000000000004,
+      "v3_ultimate_orchestrator_validation": 0.4,
+      "best_algorithm": "V3 Enhanced Fuzzy"
+    },
+    {
+      "filename": "Josip Maras - Secrets of the JavaScript Ninja (201",
+      "ground_truth_title": "Secrets of the JavaScript Ninj",
+      "ground_truth_author": "Josip Maras",
+      "v3_enhanced_fuzzy_title": "Lyza Gardner JavaScript on Thi",
+      "v3_enhanced_fuzzy_author": "",
+      "v3_enhanced_fuzzy_accuracy": 0.044444444444444446,
+      "v3_enhanced_fuzzy_validation": 0.4,
+      "v3_semantic_search_title": "Josip Maras Secrets of the Jav",
+      "v3_semantic_search_author": "",
+      "v3_semantic_search_accuracy": 0.42000000000000004,
+      "v3_semantic_search_validation": 0.4,
+      "v3_ultimate_orchestrator_title": "Lyza Gardner JavaScript on Thi",
+      "v3_ultimate_orchestrator_author": "",
+      "v3_ultimate_orchestrator_accuracy": 0.044444444444444446,
+      "v3_ultimate_orchestrator_validation": 0.4,
+      "best_algorithm": "V3 Semantic Search"
+    },
+    {
+      "filename": "Mr.Alexei Kireyev - Liberalization of Trade in Fin",
+      "ground_truth_title": "Liberalization of Trade in Fin",
+      "ground_truth_author": "Mr.Alexei Kireyev",
+      "v3_enhanced_fuzzy_title": "Mr.Alexei Kireyev Liberalizati",
+      "v3_enhanced_fuzzy_author": "",
+      "v3_enhanced_fuzzy_accuracy": 0.42000000000000004,
+      "v3_enhanced_fuzzy_validation": 0.4,
+      "v3_semantic_search_title": "Mr.Alexei Kireyev Liberalizati",
+      "v3_semantic_search_author": "",
+      "v3_semantic_search_accuracy": 0.42000000000000004,
+      "v3_semantic_search_validation": 0.4,
+      "v3_ultimate_orchestrator_title": "Mr.Alexei Kireyev Liberalizati",
+      "v3_ultimate_orchestrator_author": "",
+      "v3_ultimate_orchestrator_accuracy": 0.42000000000000004,
+      "v3_ultimate_orchestrator_validation": 0.4,
+      "best_algorithm": "V3 Enhanced Fuzzy"
+    }
+  ],
+  "detailed_results": [
+    {
+      "filename": "Paul McFedries - Build a Website with ChatGPT (2024).epub",
+      "ground_truth": {
+        "title": "Build a Website with ChatGPT",
+        "author": "Paul McFedries",
+        "publisher": "",
+        "year": "2024",
+        "isbn10": "",
+        "isbn13": ""
+      },
+      "best_algorithm": "V3 Enhanced Fuzzy",
+      "accuracy_scores": {
+        "V3 Enhanced Fuzzy": 0.42000000000000004,
+        "V3 Semantic Search": 0.42000000000000004,
+        "V3 Ultimate Orchestrator": 0.42000000000000004
+      },
+      "algorithm_results": [
+        {
+          "filename": "Paul McFedries - Build a Website with ChatGPT (2024).epub",
+          "algorithm_name": "V3 Enhanced Fuzzy",
+          "title": "Paul McFedries Build a Website with ChatGPT ()",
+          "author": "",
+          "publisher": "",
+          "year": "2024",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.02195882797241211,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Paul McFedries - Build a Website with ChatGPT (2024).epub",
+          "algorithm_name": "V3 Semantic Search",
+          "title": "Paul McFedries Build a Website with ChatGPT ()",
+          "author": "",
+          "publisher": "",
+          "year": "2024",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.001077413558959961,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Paul McFedries - Build a Website with ChatGPT (2024).epub",
+          "algorithm_name": "V3 Ultimate Orchestrator",
+          "title": "Paul McFedries Build a Website with ChatGPT ()",
+          "author": "",
+          "publisher": "",
+          "year": "2024",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.02298593521118164,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        }
+      ]
+    },
+    {
+      "filename": "Parth Girish Patel et al - Sustainable Cloud Development (2025).epub",
+      "ground_truth": {
+        "title": "Sustainable Cloud Development",
+        "author": "Parth Girish Patel et al",
+        "publisher": "",
+        "year": "2025",
+        "isbn10": "",
+        "isbn13": ""
+      },
+      "best_algorithm": "V3 Enhanced Fuzzy",
+      "accuracy_scores": {
+        "V3 Enhanced Fuzzy": 0.42000000000000004,
+        "V3 Semantic Search": 0.42000000000000004,
+        "V3 Ultimate Orchestrator": 0.42000000000000004
+      },
+      "algorithm_results": [
+        {
+          "filename": "Parth Girish Patel et al - Sustainable Cloud Development (2025).epub",
+          "algorithm_name": "V3 Enhanced Fuzzy",
+          "title": "Parth Girish Patel et al Sustainable Cloud Development ()",
+          "author": "",
+          "publisher": "",
+          "year": "2025",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.026947975158691406,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Parth Girish Patel et al - Sustainable Cloud Development (2025).epub",
+          "algorithm_name": "V3 Semantic Search",
+          "title": "Parth Girish Patel et al Sustainable Cloud Development ()",
+          "author": "",
+          "publisher": "",
+          "year": "2025",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.0010600090026855469,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Parth Girish Patel et al - Sustainable Cloud Development (2025).epub",
+          "algorithm_name": "V3 Ultimate Orchestrator",
+          "title": "Parth Girish Patel et al Sustainable Cloud Development ()",
+          "author": "",
+          "publisher": "",
+          "year": "2025",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.0272371768951416,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        }
+      ]
+    },
+    {
+      "filename": "Rodrigo Turini - Java 9 (2017).epub",
+      "ground_truth": {
+        "title": "Java 9",
+        "author": "Rodrigo Turini",
+        "publisher": "",
+        "year": "2017",
+        "isbn10": "",
+        "isbn13": ""
+      },
+      "best_algorithm": "V3 Enhanced Fuzzy",
+      "accuracy_scores": {
+        "V3 Enhanced Fuzzy": 0.42000000000000004,
+        "V3 Semantic Search": 0.42000000000000004,
+        "V3 Ultimate Orchestrator": 0.42000000000000004
+      },
+      "algorithm_results": [
+        {
+          "filename": "Rodrigo Turini - Java 9 (2017).epub",
+          "algorithm_name": "V3 Enhanced Fuzzy",
+          "title": "Rodrigo Turini Java 9 ()",
+          "author": "",
+          "publisher": "",
+          "year": "2017",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.013359785079956055,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Rodrigo Turini - Java 9 (2017).epub",
+          "algorithm_name": "V3 Semantic Search",
+          "title": "Rodrigo Turini Java 9 ()",
+          "author": "",
+          "publisher": "",
+          "year": "2017",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.0013840198516845703,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Rodrigo Turini - Java 9 (2017).epub",
+          "algorithm_name": "V3 Ultimate Orchestrator",
+          "title": "Rodrigo Turini Java 9 ()",
+          "author": "",
+          "publisher": "",
+          "year": "2017",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.01462411880493164,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        }
+      ]
+    },
+    {
+      "filename": "Micah Lee - Hacks, Leaks, and Revelations (2024).pdf",
+      "ground_truth": {
+        "title": "Hacks, Leaks, and Revelations",
+        "author": "Micah Lee",
+        "publisher": "",
+        "year": "2024",
+        "isbn10": "",
+        "isbn13": ""
+      },
+      "best_algorithm": "V3 Enhanced Fuzzy",
+      "accuracy_scores": {
+        "V3 Enhanced Fuzzy": 0.42000000000000004,
+        "V3 Semantic Search": 0.42000000000000004,
+        "V3 Ultimate Orchestrator": 0.42000000000000004
+      },
+      "algorithm_results": [
+        {
+          "filename": "Micah Lee - Hacks, Leaks, and Revelations (2024).pdf",
+          "algorithm_name": "V3 Enhanced Fuzzy",
+          "title": "Micah Lee Hacks, Leaks, and Revelations ()",
+          "author": "",
+          "publisher": "",
+          "year": "2024",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.020786762237548828,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Micah Lee - Hacks, Leaks, and Revelations (2024).pdf",
+          "algorithm_name": "V3 Semantic Search",
+          "title": "Micah Lee Hacks, Leaks, and Revelations ()",
+          "author": "",
+          "publisher": "",
+          "year": "2024",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.0009028911590576172,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Micah Lee - Hacks, Leaks, and Revelations (2024).pdf",
+          "algorithm_name": "V3 Ultimate Orchestrator",
+          "title": "Micah Lee Hacks, Leaks, and Revelations ()",
+          "author": "",
+          "publisher": "",
+          "year": "2024",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.021683931350708008,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        }
+      ]
+    },
+    {
+      "filename": "Mariot Tsitoara - Beginning Git and GitHub (2019).epub",
+      "ground_truth": {
+        "title": "Beginning Git and GitHub",
+        "author": "Mariot Tsitoara",
+        "publisher": "",
+        "year": "2019",
+        "isbn10": "",
+        "isbn13": ""
+      },
+      "best_algorithm": "V3 Enhanced Fuzzy",
+      "accuracy_scores": {
+        "V3 Enhanced Fuzzy": 0.42000000000000004,
+        "V3 Semantic Search": 0.42000000000000004,
+        "V3 Ultimate Orchestrator": 0.42000000000000004
+      },
+      "algorithm_results": [
+        {
+          "filename": "Mariot Tsitoara - Beginning Git and GitHub (2019).epub",
+          "algorithm_name": "V3 Enhanced Fuzzy",
+          "title": "Mariot Tsitoara Beginning Git and GitHub ()",
+          "author": "",
+          "publisher": "",
+          "year": "2019",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.02039504051208496,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Mariot Tsitoara - Beginning Git and GitHub (2019).epub",
+          "algorithm_name": "V3 Semantic Search",
+          "title": "Mariot Tsitoara Beginning Git and GitHub ()",
+          "author": "",
+          "publisher": "",
+          "year": "2019",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 0.89,
+          "execution_time": 0.0007898807525634766,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Mariot Tsitoara - Beginning Git and GitHub (2019).epub",
+          "algorithm_name": "V3 Ultimate Orchestrator",
+          "title": "Mariot Tsitoara Beginning Git and GitHub ()",
+          "author": "",
+          "publisher": "",
+          "year": "2019",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.021173954010009766,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        }
+      ]
+    },
+    {
+      "filename": "Lyza Gardner - JavaScript on Things (2018).epub",
+      "ground_truth": {
+        "title": "JavaScript on Things",
+        "author": "Lyza Gardner",
+        "publisher": "",
+        "year": "2018",
+        "isbn10": "",
+        "isbn13": ""
+      },
+      "best_algorithm": "V3 Enhanced Fuzzy",
+      "accuracy_scores": {
+        "V3 Enhanced Fuzzy": 0.42000000000000004,
+        "V3 Semantic Search": 0.42000000000000004,
+        "V3 Ultimate Orchestrator": 0.42000000000000004
+      },
+      "algorithm_results": [
+        {
+          "filename": "Lyza Gardner - JavaScript on Things (2018).epub",
+          "algorithm_name": "V3 Enhanced Fuzzy",
+          "title": "Lyza Gardner JavaScript on Things ()",
+          "author": "",
+          "publisher": "",
+          "year": "2018",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.018599987030029297,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Lyza Gardner - JavaScript on Things (2018).epub",
+          "algorithm_name": "V3 Semantic Search",
+          "title": "Lyza Gardner JavaScript on Things ()",
+          "author": "",
+          "publisher": "",
+          "year": "2018",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.0009317398071289062,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Lyza Gardner - JavaScript on Things (2018).epub",
+          "algorithm_name": "V3 Ultimate Orchestrator",
+          "title": "Lyza Gardner JavaScript on Things ()",
+          "author": "",
+          "publisher": "",
+          "year": "2018",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.018919944763183594,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        }
+      ]
+    },
+    {
+      "filename": "Jean-Philippe Aumasson - Serious Cryptography, 2nd Edition (2024).mobi",
+      "ground_truth": {
+        "title": "Jean-Philippe Aumasson - Serious Cryptography, 2nd Edition",
+        "author": "",
+        "publisher": "",
+        "year": "2024",
+        "isbn10": "",
+        "isbn13": ""
+      },
+      "best_algorithm": "V3 Enhanced Fuzzy",
+      "accuracy_scores": {
+        "V3 Enhanced Fuzzy": 0.5,
+        "V3 Semantic Search": 0.5,
+        "V3 Ultimate Orchestrator": 0.5
+      },
+      "algorithm_results": [
+        {
+          "filename": "Jean-Philippe Aumasson - Serious Cryptography, 2nd Edition (2024).mobi",
+          "algorithm_name": "V3 Enhanced Fuzzy",
+          "title": "Jean Philippe Aumasson Serious Cryptography, 2nd Edition ()",
+          "author": "",
+          "publisher": "",
+          "year": "2024",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.026530742645263672,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Jean-Philippe Aumasson - Serious Cryptography, 2nd Edition (2024).mobi",
+          "algorithm_name": "V3 Semantic Search",
+          "title": "Jean Philippe Aumasson Serious Cryptography, 2nd Edition ()",
+          "author": "",
+          "publisher": "",
+          "year": "2024",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.0009531974792480469,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Jean-Philippe Aumasson - Serious Cryptography, 2nd Edition (2024).mobi",
+          "algorithm_name": "V3 Ultimate Orchestrator",
+          "title": "Jean Philippe Aumasson Serious Cryptography, 2nd Edition ()",
+          "author": "",
+          "publisher": "",
+          "year": "2024",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.027201175689697266,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        }
+      ]
+    },
+    {
+      "filename": "Safari, an O'Reilly Media Company - Training Data for Machine Learning Models (2022).epub",
+      "ground_truth": {
+        "title": "Safari, an O'Reilly Media Company - Training Data for Machine Learning Models",
+        "author": "",
+        "publisher": "",
+        "year": "2022",
+        "isbn10": "",
+        "isbn13": ""
+      },
+      "best_algorithm": "V3 Enhanced Fuzzy",
+      "accuracy_scores": {
+        "V3 Enhanced Fuzzy": 0.5,
+        "V3 Semantic Search": 0.5,
+        "V3 Ultimate Orchestrator": 0.5
+      },
+      "algorithm_results": [
+        {
+          "filename": "Safari, an O'Reilly Media Company - Training Data for Machine Learning Models (2022).epub",
+          "algorithm_name": "V3 Enhanced Fuzzy",
+          "title": "Safari, an O'Reilly Media Company Training Data for Machine Learning Models ()",
+          "author": "",
+          "publisher": "OReilly",
+          "year": "2022",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.03426313400268555,
+          "validation_score": 0.6,
+          "validation_errors": 1
+        },
+        {
+          "filename": "Safari, an O'Reilly Media Company - Training Data for Machine Learning Models (2022).epub",
+          "algorithm_name": "V3 Semantic Search",
+          "title": "Safari, an O'Reilly Media Company Training Data for Machine Learning Models ()",
+          "author": "",
+          "publisher": "OReilly",
+          "year": "2022",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.0011599063873291016,
+          "validation_score": 0.6,
+          "validation_errors": 1
+        },
+        {
+          "filename": "Safari, an O'Reilly Media Company - Training Data for Machine Learning Models (2022).epub",
+          "algorithm_name": "V3 Ultimate Orchestrator",
+          "title": "Safari, an O'Reilly Media Company Training Data for Machine Learning Models ()",
+          "author": "",
+          "publisher": "OReilly",
+          "year": "2022",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.035054922103881836,
+          "validation_score": 0.6,
+          "validation_errors": 1
+        }
+      ]
+    },
+    {
+      "filename": "Malcolm McDonald - Grokking Web Application Security (2024).epub",
+      "ground_truth": {
+        "title": "Grokking Web Application Security",
+        "author": "Malcolm McDonald",
+        "publisher": "",
+        "year": "2024",
+        "isbn10": "",
+        "isbn13": ""
+      },
+      "best_algorithm": "V3 Enhanced Fuzzy",
+      "accuracy_scores": {
+        "V3 Enhanced Fuzzy": 0.42000000000000004,
+        "V3 Semantic Search": 0.42000000000000004,
+        "V3 Ultimate Orchestrator": 0.42000000000000004
+      },
+      "algorithm_results": [
+        {
+          "filename": "Malcolm McDonald - Grokking Web Application Security (2024).epub",
+          "algorithm_name": "V3 Enhanced Fuzzy",
+          "title": "Malcolm McDonald Grokking Web Application Security ()",
+          "author": "",
+          "publisher": "",
+          "year": "2024",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.023317813873291016,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Malcolm McDonald - Grokking Web Application Security (2024).epub",
+          "algorithm_name": "V3 Semantic Search",
+          "title": "Malcolm McDonald Grokking Web Application Security ()",
+          "author": "",
+          "publisher": "",
+          "year": "2024",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.0009801387786865234,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Malcolm McDonald - Grokking Web Application Security (2024).epub",
+          "algorithm_name": "V3 Ultimate Orchestrator",
+          "title": "Malcolm McDonald Grokking Web Application Security ()",
+          "author": "",
+          "publisher": "",
+          "year": "2024",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.024878740310668945,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        }
+      ]
+    },
+    {
+      "filename": "Matt Hand - Evading EDR (2023).pdf",
+      "ground_truth": {
+        "title": "Evading EDR",
+        "author": "Matt Hand",
+        "publisher": "",
+        "year": "2023",
+        "isbn10": "",
+        "isbn13": ""
+      },
+      "best_algorithm": "V3 Enhanced Fuzzy",
+      "accuracy_scores": {
+        "V3 Enhanced Fuzzy": 0.42000000000000004,
+        "V3 Semantic Search": 0.42000000000000004,
+        "V3 Ultimate Orchestrator": 0.42000000000000004
+      },
+      "algorithm_results": [
+        {
+          "filename": "Matt Hand - Evading EDR (2023).pdf",
+          "algorithm_name": "V3 Enhanced Fuzzy",
+          "title": "Matt Hand Evading EDR ()",
+          "author": "",
+          "publisher": "",
+          "year": "2023",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.01306915283203125,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Matt Hand - Evading EDR (2023).pdf",
+          "algorithm_name": "V3 Semantic Search",
+          "title": "Matt Hand Evading EDR ()",
+          "author": "",
+          "publisher": "",
+          "year": "2023",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 0.6900000000000001,
+          "execution_time": 0.0007350444793701172,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Matt Hand - Evading EDR (2023).pdf",
+          "algorithm_name": "V3 Ultimate Orchestrator",
+          "title": "Matt Hand Evading EDR ()",
+          "author": "",
+          "publisher": "",
+          "year": "2023",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.01356196403503418,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        }
+      ]
+    },
+    {
+      "filename": "Fotios Chantzis et al - Practical IoT Hacking (2021).mobi",
+      "ground_truth": {
+        "title": "Practical IoT Hacking",
+        "author": "Fotios Chantzis et al",
+        "publisher": "",
+        "year": "2021",
+        "isbn10": "",
+        "isbn13": ""
+      },
+      "best_algorithm": "V3 Enhanced Fuzzy",
+      "accuracy_scores": {
+        "V3 Enhanced Fuzzy": 0.42000000000000004,
+        "V3 Semantic Search": 0.42000000000000004,
+        "V3 Ultimate Orchestrator": 0.42000000000000004
+      },
+      "algorithm_results": [
+        {
+          "filename": "Fotios Chantzis et al - Practical IoT Hacking (2021).mobi",
+          "algorithm_name": "V3 Enhanced Fuzzy",
+          "title": "Fotios Chantzis et al Practical IoT Hacking ()",
+          "author": "",
+          "publisher": "",
+          "year": "2021",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.020914077758789062,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Fotios Chantzis et al - Practical IoT Hacking (2021).mobi",
+          "algorithm_name": "V3 Semantic Search",
+          "title": "Fotios Chantzis et al Practical IoT Hacking ()",
+          "author": "",
+          "publisher": "",
+          "year": "2021",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.0009660720825195312,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Fotios Chantzis et al - Practical IoT Hacking (2021).mobi",
+          "algorithm_name": "V3 Ultimate Orchestrator",
+          "title": "Fotios Chantzis et al Practical IoT Hacking ()",
+          "author": "",
+          "publisher": "",
+          "year": "2021",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.0216219425201416,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        }
+      ]
+    },
+    {
+      "filename": "AI_Agents_and_Applications_v7_MEAP.epub",
+      "ground_truth": {
+        "title": "AI_Agents_and_Applications_v7_MEAP",
+        "author": "",
+        "publisher": "",
+        "year": "",
+        "isbn10": "",
+        "isbn13": ""
+      },
+      "best_algorithm": "V3 Enhanced Fuzzy",
+      "accuracy_scores": {
+        "V3 Enhanced Fuzzy": 0.0,
+        "V3 Semantic Search": 0.0,
+        "V3 Ultimate Orchestrator": 0.0
+      },
+      "algorithm_results": [
+        {
+          "filename": "AI_Agents_and_Applications_v7_MEAP.epub",
+          "algorithm_name": "V3 Enhanced Fuzzy",
+          "title": "AI Agents and Applications v7 MEAP",
+          "author": "",
+          "publisher": "Manning",
+          "year": "",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.01714301109313965,
+          "validation_score": 0.5,
+          "validation_errors": 2
+        },
+        {
+          "filename": "AI_Agents_and_Applications_v7_MEAP.epub",
+          "algorithm_name": "V3 Semantic Search",
+          "title": "AI Agents and Applications v7 MEAP",
+          "author": "",
+          "publisher": "Manning",
+          "year": "",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.0008440017700195312,
+          "validation_score": 0.5,
+          "validation_errors": 2
+        },
+        {
+          "filename": "AI_Agents_and_Applications_v7_MEAP.epub",
+          "algorithm_name": "V3 Ultimate Orchestrator",
+          "title": "AI Agents and Applications v7 MEAP",
+          "author": "",
+          "publisher": "Manning",
+          "year": "",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.018237829208374023,
+          "validation_score": 0.5,
+          "validation_errors": 2
+        }
+      ]
+    },
+    {
+      "filename": "Vamsee Puligadda - 500 Machine Learning (ML) Interview Questions and Answers.epub",
+      "ground_truth": {
+        "title": "500 Machine Learning (ML) Interview Questions and Answers",
+        "author": "Vamsee Puligadda",
+        "publisher": "",
+        "year": "",
+        "isbn10": "",
+        "isbn13": ""
+      },
+      "best_algorithm": "V3 Semantic Search",
+      "accuracy_scores": {
+        "V3 Enhanced Fuzzy": 0.044444444444444446,
+        "V3 Semantic Search": 0.32000000000000006,
+        "V3 Ultimate Orchestrator": 0.044444444444444446
+      },
+      "algorithm_results": [
+        {
+          "filename": "Vamsee Puligadda - 500 Machine Learning (ML) Interview Questions and Answers.epub",
+          "algorithm_name": "V3 Enhanced Fuzzy",
+          "title": "Safari, an O'Reilly Media Company Training Data for Machine Learning Models ()",
+          "author": "",
+          "publisher": "OReilly",
+          "year": "2022",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.03155684471130371,
+          "validation_score": 0.6,
+          "validation_errors": 1
+        },
+        {
+          "filename": "Vamsee Puligadda - 500 Machine Learning (ML) Interview Questions and Answers.epub",
+          "algorithm_name": "V3 Semantic Search",
+          "title": "Vamsee Puligadda 500 Machine Learning (ML) Interview Questions and Answers",
+          "author": "",
+          "publisher": "OReilly",
+          "year": "",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.0011279582977294922,
+          "validation_score": 0.5,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Vamsee Puligadda - 500 Machine Learning (ML) Interview Questions and Answers.epub",
+          "algorithm_name": "V3 Ultimate Orchestrator",
+          "title": "Safari, an O'Reilly Media Company Training Data for Machine Learning Models ()",
+          "author": "",
+          "publisher": "OReilly",
+          "year": "2022",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.03227376937866211,
+          "validation_score": 0.6,
+          "validation_errors": 1
+        }
+      ]
+    },
+    {
+      "filename": "Douglas Crockford - How JavaScript Works (2018).epub",
+      "ground_truth": {
+        "title": "How JavaScript Works",
+        "author": "Douglas Crockford",
+        "publisher": "",
+        "year": "2018",
+        "isbn10": "",
+        "isbn13": ""
+      },
+      "best_algorithm": "V3 Semantic Search",
+      "accuracy_scores": {
+        "V3 Enhanced Fuzzy": 0.15714285714285714,
+        "V3 Semantic Search": 0.42000000000000004,
+        "V3 Ultimate Orchestrator": 0.15714285714285714
+      },
+      "algorithm_results": [
+        {
+          "filename": "Douglas Crockford - How JavaScript Works (2018).epub",
+          "algorithm_name": "V3 Enhanced Fuzzy",
+          "title": "Lyza Gardner JavaScript on Things ()",
+          "author": "",
+          "publisher": "",
+          "year": "2018",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.018288135528564453,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Douglas Crockford - How JavaScript Works (2018).epub",
+          "algorithm_name": "V3 Semantic Search",
+          "title": "Douglas Crockford How JavaScript Works ()",
+          "author": "",
+          "publisher": "",
+          "year": "2018",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.0009291172027587891,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Douglas Crockford - How JavaScript Works (2018).epub",
+          "algorithm_name": "V3 Ultimate Orchestrator",
+          "title": "Lyza Gardner JavaScript on Things ()",
+          "author": "",
+          "publisher": "",
+          "year": "2018",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.01930999755859375,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        }
+      ]
+    },
+    {
+      "filename": "resilientoracleplandsql.epub",
+      "ground_truth": {
+        "title": "resilientoracleplandsql",
+        "author": "",
+        "publisher": "",
+        "year": "",
+        "isbn10": "",
+        "isbn13": ""
+      },
+      "best_algorithm": "V3 Enhanced Fuzzy",
+      "accuracy_scores": {
+        "V3 Enhanced Fuzzy": 0.4,
+        "V3 Semantic Search": 0.4,
+        "V3 Ultimate Orchestrator": 0.4
+      },
+      "algorithm_results": [
+        {
+          "filename": "resilientoracleplandsql.epub",
+          "algorithm_name": "V3 Enhanced Fuzzy",
+          "title": "resilientoracleplandsql",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.012478828430175781,
+          "validation_score": 0.3,
+          "validation_errors": 3
+        },
+        {
+          "filename": "resilientoracleplandsql.epub",
+          "algorithm_name": "V3 Semantic Search",
+          "title": "resilientoracleplandsql",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.0008063316345214844,
+          "validation_score": 0.3,
+          "validation_errors": 3
+        },
+        {
+          "filename": "resilientoracleplandsql.epub",
+          "algorithm_name": "V3 Ultimate Orchestrator",
+          "title": "resilientoracleplandsql",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.01294708251953125,
+          "validation_score": 0.3,
+          "validation_errors": 3
+        }
+      ]
+    },
+    {
+      "filename": "Ajay Mahajan et al - Cloud-Native Applications in Java (2018).pdf",
+      "ground_truth": {
+        "title": "Cloud-Native Applications in Java",
+        "author": "Ajay Mahajan et al",
+        "publisher": "",
+        "year": "2018",
+        "isbn10": "",
+        "isbn13": ""
+      },
+      "best_algorithm": "V3 Enhanced Fuzzy",
+      "accuracy_scores": {
+        "V3 Enhanced Fuzzy": 0.42000000000000004,
+        "V3 Semantic Search": 0.42000000000000004,
+        "V3 Ultimate Orchestrator": 0.42000000000000004
+      },
+      "algorithm_results": [
+        {
+          "filename": "Ajay Mahajan et al - Cloud-Native Applications in Java (2018).pdf",
+          "algorithm_name": "V3 Enhanced Fuzzy",
+          "title": "Ajay Mahajan et al Cloud Native Applications in Java ()",
+          "author": "",
+          "publisher": "",
+          "year": "2018",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.02782297134399414,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Ajay Mahajan et al - Cloud-Native Applications in Java (2018).pdf",
+          "algorithm_name": "V3 Semantic Search",
+          "title": "Ajay Mahajan et al Cloud Native Applications in Java ()",
+          "author": "",
+          "publisher": "",
+          "year": "2018",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.0011293888092041016,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Ajay Mahajan et al - Cloud-Native Applications in Java (2018).pdf",
+          "algorithm_name": "V3 Ultimate Orchestrator",
+          "title": "Ajay Mahajan et al Cloud Native Applications in Java ()",
+          "author": "",
+          "publisher": "",
+          "year": "2018",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.029650211334228516,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        }
+      ]
+    },
+    {
+      "filename": "Michal Zalewski - The Tangled Web (2011).pdf",
+      "ground_truth": {
+        "title": "The Tangled Web",
+        "author": "Michal Zalewski",
+        "publisher": "",
+        "year": "2011",
+        "isbn10": "",
+        "isbn13": ""
+      },
+      "best_algorithm": "V3 Enhanced Fuzzy",
+      "accuracy_scores": {
+        "V3 Enhanced Fuzzy": 0.42000000000000004,
+        "V3 Semantic Search": 0.42000000000000004,
+        "V3 Ultimate Orchestrator": 0.42000000000000004
+      },
+      "algorithm_results": [
+        {
+          "filename": "Michal Zalewski - The Tangled Web (2011).pdf",
+          "algorithm_name": "V3 Enhanced Fuzzy",
+          "title": "Michal Zalewski The Tangled Web ()",
+          "author": "",
+          "publisher": "",
+          "year": "2011",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.020717144012451172,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Michal Zalewski - The Tangled Web (2011).pdf",
+          "algorithm_name": "V3 Semantic Search",
+          "title": "Michal Zalewski The Tangled Web ()",
+          "author": "",
+          "publisher": "",
+          "year": "2011",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.0009500980377197266,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Michal Zalewski - The Tangled Web (2011).pdf",
+          "algorithm_name": "V3 Ultimate Orchestrator",
+          "title": "Michal Zalewski The Tangled Web ()",
+          "author": "",
+          "publisher": "",
+          "year": "2011",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.01960301399230957,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        }
+      ]
+    },
+    {
+      "filename": "Alan Beaulieu - Learning SQL (2009).pdf",
+      "ground_truth": {
+        "title": "Learning SQL",
+        "author": "Alan Beaulieu",
+        "publisher": "",
+        "year": "2009",
+        "isbn10": "",
+        "isbn13": ""
+      },
+      "best_algorithm": "V3 Enhanced Fuzzy",
+      "accuracy_scores": {
+        "V3 Enhanced Fuzzy": 0.42000000000000004,
+        "V3 Semantic Search": 0.42000000000000004,
+        "V3 Ultimate Orchestrator": 0.42000000000000004
+      },
+      "algorithm_results": [
+        {
+          "filename": "Alan Beaulieu - Learning SQL (2009).pdf",
+          "algorithm_name": "V3 Enhanced Fuzzy",
+          "title": "Alan Beaulieu Learning SQL ()",
+          "author": "",
+          "publisher": "OReilly",
+          "year": "2009",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.01534891128540039,
+          "validation_score": 0.6,
+          "validation_errors": 1
+        },
+        {
+          "filename": "Alan Beaulieu - Learning SQL (2009).pdf",
+          "algorithm_name": "V3 Semantic Search",
+          "title": "Alan Beaulieu Learning SQL ()",
+          "author": "",
+          "publisher": "OReilly",
+          "year": "2009",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.0008339881896972656,
+          "validation_score": 0.6,
+          "validation_errors": 1
+        },
+        {
+          "filename": "Alan Beaulieu - Learning SQL (2009).pdf",
+          "algorithm_name": "V3 Ultimate Orchestrator",
+          "title": "Alan Beaulieu Learning SQL ()",
+          "author": "",
+          "publisher": "OReilly",
+          "year": "2009",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.015950679779052734,
+          "validation_score": 0.6,
+          "validation_errors": 1
+        }
+      ]
+    },
+    {
+      "filename": "Alice Zhao - SQL Pocket Guide (2022).epub",
+      "ground_truth": {
+        "title": "SQL Pocket Guide",
+        "author": "Alice Zhao",
+        "publisher": "",
+        "year": "2022",
+        "isbn10": "",
+        "isbn13": ""
+      },
+      "best_algorithm": "V3 Semantic Search",
+      "accuracy_scores": {
+        "V3 Enhanced Fuzzy": 0.06666666666666667,
+        "V3 Semantic Search": 0.42000000000000004,
+        "V3 Ultimate Orchestrator": 0.06666666666666667
+      },
+      "algorithm_results": [
+        {
+          "filename": "Alice Zhao - SQL Pocket Guide (2022).epub",
+          "algorithm_name": "V3 Enhanced Fuzzy",
+          "title": "Alan Beaulieu Learning SQL ()",
+          "author": "",
+          "publisher": "OReilly",
+          "year": "2009",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.015143871307373047,
+          "validation_score": 0.6,
+          "validation_errors": 1
+        },
+        {
+          "filename": "Alice Zhao - SQL Pocket Guide (2022).epub",
+          "algorithm_name": "V3 Semantic Search",
+          "title": "Alice Zhao SQL Pocket Guide ()",
+          "author": "",
+          "publisher": "",
+          "year": "2022",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.0008919239044189453,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Alice Zhao - SQL Pocket Guide (2022).epub",
+          "algorithm_name": "V3 Ultimate Orchestrator",
+          "title": "Alan Beaulieu Learning SQL ()",
+          "author": "",
+          "publisher": "OReilly",
+          "year": "2009",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.015969038009643555,
+          "validation_score": 0.6,
+          "validation_errors": 1
+        }
+      ]
+    },
+    {
+      "filename": "AI_Agents_and_Applications_v7_MEAP.pdf",
+      "ground_truth": {
+        "title": "AI_Agents_and_Applications_v7_MEAP",
+        "author": "",
+        "publisher": "",
+        "year": "",
+        "isbn10": "",
+        "isbn13": ""
+      },
+      "best_algorithm": "V3 Enhanced Fuzzy",
+      "accuracy_scores": {
+        "V3 Enhanced Fuzzy": 0.0,
+        "V3 Semantic Search": 0.0,
+        "V3 Ultimate Orchestrator": 0.0
+      },
+      "algorithm_results": [
+        {
+          "filename": "AI_Agents_and_Applications_v7_MEAP.pdf",
+          "algorithm_name": "V3 Enhanced Fuzzy",
+          "title": "AI Agents and Applications v7 MEAP",
+          "author": "",
+          "publisher": "Manning",
+          "year": "",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.017158985137939453,
+          "validation_score": 0.5,
+          "validation_errors": 2
+        },
+        {
+          "filename": "AI_Agents_and_Applications_v7_MEAP.pdf",
+          "algorithm_name": "V3 Semantic Search",
+          "title": "AI Agents and Applications v7 MEAP",
+          "author": "",
+          "publisher": "Manning",
+          "year": "",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.0008440017700195312,
+          "validation_score": 0.5,
+          "validation_errors": 2
+        },
+        {
+          "filename": "AI_Agents_and_Applications_v7_MEAP.pdf",
+          "algorithm_name": "V3 Ultimate Orchestrator",
+          "title": "AI Agents and Applications v7 MEAP",
+          "author": "",
+          "publisher": "Manning",
+          "year": "",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.017987966537475586,
+          "validation_score": 0.5,
+          "validation_errors": 2
+        }
+      ]
+    },
+    {
+      "filename": "A_Damn_Fine_Stable_Diffusion_Book_v6_MEAP.epub",
+      "ground_truth": {
+        "title": "A_Damn_Fine_Stable_Diffusion_Book_v6_MEAP",
+        "author": "",
+        "publisher": "",
+        "year": "",
+        "isbn10": "",
+        "isbn13": ""
+      },
+      "best_algorithm": "V3 Enhanced Fuzzy",
+      "accuracy_scores": {
+        "V3 Enhanced Fuzzy": 0.0,
+        "V3 Semantic Search": 0.0,
+        "V3 Ultimate Orchestrator": 0.0
+      },
+      "algorithm_results": [
+        {
+          "filename": "A_Damn_Fine_Stable_Diffusion_Book_v6_MEAP.epub",
+          "algorithm_name": "V3 Enhanced Fuzzy",
+          "title": "A Damn Fine Stable Diffusion Book v6 MEAP",
+          "author": "",
+          "publisher": "Manning",
+          "year": "",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.02734208106994629,
+          "validation_score": 0.5,
+          "validation_errors": 2
+        },
+        {
+          "filename": "A_Damn_Fine_Stable_Diffusion_Book_v6_MEAP.epub",
+          "algorithm_name": "V3 Semantic Search",
+          "title": "A Damn Fine Stable Diffusion Book v6 MEAP",
+          "author": "",
+          "publisher": "Manning",
+          "year": "",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.0026350021362304688,
+          "validation_score": 0.5,
+          "validation_errors": 2
+        },
+        {
+          "filename": "A_Damn_Fine_Stable_Diffusion_Book_v6_MEAP.epub",
+          "algorithm_name": "V3 Ultimate Orchestrator",
+          "title": "A Damn Fine Stable Diffusion Book v6 MEAP",
+          "author": "",
+          "publisher": "Manning",
+          "year": "",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.051275014877319336,
+          "validation_score": 0.5,
+          "validation_errors": 2
+        }
+      ]
+    },
+    {
+      "filename": "Cybellium - AWS Certified Developer  Associate (DVA-C02) (2024).pdf",
+      "ground_truth": {
+        "title": "AWS Certified Developer  Associate",
+        "author": "Cybellium",
+        "publisher": "",
+        "year": "2024",
+        "isbn10": "",
+        "isbn13": ""
+      },
+      "best_algorithm": "V3 Enhanced Fuzzy",
+      "accuracy_scores": {
+        "V3 Enhanced Fuzzy": 0.42000000000000004,
+        "V3 Semantic Search": 0.42000000000000004,
+        "V3 Ultimate Orchestrator": 0.42000000000000004
+      },
+      "algorithm_results": [
+        {
+          "filename": "Cybellium - AWS Certified Developer  Associate (DVA-C02) (2024).pdf",
+          "algorithm_name": "V3 Enhanced Fuzzy",
+          "title": "Cybellium AWS Certified Developer  Associate (DVA C02) ()",
+          "author": "",
+          "publisher": "",
+          "year": "2024",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.023405790328979492,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Cybellium - AWS Certified Developer  Associate (DVA-C02) (2024).pdf",
+          "algorithm_name": "V3 Semantic Search",
+          "title": "Cybellium AWS Certified Developer  Associate (DVA C02) ()",
+          "author": "",
+          "publisher": "",
+          "year": "2024",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.0008671283721923828,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Cybellium - AWS Certified Developer  Associate (DVA-C02) (2024).pdf",
+          "algorithm_name": "V3 Ultimate Orchestrator",
+          "title": "Cybellium AWS Certified Developer  Associate (DVA C02) ()",
+          "author": "",
+          "publisher": "",
+          "year": "2024",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.02364492416381836,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        }
+      ]
+    },
+    {
+      "filename": "Rui Pedro Machado et al - Analytics Engineering with SQL and dbt (2023).pdf",
+      "ground_truth": {
+        "title": "Analytics Engineering with SQL and dbt",
+        "author": "Rui Pedro Machado et al",
+        "publisher": "",
+        "year": "2023",
+        "isbn10": "",
+        "isbn13": ""
+      },
+      "best_algorithm": "V3 Enhanced Fuzzy",
+      "accuracy_scores": {
+        "V3 Enhanced Fuzzy": 0.42000000000000004,
+        "V3 Semantic Search": 0.42000000000000004,
+        "V3 Ultimate Orchestrator": 0.42000000000000004
+      },
+      "algorithm_results": [
+        {
+          "filename": "Rui Pedro Machado et al - Analytics Engineering with SQL and dbt (2023).pdf",
+          "algorithm_name": "V3 Enhanced Fuzzy",
+          "title": "Rui Pedro Machado et al Analytics Engineering with SQL and dbt ()",
+          "author": "",
+          "publisher": "",
+          "year": "2023",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.02984786033630371,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Rui Pedro Machado et al - Analytics Engineering with SQL and dbt (2023).pdf",
+          "algorithm_name": "V3 Semantic Search",
+          "title": "Rui Pedro Machado et al Analytics Engineering with SQL and dbt ()",
+          "author": "",
+          "publisher": "",
+          "year": "2023",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.0010788440704345703,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Rui Pedro Machado et al - Analytics Engineering with SQL and dbt (2023).pdf",
+          "algorithm_name": "V3 Ultimate Orchestrator",
+          "title": "Rui Pedro Machado et al Analytics Engineering with SQL and dbt ()",
+          "author": "",
+          "publisher": "",
+          "year": "2023",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.03061199188232422,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        }
+      ]
+    },
+    {
+      "filename": "Lyron Foster - Hacking APIs - A Comprehensive Guide from Beginner to Intermediate (2023).pdf",
+      "ground_truth": {
+        "title": "Hacking APIs - A Comprehensive Guide from Beginner to Intermediate",
+        "author": "Lyron Foster",
+        "publisher": "",
+        "year": "2023",
+        "isbn10": "",
+        "isbn13": ""
+      },
+      "best_algorithm": "V3 Enhanced Fuzzy",
+      "accuracy_scores": {
+        "V3 Enhanced Fuzzy": 0.42000000000000004,
+        "V3 Semantic Search": 0.42000000000000004,
+        "V3 Ultimate Orchestrator": 0.42000000000000004
+      },
+      "algorithm_results": [
+        {
+          "filename": "Lyron Foster - Hacking APIs - A Comprehensive Guide from Beginner to Intermediate (2023).pdf",
+          "algorithm_name": "V3 Enhanced Fuzzy",
+          "title": "Lyron Foster Hacking APIs A Comprehensive Guide from Beginner to Intermediate ()",
+          "author": "",
+          "publisher": "",
+          "year": "2023",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.034445762634277344,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Lyron Foster - Hacking APIs - A Comprehensive Guide from Beginner to Intermediate (2023).pdf",
+          "algorithm_name": "V3 Semantic Search",
+          "title": "Lyron Foster Hacking APIs A Comprehensive Guide from Beginner to Intermediate ()",
+          "author": "",
+          "publisher": "",
+          "year": "2023",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.0012049674987792969,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Lyron Foster - Hacking APIs - A Comprehensive Guide from Beginner to Intermediate (2023).pdf",
+          "algorithm_name": "V3 Ultimate Orchestrator",
+          "title": "Lyron Foster Hacking APIs A Comprehensive Guide from Beginner to Intermediate ()",
+          "author": "",
+          "publisher": "",
+          "year": "2023",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.03540778160095215,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        }
+      ]
+    },
+    {
+      "filename": "Arnaud Lauret - The Design of Web APIs, Second Edition (2025).epub",
+      "ground_truth": {
+        "title": "The Design of Web APIs, Second Edition",
+        "author": "Arnaud Lauret",
+        "publisher": "",
+        "year": "2025",
+        "isbn10": "",
+        "isbn13": ""
+      },
+      "best_algorithm": "V3 Enhanced Fuzzy",
+      "accuracy_scores": {
+        "V3 Enhanced Fuzzy": 0.42000000000000004,
+        "V3 Semantic Search": 0.42000000000000004,
+        "V3 Ultimate Orchestrator": 0.42000000000000004
+      },
+      "algorithm_results": [
+        {
+          "filename": "Arnaud Lauret - The Design of Web APIs, Second Edition (2025).epub",
+          "algorithm_name": "V3 Enhanced Fuzzy",
+          "title": "Arnaud Lauret The Design of Web APIs, Second Edition ()",
+          "author": "",
+          "publisher": "",
+          "year": "2025",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.026381254196166992,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Arnaud Lauret - The Design of Web APIs, Second Edition (2025).epub",
+          "algorithm_name": "V3 Semantic Search",
+          "title": "Arnaud Lauret The Design of Web APIs, Second Edition ()",
+          "author": "",
+          "publisher": "",
+          "year": "2025",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.0010302066802978516,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Arnaud Lauret - The Design of Web APIs, Second Edition (2025).epub",
+          "algorithm_name": "V3 Ultimate Orchestrator",
+          "title": "Arnaud Lauret The Design of Web APIs, Second Edition ()",
+          "author": "",
+          "publisher": "",
+          "year": "2025",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.027225971221923828,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        }
+      ]
+    },
+    {
+      "filename": "Patrick Wardle - The Art of Mac Malware, Volume 1 (2022).pdf",
+      "ground_truth": {
+        "title": "The Art of Mac Malware, Volume 1",
+        "author": "Patrick Wardle",
+        "publisher": "",
+        "year": "2022",
+        "isbn10": "",
+        "isbn13": ""
+      },
+      "best_algorithm": "V3 Enhanced Fuzzy",
+      "accuracy_scores": {
+        "V3 Enhanced Fuzzy": 0.42000000000000004,
+        "V3 Semantic Search": 0.42000000000000004,
+        "V3 Ultimate Orchestrator": 0.42000000000000004
+      },
+      "algorithm_results": [
+        {
+          "filename": "Patrick Wardle - The Art of Mac Malware, Volume 1 (2022).pdf",
+          "algorithm_name": "V3 Enhanced Fuzzy",
+          "title": "Patrick Wardle The Art of Mac Malware, Volume 1 ()",
+          "author": "",
+          "publisher": "",
+          "year": "2022",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.023540019989013672,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Patrick Wardle - The Art of Mac Malware, Volume 1 (2022).pdf",
+          "algorithm_name": "V3 Semantic Search",
+          "title": "Patrick Wardle The Art of Mac Malware, Volume 1 ()",
+          "author": "",
+          "publisher": "",
+          "year": "2022",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.0009379386901855469,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Patrick Wardle - The Art of Mac Malware, Volume 1 (2022).pdf",
+          "algorithm_name": "V3 Ultimate Orchestrator",
+          "title": "Patrick Wardle The Art of Mac Malware, Volume 1 ()",
+          "author": "",
+          "publisher": "",
+          "year": "2022",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.024113178253173828,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        }
+      ]
+    },
+    {
+      "filename": "Ángel Sola Orbaiceta - Build a Frontend Web Framework (From Scratch) (2024).pdf",
+      "ground_truth": {
+        "title": "Ángel Sola Orbaiceta - Build a Frontend Web Framework",
+        "author": "",
+        "publisher": "",
+        "year": "2024",
+        "isbn10": "",
+        "isbn13": ""
+      },
+      "best_algorithm": "V3 Semantic Search",
+      "accuracy_scores": {
+        "V3 Enhanced Fuzzy": 0.16153846153846155,
+        "V3 Semantic Search": 0.42000000000000004,
+        "V3 Ultimate Orchestrator": 0.16153846153846155
+      },
+      "algorithm_results": [
+        {
+          "filename": "Ángel Sola Orbaiceta - Build a Frontend Web Framework (From Scratch) (2024).pdf",
+          "algorithm_name": "V3 Enhanced Fuzzy",
+          "title": "Paul McFedries Build a Website with ChatGPT ()",
+          "author": "",
+          "publisher": "",
+          "year": "2024",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.02448892593383789,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Ángel Sola Orbaiceta - Build a Frontend Web Framework (From Scratch) (2024).pdf",
+          "algorithm_name": "V3 Semantic Search",
+          "title": "Ángel Sola Orbaiceta Build a Frontend Web Framework (From Scratch) ()",
+          "author": "",
+          "publisher": "",
+          "year": "2024",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.0010149478912353516,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Ángel Sola Orbaiceta - Build a Frontend Web Framework (From Scratch) (2024).pdf",
+          "algorithm_name": "V3 Ultimate Orchestrator",
+          "title": "Paul McFedries Build a Website with ChatGPT ()",
+          "author": "",
+          "publisher": "",
+          "year": "2024",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.025437116622924805,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        }
+      ]
+    },
+    {
+      "filename": "Alex Libby - Practical Next.js for E-Commerce (2023).epub",
+      "ground_truth": {
+        "title": "Practical Next.js for E-Commerce",
+        "author": "Alex Libby",
+        "publisher": "",
+        "year": "2023",
+        "isbn10": "",
+        "isbn13": ""
+      },
+      "best_algorithm": "V3 Enhanced Fuzzy",
+      "accuracy_scores": {
+        "V3 Enhanced Fuzzy": 0.42000000000000004,
+        "V3 Semantic Search": 0.42000000000000004,
+        "V3 Ultimate Orchestrator": 0.42000000000000004
+      },
+      "algorithm_results": [
+        {
+          "filename": "Alex Libby - Practical Next.js for E-Commerce (2023).epub",
+          "algorithm_name": "V3 Enhanced Fuzzy",
+          "title": "Alex Libby Practical Next.js for E Commerce ()",
+          "author": "",
+          "publisher": "",
+          "year": "2023",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.021352052688598633,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Alex Libby - Practical Next.js for E-Commerce (2023).epub",
+          "algorithm_name": "V3 Semantic Search",
+          "title": "Alex Libby Practical Next.js for E Commerce ()",
+          "author": "",
+          "publisher": "",
+          "year": "2023",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.0009362697601318359,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Alex Libby - Practical Next.js for E-Commerce (2023).epub",
+          "algorithm_name": "V3 Ultimate Orchestrator",
+          "title": "Alex Libby Practical Next.js for E Commerce ()",
+          "author": "",
+          "publisher": "",
+          "year": "2023",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.021865367889404297,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        }
+      ]
+    },
+    {
+      "filename": "Josip Maras - Secrets of the JavaScript Ninja (2016).epub",
+      "ground_truth": {
+        "title": "Secrets of the JavaScript Ninja",
+        "author": "Josip Maras",
+        "publisher": "",
+        "year": "2016",
+        "isbn10": "",
+        "isbn13": ""
+      },
+      "best_algorithm": "V3 Semantic Search",
+      "accuracy_scores": {
+        "V3 Enhanced Fuzzy": 0.044444444444444446,
+        "V3 Semantic Search": 0.42000000000000004,
+        "V3 Ultimate Orchestrator": 0.044444444444444446
+      },
+      "algorithm_results": [
+        {
+          "filename": "Josip Maras - Secrets of the JavaScript Ninja (2016).epub",
+          "algorithm_name": "V3 Enhanced Fuzzy",
+          "title": "Lyza Gardner JavaScript on Things ()",
+          "author": "",
+          "publisher": "",
+          "year": "2018",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.021938323974609375,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Josip Maras - Secrets of the JavaScript Ninja (2016).epub",
+          "algorithm_name": "V3 Semantic Search",
+          "title": "Josip Maras Secrets of the JavaScript Ninja ()",
+          "author": "",
+          "publisher": "",
+          "year": "2016",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.0010268688201904297,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Josip Maras - Secrets of the JavaScript Ninja (2016).epub",
+          "algorithm_name": "V3 Ultimate Orchestrator",
+          "title": "Lyza Gardner JavaScript on Things ()",
+          "author": "",
+          "publisher": "",
+          "year": "2018",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.024016141891479492,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        }
+      ]
+    },
+    {
+      "filename": "Mr.Alexei Kireyev - Liberalization of Trade in Financial Services and Financial Sector Stability (Empirical Approach) (2002).pdf",
+      "ground_truth": {
+        "title": "Liberalization of Trade in Financial Services and Financial Sector Stability",
+        "author": "Mr.Alexei Kireyev",
+        "publisher": "",
+        "year": "2002",
+        "isbn10": "",
+        "isbn13": ""
+      },
+      "best_algorithm": "V3 Enhanced Fuzzy",
+      "accuracy_scores": {
+        "V3 Enhanced Fuzzy": 0.42000000000000004,
+        "V3 Semantic Search": 0.42000000000000004,
+        "V3 Ultimate Orchestrator": 0.42000000000000004
+      },
+      "algorithm_results": [
+        {
+          "filename": "Mr.Alexei Kireyev - Liberalization of Trade in Financial Services and Financial Sector Stability (Empirical Approach) (2002).pdf",
+          "algorithm_name": "V3 Enhanced Fuzzy",
+          "title": "Mr.Alexei Kireyev Liberalization of Trade in Financial Services and Financial Sector Stability (Empirical Approach) ()",
+          "author": "",
+          "publisher": "",
+          "year": "2002",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.043682098388671875,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Mr.Alexei Kireyev - Liberalization of Trade in Financial Services and Financial Sector Stability (Empirical Approach) (2002).pdf",
+          "algorithm_name": "V3 Semantic Search",
+          "title": "Mr.Alexei Kireyev Liberalization of Trade in Financial Services and Financial Sector Stability (Empirical Approach) ()",
+          "author": "",
+          "publisher": "",
+          "year": "2002",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.0010020732879638672,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        },
+        {
+          "filename": "Mr.Alexei Kireyev - Liberalization of Trade in Financial Services and Financial Sector Stability (Empirical Approach) (2002).pdf",
+          "algorithm_name": "V3 Ultimate Orchestrator",
+          "title": "Mr.Alexei Kireyev Liberalization of Trade in Financial Services and Financial Sector Stability (Empirical Approach) ()",
+          "author": "",
+          "publisher": "",
+          "year": "2002",
+          "isbn10": "",
+          "isbn13": "",
+          "confidence": 1.0,
+          "execution_time": 0.041233062744140625,
+          "validation_score": 0.4,
+          "validation_errors": 2
+        }
+      ]
+    }
+  ]
+}

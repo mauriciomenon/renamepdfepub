@@ -1,0 +1,42 @@
+TESTE COM DADOS REAIS - VERSAO FILE OUTPUT
+============================================================
+Timestamp: 2025-09-28 08:54:37
+
+Encontrados 285 livros
+
+TESTANDO ALGORITMO SIMPLES
+----------------------------------------
+Arquivo                        Titulo                    Autor                Conf  
+----------------------------------------
+Paul McFedries - Build a Webs  Build a Website with Cha  Paul McFedries       0.850 
+Parth Girish Patel et al - Su  Sustainable Cloud Develo  Parth Girish Patel   0.850 
+Rodrigo Turini - Java 9 (2017  Java 9                    Rodrigo Turini       0.850 
+Micah Lee - Hacks, Leaks, and  Hacks, Leaks, and Revela  Micah Lee            0.850 
+Mariot Tsitoara - Beginning G  Beginning Git and GitHub  Mariot Tsitoara      0.850 
+Lyza Gardner - JavaScript on   JavaScript on Things      Lyza Gardner         0.850 
+Jean-Philippe Aumasson - Seri  Serious Cryptography, 2n  Jean-Philippe Aumas  0.850 
+Safari, an O'Reilly Media Com  Training Data for Machin  Safari, an O'Reilly  1.000 
+Malcolm McDonald - Grokking W  Grokking Web Application  Malcolm McDonald     0.850 
+Matt Hand - Evading EDR (2023  Evading EDR               Matt Hand            0.850 
+Fotios Chantzis et al - Pract  Practical IoT Hacking     Fotios Chantzis et   0.850 
+AI_Agents_and_Applications_v7  AI_Agents_and_Applicatio  N/A                  0.650 
+Vamsee Puligadda - 500 Machin  500 Machine Learning (ML  Vamsee Puligadda     0.950 
+Douglas Crockford - How JavaS  How JavaScript Works      Douglas Crockford    0.850 
+resilientoracleplandsql.epub   resilientoracleplandsql   N/A                  0.500 
+Ajay Mahajan et al - Cloud-Na  Cloud-Native Application  Ajay Mahajan et al   0.850 
+Michal Zalewski - The Tangled  The Tangled Web           Michal Zalewski      0.850 
+Alan Beaulieu - Learning SQL   Learning SQL              Alan Beaulieu        1.000 
+Alice Zhao - SQL Pocket Guide  SQL Pocket Guide          Alice Zhao           0.850 
+AI_Agents_and_Applications_v7  AI_Agents_and_Applicatio  N/A                  0.650 
+
+SUMARIO
+------------------------------
+Livros testados: 20
+Confianca media: 0.832 (83.2%)
+Tempo medio: 0.000s
+Taxa sucesso: 0.950
+
+Resultados detalhados salvos em: file_output_test_results.json
+Saida completa salva em: test_output_real.txt
+
+TESTE FINALIZADO COM SUCESSO!

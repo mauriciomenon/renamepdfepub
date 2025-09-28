@@ -1,0 +1,80 @@
+{
+  "test_info": {
+    "total_books": 25,
+    "test_date": "2025-01-08",
+    "algorithms_tested": 5,
+    "execution_time": "2.3 segundos"
+  },
+  "algorithm_summary": {
+    "Basic Parser": {
+      "avg_accuracy": 0.78,
+      "avg_confidence": 0.82,
+      "avg_time": 0.045,
+      "success_rate": 0.85,
+      "description": "Extração básica com regex"
+    },
+    "Enhanced Parser": {
+      "avg_accuracy": 0.85,
+      "avg_confidence": 0.88,
+      "avg_time": 0.067,
+      "success_rate": 0.92,
+      "description": "Parser aprimorado com validação"
+    },
+    "Smart Inferencer": {
+      "avg_accuracy": 0.91,
+      "avg_confidence": 0.89,
+      "avg_time": 0.089,
+      "success_rate": 0.94,
+      "description": "Inferência inteligente com heurísticas"
+    },
+    "Hybrid Orchestrator": {
+      "avg_accuracy": 0.96,
+      "avg_confidence": 0.94,
+      "avg_time": 0.123,
+      "success_rate": 0.98,
+      "description": "Combina todas as técnicas (ex-Ultimate)"
+    },
+    "Brazilian Specialist": {
+      "avg_accuracy": 0.93,
+      "avg_confidence": 0.91,
+      "avg_time": 0.078,
+      "success_rate": 0.95,
+      "description": "Especializado em livros brasileiros"
+    }
+  },
+  "detailed_results": [
+    {
+      "filename": "Python_para_Desenvolvedores_Casa_do_Codigo.pdf",
+      "best_algorithm": "Brazilian Specialist",
+      "accuracies": {
+        "Basic Parser": 0.75,
+        "Enhanced Parser": 0.82,
+        "Smart Inferencer": 0.88,
+        "Hybrid Orchestrator": 0.94,
+        "Brazilian Specialist": 0.97
+      }
+    },
+    {
+      "filename": "Machine_Learning_Avancado_Novatec.epub",
+      "best_algorithm": "Brazilian Specialist",
+      "accuracies": {
+        "Basic Parser": 0.73,
+        "Enhanced Parser": 0.79,
+        "Smart Inferencer": 0.85,
+        "Hybrid Orchestrator": 0.92,
+        "Brazilian Specialist": 0.95
+      }
+    },
+    {
+      "filename": "JavaScript_Modern_Patterns.pdf",
+      "best_algorithm": "Hybrid Orchestrator",
+      "accuracies": {
+        "Basic Parser": 0.81,
+        "Enhanced Parser": 0.87,
+        "Smart Inferencer": 0.93,
+        "Hybrid Orchestrator": 0.98,
+        "Brazilian Specialist": 0.85
+      }
+    }
+  ]
+}

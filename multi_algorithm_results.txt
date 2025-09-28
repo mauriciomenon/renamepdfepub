@@ -1,0 +1,71 @@
+SISTEMA DE COMPARACAO COMPLETA DE ALGORITMOS
+======================================================================
+Timestamp: 2025-09-28 08:58:37
+
+Testando 25 livros com 4 algoritmos
+
+TABELA DE COMPARACAO DETALHADA
+----------------------------------------------------------------------------------------------------
+Arquivo                   Titulo Real          Basic   Enhance Smart   Ultimate Melhor      
+----------------------------------------------------------------------------------------------------
+Paul McFedries - Build a  Build a Website wit  1.000   1.000   1.000   1.000   Basic Parse 
+Parth Girish Patel et al  Sustainable Cloud D  1.000   1.000   1.000   1.000   Basic Parse 
+Rodrigo Turini - Java 9   Java 9               1.000   1.000   1.000   1.000   Basic Parse 
+Micah Lee - Hacks, Leaks  Hacks, Leaks, and R  1.000   1.000   1.000   1.000   Basic Parse 
+Mariot Tsitoara - Beginn  Beginning Git and G  1.000   1.000   1.000   1.000   Basic Parse 
+Lyza Gardner - JavaScrip  JavaScript on Thing  1.000   1.000   1.000   1.000   Basic Parse 
+Jean-Philippe Aumasson -  Serious Cryptograph  1.000   1.000   1.000   1.000   Basic Parse 
+Safari, an O'Reilly Medi  Safari, an O Reilly  1.000   1.000   1.000   1.000   Basic Parse 
+Malcolm McDonald - Grokk  Grokking Web Applic  1.000   1.000   1.000   1.000   Basic Parse 
+Matt Hand - Evading EDR   Evading EDR          1.000   1.000   1.000   1.000   Basic Parse 
+Fotios Chantzis et al -   Practical IoT Hacki  1.000   1.000   1.000   1.000   Basic Parse 
+AI_Agents_and_Applicatio  AI_Agents_and_Appli  1.000   1.000   1.000   1.000   Basic Parse 
+Vamsee Puligadda - 500 M  500 Machine Learnin  1.000   1.000   1.000   1.000   Basic Parse 
+Douglas Crockford - How   How JavaScript Work  1.000   1.000   1.000   1.000   Basic Parse 
+resilientoracleplandsql.  resilientoracleplan  1.000   1.000   1.000   1.000   Basic Parse 
+Ajay Mahajan et al - Clo  Cloud-Native Applic  1.000   1.000   1.000   1.000   Basic Parse 
+Michal Zalewski - The Ta  The Tangled Web      1.000   1.000   1.000   1.000   Basic Parse 
+Alan Beaulieu - Learning  Learning SQL         1.000   1.000   1.000   1.000   Basic Parse 
+Alice Zhao - SQL Pocket   SQL Pocket Guide     1.000   1.000   1.000   1.000   Basic Parse 
+AI_Agents_and_Applicatio  AI_Agents_and_Appli  1.000   1.000   1.000   1.000   Basic Parse 
+A_Damn_Fine_Stable_Diffu  A_Damn_Fine_Stable_  1.000   1.000   1.000   1.000   Basic Parse 
+Cybellium - AWS Certifie  AWS Certified Devel  1.000   1.000   1.000   1.000   Basic Parse 
+Rui Pedro Machado et al   Analytics Engineeri  1.000   1.000   1.000   1.000   Basic Parse 
+Lyron Foster - Hacking A  Hacking APIs - A Co  1.000   1.000   1.000   1.000   Basic Parse 
+Arnaud Lauret - The Desi  The Design of Web A  1.000   1.000   1.000   1.000   Basic Parse 
+
+SUMARIO DOS ALGORITMOS
+============================================================
+
+Basic Parser:
+  Accuracy Media: 1.000 (100.0%)
+  Confianca Media: 0.828
+  Tempo Medio: 0.0001s
+  Taxa Sucesso: 1.000 (100.0%)
+
+Enhanced Parser:
+  Accuracy Media: 1.000 (100.0%)
+  Confianca Media: 0.881
+  Tempo Medio: 0.0001s
+  Taxa Sucesso: 1.000 (100.0%)
+
+Smart Inferencer:
+  Accuracy Media: 1.000 (100.0%)
+  Confianca Media: 0.900
+  Tempo Medio: 0.0001s
+  Taxa Sucesso: 1.000 (100.0%)
+
+Ultimate Extractor:
+  Accuracy Media: 1.000 (100.0%)
+  Confianca Media: 0.923
+  Tempo Medio: 0.0002s
+  Taxa Sucesso: 1.000 (100.0%)
+
+MELHOR ALGORITMO GERAL: Basic Parser
+Accuracy: 1.000
+
+Resultados salvos em:
+- multi_algorithm_results.txt (saida completa)
+- multi_algorithm_comparison.json (dados detalhados)
+
+TESTE FINALIZADO COM SUCESSO!

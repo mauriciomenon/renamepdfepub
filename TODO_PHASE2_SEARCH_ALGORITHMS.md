@@ -1,231 +1,231 @@
 # TODO Phase 2 - Search Algorithms Implementation
 
-## 🎯 Objetivos da Fase 2
+## Objetivos da Fase 2
 
-### Implementação de Algoritmos de Busca e Pesquisa
-- **Foco principal**: Melhorias de desempenho para suporte a múltiplos algoritmos
+### Implementacao de Algoritmos de Busca e Pesquisa
+- **Foco principal**: Melhorias de desempenho para suporte a multiplos algoritmos
 - **Escopo**: CLI + GUI com componentes compartilhados
-- **Qualidade**: Implementação longa, refinada, confiável e robusta
-- **Testes**: Extensivos e criativos usando coleção books/
+- **Qualidade**: Implementacao longa, refinada, confiavel e robusta
+- **Testes**: Extensivos e criativos usando colecao books
 
-## 📋 TODO List Detalhado
+## TODO List Detalhado
 
-### 🏗️ Arquitetura e Refatoração (Prioridade Alta)
+### Arquitetura e Refatoracao (Prioridade Alta)
 
 #### CLI Refactoring
 - [ ] **Dividir renomeia_livro.py (8536 linhas)**
-  - [ ] Extrair DependencyManager → src/renamepdfepub/dependency_manager.py
-  - [ ] Consolidar MetadataCache (eliminar duplicação CLI/shared)
-  - [ ] Extrair EbookProcessor → src/renamepdfepub/ebook_processor.py
-  - [ ] Extrair PacktBookProcessor → src/renamepdfepub/specialized_processors/
-  - [ ] Manter renomeia_livro.py como script principal (~200 linhas)
+ - [ ] Extrair DependencyManager srcrenamepdfepubdependency_manager.py
+ - [ ] Consolidar MetadataCache (eliminar duplicacao CLIshared)
+ - [ ] Extrair EbookProcessor srcrenamepdfepubebook_processor.py
+ - [ ] Extrair PacktBookProcessor srcrenamepdfepubspecialized_processors
+ - [ ] Manter renomeia_livro.py como script principal (200 linhas)
 
-#### Unificação de Componentes
+#### Unificacao de Componentes
 - [ ] **Consolidar extratores de metadados**
-  - [ ] Unificar BookMetadataExtractor (CLI) com metadata_extractor.py (shared)
-  - [ ] Implementar interface consistente entre GUI e CLI
-  - [ ] Otimizar cache compartilhado de texto PDF
+ - [ ] Unificar BookMetadataExtractor (CLI) com metadata_extractor.py (shared)
+ - [ ] Implementar interface consistente entre GUI e CLI
+ - [ ] Otimizar cache compartilhado de texto PDF
 
-#### Módulo de Busca Compartilhado
-- [ ] **Criar src/renamepdfepub/search_algorithms/**
-  - [ ] base_search.py - Interface base para algoritmos
-  - [ ] fuzzy_search.py - Busca fuzzy para títulos/autores
-  - [ ] isbn_search.py - Busca especializada por ISBN
-  - [ ] text_similarity.py - Algoritmos de similaridade de texto
-  - [ ] search_orchestrator.py - Coordenação de múltiplos algoritmos
+#### Modulo de Busca Compartilhado
+- [ ] **Criar srcrenamepdfepubsearch_algorithms**
+ - [ ] base_search.py - Interface base para algoritmos
+ - [ ] fuzzy_search.py - Busca fuzzy para titulosautores
+ - [ ] isbn_search.py - Busca especializada por ISBN
+ - [ ] text_similarity.py - Algoritmos de similaridade de texto
+ - [ ] search_orchestrator.py - Coordenacao de multiplos algoritmos
 
-### 🔍 Algoritmos de Busca (Prioridade Alta)
+### Algoritmos de Busca (Prioridade Alta)
 
 #### Algoritmos Fundamentais
 - [ ] **Fuzzy String Matching**
-  - [ ] Implementar Levenshtein distance
-  - [ ] Implementar Jaro-Winkler similarity
-  - [ ] Implementar soundex/metaphone para nomes
-  - [ ] Benchmark de performance
+ - [ ] Implementar Levenshtein distance
+ - [ ] Implementar Jaro-Winkler similarity
+ - [ ] Implementar soundexmetaphone para nomes
+ - [ ] Benchmark de performance
 
-- [ ] **Busca por Similaridade Semântica**
-  - [ ] TF-IDF para comparação de títulos
-  - [ ] N-gram matching para autores
-  - [ ] Normalização de editoras (já existe, expandir)
+- [ ] **Busca por Similaridade Semantica**
+ - [ ] TF-IDF para comparacao de titulos
+ - [ ] N-gram matching para autores
+ - [ ] Normalizacao de editoras (ja existe, expandir)
 
-- [ ] **Busca Híbrida Multi-critério**
-  - [ ] Combinação ponderada de algoritmos
-  - [ ] Sistema de scoring dinâmico
-  - [ ] Fallback automático entre estratégias
+- [ ] **Busca Hibrida Multi-criterio**
+ - [ ] Combinacao ponderada de algoritmos
+ - [ ] Sistema de scoring dinamico
+ - [ ] Fallback automatico entre estrategias
 
 #### Busca Especializada
 - [ ] **ISBN Intelligence**
-  - [ ] Validação e correção automática de ISBNs
-  - [ ] Busca por ISBN parcial/corrompido
-  - [ ] Cache inteligente de resultados ISBN
+ - [ ] Validacao e correcao automatica de ISBNs
+ - [ ] Busca por ISBN parcialcorrompido
+ - [ ] Cache inteligente de resultados ISBN
 
 - [ ] **Publisher-Specific Search**
-  - [ ] Extensão dos processadores Packt, O'Reilly, etc.
-  - [ ] Padrões específicos por editora
-  - [ ] Tratamento de edge cases por publisher
+ - [ ] Extensao dos processadores Packt, O'Reilly, etc.
+ - [ ] Padroes especificos por editora
+ - [ ] Tratamento de edge cases por publisher
 
-### 🖥️ Interface GUI (Prioridade Média)
+### Interface GUI (Prioridade Media)
 
-#### Widgets de Configuração de Algoritmos
-- [ ] **Painel de Seleção de Algoritmos**
-  - [ ] Checkboxes para algoritmos disponíveis
-  - [ ] Sliders para pesos/thresholds
-  - [ ] Preview em tempo real de resultados
+#### Widgets de Configuracao de Algoritmos
+- [ ] **Painel de Selecao de Algoritmos**
+ - [ ] Checkboxes para algoritmos disponiveis
+ - [ ] Sliders para pesosthresholds
+ - [ ] Preview em tempo real de resultados
 
-- [ ] **Visualização de Performance**
-  - [ ] Gráficos de tempo de execução
-  - [ ] Métricas de precisão por algoritmo
-  - [ ] Comparação lado-a-lado
+- [ ] **Visualizacao de Performance**
+ - [ ] Graficos de tempo de execucao
+ - [ ] Metricas de precisao por algoritmo
+ - [ ] Comparacao lado-a-lado
 
-#### Funcionalidades Avançadas GUI
+#### Funcionalidades Avancadas GUI
 - [ ] **Modo Batch Inteligente**
-  - [ ] Seleção automática de algoritmo por tipo de arquivo
-  - [ ] Progress bar detalhado por algoritmo
-  - [ ] Relatório de resultados por estratégia
+ - [ ] Selecao automatica de algoritmo por tipo de arquivo
+ - [ ] Progress bar detalhado por algoritmo
+ - [ ] Relatorio de resultados por estrategia
 
-### 🖲️ Interface CLI (Prioridade Média)
+### Interface CLI (Prioridade Media)
 
-#### Parâmetros de Linha de Comando
-- [ ] **Opções de Algoritmo**
-  - [ ] --search-algorithm (fuzzy|semantic|hybrid|auto)
-  - [ ] --fuzzy-threshold (0.0-1.0)
-  - [ ] --fallback-strategy (chain|parallel|adaptive)
+#### Parametros de Linha de Comando
+- [ ] **Opcoes de Algoritmo**
+ - [ ] --search-algorithm (fuzzy|semantic|hybrid|auto)
+ - [ ] --fuzzy-threshold (0.0-1.0)
+ - [ ] --fallback-strategy (chain|parallel|adaptive)
 
 - [ ] **Modo Benchmark**
-  - [ ] --benchmark - testa todos algoritmos
-  - [ ] --compare-algorithms - comparação detalhada
-  - [ ] --export-metrics - exporta resultados CSV/JSON
+ - [ ] --benchmark - testa todos algoritmos
+ - [ ] --compare-algorithms - comparacao detalhada
+ - [ ] --export-metrics - exporta resultados CSVJSON
 
-#### Relatórios CLI Avançados
+#### Relatorios CLI Avancados
 - [ ] **Performance Analytics**
-  - [ ] Tempo por algoritmo
-  - [ ] Taxa de sucesso por estratégia  
-  - [ ] Recomendações automáticas
+ - [ ] Tempo por algoritmo
+ - [ ] Taxa de sucesso por estrategia 
+ - [ ] Recomendacoes automaticas
 
-### 🧪 Testing Strategy (Prioridade Alta)
+### Testing Strategy (Prioridade Alta)
 
-#### Test Dataset (books/ directory - 100+ files)
-- [ ] **Categorização de Arquivos de Teste**
-  - [ ] PDFs limpos vs. escaneados
-  - [ ] EPUBs com/sem metadados completos
-  - [ ] Casos edge: nomes especiais, caracteres Unicode
-  - [ ] Arquivos corrompidos/incompletos
+#### Test Dataset (books directory - 100+ files)
+- [ ] **Categorizacao de Arquivos de Teste**
+ - [ ] PDFs limpos vs. escaneados
+ - [ ] EPUBs comsem metadados completos
+ - [ ] Casos edge: nomes especiais, caracteres Unicode
+ - [ ] Arquivos corrompidosincompletos
 
 #### Test Scenarios
 - [ ] **Accuracy Tests**
-  - [ ] Ground truth dataset com metadados validados
-  - [ ] Precision/Recall por algoritmo
-  - [ ] F1-score para comparação
+ - [ ] Ground truth dataset com metadados validados
+ - [ ] PrecisionRecall por algoritmo
+ - [ ] F1-score para comparacao
 
 - [ ] **Performance Tests**
-  - [ ] Benchmark de tempo por algoritmo
-  - [ ] Memory usage profiling
-  - [ ] Concurrency stress tests
+ - [ ] Benchmark de tempo por algoritmo
+ - [ ] Memory usage profiling
+ - [ ] Concurrency stress tests
 
 - [ ] **Edge Case Tests**
-  - [ ] Títulos com caracteres especiais
-  - [ ] Autores com múltiplas grafias
-  - [ ] ISBNs corrompidos/parciais
-  - [ ] Metadados conflitantes
+ - [ ] Titulos com caracteres especiais
+ - [ ] Autores com multiplas grafias
+ - [ ] ISBNs corrompidosparciais
+ - [ ] Metadados conflitantes
 
 #### Creative Testing Approaches
-- [ ] **Algoritmos Genéticos para Otimização**
-  - [ ] Evolução automática de pesos
-  - [ ] Descoberta de combinações ótimas
-  - [ ] Adaptação por tipo de conteúdo
+- [ ] **Algoritmos Geneticos para Otimizacao**
+ - [ ] Evolucao automatica de pesos
+ - [ ] Descoberta de combinacoes otimas
+ - [ ] Adaptacao por tipo de conteudo
 
-- [ ] **A/B Testing Framework**
-  - [ ] Comparação estatística de algoritmos
-  - [ ] Significance testing
-  - [ ] Automated regression detection
+- [ ] **AB Testing Framework**
+ - [ ] Comparacao estatistica de algoritmos
+ - [ ] Significance testing
+ - [ ] Automated regression detection
 
-### 📊 Metrics & Analytics (Prioridade Média)
+### Metrics Analytics (Prioridade Media)
 
 #### Performance Monitoring
 - [ ] **Real-time Metrics**
-  - [ ] Dashboard de performance em tempo real
-  - [ ] Alertas para degradação de performance
-  - [ ] Historical trending
+ - [ ] Dashboard de performance em tempo real
+ - [ ] Alertas para degradacao de performance
+ - [ ] Historical trending
 
 - [ ] **Algorithm Effectiveness**
-  - [ ] Success rate por tipo de arquivo
-  - [ ] Confidence score distribution
-  - [ ] False positive/negative analysis
+ - [ ] Success rate por tipo de arquivo
+ - [ ] Confidence score distribution
+ - [ ] False positivenegative analysis
 
-### 🔧 Infrastructure & DevOps (Prioridade Baixa)
+### Infrastructure DevOps (Prioridade Baixa)
 
 #### Development Tools
 - [ ] **Profiling Integration**
-  - [ ] cProfile integration para benchmarks
-  - [ ] Memory profiling com memory_profiler
-  - [ ] Visual profiling reports
+ - [ ] cProfile integration para benchmarks
+ - [ ] Memory profiling com memory_profiler
+ - [ ] Visual profiling reports
 
-- [ ] **CI/CD Enhancement**
-  - [ ] Performance regression tests
-  - [ ] Automated benchmarking pipeline
-  - [ ] Algorithm comparison reports
+- [ ] **CICD Enhancement**
+ - [ ] Performance regression tests
+ - [ ] Automated benchmarking pipeline
+ - [ ] Algorithm comparison reports
 
-## 🎯 Milestone Planning
+## Milestone Planning
 
 ### Milestone 1: Architecture Cleanup (1-2 weeks)
 - CLI refactoring completo
-- Módulos compartilhados consolidados
+- Modulos compartilhados consolidados
 - Base para algoritmos de busca
 
 ### Milestone 2: Core Search Algorithms (2-3 weeks)
 - Fuzzy matching implementado
-- Busca semântica básica
+- Busca semantica basica
 - Sistema de scoring unificado
 
 ### Milestone 3: Advanced Features (2-3 weeks)
-- GUI widgets para configuração
-- CLI parâmetros avançados
-- Busca híbrida multi-critério
+- GUI widgets para configuracao
+- CLI parametros avancados
+- Busca hibrida multi-criterio
 
-### Milestone 4: Testing & Optimization (1-2 weeks)
-- Test suite completo usando books/
+### Milestone 4: Testing Optimization (1-2 weeks)
+- Test suite completo usando books
 - Performance benchmarking
-- Documentação e refinamentos
+- Documentacao e refinamentos
 
-## 🏆 Success Criteria
+## Success Criteria
 
 ### Performance Goals
-- **Throughput**: Manter/melhorar 75% improvement atual
-- **Accuracy**: >90% precision em dataset de teste
-- **Scalability**: Suporte a 1000+ arquivos simultâneos
+- **Throughput**: Mantermelhorar 75 improvement atual
+- **Accuracy**: 90 precision em dataset de teste
+- **Scalability**: Suporte a 1000+ arquivos simultaneos
 
 ### Quality Goals
-- **Code Coverage**: >85% para novos módulos
+- **Code Coverage**: 85 para novos modulos
 - **Documentation**: Completa para todos algoritmos
-- **Maintainability**: Modular, testável, extensível
+- **Maintainability**: Modular, testavel, extensivel
 
 ### User Experience Goals
-- **GUI**: Configuração intuitiva de algoritmos
-- **CLI**: Parâmetros flexíveis e informativos
+- **GUI**: Configuracao intuitiva de algoritmos
+- **CLI**: Parametros flexiveis e informativos
 - **Robustez**: Graceful handling de edge cases
 
 ---
 
-## 📝 Notas de Implementação
+## Notas de Implementacao
 
-### Distinção CLI vs GUI vs Compartilhado
+### Distincao CLI vs GUI vs Compartilhado
 
-#### 🖥️ GUI-Specific (gui_RenameBook.py)
-- Widgets de configuração visual
+#### GUI-Specific (gui_RenameBook.py)
+- Widgets de configuracao visual
 - Progress bars para algoritmos
 - Preview em tempo real
-- Visualizações/gráficos
+- Visualizacoesgraficos
 
-#### 🖲️ CLI-Specific (renomeia_livro_main.py refatorado)
-- Parsing de argumentos avançados
-- Relatórios detalhados em texto
+#### CLI-Specific (renomeia_livro_main.py refatorado)
+- Parsing de argumentos avancados
+- Relatorios detalhados em texto
 - Processamento batch otimizado
-- Export de métricas
+- Export de metricas
 
-#### 🔗 Shared (src/renamepdfepub/)
+#### Shared (srcrenamepdfepub)
 - **Todos os algoritmos de busca**
-- **Lógica de scoring**
+- **Logica de scoring**
 - **Cache e performance optimizations**
 - **Core metadata processing**
 
-Esta separação clara permitirá implementação eficiente mantendo código DRY e performance otimizada.
+Esta separacao clara permitira implementacao eficiente mantendo codigo DRY e performance otimizada.

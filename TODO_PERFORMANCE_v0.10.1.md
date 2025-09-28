@@ -1,51 +1,51 @@
 # TODO - Performance Optimization v0.10.1
 
-## 🚀 High Priority - Performance Quick Wins
+## High Priority - Performance Quick Wins
 
 ### 1. PDF Text Extraction Caching
-- [ ] Implementar cache baseado em hash do arquivo para texto extraído
+- [ ] Implementar cache baseado em hash do arquivo para texto extraido
 - [ ] Adicionar TTL para cache (evitar dados obsoletos)
 - [ ] Cache size limits e LRU eviction policy
-- [ ] Métricas de hit rate para monitoramento
+- [ ] Metricas de hit rate para monitoramento
 
-### 2. SQLite Performance Optimization  
+### 2. SQLite Performance Optimization 
 - [ ] Adicionar PRAGMAs otimizados:
-  - `PRAGMA journal_mode=WAL`
-  - `PRAGMA synchronous=NORMAL`
-  - `PRAGMA cache_size=10000`
-  - `PRAGMA temp_store=memory`
-- [ ] Connection pooling/singleton pattern para MetadataCache
-- [ ] Batch insert/update operations (reduzir transações)
-- [ ] Índices compostos para queries complexas
+ - `PRAGMA journal_mode=WAL`
+ - `PRAGMA synchronous=NORMAL`
+ - `PRAGMA cache_size=10000`
+ - `PRAGMA temp_store=memory`
+- [ ] Connection poolingsingleton pattern para MetadataCache
+- [ ] Batch insertupdate operations (reduzir transacoes)
+- [ ] Indices compostos para queries complexas
 
 ### 3. Regex Compilation Optimization
-- [ ] Pre-compilar todos os regex patterns como constantes de módulo
+- [ ] Pre-compilar todos os regex patterns como constantes de modulo
 - [ ] ISBN13_RE, ISBN10_RE, title patterns compilados uma vez
-- [ ] Benchmark impacto na performance de extração
-- [ ] Documentar patterns para manutenção
+- [ ] Benchmark impacto na performance de extracao
+- [ ] Documentar patterns para manutencao
 
 ### 4. Database Schema Enhancements
 - [ ] Adicionar FTS5 virtual table para full-text search:
-  ```sql
-  CREATE VIRTUAL TABLE metadata_fts USING fts5(
-    title, authors, publisher, content=metadata_cache
-  );
-  ```
-- [ ] Índices otimizados para algoritmos de busca
+ ```sql
+ CREATE VIRTUAL TABLE metadata_fts USING fts5(
+ title, authors, publisher, content=metadata_cache
+ );
+ ```
+- [ ] Indices otimizados para algoritmos de busca
 - [ ] Schema migration system para updates seguros
 
-## 🎯 Medium Priority - Search Algorithm Foundation
+## Medium Priority - Search Algorithm Foundation
 
 ### 5. Async HTTP Operations
-- [ ] Migrar requests para aiohttp (async/await)
+- [ ] Migrar requests para aiohttp (asyncawait)
 - [ ] Implementar request batching quando APIs suportam
 - [ ] Rate limiting inteligente com exponential backoff
 - [ ] Connection pooling para HTTP calls
 
 ### 6. Advanced Search Capabilities
-- [ ] Fuzzy string matching (rapidfuzz) para títulos similares
-- [ ] Levenshtein distance para correção de typos
-- [ ] N-gram analysis para detecção de similaridade
+- [ ] Fuzzy string matching (rapidfuzz) para titulos similares
+- [ ] Levenshtein distance para correcao de typos
+- [ ] N-gram analysis para deteccao de similaridade
 - [ ] TF-IDF scoring para relevance ranking
 
 ### 7. Memory Management
@@ -54,13 +54,13 @@
 - [ ] Streaming JSON parsing para responses grandes
 - [ ] Memory profiling e optimization
 
-### 8. File I/O Optimization
-- [ ] Single-pass directory scanning (eliminar múltiplas passadas)
+### 8. File IO Optimization
+- [ ] Single-pass directory scanning (eliminar multiplas passadas)
 - [ ] Cache de file metadata (size, mtime) para grouping
-- [ ] Parallel directory traversal para diretórios grandes
-- [ ] Bloom filters para deduplicação rápida
+- [ ] Parallel directory traversal para diretorios grandes
+- [ ] Bloom filters para deduplicacao rapida
 
-## 🔬 Low Priority - Advanced Features
+## Low Priority - Advanced Features
 
 ### 9. Distributed Processing
 - [ ] Multiprocessing support para CPU-bound tasks
@@ -69,18 +69,18 @@
 - [ ] Resource management e cleanup
 
 ### 10. Machine Learning Integration
-- [ ] ML-based title/author extraction para PDFs complexos
+- [ ] ML-based titleauthor extraction para PDFs complexos
 - [ ] Confidence scoring baseado em ML models
 - [ ] Training data collection e model updates
-- [ ] A/B testing para comparar accuracy
+- [ ] AB testing para comparar accuracy
 
 ### 11. Monitoring e Benchmarking
 - [ ] Performance metrics collection
 - [ ] Benchmark suite automatizado
 - [ ] Performance regression testing
-- [ ] Dashboard para monitoring em produção
+- [ ] Dashboard para monitoring em producao
 
-## 🧪 Testing e Validation
+## Testing e Validation
 
 ### 12. Performance Testing
 - [ ] Benchmark suite com datasets controlados
@@ -89,38 +89,38 @@
 - [ ] Regression testing para performance
 
 ### 13. Compatibility Testing
-- [ ] Validar mudanças com diferentes Python versions
+- [ ] Validar mudancas com diferentes Python versions
 - [ ] Cross-platform testing (macOS, Linux, Windows)
 - [ ] Dependency version compatibility
 - [ ] Database migration testing
 
-## 📋 Implementation Guidelines
+## Implementation Guidelines
 
 ### Code Quality Standards
 - Manter compatibilidade total com API existente
-- Adicionar type hints para novas funções
-- Unit tests para todas as otimizações
-- Documentation updates para mudanças de comportamento
+- Adicionar type hints para novas funcoes
+- Unit tests para todas as otimizacoes
+- Documentation updates para mudancas de comportamento
 
 ### Performance Targets
-- **PDF extraction**: <1s por arquivo (atual: 2-5s)
-- **Cache lookup**: <20ms (atual: <50ms)  
-- **Total throughput**: >40 arquivos/minuto (atual: 15-20)
-- **Memory usage**: Manter <100MB para 1000 arquivos
+- **PDF extraction**: 1s por arquivo (atual: 2-5s)
+- **Cache lookup**: 20ms (atual: 50ms) 
+- **Total throughput**: 40 arquivosminuto (atual: 15-20)
+- **Memory usage**: Manter 100MB para 1000 arquivos
 
 ### Rollout Strategy
 1. **Fase 1**: Quick wins (items 1-4) - Esta sprint
-2. **Fase 2**: Search foundation (items 5-8) - Próxima sprint  
+2. **Fase 2**: Search foundation (items 5-8) - Proxima sprint 
 3. **Fase 3**: Advanced features (items 9-11) - Roadmap futuro
 
-## 🎯 Success Metrics
+## Success Metrics
 
-- [ ] 50%+ redução no tempo de extração de metadados
-- [ ] 30%+ aumento no throughput total
-- [ ] <5% aumento no memory footprint
-- [ ] 100% backward compatibility mantida
-- [ ] Zero regressão em accuracy de metadados
+- [ ] 50+ reducao no tempo de extracao de metadados
+- [ ] 30+ aumento no throughput total
+- [ ] 5 aumento no memory footprint
+- [ ] 100 backward compatibility mantida
+- [ ] Zero regressao em accuracy de metadados
 
 ---
 
-**Note**: Este TODO foca em melhorias incrementais que preparam o terreno para algoritmos avançados de busca/pesquisa, mantendo a estabilidade e compatibilidade do código atual.
+**Note**: Este TODO foca em melhorias incrementais que preparam o terreno para algoritmos avancados de buscapesquisa, mantendo a estabilidade e compatibilidade do codigo atual.

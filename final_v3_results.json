@@ -1,0 +1,152 @@
+{
+  "timestamp": "2025-09-28 02:25:04",
+  "version": "V3_Final",
+  "stats": {
+    "total_books": 80,
+    "with_title": 80,
+    "with_author": 0,
+    "with_publisher": 22,
+    "with_year": 0,
+    "with_category": 64,
+    "avg_confidence": 0.40437500000000004
+  },
+  "books_sample": [
+    {
+      "filename": "reacthooksinaction.pdf",
+      "title": "reacthooksinaction",
+      "author": "",
+      "publisher": "",
+      "year": "",
+      "edition": "",
+      "category": "Programming",
+      "keywords": [
+        "react"
+      ],
+      "confidence": 0.38
+    },
+    {
+      "filename": "mastervuejsin6days.epub",
+      "title": "mastervuejsin6days",
+      "author": "",
+      "publisher": "",
+      "year": "",
+      "edition": "",
+      "category": "Programming",
+      "keywords": [
+        "js",
+        "vue"
+      ],
+      "confidence": 0.39
+    },
+    {
+      "filename": "designingapiswithswaggerandopenapi.epub",
+      "title": "designingapiswithswaggerandopenapi",
+      "author": "",
+      "publisher": "",
+      "year": "",
+      "edition": "",
+      "category": "Web",
+      "keywords": [
+        "api"
+      ],
+      "confidence": 0.38
+    },
+    {
+      "filename": "Modern_C_Third_Edition.pdf",
+      "title": "Modern C Third Edition",
+      "author": "",
+      "publisher": "",
+      "year": "",
+      "edition": "Third Edition",
+      "category": "General",
+      "keywords": [],
+      "confidence": 0.33
+    },
+    {
+      "filename": "Learn Computer Forensics - Second Edition.pdf",
+      "title": "Learn Computer Forensics Second Edition",
+      "author": "",
+      "publisher": "",
+      "year": "",
+      "edition": "Second Edition",
+      "category": "Security",
+      "keywords": [
+        "forensics"
+      ],
+      "confidence": 0.46
+    },
+    {
+      "filename": "cloudnativeanti-patterns.epub",
+      "title": "cloudnativeanti patterns",
+      "author": "",
+      "publisher": "",
+      "year": "",
+      "edition": "",
+      "category": "DevOps",
+      "keywords": [
+        "cloud"
+      ],
+      "confidence": 0.38
+    },
+    {
+      "filename": "evasivemalware.pdf",
+      "title": "evasivemalware",
+      "author": "",
+      "publisher": "",
+      "year": "",
+      "edition": "",
+      "category": "Security",
+      "keywords": [
+        "malware"
+      ],
+      "confidence": 0.38
+    },
+    {
+      "filename": "AI_Agents_and_Applications_v7_MEAP.epub",
+      "title": "AI Agents and Applications v7 MEAP",
+      "author": "",
+      "publisher": "Manning",
+      "year": "",
+      "edition": "",
+      "category": "AI_ML",
+      "keywords": [
+        "ai",
+        "app"
+      ],
+      "confidence": 0.54
+    },
+    {
+      "filename": "efficientmysqlperformance.epub",
+      "title": "efficientmysqlperformance",
+      "author": "",
+      "publisher": "",
+      "year": "",
+      "edition": "",
+      "category": "Database",
+      "keywords": [
+        "mysql",
+        "sql"
+      ],
+      "confidence": 0.39
+    },
+    {
+      "filename": "resilientoracleplandsql.epub",
+      "title": "resilientoracleplandsql",
+      "author": "",
+      "publisher": "",
+      "year": "",
+      "edition": "",
+      "category": "Database",
+      "keywords": [
+        "sql"
+      ],
+      "confidence": 0.38
+    }
+  ],
+  "execution_time": 0.00693511962890625,
+  "meta_achievement": {
+    "author": false,
+    "year": false,
+    "publisher": true
+  }
+}

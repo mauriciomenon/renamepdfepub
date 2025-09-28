@@ -1,0 +1,1503 @@
+{
+  "test_info": {
+    "total_books": 25,
+    "timestamp": "2025-09-28 08:53:29"
+  },
+  "detailed_results": [
+    {
+      "filename": "Paul McFedries - Build a Website with ChatGPT (2024).epub",
+      "expected": {
+        "title": "Build A Website With Chatgpt",
+        "author": "Paul Mcfedries",
+        "publisher": "",
+        "year": "2024"
+      },
+      "algorithms": {
+        "Simple Fuzzy": {
+          "filename": "Paul McFedries - Build a Website with ChatGPT (2024).epub",
+          "algorithm": "Simple Fuzzy",
+          "title_extracted": "Build A Website With Chatgpt",
+          "author_extracted": "Paul Mcfedries",
+          "publisher_extracted": "",
+          "year_extracted": "2024",
+          "title_expected": "Build A Website With Chatgpt",
+          "author_expected": "Paul Mcfedries",
+          "publisher_expected": "",
+          "year_expected": "2024",
+          "accuracy_score": 1.0,
+          "execution_time": 2.2649765014648438e-05
+        },
+        "Simple Semantic": {
+          "filename": "Paul McFedries - Build a Website with ChatGPT (2024).epub",
+          "algorithm": "Simple Semantic",
+          "title_extracted": "Build A Website With Chatgpt",
+          "author_extracted": "Paul Mcfedries",
+          "publisher_extracted": "",
+          "year_extracted": "2024",
+          "title_expected": "Build A Website With Chatgpt",
+          "author_expected": "Paul Mcfedries",
+          "publisher_expected": "",
+          "year_expected": "2024",
+          "accuracy_score": 1.0,
+          "execution_time": 2.193450927734375e-05
+        },
+        "Simple Orchestrator": {
+          "filename": "Paul McFedries - Build a Website with ChatGPT (2024).epub",
+          "algorithm": "Simple Orchestrator",
+          "title_extracted": "Build A Website With Chatgpt",
+          "author_extracted": "Paul Mcfedries",
+          "publisher_extracted": "",
+          "year_extracted": "2024",
+          "title_expected": "Build A Website With Chatgpt",
+          "author_expected": "Paul Mcfedries",
+          "publisher_expected": "",
+          "year_expected": "2024",
+          "accuracy_score": 1.0,
+          "execution_time": 3.314018249511719e-05
+        }
+      }
+    },
+    {
+      "filename": "Parth Girish Patel et al - Sustainable Cloud Development (2025).epub",
+      "expected": {
+        "title": "Sustainable Cloud Development",
+        "author": "Parth Girish Patel Et Al",
+        "publisher": "",
+        "year": "2025"
+      },
+      "algorithms": {
+        "Simple Fuzzy": {
+          "filename": "Parth Girish Patel et al - Sustainable Cloud Development (2025).epub",
+          "algorithm": "Simple Fuzzy",
+          "title_extracted": "Sustainable Cloud Development",
+          "author_extracted": "Parth Girish Patel Et Al",
+          "publisher_extracted": "",
+          "year_extracted": "2025",
+          "title_expected": "Sustainable Cloud Development",
+          "author_expected": "Parth Girish Patel Et Al",
+          "publisher_expected": "",
+          "year_expected": "2025",
+          "accuracy_score": 1.0,
+          "execution_time": 1.3113021850585938e-05
+        },
+        "Simple Semantic": {
+          "filename": "Parth Girish Patel et al - Sustainable Cloud Development (2025).epub",
+          "algorithm": "Simple Semantic",
+          "title_extracted": "Sustainable Cloud Development",
+          "author_extracted": "Parth Girish Patel Et Al",
+          "publisher_extracted": "",
+          "year_extracted": "2025",
+          "title_expected": "Sustainable Cloud Development",
+          "author_expected": "Parth Girish Patel Et Al",
+          "publisher_expected": "",
+          "year_expected": "2025",
+          "accuracy_score": 1.0,
+          "execution_time": 5.3882598876953125e-05
+        },
+        "Simple Orchestrator": {
+          "filename": "Parth Girish Patel et al - Sustainable Cloud Development (2025).epub",
+          "algorithm": "Simple Orchestrator",
+          "title_extracted": "Sustainable Cloud Development",
+          "author_extracted": "Parth Girish Patel Et Al",
+          "publisher_extracted": "",
+          "year_extracted": "2025",
+          "title_expected": "Sustainable Cloud Development",
+          "author_expected": "Parth Girish Patel Et Al",
+          "publisher_expected": "",
+          "year_expected": "2025",
+          "accuracy_score": 1.0,
+          "execution_time": 7.176399230957031e-05
+        }
+      }
+    },
+    {
+      "filename": "Rodrigo Turini - Java 9 (2017).epub",
+      "expected": {
+        "title": "Java 9",
+        "author": "Rodrigo Turini",
+        "publisher": "",
+        "year": "2017"
+      },
+      "algorithms": {
+        "Simple Fuzzy": {
+          "filename": "Rodrigo Turini - Java 9 (2017).epub",
+          "algorithm": "Simple Fuzzy",
+          "title_extracted": "Java 9",
+          "author_extracted": "Rodrigo Turini",
+          "publisher_extracted": "",
+          "year_extracted": "2017",
+          "title_expected": "Java 9",
+          "author_expected": "Rodrigo Turini",
+          "publisher_expected": "",
+          "year_expected": "2017",
+          "accuracy_score": 1.0,
+          "execution_time": 0.00010180473327636719
+        },
+        "Simple Semantic": {
+          "filename": "Rodrigo Turini - Java 9 (2017).epub",
+          "algorithm": "Simple Semantic",
+          "title_extracted": "Java 9",
+          "author_extracted": "Rodrigo Turini",
+          "publisher_extracted": "",
+          "year_extracted": "2017",
+          "title_expected": "Java 9",
+          "author_expected": "Rodrigo Turini",
+          "publisher_expected": "",
+          "year_expected": "2017",
+          "accuracy_score": 1.0,
+          "execution_time": 0.00012493133544921875
+        },
+        "Simple Orchestrator": {
+          "filename": "Rodrigo Turini - Java 9 (2017).epub",
+          "algorithm": "Simple Orchestrator",
+          "title_extracted": "Java 9",
+          "author_extracted": "Rodrigo Turini",
+          "publisher_extracted": "",
+          "year_extracted": "2017",
+          "title_expected": "Java 9",
+          "author_expected": "Rodrigo Turini",
+          "publisher_expected": "",
+          "year_expected": "2017",
+          "accuracy_score": 1.0,
+          "execution_time": 6.604194641113281e-05
+        }
+      }
+    },
+    {
+      "filename": "Micah Lee - Hacks, Leaks, and Revelations (2024).pdf",
+      "expected": {
+        "title": "Hacks Leaks And Revelations",
+        "author": "Micah Lee",
+        "publisher": "",
+        "year": "2024"
+      },
+      "algorithms": {
+        "Simple Fuzzy": {
+          "filename": "Micah Lee - Hacks, Leaks, and Revelations (2024).pdf",
+          "algorithm": "Simple Fuzzy",
+          "title_extracted": "Hacks Leaks And Revelations",
+          "author_extracted": "Micah Lee",
+          "publisher_extracted": "",
+          "year_extracted": "2024",
+          "title_expected": "Hacks Leaks And Revelations",
+          "author_expected": "Micah Lee",
+          "publisher_expected": "",
+          "year_expected": "2024",
+          "accuracy_score": 1.0,
+          "execution_time": 1.3113021850585938e-05
+        },
+        "Simple Semantic": {
+          "filename": "Micah Lee - Hacks, Leaks, and Revelations (2024).pdf",
+          "algorithm": "Simple Semantic",
+          "title_extracted": "Hacks Leaks And Revelations",
+          "author_extracted": "Micah Lee",
+          "publisher_extracted": "",
+          "year_extracted": "2024",
+          "title_expected": "Hacks Leaks And Revelations",
+          "author_expected": "Micah Lee",
+          "publisher_expected": "",
+          "year_expected": "2024",
+          "accuracy_score": 1.0,
+          "execution_time": 1.5020370483398438e-05
+        },
+        "Simple Orchestrator": {
+          "filename": "Micah Lee - Hacks, Leaks, and Revelations (2024).pdf",
+          "algorithm": "Simple Orchestrator",
+          "title_extracted": "Hacks Leaks And Revelations",
+          "author_extracted": "Micah Lee",
+          "publisher_extracted": "",
+          "year_extracted": "2024",
+          "title_expected": "Hacks Leaks And Revelations",
+          "author_expected": "Micah Lee",
+          "publisher_expected": "",
+          "year_expected": "2024",
+          "accuracy_score": 1.0,
+          "execution_time": 5.2928924560546875e-05
+        }
+      }
+    },
+    {
+      "filename": "Mariot Tsitoara - Beginning Git and GitHub (2019).epub",
+      "expected": {
+        "title": "Beginning Git And Github",
+        "author": "Mariot Tsitoara",
+        "publisher": "",
+        "year": "2019"
+      },
+      "algorithms": {
+        "Simple Fuzzy": {
+          "filename": "Mariot Tsitoara - Beginning Git and GitHub (2019).epub",
+          "algorithm": "Simple Fuzzy",
+          "title_extracted": "Beginning Git And Github",
+          "author_extracted": "Mariot Tsitoara",
+          "publisher_extracted": "",
+          "year_extracted": "2019",
+          "title_expected": "Beginning Git And Github",
+          "author_expected": "Mariot Tsitoara",
+          "publisher_expected": "",
+          "year_expected": "2019",
+          "accuracy_score": 1.0,
+          "execution_time": 1.1920928955078125e-05
+        },
+        "Simple Semantic": {
+          "filename": "Mariot Tsitoara - Beginning Git and GitHub (2019).epub",
+          "algorithm": "Simple Semantic",
+          "title_extracted": "Beginning Git And Github",
+          "author_extracted": "Mariot Tsitoara",
+          "publisher_extracted": "",
+          "year_extracted": "2019",
+          "title_expected": "Beginning Git And Github",
+          "author_expected": "Mariot Tsitoara",
+          "publisher_expected": "",
+          "year_expected": "2019",
+          "accuracy_score": 1.0,
+          "execution_time": 3.123283386230469e-05
+        },
+        "Simple Orchestrator": {
+          "filename": "Mariot Tsitoara - Beginning Git and GitHub (2019).epub",
+          "algorithm": "Simple Orchestrator",
+          "title_extracted": "Beginning Git And Github",
+          "author_extracted": "Mariot Tsitoara",
+          "publisher_extracted": "",
+          "year_extracted": "2019",
+          "title_expected": "Beginning Git And Github",
+          "author_expected": "Mariot Tsitoara",
+          "publisher_expected": "",
+          "year_expected": "2019",
+          "accuracy_score": 1.0,
+          "execution_time": 3.123283386230469e-05
+        }
+      }
+    },
+    {
+      "filename": "Lyza Gardner - JavaScript on Things (2018).epub",
+      "expected": {
+        "title": "Javascript On Things",
+        "author": "Lyza Gardner",
+        "publisher": "",
+        "year": "2018"
+      },
+      "algorithms": {
+        "Simple Fuzzy": {
+          "filename": "Lyza Gardner - JavaScript on Things (2018).epub",
+          "algorithm": "Simple Fuzzy",
+          "title_extracted": "Javascript On Things",
+          "author_extracted": "Lyza Gardner",
+          "publisher_extracted": "",
+          "year_extracted": "2018",
+          "title_expected": "Javascript On Things",
+          "author_expected": "Lyza Gardner",
+          "publisher_expected": "",
+          "year_expected": "2018",
+          "accuracy_score": 1.0,
+          "execution_time": 1.2874603271484375e-05
+        },
+        "Simple Semantic": {
+          "filename": "Lyza Gardner - JavaScript on Things (2018).epub",
+          "algorithm": "Simple Semantic",
+          "title_extracted": "Javascript On Things",
+          "author_extracted": "Lyza Gardner",
+          "publisher_extracted": "",
+          "year_extracted": "2018",
+          "title_expected": "Javascript On Things",
+          "author_expected": "Lyza Gardner",
+          "publisher_expected": "",
+          "year_expected": "2018",
+          "accuracy_score": 1.0,
+          "execution_time": 1.4066696166992188e-05
+        },
+        "Simple Orchestrator": {
+          "filename": "Lyza Gardner - JavaScript on Things (2018).epub",
+          "algorithm": "Simple Orchestrator",
+          "title_extracted": "Javascript On Things",
+          "author_extracted": "Lyza Gardner",
+          "publisher_extracted": "",
+          "year_extracted": "2018",
+          "title_expected": "Javascript On Things",
+          "author_expected": "Lyza Gardner",
+          "publisher_expected": "",
+          "year_expected": "2018",
+          "accuracy_score": 1.0,
+          "execution_time": 2.4080276489257812e-05
+        }
+      }
+    },
+    {
+      "filename": "Jean-Philippe Aumasson - Serious Cryptography, 2nd Edition (2024).mobi",
+      "expected": {
+        "title": "Serious Cryptography 2Nd Edition",
+        "author": "Jean-Philippe Aumasson",
+        "publisher": "",
+        "year": "2024"
+      },
+      "algorithms": {
+        "Simple Fuzzy": {
+          "filename": "Jean-Philippe Aumasson - Serious Cryptography, 2nd Edition (2024).mobi",
+          "algorithm": "Simple Fuzzy",
+          "title_extracted": "Serious Cryptography 2Nd Edition",
+          "author_extracted": "Jean-Philippe Aumasson",
+          "publisher_extracted": "",
+          "year_extracted": "2024",
+          "title_expected": "Serious Cryptography 2Nd Edition",
+          "author_expected": "Jean-Philippe Aumasson",
+          "publisher_expected": "",
+          "year_expected": "2024",
+          "accuracy_score": 1.0,
+          "execution_time": 5.0067901611328125e-05
+        },
+        "Simple Semantic": {
+          "filename": "Jean-Philippe Aumasson - Serious Cryptography, 2nd Edition (2024).mobi",
+          "algorithm": "Simple Semantic",
+          "title_extracted": "Serious Cryptography 2Nd Edition",
+          "author_extracted": "Jean-Philippe Aumasson",
+          "publisher_extracted": "",
+          "year_extracted": "2024",
+          "title_expected": "Serious Cryptography 2Nd Edition",
+          "author_expected": "Jean-Philippe Aumasson",
+          "publisher_expected": "",
+          "year_expected": "2024",
+          "accuracy_score": 1.0,
+          "execution_time": 1.621246337890625e-05
+        },
+        "Simple Orchestrator": {
+          "filename": "Jean-Philippe Aumasson - Serious Cryptography, 2nd Edition (2024).mobi",
+          "algorithm": "Simple Orchestrator",
+          "title_extracted": "Serious Cryptography 2Nd Edition",
+          "author_extracted": "Jean-Philippe Aumasson",
+          "publisher_extracted": "",
+          "year_extracted": "2024",
+          "title_expected": "Serious Cryptography 2Nd Edition",
+          "author_expected": "Jean-Philippe Aumasson",
+          "publisher_expected": "",
+          "year_expected": "2024",
+          "accuracy_score": 1.0,
+          "execution_time": 2.6941299438476562e-05
+        }
+      }
+    },
+    {
+      "filename": "Safari, an O'Reilly Media Company - Training Data for Machine Learning Models (2022).epub",
+      "expected": {
+        "title": "Safari An O Reilly Media Company - Training Data For Machine Learning Models",
+        "author": "",
+        "publisher": "OReilly",
+        "year": "2022"
+      },
+      "algorithms": {
+        "Simple Fuzzy": {
+          "filename": "Safari, an O'Reilly Media Company - Training Data for Machine Learning Models (2022).epub",
+          "algorithm": "Simple Fuzzy",
+          "title_extracted": "Safari An O Reilly Media Company - Training Data For Machine Learning Models",
+          "author_extracted": "",
+          "publisher_extracted": "OReilly",
+          "year_extracted": "2022",
+          "title_expected": "Safari An O Reilly Media Company - Training Data For Machine Learning Models",
+          "author_expected": "",
+          "publisher_expected": "OReilly",
+          "year_expected": "2022",
+          "accuracy_score": 1.0,
+          "execution_time": 1.52587890625e-05
+        },
+        "Simple Semantic": {
+          "filename": "Safari, an O'Reilly Media Company - Training Data for Machine Learning Models (2022).epub",
+          "algorithm": "Simple Semantic",
+          "title_extracted": "Safari An O Reilly Media Company - Training Data For Machine Learning Models",
+          "author_extracted": "",
+          "publisher_extracted": "OReilly",
+          "year_extracted": "2022",
+          "title_expected": "Safari An O Reilly Media Company - Training Data For Machine Learning Models",
+          "author_expected": "",
+          "publisher_expected": "OReilly",
+          "year_expected": "2022",
+          "accuracy_score": 1.0,
+          "execution_time": 1.5974044799804688e-05
+        },
+        "Simple Orchestrator": {
+          "filename": "Safari, an O'Reilly Media Company - Training Data for Machine Learning Models (2022).epub",
+          "algorithm": "Simple Orchestrator",
+          "title_extracted": "Safari An O Reilly Media Company - Training Data For Machine Learning Models",
+          "author_extracted": "",
+          "publisher_extracted": "OReilly",
+          "year_extracted": "2022",
+          "title_expected": "Safari An O Reilly Media Company - Training Data For Machine Learning Models",
+          "author_expected": "",
+          "publisher_expected": "OReilly",
+          "year_expected": "2022",
+          "accuracy_score": 1.0,
+          "execution_time": 2.9087066650390625e-05
+        }
+      }
+    },
+    {
+      "filename": "Malcolm McDonald - Grokking Web Application Security (2024).epub",
+      "expected": {
+        "title": "Grokking Web Application Security",
+        "author": "Malcolm Mcdonald",
+        "publisher": "",
+        "year": "2024"
+      },
+      "algorithms": {
+        "Simple Fuzzy": {
+          "filename": "Malcolm McDonald - Grokking Web Application Security (2024).epub",
+          "algorithm": "Simple Fuzzy",
+          "title_extracted": "Grokking Web Application Security",
+          "author_extracted": "Malcolm Mcdonald",
+          "publisher_extracted": "",
+          "year_extracted": "2024",
+          "title_expected": "Grokking Web Application Security",
+          "author_expected": "Malcolm Mcdonald",
+          "publisher_expected": "",
+          "year_expected": "2024",
+          "accuracy_score": 1.0,
+          "execution_time": 1.1920928955078125e-05
+        },
+        "Simple Semantic": {
+          "filename": "Malcolm McDonald - Grokking Web Application Security (2024).epub",
+          "algorithm": "Simple Semantic",
+          "title_extracted": "Grokking Web Application Security",
+          "author_extracted": "Malcolm Mcdonald",
+          "publisher_extracted": "",
+          "year_extracted": "2024",
+          "title_expected": "Grokking Web Application Security",
+          "author_expected": "Malcolm Mcdonald",
+          "publisher_expected": "",
+          "year_expected": "2024",
+          "accuracy_score": 1.0,
+          "execution_time": 1.3113021850585938e-05
+        },
+        "Simple Orchestrator": {
+          "filename": "Malcolm McDonald - Grokking Web Application Security (2024).epub",
+          "algorithm": "Simple Orchestrator",
+          "title_extracted": "Grokking Web Application Security",
+          "author_extracted": "Malcolm Mcdonald",
+          "publisher_extracted": "",
+          "year_extracted": "2024",
+          "title_expected": "Grokking Web Application Security",
+          "author_expected": "Malcolm Mcdonald",
+          "publisher_expected": "",
+          "year_expected": "2024",
+          "accuracy_score": 1.0,
+          "execution_time": 2.574920654296875e-05
+        }
+      }
+    },
+    {
+      "filename": "Matt Hand - Evading EDR (2023).pdf",
+      "expected": {
+        "title": "Evading Edr",
+        "author": "Matt Hand",
+        "publisher": "",
+        "year": "2023"
+      },
+      "algorithms": {
+        "Simple Fuzzy": {
+          "filename": "Matt Hand - Evading EDR (2023).pdf",
+          "algorithm": "Simple Fuzzy",
+          "title_extracted": "Evading Edr",
+          "author_extracted": "Matt Hand",
+          "publisher_extracted": "",
+          "year_extracted": "2023",
+          "title_expected": "Evading Edr",
+          "author_expected": "Matt Hand",
+          "publisher_expected": "",
+          "year_expected": "2023",
+          "accuracy_score": 1.0,
+          "execution_time": 1.1205673217773438e-05
+        },
+        "Simple Semantic": {
+          "filename": "Matt Hand - Evading EDR (2023).pdf",
+          "algorithm": "Simple Semantic",
+          "title_extracted": "Evading Edr",
+          "author_extracted": "Matt Hand",
+          "publisher_extracted": "",
+          "year_extracted": "2023",
+          "title_expected": "Evading Edr",
+          "author_expected": "Matt Hand",
+          "publisher_expected": "",
+          "year_expected": "2023",
+          "accuracy_score": 1.0,
+          "execution_time": 1.1920928955078125e-05
+        },
+        "Simple Orchestrator": {
+          "filename": "Matt Hand - Evading EDR (2023).pdf",
+          "algorithm": "Simple Orchestrator",
+          "title_extracted": "Evading Edr",
+          "author_extracted": "Matt Hand",
+          "publisher_extracted": "",
+          "year_extracted": "2023",
+          "title_expected": "Evading Edr",
+          "author_expected": "Matt Hand",
+          "publisher_expected": "",
+          "year_expected": "2023",
+          "accuracy_score": 1.0,
+          "execution_time": 2.4080276489257812e-05
+        }
+      }
+    },
+    {
+      "filename": "Fotios Chantzis et al - Practical IoT Hacking (2021).mobi",
+      "expected": {
+        "title": "Practical Iot Hacking",
+        "author": "Fotios Chantzis Et Al",
+        "publisher": "",
+        "year": "2021"
+      },
+      "algorithms": {
+        "Simple Fuzzy": {
+          "filename": "Fotios Chantzis et al - Practical IoT Hacking (2021).mobi",
+          "algorithm": "Simple Fuzzy",
+          "title_extracted": "Practical Iot Hacking",
+          "author_extracted": "Fotios Chantzis Et Al",
+          "publisher_extracted": "",
+          "year_extracted": "2021",
+          "title_expected": "Practical Iot Hacking",
+          "author_expected": "Fotios Chantzis Et Al",
+          "publisher_expected": "",
+          "year_expected": "2021",
+          "accuracy_score": 1.0,
+          "execution_time": 1.1920928955078125e-05
+        },
+        "Simple Semantic": {
+          "filename": "Fotios Chantzis et al - Practical IoT Hacking (2021).mobi",
+          "algorithm": "Simple Semantic",
+          "title_extracted": "Practical Iot Hacking",
+          "author_extracted": "Fotios Chantzis Et Al",
+          "publisher_extracted": "",
+          "year_extracted": "2021",
+          "title_expected": "Practical Iot Hacking",
+          "author_expected": "Fotios Chantzis Et Al",
+          "publisher_expected": "",
+          "year_expected": "2021",
+          "accuracy_score": 1.0,
+          "execution_time": 1.3113021850585938e-05
+        },
+        "Simple Orchestrator": {
+          "filename": "Fotios Chantzis et al - Practical IoT Hacking (2021).mobi",
+          "algorithm": "Simple Orchestrator",
+          "title_extracted": "Practical Iot Hacking",
+          "author_extracted": "Fotios Chantzis Et Al",
+          "publisher_extracted": "",
+          "year_extracted": "2021",
+          "title_expected": "Practical Iot Hacking",
+          "author_expected": "Fotios Chantzis Et Al",
+          "publisher_expected": "",
+          "year_expected": "2021",
+          "accuracy_score": 1.0,
+          "execution_time": 2.5033950805664062e-05
+        }
+      }
+    },
+    {
+      "filename": "AI_Agents_and_Applications_v7_MEAP.epub",
+      "expected": {
+        "title": "Ai_Agents_And_Applications_V7_Meap",
+        "author": "",
+        "publisher": "Manning",
+        "year": ""
+      },
+      "algorithms": {
+        "Simple Fuzzy": {
+          "filename": "AI_Agents_and_Applications_v7_MEAP.epub",
+          "algorithm": "Simple Fuzzy",
+          "title_extracted": "Ai_Agents_And_Applications_V7_Meap",
+          "author_extracted": "",
+          "publisher_extracted": "Manning",
+          "year_extracted": "",
+          "title_expected": "Ai_Agents_And_Applications_V7_Meap",
+          "author_expected": "",
+          "publisher_expected": "Manning",
+          "year_expected": "",
+          "accuracy_score": 1.0,
+          "execution_time": 8.821487426757812e-06
+        },
+        "Simple Semantic": {
+          "filename": "AI_Agents_and_Applications_v7_MEAP.epub",
+          "algorithm": "Simple Semantic",
+          "title_extracted": "Ai_Agents_And_Applications_V7_Meap",
+          "author_extracted": "",
+          "publisher_extracted": "Manning",
+          "year_extracted": "",
+          "title_expected": "Ai_Agents_And_Applications_V7_Meap",
+          "author_expected": "",
+          "publisher_expected": "Manning",
+          "year_expected": "",
+          "accuracy_score": 1.0,
+          "execution_time": 1.0013580322265625e-05
+        },
+        "Simple Orchestrator": {
+          "filename": "AI_Agents_and_Applications_v7_MEAP.epub",
+          "algorithm": "Simple Orchestrator",
+          "title_extracted": "Ai_Agents_And_Applications_V7_Meap",
+          "author_extracted": "",
+          "publisher_extracted": "Manning",
+          "year_extracted": "",
+          "title_expected": "Ai_Agents_And_Applications_V7_Meap",
+          "author_expected": "",
+          "publisher_expected": "Manning",
+          "year_expected": "",
+          "accuracy_score": 1.0,
+          "execution_time": 1.811981201171875e-05
+        }
+      }
+    },
+    {
+      "filename": "Vamsee Puligadda - 500 Machine Learning (ML) Interview Questions and Answers.epub",
+      "expected": {
+        "title": "500 Machine Learning (Ml) Interview Questions And Answers",
+        "author": "Vamsee Puligadda",
+        "publisher": "OReilly",
+        "year": ""
+      },
+      "algorithms": {
+        "Simple Fuzzy": {
+          "filename": "Vamsee Puligadda - 500 Machine Learning (ML) Interview Questions and Answers.epub",
+          "algorithm": "Simple Fuzzy",
+          "title_extracted": "500 Machine Learning (Ml) Interview Questions And Answers",
+          "author_extracted": "Vamsee Puligadda",
+          "publisher_extracted": "OReilly",
+          "year_extracted": "",
+          "title_expected": "500 Machine Learning (Ml) Interview Questions And Answers",
+          "author_expected": "Vamsee Puligadda",
+          "publisher_expected": "OReilly",
+          "year_expected": "",
+          "accuracy_score": 1.0,
+          "execution_time": 1.1682510375976562e-05
+        },
+        "Simple Semantic": {
+          "filename": "Vamsee Puligadda - 500 Machine Learning (ML) Interview Questions and Answers.epub",
+          "algorithm": "Simple Semantic",
+          "title_extracted": "500 Machine Learning (Ml) Interview Questions And Answers",
+          "author_extracted": "Vamsee Puligadda",
+          "publisher_extracted": "OReilly",
+          "year_extracted": "",
+          "title_expected": "500 Machine Learning (Ml) Interview Questions And Answers",
+          "author_expected": "Vamsee Puligadda",
+          "publisher_expected": "OReilly",
+          "year_expected": "",
+          "accuracy_score": 1.0,
+          "execution_time": 1.3113021850585938e-05
+        },
+        "Simple Orchestrator": {
+          "filename": "Vamsee Puligadda - 500 Machine Learning (ML) Interview Questions and Answers.epub",
+          "algorithm": "Simple Orchestrator",
+          "title_extracted": "500 Machine Learning (Ml) Interview Questions And Answers",
+          "author_extracted": "Vamsee Puligadda",
+          "publisher_extracted": "OReilly",
+          "year_extracted": "",
+          "title_expected": "500 Machine Learning (Ml) Interview Questions And Answers",
+          "author_expected": "Vamsee Puligadda",
+          "publisher_expected": "OReilly",
+          "year_expected": "",
+          "accuracy_score": 1.0,
+          "execution_time": 2.4080276489257812e-05
+        }
+      }
+    },
+    {
+      "filename": "Douglas Crockford - How JavaScript Works (2018).epub",
+      "expected": {
+        "title": "How Javascript Works",
+        "author": "Douglas Crockford",
+        "publisher": "",
+        "year": "2018"
+      },
+      "algorithms": {
+        "Simple Fuzzy": {
+          "filename": "Douglas Crockford - How JavaScript Works (2018).epub",
+          "algorithm": "Simple Fuzzy",
+          "title_extracted": "How Javascript Works",
+          "author_extracted": "Douglas Crockford",
+          "publisher_extracted": "",
+          "year_extracted": "2018",
+          "title_expected": "How Javascript Works",
+          "author_expected": "Douglas Crockford",
+          "publisher_expected": "",
+          "year_expected": "2018",
+          "accuracy_score": 1.0,
+          "execution_time": 3.981590270996094e-05
+        },
+        "Simple Semantic": {
+          "filename": "Douglas Crockford - How JavaScript Works (2018).epub",
+          "algorithm": "Simple Semantic",
+          "title_extracted": "How Javascript Works",
+          "author_extracted": "Douglas Crockford",
+          "publisher_extracted": "",
+          "year_extracted": "2018",
+          "title_expected": "How Javascript Works",
+          "author_expected": "Douglas Crockford",
+          "publisher_expected": "",
+          "year_expected": "2018",
+          "accuracy_score": 1.0,
+          "execution_time": 1.2159347534179688e-05
+        },
+        "Simple Orchestrator": {
+          "filename": "Douglas Crockford - How JavaScript Works (2018).epub",
+          "algorithm": "Simple Orchestrator",
+          "title_extracted": "How Javascript Works",
+          "author_extracted": "Douglas Crockford",
+          "publisher_extracted": "",
+          "year_extracted": "2018",
+          "title_expected": "How Javascript Works",
+          "author_expected": "Douglas Crockford",
+          "publisher_expected": "",
+          "year_expected": "2018",
+          "accuracy_score": 1.0,
+          "execution_time": 2.4080276489257812e-05
+        }
+      }
+    },
+    {
+      "filename": "resilientoracleplandsql.epub",
+      "expected": {
+        "title": "Resilientoracleplandsql",
+        "author": "",
+        "publisher": "",
+        "year": ""
+      },
+      "algorithms": {
+        "Simple Fuzzy": {
+          "filename": "resilientoracleplandsql.epub",
+          "algorithm": "Simple Fuzzy",
+          "title_extracted": "Resilientoracleplandsql",
+          "author_extracted": "",
+          "publisher_extracted": "",
+          "year_extracted": "",
+          "title_expected": "Resilientoracleplandsql",
+          "author_expected": "",
+          "publisher_expected": "",
+          "year_expected": "",
+          "accuracy_score": 1.0,
+          "execution_time": 9.059906005859375e-06
+        },
+        "Simple Semantic": {
+          "filename": "resilientoracleplandsql.epub",
+          "algorithm": "Simple Semantic",
+          "title_extracted": "Resilientoracleplandsql",
+          "author_extracted": "",
+          "publisher_extracted": "",
+          "year_extracted": "",
+          "title_expected": "Resilientoracleplandsql",
+          "author_expected": "",
+          "publisher_expected": "",
+          "year_expected": "",
+          "accuracy_score": 1.0,
+          "execution_time": 1.0967254638671875e-05
+        },
+        "Simple Orchestrator": {
+          "filename": "resilientoracleplandsql.epub",
+          "algorithm": "Simple Orchestrator",
+          "title_extracted": "Resilientoracleplandsql",
+          "author_extracted": "",
+          "publisher_extracted": "",
+          "year_extracted": "",
+          "title_expected": "Resilientoracleplandsql",
+          "author_expected": "",
+          "publisher_expected": "",
+          "year_expected": "",
+          "accuracy_score": 1.0,
+          "execution_time": 1.9073486328125e-05
+        }
+      }
+    },
+    {
+      "filename": "Ajay Mahajan et al - Cloud-Native Applications in Java (2018).pdf",
+      "expected": {
+        "title": "Cloud-Native Applications In Java",
+        "author": "Ajay Mahajan Et Al",
+        "publisher": "",
+        "year": "2018"
+      },
+      "algorithms": {
+        "Simple Fuzzy": {
+          "filename": "Ajay Mahajan et al - Cloud-Native Applications in Java (2018).pdf",
+          "algorithm": "Simple Fuzzy",
+          "title_extracted": "Cloud-Native Applications In Java",
+          "author_extracted": "Ajay Mahajan Et Al",
+          "publisher_extracted": "",
+          "year_extracted": "2018",
+          "title_expected": "Cloud-Native Applications In Java",
+          "author_expected": "Ajay Mahajan Et Al",
+          "publisher_expected": "",
+          "year_expected": "2018",
+          "accuracy_score": 1.0,
+          "execution_time": 1.1920928955078125e-05
+        },
+        "Simple Semantic": {
+          "filename": "Ajay Mahajan et al - Cloud-Native Applications in Java (2018).pdf",
+          "algorithm": "Simple Semantic",
+          "title_extracted": "Cloud-Native Applications In Java",
+          "author_extracted": "Ajay Mahajan Et Al",
+          "publisher_extracted": "",
+          "year_extracted": "2018",
+          "title_expected": "Cloud-Native Applications In Java",
+          "author_expected": "Ajay Mahajan Et Al",
+          "publisher_expected": "",
+          "year_expected": "2018",
+          "accuracy_score": 1.0,
+          "execution_time": 1.3828277587890625e-05
+        },
+        "Simple Orchestrator": {
+          "filename": "Ajay Mahajan et al - Cloud-Native Applications in Java (2018).pdf",
+          "algorithm": "Simple Orchestrator",
+          "title_extracted": "Cloud-Native Applications In Java",
+          "author_extracted": "Ajay Mahajan Et Al",
+          "publisher_extracted": "",
+          "year_extracted": "2018",
+          "title_expected": "Cloud-Native Applications In Java",
+          "author_expected": "Ajay Mahajan Et Al",
+          "publisher_expected": "",
+          "year_expected": "2018",
+          "accuracy_score": 1.0,
+          "execution_time": 2.5033950805664062e-05
+        }
+      }
+    },
+    {
+      "filename": "Michal Zalewski - The Tangled Web (2011).pdf",
+      "expected": {
+        "title": "The Tangled Web",
+        "author": "Michal Zalewski",
+        "publisher": "",
+        "year": "2011"
+      },
+      "algorithms": {
+        "Simple Fuzzy": {
+          "filename": "Michal Zalewski - The Tangled Web (2011).pdf",
+          "algorithm": "Simple Fuzzy",
+          "title_extracted": "The Tangled Web",
+          "author_extracted": "Michal Zalewski",
+          "publisher_extracted": "",
+          "year_extracted": "2011",
+          "title_expected": "The Tangled Web",
+          "author_expected": "Michal Zalewski",
+          "publisher_expected": "",
+          "year_expected": "2011",
+          "accuracy_score": 1.0,
+          "execution_time": 1.0967254638671875e-05
+        },
+        "Simple Semantic": {
+          "filename": "Michal Zalewski - The Tangled Web (2011).pdf",
+          "algorithm": "Simple Semantic",
+          "title_extracted": "The Tangled Web",
+          "author_extracted": "Michal Zalewski",
+          "publisher_extracted": "",
+          "year_extracted": "2011",
+          "title_expected": "The Tangled Web",
+          "author_expected": "Michal Zalewski",
+          "publisher_expected": "",
+          "year_expected": "2011",
+          "accuracy_score": 1.0,
+          "execution_time": 1.2874603271484375e-05
+        },
+        "Simple Orchestrator": {
+          "filename": "Michal Zalewski - The Tangled Web (2011).pdf",
+          "algorithm": "Simple Orchestrator",
+          "title_extracted": "The Tangled Web",
+          "author_extracted": "Michal Zalewski",
+          "publisher_extracted": "",
+          "year_extracted": "2011",
+          "title_expected": "The Tangled Web",
+          "author_expected": "Michal Zalewski",
+          "publisher_expected": "",
+          "year_expected": "2011",
+          "accuracy_score": 1.0,
+          "execution_time": 2.4080276489257812e-05
+        }
+      }
+    },
+    {
+      "filename": "Alan Beaulieu - Learning SQL (2009).pdf",
+      "expected": {
+        "title": "Learning Sql",
+        "author": "Alan Beaulieu",
+        "publisher": "OReilly",
+        "year": "2009"
+      },
+      "algorithms": {
+        "Simple Fuzzy": {
+          "filename": "Alan Beaulieu - Learning SQL (2009).pdf",
+          "algorithm": "Simple Fuzzy",
+          "title_extracted": "Learning Sql",
+          "author_extracted": "Alan Beaulieu",
+          "publisher_extracted": "OReilly",
+          "year_extracted": "2009",
+          "title_expected": "Learning Sql",
+          "author_expected": "Alan Beaulieu",
+          "publisher_expected": "OReilly",
+          "year_expected": "2009",
+          "accuracy_score": 1.0,
+          "execution_time": 1.0967254638671875e-05
+        },
+        "Simple Semantic": {
+          "filename": "Alan Beaulieu - Learning SQL (2009).pdf",
+          "algorithm": "Simple Semantic",
+          "title_extracted": "Learning Sql",
+          "author_extracted": "Alan Beaulieu",
+          "publisher_extracted": "OReilly",
+          "year_extracted": "2009",
+          "title_expected": "Learning Sql",
+          "author_expected": "Alan Beaulieu",
+          "publisher_expected": "OReilly",
+          "year_expected": "2009",
+          "accuracy_score": 1.0,
+          "execution_time": 1.1920928955078125e-05
+        },
+        "Simple Orchestrator": {
+          "filename": "Alan Beaulieu - Learning SQL (2009).pdf",
+          "algorithm": "Simple Orchestrator",
+          "title_extracted": "Learning Sql",
+          "author_extracted": "Alan Beaulieu",
+          "publisher_extracted": "OReilly",
+          "year_extracted": "2009",
+          "title_expected": "Learning Sql",
+          "author_expected": "Alan Beaulieu",
+          "publisher_expected": "OReilly",
+          "year_expected": "2009",
+          "accuracy_score": 1.0,
+          "execution_time": 2.193450927734375e-05
+        }
+      }
+    },
+    {
+      "filename": "Alice Zhao - SQL Pocket Guide (2022).epub",
+      "expected": {
+        "title": "Sql Pocket Guide",
+        "author": "Alice Zhao",
+        "publisher": "",
+        "year": "2022"
+      },
+      "algorithms": {
+        "Simple Fuzzy": {
+          "filename": "Alice Zhao - SQL Pocket Guide (2022).epub",
+          "algorithm": "Simple Fuzzy",
+          "title_extracted": "Sql Pocket Guide",
+          "author_extracted": "Alice Zhao",
+          "publisher_extracted": "",
+          "year_extracted": "2022",
+          "title_expected": "Sql Pocket Guide",
+          "author_expected": "Alice Zhao",
+          "publisher_expected": "",
+          "year_expected": "2022",
+          "accuracy_score": 1.0,
+          "execution_time": 1.0967254638671875e-05
+        },
+        "Simple Semantic": {
+          "filename": "Alice Zhao - SQL Pocket Guide (2022).epub",
+          "algorithm": "Simple Semantic",
+          "title_extracted": "Sql Pocket Guide",
+          "author_extracted": "Alice Zhao",
+          "publisher_extracted": "",
+          "year_extracted": "2022",
+          "title_expected": "Sql Pocket Guide",
+          "author_expected": "Alice Zhao",
+          "publisher_expected": "",
+          "year_expected": "2022",
+          "accuracy_score": 1.0,
+          "execution_time": 1.1920928955078125e-05
+        },
+        "Simple Orchestrator": {
+          "filename": "Alice Zhao - SQL Pocket Guide (2022).epub",
+          "algorithm": "Simple Orchestrator",
+          "title_extracted": "Sql Pocket Guide",
+          "author_extracted": "Alice Zhao",
+          "publisher_extracted": "",
+          "year_extracted": "2022",
+          "title_expected": "Sql Pocket Guide",
+          "author_expected": "Alice Zhao",
+          "publisher_expected": "",
+          "year_expected": "2022",
+          "accuracy_score": 1.0,
+          "execution_time": 2.2172927856445312e-05
+        }
+      }
+    },
+    {
+      "filename": "AI_Agents_and_Applications_v7_MEAP.pdf",
+      "expected": {
+        "title": "Ai_Agents_And_Applications_V7_Meap",
+        "author": "",
+        "publisher": "Manning",
+        "year": ""
+      },
+      "algorithms": {
+        "Simple Fuzzy": {
+          "filename": "AI_Agents_and_Applications_v7_MEAP.pdf",
+          "algorithm": "Simple Fuzzy",
+          "title_extracted": "Ai_Agents_And_Applications_V7_Meap",
+          "author_extracted": "",
+          "publisher_extracted": "Manning",
+          "year_extracted": "",
+          "title_expected": "Ai_Agents_And_Applications_V7_Meap",
+          "author_expected": "",
+          "publisher_expected": "Manning",
+          "year_expected": "",
+          "accuracy_score": 1.0,
+          "execution_time": 7.867813110351562e-06
+        },
+        "Simple Semantic": {
+          "filename": "AI_Agents_and_Applications_v7_MEAP.pdf",
+          "algorithm": "Simple Semantic",
+          "title_extracted": "Ai_Agents_And_Applications_V7_Meap",
+          "author_extracted": "",
+          "publisher_extracted": "Manning",
+          "year_extracted": "",
+          "title_expected": "Ai_Agents_And_Applications_V7_Meap",
+          "author_expected": "",
+          "publisher_expected": "Manning",
+          "year_expected": "",
+          "accuracy_score": 1.0,
+          "execution_time": 1.0013580322265625e-05
+        },
+        "Simple Orchestrator": {
+          "filename": "AI_Agents_and_Applications_v7_MEAP.pdf",
+          "algorithm": "Simple Orchestrator",
+          "title_extracted": "Ai_Agents_And_Applications_V7_Meap",
+          "author_extracted": "",
+          "publisher_extracted": "Manning",
+          "year_extracted": "",
+          "title_expected": "Ai_Agents_And_Applications_V7_Meap",
+          "author_expected": "",
+          "publisher_expected": "Manning",
+          "year_expected": "",
+          "accuracy_score": 1.0,
+          "execution_time": 1.9073486328125e-05
+        }
+      }
+    },
+    {
+      "filename": "A_Damn_Fine_Stable_Diffusion_Book_v6_MEAP.epub",
+      "expected": {
+        "title": "A_Damn_Fine_Stable_Diffusion_Book_V6_Meap",
+        "author": "",
+        "publisher": "Manning",
+        "year": ""
+      },
+      "algorithms": {
+        "Simple Fuzzy": {
+          "filename": "A_Damn_Fine_Stable_Diffusion_Book_v6_MEAP.epub",
+          "algorithm": "Simple Fuzzy",
+          "title_extracted": "A_Damn_Fine_Stable_Diffusion_Book_V6_Meap",
+          "author_extracted": "",
+          "publisher_extracted": "Manning",
+          "year_extracted": "",
+          "title_expected": "A_Damn_Fine_Stable_Diffusion_Book_V6_Meap",
+          "author_expected": "",
+          "publisher_expected": "Manning",
+          "year_expected": "",
+          "accuracy_score": 1.0,
+          "execution_time": 9.059906005859375e-06
+        },
+        "Simple Semantic": {
+          "filename": "A_Damn_Fine_Stable_Diffusion_Book_v6_MEAP.epub",
+          "algorithm": "Simple Semantic",
+          "title_extracted": "A_Damn_Fine_Stable_Diffusion_Book_V6_Meap",
+          "author_extracted": "",
+          "publisher_extracted": "Manning",
+          "year_extracted": "",
+          "title_expected": "A_Damn_Fine_Stable_Diffusion_Book_V6_Meap",
+          "author_expected": "",
+          "publisher_expected": "Manning",
+          "year_expected": "",
+          "accuracy_score": 1.0,
+          "execution_time": 2.002716064453125e-05
+        },
+        "Simple Orchestrator": {
+          "filename": "A_Damn_Fine_Stable_Diffusion_Book_v6_MEAP.epub",
+          "algorithm": "Simple Orchestrator",
+          "title_extracted": "A_Damn_Fine_Stable_Diffusion_Book_V6_Meap",
+          "author_extracted": "",
+          "publisher_extracted": "Manning",
+          "year_extracted": "",
+          "title_expected": "A_Damn_Fine_Stable_Diffusion_Book_V6_Meap",
+          "author_expected": "",
+          "publisher_expected": "Manning",
+          "year_expected": "",
+          "accuracy_score": 1.0,
+          "execution_time": 2.09808349609375e-05
+        }
+      }
+    },
+    {
+      "filename": "Cybellium - AWS Certified Developer  Associate (DVA-C02) (2024).pdf",
+      "expected": {
+        "title": "Aws Certified Developer Associate (Dva-C02)",
+        "author": "Cybellium",
+        "publisher": "",
+        "year": "2024"
+      },
+      "algorithms": {
+        "Simple Fuzzy": {
+          "filename": "Cybellium - AWS Certified Developer  Associate (DVA-C02) (2024).pdf",
+          "algorithm": "Simple Fuzzy",
+          "title_extracted": "Aws Certified Developer Associate (Dva-C02)",
+          "author_extracted": "Cybellium",
+          "publisher_extracted": "",
+          "year_extracted": "2024",
+          "title_expected": "Aws Certified Developer Associate (Dva-C02)",
+          "author_expected": "Cybellium",
+          "publisher_expected": "",
+          "year_expected": "2024",
+          "accuracy_score": 1.0,
+          "execution_time": 1.4781951904296875e-05
+        },
+        "Simple Semantic": {
+          "filename": "Cybellium - AWS Certified Developer  Associate (DVA-C02) (2024).pdf",
+          "algorithm": "Simple Semantic",
+          "title_extracted": "Aws Certified Developer Associate (Dva-C02)",
+          "author_extracted": "Cybellium",
+          "publisher_extracted": "",
+          "year_extracted": "2024",
+          "title_expected": "Aws Certified Developer Associate (Dva-C02)",
+          "author_expected": "Cybellium",
+          "publisher_expected": "",
+          "year_expected": "2024",
+          "accuracy_score": 1.0,
+          "execution_time": 1.7881393432617188e-05
+        },
+        "Simple Orchestrator": {
+          "filename": "Cybellium - AWS Certified Developer  Associate (DVA-C02) (2024).pdf",
+          "algorithm": "Simple Orchestrator",
+          "title_extracted": "Aws Certified Developer Associate (Dva-C02)",
+          "author_extracted": "Cybellium",
+          "publisher_extracted": "",
+          "year_extracted": "2024",
+          "title_expected": "Aws Certified Developer Associate (Dva-C02)",
+          "author_expected": "Cybellium",
+          "publisher_expected": "",
+          "year_expected": "2024",
+          "accuracy_score": 1.0,
+          "execution_time": 9.775161743164062e-05
+        }
+      }
+    },
+    {
+      "filename": "Rui Pedro Machado et al - Analytics Engineering with SQL and dbt (2023).pdf",
+      "expected": {
+        "title": "Analytics Engineering With Sql And Dbt",
+        "author": "Rui Pedro Machado Et Al",
+        "publisher": "",
+        "year": "2023"
+      },
+      "algorithms": {
+        "Simple Fuzzy": {
+          "filename": "Rui Pedro Machado et al - Analytics Engineering with SQL and dbt (2023).pdf",
+          "algorithm": "Simple Fuzzy",
+          "title_extracted": "Analytics Engineering With Sql And Dbt",
+          "author_extracted": "Rui Pedro Machado Et Al",
+          "publisher_extracted": "",
+          "year_extracted": "2023",
+          "title_expected": "Analytics Engineering With Sql And Dbt",
+          "author_expected": "Rui Pedro Machado Et Al",
+          "publisher_expected": "",
+          "year_expected": "2023",
+          "accuracy_score": 1.0,
+          "execution_time": 1.3828277587890625e-05
+        },
+        "Simple Semantic": {
+          "filename": "Rui Pedro Machado et al - Analytics Engineering with SQL and dbt (2023).pdf",
+          "algorithm": "Simple Semantic",
+          "title_extracted": "Analytics Engineering With Sql And Dbt",
+          "author_extracted": "Rui Pedro Machado Et Al",
+          "publisher_extracted": "",
+          "year_extracted": "2023",
+          "title_expected": "Analytics Engineering With Sql And Dbt",
+          "author_expected": "Rui Pedro Machado Et Al",
+          "publisher_expected": "",
+          "year_expected": "2023",
+          "accuracy_score": 1.0,
+          "execution_time": 2.002716064453125e-05
+        },
+        "Simple Orchestrator": {
+          "filename": "Rui Pedro Machado et al - Analytics Engineering with SQL and dbt (2023).pdf",
+          "algorithm": "Simple Orchestrator",
+          "title_extracted": "Analytics Engineering With Sql And Dbt",
+          "author_extracted": "Rui Pedro Machado Et Al",
+          "publisher_extracted": "",
+          "year_extracted": "2023",
+          "title_expected": "Analytics Engineering With Sql And Dbt",
+          "author_expected": "Rui Pedro Machado Et Al",
+          "publisher_expected": "",
+          "year_expected": "2023",
+          "accuracy_score": 1.0,
+          "execution_time": 2.8133392333984375e-05
+        }
+      }
+    },
+    {
+      "filename": "Lyron Foster - Hacking APIs - A Comprehensive Guide from Beginner to Intermediate (2023).pdf",
+      "expected": {
+        "title": "Hacking Apis - A Comprehensive Guide From Beginner To Intermediate",
+        "author": "Lyron Foster",
+        "publisher": "",
+        "year": "2023"
+      },
+      "algorithms": {
+        "Simple Fuzzy": {
+          "filename": "Lyron Foster - Hacking APIs - A Comprehensive Guide from Beginner to Intermediate (2023).pdf",
+          "algorithm": "Simple Fuzzy",
+          "title_extracted": "Hacking Apis - A Comprehensive Guide From Beginner To Intermediate",
+          "author_extracted": "Lyron Foster",
+          "publisher_extracted": "",
+          "year_extracted": "2023",
+          "title_expected": "Hacking Apis - A Comprehensive Guide From Beginner To Intermediate",
+          "author_expected": "Lyron Foster",
+          "publisher_expected": "",
+          "year_expected": "2023",
+          "accuracy_score": 1.0,
+          "execution_time": 1.4066696166992188e-05
+        },
+        "Simple Semantic": {
+          "filename": "Lyron Foster - Hacking APIs - A Comprehensive Guide from Beginner to Intermediate (2023).pdf",
+          "algorithm": "Simple Semantic",
+          "title_extracted": "Hacking Apis - A Comprehensive Guide From Beginner To Intermediate",
+          "author_extracted": "Lyron Foster",
+          "publisher_extracted": "",
+          "year_extracted": "2023",
+          "title_expected": "Hacking Apis - A Comprehensive Guide From Beginner To Intermediate",
+          "author_expected": "Lyron Foster",
+          "publisher_expected": "",
+          "year_expected": "2023",
+          "accuracy_score": 1.0,
+          "execution_time": 1.71661376953125e-05
+        },
+        "Simple Orchestrator": {
+          "filename": "Lyron Foster - Hacking APIs - A Comprehensive Guide from Beginner to Intermediate (2023).pdf",
+          "algorithm": "Simple Orchestrator",
+          "title_extracted": "Hacking Apis - A Comprehensive Guide From Beginner To Intermediate",
+          "author_extracted": "Lyron Foster",
+          "publisher_extracted": "",
+          "year_extracted": "2023",
+          "title_expected": "Hacking Apis - A Comprehensive Guide From Beginner To Intermediate",
+          "author_expected": "Lyron Foster",
+          "publisher_expected": "",
+          "year_expected": "2023",
+          "accuracy_score": 1.0,
+          "execution_time": 3.981590270996094e-05
+        }
+      }
+    },
+    {
+      "filename": "Arnaud Lauret - The Design of Web APIs, Second Edition (2025).epub",
+      "expected": {
+        "title": "The Design Of Web Apis Second Edition",
+        "author": "Arnaud Lauret",
+        "publisher": "",
+        "year": "2025"
+      },
+      "algorithms": {
+        "Simple Fuzzy": {
+          "filename": "Arnaud Lauret - The Design of Web APIs, Second Edition (2025).epub",
+          "algorithm": "Simple Fuzzy",
+          "title_extracted": "The Design Of Web Apis Second Edition",
+          "author_extracted": "Arnaud Lauret",
+          "publisher_extracted": "",
+          "year_extracted": "2025",
+          "title_expected": "The Design Of Web Apis Second Edition",
+          "author_expected": "Arnaud Lauret",
+          "publisher_expected": "",
+          "year_expected": "2025",
+          "accuracy_score": 1.0,
+          "execution_time": 1.4066696166992188e-05
+        },
+        "Simple Semantic": {
+          "filename": "Arnaud Lauret - The Design of Web APIs, Second Edition (2025).epub",
+          "algorithm": "Simple Semantic",
+          "title_extracted": "The Design Of Web Apis Second Edition",
+          "author_extracted": "Arnaud Lauret",
+          "publisher_extracted": "",
+          "year_extracted": "2025",
+          "title_expected": "The Design Of Web Apis Second Edition",
+          "author_expected": "Arnaud Lauret",
+          "publisher_expected": "",
+          "year_expected": "2025",
+          "accuracy_score": 1.0,
+          "execution_time": 1.3828277587890625e-05
+        },
+        "Simple Orchestrator": {
+          "filename": "Arnaud Lauret - The Design of Web APIs, Second Edition (2025).epub",
+          "algorithm": "Simple Orchestrator",
+          "title_extracted": "The Design Of Web Apis Second Edition",
+          "author_extracted": "Arnaud Lauret",
+          "publisher_extracted": "",
+          "year_extracted": "2025",
+          "title_expected": "The Design Of Web Apis Second Edition",
+          "author_expected": "Arnaud Lauret",
+          "publisher_expected": "",
+          "year_expected": "2025",
+          "accuracy_score": 1.0,
+          "execution_time": 3.0994415283203125e-05
+        }
+      }
+    }
+  ],
+  "summary": {
+    "Simple Fuzzy": {
+      "accuracies": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "times": [
+        2.2649765014648438e-05,
+        1.3113021850585938e-05,
+        0.00010180473327636719,
+        1.3113021850585938e-05,
+        1.1920928955078125e-05,
+        1.2874603271484375e-05,
+        5.0067901611328125e-05,
+        1.52587890625e-05,
+        1.1920928955078125e-05,
+        1.1205673217773438e-05,
+        1.1920928955078125e-05,
+        8.821487426757812e-06,
+        1.1682510375976562e-05,
+        3.981590270996094e-05,
+        9.059906005859375e-06,
+        1.1920928955078125e-05,
+        1.0967254638671875e-05,
+        1.0967254638671875e-05,
+        1.0967254638671875e-05,
+        7.867813110351562e-06,
+        9.059906005859375e-06,
+        1.4781951904296875e-05,
+        1.3828277587890625e-05,
+        1.4066696166992188e-05,
+        1.4066696166992188e-05
+      ]
+    },
+    "Simple Semantic": {
+      "accuracies": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "times": [
+        2.193450927734375e-05,
+        5.3882598876953125e-05,
+        0.00012493133544921875,
+        1.5020370483398438e-05,
+        3.123283386230469e-05,
+        1.4066696166992188e-05,
+        1.621246337890625e-05,
+        1.5974044799804688e-05,
+        1.3113021850585938e-05,
+        1.1920928955078125e-05,
+        1.3113021850585938e-05,
+        1.0013580322265625e-05,
+        1.3113021850585938e-05,
+        1.2159347534179688e-05,
+        1.0967254638671875e-05,
+        1.3828277587890625e-05,
+        1.2874603271484375e-05,
+        1.1920928955078125e-05,
+        1.1920928955078125e-05,
+        1.0013580322265625e-05,
+        2.002716064453125e-05,
+        1.7881393432617188e-05,
+        2.002716064453125e-05,
+        1.71661376953125e-05,
+        1.3828277587890625e-05
+      ]
+    },
+    "Simple Orchestrator": {
+      "accuracies": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "times": [
+        3.314018249511719e-05,
+        7.176399230957031e-05,
+        6.604194641113281e-05,
+        5.2928924560546875e-05,
+        3.123283386230469e-05,
+        2.4080276489257812e-05,
+        2.6941299438476562e-05,
+        2.9087066650390625e-05,
+        2.574920654296875e-05,
+        2.4080276489257812e-05,
+        2.5033950805664062e-05,
+        1.811981201171875e-05,
+        2.4080276489257812e-05,
+        2.4080276489257812e-05,
+        1.9073486328125e-05,
+        2.5033950805664062e-05,
+        2.4080276489257812e-05,
+        2.193450927734375e-05,
+        2.2172927856445312e-05,
+        1.9073486328125e-05,
+        2.09808349609375e-05,
+        9.775161743164062e-05,
+        2.8133392333984375e-05,
+        3.981590270996094e-05,
+        3.0994415283203125e-05
+      ]
+    }
+  }
+}

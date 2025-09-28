@@ -1,0 +1,83 @@
+SISTEMA AVANÇADO DE COMPARAÇÃO DE ALGORITMOS v2.0
+===========================================================================
+Timestamp: 2025-09-28 09:08:39
+
+Testando 25 livros com 5 algoritmos
+
+TABELA DE COMPARAÇÃO DETALHADA - 5 ALGORITMOS
+--------------------------------------------------------------------------------------------------------------
+Arquivo                   Titulo Real          Basic   Enhanced Smart   Hybrid  Brazilian Melhor         
+--------------------------------------------------------------------------------------------------------------
+Paul McFedries - Build a  Build a Website wit  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+Parth Girish Patel et al  Sustainable Cloud D  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+Rodrigo Turini - Java 9   Java 9               1.000   1.000   1.000   1.000   1.000   Basic Parser   
+Micah Lee - Hacks, Leaks  Hacks, Leaks, and R  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+Mariot Tsitoara - Beginn  Beginning Git and G  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+Lyza Gardner - JavaScrip  JavaScript on Thing  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+Jean-Philippe Aumasson -  Serious Cryptograph  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+Safari, an O'Reilly Medi  Safari, an O Reilly  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+Malcolm McDonald - Grokk  Grokking Web Applic  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+Matt Hand - Evading EDR   Evading EDR          1.000   1.000   1.000   1.000   1.000   Basic Parser   
+Fotios Chantzis et al -   Practical IoT Hacki  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+AI_Agents_and_Applicatio  AI_Agents_and_Appli  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+Vamsee Puligadda - 500 M  500 Machine Learnin  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+Douglas Crockford - How   How JavaScript Work  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+resilientoracleplandsql.  resilientoracleplan  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+Ajay Mahajan et al - Clo  Cloud-Native Applic  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+Michal Zalewski - The Ta  The Tangled Web      1.000   1.000   1.000   1.000   1.000   Basic Parser   
+Alan Beaulieu - Learning  Learning SQL         1.000   1.000   1.000   1.000   1.000   Basic Parser   
+Alice Zhao - SQL Pocket   SQL Pocket Guide     1.000   1.000   1.000   1.000   1.000   Basic Parser   
+AI_Agents_and_Applicatio  AI_Agents_and_Appli  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+A_Damn_Fine_Stable_Diffu  A_Damn_Fine_Stable_  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+Cybellium - AWS Certifie  AWS Certified Devel  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+Rui Pedro Machado et al   Analytics Engineeri  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+Lyron Foster - Hacking A  Hacking APIs - A Co  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+Arnaud Lauret - The Desi  The Design of Web A  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+
+SUMÁRIO DOS ALGORITMOS
+=================================================================
+
+Basic Parser:
+  Accuracy Média: 1.000 (100.0%)
+  Confiança Média: 0.846
+  Tempo Médio: 0.0001s
+  Taxa Sucesso: 1.000 (100.0%)
+
+Enhanced Parser:
+  Accuracy Média: 1.000 (100.0%)
+  Confiança Média: 0.888
+  Tempo Médio: 0.0001s
+  Taxa Sucesso: 1.000 (100.0%)
+
+Smart Inferencer:
+  Accuracy Média: 1.000 (100.0%)
+  Confiança Média: 0.899
+  Tempo Médio: 0.0001s
+  Taxa Sucesso: 1.000 (100.0%)
+
+Hybrid Orchestrator:
+  Accuracy Média: 1.000 (100.0%)
+  Confiança Média: 0.922
+  Tempo Médio: 0.0003s
+  Taxa Sucesso: 1.000 (100.0%)
+
+Brazilian Specialist:
+  Accuracy Média: 1.000 (100.0%)
+  Confiança Média: 0.611
+  Tempo Médio: 0.0001s
+  Taxa Sucesso: 1.000 (100.0%)
+
+MELHOR ALGORITMO GERAL: Basic Parser
+Accuracy: 1.000
+
+ANÁLISE DO ALGORITMO BRASILEIRO:
+- Confiança média: 0.611
+- Especialização em publishers nacionais
+- Detecção de nomes brasileiros
+- Reconhecimento de padrões em português
+
+Resultados salvos em:
+- advanced_algorithm_results.txt (saída completa)
+- advanced_algorithm_comparison.json (dados detalhados)
+
+TESTE AVANÇADO FINALIZADO COM SUCESSO!

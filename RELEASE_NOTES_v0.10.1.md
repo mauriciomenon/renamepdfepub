@@ -1,50 +1,50 @@
 # Release Notes v0.10.1 - Performance Optimization Release
 
-**Release Date**: September 27, 2025  
+**Release Date**: September 27, 2025 
 **Focus**: Performance optimizations for CLI and search algorithm preparation
 
-## 🚀 Performance Improvements
+## Performance Improvements
 
 ### Core Optimizations
 - **PDF Text Caching**: Implemented hash-based text caching with TTL (5 minutes)
-  - Reduces repeated PDF parsing by ~80% for recently processed files
-  - Automatic cleanup prevents memory bloat
-  - Cache hit rate monitoring for diagnostics
+ - Reduces repeated PDF parsing by 80 for recently processed files
+ - Automatic cleanup prevents memory bloat
+ - Cache hit rate monitoring for diagnostics
 
 - **SQLite Performance**: Major database optimizations
-  - WAL mode journal for better concurrency
-  - Optimized PRAGMAs (cache_size=10000, temp_store=memory, mmap_size=256MB)  
-  - Thread-local connection pooling eliminates connection overhead
-  - New composite indexes for faster ISBN lookups
+ - WAL mode journal for better concurrency
+ - Optimized PRAGMAs (cache_size=10000, temp_store=memory, mmap_size=256MB) 
+ - Thread-local connection pooling eliminates connection overhead
+ - New composite indexes for faster ISBN lookups
 
 - **Regex Optimization**: Pre-compiled patterns as module constants
-  - ISBN13_RE, ISBN10_RE, SPACES_RE compiled once at import
-  - ~15-20% improvement in text processing speed
-  - Optimized normalize_spaces() function
+ - ISBN13_RE, ISBN10_RE, SPACES_RE compiled once at import
+ - 15-20 improvement in text processing speed
+ - Optimized normalize_spaces() function
 
 ### New Database Features
 - **Batch Operations**: `batch_upsert()` for bulk metadata insertion
-- **Cache Management**: `cleanup_old_entries()` and `get_stats()` methods  
-- **Enhanced Schema**: Added created_at/updated_at timestamps
+- **Cache Management**: `cleanup_old_entries()` and `get_stats()` methods 
+- **Enhanced Schema**: Added created_atupdated_at timestamps
 - **Better Indexing**: Composite indexes for performance-critical queries
 
-## 📊 Performance Metrics
+## Performance Metrics
 
 ### Before vs After (CLI Processing)
 ```
-PDF Text Extraction: 2-5s → 0.8-2s per file (cache hits: <100ms)
-Database Operations: ~50ms → <20ms per operation  
+PDF Text Extraction: 2-5s 0.8-2s per file (cache hits: 100ms)
+Database Operations: 50ms 20ms per operation 
 Memory Usage: Stable (automatic cache cleanup)
-Throughput: 15-20 files/min → 25-35 files/min (estimated)
+Throughput: 15-20 filesmin 25-35 filesmin (estimated)
 ```
 
 ### GUI Performance (Already Optimized in v0.10.0)
-- Async metadata loading: ✅ Working perfectly
-- Non-blocking UI: ✅ Fully responsive  
-- Thread management: ✅ Safe cancellation
-- Settings caching: ✅ Optimized storage
+- Async metadata loading: Working perfectly
+- Non-blocking UI: Fully responsive 
+- Thread management: Safe cancellation
+- Settings caching: Optimized storage
 
-## 🔍 Search Algorithm Foundation
+## Search Algorithm Foundation
 
 ### Infrastructure Prepared
 - Enhanced database schema ready for FTS5 integration
@@ -58,12 +58,12 @@ Throughput: 15-20 files/min → 25-35 files/min (estimated)
 - TTL caching system scales to larger datasets
 - Performance monitoring hooks for algorithm benchmarking
 
-## 🛠️ Technical Details
+## Technical Details
 
 ### New Dependencies
 - No new external dependencies added
 - All optimizations use Python stdlib and existing libraries
-- Backward compatibility maintained 100%
+- Backward compatibility maintained 100
 
 ### API Changes
 - **New Methods**: `MetadataCache.batch_upsert()`, `cleanup_old_entries()`, `get_stats()`
@@ -77,28 +77,28 @@ Throughput: 15-20 files/min → 25-35 files/min (estimated)
 ALTER TABLE metadata ADD COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
 ALTER TABLE metadata ADD COLUMN updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
 
--- New indexes for performance  
+-- New indexes for performance 
 CREATE INDEX idx_isbn10 ON metadata(isbn10);
 CREATE INDEX idx_isbn13 ON metadata(isbn13);
 CREATE INDEX idx_updated_at ON metadata(updated_at);
 ```
 
-## 🧪 Testing & Validation
+## Testing Validation
 
 ### Performance Testing
-- ✅ All existing unit tests pass
-- ✅ CLI functionality verified  
-- ✅ GUI performance regression tested
-- ✅ Memory leak testing completed
-- ✅ Database migration tested
+- All existing unit tests pass
+- CLI functionality verified 
+- GUI performance regression tested
+- Memory leak testing completed
+- Database migration tested
 
 ### Compatibility Testing
-- ✅ Python 3.8+ compatibility maintained
-- ✅ Cross-platform database operations
-- ✅ Existing cache files auto-upgraded
-- ✅ Graceful fallback for missing optional deps
+- Python 3.8+ compatibility maintained
+- Cross-platform database operations
+- Existing cache files auto-upgraded
+- Graceful fallback for missing optional deps
 
-## 📋 Migration Notes
+## Migration Notes
 
 ### Automatic Upgrades
 - Existing `metadata_cache.db` files are automatically upgraded
@@ -111,12 +111,12 @@ CREATE INDEX idx_updated_at ON metadata(updated_at);
 - SQLite PRAGMA settings can be customized in `_get_connection()`
 - Thread-local connections automatically managed
 
-## 🎯 Next Steps
+## Next Steps
 
 ### Immediate Benefits
 - Faster CLI processing for repeated operations
 - Better database performance under load
-- Reduced I/O overhead for PDF text extraction
+- Reduced IO overhead for PDF text extraction
 - Improved responsiveness during bulk operations
 
 ### Future Algorithm Support
@@ -125,7 +125,7 @@ CREATE INDEX idx_updated_at ON metadata(updated_at);
 - Optimized for batch processing large datasets
 - Performance monitoring hooks for algorithm evaluation
 
-## 🔧 For Developers
+## For Developers
 
 ### Performance Monitoring
 ```python
@@ -133,15 +133,15 @@ from src.renamepdfepub.metadata_cache import MetadataCache
 
 cache = MetadataCache()
 stats = cache.get_stats()
-print(f"Total entries: {stats['total_entries']}")
-print(f"Entries with ISBN: {stats['entries_with_isbn']}")
+print(f"Total entries: stats['total_entries']")
+print(f"Entries with ISBN: stats['entries_with_isbn']")
 ```
 
 ### Cache Management
 ```python
 # Cleanup old entries (30 days default)
 deleted = cache.cleanup_old_entries(days=30)
-print(f"Cleaned up {deleted} old entries")
+print(f"Cleaned up deleted old entries")
 ```
 
 ### Batch Operations
@@ -153,6 +153,6 @@ cache.batch_upsert(items)
 
 ---
 
-**Upgrade Impact**: Zero-downtime, automatic migration, immediate performance gains  
-**Compatibility**: 100% backward compatible, no API breaking changes  
+**Upgrade Impact**: Zero-downtime, automatic migration, immediate performance gains 
+**Compatibility**: 100 backward compatible, no API breaking changes 
 **Focus**: Continuous improvement without codebase disruption

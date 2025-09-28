@@ -1,0 +1,234 @@
+{
+  "test_info": {
+    "timestamp": "2025-09-28 08:54:37",
+    "total_books_tested": 20,
+    "algorithm": "Simple Filename Parser"
+  },
+  "summary": {
+    "average_confidence": 0.8324999999999998,
+    "average_time": 2.2470951080322266e-05,
+    "success_rate": 0.95
+  },
+  "detailed_results": [
+    {
+      "filename": "Paul McFedries - Build a Website with ChatGPT (2024).epub",
+      "result": {
+        "title": "Build a Website with ChatGPT",
+        "author": "Paul McFedries",
+        "publisher": "",
+        "year": "2024",
+        "confidence": 0.8500000000000001,
+        "execution_time": 0.00029087066650390625
+      }
+    },
+    {
+      "filename": "Parth Girish Patel et al - Sustainable Cloud Development (2025).epub",
+      "result": {
+        "title": "Sustainable Cloud Development",
+        "author": "Parth Girish Patel et al",
+        "publisher": "",
+        "year": "2025",
+        "confidence": 0.8500000000000001,
+        "execution_time": 1.621246337890625e-05
+      }
+    },
+    {
+      "filename": "Rodrigo Turini - Java 9 (2017).epub",
+      "result": {
+        "title": "Java 9",
+        "author": "Rodrigo Turini",
+        "publisher": "",
+        "year": "2017",
+        "confidence": 0.8500000000000001,
+        "execution_time": 1.0967254638671875e-05
+      }
+    },
+    {
+      "filename": "Micah Lee - Hacks, Leaks, and Revelations (2024).pdf",
+      "result": {
+        "title": "Hacks, Leaks, and Revelations",
+        "author": "Micah Lee",
+        "publisher": "",
+        "year": "2024",
+        "confidence": 0.8500000000000001,
+        "execution_time": 1.0013580322265625e-05
+      }
+    },
+    {
+      "filename": "Mariot Tsitoara - Beginning Git and GitHub (2019).epub",
+      "result": {
+        "title": "Beginning Git and GitHub",
+        "author": "Mariot Tsitoara",
+        "publisher": "",
+        "year": "2019",
+        "confidence": 0.8500000000000001,
+        "execution_time": 8.821487426757812e-06
+      }
+    },
+    {
+      "filename": "Lyza Gardner - JavaScript on Things (2018).epub",
+      "result": {
+        "title": "JavaScript on Things",
+        "author": "Lyza Gardner",
+        "publisher": "",
+        "year": "2018",
+        "confidence": 0.8500000000000001,
+        "execution_time": 8.106231689453125e-06
+      }
+    },
+    {
+      "filename": "Jean-Philippe Aumasson - Serious Cryptography, 2nd Edition (2024).mobi",
+      "result": {
+        "title": "Serious Cryptography, 2nd Edition",
+        "author": "Jean-Philippe Aumasson",
+        "publisher": "",
+        "year": "2024",
+        "confidence": 0.8500000000000001,
+        "execution_time": 7.867813110351562e-06
+      }
+    },
+    {
+      "filename": "Safari, an O'Reilly Media Company - Training Data for Machine Learning Models (2022).epub",
+      "result": {
+        "title": "Training Data for Machine Learning Models",
+        "author": "Safari, an O'Reilly Media Company",
+        "publisher": "OReilly",
+        "year": "2022",
+        "confidence": 1.0,
+        "execution_time": 9.059906005859375e-06
+      }
+    },
+    {
+      "filename": "Malcolm McDonald - Grokking Web Application Security (2024).epub",
+      "result": {
+        "title": "Grokking Web Application Security",
+        "author": "Malcolm McDonald",
+        "publisher": "",
+        "year": "2024",
+        "confidence": 0.8500000000000001,
+        "execution_time": 8.344650268554688e-06
+      }
+    },
+    {
+      "filename": "Matt Hand - Evading EDR (2023).pdf",
+      "result": {
+        "title": "Evading EDR",
+        "author": "Matt Hand",
+        "publisher": "",
+        "year": "2023",
+        "confidence": 0.8500000000000001,
+        "execution_time": 7.867813110351562e-06
+      }
+    },
+    {
+      "filename": "Fotios Chantzis et al - Practical IoT Hacking (2021).mobi",
+      "result": {
+        "title": "Practical IoT Hacking",
+        "author": "Fotios Chantzis et al",
+        "publisher": "",
+        "year": "2021",
+        "confidence": 0.8500000000000001,
+        "execution_time": 7.867813110351562e-06
+      }
+    },
+    {
+      "filename": "AI_Agents_and_Applications_v7_MEAP.epub",
+      "result": {
+        "title": "AI_Agents_and_Applications_v7_MEAP",
+        "author": "",
+        "publisher": "Manning",
+        "year": "",
+        "confidence": 0.65,
+        "execution_time": 5.9604644775390625e-06
+      }
+    },
+    {
+      "filename": "Vamsee Puligadda - 500 Machine Learning (ML) Interview Questions and Answers.epub",
+      "result": {
+        "title": "500 Machine Learning (ML) Interview Questions and Answers",
+        "author": "Vamsee Puligadda",
+        "publisher": "OReilly",
+        "year": "",
+        "confidence": 0.9500000000000001,
+        "execution_time": 6.9141387939453125e-06
+      }
+    },
+    {
+      "filename": "Douglas Crockford - How JavaScript Works (2018).epub",
+      "result": {
+        "title": "How JavaScript Works",
+        "author": "Douglas Crockford",
+        "publisher": "",
+        "year": "2018",
+        "confidence": 0.8500000000000001,
+        "execution_time": 8.344650268554688e-06
+      }
+    },
+    {
+      "filename": "resilientoracleplandsql.epub",
+      "result": {
+        "title": "resilientoracleplandsql",
+        "author": "",
+        "publisher": "",
+        "year": "",
+        "confidence": 0.5,
+        "execution_time": 7.152557373046875e-06
+      }
+    },
+    {
+      "filename": "Ajay Mahajan et al - Cloud-Native Applications in Java (2018).pdf",
+      "result": {
+        "title": "Cloud-Native Applications in Java",
+        "author": "Ajay Mahajan et al",
+        "publisher": "",
+        "year": "2018",
+        "confidence": 0.8500000000000001,
+        "execution_time": 7.867813110351562e-06
+      }
+    },
+    {
+      "filename": "Michal Zalewski - The Tangled Web (2011).pdf",
+      "result": {
+        "title": "The Tangled Web",
+        "author": "Michal Zalewski",
+        "publisher": "",
+        "year": "2011",
+        "confidence": 0.8500000000000001,
+        "execution_time": 7.867813110351562e-06
+      }
+    },
+    {
+      "filename": "Alan Beaulieu - Learning SQL (2009).pdf",
+      "result": {
+        "title": "Learning SQL",
+        "author": "Alan Beaulieu",
+        "publisher": "OReilly",
+        "year": "2009",
+        "confidence": 1.0,
+        "execution_time": 6.9141387939453125e-06
+      }
+    },
+    {
+      "filename": "Alice Zhao - SQL Pocket Guide (2022).epub",
+      "result": {
+        "title": "SQL Pocket Guide",
+        "author": "Alice Zhao",
+        "publisher": "",
+        "year": "2022",
+        "confidence": 0.8500000000000001,
+        "execution_time": 7.152557373046875e-06
+      }
+    },
+    {
+      "filename": "AI_Agents_and_Applications_v7_MEAP.pdf",
+      "result": {
+        "title": "AI_Agents_and_Applications_v7_MEAP",
+        "author": "",
+        "publisher": "Manning",
+        "year": "",
+        "confidence": 0.65,
+        "execution_time": 5.245208740234375e-06
+      }
+    }
+  ]
+}

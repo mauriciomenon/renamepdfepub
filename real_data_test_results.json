@@ -1,0 +1,2682 @@
+{
+  "fuzzy_real": {
+    "algorithm": "fuzzy_real",
+    "total_queries": 15,
+    "results_found": 15,
+    "avg_results_per_query": 5.0,
+    "avg_score": 0.6316763092885868,
+    "max_score": 1.0,
+    "query_results": [
+      {
+        "query": "Python Programming",
+        "results_count": 5,
+        "best_score": 0.9714285714285714,
+        "results": [
+          {
+            "title": "pythonobject orientedprogrammingfourthedition",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "pythonobject-orientedprogrammingfourthedition.pdf",
+            "similarity_score": 0.9714285714285714,
+            "confidence": 0.582857142857143,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "learncprogramming",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "learncprogramming.pdf",
+            "similarity_score": 0.8857142857142857,
+            "confidence": 0.5314285714285715,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "Exploring Functional Programming",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "Exploring_Functional_Programming.pdf",
+            "similarity_score": 0.8400000000000001,
+            "confidence": 0.5040000000000001,
+            "algorithm": "fuzzy_real"
+          }
+        ]
+      },
+      {
+        "query": "JavaScript React",
+        "results_count": 5,
+        "best_score": 0.6888888888888889,
+        "results": [
+          {
+            "title": "secretsofthejavascriptninja2e",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "secretsofthejavascriptninja2e.epub",
+            "similarity_score": 0.6888888888888889,
+            "confidence": 0.4133333333333334,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "secretsofthejavascriptninja2e",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "secretsofthejavascriptninja2e.pdf",
+            "similarity_score": 0.6888888888888889,
+            "confidence": 0.4133333333333334,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "learningphpmysqlandjavascript7e",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "learningphpmysqlandjavascript7e.pdf",
+            "similarity_score": 0.6680851063829787,
+            "confidence": 0.40085106382978725,
+            "algorithm": "fuzzy_real"
+          }
+        ]
+      },
+      {
+        "query": "Machine Learning AI",
+        "results_count": 5,
+        "best_score": 1.0,
+        "results": [
+          {
+            "title": "trainingdataformachinelearning",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "AI_ML",
+            "filename": "trainingdataformachinelearning.epub",
+            "similarity_score": 1.0,
+            "confidence": 0.6000000000000001,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "architectingdataandmachinelearningplatforms",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "AI_ML",
+            "filename": "architectingdataandmachinelearningplatforms.pdf",
+            "similarity_score": 0.9161290322580645,
+            "confidence": 0.5496774193548388,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "architectingdataandmachinelearningplatforms",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "AI_ML",
+            "filename": "architectingdataandmachinelearningplatforms.epub",
+            "similarity_score": 0.9161290322580645,
+            "confidence": 0.5496774193548388,
+            "algorithm": "fuzzy_real"
+          }
+        ]
+      },
+      {
+        "query": "Web Development",
+        "results_count": 5,
+        "best_score": 1.0,
+        "results": [
+          {
+            "title": "rustwebdevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Web",
+            "filename": "rustwebdevelopment.pdf",
+            "similarity_score": 1.0,
+            "confidence": 0.6000000000000001,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "database drivenwebdevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "filename": "database-drivenwebdevelopment.pdf",
+            "similarity_score": 0.8363636363636364,
+            "confidence": 0.5018181818181819,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "howtobeawebdeveloper",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Web",
+            "filename": "howtobeawebdeveloper.epub",
+            "similarity_score": 0.8285714285714285,
+            "confidence": 0.49714285714285716,
+            "algorithm": "fuzzy_real"
+          }
+        ]
+      },
+      {
+        "query": "Database SQL",
+        "results_count": 5,
+        "best_score": 0.8206896551724139,
+        "results": [
+          {
+            "title": "databaseinternals",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "filename": "databaseinternals.pdf",
+            "similarity_score": 0.8206896551724139,
+            "confidence": 0.4924137931034484,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "databaseperformanceatscale",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "filename": "databaseperformanceatscale.epub",
+            "similarity_score": 0.7263157894736842,
+            "confidence": 0.4357894736842106,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "database drivenwebdevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "filename": "database-drivenwebdevelopment.pdf",
+            "similarity_score": 0.6878048780487804,
+            "confidence": 0.4126829268292683,
+            "algorithm": "fuzzy_real"
+          }
+        ]
+      },
+      {
+        "query": "Security Hacking",
+        "results_count": 5,
+        "best_score": 0.7714285714285714,
+        "results": [
+          {
+            "title": "practicaliothacking",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "practicaliothacking.epub",
+            "similarity_score": 0.7714285714285714,
+            "confidence": 0.46285714285714286,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "windowssecurityinternals",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "windowssecurityinternals.epub",
+            "similarity_score": 0.7,
+            "confidence": 0.42000000000000004,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "Exploring Security Privacy and Trust",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "Exploring_Security_Privacy_and_Trust.pdf",
+            "similarity_score": 0.6615384615384616,
+            "confidence": 0.39692307692307705,
+            "algorithm": "fuzzy_real"
+          }
+        ]
+      },
+      {
+        "query": "Docker Kubernetes",
+        "results_count": 5,
+        "best_score": 0.5928571428571429,
+        "results": [
+          {
+            "title": "Learn Docker in a Month of Lunches Seco",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "DevOps",
+            "filename": "Learn_Docker_in_a_Month_of_Lunches_Seco.pdf",
+            "similarity_score": 0.5928571428571429,
+            "confidence": 0.35571428571428576,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "cyberjutsu",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "cyberjutsu.epub",
+            "similarity_score": 0.4444444444444444,
+            "confidence": 0.2666666666666667,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "windowssecurityinternals",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "windowssecurityinternals.epub",
+            "similarity_score": 0.3902439024390244,
+            "confidence": 0.23414634146341468,
+            "algorithm": "fuzzy_real"
+          }
+        ]
+      },
+      {
+        "query": "Data Science",
+        "results_count": 5,
+        "best_score": 1.0,
+        "results": [
+          {
+            "title": "Exploring Data Science",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "AI_ML",
+            "filename": "Exploring_Data_Science.pdf",
+            "similarity_score": 1.0,
+            "confidence": 0.6000000000000001,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "databaseinternals",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "filename": "databaseinternals.pdf",
+            "similarity_score": 0.7517241379310344,
+            "confidence": 0.45103448275862074,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "databaseperformanceatscale",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "filename": "databaseperformanceatscale.epub",
+            "similarity_score": 0.6736842105263158,
+            "confidence": 0.4042105263157895,
+            "algorithm": "fuzzy_real"
+          }
+        ]
+      },
+      {
+        "query": "Ethical Hacking",
+        "results_count": 5,
+        "best_score": 0.9058823529411766,
+        "results": [
+          {
+            "title": "practicaliothacking",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "practicaliothacking.epub",
+            "similarity_score": 0.9058823529411766,
+            "confidence": 0.543529411764706,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "reacthooksinaction",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "reacthooksinaction.pdf",
+            "similarity_score": 0.48484848484848486,
+            "confidence": 0.29090909090909095,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "Exploring Functional Programming",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "Exploring_Functional_Programming.pdf",
+            "similarity_score": 0.425531914893617,
+            "confidence": 0.25531914893617025,
+            "algorithm": "fuzzy_real"
+          }
+        ]
+      },
+      {
+        "query": "Network Security",
+        "results_count": 5,
+        "best_score": 0.7714285714285714,
+        "results": [
+          {
+            "title": "Understanding API Security",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "Understanding_API_Security.pdf",
+            "similarity_score": 0.7714285714285714,
+            "confidence": 0.46285714285714286,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "foundationsofinformationsecurity",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "foundationsofinformationsecurity.mobi",
+            "similarity_score": 0.7,
+            "confidence": 0.42000000000000004,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "windowssecurityinternals",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "windowssecurityinternals.epub",
+            "similarity_score": 0.7,
+            "confidence": 0.42000000000000004,
+            "algorithm": "fuzzy_real"
+          }
+        ]
+      },
+      {
+        "query": "Android Mobile",
+        "results_count": 5,
+        "best_score": 0.41379310344827586,
+        "results": [
+          {
+            "title": "artofmacmalware",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "artofmacmalware.epub",
+            "similarity_score": 0.41379310344827586,
+            "confidence": 0.24827586206896554,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "Learn Docker in a Month of Lunches Seco",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "DevOps",
+            "filename": "Learn_Docker_in_a_Month_of_Lunches_Seco.pdf",
+            "similarity_score": 0.37735849056603776,
+            "confidence": 0.2264150943396227,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "angularforbusiness",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "angularforbusiness.epub",
+            "similarity_score": 0.375,
+            "confidence": 0.22500000000000003,
+            "algorithm": "fuzzy_real"
+          }
+        ]
+      },
+      {
+        "query": "Algorithms Programming",
+        "results_count": 5,
+        "best_score": 0.8666666666666667,
+        "results": [
+          {
+            "title": "learncprogramming",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "learncprogramming.pdf",
+            "similarity_score": 0.8666666666666667,
+            "confidence": 0.5200000000000001,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "Exploring Functional Programming",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "Exploring_Functional_Programming.pdf",
+            "similarity_score": 0.8296296296296297,
+            "confidence": 0.49777777777777793,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "pythonobject orientedprogrammingfourthedition",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "pythonobject-orientedprogrammingfourthedition.pdf",
+            "similarity_score": 0.6477611940298508,
+            "confidence": 0.3886567164179105,
+            "algorithm": "fuzzy_real"
+          }
+        ]
+      },
+      {
+        "query": "Cloud Computing",
+        "results_count": 5,
+        "best_score": 0.65,
+        "results": [
+          {
+            "title": "Cloud Native Applications",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "DevOps",
+            "filename": "Cloud_Native_Applications.pdf",
+            "similarity_score": 0.65,
+            "confidence": 0.39000000000000007,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "cloudnativeanti patterns",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "DevOps",
+            "filename": "cloudnativeanti-patterns.epub",
+            "similarity_score": 0.6102564102564103,
+            "confidence": 0.3661538461538462,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "cloudnativeanti patterns",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "DevOps",
+            "filename": "cloudnativeanti-patterns.pdf",
+            "similarity_score": 0.6102564102564103,
+            "confidence": 0.3661538461538462,
+            "algorithm": "fuzzy_real"
+          }
+        ]
+      },
+      {
+        "query": "Forensics Investigation",
+        "results_count": 5,
+        "best_score": 0.5829787234042554,
+        "results": [
+          {
+            "title": "Learn Computer Forensics",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "Learn Computer Forensics - Second Edition.pdf",
+            "similarity_score": 0.5829787234042554,
+            "confidence": 0.4080851063829788,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "reacthooksinaction",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "reacthooksinaction.pdf",
+            "similarity_score": 0.43902439024390244,
+            "confidence": 0.26341463414634153,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "sqlinanutshell4thedition",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "filename": "sqlinanutshell4thedition.epub",
+            "similarity_score": 0.425531914893617,
+            "confidence": 0.25531914893617025,
+            "algorithm": "fuzzy_real"
+          }
+        ]
+      },
+      {
+        "query": "Malware Analysis",
+        "results_count": 5,
+        "best_score": 0.6666666666666667,
+        "results": [
+          {
+            "title": "evasivemalware",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "evasivemalware.pdf",
+            "similarity_score": 0.6666666666666667,
+            "confidence": 0.4000000000000001,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "artofmacmalware",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "artofmacmalware.epub",
+            "similarity_score": 0.6516129032258065,
+            "confidence": 0.39096774193548395,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "sqlfordataanalysis",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "filename": "sqlfordataanalysis.pdf",
+            "similarity_score": 0.5882352941176471,
+            "confidence": 0.3529411764705883,
+            "algorithm": "fuzzy_real"
+          }
+        ]
+      }
+    ]
+  },
+  "semantic_real": {
+    "algorithm": "semantic_real",
+    "total_queries": 15,
+    "results_found": 14,
+    "avg_results_per_query": 4.6,
+    "avg_score": 0.4297614623701581,
+    "max_score": 0.8333333333333333,
+    "query_results": [
+      {
+        "query": "Python Programming",
+        "results_count": 5,
+        "best_score": 0.5666666666666667,
+        "results": [
+          {
+            "title": "Python Workout",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "Python_Workout.pdf",
+            "similarity_score": 0.5666666666666667,
+            "confidence": 0.34,
+            "algorithm": "semantic_real"
+          },
+          {
+            "title": "Python Workout",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "Python_Workout_Second_Edition_v3_MEAP.epub",
+            "similarity_score": 0.5666666666666667,
+            "confidence": 0.39666666666666667,
+            "algorithm": "semantic_real"
+          },
+          {
+            "title": "Exploring Functional Programming",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "Exploring_Functional_Programming.pdf",
+            "similarity_score": 0.525,
+            "confidence": 0.31500000000000006,
+            "algorithm": "semantic_real"
+          }
+        ]
+      },
+      {
+        "query": "JavaScript React",
+        "results_count": 5,
+        "best_score": 0.43333333333333335,
+        "results": [
+          {
+            "title": "secretsofthejavascriptninja2e",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "secretsofthejavascriptninja2e.epub",
+            "similarity_score": 0.43333333333333335,
+            "confidence": 0.26000000000000006,
+            "algorithm": "semantic_real"
+          },
+          {
+            "title": "learningphpmysqlandjavascript7e",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "learningphpmysqlandjavascript7e.pdf",
+            "similarity_score": 0.43333333333333335,
+            "confidence": 0.26000000000000006,
+            "algorithm": "semantic_real"
+          },
+          {
+            "title": "secretsofthejavascriptninja2e",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "secretsofthejavascriptninja2e.pdf",
+            "similarity_score": 0.43333333333333335,
+            "confidence": 0.26000000000000006,
+            "algorithm": "semantic_real"
+          }
+        ]
+      },
+      {
+        "query": "Machine Learning AI",
+        "results_count": 5,
+        "best_score": 0.5,
+        "results": [
+          {
+            "title": "trainingdataformachinelearning",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "AI_ML",
+            "filename": "trainingdataformachinelearning.epub",
+            "similarity_score": 0.5,
+            "confidence": 0.30000000000000004,
+            "algorithm": "semantic_real"
+          },
+          {
+            "title": "AI Agents and Applications",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "AI_ML",
+            "filename": "AI_Agents_and_Applications_v7_MEAP.epub",
+            "similarity_score": 0.44999999999999996,
+            "confidence": 0.27,
+            "algorithm": "semantic_real"
+          },
+          {
+            "title": "AI Agents and Applications",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "AI_ML",
+            "filename": "AI_Agents_and_Applications_v7_MEAP.pdf",
+            "similarity_score": 0.44999999999999996,
+            "confidence": 0.27,
+            "algorithm": "semantic_real"
+          }
+        ]
+      },
+      {
+        "query": "Web Development",
+        "results_count": 5,
+        "best_score": 0.5,
+        "results": [
+          {
+            "title": "howtobeawebdeveloper",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Web",
+            "filename": "howtobeawebdeveloper.epub",
+            "similarity_score": 0.5,
+            "confidence": 0.30000000000000004,
+            "algorithm": "semantic_real"
+          },
+          {
+            "title": "thetangledweb",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Web",
+            "filename": "thetangledweb.mobi",
+            "similarity_score": 0.5,
+            "confidence": 0.30000000000000004,
+            "algorithm": "semantic_real"
+          },
+          {
+            "title": "rustwebdevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Web",
+            "filename": "rustwebdevelopment.pdf",
+            "similarity_score": 0.5,
+            "confidence": 0.30000000000000004,
+            "algorithm": "semantic_real"
+          }
+        ]
+      },
+      {
+        "query": "Database SQL",
+        "results_count": 5,
+        "best_score": 0.6,
+        "results": [
+          {
+            "title": "database drivenwebdevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "filename": "database-drivenwebdevelopment.pdf",
+            "similarity_score": 0.6,
+            "confidence": 0.36000000000000004,
+            "algorithm": "semantic_real"
+          },
+          {
+            "title": "databaseperformanceatscale",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "filename": "databaseperformanceatscale.epub",
+            "similarity_score": 0.43333333333333335,
+            "confidence": 0.26000000000000006,
+            "algorithm": "semantic_real"
+          },
+          {
+            "title": "fuzzydatamatchingwithsql",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "filename": "fuzzydatamatchingwithsql.pdf",
+            "similarity_score": 0.43333333333333335,
+            "confidence": 0.26000000000000006,
+            "algorithm": "semantic_real"
+          }
+        ]
+      },
+      {
+        "query": "Security Hacking",
+        "results_count": 5,
+        "best_score": 0.525,
+        "results": [
+          {
+            "title": "Understanding API Security",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "Understanding_API_Security.pdf",
+            "similarity_score": 0.525,
+            "confidence": 0.31500000000000006,
+            "algorithm": "semantic_real"
+          },
+          {
+            "title": "Exploring Security Privacy and Trust",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "Exploring_Security_Privacy_and_Trust.pdf",
+            "similarity_score": 0.4833333333333333,
+            "confidence": 0.29000000000000004,
+            "algorithm": "semantic_real"
+          },
+          {
+            "title": "foundationsofinformationsecurity",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "foundationsofinformationsecurity.mobi",
+            "similarity_score": 0.4,
+            "confidence": 0.24000000000000005,
+            "algorithm": "semantic_real"
+          }
+        ]
+      },
+      {
+        "query": "Docker Kubernetes",
+        "results_count": 4,
+        "best_score": 0.4555555555555555,
+        "results": [
+          {
+            "title": "Learn Docker in a Month of Lunches Seco",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "DevOps",
+            "filename": "Learn_Docker_in_a_Month_of_Lunches_Seco.pdf",
+            "similarity_score": 0.4555555555555555,
+            "confidence": 0.2733333333333333,
+            "algorithm": "semantic_real"
+          },
+          {
+            "title": "cloudnativeanti patterns",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "DevOps",
+            "filename": "cloudnativeanti-patterns.epub",
+            "similarity_score": 0.3,
+            "confidence": 0.18000000000000002,
+            "algorithm": "semantic_real"
+          },
+          {
+            "title": "Cloud Native Applications",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "DevOps",
+            "filename": "Cloud_Native_Applications.pdf",
+            "similarity_score": 0.3,
+            "confidence": 0.18000000000000002,
+            "algorithm": "semantic_real"
+          }
+        ]
+      },
+      {
+        "query": "Data Science",
+        "results_count": 5,
+        "best_score": 0.8333333333333333,
+        "results": [
+          {
+            "title": "Exploring Data Science",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "AI_ML",
+            "filename": "Exploring_Data_Science.pdf",
+            "similarity_score": 0.8333333333333333,
+            "confidence": 0.5,
+            "algorithm": "semantic_real"
+          },
+          {
+            "title": "architectingdataandmachinelearningplatforms",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "AI_ML",
+            "filename": "architectingdataandmachinelearningplatforms.pdf",
+            "similarity_score": 0.4,
+            "confidence": 0.24000000000000005,
+            "algorithm": "semantic_real"
+          },
+          {
+            "title": "trainingdataformachinelearning",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "AI_ML",
+            "filename": "trainingdataformachinelearning.epub",
+            "similarity_score": 0.4,
+            "confidence": 0.24000000000000005,
+            "algorithm": "semantic_real"
+          }
+        ]
+      },
+      {
+        "query": "Ethical Hacking",
+        "results_count": 5,
+        "best_score": 0.5,
+        "results": [
+          {
+            "title": "practicaliothacking",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "practicaliothacking.epub",
+            "similarity_score": 0.5,
+            "confidence": 0.30000000000000004,
+            "algorithm": "semantic_real"
+          },
+          {
+            "title": "Learn Computer Forensics",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "Learn Computer Forensics - Second Edition.pdf",
+            "similarity_score": 0.3,
+            "confidence": 0.21000000000000002,
+            "algorithm": "semantic_real"
+          },
+          {
+            "title": "evasivemalware",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "evasivemalware.pdf",
+            "similarity_score": 0.3,
+            "confidence": 0.18000000000000002,
+            "algorithm": "semantic_real"
+          }
+        ]
+      },
+      {
+        "query": "Network Security",
+        "results_count": 5,
+        "best_score": 0.525,
+        "results": [
+          {
+            "title": "Understanding API Security",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "Understanding_API_Security.pdf",
+            "similarity_score": 0.525,
+            "confidence": 0.31500000000000006,
+            "algorithm": "semantic_real"
+          },
+          {
+            "title": "Exploring Security Privacy and Trust",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "Exploring_Security_Privacy_and_Trust.pdf",
+            "similarity_score": 0.4833333333333333,
+            "confidence": 0.29000000000000004,
+            "algorithm": "semantic_real"
+          },
+          {
+            "title": "foundationsofinformationsecurity",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "foundationsofinformationsecurity.mobi",
+            "similarity_score": 0.4,
+            "confidence": 0.24000000000000005,
+            "algorithm": "semantic_real"
+          }
+        ]
+      },
+      {
+        "query": "Android Mobile",
+        "results_count": 0,
+        "best_score": 0.0,
+        "results": []
+      },
+      {
+        "query": "Algorithms Programming",
+        "results_count": 5,
+        "best_score": 0.625,
+        "results": [
+          {
+            "title": "Exploring Functional Programming",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "Exploring_Functional_Programming.pdf",
+            "similarity_score": 0.625,
+            "confidence": 0.37500000000000006,
+            "algorithm": "semantic_real"
+          },
+          {
+            "title": "extreme programming praticas para o dia a dia no desenvolvimento agil de software",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "extreme-programming-praticas-para-o-dia-a-dia-no-desenvolvimento-agil-de-software.pdf",
+            "similarity_score": 0.5384615384615385,
+            "confidence": 0.32307692307692315,
+            "algorithm": "semantic_real"
+          },
+          {
+            "title": "pythonobject orientedprogrammingfourthedition",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "pythonobject-orientedprogrammingfourthedition.pdf",
+            "similarity_score": 0.5,
+            "confidence": 0.30000000000000004,
+            "algorithm": "semantic_real"
+          }
+        ]
+      },
+      {
+        "query": "Cloud Computing",
+        "results_count": 5,
+        "best_score": 0.625,
+        "results": [
+          {
+            "title": "Cloud Native Applications",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "DevOps",
+            "filename": "Cloud_Native_Applications.pdf",
+            "similarity_score": 0.625,
+            "confidence": 0.37500000000000006,
+            "algorithm": "semantic_real"
+          },
+          {
+            "title": "cloudnativeanti patterns",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "DevOps",
+            "filename": "cloudnativeanti-patterns.epub",
+            "similarity_score": 0.5,
+            "confidence": 0.30000000000000004,
+            "algorithm": "semantic_real"
+          },
+          {
+            "title": "cloudnativeanti patterns",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "DevOps",
+            "filename": "cloudnativeanti-patterns.pdf",
+            "similarity_score": 0.5,
+            "confidence": 0.30000000000000004,
+            "algorithm": "semantic_real"
+          }
+        ]
+      },
+      {
+        "query": "Forensics Investigation",
+        "results_count": 5,
+        "best_score": 0.625,
+        "results": [
+          {
+            "title": "Learn Computer Forensics",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "Learn Computer Forensics - Second Edition.pdf",
+            "similarity_score": 0.625,
+            "confidence": 0.43750000000000006,
+            "algorithm": "semantic_real"
+          },
+          {
+            "title": "evasivemalware",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "evasivemalware.pdf",
+            "similarity_score": 0.3,
+            "confidence": 0.18000000000000002,
+            "algorithm": "semantic_real"
+          },
+          {
+            "title": "Exploring Security Privacy and Trust",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "Exploring_Security_Privacy_and_Trust.pdf",
+            "similarity_score": 0.3,
+            "confidence": 0.18000000000000002,
+            "algorithm": "semantic_real"
+          }
+        ]
+      },
+      {
+        "query": "Malware Analysis",
+        "results_count": 5,
+        "best_score": 0.5,
+        "results": [
+          {
+            "title": "evasivemalware",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "evasivemalware.pdf",
+            "similarity_score": 0.5,
+            "confidence": 0.30000000000000004,
+            "algorithm": "semantic_real"
+          },
+          {
+            "title": "artofmacmalware",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "artofmacmalware.epub",
+            "similarity_score": 0.5,
+            "confidence": 0.30000000000000004,
+            "algorithm": "semantic_real"
+          },
+          {
+            "title": "Learn Computer Forensics",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "Learn Computer Forensics - Second Edition.pdf",
+            "similarity_score": 0.3,
+            "confidence": 0.21000000000000002,
+            "algorithm": "semantic_real"
+          }
+        ]
+      }
+    ]
+  },
+  "isbn_real": {
+    "algorithm": "isbn_real",
+    "total_queries": 15,
+    "results_found": 15,
+    "avg_results_per_query": 5.0,
+    "avg_score": 0.6316763092885868,
+    "max_score": 1.0,
+    "query_results": [
+      {
+        "query": "Python Programming",
+        "results_count": 5,
+        "best_score": 0.9714285714285714,
+        "results": [
+          {
+            "title": "pythonobject orientedprogrammingfourthedition",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "pythonobject-orientedprogrammingfourthedition.pdf",
+            "similarity_score": 0.9714285714285714,
+            "confidence": 0.582857142857143,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "learncprogramming",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "learncprogramming.pdf",
+            "similarity_score": 0.8857142857142857,
+            "confidence": 0.5314285714285715,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "Exploring Functional Programming",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "Exploring_Functional_Programming.pdf",
+            "similarity_score": 0.8400000000000001,
+            "confidence": 0.5040000000000001,
+            "algorithm": "fuzzy_real"
+          }
+        ]
+      },
+      {
+        "query": "JavaScript React",
+        "results_count": 5,
+        "best_score": 0.6888888888888889,
+        "results": [
+          {
+            "title": "secretsofthejavascriptninja2e",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "secretsofthejavascriptninja2e.epub",
+            "similarity_score": 0.6888888888888889,
+            "confidence": 0.4133333333333334,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "secretsofthejavascriptninja2e",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "secretsofthejavascriptninja2e.pdf",
+            "similarity_score": 0.6888888888888889,
+            "confidence": 0.4133333333333334,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "learningphpmysqlandjavascript7e",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "learningphpmysqlandjavascript7e.pdf",
+            "similarity_score": 0.6680851063829787,
+            "confidence": 0.40085106382978725,
+            "algorithm": "fuzzy_real"
+          }
+        ]
+      },
+      {
+        "query": "Machine Learning AI",
+        "results_count": 5,
+        "best_score": 1.0,
+        "results": [
+          {
+            "title": "trainingdataformachinelearning",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "AI_ML",
+            "filename": "trainingdataformachinelearning.epub",
+            "similarity_score": 1.0,
+            "confidence": 0.6000000000000001,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "architectingdataandmachinelearningplatforms",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "AI_ML",
+            "filename": "architectingdataandmachinelearningplatforms.pdf",
+            "similarity_score": 0.9161290322580645,
+            "confidence": 0.5496774193548388,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "architectingdataandmachinelearningplatforms",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "AI_ML",
+            "filename": "architectingdataandmachinelearningplatforms.epub",
+            "similarity_score": 0.9161290322580645,
+            "confidence": 0.5496774193548388,
+            "algorithm": "fuzzy_real"
+          }
+        ]
+      },
+      {
+        "query": "Web Development",
+        "results_count": 5,
+        "best_score": 1.0,
+        "results": [
+          {
+            "title": "rustwebdevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Web",
+            "filename": "rustwebdevelopment.pdf",
+            "similarity_score": 1.0,
+            "confidence": 0.6000000000000001,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "database drivenwebdevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "filename": "database-drivenwebdevelopment.pdf",
+            "similarity_score": 0.8363636363636364,
+            "confidence": 0.5018181818181819,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "howtobeawebdeveloper",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Web",
+            "filename": "howtobeawebdeveloper.epub",
+            "similarity_score": 0.8285714285714285,
+            "confidence": 0.49714285714285716,
+            "algorithm": "fuzzy_real"
+          }
+        ]
+      },
+      {
+        "query": "Database SQL",
+        "results_count": 5,
+        "best_score": 0.8206896551724139,
+        "results": [
+          {
+            "title": "databaseinternals",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "filename": "databaseinternals.pdf",
+            "similarity_score": 0.8206896551724139,
+            "confidence": 0.4924137931034484,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "databaseperformanceatscale",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "filename": "databaseperformanceatscale.epub",
+            "similarity_score": 0.7263157894736842,
+            "confidence": 0.4357894736842106,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "database drivenwebdevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "filename": "database-drivenwebdevelopment.pdf",
+            "similarity_score": 0.6878048780487804,
+            "confidence": 0.4126829268292683,
+            "algorithm": "fuzzy_real"
+          }
+        ]
+      },
+      {
+        "query": "Security Hacking",
+        "results_count": 5,
+        "best_score": 0.7714285714285714,
+        "results": [
+          {
+            "title": "practicaliothacking",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "practicaliothacking.epub",
+            "similarity_score": 0.7714285714285714,
+            "confidence": 0.46285714285714286,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "windowssecurityinternals",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "windowssecurityinternals.epub",
+            "similarity_score": 0.7,
+            "confidence": 0.42000000000000004,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "Exploring Security Privacy and Trust",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "Exploring_Security_Privacy_and_Trust.pdf",
+            "similarity_score": 0.6615384615384616,
+            "confidence": 0.39692307692307705,
+            "algorithm": "fuzzy_real"
+          }
+        ]
+      },
+      {
+        "query": "Docker Kubernetes",
+        "results_count": 5,
+        "best_score": 0.5928571428571429,
+        "results": [
+          {
+            "title": "Learn Docker in a Month of Lunches Seco",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "DevOps",
+            "filename": "Learn_Docker_in_a_Month_of_Lunches_Seco.pdf",
+            "similarity_score": 0.5928571428571429,
+            "confidence": 0.35571428571428576,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "cyberjutsu",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "cyberjutsu.epub",
+            "similarity_score": 0.4444444444444444,
+            "confidence": 0.2666666666666667,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "windowssecurityinternals",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "windowssecurityinternals.epub",
+            "similarity_score": 0.3902439024390244,
+            "confidence": 0.23414634146341468,
+            "algorithm": "fuzzy_real"
+          }
+        ]
+      },
+      {
+        "query": "Data Science",
+        "results_count": 5,
+        "best_score": 1.0,
+        "results": [
+          {
+            "title": "Exploring Data Science",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "AI_ML",
+            "filename": "Exploring_Data_Science.pdf",
+            "similarity_score": 1.0,
+            "confidence": 0.6000000000000001,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "databaseinternals",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "filename": "databaseinternals.pdf",
+            "similarity_score": 0.7517241379310344,
+            "confidence": 0.45103448275862074,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "databaseperformanceatscale",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "filename": "databaseperformanceatscale.epub",
+            "similarity_score": 0.6736842105263158,
+            "confidence": 0.4042105263157895,
+            "algorithm": "fuzzy_real"
+          }
+        ]
+      },
+      {
+        "query": "Ethical Hacking",
+        "results_count": 5,
+        "best_score": 0.9058823529411766,
+        "results": [
+          {
+            "title": "practicaliothacking",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "practicaliothacking.epub",
+            "similarity_score": 0.9058823529411766,
+            "confidence": 0.543529411764706,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "reacthooksinaction",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "reacthooksinaction.pdf",
+            "similarity_score": 0.48484848484848486,
+            "confidence": 0.29090909090909095,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "Exploring Functional Programming",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "Exploring_Functional_Programming.pdf",
+            "similarity_score": 0.425531914893617,
+            "confidence": 0.25531914893617025,
+            "algorithm": "fuzzy_real"
+          }
+        ]
+      },
+      {
+        "query": "Network Security",
+        "results_count": 5,
+        "best_score": 0.7714285714285714,
+        "results": [
+          {
+            "title": "Understanding API Security",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "Understanding_API_Security.pdf",
+            "similarity_score": 0.7714285714285714,
+            "confidence": 0.46285714285714286,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "foundationsofinformationsecurity",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "foundationsofinformationsecurity.mobi",
+            "similarity_score": 0.7,
+            "confidence": 0.42000000000000004,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "windowssecurityinternals",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "windowssecurityinternals.epub",
+            "similarity_score": 0.7,
+            "confidence": 0.42000000000000004,
+            "algorithm": "fuzzy_real"
+          }
+        ]
+      },
+      {
+        "query": "Android Mobile",
+        "results_count": 5,
+        "best_score": 0.41379310344827586,
+        "results": [
+          {
+            "title": "artofmacmalware",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "artofmacmalware.epub",
+            "similarity_score": 0.41379310344827586,
+            "confidence": 0.24827586206896554,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "Learn Docker in a Month of Lunches Seco",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "DevOps",
+            "filename": "Learn_Docker_in_a_Month_of_Lunches_Seco.pdf",
+            "similarity_score": 0.37735849056603776,
+            "confidence": 0.2264150943396227,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "angularforbusiness",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "angularforbusiness.epub",
+            "similarity_score": 0.375,
+            "confidence": 0.22500000000000003,
+            "algorithm": "fuzzy_real"
+          }
+        ]
+      },
+      {
+        "query": "Algorithms Programming",
+        "results_count": 5,
+        "best_score": 0.8666666666666667,
+        "results": [
+          {
+            "title": "learncprogramming",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "learncprogramming.pdf",
+            "similarity_score": 0.8666666666666667,
+            "confidence": 0.5200000000000001,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "Exploring Functional Programming",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "Exploring_Functional_Programming.pdf",
+            "similarity_score": 0.8296296296296297,
+            "confidence": 0.49777777777777793,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "pythonobject orientedprogrammingfourthedition",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "pythonobject-orientedprogrammingfourthedition.pdf",
+            "similarity_score": 0.6477611940298508,
+            "confidence": 0.3886567164179105,
+            "algorithm": "fuzzy_real"
+          }
+        ]
+      },
+      {
+        "query": "Cloud Computing",
+        "results_count": 5,
+        "best_score": 0.65,
+        "results": [
+          {
+            "title": "Cloud Native Applications",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "DevOps",
+            "filename": "Cloud_Native_Applications.pdf",
+            "similarity_score": 0.65,
+            "confidence": 0.39000000000000007,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "cloudnativeanti patterns",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "DevOps",
+            "filename": "cloudnativeanti-patterns.epub",
+            "similarity_score": 0.6102564102564103,
+            "confidence": 0.3661538461538462,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "cloudnativeanti patterns",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "DevOps",
+            "filename": "cloudnativeanti-patterns.pdf",
+            "similarity_score": 0.6102564102564103,
+            "confidence": 0.3661538461538462,
+            "algorithm": "fuzzy_real"
+          }
+        ]
+      },
+      {
+        "query": "Forensics Investigation",
+        "results_count": 5,
+        "best_score": 0.5829787234042554,
+        "results": [
+          {
+            "title": "Learn Computer Forensics",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "Learn Computer Forensics - Second Edition.pdf",
+            "similarity_score": 0.5829787234042554,
+            "confidence": 0.4080851063829788,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "reacthooksinaction",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "reacthooksinaction.pdf",
+            "similarity_score": 0.43902439024390244,
+            "confidence": 0.26341463414634153,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "sqlinanutshell4thedition",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "filename": "sqlinanutshell4thedition.epub",
+            "similarity_score": 0.425531914893617,
+            "confidence": 0.25531914893617025,
+            "algorithm": "fuzzy_real"
+          }
+        ]
+      },
+      {
+        "query": "Malware Analysis",
+        "results_count": 5,
+        "best_score": 0.6666666666666667,
+        "results": [
+          {
+            "title": "evasivemalware",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "evasivemalware.pdf",
+            "similarity_score": 0.6666666666666667,
+            "confidence": 0.4000000000000001,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "artofmacmalware",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "artofmacmalware.epub",
+            "similarity_score": 0.6516129032258065,
+            "confidence": 0.39096774193548395,
+            "algorithm": "fuzzy_real"
+          },
+          {
+            "title": "sqlfordataanalysis",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "filename": "sqlfordataanalysis.pdf",
+            "similarity_score": 0.5882352941176471,
+            "confidence": 0.3529411764705883,
+            "algorithm": "fuzzy_real"
+          }
+        ]
+      }
+    ]
+  },
+  "orchestrator_real": {
+    "algorithm": "orchestrator_real",
+    "total_queries": 15,
+    "results_found": 15,
+    "avg_results_per_query": 5.0,
+    "avg_score": 0.6559144901011141,
+    "max_score": 1.0791666666666666,
+    "query_results": [
+      {
+        "query": "Python Programming",
+        "results_count": 5,
+        "best_score": 0.9632142857142857,
+        "results": [
+          {
+            "title": "pythonobject orientedprogrammingfourthedition",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "pythonobject-orientedprogrammingfourthedition.pdf",
+            "similarity_score": 0.9632142857142857,
+            "confidence": 0.582857142857143,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.9632142857142857,
+            "algorithms": [
+              "fuzzy_real",
+              "semantic_real",
+              "fuzzy_real"
+            ]
+          },
+          {
+            "title": "learncprogramming",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "learncprogramming.pdf",
+            "similarity_score": 0.8628571428571428,
+            "confidence": 0.5314285714285715,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.8628571428571428,
+            "algorithms": [
+              "fuzzy_real",
+              "semantic_real",
+              "fuzzy_real"
+            ]
+          },
+          {
+            "title": "Exploring Functional Programming",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "Exploring_Functional_Programming.pdf",
+            "similarity_score": 0.8583750000000001,
+            "confidence": 0.5040000000000001,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.8583750000000001,
+            "algorithms": [
+              "fuzzy_real",
+              "semantic_real",
+              "fuzzy_real"
+            ]
+          }
+        ]
+      },
+      {
+        "query": "JavaScript React",
+        "results_count": 5,
+        "best_score": 0.7524305555555556,
+        "results": [
+          {
+            "title": "secretsofthejavascriptninja2e",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "secretsofthejavascriptninja2e.epub",
+            "similarity_score": 0.7524305555555556,
+            "confidence": 0.4133333333333334,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.7524305555555556,
+            "algorithms": [
+              "fuzzy_real",
+              "fuzzy_real",
+              "semantic_real",
+              "semantic_real",
+              "fuzzy_real",
+              "fuzzy_real"
+            ]
+          },
+          {
+            "title": "learningphpmysqlandjavascript7e",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "learningphpmysqlandjavascript7e.pdf",
+            "similarity_score": 0.6870390070921986,
+            "confidence": 0.40085106382978725,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.6870390070921986,
+            "algorithms": [
+              "fuzzy_real",
+              "semantic_real",
+              "fuzzy_real"
+            ]
+          },
+          {
+            "title": "reactquickly2e",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "reactquickly2e.pdf",
+            "similarity_score": 0.5541666666666667,
+            "confidence": 0.32000000000000006,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.5541666666666667,
+            "algorithms": [
+              "fuzzy_real",
+              "semantic_real",
+              "fuzzy_real"
+            ]
+          }
+        ]
+      },
+      {
+        "query": "Machine Learning AI",
+        "results_count": 5,
+        "best_score": 0.9875,
+        "results": [
+          {
+            "title": "trainingdataformachinelearning",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "AI_ML",
+            "filename": "trainingdataformachinelearning.epub",
+            "similarity_score": 0.9875,
+            "confidence": 0.6000000000000001,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.9875,
+            "algorithms": [
+              "fuzzy_real",
+              "semantic_real",
+              "fuzzy_real"
+            ]
+          },
+          {
+            "title": "architectingdataandmachinelearningplatforms",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "AI_ML",
+            "filename": "architectingdataandmachinelearningplatforms.pdf",
+            "similarity_score": 0.9711491935483871,
+            "confidence": 0.5496774193548388,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.9711491935483871,
+            "algorithms": [
+              "fuzzy_real",
+              "fuzzy_real",
+              "semantic_real",
+              "semantic_real",
+              "fuzzy_real",
+              "fuzzy_real"
+            ]
+          },
+          {
+            "title": "learningsql",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "filename": "learningsql.epub",
+            "similarity_score": 0.8066666666666666,
+            "confidence": 0.4400000000000001,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.8066666666666666,
+            "algorithms": [
+              "fuzzy_real",
+              "fuzzy_real"
+            ]
+          }
+        ]
+      },
+      {
+        "query": "Web Development",
+        "results_count": 5,
+        "best_score": 0.9875,
+        "results": [
+          {
+            "title": "rustwebdevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Web",
+            "filename": "rustwebdevelopment.pdf",
+            "similarity_score": 0.9875,
+            "confidence": 0.6000000000000001,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.9875,
+            "algorithms": [
+              "fuzzy_real",
+              "semantic_real",
+              "fuzzy_real"
+            ]
+          },
+          {
+            "title": "howtobeawebdeveloper",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Web",
+            "filename": "howtobeawebdeveloper.epub",
+            "similarity_score": 0.8417857142857142,
+            "confidence": 0.49714285714285716,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.8417857142857142,
+            "algorithms": [
+              "fuzzy_real",
+              "semantic_real",
+              "fuzzy_real"
+            ]
+          },
+          {
+            "title": "database drivenwebdevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "filename": "database-drivenwebdevelopment.pdf",
+            "similarity_score": 0.7659090909090909,
+            "confidence": 0.5018181818181819,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.7659090909090909,
+            "algorithms": [
+              "fuzzy_real",
+              "semantic_real",
+              "fuzzy_real"
+            ]
+          }
+        ]
+      },
+      {
+        "query": "Database SQL",
+        "results_count": 5,
+        "best_score": 0.8167528735632185,
+        "results": [
+          {
+            "title": "databaseinternals",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "filename": "databaseinternals.pdf",
+            "similarity_score": 0.8167528735632185,
+            "confidence": 0.4924137931034484,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.8167528735632185,
+            "algorithms": [
+              "fuzzy_real",
+              "semantic_real",
+              "fuzzy_real"
+            ]
+          },
+          {
+            "title": "database drivenwebdevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "filename": "database-drivenwebdevelopment.pdf",
+            "similarity_score": 0.7496341463414633,
+            "confidence": 0.4126829268292683,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.7496341463414633,
+            "algorithms": [
+              "fuzzy_real",
+              "semantic_real",
+              "fuzzy_real"
+            ]
+          },
+          {
+            "title": "databaseperformanceatscale",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "filename": "databaseperformanceatscale.epub",
+            "similarity_score": 0.7365350877192983,
+            "confidence": 0.4357894736842106,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.7365350877192983,
+            "algorithms": [
+              "fuzzy_real",
+              "semantic_real",
+              "fuzzy_real"
+            ]
+          }
+        ]
+      },
+      {
+        "query": "Security Hacking",
+        "results_count": 5,
+        "best_score": 0.7657142857142856,
+        "results": [
+          {
+            "title": "practicaliothacking",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "practicaliothacking.epub",
+            "similarity_score": 0.7657142857142856,
+            "confidence": 0.46285714285714286,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.7657142857142856,
+            "algorithms": [
+              "fuzzy_real",
+              "semantic_real",
+              "fuzzy_real"
+            ]
+          },
+          {
+            "title": "windowssecurityinternals",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "windowssecurityinternals.epub",
+            "similarity_score": 0.7050000000000001,
+            "confidence": 0.42000000000000004,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.7050000000000001,
+            "algorithms": [
+              "fuzzy_real",
+              "semantic_real",
+              "fuzzy_real"
+            ]
+          },
+          {
+            "title": "Exploring Security Privacy and Trust",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "Exploring_Security_Privacy_and_Trust.pdf",
+            "similarity_score": 0.695224358974359,
+            "confidence": 0.39692307692307705,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.695224358974359,
+            "algorithms": [
+              "fuzzy_real",
+              "semantic_real",
+              "fuzzy_real"
+            ]
+          }
+        ]
+      },
+      {
+        "query": "Docker Kubernetes",
+        "results_count": 5,
+        "best_score": 0.6292063492063491,
+        "results": [
+          {
+            "title": "Learn Docker in a Month of Lunches Seco",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "DevOps",
+            "filename": "Learn_Docker_in_a_Month_of_Lunches_Seco.pdf",
+            "similarity_score": 0.6292063492063491,
+            "confidence": 0.35571428571428576,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.6292063492063491,
+            "algorithms": [
+              "fuzzy_real",
+              "semantic_real",
+              "fuzzy_real"
+            ]
+          },
+          {
+            "title": "cyberjutsu",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "cyberjutsu.epub",
+            "similarity_score": 0.4888888888888889,
+            "confidence": 0.2666666666666667,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.4888888888888889,
+            "algorithms": [
+              "fuzzy_real",
+              "fuzzy_real"
+            ]
+          },
+          {
+            "title": "windowssecurityinternals",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "windowssecurityinternals.epub",
+            "similarity_score": 0.4292682926829268,
+            "confidence": 0.23414634146341468,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.4292682926829268,
+            "algorithms": [
+              "fuzzy_real",
+              "fuzzy_real"
+            ]
+          }
+        ]
+      },
+      {
+        "query": "Data Science",
+        "results_count": 5,
+        "best_score": 1.0791666666666666,
+        "results": [
+          {
+            "title": "Exploring Data Science",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "AI_ML",
+            "filename": "Exploring_Data_Science.pdf",
+            "similarity_score": 1.0791666666666666,
+            "confidence": 0.6000000000000001,
+            "algorithm": "orchestrator_real",
+            "combined_score": 1.0791666666666666,
+            "algorithms": [
+              "fuzzy_real",
+              "semantic_real",
+              "fuzzy_real"
+            ]
+          },
+          {
+            "title": "databaseinternals",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "filename": "databaseinternals.pdf",
+            "similarity_score": 0.8268965517241378,
+            "confidence": 0.45103448275862074,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.8268965517241378,
+            "algorithms": [
+              "fuzzy_real",
+              "fuzzy_real"
+            ]
+          },
+          {
+            "title": "databaseperformanceatscale",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "filename": "databaseperformanceatscale.epub",
+            "similarity_score": 0.7410526315789474,
+            "confidence": 0.4042105263157895,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.7410526315789474,
+            "algorithms": [
+              "fuzzy_real",
+              "fuzzy_real"
+            ]
+          }
+        ]
+      },
+      {
+        "query": "Ethical Hacking",
+        "results_count": 5,
+        "best_score": 0.9075000000000001,
+        "results": [
+          {
+            "title": "practicaliothacking",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "practicaliothacking.epub",
+            "similarity_score": 0.9075000000000001,
+            "confidence": 0.543529411764706,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.9075000000000001,
+            "algorithms": [
+              "fuzzy_real",
+              "semantic_real",
+              "fuzzy_real"
+            ]
+          },
+          {
+            "title": "reacthooksinaction",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "reacthooksinaction.pdf",
+            "similarity_score": 0.5333333333333333,
+            "confidence": 0.29090909090909095,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.5333333333333333,
+            "algorithms": [
+              "fuzzy_real",
+              "fuzzy_real"
+            ]
+          },
+          {
+            "title": "Exploring Functional Programming",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "Exploring_Functional_Programming.pdf",
+            "similarity_score": 0.46808510638297873,
+            "confidence": 0.25531914893617025,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.46808510638297873,
+            "algorithms": [
+              "fuzzy_real",
+              "fuzzy_real"
+            ]
+          }
+        ]
+      },
+      {
+        "query": "Network Security",
+        "results_count": 5,
+        "best_score": 0.8000892857142856,
+        "results": [
+          {
+            "title": "Understanding API Security",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "Understanding_API_Security.pdf",
+            "similarity_score": 0.8000892857142856,
+            "confidence": 0.46285714285714286,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.8000892857142856,
+            "algorithms": [
+              "fuzzy_real",
+              "semantic_real",
+              "fuzzy_real"
+            ]
+          },
+          {
+            "title": "foundationsofinformationsecurity",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "foundationsofinformationsecurity.mobi",
+            "similarity_score": 0.7562500000000001,
+            "confidence": 0.42000000000000004,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.7562500000000001,
+            "algorithms": [
+              "fuzzy_real",
+              "fuzzy_real",
+              "semantic_real",
+              "semantic_real",
+              "fuzzy_real",
+              "fuzzy_real"
+            ]
+          },
+          {
+            "title": "windowssecurityinternals",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "windowssecurityinternals.epub",
+            "similarity_score": 0.7050000000000001,
+            "confidence": 0.42000000000000004,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.7050000000000001,
+            "algorithms": [
+              "fuzzy_real",
+              "semantic_real",
+              "fuzzy_real"
+            ]
+          }
+        ]
+      },
+      {
+        "query": "Android Mobile",
+        "results_count": 5,
+        "best_score": 0.45517241379310347,
+        "results": [
+          {
+            "title": "artofmacmalware",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "artofmacmalware.epub",
+            "similarity_score": 0.45517241379310347,
+            "confidence": 0.24827586206896554,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.45517241379310347,
+            "algorithms": [
+              "fuzzy_real",
+              "fuzzy_real"
+            ]
+          },
+          {
+            "title": "Learn Docker in a Month of Lunches Seco",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "DevOps",
+            "filename": "Learn_Docker_in_a_Month_of_Lunches_Seco.pdf",
+            "similarity_score": 0.41509433962264153,
+            "confidence": 0.2264150943396227,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.41509433962264153,
+            "algorithms": [
+              "fuzzy_real",
+              "fuzzy_real"
+            ]
+          },
+          {
+            "title": "angularforbusiness",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "angularforbusiness.epub",
+            "similarity_score": 0.4125,
+            "confidence": 0.22500000000000003,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.4125,
+            "algorithms": [
+              "fuzzy_real",
+              "fuzzy_real"
+            ]
+          }
+        ]
+      },
+      {
+        "query": "Algorithms Programming",
+        "results_count": 5,
+        "best_score": 0.8770601851851852,
+        "results": [
+          {
+            "title": "Exploring Functional Programming",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "Exploring_Functional_Programming.pdf",
+            "similarity_score": 0.8770601851851852,
+            "confidence": 0.49777777777777793,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.8770601851851852,
+            "algorithms": [
+              "fuzzy_real",
+              "semantic_real",
+              "fuzzy_real"
+            ]
+          },
+          {
+            "title": "learncprogramming",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "learncprogramming.pdf",
+            "similarity_score": 0.8741666666666668,
+            "confidence": 0.5200000000000001,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.8741666666666668,
+            "algorithms": [
+              "fuzzy_real",
+              "semantic_real",
+              "fuzzy_real"
+            ]
+          },
+          {
+            "title": "pythonobject orientedprogrammingfourthedition",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "pythonobject-orientedprogrammingfourthedition.pdf",
+            "similarity_score": 0.6880970149253731,
+            "confidence": 0.3886567164179105,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.6880970149253731,
+            "algorithms": [
+              "fuzzy_real",
+              "semantic_real",
+              "fuzzy_real"
+            ]
+          }
+        ]
+      },
+      {
+        "query": "Cloud Computing",
+        "results_count": 5,
+        "best_score": 0.724375,
+        "results": [
+          {
+            "title": "Cloud Native Applications",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "DevOps",
+            "filename": "Cloud_Native_Applications.pdf",
+            "similarity_score": 0.724375,
+            "confidence": 0.39000000000000007,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.724375,
+            "algorithms": [
+              "fuzzy_real",
+              "semantic_real",
+              "fuzzy_real"
+            ]
+          },
+          {
+            "title": "cloudnativeanti patterns",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "DevOps",
+            "filename": "cloudnativeanti-patterns.epub",
+            "similarity_score": 0.6904967948717948,
+            "confidence": 0.3661538461538462,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.6904967948717948,
+            "algorithms": [
+              "fuzzy_real",
+              "fuzzy_real",
+              "semantic_real",
+              "semantic_real",
+              "fuzzy_real",
+              "fuzzy_real"
+            ]
+          },
+          {
+            "title": "sustainableclouddevelopment",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "AI_ML",
+            "filename": "sustainableclouddevelopment.epub",
+            "similarity_score": 0.6004166666666666,
+            "confidence": 0.3485714285714286,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.6004166666666666,
+            "algorithms": [
+              "fuzzy_real",
+              "fuzzy_real",
+              "semantic_real",
+              "semantic_real",
+              "fuzzy_real",
+              "fuzzy_real"
+            ]
+          }
+        ]
+      },
+      {
+        "query": "Forensics Investigation",
+        "results_count": 5,
+        "best_score": 0.667406914893617,
+        "results": [
+          {
+            "title": "Learn Computer Forensics",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "Learn Computer Forensics - Second Edition.pdf",
+            "similarity_score": 0.667406914893617,
+            "confidence": 0.4080851063829788,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.667406914893617,
+            "algorithms": [
+              "fuzzy_real",
+              "semantic_real",
+              "fuzzy_real"
+            ]
+          },
+          {
+            "title": "reacthooksinaction",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Programming",
+            "filename": "reacthooksinaction.pdf",
+            "similarity_score": 0.48292682926829267,
+            "confidence": 0.26341463414634153,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.48292682926829267,
+            "algorithms": [
+              "fuzzy_real",
+              "fuzzy_real"
+            ]
+          },
+          {
+            "title": "AI Agents and Applications",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "AI_ML",
+            "filename": "AI_Agents_and_Applications_v7_MEAP.epub",
+            "similarity_score": 0.4693877551020408,
+            "confidence": 0.24489795918367352,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.4693877551020408,
+            "algorithms": [
+              "fuzzy_real",
+              "fuzzy_real",
+              "fuzzy_real",
+              "fuzzy_real"
+            ]
+          }
+        ]
+      },
+      {
+        "query": "Malware Analysis",
+        "results_count": 5,
+        "best_score": 0.7041666666666667,
+        "results": [
+          {
+            "title": "evasivemalware",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "evasivemalware.pdf",
+            "similarity_score": 0.7041666666666667,
+            "confidence": 0.4000000000000001,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.7041666666666667,
+            "algorithms": [
+              "fuzzy_real",
+              "semantic_real",
+              "fuzzy_real"
+            ]
+          },
+          {
+            "title": "artofmacmalware",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Security",
+            "filename": "artofmacmalware.epub",
+            "similarity_score": 0.6913709677419355,
+            "confidence": 0.39096774193548395,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.6913709677419355,
+            "algorithms": [
+              "fuzzy_real",
+              "semantic_real",
+              "fuzzy_real"
+            ]
+          },
+          {
+            "title": "sqlfordataanalysis",
+            "author": "",
+            "publisher": "",
+            "year": "",
+            "category": "Database",
+            "filename": "sqlfordataanalysis.pdf",
+            "similarity_score": 0.6470588235294118,
+            "confidence": 0.3529411764705883,
+            "algorithm": "orchestrator_real",
+            "combined_score": 0.6470588235294118,
+            "algorithms": [
+              "fuzzy_real",
+              "fuzzy_real"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
