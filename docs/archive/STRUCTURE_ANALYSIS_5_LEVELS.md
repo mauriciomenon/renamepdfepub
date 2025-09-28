@@ -5,15 +5,15 @@
 ### Arquivos Dispersos Encontrados
 ```
 root/
-├── advanced_algorithm_comparison.json  # DEVE MOVER -> data/results/
-├── multi_algorithm_comparison.json     # DEVE MOVER -> data/results/
-├── multi_algorithm_comparison.py       # DEVE MOVER -> src/core/
-├── demo_system.py                      # DEVE MOVER -> src/cli/
-├── organize_docs.py                    # DEVE MOVER -> utils/
-├── run_comprehensive_tests.py          # DEVE MOVER -> tests/
-├── improved_algorithms_v2.py           # RENOMEAR -> src/core/algorithms_enhanced.py
-├── executive_test_log.txt              # DEVE MOVER -> logs/
-├── test_output_real.txt                # DEVE MOVER -> logs/
+ advanced_algorithm_comparison.json  # DEVE MOVER -> data/results/
+ multi_algorithm_comparison.json     # DEVE MOVER -> data/results/
+ multi_algorithm_comparison.py       # DEVE MOVER -> src/core/
+ demo_system.py                      # DEVE MOVER -> src/cli/
+ organize_docs.py                    # DEVE MOVER -> utils/
+ run_comprehensive_tests.py          # DEVE MOVER -> tests/
+ improved_algorithms_v2.py           # RENOMEAR -> src/core/algorithms_enhanced.py
+ executive_test_log.txt              # DEVE MOVER -> logs/
+ test_output_real.txt                # DEVE MOVER -> logs/
 ```
 
 ### Pastas com Nomes Problematicos
@@ -56,22 +56,22 @@ root/
 ### Problema: Arquivos Gerados Acumulados
 ```
 reports/
-├── 80+ arquivos report_YYYYMMDD_*.html/json/log  # DEVE LIMPAR
-├── metadata_report_*.html/json                   # DEVE LIMPAR
-├── geradores misturados com outputs              # SEPARAR
+ 80+ arquivos report_YYYYMMDD_*.html/json/log  # DEVE LIMPAR
+ metadata_report_*.html/json                   # DEVE LIMPAR
+ geradores misturados com outputs              # SEPARAR
 ```
 
 ### Solucao Proposta
 ```
 reports/
-├── generators/          # Geradores de relatorio
-│   ├── html_generator.py
-│   ├── performance_generator.py
-│   └── summary_generator.py
-├── outputs/            # Outputs organizados
-│   ├── current/       # Relatorios atuais
-│   └── archive/       # Relatorios antigos
-└── templates/         # Templates HTML
+ generators/          # Geradores de relatorio
+    html_generator.py
+    performance_generator.py
+    summary_generator.py
+ outputs/            # Outputs organizados
+    current/       # Relatorios atuais
+    archive/       # Relatorios antigos
+ templates/         # Templates HTML
 ```
 
 ## NIVEL 5 - data/ e logs/ (OK, mas pode melhorar)
@@ -79,16 +79,16 @@ reports/
 ### data/ - Estrutura Atual OK
 ```
 data/
-├── cache/     # Cache de metadados
-└── results/   # Resultados de testes
+ cache/     # Cache de metadados
+ results/   # Resultados de testes
 ```
 
 ### logs/ - Precisa organizacao
 ```
 logs/
-├── current/   # Logs atuais
-├── archive/   # Logs antigos
-└── debug/     # Logs de debug
+ current/   # Logs atuais
+ archive/   # Logs antigos
+ debug/     # Logs de debug
 ```
 
 ---
@@ -134,21 +134,21 @@ reorganize_project.py    -> structure_organizer.py
 #### Criar Subpastas Logicas
 ```
 reports/
-├── generators/    # Geradores (advanced_report_generator.py, etc)
-├── outputs/       # Outputs gerados
-│   ├── current/  # Relatorios atuais
-│   └── archive/  # Relatorios antigos
-└── templates/     # Templates HTML
+ generators/    # Geradores (advanced_report_generator.py, etc)
+ outputs/       # Outputs gerados
+    current/  # Relatorios atuais
+    archive/  # Relatorios antigos
+ templates/     # Templates HTML
 
 results/           # Renomear pastas atuais
-├── comprehensive/ # (era executive_results/)
-├── enhanced/      # (era improved_test_results/)
-└── basic/         # (era simple_test_results/)
+ comprehensive/ # (era executive_results/)
+ enhanced/      # (era improved_test_results/)
+ basic/         # (era simple_test_results/)
 
 logs/
-├── current/       # Logs atuais
-├── archive/       # Logs antigos  
-└── debug/         # Debug específico
+ current/       # Logs atuais
+ archive/       # Logs antigos  
+ debug/         # Debug especifico
 ```
 
 ### 3. LIMPEZA DE ARQUIVOS ACUMULADOS
@@ -183,65 +183,65 @@ logs/
 
 ```
 renamepdfepub/
-├── start_web.py           # Interface Streamlit
-├── start_html.py          # Relatorios HTML
-├── start_cli.py           # Interface CLI
-├── start_gui.py           # Interface GUI
-├── run_tests.py           # Testes
-│
-├── src/
-│   ├── core/             # Algoritmos principais
-│   │   ├── algorithm_orchestrator.py    # (era advanced_algorithm_comparison)
-│   │   ├── algorithm_framework.py       # (era algorithms_v3)
-│   │   ├── algorithm_enhanced.py        # (era improved_algorithms_v2)
-│   │   ├── legacy_renamer.py            # (era renomeia_livro)
-│   │   ├── auto_rename_system.py        # OK
-│   │   ├── performance_analyzer.py      # OK
-│   │   └── quality_validator.py         # OK
-│   │
-│   ├── cli/              # Interface CLI
-│   │   ├── launch_system.py             # OK
-│   │   ├── demo_comprehensive.py        # (era demo_complete)
-│   │   ├── validator_fast.py            # (era quick_validation)
-│   │   ├── validator_comprehensive.py   # (era rigorous_validation)
-│   │   ├── validator_framework.py       # (era validate_v3)
-│   │   └── manual_analysis.py           # OK
-│   │
-│   └── gui/              # Interfaces graficas
-│       ├── web_launcher.py              # OK
-│       ├── streamlit_interface.py       # OK
-│       ├── gui_modern.py                # OK
-│       └── gui_RenameBook.py            # OK -> gui_classic.py
-│
-├── utils/                # Utilitarios
-│   ├── comprehensive_test_suite.py      # (era executive_test_system)
-│   ├── documentation_cleaner.py         # (era clean_md_files)
-│   ├── project_validator.py             # (era verify_project)
-│   └── structure_organizer.py           # (era reorganize_project)
-│
-├── tests/                # Testes pytest
-├── docs/                 # Documentacao
-│
-├── reports/              # Relatorios organizados
-│   ├── generators/       # Geradores
-│   ├── outputs/         # Outputs
-│   │   ├── current/     # Atuais
-│   │   └── archive/     # Antigos
-│   └── templates/       # Templates
-│
-├── results/              # Resultados organizados
-│   ├── comprehensive/    # (era executive_results)
-│   ├── enhanced/         # (era improved_test_results)
-│   └── basic/           # (era simple_test_results)
-│
-├── data/                # Dados
-│   ├── cache/           # Cache
-│   └── results/         # Resultados JSON
-│
-└── logs/                # Logs organizados
-    ├── current/         # Atuais
-    ├── archive/         # Antigos
-    └── debug/           # Debug
+ start_web.py           # Interface Streamlit
+ start_html.py          # Relatorios HTML
+ start_cli.py           # Interface CLI
+ start_gui.py           # Interface GUI
+ run_tests.py           # Testes
+
+ src/
+    core/             # Algoritmos principais
+       algorithm_orchestrator.py    # (era advanced_algorithm_comparison)
+       algorithm_framework.py       # (era algorithms_v3)
+       algorithm_enhanced.py        # (era improved_algorithms_v2)
+       legacy_renamer.py            # (era renomeia_livro)
+       auto_rename_system.py        # OK
+       performance_analyzer.py      # OK
+       quality_validator.py         # OK
+   
+    cli/              # Interface CLI
+       launch_system.py             # OK
+       demo_comprehensive.py        # (era demo_complete)
+       validator_fast.py            # (era quick_validation)
+       validator_comprehensive.py   # (era rigorous_validation)
+       validator_framework.py       # (era validate_v3)
+       manual_analysis.py           # OK
+   
+    gui/              # Interfaces graficas
+        web_launcher.py              # OK
+        streamlit_interface.py       # OK
+        gui_modern.py                # OK
+        gui_RenameBook.py            # OK -> gui_classic.py
+
+ utils/                # Utilitarios
+    comprehensive_test_suite.py      # (era executive_test_system)
+    documentation_cleaner.py         # (era clean_md_files)
+    project_validator.py             # (era verify_project)
+    structure_organizer.py           # (era reorganize_project)
+
+ tests/                # Testes pytest
+ docs/                 # Documentacao
+
+ reports/              # Relatorios organizados
+    generators/       # Geradores
+    outputs/         # Outputs
+       current/     # Atuais
+       archive/     # Antigos
+    templates/       # Templates
+
+ results/              # Resultados organizados
+    comprehensive/    # (era executive_results)
+    enhanced/         # (era improved_test_results)
+    basic/           # (era simple_test_results)
+
+ data/                # Dados
+    cache/           # Cache
+    results/         # Resultados JSON
+
+ logs/                # Logs organizados
+     current/         # Atuais
+     archive/         # Antigos
+     debug/           # Debug
 ```
 
 ## BENEFICIOS DAS MELHORIAS

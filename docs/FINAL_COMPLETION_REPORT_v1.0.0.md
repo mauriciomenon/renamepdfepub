@@ -75,11 +75,11 @@
 #### Documentation Structure
 ```
 docs/
-├── README.md (TL;DR + navigation)
-├── VERSIONING.md (semantic versioning)
-├── releases/ (all release notes)
-├── analysis/ (architecture & quality reports)
-└── performance/ (performance studies & data)
+ README.md (TL;DR + navigation)
+ VERSIONING.md (semantic versioning)
+ releases/ (all release notes)
+ analysis/ (architecture & quality reports)
+ performance/ (performance studies & data)
 ```
 
 ### Usage Instructions

@@ -1,37 +1,37 @@
 # Changelog
 
-## [0.11.0] - 2025-09-28 - Sistema Avançado de Algoritmos
+## [0.11.0] - 2025-09-28 - Sistema Avancado de Algoritmos
 
-### 🚀 Principais Adições
+###  Principais Adicoes
 - **Sistema de 5 Algoritmos**: Basic Parser, Enhanced Parser, Smart Inferencer, Hybrid Orchestrator, Brazilian Specialist
-- **Brazilian Specialist**: Algoritmo especializado em livros e editoras brasileiras (Casa do Código, Novatec, Érica, etc.)
-- **Interface Web Streamlit**: Dashboard moderno e interativo para análise de algoritmos
-- **Sistema de Relatórios Avançado**: Relatórios HTML responsivos com visualizações
+- **Brazilian Specialist**: Algoritmo especializado em livros e editoras brasileiras (Casa do Codigo, Novatec, Erica, etc.)
+- **Interface Web Streamlit**: Dashboard moderno e interativo para analise de algoritmos
+- **Sistema de Relatorios Avancado**: Relatorios HTML responsivos com visualizacoes
 
-### 🔄 Mudanças
-- **Renomeação**: "Ultimate Extractor" → "Hybrid Orchestrator" (nome mais descritivo)
-- **Arquitetura Modular**: Sistema plugável de algoritmos independentes
-- **Performance**: Accuracy média de 88.6%, melhor resultado 96%
+###  Mudancas
+- **Renomeacao**: "Ultimate Extractor" → "Hybrid Orchestrator" (nome mais descritivo)
+- **Arquitetura Modular**: Sistema plugavel de algoritmos independentes
+- **Performance**: Accuracy media de 88.6%, melhor resultado 96%
 
-### 📁 Novos Arquivos
+###  Novos Arquivos
 - `advanced_algorithm_comparison.py` - Sistema principal de algoritmos
-- `simple_report_generator.py` - Gerador de relatórios HTML
+- `simple_report_generator.py` - Gerador de relatorios HTML
 - `streamlit_interface.py` - Interface web moderna
-- `web_launcher.py` - Launcher com instalação automática
-- `demo_system.py` - Sistema de demonstração
+- `web_launcher.py` - Launcher com instalacao automatica
+- `demo_system.py` - Sistema de demonstracao
 - `comprehensive_test_suite.py` - Testes abrangentes
-- `quality_validator.py` - Validação de qualidade
+- `quality_validator.py` - Validacao de qualidade
 
-### 🇧🇷 Funcionalidades Brasileiras
-- Detecção de editoras nacionais (Casa do Código, Novatec, Érica, Brasport, Alta Books)
-- Reconhecimento de padrões de nomes brasileiros
-- Identificação de palavras em português
-- Suporte a formatos de edição brasileiros
+###  Funcionalidades Brasileiras
+- Deteccao de editoras nacionais (Casa do Codigo, Novatec, Erica, Brasport, Alta Books)
+- Reconhecimento de padroes de nomes brasileiros
+- Identificacao de palavras em portugues
+- Suporte a formatos de edicao brasileiros
 
-### 🌐 Interface Web
+###  Interface Web
 - Dashboard interativo com Streamlit
-- Visualizações em tempo real de métricas
-- Comparação avançada entre algoritmos
+- Visualizacoes em tempo real de metricas
+- Comparacao avancada entre algoritmos
 - Design moderno com CSS gradients
 
 ## [0.10.0] - 2024-12-05

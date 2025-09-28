@@ -22,10 +22,10 @@ Data: 28/09/2025
 ### Estrutura de Diretorios - COMPLETA
 ```
 src/
-├── core/     [OK] 9 arquivos Python
-├── gui/      [OK] 4 arquivos Python  
-├── cli/      [OK] Arquivos presentes
-└── renamepdfepub/ [OK] Modulo adicional
+ core/     [OK] 9 arquivos Python
+ gui/      [OK] 4 arquivos Python  
+ cli/      [OK] Arquivos presentes
+ renamepdfepub/ [OK] Modulo adicional
 
 reports/      [OK] 3 geradores principais
 utils/        [OK] Utilitarios diversos
@@ -133,7 +133,7 @@ docs/         [OK] Documentacao organizada
 3. [X] "referencias cruzadas quebradas" → [OK] Todas funcionais
 4. [X] "falta opcao default" → [OK] CLI completo
 5. [X] "tkinter erro basico" → [OK] Deteccao inteligente
-6. [X] "documentacao bagunçada" → [OK] Organizada
+6. [X] "documentacao baguncada" → [OK] Organizada
 
 ### Repositorio Pronto Para:
 - [OK] Desenvolvimento profissional

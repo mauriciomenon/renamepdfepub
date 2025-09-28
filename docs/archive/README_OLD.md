@@ -5,13 +5,13 @@
 ![Accuracy](https:img.shields.iobadgeaccuracy-88.725-brightgreen)
 ![Target](https:img.shields.iobadgetarget-7025-blue)
 
-**# 📚 RenamePDFEPUB v1.0.0
+**#  RenamePDFEPUB v1.0.0
 
-## 📖 TL;DR - Uso Rápido
+##  TL;DR - Uso Rapido
 
-**O que faz:** Sistema avançado de renomeação automática de PDFs e EPUBs usando 5 algoritmos especializados com até 96% de precisão, incluindo especialização para livros brasileiros.
+**O que faz:** Sistema avancado de renomeacao automatica de PDFs e EPUBs usando 5 algoritmos especializados com ate 96% de precisao, incluindo especializacao para livros brasileiros.
 
-**Instalação rápida:**
+**Instalacao rapida:**
 ```bash
 git clone https://github.com/mauriciomenon/renamepdfepub.git
 cd renamepdfepub
@@ -26,20 +26,20 @@ python3 web_launcher.py
 # Teste direto dos algoritmos  
 python3 advanced_algorithm_comparison.py
 
-# Renomeação simples (legado)
+# Renomeacao simples (legado)
 python3 renomeia_livro.py
 ```
 
-**Algoritmos disponíveis:**
-- **Hybrid Orchestrator** (96% accuracy) - Combina todas as técnicas
+**Algoritmos disponiveis:**
+- **Hybrid Orchestrator** (96% accuracy) - Combina todas as tecnicas
 - **Brazilian Specialist** (93% accuracy) - Especializado em livros nacionais  
-- **Smart Inferencer** (91% accuracy) - Inferência inteligente
+- **Smart Inferencer** (91% accuracy) - Inferencia inteligente
 - **Enhanced Parser** (85% accuracy) - Parser aprimorado
-- **Basic Parser** (78% accuracy) - Extração básica
+- **Basic Parser** (78% accuracy) - Extracao basica
 
 ---
 
-## Sistema para renomear arquivos PDF e EPUB com base em metadados extraídos automaticamente
+## Sistema para renomear arquivos PDF e EPUB com base em metadados extraidos automaticamente
 
 ## Status do Projeto
 

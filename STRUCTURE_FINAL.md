@@ -6,79 +6,79 @@
 ### Raiz do Projeto
 ```
 renamepdfepub/
-├── start_cli.py              [Entry Point CLI]
-├── start_web.py              [Entry Point Web]
-├── start_gui.py              [Entry Point GUI]
-├── start_html.py             [Entry Point HTML]
-├── start_iterative_cache.py  [Entry Point Cache]
-├── README.md                 [Documentacao Principal]
-├── CHANGELOG.md              [Historico de Mudancas]
-├── STRUCTURE.md              [Estrutura do Projeto]
-├── requirements.txt          [Dependencias]
-├── .copilot-instructions.md  [Diretrizes AI]
-└── pytest.ini               [Config Testes]
+ start_cli.py              [Entry Point CLI]
+ start_web.py              [Entry Point Web]
+ start_gui.py              [Entry Point GUI]
+ start_html.py             [Entry Point HTML]
+ start_iterative_cache.py  [Entry Point Cache]
+ README.md                 [Documentacao Principal]
+ CHANGELOG.md              [Historico de Mudancas]
+ STRUCTURE.md              [Estrutura do Projeto]
+ requirements.txt          [Dependencias]
+ .copilot-instructions.md  [Diretrizes AI]
+ pytest.ini               [Config Testes]
 ```
 
 ### Codigo Fonte
 ```
 src/
-├── core/                     [Logica Principal]
-│   ├── advanced_algorithm_comparison.py
-│   ├── algorithms_v3.py
-│   ├── amazon_api_integration.py
-│   ├── auto_rename_system.py
-│   ├── iterative_cache_system.py
-│   ├── performance_analyzer.py
-│   ├── quality_validator.py
-│   └── renomeia_livro.py
-├── gui/                      [Interfaces Graficas]
-│   ├── gui_RenameBook.py
-│   ├── gui_modern.py
-│   ├── streamlit_interface.py
-│   └── web_launcher.py
-├── cli/                      [Interface Linha Comando]
-│   └── launch_system.py
-└── renamepdfepub/            [Modulo Auxiliar]
-    ├── cli/
-    ├── metadata_enricher.py
-    └── outros...
+ core/                     [Logica Principal]
+    advanced_algorithm_comparison.py
+    algorithms_v3.py
+    amazon_api_integration.py
+    auto_rename_system.py
+    iterative_cache_system.py
+    performance_analyzer.py
+    quality_validator.py
+    renomeia_livro.py
+ gui/                      [Interfaces Graficas]
+    gui_RenameBook.py
+    gui_modern.py
+    streamlit_interface.py
+    web_launcher.py
+ cli/                      [Interface Linha Comando]
+    launch_system.py
+ renamepdfepub/            [Modulo Auxiliar]
+     cli/
+     metadata_enricher.py
+     outros...
 ```
 
 ### Relatorios e Dados
 ```
 reports/                      [Geradores de Relatorio]
-├── simple_report_generator.py
-├── advanced_report_generator.py
-├── final_report.py
-└── html/                     [Relatorios HTML]
+ simple_report_generator.py
+ advanced_report_generator.py
+ final_report.py
+ html/                     [Relatorios HTML]
 
 data/                         [Dados e Cache]
-├── cache/
-└── results/
+ cache/
+ results/
 
 tests/                        [Suite de Testes]
-├── test_algorithms.py
-├── test_interface.py
-└── comprehensive_test_suite.py
+ test_algorithms.py
+ test_interface.py
+ comprehensive_test_suite.py
 ```
 
 ### Utilitarios e Documentacao
 ```
 utils/                        [Ferramentas Auxiliares]
-├── cross_reference_validator.py
-├── quick_validation.py
-├── onedrive_parser.py
-└── file_list_creator.py
+ cross_reference_validator.py
+ quick_validation.py
+ onedrive_parser.py
+ file_list_creator.py
 
 docs/                         [Documentacao]
-├── README.md
-└── archive/                  [Arquivos Antigos]
-    ├── README_OLD.md
-    ├── README_NEW.md
-    └── quick_test.py
+ README.md
+ archive/                  [Arquivos Antigos]
+     README_OLD.md
+     README_NEW.md
+     quick_test.py
 
 legacy/                       [Codigo Legado]
-└── arquivos_antigos/
+ arquivos_antigos/
 ```
 
 ## VALIDACAO DE INTEGRIDADE

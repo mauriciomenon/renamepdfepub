@@ -1,89 +1,89 @@
 # Estrutura Reorganizada - RenamePDFEPUB v1.0.0
 
-## Reorganização Completa Realizada
+## Reorganizacao Completa Realizada
 
 ### Problema Anterior
-A estrutura estava completamente desorganizada com 120+ arquivos no diretório raiz, sem padrão profissional e impossível de navegar.
+A estrutura estava completamente desorganizada com 120+ arquivos no diretorio raiz, sem padrao profissional e impossivel de navegar.
 
-### Solução Implementada
-Reorganização completa seguindo padrões de projeto sérios e rastreáveis.
+### Solucao Implementada
+Reorganizacao completa seguindo padroes de projeto serios e rastreaveis.
 
 ## Nova Estrutura Profissional
 
 ```
 renamepdfepub/
-├── web.py              # PONTO DE ENTRADA PRINCIPAL - Interface Web
-├── cli.py              # Interface CLI - Linha de comando
-├── gui.py              # Interface Gráfica Desktop
-├── run_tests.py        # Executor de testes automatizados
-│
-├── src/                # CÓDIGO FONTE ORGANIZADO
-│   ├── core/          # Algoritmos e lógica principal
-│   │   ├── advanced_algorithm_comparison.py  # 5 algoritmos especializados
-│   │   ├── algorithms_v3.py                  # Versão 3 dos algoritmos
-│   │   ├── auto_rename_system.py             # Sistema automático
-│   │   ├── amazon_api_integration.py         # Integração Amazon
-│   │   ├── quality_validator.py              # Validação de qualidade
-│   │   └── performance_analyzer.py           # Análise de performance
-│   │
-│   ├── cli/           # Interface linha de comando
-│   │   ├── launch_system.py      # Launcher do sistema
-│   │   ├── demo_complete.py      # Demonstração completa
-│   │   ├── manual_analysis.py    # Análise manual
-│   │   ├── quick_validation.py   # Validação rápida
-│   │   └── rigorous_validation.py # Validação rigorosa
-│   │
-│   └── gui/           # Interfaces gráficas
-│       ├── web_launcher.py       # Launcher web (Streamlit)
-│       ├── streamlit_interface.py # Interface Streamlit
-│       ├── gui_modern.py         # GUI moderna
-│       └── gui_RenameBook.py     # GUI clássica
-│
-├── tests/             # TESTES AUTOMATIZADOS
-│   ├── conftest.py           # Configuração pytest
-│   ├── test_algorithms.py    # Testes dos algoritmos
-│   ├── test_reports.py       # Testes de relatórios
-│   ├── test_utils.py         # Testes de utilitários
-│   └── test_interface.py     # Testes de interface
-│
-├── docs/              # DOCUMENTAÇÃO TÉCNICA
-│   ├── README.md             # Documentação principal
-│   ├── TESTS.md              # Documentação de testes
-│   ├── VERSIONING.md         # Sistema de versionamento
-│   ├── releases/             # Notas de release
-│   ├── analysis/             # Análises técnicas
-│   └── performance/          # Estudos de performance
-│
-├── reports/           # RELATÓRIOS GERADOS
-│   ├── html/                 # Relatórios HTML interativos
-│   │   ├── advanced_algorithms_report.html
-│   │   ├── demo_report.html
-│   │   └── performance_analysis.html
-│   │
-│   ├── performance/          # Análises de performance
-│   │   ├── algorithm_comparison.txt
-│   │   └── benchmark_results.txt
-│   │
-│   ├── simple_report_generator.py  # Gerador de relatórios
-│   ├── advanced_report_generator.py
-│   ├── final_report.py
-│   └── final_summary.py
-│
-├── data/              # DADOS E CACHE
-│   ├── cache/                # Cache de metadados
-│   │   ├── amazon_metadata_cache.db
-│   │   └── metadata_cache.db
-│   │
-│   └── results/              # Resultados de testes
-│       ├── advanced_algorithm_comparison.json
-│       ├── final_v3_results.json
-│       └── real_data_test_results.json
-│
-└── logs/              # ARQUIVOS DE LOG CENTRALIZADOS
-    ├── auto_rename_system.log
-    ├── amazon_api_integration.log
-    ├── metadata_cache.log
-    └── real_data_testing.log
+ web.py              # PONTO DE ENTRADA PRINCIPAL - Interface Web
+ cli.py              # Interface CLI - Linha de comando
+ gui.py              # Interface Grafica Desktop
+ run_tests.py        # Executor de testes automatizados
+
+ src/                # CODIGO FONTE ORGANIZADO
+    core/          # Algoritmos e logica principal
+       advanced_algorithm_comparison.py  # 5 algoritmos especializados
+       algorithms_v3.py                  # Versao 3 dos algoritmos
+       auto_rename_system.py             # Sistema automatico
+       amazon_api_integration.py         # Integracao Amazon
+       quality_validator.py              # Validacao de qualidade
+       performance_analyzer.py           # Analise de performance
+   
+    cli/           # Interface linha de comando
+       launch_system.py      # Launcher do sistema
+       demo_complete.py      # Demonstracao completa
+       manual_analysis.py    # Analise manual
+       quick_validation.py   # Validacao rapida
+       rigorous_validation.py # Validacao rigorosa
+   
+    gui/           # Interfaces graficas
+        web_launcher.py       # Launcher web (Streamlit)
+        streamlit_interface.py # Interface Streamlit
+        gui_modern.py         # GUI moderna
+        gui_RenameBook.py     # GUI classica
+
+ tests/             # TESTES AUTOMATIZADOS
+    conftest.py           # Configuracao pytest
+    test_algorithms.py    # Testes dos algoritmos
+    test_reports.py       # Testes de relatorios
+    test_utils.py         # Testes de utilitarios
+    test_interface.py     # Testes de interface
+
+ docs/              # DOCUMENTACAO TECNICA
+    README.md             # Documentacao principal
+    TESTS.md              # Documentacao de testes
+    VERSIONING.md         # Sistema de versionamento
+    releases/             # Notas de release
+    analysis/             # Analises tecnicas
+    performance/          # Estudos de performance
+
+ reports/           # RELATORIOS GERADOS
+    html/                 # Relatorios HTML interativos
+       advanced_algorithms_report.html
+       demo_report.html
+       performance_analysis.html
+   
+    performance/          # Analises de performance
+       algorithm_comparison.txt
+       benchmark_results.txt
+   
+    simple_report_generator.py  # Gerador de relatorios
+    advanced_report_generator.py
+    final_report.py
+    final_summary.py
+
+ data/              # DADOS E CACHE
+    cache/                # Cache de metadados
+       amazon_metadata_cache.db
+       metadata_cache.db
+   
+    results/              # Resultados de testes
+        advanced_algorithm_comparison.json
+        final_v3_results.json
+        real_data_test_results.json
+
+ logs/              # ARQUIVOS DE LOG CENTRALIZADOS
+     auto_rename_system.log
+     amazon_api_integration.log
+     metadata_cache.log
+     real_data_testing.log
 ```
 
 ## Pontos de Entrada Claros
@@ -93,129 +93,129 @@ renamepdfepub/
 python3 web.py
 ```
 **Para que serve**: Interface Streamlit moderna e interativa
-**Usuário alvo**: Usuários finais, demos, apresentações
-**Funcionalidades**: Dashboard, visualizações, relatórios interativos
+**Usuario alvo**: Usuarios finais, demos, apresentacoes
+**Funcionalidades**: Dashboard, visualizacoes, relatorios interativos
 
 ### 2. Interface CLI
 ```bash
 python3 cli.py algorithms    # Executar os 5 algoritmos
 python3 cli.py launch        # Launcher sistema
-python3 cli.py demo          # Demonstração completa
-python3 cli.py validate      # Validação rápida
+python3 cli.py demo          # Demonstracao completa
+python3 cli.py validate      # Validacao rapida
 ```
-**Para que serve**: Automação, integração, desenvolvimento
-**Usuário alvo**: Desenvolvedores, scripts automatizados
-**Funcionalidades**: Processamento em lote, integração CI/CD
+**Para que serve**: Automacao, integracao, desenvolvimento
+**Usuario alvo**: Desenvolvedores, scripts automatizados
+**Funcionalidades**: Processamento em lote, integracao CI/CD
 
-### 3. Interface Gráfica
+### 3. Interface Grafica
 ```bash
 python3 gui.py
 ```
-**Para que serve**: Interface desktop para usuários não-técnicos
-**Usuário alvo**: Usuários finais que preferem GUI
+**Para que serve**: Interface desktop para usuarios nao-tecnicos
+**Usuario alvo**: Usuarios finais que preferem GUI
 **Funcionalidades**: Interface visual, drag-and-drop
 
 ### 4. Testes Automatizados
 ```bash
 python3 run_tests.py
 ```
-**Para que serve**: Validação do sistema, CI/CD
-**Usuário alvo**: Desenvolvedores, QA
-**Funcionalidades**: Testes pytest, validação completa
+**Para que serve**: Validacao do sistema, CI/CD
+**Usuario alvo**: Desenvolvedores, QA
+**Funcionalidades**: Testes pytest, validacao completa
 
-## Organização por Função
+## Organizacao por Funcao
 
-### src/core/ - Lógica de Negócio
-**Contém**: Algoritmos principais, lógica de extração, validação
+### src/core/ - Logica de Negocio
+**Contem**: Algoritmos principais, logica de extracao, validacao
 **Responsabilidade**: Core business logic, algoritmos de IA
 **Arquivos principais**:
 - `advanced_algorithm_comparison.py` - Os 5 algoritmos especializados
-- `quality_validator.py` - Validação de qualidade
-- `performance_analyzer.py` - Análise de performance
+- `quality_validator.py` - Validacao de qualidade
+- `performance_analyzer.py` - Analise de performance
 
 ### src/cli/ - Interface Linha de Comando
-**Contém**: Scripts CLI, launchers, demos
-**Responsabilidade**: Interface para desenvolvedores e automação
+**Contem**: Scripts CLI, launchers, demos
+**Responsabilidade**: Interface para desenvolvedores e automacao
 **Arquivos principais**:
 - `launch_system.py` - Launcher principal
-- `demo_complete.py` - Demonstração completa
-- `manual_analysis.py` - Análise manual
+- `demo_complete.py` - Demonstracao completa
+- `manual_analysis.py` - Analise manual
 
-### src/gui/ - Interfaces Gráficas
-**Contém**: Streamlit, GUI desktop, launchers web
-**Responsabilidade**: Interfaces visuais para usuários finais
+### src/gui/ - Interfaces Graficas
+**Contem**: Streamlit, GUI desktop, launchers web
+**Responsabilidade**: Interfaces visuais para usuarios finais
 **Arquivos principais**:
 - `web_launcher.py` - Launcher web (limpo, sem emojis)
 - `streamlit_interface.py` - Dashboard Streamlit
 - `gui_modern.py` - Interface desktop moderna
 
 ### tests/ - Testes Automatizados
-**Contém**: Testes pytest organizados
-**Responsabilidade**: Validação automatizada, CI/CD
-**Cobertura**: 5 algoritmos, validações, interfaces
+**Contem**: Testes pytest organizados
+**Responsabilidade**: Validacao automatizada, CI/CD
+**Cobertura**: 5 algoritmos, validacoes, interfaces
 
-### reports/ - Relatórios e Análises
-**Contém**: Geradores de relatório, outputs HTML
-**Responsabilidade**: Relatórios de performance, análises
-**Subdiretórios**:
-- `html/` - Relatórios HTML interativos
-- `performance/` - Análises de benchmarks
+### reports/ - Relatorios e Analises
+**Contem**: Geradores de relatorio, outputs HTML
+**Responsabilidade**: Relatorios de performance, analises
+**Subdiretorios**:
+- `html/` - Relatorios HTML interativos
+- `performance/` - Analises de benchmarks
 
 ### data/ - Dados e Cache
-**Contém**: Cache de metadados, resultados de testes
-**Responsabilidade**: Persistência de dados, cache
-**Subdiretórios**:
+**Contem**: Cache de metadados, resultados de testes
+**Responsabilidade**: Persistencia de dados, cache
+**Subdiretorios**:
 - `cache/` - Arquivos .db de cache
-- `results/` - Resultados JSON de execuções
+- `results/` - Resultados JSON de execucoes
 
 ### logs/ - Logs Centralizados
-**Contém**: Todos os arquivos .log
+**Contem**: Todos os arquivos .log
 **Responsabilidade**: Logging, debugging, auditoria
-**Benefício**: Logs centralizados e organizados
+**Beneficio**: Logs centralizados e organizados
 
-## Benefícios da Reorganização
+## Beneficios da Reorganizacao
 
 ### 1. Navegabilidade
-- **Antes**: 120+ arquivos no root, impossível navegar
-- **Depois**: Estrutura clara com propósito definido para cada pasta
+- **Antes**: 120+ arquivos no root, impossivel navegar
+- **Depois**: Estrutura clara com proposito definido para cada pasta
 
-### 2. Pontos de Entrada Óbvios
-- **Antes**: Usuário não sabia por onde começar
+### 2. Pontos de Entrada Obvios
+- **Antes**: Usuario nao sabia por onde comecar
 - **Depois**: `web.py`, `cli.py`, `gui.py` - autoexplicativos
 
 ### 3. Manutenibilidade
-- **Antes**: Código espalhado sem organização
-- **Depois**: Separação clara de responsabilidades
+- **Antes**: Codigo espalhado sem organizacao
+- **Depois**: Separacao clara de responsabilidades
 
 ### 4. Profissionalismo
 - **Antes**: Estrutura amadora, nomes confusos
-- **Depois**: Padrões da indústria, nomes sérios e descritivos
+- **Depois**: Padroes da industria, nomes serios e descritivos
 
 ### 5. Rastreabilidade
-- **Antes**: Arquivos perdidos, difícil encontrar funcionalidades
-- **Depois**: Pela própria organização da para saber para que serve
+- **Antes**: Arquivos perdidos, dificil encontrar funcionalidades
+- **Depois**: Pela propria organizacao da para saber para que serve
 
 ## Comandos de Uso Principais
 
 ```bash
-# USUÁRIO FINAL (Interface Web)
+# USUARIO FINAL (Interface Web)
 python3 web.py
 
 # DESENVOLVEDOR (CLI)
 python3 cli.py algorithms
 
-# TESTE E VALIDAÇÃO
+# TESTE E VALIDACAO
 python3 run_tests.py
 
-# INTERFACE GRÁFICA
+# INTERFACE GRAFICA
 python3 gui.py
 ```
 
 ## Commits Limpos
 
-Todos os commits seguem padrão profissional:
+Todos os commits seguem padrao profissional:
 - **Sem emojis** ou caracteres especiais
-- **Mensagens descritivas** e técnicas
+- **Mensagens descritivas** e tecnicas
 - **Formato padronizado**: `type: description`
 
 ### Exemplo de Commit Limpo
@@ -232,15 +232,15 @@ refactor: Reorganize project structure into professional layout
 Structure now follows industry standards with clear separation of concerns.
 ```
 
-## Status da Reorganização
+## Status da Reorganizacao
 
 [OK] **Estrutura Criada**: Todas as pastas organizadas
 [OK] **Arquivos Movidos**: Core, GUI, CLI separados
 [OK] **Pontos de Entrada**: web.py, cli.py, gui.py criados
 [OK] **Logs Centralizados**: Todos em logs/
 [OK] **Cache Organizado**: data/cache/ e data/results/
-[OK] **Relatórios Separados**: HTML e performance
+[OK] **Relatorios Separados**: HTML e performance
 [OK] **Testes Mantidos**: Estrutura tests/ preservada
-[OK] **Documentação Atualizada**: README e docs/
+[OK] **Documentacao Atualizada**: README e docs/
 
-A estrutura agora é **profissional, rastreável e séria**, seguindo padrões da indústria para projetos Python de qualidade.
+A estrutura agora e **profissional, rastreavel e seria**, seguindo padroes da industria para projetos Python de qualidade.

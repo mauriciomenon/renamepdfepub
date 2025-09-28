@@ -1,60 +1,60 @@
 # RenamePDFEPUB v1.0.0
 
-Sistema automatizado para renomeação de arquivos PDF e EPUB baseado em extração de metadados.
+Sistema automatizado para renomeacao de arquivos PDF e EPUB baseado em extracao de metadados.
 
-## TL;DR - Uso Rápido
+## TL;DR - Uso Rapido
 
 ```bash
-# Instalar dependências
+# Instalar dependencias
 pip install -r requirements.txt
 
 # Interface Web Interativa - Streamlit (RECOMENDADO)
 python3 start_web.py
 
-# Relatórios HTML Estáticos - "Página Antiga"
+# Relatorios HTML Estaticos - "Pagina Antiga"
 python3 start_html.py
 
 # Interface CLI - Linha de Comando
 python3 start_cli.py algorithms
 
-# Interface Gráfica Desktop
+# Interface Grafica Desktop
 python3 start_gui.py
 
 # Executar testes
 python3 run_tests.py
 ```
 
-## Algoritmos Disponíveis
+## Algoritmos Disponiveis
 
-| Algoritmo | Precisão | Especialização |
+| Algoritmo | Precisao | Especializacao |
 |-----------|----------|----------------|
-| **Hybrid Orchestrator** | 96% | Combinação de todas as técnicas |
+| **Hybrid Orchestrator** | 96% | Combinacao de todas as tecnicas |
 | **Brazilian Specialist** | 93% | Livros e editoras brasileiras |
-| **Smart Inferencer** | 91% | Inferência inteligente |
-| **Enhanced Parser** | 85% | Parser com validação |
-| **Basic Parser** | 78% | Extração básica rápida |
+| **Smart Inferencer** | 91% | Inferencia inteligente |
+| **Enhanced Parser** | 85% | Parser com validacao |
+| **Basic Parser** | 78% | Extracao basica rapida |
 
 ## Estrutura do Projeto
 
 ```
 renamepdfepub/
-├── start_web.py        # Interface Web Streamlit - PRINCIPAL
-├── start_html.py       # Relatórios HTML - "Página Antiga"
-├── start_cli.py        # Interface CLI - Linha de Comando
-├── start_gui.py        # Interface Gráfica Desktop
-├── run_tests.py        # Testes automatizados
-│
-├── src/                # Código fonte organizado
-│   ├── core/          # Algoritmos e lógica principal
-│   ├── cli/           # Interface linha de comando  
-│   └── gui/           # Interfaces gráficas (Streamlit, GUI)
-│
-├── utils/             # Utilitários e ferramentas auxiliares
-├── tests/             # Testes automatizados com pytest
-├── docs/              # Documentação técnica
-├── reports/           # Relatórios HTML e performance
-├── data/              # Cache de metadados e resultados
-└── logs/              # Arquivos de log centralizados
+ start_web.py        # Interface Web Streamlit - PRINCIPAL
+ start_html.py       # Relatorios HTML - "Pagina Antiga"
+ start_cli.py        # Interface CLI - Linha de Comando
+ start_gui.py        # Interface Grafica Desktop
+ run_tests.py        # Testes automatizados
+
+ src/                # Codigo fonte organizado
+    core/          # Algoritmos e logica principal
+    cli/           # Interface linha de comando  
+    gui/           # Interfaces graficas (Streamlit, GUI)
+
+ utils/             # Utilitarios e ferramentas auxiliares
+ tests/             # Testes automatizados com pytest
+ docs/              # Documentacao tecnica
+ reports/           # Relatorios HTML e performance
+ data/              # Cache de metadados e resultados
+ logs/              # Arquivos de log centralizados
 ```
 
 ## Pontos de Entrada
@@ -64,18 +64,18 @@ renamepdfepub/
 python3 start_web.py
 ```
 - **Streamlit Dashboard** - Interface web moderna e interativa
-- Visualizações em tempo real
-- Instalação automática de dependências
+- Visualizacoes em tempo real
+- Instalacao automatica de dependencias
 - Interface responsiva com widgets
 
-### 2. Relatórios HTML Estáticos
+### 2. Relatorios HTML Estaticos
 ```bash
 python3 start_html.py
 ```
-- **"Página Antiga"** - Relatórios HTML sem dependências
+- **"Pagina Antiga"** - Relatorios HTML sem dependencias
 - Funciona offline, abre no navegador
-- Relatórios pré-gerados com gráficos CSS
-- Ideal para apresentações ou compartilhamento
+- Relatorios pre-gerados com graficos CSS
+- Ideal para apresentacoes ou compartilhamento
 
 ### 3. Interface CLI
 ```bash
@@ -83,99 +83,99 @@ python3 start_cli.py algorithms    # Executar algoritmos
 python3 start_cli.py launch        # Launcher sistema
 ```
 - Interface de linha de comando
-- Ideal para automação e scripts
+- Ideal para automacao e scripts
 - Output limpo e profissional
 
-### 4. Interface Gráfica Desktop
+### 4. Interface Grafica Desktop
 ```bash
 python3 start_gui.py
 ```
-- Interface gráfica desktop (tkinter)
-- Para usuários menos técnicos
-- Não requer navegador
+- Interface grafica desktop (tkinter)
+- Para usuarios menos tecnicos
+- Nao requer navegador
 
-## Diferença: Streamlit vs HTML
+## Diferenca: Streamlit vs HTML
 
 ### Interface Streamlit (`start_web.py`) - MODERNA
-- **Interativa**: Widgets, sliders, botões em tempo real
-- **Dinâmica**: Executa algoritmos ao vivo
-- **Requer**: Python rodando, dependências instaladas
-- **Uso**: Desenvolvimento, testes, demonstrações interativas
+- **Interativa**: Widgets, sliders, botoes em tempo real
+- **Dinamica**: Executa algoritmos ao vivo
+- **Requer**: Python rodando, dependencias instaladas
+- **Uso**: Desenvolvimento, testes, demonstracoes interativas
 
-### Relatórios HTML (`start_html.py`) - ESTÁTICA
-- **Estática**: Relatórios pré-gerados, sem interação
+### Relatorios HTML (`start_html.py`) - ESTATICA
+- **Estatica**: Relatorios pre-gerados, sem interacao
 - **Offline**: Funciona sem Python rodando
 - **Requer**: Apenas navegador web
-- **Uso**: Apresentações, compartilhamento, arquivamento
+- **Uso**: Apresentacoes, compartilhamento, arquivamento
 
 ## Sistema de 5 Algoritmos
 
-### Hybrid Orchestrator (96% precisão)
-O algoritmo mais avançado que combina todas as técnicas:
-- Extração de múltiplas fontes
-- Validação cruzada
-- Correção automática de erros
-- Inferência inteligente quando dados incompletos
+### Hybrid Orchestrator (96% precisao)
+O algoritmo mais avancado que combina todas as tecnicas:
+- Extracao de multiplas fontes
+- Validacao cruzada
+- Correcao automatica de erros
+- Inferencia inteligente quando dados incompletos
 
-### Brazilian Specialist (93% precisão) 
+### Brazilian Specialist (93% precisao) 
 Especializado no mercado brasileiro:
-- **Editoras**: Casa do Código, Novatec, Érica, Brasport, Alta Books
-- **Padrões**: Detecção de nomes brasileiros
-- **Idioma**: Reconhecimento de português
-- **Formatos**: Padrões de metadados nacionais
+- **Editoras**: Casa do Codigo, Novatec, Erica, Brasport, Alta Books
+- **Padroes**: Deteccao de nomes brasileiros
+- **Idioma**: Reconhecimento de portugues
+- **Formatos**: Padroes de metadados nacionais
 
-### Smart Inferencer (91% precisão)
-Inferência inteligente para dados ausentes:
-- Análise de padrões de nome de arquivo
-- Inferência de autor por padrões
-- Correção automática de encoding
-- Validação de consistência
+### Smart Inferencer (91% precisao)
+Inferencia inteligente para dados ausentes:
+- Analise de padroes de nome de arquivo
+- Inferencia de autor por padroes
+- Correcao automatica de encoding
+- Validacao de consistencia
 
-### Enhanced Parser (85% precisão)
-Parser robusto com validação:
-- Múltiplas tentativas de extração
-- Validação de formato
-- Correção de erros comuns
-- Fallback para métodos alternativos
+### Enhanced Parser (85% precisao)
+Parser robusto com validacao:
+- Multiplas tentativas de extracao
+- Validacao de formato
+- Correcao de erros comuns
+- Fallback para metodos alternativos
 
-### Basic Parser (78% precisão)
-Extração básica e rápida:
+### Basic Parser (78% precisao)
+Extracao basica e rapida:
 - Metadados diretos do arquivo
-- Processamento rápido
+- Processamento rapido
 - Ideal para lotes grandes
 - Baixo uso de recursos
 
 ## Funcionalidades Brasileiras
 
 ### Editoras Suportadas
-- **Casa do Código**: Detecção especializada
-- **Novatec**: Padrões específicos
-- **Érica**: Formatos acadêmicos
-- **Brasport**: Livros técnicos
-- **Alta Books**: Traduções
+- **Casa do Codigo**: Deteccao especializada
+- **Novatec**: Padroes especificos
+- **Erica**: Formatos academicos
+- **Brasport**: Livros tecnicos
+- **Alta Books**: Traducoes
 
-### Padrões Detectados
-- **Nomes**: João, Maria, Silva, Santos, etc.
-- **Idioma**: Palavras em português
-- **Formatos**: Edições brasileiras
+### Padroes Detectados
+- **Nomes**: Joao, Maria, Silva, Santos, etc.
+- **Idioma**: Palavras em portugues
+- **Formatos**: Edicoes brasileiras
 - **ISBN**: Prefixos nacionais (978-85)
 
-## Relatórios e Análises
+## Relatorios e Analises
 
-### Relatórios HTML
+### Relatorios HTML
 ```bash
 # Gerados automaticamente em reports/html/
-- advanced_algorithms_report.html  # Comparação completa
-- demo_report.html                 # Demonstração
-- performance_analysis.html        # Análise de performance
+- advanced_algorithms_report.html  # Comparacao completa
+- demo_report.html                 # Demonstracao
+- performance_analysis.html        # Analise de performance
 ```
 
-### Análises de Performance
+### Analises de Performance
 ```bash
-# Disponíveis em reports/performance/
-- Comparação entre algoritmos
-- Métricas por editora
-- Análise de tempo de execução
+# Disponiveis em reports/performance/
+- Comparacao entre algoritmos
+- Metricas por editora
+- Analise de tempo de execucao
 - Taxa de sucesso por tipo de arquivo
 ```
 
@@ -191,24 +191,24 @@ pytest tests/ -v
 
 ### Cobertura de Testes
 - **5 algoritmos** validados
-- **Detecção de editoras brasileiras**
-- **Validação de metadados**
+- **Deteccao de editoras brasileiras**
+- **Validacao de metadados**
 - **Limpeza de output** (sem emojis)
-- **Geração de relatórios**
+- **Geracao de relatorios**
 
-## Instalação
+## Instalacao
 
 ### Requisitos
 - Python 3.8+
-- Dependências em requirements.txt
+- Dependencias em requirements.txt
 
-### Instalação Rápida
+### Instalacao Rapida
 ```bash
-# Clonar repositório
+# Clonar repositorio
 git clone https://github.com/mauriciomenon/renamepdfepub.git
 cd renamepdfepub
 
-# Instalar dependências
+# Instalar dependencias
 pip install -r requirements.txt
 
 # Executar interface web
@@ -217,10 +217,10 @@ python3 web.py
 
 ## Performance
 
-### Métricas Gerais
-- **Precisão Média**: 88.6%
+### Metricas Gerais
+- **Precisao Media**: 88.6%
 - **Melhor Resultado**: 96% (Hybrid Orchestrator)
-- **Tempo Médio**: <150ms por arquivo
+- **Tempo Medio**: <150ms por arquivo
 - **Taxa de Sucesso**: 95%+
 
 ### Benchmarks
@@ -231,27 +231,27 @@ python3 web.py
 
 ## Desenvolvimento
 
-### Estrutura de Código
+### Estrutura de Codigo
 ```
-src/core/           # Lógica principal
-├── advanced_algorithm_comparison.py  # 5 algoritmos
-├── renomeia_livro.py                # Sistema legado
-├── auto_rename_system.py            # Sistema automático
-└── quality_validator.py             # Validação
+src/core/           # Logica principal
+ advanced_algorithm_comparison.py  # 5 algoritmos
+ renomeia_livro.py                # Sistema legado
+ auto_rename_system.py            # Sistema automatico
+ quality_validator.py             # Validacao
 
 src/cli/            # Interface CLI
-├── launch_system.py     # Launcher
-├── demo_complete.py     # Demo
-└── manual_analysis.py   # Análise manual
+ launch_system.py     # Launcher
+ demo_complete.py     # Demo
+ manual_analysis.py   # Analise manual
 
-src/gui/            # Interfaces gráficas
-├── web_launcher.py         # Launcher web
-├── streamlit_interface.py  # Streamlit
-└── gui_modern.py          # GUI desktop
+src/gui/            # Interfaces graficas
+ web_launcher.py         # Launcher web
+ streamlit_interface.py  # Streamlit
+ gui_modern.py          # GUI desktop
 ```
 
-### Contribuição
-1. Fork do repositório
+### Contribuicao
+1. Fork do repositorio
 2. Criar branch para feature
 3. Executar testes: `python3 run_tests.py`
 4. Commit com mensagens limpas (sem emojis)
@@ -259,28 +259,28 @@ src/gui/            # Interfaces gráficas
 
 ## Status do Projeto
 
-**PRONTO PARA PRODUÇÃO**
+**PRONTO PARA PRODUCAO**
 
-- **Meta Original**: 70% de precisão
-- **Resultado Alcançado**: **88.7% de precisão média**
-- **Superação**: +18.7 pontos percentuais acima da meta
+- **Meta Original**: 70% de precisao
+- **Resultado Alcancado**: **88.7% de precisao media**
+- **Superacao**: +18.7 pontos percentuais acima da meta
 
-### Versão Atual: v1.0.0
+### Versao Atual: v1.0.0
 - 5 algoritmos especializados implementados
 - Interface web moderna (Streamlit)
-- Sistema de relatórios avançado
-- Especialização brasileira
+- Sistema de relatorios avancado
+- Especializacao brasileira
 - Testes automatizados
-- Documentação completa
+- Documentacao completa
 - Estrutura profissional organizada
 
-## Licença
+## Licenca
 
 MIT License - veja LICENSE para detalhes.
 
 ## Suporte
 
-- **Documentação**: [docs/](docs/)
+- **Documentacao**: [docs/](docs/)
 - **Testes**: `python3 run_tests.py`
 - **Issues**: GitHub Issues
 - **Estrutura**: STRUCTURE.md

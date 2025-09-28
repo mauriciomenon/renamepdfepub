@@ -79,22 +79,22 @@ Todas as referencias foram corrigidas e validadas:
 
 ### Estrutura de Arquivos [OK]
 ```
-├── start_cli.py              [OK] CLI com argparse
-├── start_web.py              [OK] Web com argparse  
-├── start_gui.py              [OK] GUI com argparse
-├── .copilot-instructions.md  [OK] Diretrizes criadas
-├── src/
-│   ├── core/
-│   │   └── advanced_algorithm_comparison.py [OK] Existe
-│   ├── gui/
-│   │   ├── streamlit_interface.py [OK] Existe
-│   │   └── web_launcher.py        [OK] Referencias corrigidas
-│   └── cli/
-│       └── launch_system.py       [OK] Emojis removidos
-├── reports/
-│   └── simple_report_generator.py [OK] Existe
-└── utils/
-    └── onedrive_parser.py         [OK] Nova funcionalidade
+ start_cli.py              [OK] CLI com argparse
+ start_web.py              [OK] Web com argparse  
+ start_gui.py              [OK] GUI com argparse
+ .copilot-instructions.md  [OK] Diretrizes criadas
+ src/
+    core/
+       advanced_algorithm_comparison.py [OK] Existe
+    gui/
+       streamlit_interface.py [OK] Existe
+       web_launcher.py        [OK] Referencias corrigidas
+    cli/
+        launch_system.py       [OK] Emojis removidos
+ reports/
+    simple_report_generator.py [OK] Existe
+ utils/
+     onedrive_parser.py         [OK] Nova funcionalidade
 ```
 
 ### Todas as Referencias Cruzadas [OK] VALIDADAS

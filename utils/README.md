@@ -1,52 +1,52 @@
-# Utilitários - RenamePDFEPUB
+# Utilitarios - RenamePDFEPUB
 
 ## Ferramentas Auxiliares na Pasta utils/
 
 ### executive_test_system.py
-**Função**: Sistema executivo de testes completos
-**Uso**: Testes extensivos com 200+ livros da coleção
-**Quando usar**: Validação completa do sistema, benchmarks
+**Funcao**: Sistema executivo de testes completos
+**Uso**: Testes extensivos com 200+ livros da colecao
+**Quando usar**: Validacao completa do sistema, benchmarks
 ```bash
 python3 utils/executive_test_system.py
 ```
 
 ### clean_md_files.py
-**Função**: Limpador de arquivos Markdown
+**Funcao**: Limpador de arquivos Markdown
 **Uso**: Remove emojis e caracteres especiais dos arquivos .md
-**Quando usar**: Manutenção da documentação, padronização
+**Quando usar**: Manutencao da documentacao, padronizacao
 ```bash
 python3 utils/clean_md_files.py
 ```
 
 ### verify_project.py
-**Função**: Verificador da estrutura do projeto
-**Uso**: Valida se todos os arquivos estão no lugar correto
-**Quando usar**: Após reorganizações, troubleshooting
+**Funcao**: Verificador da estrutura do projeto
+**Uso**: Valida se todos os arquivos estao no lugar correto
+**Quando usar**: Apos reorganizacoes, troubleshooting
 ```bash
 python3 utils/verify_project.py
 ```
 
 ### reorganize_project.py
-**Função**: Script de reorganização da estrutura
+**Funcao**: Script de reorganizacao da estrutura
 **Uso**: Reorganiza arquivos dispersos em estrutura profissional
-**Quando usar**: Manutenção da estrutura, limpeza
+**Quando usar**: Manutencao da estrutura, limpeza
 ```bash
 python3 utils/reorganize_project.py
 ```
 
 ### validation_report.json
-**Função**: Relatório de validação do projeto
-**Uso**: Dados estruturais do projeto, métricas de validação
-**Quando usar**: Referência para status do projeto
+**Funcao**: Relatorio de validacao do projeto
+**Uso**: Dados estruturais do projeto, metricas de validacao
+**Quando usar**: Referencia para status do projeto
 
-## Uso dos Utilitários
+## Uso dos Utilitarios
 
 ### Para Desenvolvedores
 ```bash
 # Verificar estrutura do projeto
 python3 utils/verify_project.py
 
-# Limpar documentação
+# Limpar documentacao
 python3 utils/clean_md_files.py
 
 # Reorganizar arquivos
@@ -59,30 +59,30 @@ python3 utils/reorganize_project.py
 python3 utils/executive_test_system.py
 ```
 
-### Para Manutenção
+### Para Manutencao
 ```bash
 # Verificar status geral
 python3 utils/verify_project.py
 
-# Ver relatório de validação
+# Ver relatorio de validacao
 cat utils/validation_report.json
 ```
 
-## Características dos Utilitários
+## Caracteristicas dos Utilitarios
 
 ### Independentes
-- Cada utilitário funciona de forma independente
-- Não requerem configuração especial
+- Cada utilitario funciona de forma independente
+- Nao requerem configuracao especial
 - Podem ser executados a qualquer momento
 
 ### Auxiliares
-- Não são pontos de entrada principais
-- Ferramentas de suporte e manutenção
-- Úteis eventualmente, não diariamente
+- Nao sao pontos de entrada principais
+- Ferramentas de suporte e manutencao
+- Uteis eventualmente, nao diariamente
 
 ### Organizados
 - Todos centralizados na pasta utils/
-- Nomes descritivos e funções claras
-- Documentação inline em cada arquivo
+- Nomes descritivos e funcoes claras
+- Documentacao inline em cada arquivo
 
-Esta organização mantém os utilitários acessíveis mas separados dos pontos de entrada principais, seguindo o princípio de que "pela própria organização dá para saber para que serve".
+Esta organizacao mantem os utilitarios acessiveis mas separados dos pontos de entrada principais, seguindo o principio de que "pela propria organizacao da para saber para que serve".

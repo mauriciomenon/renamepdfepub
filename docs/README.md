@@ -1,10 +1,10 @@
-# 📚 Documentação RenamePDFEPUB
+#  Documentacao RenamePDFEPUB
 
-## 📖 TL;DR - Uso Rápido
+##  TL;DR - Uso Rapido
 
-**O que faz:** Sistema avançado de renomeação automática de PDFs e EPUBs usando metadados extraídos com 5 algoritmos especializados.
+**O que faz:** Sistema avancado de renomeacao automatica de PDFs e EPUBs usando metadados extraidos com 5 algoritmos especializados.
 
-**Instalação:**
+**Instalacao:**
 ```bash
 git clone https://github.com/mauriciomenon/renamepdfepub.git
 cd renamepdfepub
@@ -19,39 +19,39 @@ python3 web_launcher.py
 # Teste direto dos algoritmos
 python3 advanced_algorithm_comparison.py
 
-# Renomeação simples (legado)
+# Renomeacao simples (legado)
 python3 renomeia_livro.py
 ```
 
-**Algoritmos disponíveis:**
-- **Hybrid Orchestrator** (96% accuracy) - Combina todas as técnicas
+**Algoritmos disponiveis:**
+- **Hybrid Orchestrator** (96% accuracy) - Combina todas as tecnicas
 - **Brazilian Specialist** (93% accuracy) - Especializado em livros nacionais
-- **Smart Inferencer** (91% accuracy) - Inferência inteligente
+- **Smart Inferencer** (91% accuracy) - Inferencia inteligente
 - **Enhanced Parser** (85% accuracy) - Parser aprimorado
-- **Basic Parser** (78% accuracy) - Extração básica
+- **Basic Parser** (78% accuracy) - Extracao basica
 
 ---
 
-## 📂 Estrutura da Documentação
+##  Estrutura da Documentacao
 
 ### [Releases](releases/)
-- [CHANGELOG.md](releases/CHANGELOG.md) - Histórico de mudanças
+- [CHANGELOG.md](releases/CHANGELOG.md) - Historico de mudancas
 - [Release Notes v0.11.0](releases/RELEASE_NOTES_v0.11.0_ADVANCED_ALGORITHMS.md) - Release atual
-- [Releases anteriores](releases/) - Histórico completo
+- [Releases anteriores](releases/) - Historico completo
 
-### [Análises](analysis/)
-- [Análise de Arquitetura](analysis/ARCHITECTURE_ANALYSIS_v0.10.1.md)
-- [Análise de Padrões](analysis/ANALISE_PADROES_REAIS.md)
-- [Relatório de Qualidade](analysis/QUALITY_REPORT_v0.11.0.md)
-- [Avaliações Completas](analysis/)
+### [Analises](analysis/)
+- [Analise de Arquitetura](analysis/ARCHITECTURE_ANALYSIS_v0.10.1.md)
+- [Analise de Padroes](analysis/ANALISE_PADROES_REAIS.md)
+- [Relatorio de Qualidade](analysis/QUALITY_REPORT_v0.11.0.md)
+- [Avaliacoes Completas](analysis/)
 
 ### [Performance](performance/)
-- [Relatório de Dados Reais](performance/RELATORIO_DADOS_REAIS.md)
-- [Análise Final v3](performance/RELATORIO_FINAL_V3.md)
+- [Relatorio de Dados Reais](performance/RELATORIO_DADOS_REAIS.md)
+- [Analise Final v3](performance/RELATORIO_FINAL_V3.md)
 - [Melhorias de Performance](performance/)
 
 ### Status e Progresso
-- [Conclusão Final](CONCLUSAO_FINAL_SUCESSO.md)
+- [Conclusao Final](CONCLUSAO_FINAL_SUCESSO.md)
 - [Status do Projeto](STATUS_FINAL_PROJETO.md)
 - [TODO](TODO.md)
 
@@ -59,47 +59,47 @@ python3 renomeia_livro.py
 
 ## Sistema de 5 Algoritmos
 
-| Algoritmo | Accuracy | Especialização |
+| Algoritmo | Accuracy | Especializacao |
 |-----------|----------|----------------|
-| **Hybrid Orchestrator** | 96% | Combinação de todas as técnicas |
+| **Hybrid Orchestrator** | 96% | Combinacao de todas as tecnicas |
 | **Brazilian Specialist** | 93% | Livros e editoras brasileiras |
-| **Smart Inferencer** | 91% | Inferência inteligente |
-| **Enhanced Parser** | 85% | Parser com validação |
-| **Basic Parser** | 78% | Extração básica rápida |
+| **Smart Inferencer** | 91% | Inferencia inteligente |
+| **Enhanced Parser** | 85% | Parser com validacao |
+| **Basic Parser** | 78% | Extracao basica rapida |
 
 ## Funcionalidades Brasileiras
 
-- **Editoras:** Casa do Código, Novatec, Érica, Brasport, Alta Books
-- **Padrões:** Nomes brasileiros, português, formatos locais
-- **Especialização:** 93% de accuracy em conteúdo nacional
+- **Editoras:** Casa do Codigo, Novatec, Erica, Brasport, Alta Books
+- **Padroes:** Nomes brasileiros, portugues, formatos locais
+- **Especializacao:** 93% de accuracy em conteudo nacional
 
 ## Interface Web
 
-- **Dashboard Streamlit:** Visualizações interativas em tempo real
-- **Relatórios HTML:** Análises detalhadas sem dependências
-- **Instalação Automática:** Sistema plug-and-play
+- **Dashboard Streamlit:** Visualizacoes interativas em tempo real
+- **Relatorios HTML:** Analises detalhadas sem dependencias
+- **Instalacao Automatica:** Sistema plug-and-play
 
 ---
 
-## 📈 Performance Atual
+##  Performance Atual
 
-- **Accuracy Média:** 88.6%
+- **Accuracy Media:** 88.6%
 - **Melhor Resultado:** 96% (Hybrid Orchestrator)
-- **Tempo Médio:** <150ms por livro
+- **Tempo Medio:** <150ms por livro
 - **Taxa de Sucesso:** 95%+
 
-## 🔧 Requisitos
+##  Requisitos
 
 - Python 3.8+
-- Dependências automáticas via web_launcher.py
-- Streamlit (instalação automática)
+- Dependencias automaticas via web_launcher.py
+- Streamlit (instalacao automatica)
 
-## 📞 Suporte
+##  Suporte
 
 - **Issues:** [GitHub Issues](https://github.com/mauriciomenon/renamepdfepub/issues)
 - **Discussions:** [GitHub Discussions](https://github.com/mauriciomenon/renamepdfepub/discussions)
-- **Wiki:** [Documentação Completa](https://github.com/mauriciomenon/renamepdfepub/wiki)
+- **Wiki:** [Documentacao Completa](https://github.com/mauriciomenon/renamepdfepub/wiki)
 
 ---
 
-*Última atualização: 28/09/2025 - v1.0.0_20250928*
+*Ultima atualizacao: 28/09/2025 - v1.0.0_20250928*
