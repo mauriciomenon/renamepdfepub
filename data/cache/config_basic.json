@@ -1,0 +1,13 @@
+{
+  "_comment": "Configuração Básica - Processamento Rápido",
+  "config_name": "Processamento Básico",
+  "description": "Configuração para processamento rápido com recursos limitados",
+  
+  "max_iterations": 50,
+  "max_time_minutes": 30,
+  "target_performance": 0.7,
+  "performance_metric": "improvement",
+  "batch_size": 25,
+  "thread_count": 2,
+  "cache_interval": 10
+}

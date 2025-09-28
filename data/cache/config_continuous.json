@@ -1,0 +1,19 @@
+{
+  "_comment": "Configuração por Tempo - Processamento Contínuo",
+  "config_name": "Processamento Contínuo 8 Horas",
+  "description": "Configuração para processamento contínuo durante horário de trabalho",
+  
+  "max_iterations": null,
+  "max_time_minutes": 480,
+  "target_performance": 0.9,
+  "performance_metric": "completeness",
+  "batch_size": 75,
+  "thread_count": 6,
+  "cache_interval": 15,
+  
+  "optimization": {
+    "prioritize_low_confidence": true,
+    "dynamic_batch_adjustment": true,
+    "performance_monitoring": true
+  }
+}

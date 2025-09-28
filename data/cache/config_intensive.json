@@ -1,0 +1,28 @@
+{
+  "_comment": "Configuração para Sistema de Cache Iterativo - Processamento Intensivo",
+  "config_name": "Processamento Intensivo - Alta Performance",
+  "description": "Configuração para processamento intensivo com foco em alta performance",
+  
+  "max_iterations": 200,
+  "max_time_minutes": 120,
+  "target_performance": 0.85,
+  "performance_metric": "accuracy",
+  "batch_size": 100,
+  "thread_count": 8,
+  "cache_interval": 5,
+  
+  "algorithm_weights": {
+    "advanced_comparison": 2.5,
+    "metadata_v3": 2.0,
+    "auto_rename": 1.5,
+    "metadata_enricher": 1.8,
+    "basic_extractor": 1.0,
+    "filename_analyzer": 0.8
+  },
+  
+  "optimization": {
+    "prioritize_low_confidence": true,
+    "early_stop_on_target": true,
+    "adaptive_batch_size": true
+  }
+}
