@@ -234,25 +234,25 @@ def print_readable_report(report: Dict):
     # Entry Points detalhado
     print(f"\nENTRY POINTS:")
     for name, info in report['entry_points'].items():
-        status_icon = "✅" if info['status'] == 'exists' and not info.get('broken_refs', []) else "❌"
+        status_icon = "[OK]" if info['status'] == 'exists' and not info.get('broken_refs', []) else "[X]"
         print(f"  {status_icon} {name:<25} {info['status']}")
         
         if info.get('broken_refs'):
             for ref in info['broken_refs']:
-                print(f"    ❌ Referencia quebrada: {ref}")
+                print(f"    [X] Referencia quebrada: {ref}")
     
     # Modulos principais
     print(f"\nMODULOS PRINCIPAIS:")
     for path, info in report['core_modules'].items():
         if info['status'] == 'exists':
-            print(f"  ✅ {path:<20} {info['file_count']} arquivos")
+            print(f"  [OK] {path:<20} {info['file_count']} arquivos")
         else:
-            print(f"  ❌ {path:<20} PASTA MISSING")
+            print(f"  [X] {path:<20} PASTA MISSING")
     
     # Imports padrao
     print(f"\nIMPORTS PADRAO:")
     for module, status in report['standard_imports'].items():
-        icon = "✅" if status == 'OK' else "❌"
+        icon = "[OK]" if status == 'OK' else "[X]"
         print(f"  {icon} {module:<15} {status}")
     
     # Problemas criticos
@@ -296,10 +296,10 @@ def main():
     
     # Codigo de saida
     if report['summary']['overall_status'] == 'OK':
-        print("\n✅ VALIDACAO CONCLUIDA - Sistema integro")
+        print("\n[OK] VALIDACAO CONCLUIDA - Sistema integro")
         return 0
     else:
-        print("\n❌ VALIDACAO FALHOU - Correcoes necessarias")
+        print("\n[X] VALIDACAO FALHOU - Correcoes necessarias")
         return 1
 
 if __name__ == '__main__':
