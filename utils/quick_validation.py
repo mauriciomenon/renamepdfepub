@@ -22,9 +22,9 @@ def test_imports():
     for entry in entry_points:
         path = Path(entry)
         if path.exists():
-            print(f"✅ {entry} - existe")
+            print(f"[OK] {entry} - existe")
         else:
-            print(f"❌ {entry} - AUSENTE")
+            print(f"[X] {entry} - AUSENTE")
 
 def test_core_files():
     """Testa arquivos principais"""
@@ -42,9 +42,9 @@ def test_core_files():
     for file_path in core_files:
         path = Path(file_path)
         if path.exists():
-            print(f"✅ {file_path} - existe")
+            print(f"[OK] {file_path} - existe")
         else:
-            print(f"❌ {file_path} - AUSENTE")
+            print(f"[X] {file_path} - AUSENTE")
 
 def test_structure():
     """Testa estrutura de diretorios"""
@@ -57,9 +57,9 @@ def test_structure():
         path = Path(dir_path)
         if path.exists() and path.is_dir():
             py_files = len(list(path.glob('*.py')))
-            print(f"✅ {dir_path} - {py_files} arquivos Python")
+            print(f"[OK] {dir_path} - {py_files} arquivos Python")
         else:
-            print(f"❌ {dir_path} - AUSENTE")
+            print(f"[X] {dir_path} - AUSENTE")
 
 def main():
     """Validacao principal"""
