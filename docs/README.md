@@ -34,30 +34,30 @@ python3 renomeia_livro.py
 
 ## 📂 Estrutura da Documentação
 
-### 🚀 [Releases](releases/)
+### [Releases](releases/)
 - [CHANGELOG.md](releases/CHANGELOG.md) - Histórico de mudanças
 - [Release Notes v0.11.0](releases/RELEASE_NOTES_v0.11.0_ADVANCED_ALGORITHMS.md) - Release atual
 - [Releases anteriores](releases/) - Histórico completo
 
-### 🔍 [Análises](analysis/)
+### [Análises](analysis/)
 - [Análise de Arquitetura](analysis/ARCHITECTURE_ANALYSIS_v0.10.1.md)
 - [Análise de Padrões](analysis/ANALISE_PADROES_REAIS.md)
 - [Relatório de Qualidade](analysis/QUALITY_REPORT_v0.11.0.md)
 - [Avaliações Completas](analysis/)
 
-### 📊 [Performance](performance/)
+### [Performance](performance/)
 - [Relatório de Dados Reais](performance/RELATORIO_DADOS_REAIS.md)
 - [Análise Final v3](performance/RELATORIO_FINAL_V3.md)
 - [Melhorias de Performance](performance/)
 
-### 📋 Status e Progresso
+### Status e Progresso
 - [Conclusão Final](CONCLUSAO_FINAL_SUCESSO.md)
 - [Status do Projeto](STATUS_FINAL_PROJETO.md)
 - [TODO](TODO.md)
 
 ---
 
-## 🎯 Sistema de 5 Algoritmos
+## Sistema de 5 Algoritmos
 
 | Algoritmo | Accuracy | Especialização |
 |-----------|----------|----------------|
@@ -67,13 +67,13 @@ python3 renomeia_livro.py
 | **Enhanced Parser** | 85% | Parser com validação |
 | **Basic Parser** | 78% | Extração básica rápida |
 
-## 🇧🇷 Funcionalidades Brasileiras
+## Funcionalidades Brasileiras
 
 - **Editoras:** Casa do Código, Novatec, Érica, Brasport, Alta Books
 - **Padrões:** Nomes brasileiros, português, formatos locais
 - **Especialização:** 93% de accuracy em conteúdo nacional
 
-## 🌐 Interface Web
+## Interface Web
 
 - **Dashboard Streamlit:** Visualizações interativas em tempo real
 - **Relatórios HTML:** Análises detalhadas sem dependências

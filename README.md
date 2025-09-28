@@ -20,17 +20,17 @@ python3 web_launcher.py  # Interface web moderna
 
 **Principais comandos:**
 ```bash
-# 🌐 Interface web (recomendado)
+# Interface web (recomendado)
 python3 web_launcher.py
 
-# 🔬 Teste direto dos algoritmos  
+# Teste direto dos algoritmos  
 python3 advanced_algorithm_comparison.py
 
-# 📄 Renomeação simples (legado)
+# Renomeação simples (legado)
 python3 renomeia_livro.py
 ```
 
-**🎯 Algoritmos disponíveis:**
+**Algoritmos disponíveis:**
 - **Hybrid Orchestrator** (96% accuracy) - Combina todas as técnicas
 - **Brazilian Specialist** (93% accuracy) - Especializado em livros nacionais  
 - **Smart Inferencer** (91% accuracy) - Inferência inteligente
@@ -39,7 +39,7 @@ python3 renomeia_livro.py
 
 ---
 
-## 🚀 Sistema para renomear arquivos PDF e EPUB com base em metadados extraídos automaticamente**
+## Sistema para renomear arquivos PDF e EPUB com base em metadados extraídos automaticamente
 
 ## Status do Projeto
 

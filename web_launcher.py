@@ -15,18 +15,18 @@ def install_streamlit():
     """Instala Streamlit se não estiver disponível"""
     try:
         import streamlit
-        print("✅ Streamlit já está instalado")
+        print("[OK] Streamlit já está instalado")
         return True
     except ImportError:
-        print("📦 Instalando Streamlit...")
+        print("[INFO] Instalando Streamlit...")
         try:
             subprocess.check_call([
                 sys.executable, "-m", "pip", "install", "streamlit"
             ])
-            print("✅ Streamlit instalado com sucesso!")
+            print("[OK] Streamlit instalado com sucesso!")
             return True
         except subprocess.CalledProcessError as e:
-            print(f"❌ Erro ao instalar Streamlit: {e}")
+            print(f"[ERROR] Erro ao instalar Streamlit: {e}")
             return False
 
 def generate_sample_data():
@@ -37,10 +37,10 @@ def generate_sample_data():
     sample_file = "advanced_algorithm_comparison.json"
     
     if Path(sample_file).exists():
-        print(f"✅ Arquivo de dados encontrado: {sample_file}")
+        print(f"[OK] Arquivo de dados encontrado: {sample_file}")
         return
     
-    print("📊 Gerando dados de exemplo...")
+    print("[INFO] Gerando dados de exemplo...")
     
     # Dados de exemplo
     sample_data = {
@@ -170,33 +170,33 @@ def launch_streamlit():
 
 def generate_simple_report():
     """Gera relatório HTML simples"""
-    print("📄 Gerando relatório HTML...")
+    print("[INFO] Gerando relatório HTML...")
     try:
         subprocess.run([sys.executable, "simple_report_generator.py"])
     except Exception as e:
-        print(f"⚠️ Erro ao gerar relatório: {e}")
+        print(f"[WARNING] Erro ao gerar relatório: {e}")
 
 def main():
     """Função principal"""
     print("=" * 60)
-    print("🚀 RENAMEPDFEPUB - INTERFACE WEB LAUNCHER")
+    print("RENAMEPDFEPUB - INTERFACE WEB LAUNCHER")
     print("=" * 60)
     
     # Menu de opções
     print("\nEscolha uma opção:")
-    print("1. 🌐 Iniciar Interface Streamlit (Recomendado)")
-    print("2. 📄 Gerar Relatório HTML")
-    print("3. 🔬 Executar Teste de Algoritmos")
-    print("4. 📊 Gerar Dados de Exemplo")
-    print("0. ❌ Sair")
+    print("1. Iniciar Interface Streamlit (Recomendado)")
+    print("2. Gerar Relatório HTML")
+    print("3. Executar Teste de Algoritmos")
+    print("4. Gerar Dados de Exemplo")
+    print("0. Sair")
     
     try:
-        choice = input("\n📝 Digite sua escolha (0-4): ").strip()
+        choice = input("\nDigite sua escolha (0-4): ").strip()
         
         if choice == "1":
             # Instala Streamlit se necessário
             if not install_streamlit():
-                print("❌ Não foi possível instalar Streamlit")
+                print("[ERROR] Não foi possível instalar Streamlit")
                 return
             
             # Gera dados de exemplo se necessário
@@ -210,25 +210,25 @@ def main():
             generate_simple_report()
             
         elif choice == "3":
-            print("🔬 Executando teste de algoritmos...")
+            print("[INFO] Executando teste de algoritmos...")
             try:
                 subprocess.run([sys.executable, "advanced_algorithm_comparison.py"])
             except Exception as e:
-                print(f"❌ Erro: {e}")
+                print(f"[ERROR] Erro: {e}")
                 
         elif choice == "4":
             generate_sample_data()
             
         elif choice == "0":
-            print("👋 Até logo!")
+            print("Até logo!")
             
         else:
-            print("❌ Opção inválida")
+            print("[ERROR] Opção inválida")
             
     except KeyboardInterrupt:
-        print("\n👋 Operação cancelada")
+        print("\nOperação cancelada")
     except Exception as e:
-        print(f"❌ Erro: {e}")
+        print(f"[ERROR] Erro: {e}")
 
 if __name__ == "__main__":
     main()
