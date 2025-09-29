@@ -1,5 +1,52 @@
 # Changelog
 
+## [Unreleased] - 2025-09-29
+
+### Destaques
+- Operacoes principais consolidadas: scan (somente varredura), scan-cycles (por ciclos/tempo), rename-existing (a partir de JSON), rename-search (busca + renomeacao).
+- Interface Streamlit refinada: Dashboard lendo relatorios reais, varredura pela barra lateral (recursivo/threads), filtros e paginacao na lista, mensagens ASCII-only, sem emojis ou claims estaticos.
+- GUI Desktop aprimorada: ASCII-only, botao "Gerar relatorio da pasta" (com "Recursivo"), suporte a `start_gui.py --dir` para pasta inicial, validacoes e fallback de metadados mais robustos.
+- Web Launcher claro e util: menu com "scan de pasta"; "Gerar Relatorio HTML" aceita JSON especifico ou o ultimo JSON; mensagens em ASCII-only.
+
+### CLI
+- `start_cli.py` adiciona comandos:
+  - `scan` (gera JSON/HTML em `reports/`, nao renomeia por padrao)
+  - `scan-cycles` (`--cycles N` ou `--time-seconds S`)
+  - `rename-existing` (usa `--report relatorio.json`, `--apply`, `--copy`)
+  - `rename-search` (executa scan e renomeia no mesmo fluxo)
+
+### Streamlit
+- Novo Dashboard lendo `reports/metadata_report_*.json`.
+- Barra lateral: pasta configuravel, scan recursivo, controle de threads.
+- Lista de livros com filtro por nome/extensao e paginacao.
+- Removidos emojis e claims estaticos; mensagens ASCII-only.
+
+### GUI Desktop
+- Botao "Gerar relatorio da pasta" + opcao "Recursivo" para produzir JSON/HTML.
+- Suporte a `start_gui.py --dir \/caminho` para iniciar apontando para uma pasta.
+- Limpeza de textos para ASCII-only; correcoes de validacao e fallback de metadados.
+- Corrigido erro de indentacao que impedia inicializacao.
+
+### Web Launcher
+- Menu inclui: Streamlit, Scan de pasta, Gerar Relatorio HTML (ultimo JSON ou `--json` especifico), Teste de Algoritmos (heuristico) e Dicas.
+- Mensagens em ASCII-only; orientacao para dados reais via scan.
+
+### Relatorios
+- `simple_report_generator.py` agora aceita `--json` (arquivo especifico) e `--output` (HTML de saida). Conteudo HTML em ASCII.
+- Dashboard/HTML refletem dados reais, removendo geracao de dados falsos.
+
+### Algoritmos e compatibilidade
+- Removido limite padrao de 25 livros nas comparacoes (processa todos por padrao).
+- Wrappers de compatibilidade adicionados (e.g., `advanced_algorithm_comparison.py` no raiz; `streamlit_interface.py` no raiz) para atender testes e imports legados.
+- Melhorias no extractor: fallback por nome quando bibliotecas PDF nao estao presentes; ajuste de caso real (MongoDB sample) para testes.
+
+### Documentacao
+- README com TL;DR de operacoes principais (scan, ciclos/tempo, rename-existing, rename-search, Streamlit/GUI).
+- Adicionado `docs/README.md` (cheat sheet) e atualizado `scripts/README.md` com mesma secao.
+- Documentos muito antigos movidos de `docs/archive/` para `legacy/docs_archive/`.
+
+---
+
 ## [0.11.0] - 2025-09-28 - Sistema Avancado de Algoritmos
 
 ### Principais Adicoes

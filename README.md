@@ -2,24 +2,24 @@
 
 Sistema automatizado para renomeacao de arquivos PDF e EPUB baseado em extracao de metadados.
 
-## TL;DR – Operações Principais
+## TL;DR - Operacoes Principais
 
 As operações abaixo cobrem varredura (scan) sem renomear, varredura repetida, renomear com base em relatório existente e renomear enquanto busca. Válidas para pastas locais e pastas sincronizadas (OneDrive/Google Drive).
 
 ```bash
-# 0) Instalar dependências
+# 0) Instalar dependencias
 pip install -r requirements.txt
 
-# 1) Scan (gera relatórios JSON/HTML em reports/, não renomeia)
+# 1) Scan (gera relatorios JSON/HTML em reports/, nao renomeia)
 python3 start_cli.py scan "/caminho/livros"
 python3 start_cli.py scan "/caminho/livros" -r                # recursivo
 python3 start_cli.py scan "/caminho/livros" -t 8 -o out.json   # threads e saída
 
-# 2) Scan por ciclos/tempo (repetiçōes retroalimentadas)
+# 2) Scan por ciclos/tempo (repeticoes retroalimentadas)
 python3 start_cli.py scan-cycles "/caminho/livros" --cycles 3
 python3 start_cli.py scan-cycles "/caminho/livros" --time-seconds 120
 
-# 3) Renomear com dados já existentes (relatório JSON)
+# 3) Renomear com dados ja existentes (relatorio JSON)
 python3 start_cli.py rename-existing --report relatorio.json --apply [--copy]
 
 # 4) Renomear fazendo a procura (scan + rename)
@@ -27,13 +27,13 @@ python3 start_cli.py rename-search "/caminho/livros" --rename
 
 # 5) Streamlit (dashboard + scan pela barra lateral)
 python3 start_web.py --auto-start
-# Ajuste "Pasta de livros" na barra lateral e use "Executar varredura". Dashboard lê reports/.
+# Ajuste "Pasta de livros" na barra lateral e use "Executar varredura". Dashboard le reports/.
 
 # 6) GUI Desktop
 python3 start_gui.py --dir "/caminho/inicial"   # inicia apontando para a pasta
-# Na GUI, use "Gerar relatório da pasta" (com opção Recursivo) para produzir JSON/HTML.
+# Na GUI, use "Gerar relatorio da pasta" (com opcao Recursivo) para produzir JSON/HTML.
 
-# 7) Algoritmos (comparação)
+# 7) Algoritmos (comparacao)
 python3 start_cli.py algorithms
 
 # 8) Testes
