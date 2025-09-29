@@ -355,7 +355,7 @@ class MultiAlgorithmTester:
         
         return 0.0
 
-    def run_comprehensive_test(self, max_books: int = 30) -> Dict[str, Any]:
+    def run_comprehensive_test(self, max_books: int = 0) -> Dict[str, Any]:
         """Executa teste abrangente com todos os algoritmos"""
         self.print_both("SISTEMA DE COMPARACAO COMPLETA DE ALGORITMOS")
         self.print_both("=" * 70)
@@ -372,7 +372,7 @@ class MultiAlgorithmTester:
                      if f.suffix.lower() in ['.pdf', '.epub', '.mobi'] 
                      and not f.name.startswith('.')]
         
-        if len(book_files) > max_books:
+        if max_books and len(book_files) > max_books:
             book_files = book_files[:max_books]
         
         self.print_both(f"Testando {len(book_files)} livros com 4 algoritmos")
@@ -503,7 +503,7 @@ def main():
     
     try:
         # Executa teste
-        results = tester.run_comprehensive_test(max_books=25)
+        results = tester.run_comprehensive_test(max_books=0)
         
         if results:
             # Salva resultados JSON

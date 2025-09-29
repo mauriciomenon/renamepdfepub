@@ -7,12 +7,19 @@ import shutil
 import re
 import logging
 from pathlib import Path
-from .logging_config import configure_logging
+try:
+    from .logging_config import configure_logging
+except Exception:  # pragma: no cover - fallback for direct module import
+    try:
+        from logging_config import configure_logging  # type: ignore
+    except Exception:
+        def configure_logging():  # type: ignore
+            pass
 
 INVALID_CHARS_RE = re.compile(r'[^\w\-\._ ]')
 
 
-def sanitize_name(s: str, max_len: int = 120) -> str:
+def sanitize_name(s: str, max_len: int = 90) -> str:
     if not s:
         return ''
     s = s.strip()

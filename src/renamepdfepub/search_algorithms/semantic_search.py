@@ -11,6 +11,7 @@ Implementa algoritmos avançados para:
 import re
 import time
 import math
+import unicodedata
 from typing import Dict, List, Any, Optional, Tuple, Set
 from collections import Counter, defaultdict
 from .base_search import BaseSearchAlgorithm, SearchQuery, SearchResult
@@ -40,7 +41,7 @@ class TextNormalizer:
     TECHNICAL_TERMS = {
         'api', 'sdk', 'gui', 'cli', 'ide', 'sql', 'nosql', 'json', 'xml', 'html',
         'css', 'javascript', 'python', 'java', 'cpp', 'csharp', 'ruby', 'php',
-        'react', 'angular', 'vue', 'node', 'express', 'django', 'flask', 'spring',
+        'react', 'angular', 'vue', 'node', 'nodejs', 'express', 'django', 'flask', 'spring',
         'docker', 'kubernetes', 'aws', 'azure', 'gcp', 'git', 'github', 'gitlab',
         'ci', 'cd', 'devops', 'agile', 'scrum', 'kanban', 'tdd', 'bdd', 'ddd',
         'ml', 'ai', 'nlp', 'cv', 'dl', 'nn', 'cnn', 'rnn', 'lstm', 'bert'
@@ -60,18 +61,19 @@ class TextNormalizer:
         """
         if not text:
             return []
-        
-        # Convert to lowercase
+
         text = text.lower()
-        
-        # Remove special characters but preserve alphanumeric and spaces
-        text = re.sub(r'[^\w\s\-]', ' ', text)
-        
-        # Handle common abbreviations and technical terms
+
+        # Handle common abbreviations and technical terms before stripping punctuation
         text = cls._preserve_technical_terms(text)
-        
-        # Split into tokens
+
+        # Remove special characters but preserve alphanumeric (incluindo unicode) e espacos
+        text = re.sub(r'[^\w\s\-]', ' ', text)
+
         tokens = text.split()
+
+        # Add supportive translations mantendo tokens originais
+        tokens = cls._augment_with_translations(tokens)
         
         # Remove stop words
         stop_words = cls.STOP_WORDS.get(language, cls.STOP_WORDS['english'])
@@ -111,6 +113,33 @@ class TextNormalizer:
             text = text.replace(abbrev, replacement)
         
         return text
+
+    @classmethod
+    def _augment_with_translations(cls, tokens: List[str]) -> List[str]:
+        """Mantem tokens originais e adiciona traducoes auxiliares."""
+        translations = {
+            'programacao': 'programming',
+            'aprendizado': 'learning',
+            'avancada': 'advanced',
+            'avancado': 'advanced',
+            'linguagem': 'language',
+            'dados': 'data',
+            'maquina': 'machine',
+            'redes': 'networks',
+            'rede': 'network',
+            'neurais': 'neural',
+            'ciencia': 'science',
+            'visao': 'vision',
+            'computacional': 'computational'
+        }
+
+        augmented = list(tokens)
+        for token in tokens:
+            ascii_token = unicodedata.normalize('NFKD', token).encode('ascii', 'ignore').decode('ascii')
+            translation = translations.get(ascii_token)
+            if translation:
+                augmented.extend(translation.split())
+        return augmented
     
     @classmethod
     def generate_ngrams(cls, tokens: List[str], n: int) -> List[str]:
@@ -235,12 +264,15 @@ class TFIDFCalculator:
         """
         if self.total_documents == 0:
             return 0.0
-        
+
         df = self.document_frequency.get(term, 0)
         if df == 0:
-            return 0.0
-        
-        return math.log(self.total_documents / df)
+            return math.log(self.total_documents + 1)
+
+        value = math.log(self.total_documents / df)
+        if value <= 0.0:
+            return 0.1
+        return value
     
     def calculate_tfidf_vector(self, tokens: List[str]) -> Dict[str, float]:
         """

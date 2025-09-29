@@ -45,7 +45,11 @@ class SearchOrchestrator:
         self.max_workers = max_workers
         self.default_timeout = 30.0  # seconds
         self.result_combination_strategy = 'weighted_merge'  # 'weighted_merge', 'best_of_each', 'consensus'
-        self.performance_stats = {}
+        self.performance_stats = {
+            'total_searches': 0,
+            'total_time': 0.0,
+            'average_time': 0.0
+        }
         self._lock = threading.Lock()
         
         # Initialize default algorithms
@@ -78,6 +82,14 @@ class SearchOrchestrator:
             bool: True se remoção foi bem-sucedida
         """
         return self.algorithms.pop(algorithm_name, None) is not None
+
+    # Backwards compatibility alias expected pelos testes
+    def remove_algorithm(self, algorithm_name: str) -> bool:
+        return self.unregister_algorithm(algorithm_name)
+
+    def get_registered_algorithms(self) -> List[BaseSearchAlgorithm]:
+        """Retorna lista ordenada dos algoritmos registrados."""
+        return list(self.algorithms.values())
     
     def search(self, 
                query: SearchQuery, 
@@ -97,15 +109,21 @@ class SearchOrchestrator:
         if strategy == 'auto':
             strategy = self._select_optimal_strategy(query)
         
+        start_time = time.time()
+
         if strategy == 'parallel':
-            return self._parallel_search(query, max_results)
+            results = self._parallel_search(query, max_results)
         elif strategy == 'sequential':
-            return self._sequential_search(query, max_results)
+            results = self._sequential_search(query, max_results)
         elif strategy == 'best_match':
-            return self._best_match_search(query, max_results)
+            results = self._best_match_search(query, max_results)
         else:
             # Default to adaptive strategy
-            return self._adaptive_search(query, max_results)
+            results = self._adaptive_search(query, max_results)
+
+        elapsed = time.time() - start_time
+        self._record_performance(elapsed)
+        return results
     
     def _select_optimal_strategy(self, query: SearchQuery) -> str:
         """
@@ -168,6 +186,10 @@ class SearchOrchestrator:
                     print(f"Algorithm {algorithm.name} failed: {e}")
         
         return self._combine_and_rank_results(all_results, max_results)
+
+    def get_performance_stats(self) -> Dict[str, float]:
+        """Retorna estatísticas agregadas do orquestrador."""
+        return self.performance_stats.copy()
     
     def _sequential_search(self, query: SearchQuery, max_results: int) -> List[SearchResult]:
         """
@@ -524,3 +546,12 @@ class SearchOrchestrator:
         }
         semantic_algo.configure(semantic_config)
         self.register_algorithm(semantic_algo)
+
+    def _record_performance(self, elapsed: float):
+        """Atualiza estatísticas agregadas de desempenho."""
+        self.performance_stats['total_searches'] += 1
+        self.performance_stats['total_time'] += elapsed
+        total = self.performance_stats['total_searches']
+        self.performance_stats['average_time'] = (
+            self.performance_stats['total_time'] / total if total else 0.0
+        )

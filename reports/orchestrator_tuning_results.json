@@ -1,0 +1,470 @@
+[
+  {
+    "config": {
+      "weights": {
+        "v3_enhanced_fuzzy": 0.9,
+        "v3_super_semantic": 0.9
+      },
+      "consensus_bonus": 0.15,
+      "multi_algo_bonus": 0.0
+    },
+    "average_accuracy": 0.523,
+    "success_rate": 0.5,
+    "average_time": 0.032827353477478026
+  },
+  {
+    "config": {
+      "weights": {
+        "v3_enhanced_fuzzy": 0.9,
+        "v3_super_semantic": 0.9
+      },
+      "consensus_bonus": 0.15,
+      "multi_algo_bonus": 0.05
+    },
+    "average_accuracy": 0.523,
+    "success_rate": 0.5,
+    "average_time": 0.03252529303232829
+  },
+  {
+    "config": {
+      "weights": {
+        "v3_enhanced_fuzzy": 0.9,
+        "v3_super_semantic": 0.9
+      },
+      "consensus_bonus": 0.25,
+      "multi_algo_bonus": 0.0
+    },
+    "average_accuracy": 0.523,
+    "success_rate": 0.5,
+    "average_time": 0.03213674227396647
+  },
+  {
+    "config": {
+      "weights": {
+        "v3_enhanced_fuzzy": 0.9,
+        "v3_super_semantic": 0.9
+      },
+      "consensus_bonus": 0.25,
+      "multi_algo_bonus": 0.05
+    },
+    "average_accuracy": 0.523,
+    "success_rate": 0.5,
+    "average_time": 0.03164003690083821
+  },
+  {
+    "config": {
+      "weights": {
+        "v3_enhanced_fuzzy": 0.9,
+        "v3_super_semantic": 1.0
+      },
+      "consensus_bonus": 0.15,
+      "multi_algo_bonus": 0.0
+    },
+    "average_accuracy": 0.523,
+    "success_rate": 0.5,
+    "average_time": 0.03148808479309082
+  },
+  {
+    "config": {
+      "weights": {
+        "v3_enhanced_fuzzy": 0.9,
+        "v3_super_semantic": 1.0
+      },
+      "consensus_bonus": 0.15,
+      "multi_algo_bonus": 0.05
+    },
+    "average_accuracy": 0.523,
+    "success_rate": 0.5,
+    "average_time": 0.03154760996500651
+  },
+  {
+    "config": {
+      "weights": {
+        "v3_enhanced_fuzzy": 0.9,
+        "v3_super_semantic": 1.0
+      },
+      "consensus_bonus": 0.25,
+      "multi_algo_bonus": 0.0
+    },
+    "average_accuracy": 0.523,
+    "success_rate": 0.5,
+    "average_time": 0.03401791254679362
+  },
+  {
+    "config": {
+      "weights": {
+        "v3_enhanced_fuzzy": 0.9,
+        "v3_super_semantic": 1.0
+      },
+      "consensus_bonus": 0.25,
+      "multi_algo_bonus": 0.05
+    },
+    "average_accuracy": 0.523,
+    "success_rate": 0.5,
+    "average_time": 0.03248191674550374
+  },
+  {
+    "config": {
+      "weights": {
+        "v3_enhanced_fuzzy": 0.9,
+        "v3_super_semantic": 1.1
+      },
+      "consensus_bonus": 0.15,
+      "multi_algo_bonus": 0.0
+    },
+    "average_accuracy": 0.523,
+    "success_rate": 0.5,
+    "average_time": 0.03173981507619222
+  },
+  {
+    "config": {
+      "weights": {
+        "v3_enhanced_fuzzy": 0.9,
+        "v3_super_semantic": 1.1
+      },
+      "consensus_bonus": 0.15,
+      "multi_algo_bonus": 0.05
+    },
+    "average_accuracy": 0.523,
+    "success_rate": 0.5,
+    "average_time": 0.03882497946421305
+  },
+  {
+    "config": {
+      "weights": {
+        "v3_enhanced_fuzzy": 0.9,
+        "v3_super_semantic": 1.1
+      },
+      "consensus_bonus": 0.25,
+      "multi_algo_bonus": 0.0
+    },
+    "average_accuracy": 0.523,
+    "success_rate": 0.5,
+    "average_time": 0.031608414649963376
+  },
+  {
+    "config": {
+      "weights": {
+        "v3_enhanced_fuzzy": 0.9,
+        "v3_super_semantic": 1.1
+      },
+      "consensus_bonus": 0.25,
+      "multi_algo_bonus": 0.05
+    },
+    "average_accuracy": 0.523,
+    "success_rate": 0.5,
+    "average_time": 0.03598548571268718
+  },
+  {
+    "config": {
+      "weights": {
+        "v3_enhanced_fuzzy": 1.0,
+        "v3_super_semantic": 0.9
+      },
+      "consensus_bonus": 0.15,
+      "multi_algo_bonus": 0.0
+    },
+    "average_accuracy": 0.5156666666666667,
+    "success_rate": 0.4666666666666667,
+    "average_time": 0.0330514113108317
+  },
+  {
+    "config": {
+      "weights": {
+        "v3_enhanced_fuzzy": 1.0,
+        "v3_super_semantic": 0.9
+      },
+      "consensus_bonus": 0.15,
+      "multi_algo_bonus": 0.05
+    },
+    "average_accuracy": 0.5156666666666667,
+    "success_rate": 0.4666666666666667,
+    "average_time": 0.03373857339223226
+  },
+  {
+    "config": {
+      "weights": {
+        "v3_enhanced_fuzzy": 1.0,
+        "v3_super_semantic": 0.9
+      },
+      "consensus_bonus": 0.25,
+      "multi_algo_bonus": 0.0
+    },
+    "average_accuracy": 0.5156666666666667,
+    "success_rate": 0.4666666666666667,
+    "average_time": 0.032537070910135905
+  },
+  {
+    "config": {
+      "weights": {
+        "v3_enhanced_fuzzy": 1.0,
+        "v3_super_semantic": 0.9
+      },
+      "consensus_bonus": 0.25,
+      "multi_algo_bonus": 0.05
+    },
+    "average_accuracy": 0.5156666666666667,
+    "success_rate": 0.4666666666666667,
+    "average_time": 0.03268857796986898
+  },
+  {
+    "config": {
+      "weights": {
+        "v3_enhanced_fuzzy": 1.0,
+        "v3_super_semantic": 1.0
+      },
+      "consensus_bonus": 0.15,
+      "multi_algo_bonus": 0.0
+    },
+    "average_accuracy": 0.5156666666666667,
+    "success_rate": 0.4666666666666667,
+    "average_time": 0.03149413267771403
+  },
+  {
+    "config": {
+      "weights": {
+        "v3_enhanced_fuzzy": 1.0,
+        "v3_super_semantic": 1.0
+      },
+      "consensus_bonus": 0.15,
+      "multi_algo_bonus": 0.05
+    },
+    "average_accuracy": 0.5156666666666667,
+    "success_rate": 0.4666666666666667,
+    "average_time": 0.033541329701741535
+  },
+  {
+    "config": {
+      "weights": {
+        "v3_enhanced_fuzzy": 1.0,
+        "v3_super_semantic": 1.0
+      },
+      "consensus_bonus": 0.25,
+      "multi_algo_bonus": 0.0
+    },
+    "average_accuracy": 0.5156666666666667,
+    "success_rate": 0.4666666666666667,
+    "average_time": 0.04081137180328369
+  },
+  {
+    "config": {
+      "weights": {
+        "v3_enhanced_fuzzy": 1.0,
+        "v3_super_semantic": 1.0
+      },
+      "consensus_bonus": 0.25,
+      "multi_algo_bonus": 0.05
+    },
+    "average_accuracy": 0.5156666666666667,
+    "success_rate": 0.4666666666666667,
+    "average_time": 0.03977739016215007
+  },
+  {
+    "config": {
+      "weights": {
+        "v3_enhanced_fuzzy": 1.0,
+        "v3_super_semantic": 1.1
+      },
+      "consensus_bonus": 0.15,
+      "multi_algo_bonus": 0.0
+    },
+    "average_accuracy": 0.5156666666666667,
+    "success_rate": 0.4666666666666667,
+    "average_time": 0.04025704065958659
+  },
+  {
+    "config": {
+      "weights": {
+        "v3_enhanced_fuzzy": 1.0,
+        "v3_super_semantic": 1.1
+      },
+      "consensus_bonus": 0.15,
+      "multi_algo_bonus": 0.05
+    },
+    "average_accuracy": 0.5156666666666667,
+    "success_rate": 0.4666666666666667,
+    "average_time": 0.03455526828765869
+  },
+  {
+    "config": {
+      "weights": {
+        "v3_enhanced_fuzzy": 1.0,
+        "v3_super_semantic": 1.1
+      },
+      "consensus_bonus": 0.25,
+      "multi_algo_bonus": 0.0
+    },
+    "average_accuracy": 0.5156666666666667,
+    "success_rate": 0.4666666666666667,
+    "average_time": 0.03162561257680257
+  },
+  {
+    "config": {
+      "weights": {
+        "v3_enhanced_fuzzy": 1.0,
+        "v3_super_semantic": 1.1
+      },
+      "consensus_bonus": 0.25,
+      "multi_algo_bonus": 0.05
+    },
+    "average_accuracy": 0.5156666666666667,
+    "success_rate": 0.4666666666666667,
+    "average_time": 0.03167747656504313
+  },
+  {
+    "config": {
+      "weights": {
+        "v3_enhanced_fuzzy": 1.1,
+        "v3_super_semantic": 0.9
+      },
+      "consensus_bonus": 0.15,
+      "multi_algo_bonus": 0.0
+    },
+    "average_accuracy": 0.5156666666666667,
+    "success_rate": 0.4666666666666667,
+    "average_time": 0.03147654533386231
+  },
+  {
+    "config": {
+      "weights": {
+        "v3_enhanced_fuzzy": 1.1,
+        "v3_super_semantic": 0.9
+      },
+      "consensus_bonus": 0.15,
+      "multi_algo_bonus": 0.05
+    },
+    "average_accuracy": 0.5156666666666667,
+    "success_rate": 0.4666666666666667,
+    "average_time": 0.03187611897786458
+  },
+  {
+    "config": {
+      "weights": {
+        "v3_enhanced_fuzzy": 1.1,
+        "v3_super_semantic": 0.9
+      },
+      "consensus_bonus": 0.25,
+      "multi_algo_bonus": 0.0
+    },
+    "average_accuracy": 0.5156666666666667,
+    "success_rate": 0.4666666666666667,
+    "average_time": 0.03141811688741048
+  },
+  {
+    "config": {
+      "weights": {
+        "v3_enhanced_fuzzy": 1.1,
+        "v3_super_semantic": 0.9
+      },
+      "consensus_bonus": 0.25,
+      "multi_algo_bonus": 0.05
+    },
+    "average_accuracy": 0.5156666666666667,
+    "success_rate": 0.4666666666666667,
+    "average_time": 0.03169155915578206
+  },
+  {
+    "config": {
+      "weights": {
+        "v3_enhanced_fuzzy": 1.1,
+        "v3_super_semantic": 1.0
+      },
+      "consensus_bonus": 0.15,
+      "multi_algo_bonus": 0.0
+    },
+    "average_accuracy": 0.5156666666666667,
+    "success_rate": 0.4666666666666667,
+    "average_time": 0.0315628449122111
+  },
+  {
+    "config": {
+      "weights": {
+        "v3_enhanced_fuzzy": 1.1,
+        "v3_super_semantic": 1.0
+      },
+      "consensus_bonus": 0.15,
+      "multi_algo_bonus": 0.05
+    },
+    "average_accuracy": 0.5156666666666667,
+    "success_rate": 0.4666666666666667,
+    "average_time": 0.03132863044738769
+  },
+  {
+    "config": {
+      "weights": {
+        "v3_enhanced_fuzzy": 1.1,
+        "v3_super_semantic": 1.0
+      },
+      "consensus_bonus": 0.25,
+      "multi_algo_bonus": 0.0
+    },
+    "average_accuracy": 0.5156666666666667,
+    "success_rate": 0.4666666666666667,
+    "average_time": 0.03166817824045817
+  },
+  {
+    "config": {
+      "weights": {
+        "v3_enhanced_fuzzy": 1.1,
+        "v3_super_semantic": 1.0
+      },
+      "consensus_bonus": 0.25,
+      "multi_algo_bonus": 0.05
+    },
+    "average_accuracy": 0.5156666666666667,
+    "success_rate": 0.4666666666666667,
+    "average_time": 0.031697956720987956
+  },
+  {
+    "config": {
+      "weights": {
+        "v3_enhanced_fuzzy": 1.1,
+        "v3_super_semantic": 1.1
+      },
+      "consensus_bonus": 0.15,
+      "multi_algo_bonus": 0.0
+    },
+    "average_accuracy": 0.5156666666666667,
+    "success_rate": 0.4666666666666667,
+    "average_time": 0.03311001459757487
+  },
+  {
+    "config": {
+      "weights": {
+        "v3_enhanced_fuzzy": 1.1,
+        "v3_super_semantic": 1.1
+      },
+      "consensus_bonus": 0.15,
+      "multi_algo_bonus": 0.05
+    },
+    "average_accuracy": 0.5156666666666667,
+    "success_rate": 0.4666666666666667,
+    "average_time": 0.0321460485458374
+  },
+  {
+    "config": {
+      "weights": {
+        "v3_enhanced_fuzzy": 1.1,
+        "v3_super_semantic": 1.1
+      },
+      "consensus_bonus": 0.25,
+      "multi_algo_bonus": 0.0
+    },
+    "average_accuracy": 0.5156666666666667,
+    "success_rate": 0.4666666666666667,
+    "average_time": 0.03178610006968181
+  },
+  {
+    "config": {
+      "weights": {
+        "v3_enhanced_fuzzy": 1.1,
+        "v3_super_semantic": 1.1
+      },
+      "consensus_bonus": 0.25,
+      "multi_algo_bonus": 0.05
+    },
+    "average_accuracy": 0.5156666666666667,
+    "success_rate": 0.4666666666666667,
+    "average_time": 0.03146006266276042
+  }
+]

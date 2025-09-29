@@ -25,7 +25,7 @@ import time
 # Imports dos nossos sistemas
 from amazon_api_integration import AmazonBooksAPI, BatchBookProcessor
 from auto_rename_system import AutoRenameSystem
-from final_v3_complete_test import V3CompleteSystem
+from core.v3_complete_system import V3CompleteSystem
 
 def print_banner():
     """Banner da demonstração"""

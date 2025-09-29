@@ -31,7 +31,7 @@ import re
 
 # Imports dos nossos sistemas
 from amazon_api_integration import AmazonBooksAPI, BatchBookProcessor, BookMetadata
-from final_v3_complete_test import V3CompleteSystem
+from .v3_complete_system import V3CompleteSystem
 
 class FileRenamer:
     """

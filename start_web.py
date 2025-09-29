@@ -25,7 +25,7 @@ Opcoes da interface:
   1. Iniciar Interface Streamlit (Recomendado)  
   2. Gerar Relatorio HTML
   3. Executar Teste de Algoritmos
-  4. Gerar Dados de Exemplo
+  4. Dica sobre relatorios reais (reports/)
   0. Sair
         """
     )
@@ -41,9 +41,8 @@ Opcoes da interface:
     if args.auto_start:
         print("Iniciando interface Streamlit automaticamente...")
         try:
-            from src.gui.web_launcher import launch_streamlit, install_streamlit, generate_sample_data
+            from src.gui.web_launcher import launch_streamlit, install_streamlit
             if install_streamlit():
-                generate_sample_data()
                 launch_streamlit()
             else:
                 print("[ERROR] Nao foi possível instalar Streamlit")

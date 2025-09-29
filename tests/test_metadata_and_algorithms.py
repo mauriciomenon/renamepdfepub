@@ -132,6 +132,23 @@ class TestMetadataExtraction:
         except Exception as e:
             pytest.fail(f"Erro ao testar padrões ISBN: {e}")
 
+    def test_pdf_metadata_cleanup_uses_filename_fallback(self):
+        """Ensure PDF extraction cleans garbled text and falls back to filename when needed"""
+        sys.path.insert(0, str(PROJECT_ROOT / "src"))
+        from renamepdfepub.metadata_extractor import extract_from_pdf
+
+        sample_path = PROJECT_ROOT / "books" / "Shannon Bradshaw et al - MongoDB The Definitive Guide (2019).pdf"
+        if not sample_path.exists():
+            pytest.skip("Sample book required for metadata cleanup test is missing")
+
+        metadata = extract_from_pdf(str(sample_path))
+
+        assert metadata['title'] == 'MongoDB The Definitive Guide'
+        assert metadata['authors'] == 'Shannon Bradshaw et al'
+        assert metadata['publisher'] == "O'Reilly Media"
+        assert metadata['isbn13'] == '9781491954461'
+        assert metadata['year'] == '2020'
+
 
 class TestSearchAlgorithms:
     """Testa algoritmos de busca"""

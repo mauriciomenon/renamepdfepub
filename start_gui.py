@@ -18,14 +18,10 @@ sys.path.insert(0, str(Path(__file__).parent / 'src'))
 def check_gui_dependencies():
     """Verifica se as dependencias da GUI estao disponíveis"""
     try:
-        import tkinter
-        return True, "tkinter available"
+        import PyQt6
+        return True, "PyQt6 available"
     except ImportError:
-        try:
-            import Tkinter  # Python 2 fallback
-            return True, "Tkinter available"
-        except ImportError:
-            return False, "tkinter nao disponivel - e um modulo built-in do Python"
+        return False, "PyQt6 nao disponivel - instale com: pip install PyQt6"
 
 def main():
     """Interface GUI principal"""
@@ -40,6 +36,8 @@ def main():
     parser.add_argument('--check-deps', action='store_true',
                        help='Verificar dependencias')
     
+    parser.add_argument('--dir', dest='initial_dir', help='Diretorio inicial para seleção de arquivos')
+
     args = parser.parse_args()
     
     if args.check_deps:
@@ -50,19 +48,24 @@ def main():
     # Verifica dependencias
     available, msg = check_gui_dependencies()
     if not available:
-        print("[ERROR] Interface grafica requer tkinter")
-        print("NOTA: tkinter e um modulo built-in do Python")
-        print("Se nao esta disponivel, verifique sua instalacao do Python")
-        print("Em sistemas Ubuntu/Debian: sudo apt-get install python3-tk")
-        print("Em sistemas macOS: tkinter deve estar incluído")
+        print("[ERROR] Interface grafica requer PyQt6")
+        print("NOTA: PyQt6 precisa ser instalado separadamente")
+        print("Execute: pip install PyQt6")
+        print("Ou: conda install pyqt")
         return
     
     try:
-        from src.gui.gui_modern import main as gui_main
-        gui_main()
+        from PyQt6.QtWidgets import QApplication
+        from src.gui.gui_RenameBook import FileRenamer
+        
+        app = QApplication(sys.argv)
+        window = FileRenamer(initial_directory=args.initial_dir)
+        window.show()
+        app.exec()
+        
     except ImportError as e:
         print(f"[ERROR] Erro ao importar interface grafica: {e}")
-        print("Verifique se o arquivo src/gui/gui_modern.py existe")
+        print("Verifique se PyQt6 esta instalado: pip install PyQt6")
     except Exception as e:
         print(f"[ERROR] Erro na interface grafica: {e}")
 

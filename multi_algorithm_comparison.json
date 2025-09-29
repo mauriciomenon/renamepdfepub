@@ -1,0 +1,1918 @@
+{
+  "test_info": {
+    "total_books": 25,
+    "timestamp": "2025-09-28 20:51:33",
+    "algorithms": [
+      "Basic Parser",
+      "Enhanced Parser",
+      "Smart Inferencer",
+      "Ultimate Extractor"
+    ]
+  },
+  "detailed_results": [
+    {
+      "filename": "Paul McFedries - Build a Website with ChatGPT (2024).epub",
+      "ground_truth": {
+        "title": "Build a Website with ChatGPT",
+        "author": "Paul McFedries",
+        "publisher": "",
+        "year": "2024"
+      },
+      "algorithm_results": [
+        {
+          "filename": "Paul McFedries - Build a Website with ChatGPT (2024).epub",
+          "algorithm_name": "Basic Parser",
+          "title": "Build a Website with ChatGPT",
+          "author": "Paul McFedries",
+          "publisher": "",
+          "year": "2024",
+          "confidence": 0.8500000000000001,
+          "execution_time": 7.390975952148438e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Paul McFedries - Build a Website with ChatGPT (2024).epub",
+          "algorithm_name": "Enhanced Parser",
+          "title": "Build a Website with ChatGPT",
+          "author": "Paul McFedries",
+          "publisher": "",
+          "year": "2024",
+          "confidence": 0.92,
+          "execution_time": 6.198883056640625e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Paul McFedries - Build a Website with ChatGPT (2024).epub",
+          "algorithm_name": "Smart Inferencer",
+          "title": "Build a Website with ChatGPT",
+          "author": "Paul McFedries",
+          "publisher": "",
+          "year": "2024",
+          "confidence": 0.9400000000000001,
+          "execution_time": 9.918212890625e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Paul McFedries - Build a Website with ChatGPT (2024).epub",
+          "algorithm_name": "Ultimate Extractor",
+          "title": "Build a Website with ChatGPT",
+          "author": "Paul McFedries",
+          "publisher": "",
+          "year": "2024",
+          "confidence": 0.9660000000000002,
+          "execution_time": 0.00024199485778808594,
+          "accuracy_score": 1.0
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Ultimate Extractor": 1.0
+      }
+    },
+    {
+      "filename": "Parth Girish Patel et al - Sustainable Cloud Development (2025).epub",
+      "ground_truth": {
+        "title": "Sustainable Cloud Development",
+        "author": "Parth Girish Patel et al",
+        "publisher": "",
+        "year": "2025"
+      },
+      "algorithm_results": [
+        {
+          "filename": "Parth Girish Patel et al - Sustainable Cloud Development (2025).epub",
+          "algorithm_name": "Basic Parser",
+          "title": "Sustainable Cloud Development",
+          "author": "Parth Girish Patel et al",
+          "publisher": "",
+          "year": "2025",
+          "confidence": 0.8500000000000001,
+          "execution_time": 6.127357482910156e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Parth Girish Patel et al - Sustainable Cloud Development (2025).epub",
+          "algorithm_name": "Enhanced Parser",
+          "title": "Sustainable Cloud Development",
+          "author": "Parth Girish Patel et al",
+          "publisher": "",
+          "year": "2025",
+          "confidence": 0.96,
+          "execution_time": 6.318092346191406e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Parth Girish Patel et al - Sustainable Cloud Development (2025).epub",
+          "algorithm_name": "Smart Inferencer",
+          "title": "Sustainable Cloud Development",
+          "author": "Parth Girish Patel et al",
+          "publisher": "",
+          "year": "2025",
+          "confidence": 0.98,
+          "execution_time": 0.00010323524475097656,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Parth Girish Patel et al - Sustainable Cloud Development (2025).epub",
+          "algorithm_name": "Ultimate Extractor",
+          "title": "Sustainable Cloud Development",
+          "author": "Parth Girish Patel et al",
+          "publisher": "",
+          "year": "2025",
+          "confidence": 0.998,
+          "execution_time": 0.0002617835998535156,
+          "accuracy_score": 1.0
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Ultimate Extractor": 1.0
+      }
+    },
+    {
+      "filename": "Rodrigo Turini - Java 9 (2017).epub",
+      "ground_truth": {
+        "title": "Java 9",
+        "author": "Rodrigo Turini",
+        "publisher": "",
+        "year": "2017"
+      },
+      "algorithm_results": [
+        {
+          "filename": "Rodrigo Turini - Java 9 (2017).epub",
+          "algorithm_name": "Basic Parser",
+          "title": "Java 9",
+          "author": "Rodrigo Turini",
+          "publisher": "",
+          "year": "2017",
+          "confidence": 0.8500000000000001,
+          "execution_time": 4.458427429199219e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Rodrigo Turini - Java 9 (2017).epub",
+          "algorithm_name": "Enhanced Parser",
+          "title": "Java 9",
+          "author": "Rodrigo Turini",
+          "publisher": "",
+          "year": "2017",
+          "confidence": 0.92,
+          "execution_time": 4.506111145019531e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Rodrigo Turini - Java 9 (2017).epub",
+          "algorithm_name": "Smart Inferencer",
+          "title": "Java 9",
+          "author": "Rodrigo Turini",
+          "publisher": "",
+          "year": "2017",
+          "confidence": 0.9400000000000001,
+          "execution_time": 7.295608520507812e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Rodrigo Turini - Java 9 (2017).epub",
+          "algorithm_name": "Ultimate Extractor",
+          "title": "Java 9",
+          "author": "Rodrigo Turini",
+          "publisher": "",
+          "year": "2017",
+          "confidence": 0.9660000000000002,
+          "execution_time": 0.00018835067749023438,
+          "accuracy_score": 1.0
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Ultimate Extractor": 1.0
+      }
+    },
+    {
+      "filename": "Micah Lee - Hacks, Leaks, and Revelations (2024).pdf",
+      "ground_truth": {
+        "title": "Hacks, Leaks, and Revelations",
+        "author": "Micah Lee",
+        "publisher": "",
+        "year": "2024"
+      },
+      "algorithm_results": [
+        {
+          "filename": "Micah Lee - Hacks, Leaks, and Revelations (2024).pdf",
+          "algorithm_name": "Basic Parser",
+          "title": "Hacks, Leaks, and Revelations",
+          "author": "Micah Lee",
+          "publisher": "",
+          "year": "2024",
+          "confidence": 0.8500000000000001,
+          "execution_time": 5.2928924560546875e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Micah Lee - Hacks, Leaks, and Revelations (2024).pdf",
+          "algorithm_name": "Enhanced Parser",
+          "title": "Hacks, Leaks, and Revelations",
+          "author": "Micah Lee",
+          "publisher": "",
+          "year": "2024",
+          "confidence": 0.9,
+          "execution_time": 5.412101745605469e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Micah Lee - Hacks, Leaks, and Revelations (2024).pdf",
+          "algorithm_name": "Smart Inferencer",
+          "title": "Hacks, Leaks, and Revelations",
+          "author": "Micah Lee",
+          "publisher": "",
+          "year": "2024",
+          "confidence": 0.92,
+          "execution_time": 8.797645568847656e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Micah Lee - Hacks, Leaks, and Revelations (2024).pdf",
+          "algorithm_name": "Ultimate Extractor",
+          "title": "Hacks, Leaks, and Revelations",
+          "author": "Micah Lee",
+          "publisher": "",
+          "year": "2024",
+          "confidence": 0.9500000000000002,
+          "execution_time": 0.00022673606872558594,
+          "accuracy_score": 1.0
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Ultimate Extractor": 1.0
+      }
+    },
+    {
+      "filename": "Mariot Tsitoara - Beginning Git and GitHub (2019).epub",
+      "ground_truth": {
+        "title": "Beginning Git and GitHub",
+        "author": "Mariot Tsitoara",
+        "publisher": "Apress",
+        "year": "2019"
+      },
+      "algorithm_results": [
+        {
+          "filename": "Mariot Tsitoara - Beginning Git and GitHub (2019).epub",
+          "algorithm_name": "Basic Parser",
+          "title": "Beginning Git and GitHub",
+          "author": "Mariot Tsitoara",
+          "publisher": "Apress",
+          "year": "2019",
+          "confidence": 1.0,
+          "execution_time": 5.3882598876953125e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Mariot Tsitoara - Beginning Git and GitHub (2019).epub",
+          "algorithm_name": "Enhanced Parser",
+          "title": "Beginning Git and GitHub",
+          "author": "Mariot Tsitoara",
+          "publisher": "Apress",
+          "year": "2019",
+          "confidence": 1.0,
+          "execution_time": 5.3882598876953125e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Mariot Tsitoara - Beginning Git and GitHub (2019).epub",
+          "algorithm_name": "Smart Inferencer",
+          "title": "Beginning Git and GitHub",
+          "author": "Mariot Tsitoara",
+          "publisher": "Apress",
+          "year": "2019",
+          "confidence": 1.0,
+          "execution_time": 8.869171142578125e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Mariot Tsitoara - Beginning Git and GitHub (2019).epub",
+          "algorithm_name": "Ultimate Extractor",
+          "title": "Beginning Git and GitHub",
+          "author": "Mariot Tsitoara",
+          "publisher": "Apress",
+          "year": "2019",
+          "confidence": 1.0,
+          "execution_time": 0.00023221969604492188,
+          "accuracy_score": 1.0
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Ultimate Extractor": 1.0
+      }
+    },
+    {
+      "filename": "Lyza Gardner - JavaScript on Things (2018).epub",
+      "ground_truth": {
+        "title": "JavaScript on Things",
+        "author": "Lyza Gardner",
+        "publisher": "",
+        "year": "2018"
+      },
+      "algorithm_results": [
+        {
+          "filename": "Lyza Gardner - JavaScript on Things (2018).epub",
+          "algorithm_name": "Basic Parser",
+          "title": "JavaScript on Things",
+          "author": "Lyza Gardner",
+          "publisher": "",
+          "year": "2018",
+          "confidence": 0.8500000000000001,
+          "execution_time": 5.0067901611328125e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Lyza Gardner - JavaScript on Things (2018).epub",
+          "algorithm_name": "Enhanced Parser",
+          "title": "JavaScript on Things",
+          "author": "Lyza Gardner",
+          "publisher": "",
+          "year": "2018",
+          "confidence": 0.9400000000000001,
+          "execution_time": 5.1021575927734375e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Lyza Gardner - JavaScript on Things (2018).epub",
+          "algorithm_name": "Smart Inferencer",
+          "title": "JavaScript on Things",
+          "author": "Lyza Gardner",
+          "publisher": "",
+          "year": "2018",
+          "confidence": 0.9600000000000001,
+          "execution_time": 8.392333984375e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Lyza Gardner - JavaScript on Things (2018).epub",
+          "algorithm_name": "Ultimate Extractor",
+          "title": "JavaScript on Things",
+          "author": "Lyza Gardner",
+          "publisher": "",
+          "year": "2018",
+          "confidence": 0.9820000000000002,
+          "execution_time": 0.00021314620971679688,
+          "accuracy_score": 1.0
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Ultimate Extractor": 1.0
+      }
+    },
+    {
+      "filename": "Jean-Philippe Aumasson - Serious Cryptography, 2nd Edition (2024).mobi",
+      "ground_truth": {
+        "title": "Serious Cryptography, 2nd Edition",
+        "author": "Jean-Philippe Aumasson",
+        "publisher": "",
+        "year": "2024"
+      },
+      "algorithm_results": [
+        {
+          "filename": "Jean-Philippe Aumasson - Serious Cryptography, 2nd Edition (2024).mobi",
+          "algorithm_name": "Basic Parser",
+          "title": "Serious Cryptography, 2nd Edition",
+          "author": "Jean-Philippe Aumasson",
+          "publisher": "",
+          "year": "2024",
+          "confidence": 0.8500000000000001,
+          "execution_time": 6.29425048828125e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Jean-Philippe Aumasson - Serious Cryptography, 2nd Edition (2024).mobi",
+          "algorithm_name": "Enhanced Parser",
+          "title": "Serious Cryptography, 2nd Edition",
+          "author": "Jean-Philippe Aumasson",
+          "publisher": "",
+          "year": "2024",
+          "confidence": 0.9,
+          "execution_time": 6.198883056640625e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Jean-Philippe Aumasson - Serious Cryptography, 2nd Edition (2024).mobi",
+          "algorithm_name": "Smart Inferencer",
+          "title": "Serious Cryptography, 2nd Edition",
+          "author": "Jean-Philippe Aumasson",
+          "publisher": "",
+          "year": "2024",
+          "confidence": 0.92,
+          "execution_time": 0.00010395050048828125,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Jean-Philippe Aumasson - Serious Cryptography, 2nd Edition (2024).mobi",
+          "algorithm_name": "Ultimate Extractor",
+          "title": "Serious Cryptography, 2nd Edition",
+          "author": "Jean-Philippe Aumasson",
+          "publisher": "",
+          "year": "2024",
+          "confidence": 0.9500000000000002,
+          "execution_time": 0.0002639293670654297,
+          "accuracy_score": 1.0
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Ultimate Extractor": 1.0
+      }
+    },
+    {
+      "filename": "Safari, an O'Reilly Media Company - Training Data for Machine Learning Models (2022).epub",
+      "ground_truth": {
+        "title": "Safari, an O Reilly Media Company - Training Data for Machine Learning Models",
+        "author": "",
+        "publisher": "Packt",
+        "year": "2022"
+      },
+      "algorithm_results": [
+        {
+          "filename": "Safari, an O'Reilly Media Company - Training Data for Machine Learning Models (2022).epub",
+          "algorithm_name": "Basic Parser",
+          "title": "Safari, an O Reilly Media Company - Training Data for Machine Learning Models",
+          "author": "",
+          "publisher": "Packt",
+          "year": "2022",
+          "confidence": 0.7000000000000001,
+          "execution_time": 6.794929504394531e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Safari, an O'Reilly Media Company - Training Data for Machine Learning Models (2022).epub",
+          "algorithm_name": "Enhanced Parser",
+          "title": "Safari, an O Reilly Media Company - Training Data for Machine Learning Models",
+          "author": "",
+          "publisher": "Packt",
+          "year": "2022",
+          "confidence": 0.79,
+          "execution_time": 6.914138793945312e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Safari, an O'Reilly Media Company - Training Data for Machine Learning Models (2022).epub",
+          "algorithm_name": "Smart Inferencer",
+          "title": "Safari, an O Reilly Media Company - Training Data for Machine Learning Models",
+          "author": "",
+          "publisher": "Packt",
+          "year": "2022",
+          "confidence": 0.81,
+          "execution_time": 0.00011301040649414062,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Safari, an O'Reilly Media Company - Training Data for Machine Learning Models (2022).epub",
+          "algorithm_name": "Ultimate Extractor",
+          "title": "Safari, an O Reilly Media Company - Training Data for Machine Learning Models",
+          "author": "",
+          "publisher": "Packt",
+          "year": "2022",
+          "confidence": 0.8320000000000001,
+          "execution_time": 0.0002892017364501953,
+          "accuracy_score": 1.0
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Ultimate Extractor": 1.0
+      }
+    },
+    {
+      "filename": "Malcolm McDonald - Grokking Web Application Security (2024).epub",
+      "ground_truth": {
+        "title": "Grokking Web Application Security",
+        "author": "Malcolm McDonald",
+        "publisher": "",
+        "year": "2024"
+      },
+      "algorithm_results": [
+        {
+          "filename": "Malcolm McDonald - Grokking Web Application Security (2024).epub",
+          "algorithm_name": "Basic Parser",
+          "title": "Grokking Web Application Security",
+          "author": "Malcolm McDonald",
+          "publisher": "",
+          "year": "2024",
+          "confidence": 0.8500000000000001,
+          "execution_time": 5.7697296142578125e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Malcolm McDonald - Grokking Web Application Security (2024).epub",
+          "algorithm_name": "Enhanced Parser",
+          "title": "Grokking Web Application Security",
+          "author": "Malcolm McDonald",
+          "publisher": "",
+          "year": "2024",
+          "confidence": 0.9400000000000001,
+          "execution_time": 5.91278076171875e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Malcolm McDonald - Grokking Web Application Security (2024).epub",
+          "algorithm_name": "Smart Inferencer",
+          "title": "Grokking Web Application Security",
+          "author": "Malcolm McDonald",
+          "publisher": "NoStarch",
+          "year": "2024",
+          "confidence": 1.0,
+          "execution_time": 9.799003601074219e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Malcolm McDonald - Grokking Web Application Security (2024).epub",
+          "algorithm_name": "Ultimate Extractor",
+          "title": "Grokking Web Application Security",
+          "author": "Malcolm McDonald",
+          "publisher": "NoStarch",
+          "year": "2024",
+          "confidence": 1.0,
+          "execution_time": 0.00025010108947753906,
+          "accuracy_score": 1.0
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Ultimate Extractor": 1.0
+      }
+    },
+    {
+      "filename": "Matt Hand - Evading EDR (2023).pdf",
+      "ground_truth": {
+        "title": "Evading EDR",
+        "author": "Matt Hand",
+        "publisher": "",
+        "year": "2023"
+      },
+      "algorithm_results": [
+        {
+          "filename": "Matt Hand - Evading EDR (2023).pdf",
+          "algorithm_name": "Basic Parser",
+          "title": "Evading EDR",
+          "author": "Matt Hand",
+          "publisher": "",
+          "year": "2023",
+          "confidence": 0.8500000000000001,
+          "execution_time": 4.291534423828125e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Matt Hand - Evading EDR (2023).pdf",
+          "algorithm_name": "Enhanced Parser",
+          "title": "Evading EDR",
+          "author": "Matt Hand",
+          "publisher": "",
+          "year": "2023",
+          "confidence": 0.9,
+          "execution_time": 4.482269287109375e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Matt Hand - Evading EDR (2023).pdf",
+          "algorithm_name": "Smart Inferencer",
+          "title": "Evading EDR",
+          "author": "Matt Hand",
+          "publisher": "",
+          "year": "2023",
+          "confidence": 0.92,
+          "execution_time": 7.319450378417969e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Matt Hand - Evading EDR (2023).pdf",
+          "algorithm_name": "Ultimate Extractor",
+          "title": "Evading EDR",
+          "author": "Matt Hand",
+          "publisher": "",
+          "year": "2023",
+          "confidence": 0.9500000000000002,
+          "execution_time": 0.00018715858459472656,
+          "accuracy_score": 1.0
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Ultimate Extractor": 1.0
+      }
+    },
+    {
+      "filename": "Modern_C_Third_Edition.pdf",
+      "ground_truth": {
+        "title": "Modern_C_Third_Edition",
+        "author": "",
+        "publisher": "",
+        "year": ""
+      },
+      "algorithm_results": [
+        {
+          "filename": "Modern_C_Third_Edition.pdf",
+          "algorithm_name": "Basic Parser",
+          "title": "Modern_C_Third_Edition",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "confidence": 0.5,
+          "execution_time": 3.2901763916015625e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Modern_C_Third_Edition.pdf",
+          "algorithm_name": "Enhanced Parser",
+          "title": "Modern_C_Third_Edition",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "confidence": 0.5,
+          "execution_time": 3.409385681152344e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Modern_C_Third_Edition.pdf",
+          "algorithm_name": "Smart Inferencer",
+          "title": "Modern_C_Third_Edition",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "confidence": 0.5,
+          "execution_time": 5.5789947509765625e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Modern_C_Third_Edition.pdf",
+          "algorithm_name": "Ultimate Extractor",
+          "title": "Modern_C_Third_Edition",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "confidence": 0.55,
+          "execution_time": 0.00014209747314453125,
+          "accuracy_score": 1.0
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Ultimate Extractor": 1.0
+      }
+    },
+    {
+      "filename": "Handbook of Modern Sensors.pdf",
+      "ground_truth": {
+        "title": "Handbook of Modern Sensors",
+        "author": "",
+        "publisher": "",
+        "year": ""
+      },
+      "algorithm_results": [
+        {
+          "filename": "Handbook of Modern Sensors.pdf",
+          "algorithm_name": "Basic Parser",
+          "title": "Handbook of Modern Sensors",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "confidence": 0.5,
+          "execution_time": 3.695487976074219e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Handbook of Modern Sensors.pdf",
+          "algorithm_name": "Enhanced Parser",
+          "title": "Handbook of Modern Sensors",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "confidence": 0.5,
+          "execution_time": 3.695487976074219e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Handbook of Modern Sensors.pdf",
+          "algorithm_name": "Smart Inferencer",
+          "title": "Handbook of Modern Sensors",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "confidence": 0.5,
+          "execution_time": 6.008148193359375e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Handbook of Modern Sensors.pdf",
+          "algorithm_name": "Ultimate Extractor",
+          "title": "Handbook of Modern Sensors",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "confidence": 0.55,
+          "execution_time": 0.00015282630920410156,
+          "accuracy_score": 1.0
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Ultimate Extractor": 1.0
+      }
+    },
+    {
+      "filename": "Fotios Chantzis et al - Practical IoT Hacking (2021).mobi",
+      "ground_truth": {
+        "title": "Practical IoT Hacking",
+        "author": "Fotios Chantzis et al",
+        "publisher": "",
+        "year": "2021"
+      },
+      "algorithm_results": [
+        {
+          "filename": "Fotios Chantzis et al - Practical IoT Hacking (2021).mobi",
+          "algorithm_name": "Basic Parser",
+          "title": "Practical IoT Hacking",
+          "author": "Fotios Chantzis et al",
+          "publisher": "",
+          "year": "2021",
+          "confidence": 0.8500000000000001,
+          "execution_time": 5.626678466796875e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Fotios Chantzis et al - Practical IoT Hacking (2021).mobi",
+          "algorithm_name": "Enhanced Parser",
+          "title": "Practical IoT Hacking",
+          "author": "Fotios Chantzis et al",
+          "publisher": "",
+          "year": "2021",
+          "confidence": 0.92,
+          "execution_time": 5.602836608886719e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Fotios Chantzis et al - Practical IoT Hacking (2021).mobi",
+          "algorithm_name": "Smart Inferencer",
+          "title": "Practical IoT Hacking",
+          "author": "Fotios Chantzis et al",
+          "publisher": "NoStarch",
+          "year": "2021",
+          "confidence": 0.9900000000000001,
+          "execution_time": 9.298324584960938e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Fotios Chantzis et al - Practical IoT Hacking (2021).mobi",
+          "algorithm_name": "Ultimate Extractor",
+          "title": "Practical IoT Hacking",
+          "author": "Fotios Chantzis et al",
+          "publisher": "NoStarch",
+          "year": "2021",
+          "confidence": 0.9910000000000001,
+          "execution_time": 0.00023508071899414062,
+          "accuracy_score": 1.0
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Ultimate Extractor": 1.0
+      }
+    },
+    {
+      "filename": "kafka-connect-e-kafka-streams-integre-suas-aplicacoes-ao-kafka-usando-as-melhores-praticas.pdf",
+      "ground_truth": {
+        "title": "kafka-connect-e-kafka-streams-integre-suas-aplicacoes-ao-kafka-usando-as-melhores-praticas",
+        "author": "",
+        "publisher": "",
+        "year": ""
+      },
+      "algorithm_results": [
+        {
+          "filename": "kafka-connect-e-kafka-streams-integre-suas-aplicacoes-ao-kafka-usando-as-melhores-praticas.pdf",
+          "algorithm_name": "Basic Parser",
+          "title": "kafka-connect-e-kafka-streams-integre-suas-aplicacoes-ao-kafka-usando-as-melhores-praticas",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "confidence": 0.5,
+          "execution_time": 6.628036499023438e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "kafka-connect-e-kafka-streams-integre-suas-aplicacoes-ao-kafka-usando-as-melhores-praticas.pdf",
+          "algorithm_name": "Enhanced Parser",
+          "title": "kafka-connect-e-kafka-streams-integre-suas-aplicacoes-ao-kafka-usando-as-melhores-praticas",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "confidence": 0.5,
+          "execution_time": 6.794929504394531e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "kafka-connect-e-kafka-streams-integre-suas-aplicacoes-ao-kafka-usando-as-melhores-praticas.pdf",
+          "algorithm_name": "Smart Inferencer",
+          "title": "kafka-connect-e-kafka-streams-integre-suas-aplicacoes-ao-kafka-usando-as-melhores-praticas",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "confidence": 0.5,
+          "execution_time": 0.00011086463928222656,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "kafka-connect-e-kafka-streams-integre-suas-aplicacoes-ao-kafka-usando-as-melhores-praticas.pdf",
+          "algorithm_name": "Ultimate Extractor",
+          "title": "kafka-connect-e-kafka-streams-integre-suas-aplicacoes-ao-kafka-usando-as-melhores-praticas",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "confidence": 0.55,
+          "execution_time": 0.0002827644348144531,
+          "accuracy_score": 1.0
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Ultimate Extractor": 1.0
+      }
+    },
+    {
+      "filename": "evasivemalware.pdf",
+      "ground_truth": {
+        "title": "evasivemalware",
+        "author": "",
+        "publisher": "",
+        "year": ""
+      },
+      "algorithm_results": [
+        {
+          "filename": "evasivemalware.pdf",
+          "algorithm_name": "Basic Parser",
+          "title": "evasivemalware",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "confidence": 0.5,
+          "execution_time": 2.8848648071289062e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "evasivemalware.pdf",
+          "algorithm_name": "Enhanced Parser",
+          "title": "evasivemalware",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "confidence": 0.5,
+          "execution_time": 2.9325485229492188e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "evasivemalware.pdf",
+          "algorithm_name": "Smart Inferencer",
+          "title": "evasivemalware",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "confidence": 0.5,
+          "execution_time": 4.792213439941406e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "evasivemalware.pdf",
+          "algorithm_name": "Ultimate Extractor",
+          "title": "evasivemalware",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "confidence": 0.55,
+          "execution_time": 0.0001227855682373047,
+          "accuracy_score": 1.0
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Ultimate Extractor": 1.0
+      }
+    },
+    {
+      "filename": "AI_Agents_and_Applications_v7_MEAP.epub",
+      "ground_truth": {
+        "title": "AI_Agents_and_Applications_v7_MEAP",
+        "author": "",
+        "publisher": "Manning",
+        "year": ""
+      },
+      "algorithm_results": [
+        {
+          "filename": "AI_Agents_and_Applications_v7_MEAP.epub",
+          "algorithm_name": "Basic Parser",
+          "title": "AI_Agents_and_Applications_v7_MEAP",
+          "author": "",
+          "publisher": "Manning",
+          "year": "",
+          "confidence": 0.65,
+          "execution_time": 3.2901763916015625e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "AI_Agents_and_Applications_v7_MEAP.epub",
+          "algorithm_name": "Enhanced Parser",
+          "title": "AI_Agents_and_Applications_v7_MEAP",
+          "author": "",
+          "publisher": "Manning",
+          "year": "",
+          "confidence": 0.67,
+          "execution_time": 3.504753112792969e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "AI_Agents_and_Applications_v7_MEAP.epub",
+          "algorithm_name": "Smart Inferencer",
+          "title": "AI_Agents_and_Applications_v7_MEAP",
+          "author": "",
+          "publisher": "Manning",
+          "year": "",
+          "confidence": 0.67,
+          "execution_time": 5.6743621826171875e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "AI_Agents_and_Applications_v7_MEAP.epub",
+          "algorithm_name": "Ultimate Extractor",
+          "title": "AI_Agents_and_Applications_v7_MEAP",
+          "author": "",
+          "publisher": "Manning",
+          "year": "",
+          "confidence": 0.7160000000000001,
+          "execution_time": 0.00014710426330566406,
+          "accuracy_score": 1.0
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Ultimate Extractor": 1.0
+      }
+    },
+    {
+      "filename": "efficientmysqlperformance.epub",
+      "ground_truth": {
+        "title": "efficientmysqlperformance",
+        "author": "",
+        "publisher": "",
+        "year": ""
+      },
+      "algorithm_results": [
+        {
+          "filename": "efficientmysqlperformance.epub",
+          "algorithm_name": "Basic Parser",
+          "title": "efficientmysqlperformance",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "confidence": 0.5,
+          "execution_time": 3.409385681152344e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "efficientmysqlperformance.epub",
+          "algorithm_name": "Enhanced Parser",
+          "title": "efficientmysqlperformance",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "confidence": 0.52,
+          "execution_time": 3.504753112792969e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "efficientmysqlperformance.epub",
+          "algorithm_name": "Smart Inferencer",
+          "title": "efficientmysqlperformance",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "confidence": 0.52,
+          "execution_time": 5.6743621826171875e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "efficientmysqlperformance.epub",
+          "algorithm_name": "Ultimate Extractor",
+          "title": "efficientmysqlperformance",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "confidence": 0.5660000000000001,
+          "execution_time": 0.00014519691467285156,
+          "accuracy_score": 1.0
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Ultimate Extractor": 1.0
+      }
+    },
+    {
+      "filename": "Vamsee Puligadda - 500 Machine Learning (ML) Interview Questions and Answers.epub",
+      "ground_truth": {
+        "title": "500 Machine Learning (ML) Interview Questions and Answers",
+        "author": "Vamsee Puligadda",
+        "publisher": "Packt",
+        "year": ""
+      },
+      "algorithm_results": [
+        {
+          "filename": "Vamsee Puligadda - 500 Machine Learning (ML) Interview Questions and Answers.epub",
+          "algorithm_name": "Basic Parser",
+          "title": "500 Machine Learning (ML) Interview Questions and Answers",
+          "author": "Vamsee Puligadda",
+          "publisher": "Packt",
+          "year": "",
+          "confidence": 0.9500000000000001,
+          "execution_time": 5.888938903808594e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Vamsee Puligadda - 500 Machine Learning (ML) Interview Questions and Answers.epub",
+          "algorithm_name": "Enhanced Parser",
+          "title": "500 Machine Learning (ML) Interview Questions and Answers",
+          "author": "Vamsee Puligadda",
+          "publisher": "Packt",
+          "year": "",
+          "confidence": 0.9700000000000001,
+          "execution_time": 6.079673767089844e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Vamsee Puligadda - 500 Machine Learning (ML) Interview Questions and Answers.epub",
+          "algorithm_name": "Smart Inferencer",
+          "title": "500 Machine Learning (ML) Interview Questions and Answers",
+          "author": "Vamsee Puligadda",
+          "publisher": "Packt",
+          "year": "",
+          "confidence": 0.9700000000000001,
+          "execution_time": 0.0001010894775390625,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Vamsee Puligadda - 500 Machine Learning (ML) Interview Questions and Answers.epub",
+          "algorithm_name": "Ultimate Extractor",
+          "title": "500 Machine Learning (ML) Interview Questions and Answers",
+          "author": "Vamsee Puligadda",
+          "publisher": "Packt",
+          "year": "",
+          "confidence": 1.0,
+          "execution_time": 0.00025916099548339844,
+          "accuracy_score": 1.0
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Ultimate Extractor": 1.0
+      }
+    },
+    {
+      "filename": "Douglas Crockford - How JavaScript Works (2018).epub",
+      "ground_truth": {
+        "title": "How JavaScript Works",
+        "author": "Douglas Crockford",
+        "publisher": "",
+        "year": "2018"
+      },
+      "algorithm_results": [
+        {
+          "filename": "Douglas Crockford - How JavaScript Works (2018).epub",
+          "algorithm_name": "Basic Parser",
+          "title": "How JavaScript Works",
+          "author": "Douglas Crockford",
+          "publisher": "",
+          "year": "2018",
+          "confidence": 0.8500000000000001,
+          "execution_time": 5.1975250244140625e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Douglas Crockford - How JavaScript Works (2018).epub",
+          "algorithm_name": "Enhanced Parser",
+          "title": "How JavaScript Works",
+          "author": "Douglas Crockford",
+          "publisher": "",
+          "year": "2018",
+          "confidence": 0.9400000000000001,
+          "execution_time": 5.2928924560546875e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Douglas Crockford - How JavaScript Works (2018).epub",
+          "algorithm_name": "Smart Inferencer",
+          "title": "How JavaScript Works",
+          "author": "Douglas Crockford",
+          "publisher": "",
+          "year": "2018",
+          "confidence": 0.9600000000000001,
+          "execution_time": 8.797645568847656e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Douglas Crockford - How JavaScript Works (2018).epub",
+          "algorithm_name": "Ultimate Extractor",
+          "title": "How JavaScript Works",
+          "author": "Douglas Crockford",
+          "publisher": "",
+          "year": "2018",
+          "confidence": 0.9820000000000002,
+          "execution_time": 0.00022292137145996094,
+          "accuracy_score": 1.0
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Ultimate Extractor": 1.0
+      }
+    },
+    {
+      "filename": "resilientoracleplandsql.epub",
+      "ground_truth": {
+        "title": "resilientoracleplandsql",
+        "author": "",
+        "publisher": "",
+        "year": ""
+      },
+      "algorithm_results": [
+        {
+          "filename": "resilientoracleplandsql.epub",
+          "algorithm_name": "Basic Parser",
+          "title": "resilientoracleplandsql",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "confidence": 0.5,
+          "execution_time": 3.2901763916015625e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "resilientoracleplandsql.epub",
+          "algorithm_name": "Enhanced Parser",
+          "title": "resilientoracleplandsql",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "confidence": 0.52,
+          "execution_time": 3.409385681152344e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "resilientoracleplandsql.epub",
+          "algorithm_name": "Smart Inferencer",
+          "title": "resilientoracleplandsql",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "confidence": 0.52,
+          "execution_time": 5.507469177246094e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "resilientoracleplandsql.epub",
+          "algorithm_name": "Ultimate Extractor",
+          "title": "resilientoracleplandsql",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "confidence": 0.5660000000000001,
+          "execution_time": 0.00014090538024902344,
+          "accuracy_score": 1.0
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Ultimate Extractor": 1.0
+      }
+    },
+    {
+      "filename": "Python_Workout.pdf",
+      "ground_truth": {
+        "title": "Python_Workout",
+        "author": "",
+        "publisher": "",
+        "year": ""
+      },
+      "algorithm_results": [
+        {
+          "filename": "Python_Workout.pdf",
+          "algorithm_name": "Basic Parser",
+          "title": "Python_Workout",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "confidence": 0.5,
+          "execution_time": 2.8848648071289062e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Python_Workout.pdf",
+          "algorithm_name": "Enhanced Parser",
+          "title": "Python_Workout",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "confidence": 0.52,
+          "execution_time": 2.9325485229492188e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Python_Workout.pdf",
+          "algorithm_name": "Smart Inferencer",
+          "title": "Python_Workout",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "confidence": 0.52,
+          "execution_time": 4.792213439941406e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Python_Workout.pdf",
+          "algorithm_name": "Ultimate Extractor",
+          "title": "Python_Workout",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "confidence": 0.5660000000000001,
+          "execution_time": 0.0001239776611328125,
+          "accuracy_score": 1.0
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Ultimate Extractor": 1.0
+      }
+    },
+    {
+      "filename": "Ajay Mahajan et al - Cloud-Native Applications in Java (2018).pdf",
+      "ground_truth": {
+        "title": "Cloud-Native Applications in Java",
+        "author": "Ajay Mahajan et al",
+        "publisher": "",
+        "year": "2018"
+      },
+      "algorithm_results": [
+        {
+          "filename": "Ajay Mahajan et al - Cloud-Native Applications in Java (2018).pdf",
+          "algorithm_name": "Basic Parser",
+          "title": "Cloud-Native Applications in Java",
+          "author": "Ajay Mahajan et al",
+          "publisher": "",
+          "year": "2018",
+          "confidence": 0.8500000000000001,
+          "execution_time": 5.984306335449219e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Ajay Mahajan et al - Cloud-Native Applications in Java (2018).pdf",
+          "algorithm_name": "Enhanced Parser",
+          "title": "Cloud-Native Applications in Java",
+          "author": "Ajay Mahajan et al",
+          "publisher": "",
+          "year": "2018",
+          "confidence": 0.9400000000000001,
+          "execution_time": 6.127357482910156e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Ajay Mahajan et al - Cloud-Native Applications in Java (2018).pdf",
+          "algorithm_name": "Smart Inferencer",
+          "title": "Cloud-Native Applications in Java",
+          "author": "Ajay Mahajan et al",
+          "publisher": "",
+          "year": "2018",
+          "confidence": 0.9600000000000001,
+          "execution_time": 0.00010085105895996094,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Ajay Mahajan et al - Cloud-Native Applications in Java (2018).pdf",
+          "algorithm_name": "Ultimate Extractor",
+          "title": "Cloud-Native Applications in Java",
+          "author": "Ajay Mahajan et al",
+          "publisher": "",
+          "year": "2018",
+          "confidence": 0.9820000000000002,
+          "execution_time": 0.0002548694610595703,
+          "accuracy_score": 1.0
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Ultimate Extractor": 1.0
+      }
+    },
+    {
+      "filename": "hacksleaksandrevelations.pdf",
+      "ground_truth": {
+        "title": "hacksleaksandrevelations",
+        "author": "",
+        "publisher": "",
+        "year": ""
+      },
+      "algorithm_results": [
+        {
+          "filename": "hacksleaksandrevelations.pdf",
+          "algorithm_name": "Basic Parser",
+          "title": "hacksleaksandrevelations",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "confidence": 0.5,
+          "execution_time": 3.2901763916015625e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "hacksleaksandrevelations.pdf",
+          "algorithm_name": "Enhanced Parser",
+          "title": "hacksleaksandrevelations",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "confidence": 0.5,
+          "execution_time": 3.409385681152344e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "hacksleaksandrevelations.pdf",
+          "algorithm_name": "Smart Inferencer",
+          "title": "hacksleaksandrevelations",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "confidence": 0.5,
+          "execution_time": 5.602836608886719e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "hacksleaksandrevelations.pdf",
+          "algorithm_name": "Ultimate Extractor",
+          "title": "hacksleaksandrevelations",
+          "author": "",
+          "publisher": "",
+          "year": "",
+          "confidence": 0.55,
+          "execution_time": 0.00014281272888183594,
+          "accuracy_score": 1.0
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Ultimate Extractor": 1.0
+      }
+    },
+    {
+      "filename": "Michal Zalewski - The Tangled Web (2011).pdf",
+      "ground_truth": {
+        "title": "The Tangled Web",
+        "author": "Michal Zalewski",
+        "publisher": "",
+        "year": "2011"
+      },
+      "algorithm_results": [
+        {
+          "filename": "Michal Zalewski - The Tangled Web (2011).pdf",
+          "algorithm_name": "Basic Parser",
+          "title": "The Tangled Web",
+          "author": "Michal Zalewski",
+          "publisher": "",
+          "year": "2011",
+          "confidence": 0.8500000000000001,
+          "execution_time": 4.887580871582031e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Michal Zalewski - The Tangled Web (2011).pdf",
+          "algorithm_name": "Enhanced Parser",
+          "title": "The Tangled Web",
+          "author": "Michal Zalewski",
+          "publisher": "",
+          "year": "2011",
+          "confidence": 0.92,
+          "execution_time": 4.887580871582031e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Michal Zalewski - The Tangled Web (2011).pdf",
+          "algorithm_name": "Smart Inferencer",
+          "title": "The Tangled Web",
+          "author": "Michal Zalewski",
+          "publisher": "",
+          "year": "2011",
+          "confidence": 0.9400000000000001,
+          "execution_time": 8.177757263183594e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Michal Zalewski - The Tangled Web (2011).pdf",
+          "algorithm_name": "Ultimate Extractor",
+          "title": "The Tangled Web",
+          "author": "Michal Zalewski",
+          "publisher": "",
+          "year": "2011",
+          "confidence": 0.9660000000000002,
+          "execution_time": 0.00020813941955566406,
+          "accuracy_score": 1.0
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Ultimate Extractor": 1.0
+      }
+    },
+    {
+      "filename": "Alan Beaulieu - Learning SQL (2009).pdf",
+      "ground_truth": {
+        "title": "Learning SQL",
+        "author": "Alan Beaulieu",
+        "publisher": "Packt",
+        "year": "2009"
+      },
+      "algorithm_results": [
+        {
+          "filename": "Alan Beaulieu - Learning SQL (2009).pdf",
+          "algorithm_name": "Basic Parser",
+          "title": "Learning SQL",
+          "author": "Alan Beaulieu",
+          "publisher": "Packt",
+          "year": "2009",
+          "confidence": 1.0,
+          "execution_time": 4.1961669921875e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Alan Beaulieu - Learning SQL (2009).pdf",
+          "algorithm_name": "Enhanced Parser",
+          "title": "Learning SQL",
+          "author": "Alan Beaulieu",
+          "publisher": "Packt",
+          "year": "2009",
+          "confidence": 1.0,
+          "execution_time": 4.315376281738281e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Alan Beaulieu - Learning SQL (2009).pdf",
+          "algorithm_name": "Smart Inferencer",
+          "title": "Learning SQL",
+          "author": "Alan Beaulieu",
+          "publisher": "Packt",
+          "year": "2009",
+          "confidence": 1.0,
+          "execution_time": 6.914138793945312e-05,
+          "accuracy_score": 1.0
+        },
+        {
+          "filename": "Alan Beaulieu - Learning SQL (2009).pdf",
+          "algorithm_name": "Ultimate Extractor",
+          "title": "Learning SQL",
+          "author": "Alan Beaulieu",
+          "publisher": "Packt",
+          "year": "2009",
+          "confidence": 1.0,
+          "execution_time": 0.0001800060272216797,
+          "accuracy_score": 1.0
+        }
+      ],
+      "best_algorithm": "Basic Parser",
+      "accuracies": {
+        "Basic Parser": 1.0,
+        "Enhanced Parser": 1.0,
+        "Smart Inferencer": 1.0,
+        "Ultimate Extractor": 1.0
+      }
+    }
+  ],
+  "algorithm_summary": {
+    "Basic Parser": {
+      "accuracies": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "confidences": [
+        0.8500000000000001,
+        0.8500000000000001,
+        0.8500000000000001,
+        0.8500000000000001,
+        1.0,
+        0.8500000000000001,
+        0.8500000000000001,
+        0.7000000000000001,
+        0.8500000000000001,
+        0.8500000000000001,
+        0.5,
+        0.5,
+        0.8500000000000001,
+        0.5,
+        0.5,
+        0.65,
+        0.5,
+        0.9500000000000001,
+        0.8500000000000001,
+        0.5,
+        0.5,
+        0.8500000000000001,
+        0.5,
+        0.8500000000000001,
+        1.0
+      ],
+      "times": [
+        7.390975952148438e-05,
+        6.127357482910156e-05,
+        4.458427429199219e-05,
+        5.2928924560546875e-05,
+        5.3882598876953125e-05,
+        5.0067901611328125e-05,
+        6.29425048828125e-05,
+        6.794929504394531e-05,
+        5.7697296142578125e-05,
+        4.291534423828125e-05,
+        3.2901763916015625e-05,
+        3.695487976074219e-05,
+        5.626678466796875e-05,
+        6.628036499023438e-05,
+        2.8848648071289062e-05,
+        3.2901763916015625e-05,
+        3.409385681152344e-05,
+        5.888938903808594e-05,
+        5.1975250244140625e-05,
+        3.2901763916015625e-05,
+        2.8848648071289062e-05,
+        5.984306335449219e-05,
+        3.2901763916015625e-05,
+        4.887580871582031e-05,
+        4.1961669921875e-05
+      ],
+      "success_count": 25,
+      "avg_accuracy": 1.0,
+      "avg_confidence": 0.74,
+      "avg_time": 4.8503875732421874e-05,
+      "success_rate": 1.0
+    },
+    "Enhanced Parser": {
+      "accuracies": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "confidences": [
+        0.92,
+        0.96,
+        0.92,
+        0.9,
+        1.0,
+        0.9400000000000001,
+        0.9,
+        0.79,
+        0.9400000000000001,
+        0.9,
+        0.5,
+        0.5,
+        0.92,
+        0.5,
+        0.5,
+        0.67,
+        0.52,
+        0.9700000000000001,
+        0.9400000000000001,
+        0.52,
+        0.52,
+        0.9400000000000001,
+        0.5,
+        0.92,
+        1.0
+      ],
+      "times": [
+        6.198883056640625e-05,
+        6.318092346191406e-05,
+        4.506111145019531e-05,
+        5.412101745605469e-05,
+        5.3882598876953125e-05,
+        5.1021575927734375e-05,
+        6.198883056640625e-05,
+        6.914138793945312e-05,
+        5.91278076171875e-05,
+        4.482269287109375e-05,
+        3.409385681152344e-05,
+        3.695487976074219e-05,
+        5.602836608886719e-05,
+        6.794929504394531e-05,
+        2.9325485229492188e-05,
+        3.504753112792969e-05,
+        3.504753112792969e-05,
+        6.079673767089844e-05,
+        5.2928924560546875e-05,
+        3.409385681152344e-05,
+        2.9325485229492188e-05,
+        6.127357482910156e-05,
+        3.409385681152344e-05,
+        4.887580871582031e-05,
+        4.315376281738281e-05
+      ],
+      "success_count": 25,
+      "avg_accuracy": 1.0,
+      "avg_confidence": 0.7836,
+      "avg_time": 4.893302917480469e-05,
+      "success_rate": 1.0
+    },
+    "Smart Inferencer": {
+      "accuracies": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "confidences": [
+        0.9400000000000001,
+        0.98,
+        0.9400000000000001,
+        0.92,
+        1.0,
+        0.9600000000000001,
+        0.92,
+        0.81,
+        1.0,
+        0.92,
+        0.5,
+        0.5,
+        0.9900000000000001,
+        0.5,
+        0.5,
+        0.67,
+        0.52,
+        0.9700000000000001,
+        0.9600000000000001,
+        0.52,
+        0.52,
+        0.9600000000000001,
+        0.5,
+        0.9400000000000001,
+        1.0
+      ],
+      "times": [
+        9.918212890625e-05,
+        0.00010323524475097656,
+        7.295608520507812e-05,
+        8.797645568847656e-05,
+        8.869171142578125e-05,
+        8.392333984375e-05,
+        0.00010395050048828125,
+        0.00011301040649414062,
+        9.799003601074219e-05,
+        7.319450378417969e-05,
+        5.5789947509765625e-05,
+        6.008148193359375e-05,
+        9.298324584960938e-05,
+        0.00011086463928222656,
+        4.792213439941406e-05,
+        5.6743621826171875e-05,
+        5.6743621826171875e-05,
+        0.0001010894775390625,
+        8.797645568847656e-05,
+        5.507469177246094e-05,
+        4.792213439941406e-05,
+        0.00010085105895996094,
+        5.602836608886719e-05,
+        8.177757263183594e-05,
+        6.914138793945312e-05
+      ],
+      "success_count": 25,
+      "avg_accuracy": 1.0,
+      "avg_confidence": 0.7976000000000001,
+      "avg_time": 8.020401000976562e-05,
+      "success_rate": 1.0
+    },
+    "Ultimate Extractor": {
+      "accuracies": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "confidences": [
+        0.9660000000000002,
+        0.998,
+        0.9660000000000002,
+        0.9500000000000002,
+        1.0,
+        0.9820000000000002,
+        0.9500000000000002,
+        0.8320000000000001,
+        1.0,
+        0.9500000000000002,
+        0.55,
+        0.55,
+        0.9910000000000001,
+        0.55,
+        0.55,
+        0.7160000000000001,
+        0.5660000000000001,
+        1.0,
+        0.9820000000000002,
+        0.5660000000000001,
+        0.5660000000000001,
+        0.9820000000000002,
+        0.55,
+        0.9660000000000002,
+        1.0
+      ],
+      "times": [
+        0.00024199485778808594,
+        0.0002617835998535156,
+        0.00018835067749023438,
+        0.00022673606872558594,
+        0.00023221969604492188,
+        0.00021314620971679688,
+        0.0002639293670654297,
+        0.0002892017364501953,
+        0.00025010108947753906,
+        0.00018715858459472656,
+        0.00014209747314453125,
+        0.00015282630920410156,
+        0.00023508071899414062,
+        0.0002827644348144531,
+        0.0001227855682373047,
+        0.00014710426330566406,
+        0.00014519691467285156,
+        0.00025916099548339844,
+        0.00022292137145996094,
+        0.00014090538024902344,
+        0.0001239776611328125,
+        0.0002548694610595703,
+        0.00014281272888183594,
+        0.00020813941955566406,
+        0.0001800060272216797
+      ],
+      "success_count": 25,
+      "avg_accuracy": 1.0,
+      "avg_confidence": 0.8271600000000001,
+      "avg_time": 0.00020461082458496095,
+      "success_rate": 1.0
+    }
+  }
+}

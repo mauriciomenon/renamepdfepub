@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Launcher para Interface Web
-===========================
+Launcher para Interface Web (ASCII only)
+=======================================
 
-Instala dependências e executa a interface Streamlit
+Instala dependencias e executa a interface Streamlit
 """
 
 import subprocess
@@ -12,10 +12,10 @@ import os
 from pathlib import Path
 
 def install_streamlit():
-    """Instala Streamlit se não estiver disponível"""
+    """Instala Streamlit se nao estiver disponivel"""
     try:
         import streamlit
-        print("[OK] Streamlit já está instalado")
+        print("[OK] Streamlit ja esta instalado")
         return True
     except ImportError:
         print("[INFO] Instalando Streamlit...")
@@ -29,131 +29,24 @@ def install_streamlit():
             print(f"[ERROR] Erro ao instalar Streamlit: {e}")
             return False
 
-def generate_sample_data():
-    """Gera dados de exemplo se não existirem"""
-    import json
-    import random
-    
-    sample_file = "advanced_algorithm_comparison.json"
-    
-    if Path(sample_file).exists():
-        print(f"[OK] Arquivo de dados encontrado: {sample_file}")
-        return
-    
-    print("[INFO] Gerando dados de exemplo...")
-    
-    # Dados de exemplo
-    sample_data = {
-        "test_info": {
-            "total_books": 25,
-            "test_date": "2025-01-08",
-            "algorithms_tested": 5
-        },
-        "algorithm_summary": {
-            "Basic Parser": {
-                "avg_accuracy": 0.78,
-                "avg_confidence": 0.82,
-                "avg_time": 0.045,
-                "success_rate": 0.85
-            },
-            "Enhanced Parser": {
-                "avg_accuracy": 0.85,
-                "avg_confidence": 0.88, 
-                "avg_time": 0.067,
-                "success_rate": 0.92
-            },
-            "Smart Inferencer": {
-                "avg_accuracy": 0.91,
-                "avg_confidence": 0.89,
-                "avg_time": 0.089,
-                "success_rate": 0.94
-            },
-            "Hybrid Orchestrator": {
-                "avg_accuracy": 0.96,
-                "avg_confidence": 0.94,
-                "avg_time": 0.123,
-                "success_rate": 0.98
-            },
-            "Brazilian Specialist": {
-                "avg_accuracy": 0.93,
-                "avg_confidence": 0.91,
-                "avg_time": 0.078,
-                "success_rate": 0.95
-            }
-        },
-        "detailed_results": []
-    }
-    
-    # Gera resultados detalhados de exemplo
-    book_names = [
-        "Python_para_Desenvolvedores.pdf",
-        "JavaScript_Moderno.epub",
-        "Machine_Learning_Casa_do_Codigo.pdf", 
-        "React_Native_Novatec.epub",
-        "Docker_Containers.pdf",
-        "AWS_Cloud_Computing.epub",
-        "Data_Science_Python.pdf",
-        "Vue.js_Desenvolvimento.epub",
-        "Kubernetes_Pratico.pdf",
-        "TensorFlow_Deep_Learning.epub",
-        "NodeJS_APIs.pdf",
-        "Angular_Completo.epub",
-        "PostgreSQL_Banco_Dados.pdf",
-        "Redis_Cache.epub",
-        "GraphQL_API.pdf",
-        "Flutter_Mobile.epub",
-        "Go_Programming.pdf",
-        "Rust_Systems.epub",
-        "C++_Moderno.pdf",
-        "Java_Spring_Boot.epub",
-        "PHP_Laravel.pdf",
-        "Ruby_Rails.epub",
-        "Swift_iOS.pdf",
-        "Kotlin_Android.epub",
-        "Unity_Game_Dev.pdf"
-    ]
-    
-    algorithms = list(sample_data["algorithm_summary"].keys())
-    
-    for i, book in enumerate(book_names):
-        # Seleciona melhor algoritmo baseado no tipo de livro
-        if "Casa_do_Codigo" in book or "Novatec" in book:
-            best_alg = "Brazilian Specialist"
-        elif "Machine_Learning" in book or "TensorFlow" in book:
-            best_alg = "Hybrid Orchestrator"
-        elif "JavaScript" in book or "React" in book or "Vue" in book:
-            best_alg = "Smart Inferencer"
+def _hint_real_reports():
+    """Exibe uma dica sobre geracao de relatorios reais a partir de books/."""
+    reports_dir = Path(__file__).parent.parent.parent / "reports"
+    print("[INFO] Para relatorios reais, use os dados gerados pelo pipeline que le a pasta books/.")
+    if reports_dir.exists():
+        latest = sorted(reports_dir.glob("metadata_report_*.json"))
+        if latest:
+            print(f"[OK] Relatorio encontrado: {latest[-1].name}")
         else:
-            best_alg = random.choice(algorithms)
-        
-        # Gera accuracies
-        accuracies = {}
-        for alg in algorithms:
-            base_acc = sample_data["algorithm_summary"][alg]["avg_accuracy"]
-            variation = random.uniform(-0.1, 0.1)
-            accuracies[alg] = max(0.1, min(1.0, base_acc + variation))
-        
-        result = {
-            "filename": book,
-            "best_algorithm": best_alg,
-            "accuracies": accuracies,
-            "confidences": {alg: acc * random.uniform(0.9, 1.1) for alg, acc in accuracies.items()},
-            "execution_time": random.uniform(0.03, 0.15)
-        }
-        
-        sample_data["detailed_results"].append(result)
-    
-    # Salva arquivo
-    with open(sample_file, 'w', encoding='utf-8') as f:
-        json.dump(sample_data, f, indent=2, ensure_ascii=False)
-    
-    print(f" Dados de exemplo gerados: {sample_file}")
+            print("[INFO] Nenhum relatorio JSON encontrado em reports/. Execute o pipeline de extracao.")
+    else:
+        print("[INFO] Pasta reports/ nao encontrada. Sera criada quando o pipeline for executado.")
 
 def launch_streamlit():
     """Executa a interface Streamlit"""
     print("Iniciando interface Streamlit...")
-    print("A interface sera aberta no navegador automaticamente")
-    print("Pressione Ctrl+C para parar o servidor")
+    print("A interface abrira no navegador.")
+    print("Pressione Ctrl+C para encerrar.")
     
     # Caminho correto para o arquivo
     streamlit_file = Path(__file__).parent / "streamlit_interface.py"
@@ -175,47 +68,91 @@ def generate_simple_report():
     """Gera relatorio HTML simples"""
     print("[INFO] Gerando relatorio HTML...")
     try:
-        # Caminho correto para o gerador
-        report_generator = Path(__file__).parent.parent.parent / "reports" / "simple_report_generator.py"
-        subprocess.run([sys.executable, str(report_generator)])
+        # Usa o gerador de relatorios raiz (real)
+        report_generator = Path(__file__).parent.parent.parent / "simple_report_generator.py"
+        if report_generator.exists():
+            subprocess.run([sys.executable, str(report_generator)], check=False)
+        else:
+            print("[INFO] Gerador simples nao encontrado no raiz. Consulte a documentacao.")
     except Exception as e:
         print(f"[WARNING] Erro ao gerar relatorio: {e}")
 
+def run_scan_interactive():
+    """Executa varredura (scan) de uma pasta gerando JSON/HTML em reports/."""
+    try:
+        default_dir = str((Path(__file__).parent.parent.parent / 'books').resolve())
+        print("\nVarredura (scan) de metadados")
+        directory = input(f"Pasta a escanear [default: {default_dir}]: ").strip() or default_dir
+        recursive = input("Modo recursivo? (s/N): ").strip().lower() in {"s", "sim", "y", "yes"}
+        threads_raw = input("Threads (1-16) [4]: ").strip()
+        try:
+            threads = max(1, min(16, int(threads_raw))) if threads_raw else 4
+        except Exception:
+            threads = 4
+
+        extractor = Path(__file__).parent / 'renomeia_livro_renew_v2.py'
+        if not extractor.exists():
+            print("[ERROR] Ferramenta de varredura nao encontrada")
+            return
+        cmd = [sys.executable, str(extractor), directory, '-t', str(threads)]
+        if recursive:
+            cmd.append('-r')
+        print("\nExecutando varredura...\n")
+        result = subprocess.run(cmd)
+        if result.returncode == 0:
+            print("\n[OK] Varredura concluida. Relatorios gerados em reports/.")
+        else:
+            print("\n[ERROR] Falha na varredura. Verifique os logs.")
+    except KeyboardInterrupt:
+        print("\nOperacao cancelada")
+    except Exception as e:
+        print(f"[ERROR] Erro ao executar varredura: {e}")
+
 def main():
-    """Função principal"""
+    """Funcao principal"""
     print("=" * 60)
     print("RENAMEPDFEPUB - INTERFACE WEB LAUNCHER")
     print("=" * 60)
     
-    # Menu de opções
-    print("\nEscolha uma opção:")
-    print("1. Iniciar Interface Streamlit (Recomendado)")
-    print("2. Gerar Relatório HTML")
-    print("3. Executar Teste de Algoritmos")
-    print("4. Gerar Dados de Exemplo")
+    # Menu de opcoes
+    print("\nEscolha uma opcao:")
+    print("1. Iniciar Interface Streamlit (recomendado)")
+    print("2. Executar scan de uma pasta (gera JSON/HTML)")
+    print("3. Gerar Relatorio HTML (usar ultimo JSON ou informar outro)")
+    print("4. Executar teste de algoritmos (heuristico)")
+    print("5. Dica sobre relatorios reais")
     print("0. Sair")
     
     try:
-        choice = input("\nDigite sua escolha (0-4): ").strip()
+        choice = input("\nDigite sua escolha (0-5): ").strip()
         
         if choice == "1":
-            # Instala Streamlit se necessário
+            # Instala Streamlit se necessario
             if not install_streamlit():
-                print("[ERROR] Não foi possível instalar Streamlit")
+                print("[ERROR] Nao foi possivel instalar Streamlit")
                 return
-            
-            # Gera dados de exemplo se necessário
-            generate_sample_data()
             
             # Executa interface
             launch_streamlit()
             
         elif choice == "2":
-            generate_sample_data()
-            generate_simple_report()
-            
+            run_scan_interactive()
         elif choice == "3":
+            _hint_real_reports()
+            # Permitir escolher um JSON especifico
+            default_dir = str((Path(__file__).parent.parent.parent / 'reports').resolve())
+            sel = input(f"Usar JSON especifico? (enter p/ padrao em {default_dir}): ").strip()
+            if sel:
+                # Chama o gerador com --json
+                report_generator = Path(__file__).parent.parent.parent / "simple_report_generator.py"
+                subprocess.run([sys.executable, str(report_generator), "--json", sel], check=False)
+            else:
+                generate_simple_report()
+            
+        elif choice == "4":
             print("[INFO] Executando teste de algoritmos...")
+            print("[NOTE] Este teste usa heuristicas baseadas em nomes de arquivos.")
+            print("[NOTE] Para metricas reais por conteudo, use a opcao 2 (scan).")
             try:
                 # Caminho correto para o algoritmo
                 algorithm_file = Path(__file__).parent.parent / "core" / "advanced_algorithm_comparison.py"
@@ -223,17 +160,17 @@ def main():
             except Exception as e:
                 print(f"[ERROR] Erro: {e}")
                 
-        elif choice == "4":
-            generate_sample_data()
+        elif choice == "5":
+            _hint_real_reports()
             
         elif choice == "0":
-            print("Até logo!")
+            print("Ate logo!")
             
         else:
-            print("[ERROR] Opção inválida")
+            print("[ERROR] Opcao invalida")
             
     except KeyboardInterrupt:
-        print("\nOperação cancelada")
+        print("\nOperacao cancelada")
     except Exception as e:
         print(f"[ERROR] Erro: {e}")
 

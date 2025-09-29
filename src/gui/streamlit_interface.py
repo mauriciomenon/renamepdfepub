@@ -1,472 +1,306 @@
 #!/usr/bin/env python3
 """
-Interface Web Streamlit - RenamePDFEPUB
-=====================================
-
-Interface moderna e interativa para o sistema de algoritmos
+Interface Web Streamlit - RenamePDFEPUB (ASCII only)
+Sistema para renomeacao automatica de livros PDF/EPUB
 """
 
 import streamlit as st
-import json
 import os
 import sys
-import time
+import subprocess
 from pathlib import Path
-from typing import Dict, List, Any
 
-# Configuração da página
+# Configuracao da pagina
 st.set_page_config(
-    page_title="RenamePDFEPUB - Sistema de Algoritmos",
-    page_icon="📚",
-    layout="wide",
-    initial_sidebar_state="expanded"
+    page_title="RenamePDFEPUB - Renomeador de Livros",
+    layout="wide"
 )
 
-# CSS customizado para interface mais bonita
-st.markdown("""
-<style>
-    .main-header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        padding: 2rem;
-        border-radius: 15px;
-        color: white;
-        text-align: center;
-        margin-bottom: 2rem;
-    }
-    
-    .metric-card {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        padding: 1.5rem;
-        border-radius: 10px;
-        color: white;
-        text-align: center;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-    
-    .algorithm-card {
-        border: 2px solid #e1e8ed;
-        border-radius: 10px;
-        padding: 1rem;
-        margin: 0.5rem 0;
-        background: white;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    
-    .success-card {
-        border-left: 5px solid #27ae60;
-        background-color: #d5f4e6;
-    }
-    
-    .warning-card {
-        border-left: 5px solid #f39c12;
-        background-color: #fef5e7;
-    }
-    
-    .info-card {
-        border-left: 5px solid #3498db;
-        background-color: #ebf3fd;
-    }
-    
-    .stProgress > div > div > div > div {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    }
-</style>
-""", unsafe_allow_html=True)
-
-class StreamlitInterface:
-    """Interface Streamlit para o sistema de algoritmos"""
-    
+class RenamePDFEPUBInterface:
     def __init__(self):
-        self.algorithm_colors = {
-            'Basic Parser': '#FF6B6B',
-            'Enhanced Parser': '#4ECDC4', 
-            'Smart Inferencer': '#45B7D1',
-            'Hybrid Orchestrator': '#96CEB4',
-            'Brazilian Specialist': '#FFEAA7'
-        }
+        self.project_root = Path(__file__).parent.parent.parent
+        self.books_dir = self.project_root / "books"
+        self.reports_dir = self.project_root / "reports"
         
-        self.algorithm_descriptions = {
-            'Basic Parser': 'Extração básica de metadados usando regex e parsing simples',
-            'Enhanced Parser': 'Parser aprimorado com limpeza de dados e validação',
-            'Smart Inferencer': 'Inferência inteligente usando padrões e heurísticas',
-            'Hybrid Orchestrator': 'Combina múltiplas técnicas para máxima precisão',
-            'Brazilian Specialist': 'Especializado em livros nacionais e editoras brasileiras'
-        }
-
-    def load_results(self) -> Dict[str, Any]:
-        """Carrega resultados mais recentes"""
-        json_files = [
-            'advanced_algorithm_comparison.json',
-            'multi_algorithm_comparison.json',
-            'final_v3_results.json'
-        ]
-        
-        for json_file in json_files:
-            if Path(json_file).exists():
-                try:
-                    with open(json_file, 'r', encoding='utf-8') as f:
-                        return json.load(f)
-                except Exception as e:
-                    st.error(f"Erro ao carregar {json_file}: {e}")
-        
-        return {}
-
-    def render_header(self):
-        """Renderiza o cabeçalho principal"""
-        st.markdown("""
-        <div class="main-header">
-            <h1> RenamePDFEPUB</h1>
-            <h3>Sistema Avançado de Algoritmos para Metadados</h3>
-            <p>Interface moderna para análise e comparação de algoritmos</p>
-        </div>
-        """, unsafe_allow_html=True)
-
-    def render_sidebar(self, results: Dict[str, Any]):
-        """Renderiza a barra lateral com controles"""
-        st.sidebar.header("🎛 Controles")
-        
-        # Seleção de visualização
-        view_mode = st.sidebar.selectbox(
-            "Modo de Visualização",
-            ["Dashboard Geral", "Análise por Algoritmo", "Análise por Livro", "Comparação Avançada"]
-        )
-        
-        # Filtros
-        st.sidebar.header("🔍 Filtros")
-        
-        if results and 'algorithm_summary' in results:
-            selected_algorithms = st.sidebar.multiselect(
-                "Algoritmos",
-                list(results['algorithm_summary'].keys()),
-                default=list(results['algorithm_summary'].keys())
-            )
-        else:
-            selected_algorithms = []
-        
-        # Controles de execução
-        st.sidebar.header("⚡ Ações")
-        
-        col1, col2 = st.sidebar.columns(2)
-        
-        with col1:
-            if st.button("🔄 Atualizar Dados"):
-                st.rerun()
-        
-        with col2:
-            if st.button("📊 Executar Teste"):
-                self.run_algorithm_test()
-        
-        return view_mode, selected_algorithms
-
-    def render_metrics_overview(self, results: Dict[str, Any]):
-        """Renderiza visão geral das métricas"""
-        if not results or 'algorithm_summary' not in results:
-            st.warning("⚠ Dados não disponíveis")
-            return
-        
-        st.header("📊 Métricas Gerais")
-        
-        # Calcula métricas
-        total_algorithms = len(results['algorithm_summary'])
-        avg_accuracy = 0
-        avg_confidence = 0
-        total_books = results.get('test_info', {}).get('total_books', 0)
-        
-        for summary in results['algorithm_summary'].values():
-            if 'avg_accuracy' in summary:
-                avg_accuracy += summary['avg_accuracy']
-                avg_confidence += summary['avg_confidence']
-        
-        if total_algorithms > 0:
-            avg_accuracy = (avg_accuracy / total_algorithms) * 100
-            avg_confidence = (avg_confidence / total_algorithms) * 100
-        
-        # Exibe métricas em colunas
-        col1, col2, col3, col4 = st.columns(4)
-        
-        with col1:
-            st.metric(
-                label="🔬 Algoritmos",
-                value=total_algorithms,
-                delta="5 disponíveis"
-            )
-        
-        with col2:
-            st.metric(
-                label="📚 Livros Testados",
-                value=total_books,
-                delta="Dataset completo"
-            )
-        
-        with col3:
-            st.metric(
-                label="🎯 Accuracy Média",
-                value=f"{avg_accuracy:.1f}%",
-                delta="Excelente" if avg_accuracy > 85 else "Bom"
-            )
-        
-        with col4:
-            st.metric(
-                label="💡 Confiança Média",
-                value=f"{avg_confidence:.1f}%",
-                delta="Alta confiança"
-            )
-
-    def render_algorithm_comparison(self, results: Dict[str, Any], selected_algorithms: List[str]):
-        """Renderiza comparação entre algoritmos"""
-        if not results or 'algorithm_summary' not in results:
-            return
-        
-        st.header("🔬 Comparação de Algoritmos")
-        
-        # Filtra algoritmos selecionados
-        filtered_data = {
-            name: data for name, data in results['algorithm_summary'].items()
-            if name in selected_algorithms and 'avg_accuracy' in data
-        }
-        
-        if not filtered_data:
-            st.warning("⚠ Nenhum algoritmo selecionado ou dados insuficientes")
-            return
-        
-        # Cria cards para cada algoritmo
-        for alg_name, summary in filtered_data.items():
-            accuracy = summary['avg_accuracy'] * 100
-            confidence = summary['avg_confidence'] * 100
-            time_ms = summary['avg_time'] * 1000
-            success_rate = summary['success_rate'] * 100
+    def get_books_list(self):
+        """Lista todos os livros PDF e EPUB"""
+        books = []
+        if self.books_dir.exists():
+            pdf_files = list(self.books_dir.glob("*.pdf"))
+            epub_files = list(self.books_dir.glob("*.epub"))
+            books = pdf_files + epub_files
+        return sorted(books)
+    
+    def run_algorithm(self, algorithm, book_path=None):
+        """Executa algoritmo de renomeacao"""
+        try:
+            algorithm_script = self.project_root / "src" / "core" / "advanced_algorithm_comparison.py"
             
-            # Define cor do card baseada na performance
-            if accuracy >= 90:
-                card_class = "success-card"
-                emoji = "🏆"
-            elif accuracy >= 70:
-                card_class = "warning-card"
-                emoji = "⚡"
+            if not algorithm_script.exists():
+                return False, f"Arquivo nao encontrado: {algorithm_script}"
+            
+            cmd = [sys.executable, str(algorithm_script)]
+            if book_path:
+                cmd.extend(["--file", str(book_path)])
+            if algorithm != "all":
+                cmd.extend(["--algorithm", algorithm])
+            
+            result = subprocess.run(cmd, capture_output=True, text=True, timeout=60)
+            
+            if result.returncode == 0:
+                return True, result.stdout
             else:
-                card_class = "info-card"
-                emoji = "🔧"
-            
-            with st.container():
-                col1, col2 = st.columns([3, 1])
+                return False, result.stderr or result.stdout
                 
-                with col1:
-                    st.markdown(f"""
-                    <div class="algorithm-card {card_class}">
-                        <h4>{emoji} {alg_name}</h4>
-                        <p>{self.algorithm_descriptions.get(alg_name, 'Algoritmo especializado')}</p>
-                    </div>
-                    """, unsafe_allow_html=True)
-                
-                with col2:
-                    st.write("")  # Espaçamento
-                
-                # Métricas detalhadas
-                col1, col2, col3, col4 = st.columns(4)
-                
-                with col1:
-                    st.metric("Accuracy", f"{accuracy:.2f}%")
-                    st.progress(accuracy / 100)
-                
-                with col2:
-                    st.metric("Confiança", f"{confidence:.2f}%")
-                    st.progress(confidence / 100)
-                
-                with col3:
-                    st.metric("Tempo", f"{time_ms:.2f}ms")
-                
-                with col4:
-                    st.metric("Sucesso", f"{success_rate:.1f}%")
-                    st.progress(success_rate / 100)
-                
-                st.divider()
+        except Exception as e:
+            return False, f"Erro: {str(e)}"
+    
+    def render_header(self):
+        """Cabecalho principal"""
+        st.title("RenamePDFEPUB - Renomeador de Livros")
+        st.markdown("Sistema para renomeacao automatica de arquivos PDF e EPUB")
+        st.markdown("---")
 
-    def render_book_analysis(self, results: Dict[str, Any]):
-        """Renderiza análise detalhada por livro"""
-        if not results or 'detailed_results' not in results:
+    def _load_latest_report(self):
+        """Carrega o relatorio JSON mais recente em reports/ (se existir)."""
+        try:
+            if not self.reports_dir.exists():
+                return None
+            candidates = sorted(self.reports_dir.glob("metadata_report_*.json"))
+            if not candidates:
+                return None
+            latest = candidates[-1]
+            import json
+            with open(latest, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            return data
+        except Exception:
+            return None
+
+    def render_dashboard(self):
+        """Exibe metricas reais a partir do relatorio em reports/."""
+        st.header("Dashboard")
+        data = self._load_latest_report()
+        if not data:
+            st.info("Nenhum relatorio encontrado em reports/. Gere um relatorio para visualizar metricas reais.")
+            return
+        # Estrutura esperada: chaves comuns usadas no projeto
+        summary = data.get("summary") or {}
+        # Metricas basicas
+        total = summary.get("total_files") or summary.get("total_books") or summary.get("total") or 0
+        success = summary.get("successful") or summary.get("success") or 0
+        failed = summary.get("failed") or summary.get("failures") or 0
+        with st.container():
+            c1, c2, c3 = st.columns(3)
+            c1.metric("Total de arquivos", total)
+            c2.metric("Processados com sucesso", success)
+            c3.metric("Falhas", failed)
+        # Faltas por campo
+        missing = summary.get("missing_fields") or {}
+        if missing:
+            st.subheader("Campos ausentes")
+            for field, count in missing.items():
+                st.write(f"- {field}: {count}")
+        # Estatisticas por editora
+        pub_stats = data.get("publisher_stats") or {}
+        if pub_stats:
+            st.subheader("Distribuicao por editora")
+            for pub, cnt in list(pub_stats.items())[:15]:
+                st.write(f"- {pub}: {cnt}")
+    
+    def render_books_section(self):
+        """Secao principal: livros"""
+        st.header("Biblioteca de Livros")
+        
+        books = self.get_books_list()
+        
+        if not books:
+            st.warning("Nenhum livro encontrado na pasta 'books/'. Adicione arquivos PDF ou EPUB.")
             return
         
-        st.header("📚 Análise por Livro")
+        st.info(f"{len(books)} arquivos encontrados")
         
-        # Configurações
-        num_books = st.slider("Número de livros para exibir", 5, 50, 15)
-        
-        # Análise dos livros
-        books_data = []
-        for i, result in enumerate(results['detailed_results'][:num_books], 1):
-            filename = result['filename']
-            best_alg = result['best_algorithm']
-            
-            # Accuracy do melhor algoritmo
-            best_accuracy = 0
-            if 'accuracies' in result:
-                best_accuracy = max(result['accuracies'].values()) * 100
-            
-            books_data.append({
-                'Posição': i,
-                'Arquivo': filename[:60] + "..." if len(filename) > 60 else filename,
-                'Melhor Algoritmo': best_alg,
-                'Accuracy': f"{best_accuracy:.1f}%",
-                'Status': " Sucesso" if best_accuracy > 80 else "⚠ Revisão"
-            })
-        
-        # Exibe como dataframe
-        if books_data:
-            st.dataframe(
-                books_data,
-                use_container_width=True,
-                hide_index=True
-            )
-        
-        # Estatísticas adicionais
-        st.subheader("📈 Estatísticas")
-        
-        col1, col2, col3 = st.columns(3)
-        
-        with col1:
-            high_accuracy = sum(1 for book in books_data if float(book['Accuracy'].replace('%', '')) > 90)
-            st.metric("Alta Accuracy (>90%)", high_accuracy)
-        
-        with col2:
-            brazilian_books = sum(1 for result in results['detailed_results'][:num_books] 
-                                if result['best_algorithm'] == 'Brazilian Specialist')
-            st.metric("Livros Brasileiros", brazilian_books)
-        
-        with col3:
-            avg_book_accuracy = sum(float(book['Accuracy'].replace('%', '')) for book in books_data) / len(books_data)
-            st.metric("Accuracy Média", f"{avg_book_accuracy:.1f}%")
-
-    def render_advanced_comparison(self, results: Dict[str, Any]):
-        """Renderiza comparação avançada com visualizações"""
-        if not results or 'algorithm_summary' not in results:
-            return
-        
-        st.header(" Comparação Avançada")
-        
-        tab1, tab2, tab3 = st.tabs(["Performance", "Distribuição", "Correlações"])
+        # Tabs
+        tab1, tab2, tab3 = st.tabs(["Lista", "Individual", "Lote"])
         
         with tab1:
-            st.subheader("⚡ Performance por Algoritmo")
-            
-            # Dados para gráfico
-            alg_names = []
-            accuracies = []
-            times = []
-            
-            for name, data in results['algorithm_summary'].items():
-                if 'avg_accuracy' in data:
-                    alg_names.append(name)
-                    accuracies.append(data['avg_accuracy'] * 100)
-                    times.append(data['avg_time'] * 1000)
-            
-            if alg_names:
-                # Simula gráfico com barras de progresso
-                for i, (name, acc, time_ms) in enumerate(zip(alg_names, accuracies, times)):
-                    col1, col2, col3 = st.columns([2, 2, 1])
-                    
-                    with col1:
-                        st.write(f"**{name}**")
-                        st.progress(acc / 100)
-                    
-                    with col2:
-                        st.metric("Accuracy", f"{acc:.1f}%")
-                    
-                    with col3:
-                        st.metric("Tempo", f"{time_ms:.1f}ms")
+            self.show_books_list(books)
         
         with tab2:
-            st.subheader("📊 Distribuição de Resultados")
-            
-            # Análise de distribuição
-            if 'detailed_results' in results:
-                algorithm_counts = {}
-                for result in results['detailed_results']:
-                    best_alg = result['best_algorithm']
-                    algorithm_counts[best_alg] = algorithm_counts.get(best_alg, 0) + 1
-                
-                st.write("**Algoritmo mais usado por livro:**")
-                for alg, count in sorted(algorithm_counts.items(), key=lambda x: x[1], reverse=True):
-                    percentage = (count / len(results['detailed_results'])) * 100
-                    st.write(f"• {alg}: {count} livros ({percentage:.1f}%)")
-                    st.progress(percentage / 100)
+            self.process_individual(books)
         
         with tab3:
-            st.subheader("🔗 Análise de Correlações")
-            
-            st.write("**Insights do Sistema:**")
-            
-            insights = [
-                "🎯 **Hybrid Orchestrator** combina as melhores técnicas de todos os algoritmos",
-                "🇧🇷 **Brazilian Specialist** é otimizado para editoras nacionais (Casa do Código, Novatec, etc)",
-                "⚡ **Smart Inferencer** usa heurísticas avançadas para inferir dados ausentes",
-                "🔧 **Enhanced Parser** melhora a qualidade dos dados extraídos",
-                "📝 **Basic Parser** oferece extração rápida e confiável"
-            ]
-            
-            for insight in insights:
-                st.markdown(insight)
+            self.process_batch(books)
+    
+    def show_books_list(self, books):
+        """Mostra lista de livros"""
+        # Filtros simples
+        colf1, colf2, colf3 = st.columns([3, 1, 1])
+        with colf1:
+            q = st.text_input("Filtro por nome", value="")
+        with colf2:
+            ext = st.selectbox("Extensao", ["Todos", "pdf", "epub"], index=0)
+        with colf3:
+            page_size = st.number_input("Itens/pagina", min_value=10, max_value=200, value=50, step=10)
 
-    def run_algorithm_test(self):
-        """Executa teste de algoritmos"""
-        with st.spinner('Executando teste de algoritmos...'):
-            try:
-                # Simula execução
-                time.sleep(2)
+        filtered = []
+        q_lower = (q or "").lower()
+        for b in books:
+            if ext != "Todos" and b.suffix.lower() != f".{ext}":
+                continue
+            if q_lower and q_lower not in b.name.lower():
+                continue
+            filtered.append(b)
+
+        total = len(filtered)
+        page_count = max(1, (total + int(page_size) - 1) // int(page_size))
+        page = st.slider("Pagina", min_value=1, max_value=page_count, value=1)
+        start = (page - 1) * int(page_size)
+        end = min(total, start + int(page_size))
+
+        for i, book in enumerate(filtered[start:end], start=start):
+            col1, col2, col3 = st.columns([4, 1, 1])
+            
+            with col1:
+                st.write(f"**{book.name}**")
+            with col2:
+                size_mb = book.stat().st_size / (1024 * 1024)
+                st.write(f"{size_mb:.1f} MB")
+            with col3:
+                if st.button("Processar", key=f"btn_{i}"):
+                    self.process_single_book(book)
+    
+    def process_individual(self, books):
+        """Processamento individual"""
+        selected_book = st.selectbox(
+            "Selecione um livro:",
+            books,
+            format_func=lambda x: x.name
+        )
+        
+        algorithm = st.selectbox(
+            "Algoritmo:",
+            ["hybrid_orchestrator", "brazilian_specialist", "smart_inferencer"],
+            format_func=lambda x: {
+                "hybrid_orchestrator": "Hybrid (orquestrador)",
+                "brazilian_specialist": "Brazilian (especialista)", 
+                "smart_inferencer": "Smart (inferencia)"
+            }[x]
+        )
+        
+        if st.button("Processar Livro", type="primary"):
+            self.process_single_book(selected_book, algorithm)
+    
+    def process_batch(self, books):
+        """Processamento em lote"""
+        st.write("Processamento em lote de todos os livros")
+        
+        algorithm = st.selectbox(
+            "Algoritmo para todos:",
+            ["hybrid_orchestrator", "brazilian_specialist"],
+            key="batch_algo"
+        )
+        
+        if st.button("Processar Todos", type="primary"):
+            progress_bar = st.progress(0)
+            
+            for i, book in enumerate(books):
+                st.write(f"Processando: {book.name}")
+                success, result = self.run_algorithm(algorithm, book)
                 
-                # Tenta executar o script real
-                import subprocess
-                result = subprocess.run([
-                    sys.executable, 'advanced_algorithm_comparison.py'
-                ], capture_output=True, text=True, timeout=30)
-                
-                if result.returncode == 0:
-                    st.success(" Teste executado com sucesso!")
-                    st.rerun()
+                if success:
+                    st.success(f"Processado: {book.name}")
                 else:
-                    st.error(f" Erro na execução: {result.stderr}")
-                    
-            except subprocess.TimeoutExpired:
-                st.warning("⏱ Teste em execução (tempo limite atingido)")
-            except Exception as e:
-                st.error(f" Erro: {e}")
-
+                    st.error(f"Erro: {book.name}: {result}")
+                
+                progress_bar.progress((i + 1) / len(books))
+    
+    def process_single_book(self, book_path, algorithm="hybrid_orchestrator"):
+        """Processa um livro"""
+        with st.spinner(f"Processando {book_path.name}..."):
+            success, result = self.run_algorithm(algorithm, book_path)
+            
+            if success:
+                st.success("Processado com sucesso.")
+                st.code(result)
+            else:
+                st.error(f"Erro: {result}")
+    
+    def render_algorithms_info(self):
+        """Info sobre algoritmos"""
+        st.header("Algoritmos Disponiveis")
+        
+        algorithms = {
+            "Hybrid Orchestrator": "Combina tecnicas e heuristicas",
+            "Brazilian Specialist": "Foco em caracteristicas nacionais",
+            "Smart Inferencer": "Inferencia e padroes no nome"
+        }
+        
+        for name, desc in algorithms.items():
+            st.info(f"**{name}**: {desc}")
+    
     def run(self):
-        """Executa a interface principal"""
-        # Cabeçalho
+        """Interface principal"""
         self.render_header()
+
+        # Menu lateral
+        st.sidebar.title("Menu")
+        # Permite definir a pasta de livros
+        default_dir = str(self.books_dir)
+        chosen_dir = st.sidebar.text_input("Pasta de livros", value=default_dir)
+        chosen_path = Path(chosen_dir).expanduser()
+        if chosen_path != self.books_dir:
+            self.books_dir = chosen_path
+
+        # Opcoes de varredura (scan)
+        st.sidebar.subheader("Varredura (scan)")
+        recursive = st.sidebar.checkbox("Recursivo", value=False)
+        threads = st.sidebar.number_input("Threads", min_value=1, max_value=16, value=4)
+        if st.sidebar.button("Executar varredura"):
+            self._run_scan(self.books_dir, recursive=recursive, threads=int(threads))
+
+        page = st.sidebar.radio(
+            "Navegacao:",
+            ["Dashboard", "Processar Livros", "Algoritmos", "Sistema"]
+        )
         
-        # Carrega dados
-        results = self.load_results()
-        
-        # Sidebar
-        view_mode, selected_algorithms = self.render_sidebar(results)
-        
-        # Conteúdo principal baseado no modo
-        if view_mode == "Dashboard Geral":
-            self.render_metrics_overview(results)
-            self.render_algorithm_comparison(results, selected_algorithms)
-            
-        elif view_mode == "Análise por Algoritmo":
-            self.render_algorithm_comparison(results, selected_algorithms)
-            
-        elif view_mode == "Análise por Livro":
-            self.render_book_analysis(results)
-            
-        elif view_mode == "Comparação Avançada":
-            self.render_advanced_comparison(results)
-        
-        # Rodapé
-        st.divider()
-        st.markdown("""
-        <div style="text-align: center; color: #666; padding: 20px;">
-            <p> <strong>RenamePDFEPUB</strong> - Sistema Avançado de Algoritmos</p>
-            <p>Desenvolvido com ❤ para otimização de metadados de livros</p>
-        </div>
-        """, unsafe_allow_html=True)
+        if page == "Dashboard":
+            self.render_dashboard()
+        elif page == "Processar Livros":
+            self.render_books_section()
+        elif page == "Algoritmos":
+            self.render_algorithms_info()
+        elif page == "Sistema":
+            st.header("Sistema")
+            st.write(f"Pasta de livros: `{self.books_dir}`")
+            st.write(f"Total de livros: {len(self.get_books_list())}")
+            if not self.books_dir.exists():
+                st.warning("Pasta nao encontrada. Ajuste o caminho na barra lateral.")
+
+    def _run_scan(self, directory: Path, recursive: bool = False, threads: int = 4):
+        """Executa varredura de metadados sem renomear e atualiza os relatorios."""
+        try:
+            extractor = self.project_root / "src" / "gui" / "renomeia_livro_renew_v2.py"
+            if not extractor.exists():
+                st.error("Ferramenta de varredura nao encontrada.")
+                return
+            args = [sys.executable, str(extractor), str(directory)]
+            if recursive:
+                args.append("-r")
+            args.extend(["-t", str(threads)])
+            # Sem --rename: gera apenas relatorios JSON/HTML
+            with st.spinner("Executando varredura..."):
+                result = subprocess.run(args, capture_output=True, text=True, timeout=180)
+            if result.returncode == 0:
+                st.success("Varredura concluida. Atualize o Dashboard para ver os resultados.")
+            else:
+                st.error("Falha na varredura. Verifique os logs.")
+                st.code(result.stderr or result.stdout)
+        except Exception as e:
+            st.error(f"Erro ao executar varredura: {e}")
 
 def main():
-    """Função principal"""
-    interface = StreamlitInterface()
+    interface = RenamePDFEPUBInterface()
     interface.run()
 
 if __name__ == "__main__":

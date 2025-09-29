@@ -66,15 +66,17 @@ class DataValidator:
 
     def setup_logging(self):
         """Configura logging detalhado"""
-        logging.basicConfig(
-            level=logging.INFO,
-            format='%(asctime)s - %(levelname)s - %(message)s',
-            handlers=[
-                logging.FileHandler('validation_detailed.log'),
-                logging.StreamHandler()
-            ]
-        )
-        self.logger = logging.getLogger(__name__)
+        self.logger = logging.getLogger('data_validator')
+        if not self.logger.handlers:
+            file_handler = logging.FileHandler('validation_detailed.log')
+            formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+            file_handler.setFormatter(formatter)
+            self.logger.addHandler(file_handler)
+            stream_handler = logging.StreamHandler()
+            stream_handler.setFormatter(formatter)
+            self.logger.addHandler(stream_handler)
+        self.logger.setLevel(logging.INFO)
+        self.logger.propagate = False
 
     def validate_author(self, author: str) -> Tuple[bool, List[str]]:
         """Valida se o autor e real e valido"""

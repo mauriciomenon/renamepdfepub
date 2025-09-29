@@ -474,7 +474,7 @@ class AdvancedAlgorithmTester:
         
         return 0.0
 
-    def run_comprehensive_test(self, max_books: int = 30) -> Dict[str, Any]:
+    def run_comprehensive_test(self, max_books: int = 0) -> Dict[str, Any]:
         """Executa teste abrangente com todos os 5 algoritmos"""
         self.print_both("SISTEMA AVANÇADO DE COMPARAÇÃO DE ALGORITMOS v2.0")
         self.print_both("=" * 75)
@@ -491,7 +491,7 @@ class AdvancedAlgorithmTester:
                      if f.suffix.lower() in ['.pdf', '.epub', '.mobi'] 
                      and not f.name.startswith('.')]
         
-        if len(book_files) > max_books:
+        if max_books and len(book_files) > max_books:
             book_files = book_files[:max_books]
         
         self.print_both(f"Testando {len(book_files)} livros com 5 algoritmos")
@@ -632,7 +632,7 @@ def main():
     
     try:
         # Executa teste
-        results = tester.run_comprehensive_test(max_books=25)
+        results = tester.run_comprehensive_test(max_books=0)
         
         if results:
             # Salva resultados JSON

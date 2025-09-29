@@ -33,7 +33,7 @@ import unicodedata
 from urllib.parse import quote
 
 # Import do sistema V3 completo
-from final_v3_complete_test import V3CompleteSystem
+from .v3_complete_system import V3CompleteSystem
 
 @dataclass
 class BookMetadata:

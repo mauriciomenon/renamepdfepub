@@ -17,8 +17,8 @@ from dataclasses import dataclass, asdict
 import unicodedata
 
 # Importa algoritmos existentes
-from final_v3_complete_test import V3CompleteSystem
-from rigorous_validation import DataValidator, ValidationResult
+from core.v3_complete_system import V3CompleteSystem
+from cli.rigorous_validation import DataValidator, ValidationResult
 
 @dataclass
 class AlgorithmResult:
@@ -72,9 +72,11 @@ class RealDataExtractor:
         }
 
     def setup_logging(self):
-        """Configura logging"""
-        logging.basicConfig(level=logging.INFO)
-        self.logger = logging.getLogger(__name__)
+        """Configura logging dedicado"""
+        self.logger = logging.getLogger('real_data_extractor')
+        if not self.logger.handlers:
+            self.logger.addHandler(logging.NullHandler())
+        self.logger.setLevel(logging.INFO)
 
     def extract_ground_truth(self, filename: str) -> Dict[str, str]:
         """Extrai verdade fundamental do nome do arquivo"""
@@ -150,32 +152,39 @@ class RealDataExtractor:
 class AlgorithmTester:
     """Testa algoritmos com dados reais"""
     
-    def __init__(self):
-        self.setup_logging()
+    def __init__(self, orchestrator_config: Dict[str, Any] | None = None, silent: bool = False):
+        self.orchestrator_config = orchestrator_config or {}
+        self.silent = silent
+        self.setup_logging(silent=silent)
         self.validator = DataValidator()
+        if silent:
+            self.validator.logger.setLevel(logging.ERROR)
         self.extractor = RealDataExtractor()
+        self.extractor.logger.setLevel(logging.ERROR if silent else logging.INFO)
         
         # Carrega dados dos livros
         self.books_data = self.load_books_data()
         
         # Inicializa algoritmos
         if self.books_data:
-            self.v3_system = V3CompleteSystem(self.books_data)
+            self.v3_system = V3CompleteSystem(self.books_data, orchestrator_config=self.orchestrator_config)
         else:
             self.v3_system = None
             self.logger.warning("Nao foi possivel carregar dados dos livros")
 
-    def setup_logging(self):
+    def setup_logging(self, silent: bool = False):
         """Configura logging detalhado"""
-        logging.basicConfig(
-            level=logging.INFO,
-            format='%(asctime)s - %(levelname)s - %(message)s',
-            handlers=[
-                logging.FileHandler('real_data_testing.log'),
-                logging.StreamHandler()
-            ]
-        )
-        self.logger = logging.getLogger(__name__)
+        self.logger = logging.getLogger('real_data_tester')
+        if not self.logger.handlers:
+            formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+            file_handler = logging.FileHandler('real_data_testing.log')
+            file_handler.setFormatter(formatter)
+            self.logger.addHandler(file_handler)
+            stream_handler = logging.StreamHandler()
+            stream_handler.setFormatter(formatter)
+            self.logger.addHandler(stream_handler)
+            self.logger.propagate = False
+        self.logger.setLevel(logging.ERROR if silent else logging.INFO)
 
     def load_books_data(self) -> List[Dict[str, Any]]:
         """Carrega dados dos livros da pasta books/"""

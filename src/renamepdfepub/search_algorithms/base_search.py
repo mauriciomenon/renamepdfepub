@@ -78,7 +78,9 @@ class BaseSearchAlgorithm(ABC):
         self.is_configured = False
         self._stats = {
             'searches_performed': 0,
+            'executions': 0,
             'total_time': 0.0,
+            'average_time': 0.0,
             'average_score': 0.0
         }
     
@@ -143,7 +145,9 @@ class BaseSearchAlgorithm(ABC):
         """Reseta as estatísticas do algoritmo."""
         self._stats = {
             'searches_performed': 0,
+            'executions': 0,
             'total_time': 0.0,
+            'average_time': 0.0,
             'average_score': 0.0
         }
     
@@ -156,12 +160,21 @@ class BaseSearchAlgorithm(ABC):
             score: Score obtido na busca
         """
         self._stats['searches_performed'] += 1
+        self._stats['executions'] += 1
         self._stats['total_time'] += execution_time
-        
-        # Calcula média ponderada do score
-        current_avg = self._stats['average_score']
+
         count = self._stats['searches_performed']
-        self._stats['average_score'] = ((current_avg * (count - 1)) + score) / count
+
+        # Atualiza medias
+        current_score_avg = self._stats['average_score']
+        self._stats['average_score'] = (
+            ((current_score_avg * (count - 1)) + score) / count
+        )
+
+        current_time_avg = self._stats['average_time']
+        self._stats['average_time'] = (
+            ((current_time_avg * (count - 1)) + execution_time) / count
+        )
     
     def __str__(self) -> str:
         """Representação string do algoritmo."""

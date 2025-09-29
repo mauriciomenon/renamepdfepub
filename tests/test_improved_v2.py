@@ -9,16 +9,12 @@ Executa teste completo dos algoritmos melhorados e compara com versao anterior.
 import sys
 import time
 import json
-import importlib.util
 from pathlib import Path
 
-# Carregar módulo dos algoritmos melhorados
-spec = importlib.util.spec_from_file_location("improved_algorithms_v2", "improved_algorithms_v2.py")
-improved_algos = importlib.util.module_from_spec(spec) 
-spec.loader.exec_module(improved_algos)
+PROJECT_ROOT = Path(__file__).parent.parent
+sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
-ImprovedMetadataExtractor = improved_algos.ImprovedMetadataExtractor
-EnhancedRealAlgorithms = improved_algos.EnhancedRealAlgorithms
+from core.enhanced_algorithms import ImprovedMetadataExtractor, EnhancedRealAlgorithms
 
 def main():
     start_time = time.time()

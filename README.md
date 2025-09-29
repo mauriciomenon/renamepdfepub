@@ -2,25 +2,41 @@
 
 Sistema automatizado para renomeacao de arquivos PDF e EPUB baseado em extracao de metadados.
 
-## TL;DR - Uso Rapido
+## TL;DR – Operações Principais
+
+As operações abaixo cobrem varredura (scan) sem renomear, varredura repetida, renomear com base em relatório existente e renomear enquanto busca. Válidas para pastas locais e pastas sincronizadas (OneDrive/Google Drive).
 
 ```bash
-# Instalar dependencias
+# 0) Instalar dependências
 pip install -r requirements.txt
 
-# Interface Web Interativa - Streamlit (RECOMENDADO)
-python3 start_web.py
+# 1) Scan (gera relatórios JSON/HTML em reports/, não renomeia)
+python3 start_cli.py scan "/caminho/livros"
+python3 start_cli.py scan "/caminho/livros" -r                # recursivo
+python3 start_cli.py scan "/caminho/livros" -t 8 -o out.json   # threads e saída
 
-# Relatorios HTML Estaticos - "Pagina Antiga"
-python3 start_html.py
+# 2) Scan por ciclos/tempo (repetiçōes retroalimentadas)
+python3 start_cli.py scan-cycles "/caminho/livros" --cycles 3
+python3 start_cli.py scan-cycles "/caminho/livros" --time-seconds 120
 
-# Interface CLI - Linha de Comando
+# 3) Renomear com dados já existentes (relatório JSON)
+python3 start_cli.py rename-existing --report relatorio.json --apply [--copy]
+
+# 4) Renomear fazendo a procura (scan + rename)
+python3 start_cli.py rename-search "/caminho/livros" --rename
+
+# 5) Streamlit (dashboard + scan pela barra lateral)
+python3 start_web.py --auto-start
+# Ajuste "Pasta de livros" na barra lateral e use "Executar varredura". Dashboard lê reports/.
+
+# 6) GUI Desktop
+python3 start_gui.py --dir "/caminho/inicial"   # inicia apontando para a pasta
+# Na GUI, use "Gerar relatório da pasta" (com opção Recursivo) para produzir JSON/HTML.
+
+# 7) Algoritmos (comparação)
 python3 start_cli.py algorithms
 
-# Interface Grafica Desktop
-python3 start_gui.py
-
-# Executar testes
+# 8) Testes
 python3 run_tests.py
 ```
 

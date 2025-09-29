@@ -27,7 +27,7 @@ from PyQt6.QtWidgets import (
 
 try:
     import renamepdfepub.metadata_extractor as extractor
-except ModuleNotFoundError:  # pragma: no cover - fallback para execução direta
+except ModuleNotFoundError:  # pragma: no cover - fallback para execucao direta
     if __package__:
         raise
     project_root = Path(__file__).resolve().parent
@@ -43,14 +43,14 @@ FIELD_ORDER: Sequence[str] = ("Title", "Author", "Year", "Publisher", "ISBN")
 FIELD_SET: Set[str] = set(FIELD_ORDER)
 DEFAULT_SELECTED_FIELDS = {"Title", "Author", "Year", "ISBN"}
 FIELD_LABELS = {
-    "Title": "Título",
+    "Title": "Titulo",
     "Author": "Autor",
     "Year": "Ano",
     "Publisher": "Editora",
     "ISBN": "ISBN",
 }
 INVALID_FILENAME_CHARS = re.compile(r"[\\/:*?\"<>|]+")
-DEFAULT_MAX_LENGTH = 120
+DEFAULT_MAX_LENGTH = 90
 MIN_FILENAME_LENGTH = 10
 
 
@@ -80,6 +80,55 @@ def normalize_metadata(raw: Dict[str, Optional[str]]) -> Dict[str, Optional[str]
     return normalized
 
 
+def _validate_year(value: Optional[str]) -> Optional[str]:
+    if not value:
+        return None
+    try:
+        year = int(str(value)[:4])
+    except ValueError:
+        return None
+    from datetime import datetime
+    current = datetime.now().year
+    if 1900 <= year <= current:
+        return str(year)
+    return None
+
+
+def _clean_noise(text: Optional[str]) -> Optional[str]:
+    if not text:
+        return None
+    t = str(text).strip()
+    # Remove ocorrencias conhecidas de ruido
+    noise_tokens = [
+        "Fading Channels",
+    ]
+    for token in noise_tokens:
+        t = t.replace(token, " ")
+    t = re.sub(r"\s+", " ", t).strip()
+    return t or None
+
+
+def _fallback_from_filename(path: Path) -> Dict[str, Optional[str]]:
+    """Heuristicas simples para extrair metadados do nome do arquivo."""
+    name = path.stem
+    result: Dict[str, Optional[str]] = {field: None for field in FIELD_ORDER}
+    # Ano entre parenteses
+    m = re.search(r"\((\d{4})\)", name)
+    if m:
+        result["Year"] = _validate_year(m.group(1))
+        name = re.sub(r"\(\d{4}\)", "", name).strip()
+    # Autor antes de " - "
+    if " - " in name:
+        author, title = name.split(" - ", 1)
+        if author and not author[0].isdigit():
+            result["Author"] = author.strip()
+            name = title.strip()
+    # Resto e titulo
+    if name:
+        result["Title"] = name.strip(" -")
+    return result
+
+
 def read_metadata(path: Path) -> Dict[str, Optional[str]]:
     ext = path.suffix.lower()
     try:
@@ -91,7 +140,20 @@ def read_metadata(path: Path) -> Dict[str, Optional[str]]:
             raw = {}
     except Exception as exc:  # pragma: no cover - GUI feedback only
         raise RuntimeError(str(exc))
-    return normalize_metadata(raw)
+    data = normalize_metadata(raw)
+    # Limpeza de ruido e validacao
+    data["Title"] = _clean_noise(data.get("Title"))
+    data["Author"] = _clean_noise(data.get("Author"))
+    data["Publisher"] = _clean_noise(data.get("Publisher"))
+    data["Year"] = _validate_year(data.get("Year"))
+
+    # Fallback por nome de arquivo quando campos essenciais estao ausentes
+    if not data.get("Title") or not data.get("Author") or not data.get("Year"):
+        fb = _fallback_from_filename(path)
+        for k in ("Title", "Author", "Year"):
+            if not data.get(k) and fb.get(k):
+                data[k] = fb[k]
+    return data
 
 
 def sanitize_component(value: str) -> str:
@@ -154,11 +216,11 @@ def build_dependency_message() -> str:
     if getattr(extractor, "epub", None) is None:
         missing.append("ebooklib")
     if not missing:
-        return "Dependências opcionais carregadas."
+        return "Dependencias opcionais carregadas."
     return (
-        "Dependências ausentes: "
+        "Dependencias ausentes: "
         + ", ".join(missing)
-        + ". Algumas funcionalidades podem ficar indisponíveis."
+        + ". Algumas funcionalidades podem ficar indisponiveis."
     )
 
 
@@ -210,12 +272,12 @@ class RenameWorker(QObject):
                 else:
                     source.rename(target)
                     action = "Renomeado"
-                results.append(f"{action}: {source.name} → {target.name}")
+                results.append(f"{action}: {source.name} -> {target.name}")
             except Exception as exc:
                 results.append(f"Falhou: {source.name} ({exc})")
             self.progress.emit(index, total, source.name)
         if cancelled:
-            results.append("Processo cancelado pelo usuário.")
+            results.append("Processo cancelado pelo usuario.")
         self.finished.emit(results)
 
 
@@ -247,11 +309,11 @@ class PreviewWorker(QObject):
 
 
 class FileRenamer(QWidget):
-    def __init__(self) -> None:
+    def __init__(self, initial_directory: Optional[str] = None) -> None:
         super().__init__()
 
         self.settings = QSettings("renamepdfepub", "GuiRenamer")
-        self.last_directory = self._load_last_directory()
+        self.last_directory = initial_directory or self._load_last_directory()
         stored_fields = self._load_selected_fields()
         copy_mode = self._load_copy_mode()
         max_length = self._load_max_length()
@@ -289,16 +351,24 @@ class FileRenamer(QWidget):
         self.open_button.clicked.connect(self.open_file_dialog)
         grid.addWidget(self.open_button, 1, 0)
 
-        self.copy_check = QCheckBox("Copiar (mantém o original)")
+        self.copy_check = QCheckBox("Copia (mantem o original)")
         self.copy_check.setChecked(copy_mode)
         self.copy_check.stateChanged.connect(self.on_copy_mode_changed)
-        grid.addWidget(self.copy_check, 1, 1, 1, 2)
+        grid.addWidget(self.copy_check, 1, 1)
+
+        # Utilitarios de relatorio
+        self.scan_recursive_check = QCheckBox("Recursivo")
+        grid.addWidget(self.scan_recursive_check, 1, 2)
+
+        self.scan_button = QPushButton("Gerar relatorio da pasta")
+        self.scan_button.clicked.connect(self.on_generate_folder_report)
+        grid.addWidget(self.scan_button, 1, 3)
 
         self.drop_area = QLabel("Arraste e solte arquivos aqui.")
         self.drop_area.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.drop_area.setMinimumHeight(55)
         self.drop_area.setStyleSheet("border: 2px dashed gray; color: #404040; padding: 8px;")
-        grid.addWidget(self.drop_area, 2, 0, 1, 3)
+        grid.addWidget(self.drop_area, 2, 0, 1, 4)
 
         self.field_checkboxes: Dict[str, QCheckBox] = {}
         self.info_boxes: Dict[str, QLineEdit] = {}
@@ -313,18 +383,18 @@ class FileRenamer(QWidget):
 
             info_box = QLineEdit()
             info_box.setReadOnly(True)
-            grid.addWidget(info_box, start_row + offset, 1, 1, 2)
+            grid.addWidget(info_box, start_row + offset, 1, 1, 3)
             self.info_boxes[field] = info_box
 
         self._update_selected_fields_cache()
 
         preview_row = start_row + len(FIELD_ORDER)
-        self.preview_label = QLabel("Prévia do novo nome:")
+        self.preview_label = QLabel("Previa do novo nome:")
         grid.addWidget(self.preview_label, preview_row, 0)
 
         self.preview_line = QLineEdit()
         self.preview_line.setReadOnly(True)
-        grid.addWidget(self.preview_line, preview_row, 1, 1, 2)
+        grid.addWidget(self.preview_line, preview_row, 1, 1, 3)
 
         length_row = preview_row + 1
         self.length_label = QLabel("Limite de caracteres:")
@@ -335,28 +405,28 @@ class FileRenamer(QWidget):
         self.max_length_spin.setMaximum(255)
         self.max_length_spin.setValue(max_length)
         self.max_length_spin.valueChanged.connect(self.on_max_length_changed)
-        grid.addWidget(self.max_length_spin, length_row, 1, 1, 2)
+        grid.addWidget(self.max_length_spin, length_row, 1, 1, 3)
 
         status_row = length_row + 1
         self.status_label = QLabel(self._dependency_message)
         self.status_label.setWordWrap(True)
-        grid.addWidget(self.status_label, status_row, 0, 1, 3)
+        grid.addWidget(self.status_label, status_row, 0, 1, 4)
 
         progress_row = status_row + 1
         self.progress_bar = QProgressBar()
         self.progress_bar.setVisible(False)
         self.progress_bar.setMinimum(0)
         self.progress_bar.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        grid.addWidget(self.progress_bar, progress_row, 0, 1, 3)
+        grid.addWidget(self.progress_bar, progress_row, 0, 1, 4)
 
         log_row = progress_row + 1
-        self.log_label = QLabel("Histórico do processamento:")
+        self.log_label = QLabel("Historico do processamento:")
         grid.addWidget(self.log_label, log_row, 0)
 
         self.results_log = QPlainTextEdit()
         self.results_log.setReadOnly(True)
         self.results_log.setMinimumHeight(90)
-        self.results_log.setPlaceholderText("Os resultados serão exibidos aqui após a execução.")
+        self.results_log.setPlaceholderText("Os resultados serao exibidos aqui apos a execucao.")
         grid.addWidget(self.results_log, log_row, 1, 1, 2)
 
         button_row = log_row + 1
@@ -402,7 +472,7 @@ class FileRenamer(QWidget):
 
     def dropEvent(self, event):  # type: ignore[override]
         if self._thread is not None:
-            QMessageBox.warning(self, "Processo em andamento", "Aguarde o término da operação atual.")
+            QMessageBox.warning(self, "Processo em andamento", "Aguarde o termino da operacao atual.")
             return
         paths = [url.toLocalFile() for url in event.mimeData().urls() if url.isLocalFile()]
         if paths:
@@ -411,7 +481,7 @@ class FileRenamer(QWidget):
     # --- Interaction -----------------------------------------------------------------
     def open_file_dialog(self) -> None:
         if self._thread is not None:
-            QMessageBox.warning(self, "Processo em andamento", "Aguarde o término da operação atual.")
+            QMessageBox.warning(self, "Processo em andamento", "Aguarde o termino da operacao atual.")
             return
         start_dir = self.last_directory if Path(self.last_directory).exists() else str(Path.home())
         files, _ = QFileDialog.getOpenFileNames(
@@ -489,7 +559,7 @@ class FileRenamer(QWidget):
             choice = QMessageBox.question(
                 self,
                 "Nenhum campo selecionado",
-                "Nenhum campo está marcado para compor o novo nome. Deseja continuar usando o nome atual do arquivo?",
+                "Nenhum campo esta marcado para compor o novo nome. Deseja continuar usando o nome atual do arquivo?",
             )
             if choice != QMessageBox.StandardButton.Yes:
                 return
@@ -505,7 +575,7 @@ class FileRenamer(QWidget):
         self.progress_bar.setMaximum(len(files_snapshot))
         self.progress_bar.setValue(0)
         self.progress_bar.setFormat("")
-        self.status_label.setText("Iniciando renomeação...")
+        self.status_label.setText("Iniciando renomeacao...")
 
         self._thread = QThread(self)
         self._worker = RenameWorker(
@@ -533,13 +603,13 @@ class FileRenamer(QWidget):
         summary = "\n".join(results) if results else "Nenhum arquivo processado."
         self.results_log.setPlainText(summary)
         self.update_copy_button_state()
-        was_cancelled = bool(results and results[-1] == "Processo cancelado pelo usuário.")
-        title = "Operação cancelada" if was_cancelled else "Processo concluído"
+        was_cancelled = bool(results and results[-1] == "Processo cancelado pelo usuario.")
+        title = "Operacao cancelada" if was_cancelled else "Processo concluido"
         QMessageBox.information(self, title, summary)
         status_message = (
-            "Operação cancelada pelo usuário. Veja o histórico abaixo."
+            "Operacao cancelada pelo usuario. Veja o historico abaixo."
             if was_cancelled
-            else "Processo concluído. Veja o histórico abaixo."
+            else "Processo concluido. Veja o historico abaixo."
         )
         self.reset_state(status_message, clear_results=False)
 
@@ -565,7 +635,7 @@ class FileRenamer(QWidget):
         self.instructions.setText("Selecione ou arraste arquivos PDF/EPUB para gerar um novo nome.")
         for box in self.info_boxes.values():
             box.clear()
-            box.setPlaceholderText("Não disponível")
+            box.setPlaceholderText("Nao disponivel")
         if clear_results:
             self.results_log.clear()
         self.update_folder_button_state()
@@ -617,7 +687,7 @@ class FileRenamer(QWidget):
             self.status_label.setText("Nenhum resultado para copiar ainda.")
             return
         QApplication.clipboard().setText(text)
-        self.status_label.setText("Histórico copiado para a área de transferência.")
+        self.status_label.setText("Historico copiado para a area de transferencia.")
 
     def _update_selected_fields_cache(self) -> None:
         self._selected_fields_cached = tuple(
@@ -631,7 +701,7 @@ class FileRenamer(QWidget):
     def _apply_metadata_to_fields(self, metadata: Dict[str, Optional[str]]) -> None:
         for field, box in self.info_boxes.items():
             value = metadata.get(field)
-            box.setText(value if value else "Não disponível")
+            box.setText(value if value else "Nao disponivel")
 
     def start_preview_loader(self, file_path: Path) -> None:
         self._stop_preview_thread(wait=False)
@@ -672,14 +742,14 @@ class FileRenamer(QWidget):
         if error and error != "__cancelled__":
             message = str(error)
             self.current_metadata = {field: None for field in FIELD_ORDER}
-            self._set_info_boxes_text("Não disponível")
+            self._set_info_boxes_text("Nao disponivel")
             first_file = Path(self.selected_files[0]) if self.selected_files else None
             self.status_label.setText(f"Falha ao extrair metadados: {message}")
             if first_file is not None:
                 QMessageBox.warning(
                     self,
                     "Erro ao extrair metadados",
-                    f"Não foi possível ler os metadados de {first_file.name}: {message}",
+                    f"Nao foi possivel ler os metadados de {first_file.name}: {message}",
                 )
             self.update_preview()
             return
@@ -696,7 +766,7 @@ class FileRenamer(QWidget):
             return
         self._cancel_requested = True
         self.cancel_btn.setEnabled(False)
-        self.status_label.setText("Cancelando operação...")
+        self.status_label.setText("Cancelando operacao...")
         self._worker.cancel()
         self._thread.requestInterruption()
 
@@ -733,7 +803,7 @@ class FileRenamer(QWidget):
             choice = QMessageBox.question(
                 self,
                 "Processo em andamento",
-                "Uma renomeação está em progresso. Deseja cancelar e fechar a aplicação?",
+                "Uma renomeacao esta em progresso. Deseja cancelar e fechar a aplicacao?",
             )
             if choice != QMessageBox.StandardButton.Yes:
                 event.ignore()
@@ -743,7 +813,7 @@ class FileRenamer(QWidget):
                 QMessageBox.warning(
                     self,
                     "Encerramento em andamento",
-                    "A operação ainda está finalizando. Tente novamente em alguns instantes.",
+                    "A operacao ainda esta finalizando. Tente novamente em alguns instantes.",
                 )
                 event.ignore()
                 return
@@ -759,6 +829,38 @@ class FileRenamer(QWidget):
         if isinstance(value, str) and value:
             return value
         return str(Path.home())
+
+    def on_generate_folder_report(self) -> None:
+        """Executa varredura de metadados na pasta escolhida e gera JSON/HTML em reports/."""
+        from PyQt6.QtWidgets import QFileDialog
+        import subprocess
+        import sys as _sys
+
+        start_dir = self.last_directory or str(Path.home())
+        directory = QFileDialog.getExistingDirectory(self, "Selecione a pasta para relatorio", start_dir)
+        if not directory:
+            return
+
+        recursive = self.scan_recursive_check.isChecked()
+        extractor = Path(__file__).resolve().parent / "renomeia_livro_renew_v2.py"
+        if not extractor.exists():
+            QMessageBox.warning(self, "Ferramenta ausente", "renomeia_livro_renew_v2.py nao encontrada.")
+            return
+        args = [_sys.executable, str(extractor), directory]
+        if recursive:
+            args.append("-r")
+        self.status_label.setText("Gerando relatorio da pasta...")
+        try:
+            result = subprocess.run(args, capture_output=True, text=True, timeout=600)
+        except Exception as exc:
+            QMessageBox.critical(self, "Erro na varredura", str(exc))
+            self.status_label.setText(self._dependency_message)
+            return
+        if result.returncode == 0:
+            QMessageBox.information(self, "Concluido", "Relatorio gerado em reports/. Abra no navegador ou use o Dashboard.")
+        else:
+            QMessageBox.warning(self, "Falha", result.stderr or result.stdout or "Falha desconhecida.")
+        self.status_label.setText(self._dependency_message)
 
 
 if __name__ == "__main__":
