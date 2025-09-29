@@ -41,8 +41,10 @@ def test_html_report_generation():
         file_path = Path(__file__).parent.parent / html_file
         if file_path.exists():
             content = file_path.read_text(encoding='utf-8')
-            assert "<html>" in content.lower(), f"Arquivo {html_file} não é HTML válido"
-            assert "</html>" in content.lower(), f"Arquivo {html_file} não tem fechamento HTML"
+            # Aceita <html> ou <html ...>
+            cl = content.lower()
+            assert "<html" in cl, f"Arquivo {html_file} nao e HTML valido"
+            assert "</html>" in cl, f"Arquivo {html_file} nao tem fechamento HTML"
 
 def test_performance_data_structure():
     """Testa estrutura dos dados de performance"""
