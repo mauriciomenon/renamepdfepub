@@ -23,6 +23,134 @@ class RenamePDFEPUBInterface:
         self.reports_dir = self.project_root / "reports"
         self.live_stats_file = self.reports_dir / "live_api_stats.json"
         self.default_scan_path = str(self.books_dir)
+        self.db_path = self.project_root / "metadata_cache.db"
+
+    # --------------------------- DB helpers ---------------------------------
+    def _connect_db(self):
+        import sqlite3
+        return sqlite3.connect(str(self.db_path))
+
+    def _canonical_publisher(self, name: str) -> str:
+        try:
+            # Prefer shared normalization
+            from core.normalization import canonical_publisher
+            return canonical_publisher(name)
+        except Exception:
+            # Fallback minimal
+            if not name:
+                return ""
+            n = name.strip()
+            if not n or n.lower() == 'unknown':
+                return ""
+            return n
+
+    def _query_catalog(self, filters: dict, limit: int = 200, offset: int = 0):
+        if not self.db_path.exists():
+            return []
+        where = []
+        params = []
+        def like(field, value):
+            where.append(f"{field} LIKE ?")
+            params.append(f"%{value}%")
+        if filters.get('q_title'):
+            like('title', filters['q_title'])
+        if filters.get('q_author'):
+            like('authors', filters['q_author'])
+        if filters.get('q_publisher'):
+            like('publisher', filters['q_publisher'])
+        if filters.get('q_year'):
+            like('published_date', filters['q_year'])
+        if filters.get('only_isbn'):
+            where.append("(COALESCE(isbn_13,'') <> '' OR COALESCE(isbn_10,'') <> '')")
+        if filters.get('only_incomplete'):
+            where.append("(title IS NULL OR title='' OR publisher IS NULL OR publisher='' OR publisher='Unknown' OR authors IS NULL OR authors='' OR published_date IS NULL OR published_date='' OR published_date='Unknown')")
+        sql = """
+            SELECT isbn_10, isbn_13, title, authors, publisher, published_date, confidence_score, source, file_path, timestamp
+            FROM metadata_cache
+        """
+        if where:
+            sql += " WHERE " + " AND ".join(where)
+        sql += " ORDER BY timestamp DESC LIMIT ? OFFSET ?"
+        params.extend([int(limit), int(offset)])
+        try:
+            with self._connect_db() as conn:
+                cur = conn.execute(sql, params)
+                rows = cur.fetchall()
+            results = []
+            for r in rows:
+                isbn10, isbn13, title, authors, publisher, published_date, conf, source, fpath, ts = r
+                display_publisher = self._canonical_publisher(publisher or '')
+                display_authors = authors or ''
+                if display_authors.lower() == 'unknown':
+                    display_authors = ''
+                display_title = title or ''
+                if display_title.lower() == 'unknown':
+                    display_title = ''
+                display_year = (published_date or '')
+                if display_year.lower() == 'unknown':
+                    display_year = ''
+                results.append({
+                    'ISBN-13': isbn13 or '',
+                    'ISBN-10': isbn10 or '',
+                    'Título': display_title,
+                    'Autores': display_authors,
+                    'Editora': display_publisher,
+                    'Ano': display_year,
+                    'Confiança': conf or 0.0,
+                    'Fonte': source or '',
+                    'Arquivo': fpath or ''
+                })
+            return results
+        except Exception:
+            return []
+
+    def _query_incomplete(self, limit: int = 200):
+        """Retorna registros com campos faltantes (para export/inspeção)."""
+        if not self.db_path.exists():
+            return []
+        sql = (
+            "SELECT isbn_13, isbn_10, title, authors, publisher, published_date, "
+            "confidence_score, source, file_path, timestamp "
+            "FROM metadata_cache WHERE "
+            "(title IS NULL OR title='' OR title='Unknown' "
+            "OR authors IS NULL OR authors='' OR authors='Unknown' "
+            "OR publisher IS NULL OR publisher='' OR publisher='Unknown' "
+            "OR published_date IS NULL OR published_date='' OR published_date='Unknown' "
+            ") ORDER BY timestamp DESC LIMIT ?"
+        )
+        try:
+            with self._connect_db() as conn:
+                rows = conn.execute(sql, (int(limit),)).fetchall()
+            out = []
+            for r in rows:
+                out.append({
+                    'ISBN-13': r[0] or '',
+                    'ISBN-10': r[1] or '',
+                    'Título': '' if not r[2] or str(r[2]).lower() == 'unknown' else r[2],
+                    'Autores': '' if not r[3] or str(r[3]).lower() == 'unknown' else r[3],
+                    'Editora': self._canonical_publisher(r[4] or ''),
+                    'Ano': '' if not r[5] or str(r[5]).lower() == 'unknown' else r[5],
+                    'Confiança': r[6] or 0.0,
+                    'Fonte': r[7] or '',
+                    'Arquivo': r[8] or '',
+                    'Timestamp': r[9] or 0,
+                })
+            return out
+        except Exception:
+            return []
+
+    @staticmethod
+    def _rows_to_csv(rows: list) -> str:
+        if not rows:
+            return ''
+        import csv
+        import io
+        buf = io.StringIO()
+        w = csv.DictWriter(buf, fieldnames=list(rows[0].keys()))
+        w.writeheader()
+        for r in rows:
+            w.writerow(r)
+        return buf.getvalue()
 
     def _tail_file(self, path: Path, max_lines: int = 200):
         try:
@@ -181,6 +309,7 @@ class RenamePDFEPUBInterface:
         per_api = live.get("per_api") or {}
         open_circuits = live.get("open_circuits") or []
         open_detail = live.get("open_circuits_detail") or {}
+        disabled_apis = live.get("disabled_apis") or []
 
         c1, c2, c3 = st.columns(3)
         c1.metric("Chamadas (total)", overall.get("total", 0))
@@ -193,11 +322,51 @@ class RenamePDFEPUBInterface:
                 secs = float(open_detail.get(api, 0.0))
                 items.append(f"{api} (~{int(secs)}s)")
             st.warning("Circuito aberto: " + ", ".join(items))
+        if disabled_apis:
+            st.warning("APIs desabilitadas: " + ", ".join(sorted(disabled_apis)))
 
         st.write("Fontes")
         # Tabela simples com os principais campos
         for api, stats in sorted(per_api.items()):
             st.write(f"- {api}: {stats.get('success',0)}/{stats.get('total',0)} ({stats.get('success_rate',0.0):.1f}%) - {stats.get('avg_time',0.0):.2f}s")
+            errs = stats.get('errors') or {}
+            recents = stats.get('recent_errors') or []
+            rfail = stats.get('recent_failures') or []
+            if errs or recents or rfail:
+                with st.expander(f"Detalhes de {api}"):
+                    if errs:
+                        st.write("Erros (contagem):")
+                        for et, cnt in sorted(errs.items(), key=lambda x: x[1], reverse=True):
+                            st.write(f"  - {et}: {cnt}")
+                    if recents:
+                        from datetime import datetime
+                        st.write("Recentes:")
+                        for r in recents[-10:]:
+                            ts = int(r.get('ts', 0))
+                            ts_h = datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S') if ts else '—'
+                            st.write(f"  - {r.get('type','?')} @ {ts_h}")
+                    if rfail:
+                        from datetime import datetime
+                        st.write("Falhas recentes:")
+                        cols = st.columns([2,1,5,3])
+                        with cols[0]:
+                            st.caption("Tipo")
+                        with cols[1]:
+                            st.caption("Status")
+                        with cols[2]:
+                            st.caption("Mensagem")
+                        with cols[3]:
+                            st.caption("ISBN")
+                        for f in rfail[-10:]:
+                            c = st.columns([2,1,5,3])
+                            with c[0]:
+                                st.write(f.get('type',''))
+                            with c[1]:
+                                st.write(f.get('status',''))
+                            with c[2]:
+                                st.write(f.get('msg',''))
+                            with c[3]:
+                                st.write(f.get('isbn',''))
 
         # Visualizacao rapida (top 10 por volume de chamadas)
         if per_api:
@@ -372,6 +541,85 @@ class RenamePDFEPUBInterface:
         
         for name, desc in algorithms.items():
             st.info(f"**{name}**: {desc}")
+
+    def render_catalog(self):
+        """Navegador do banco de dados (metadata_cache.db)."""
+        st.header("Catálogo (DB)")
+        if not self.db_path.exists():
+            st.info("Banco metadata_cache.db não encontrado. Rode uma varredura para gerar dados.")
+            return
+        with st.expander("Filtros"):
+            c1, c2, c3, c4 = st.columns(4)
+            with c1:
+                q_title = st.text_input("Título contém", value="")
+            with c2:
+                q_author = st.text_input("Autor contém", value="")
+            with c3:
+                q_publisher = st.text_input("Editora contém", value="")
+            with c4:
+                q_year = st.text_input("Ano contém", value="")
+            c5, c6, c7 = st.columns(3)
+            with c5:
+                only_isbn = st.checkbox("Somente com ISBN", value=False)
+            with c6:
+                only_incomplete = st.checkbox("Somente incompletos", value=False)
+            with c7:
+                limit = st.number_input("Limite", min_value=10, max_value=2000, value=200, step=10)
+        filters = {
+            'q_title': q_title.strip(),
+            'q_author': q_author.strip(),
+            'q_publisher': q_publisher.strip(),
+            'q_year': q_year.strip(),
+            'only_isbn': only_isbn,
+            'only_incomplete': only_incomplete,
+        }
+        rows = self._query_catalog(filters, limit=int(limit), offset=0)
+        st.caption(f"{len(rows)} registros")
+        if rows:
+            try:
+                import pandas as pd
+                df = pd.DataFrame(rows)
+                st.dataframe(df, use_container_width=True, hide_index=True)
+            except Exception:
+                for r in rows[:200]:
+                    st.write(f"- {r['Título']} | {r['Autores']} | {r['Editora']} | {r['Ano']} | {r['ISBN-13']}")
+            # Export
+            csv_data = self._rows_to_csv(rows)
+            st.download_button(
+                label="Exportar CSV (filtros aplicados)",
+                data=csv_data,
+                file_name="catalogo_filtrado.csv",
+                mime="text/csv"
+            )
+        st.subheader("Operações")
+        cc1, cc2, cc3 = st.columns(3)
+        with cc1:
+            if st.button("Rescan cache (core)"):
+                start_cli = self.project_root / 'start_cli.py'
+                subprocess.Popen([sys.executable, str(start_cli), 'scan', '--rescan-cache'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                st.info("Rescan iniciado em background")
+        with cc2:
+            thr = st.number_input("Confiança < para update-cache", min_value=0.0, max_value=1.0, value=0.7, step=0.05)
+            if st.button("Update cache (core)"):
+                start_cli = self.project_root / 'start_cli.py'
+                subprocess.Popen([sys.executable, str(start_cli), 'scan', '--update-cache', '--confidence-threshold', str(thr)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                st.info("Update-cache iniciado em background")
+        with cc3:
+            if st.button("Normalizar editoras no DB"):
+                try:
+                    updated = 0
+                    with self._connect_db() as conn:
+                        cur = conn.execute("SELECT rowid, publisher FROM metadata_cache")
+                        rows = cur.fetchall()
+                        for rowid, pub in rows:
+                            canon = self._canonical_publisher(pub or '')
+                            if canon and canon != (pub or ''):
+                                conn.execute("UPDATE metadata_cache SET publisher=? WHERE rowid=?", (canon, rowid))
+                                updated += 1
+                        conn.commit()
+                    st.success(f"Editoras normalizadas: {updated} registros atualizados")
+                except Exception as e:
+                    st.error(f"Falha na normalização: {e}")
     
     def run(self):
         """Interface principal"""
@@ -395,15 +643,32 @@ class RenamePDFEPUBInterface:
 
         page = st.sidebar.radio(
             "Navegacao:",
-            ["Dashboard", "Processar Livros", "Algoritmos", "Sistema"]
+            [
+                "Dashboard",
+                "Catálogo (DB)",
+                "Scan Avançado",
+                "Operações em Lote",
+                "Processar Livros",
+                "Algoritmos",
+                "Launchers",
+                "Sistema"
+            ]
         )
         
         if page == "Dashboard":
             self.render_dashboard()
+        elif page == "Catálogo (DB)":
+            self.render_catalog()
+        elif page == "Scan Avançado":
+            self.render_scan_advanced()
+        elif page == "Operações em Lote":
+            self.render_batch_ops()
         elif page == "Processar Livros":
             self.render_books_section()
         elif page == "Algoritmos":
             self.render_algorithms_info()
+        elif page == "Launchers":
+            self.render_launchers()
         elif page == "Sistema":
             st.header("Sistema")
             st.write(f"Pasta de livros: `{self.books_dir}`")
@@ -414,11 +679,11 @@ class RenamePDFEPUBInterface:
     def _run_scan(self, directory: Path, recursive: bool = False, threads: int = 4):
         """Executa varredura de metadados sem renomear e atualiza os relatorios."""
         try:
-            extractor = self.project_root / "src" / "gui" / "renomeia_livro_renew_v2.py"
-            if not extractor.exists():
-                st.error("Ferramenta de varredura nao encontrada.")
+            start_cli = self.project_root / "start_cli.py"
+            if not start_cli.exists():
+                st.error("start_cli.py nao encontrado.")
                 return
-            args = [sys.executable, str(extractor), str(directory)]
+            args = [sys.executable, str(start_cli), 'scan', str(directory)]
             if recursive:
                 args.append("-r")
             args.extend(["-t", str(threads)])
@@ -431,7 +696,184 @@ class RenamePDFEPUBInterface:
                 st.error("Falha na varredura. Verifique os logs.")
                 st.code(result.stderr or result.stdout)
         except Exception as e:
-            st.error(f"Erro ao executar varredura: {e}")
+                st.error(f"Erro ao executar varredura: {e}")
+
+    def render_db_gaps(self):
+        """Resumo de campos faltantes + ações de recuperação"""
+        st.header("Caça-Furos (DB)")
+        if not self.db_path.exists():
+            st.info("Banco metadata_cache.db não encontrado. Rode uma varredura para gerar dados.")
+            return
+        try:
+            with self._connect_db() as conn:
+                def _count(sql: str) -> int:
+                    return conn.execute(sql).fetchone()[0]
+                total = _count("SELECT COUNT(*) FROM metadata_cache")
+                missing_title = _count("SELECT COUNT(*) FROM metadata_cache WHERE title IS NULL OR title='' OR title='Unknown'")
+                missing_auth = _count("SELECT COUNT(*) FROM metadata_cache WHERE authors IS NULL OR authors='' OR authors='Unknown'")
+                missing_pub = _count("SELECT COUNT(*) FROM metadata_cache WHERE publisher IS NULL OR publisher='' OR publisher='Unknown'")
+                missing_year = _count("SELECT COUNT(*) FROM metadata_cache WHERE published_date IS NULL OR published_date='' OR published_date='Unknown'")
+                missing_isbn = _count("SELECT COUNT(*) FROM metadata_cache WHERE (COALESCE(isbn_13,'')='' AND COALESCE(isbn_10,'')='')")
+        except Exception as e:
+            st.error(f"Erro ao consultar DB: {e}")
+            return
+        c1, c2, c3, c4, c5 = st.columns(5)
+        c1.metric("Registros", total)
+        c2.metric("Sem título", missing_title)
+        c3.metric("Sem autores", missing_auth)
+        c4.metric("Sem editora", missing_pub)
+        c5.metric("Sem ano", missing_year)
+        st.metric(label="Sem ISBN (10/13)", value=missing_isbn)
+
+        st.subheader("Ações de recuperação")
+        a1, a2 = st.columns(2)
+        start_cli = self.project_root / 'start_cli.py'
+        with a1:
+            if st.button("Tentar completar (update-cache, confiança<0.99)"):
+                subprocess.Popen([sys.executable, str(start_cli), 'scan', '--update-cache', '--confidence-threshold', '0.99'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                st.info("Atualização iniciada. Acompanhe no Dashboard.")
+        with a2:
+            if st.button("Reprocessar tudo (rescan-cache)"):
+                subprocess.Popen([sys.executable, str(start_cli), 'scan', '--rescan-cache'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                st.info("Rescan-cache iniciado.")
+        st.subheader("Exportar incompletos")
+        inc_rows = self._query_incomplete(limit=2000)
+        if inc_rows:
+            csv_inc = self._rows_to_csv(inc_rows)
+            st.download_button(
+                label=f"Exportar {len(inc_rows)} registros incompletos (CSV)",
+                data=csv_inc,
+                file_name="incompletos.csv",
+                mime="text/csv"
+            )
+        else:
+            st.caption("Nenhum registro incompleto encontrado (ou DB ausente)")
+
+    # ----------------------- New advanced/ops pages -------------------------
+    def render_scan_advanced(self):
+        st.header("Scan Avançado (Core)")
+        c1, c2, c3 = st.columns(3)
+        with c1:
+            directory = st.text_input("Diretório", value=str(self.books_dir))
+            recursive = st.checkbox("Recursivo", value=False)
+            subdirs = st.text_input("Subdirs (sep por vírgula)", value="")
+        with c2:
+            threads = st.number_input("Threads", min_value=1, max_value=32, value=4)
+            output = st.text_input("JSON de saída (opcional)", value="")
+            rename = st.checkbox("Renomear após scan", value=False)
+        with c3:
+            cycles = st.number_input("scan-cycles: ciclos", min_value=1, max_value=100, value=3)
+            time_secs = st.number_input("scan-cycles: tempo (s)", min_value=0, max_value=36000, value=0)
+
+        start_cli = self.project_root / 'start_cli.py'
+        if not start_cli.exists():
+            st.error("start_cli.py não encontrado")
+            return
+
+        def _args_base():
+            args = [sys.executable, str(start_cli), 'scan', directory]
+            if recursive:
+                args.append('-r')
+            if subdirs.strip():
+                args += ['--subdirs', subdirs]
+            args += ['-t', str(int(threads))]
+            if output.strip():
+                args += ['-o', output]
+            if rename:
+                args.append('--rename')
+            return args
+
+        st.subheader("Executar")
+        b1, b2, b3 = st.columns(3)
+        with b1:
+            if st.button("Scan agora"):
+                subprocess.Popen(_args_base(), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                st.info("Scan iniciado em background")
+        with b2:
+            if st.button("Scan-cycles agora"):
+                cyc = [sys.executable, str(start_cli), 'scan-cycles', directory, '--cycles', str(int(cycles)), '-t', str(int(threads))]
+                if time_secs > 0:
+                    cyc += ['--time-seconds', str(int(time_secs))]
+                subprocess.Popen(cyc, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                st.info("Scan-cycles iniciado em background")
+        with b3:
+            if st.button("Abrir relatório (último)"):
+                st.write("Abra a aba Dashboard; ele busca o JSON/HTML mais recente em reports/.")
+
+        st.subheader("Manutenção do Cache")
+        m1, m2 = st.columns(2)
+        with m1:
+            if st.button("Rescan-cache (core)"):
+                subprocess.Popen([sys.executable, str(start_cli), 'scan', '--rescan-cache'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                st.info("Rescan-cache iniciado.")
+        with m2:
+            thr = st.number_input("Update-cache: confiança <", min_value=0.0, max_value=1.0, value=0.7, step=0.05)
+            if st.button("Update-cache (core)"):
+                subprocess.Popen([sys.executable, str(start_cli), 'scan', '--update-cache', '--confidence-threshold', str(thr)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                st.info("Update-cache iniciado.")
+
+    def render_batch_ops(self):
+        st.header("Operações em Lote")
+        st.caption("Ações de batch para muitos arquivos/relatórios, sem precisar saber comandos.")
+        # Rename-existing
+        re_col1, re_col2 = st.columns([3,1])
+        with re_col1:
+            report_path = st.text_input("Relatório JSON para renomear (rename-existing)", value="")
+        with re_col2:
+            apply = st.checkbox("Aplicar (mover)", value=False)
+            copy = st.checkbox("Copiar", value=False)
+        if st.button("Executar rename-existing"):
+            if not report_path.strip():
+                st.warning("Informe o caminho do relatório JSON.")
+            else:
+                cmd = [sys.executable, str(self.project_root / 'start_cli.py'), 'rename-existing', '--report', report_path]
+                if apply:
+                    cmd.append('--apply')
+                if copy:
+                    cmd.append('--copy')
+                subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                st.info("rename-existing iniciado em background")
+
+        st.markdown("---")
+        # Rename-search
+        rs_col1, rs_col2 = st.columns([3,1])
+        with rs_col1:
+            rs_dir = st.text_input("Diretório para rename-search", value=str(self.books_dir))
+        with rs_col2:
+            rs_rename = st.checkbox("Renomear", value=True)
+        if st.button("Executar rename-search"):
+            cmd = [sys.executable, str(self.project_root / 'start_cli.py'), 'rename-search', rs_dir]
+            if rs_rename:
+                cmd.append('--rename')
+            subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            st.info("rename-search iniciado em background")
+
+        st.markdown("---")
+        # Normalizar editoras
+        st.subheader("Normalização de Editoras (DB)")
+        nb1, nb2 = st.columns(2)
+        with nb1:
+            if st.button("Dry-run (mostrar alterações)"):
+                subprocess.Popen([sys.executable, str(self.project_root / 'scripts' / 'normalize_publishers.py'), '--dry-run'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                st.info("Dry-run iniciado (veja saída no terminal).")
+        with nb2:
+            if st.button("Aplicar (backup automático)"):
+                subprocess.Popen([sys.executable, str(self.project_root / 'scripts' / 'normalize_publishers.py'), '--apply'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                st.info("Normalização iniciada.")
+
+    def render_launchers(self):
+        st.header("Launchers")
+        st.caption("Acesso fácil a todas as interfaces e ferramentas.")
+        c1, c2, c3 = st.columns(3)
+        with c1:
+            if st.button("Abrir Streamlit (este)"):
+                st.info("Você já está na interface Streamlit.")
+        with c2:
+            if st.button("Launcher Web"):
+                subprocess.Popen([sys.executable, str(self.project_root / 'start_web.py')])
+        with c3:
+            if st.button("Launcher PyQt6"):
+                subprocess.Popen([sys.executable, str(self.project_root / 'scripts' / 'launcher_pyqt6.py')])
 
 def main():
     interface = RenamePDFEPUBInterface()

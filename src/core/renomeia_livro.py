@@ -493,7 +493,7 @@ class MetadataCache:
                         metadata.get('isbn_13'),
                         metadata.get('title'),
                         ', '.join(normalize_authors(metadata.get('authors', []))),
-                        metadata.get('publisher'),
+                        canonical_publisher(metadata.get('publisher')),
                         metadata.get('published_date'),
                         metadata.get('confidence_score', 0.0),
                         metadata.get('source'),
@@ -535,7 +535,7 @@ class MetadataCache:
                         """, (
                             metadata.title,
                             ', '.join(normalize_authors(metadata.authors)),
-                            metadata.publisher,
+                            canonical_publisher(metadata.publisher),
                             metadata.published_date,
                             metadata.confidence_score,
                             metadata.source,
@@ -580,7 +580,7 @@ class MetadataCache:
                 """, (
                     metadata.get('title'),
                     ', '.join(normalize_authors(metadata.get('authors', []))),
-                    metadata.get('publisher'),
+                    canonical_publisher(metadata.get('publisher')),
                     metadata.get('published_date'),
                     metadata.get('confidence_score', 0.0),
                     metadata.get('source'),
@@ -3620,16 +3620,22 @@ class MetadataFetcher:
         # Categorize and record error
         if isinstance(error, requests.exceptions.Timeout):
             logger.warning(f"{api_name} timeout for ISBN {isbn}: {error_msg}")
-            self.metrics.add_error(api_name, 'timeout')
+            self.metrics.add_error(api_name, 'Timeout')
+            self.metrics.add_failure(api_name, error_type='Timeout', status=None, message=error_msg, isbn=isbn)
         elif isinstance(error, requests.exceptions.ConnectionError):
             logger.error(f"{api_name} connection error for ISBN {isbn}: {error_msg}")
-            self.metrics.add_error(api_name, 'connection')
+            self.metrics.add_error(api_name, 'ConnectionError')
+            self.metrics.add_failure(api_name, error_type='ConnectionError', status=None, message=error_msg, isbn=isbn)
         elif isinstance(error, requests.exceptions.HTTPError):
-            logger.error(f"{api_name} HTTP error for ISBN {isbn}: {error_msg}")
-            self.metrics.add_error(api_name, 'http')
+            status = getattr(getattr(error, 'response', None), 'status_code', None)
+            etype = f"HTTP_{status}" if status is not None else 'HTTPError'
+            logger.error(f"{api_name} HTTP error for ISBN {isbn}: {etype} {error_msg}")
+            self.metrics.add_error(api_name, etype)
+            self.metrics.add_failure(api_name, error_type=etype, status=status, message=error_msg, isbn=isbn)
         else:
             logger.error(f"{api_name} unexpected error for ISBN {isbn}: {error_type} - {error_msg}")
-            self.metrics.add_error(api_name, 'unexpected')
+            self.metrics.add_error(api_name, error_type)
+            self.metrics.add_failure(api_name, error_type=error_type, status=None, message=error_msg, isbn=isbn)
         
         # Record metrics for the failure
         self._log_api_metrics(api_name, False, 0.0)
@@ -5792,6 +5798,8 @@ class BookMetadataExtractor:
                     'success_rate': float(s.get('success_rate', 0.0)),
                     'avg_time': float(s.get('avg_response_time', 0.0)),
                     'errors': s.get('error_types', {}),
+                    'recent_errors': s.get('recent_errors', []),
+                    'recent_failures': s.get('recent_failures', []),
                 }
                 total_all += total
                 success_all += success
@@ -7522,6 +7530,8 @@ class MetricsCollector:
         self._init_logging()
         self.metrics = defaultdict(list)
         self.errors = defaultdict(Counter)
+        self.recent = defaultdict(list)    # api_name -> [{'type': str, 'ts': float}]
+        self.failures = defaultdict(list)  # api_name -> [{'type': str, 'status': int|None, 'msg': str, 'isbn': str|None, 'ts': float}]
         
     def add_metric(self, api_name: str, response_time: float, success: bool):
         self.metrics[api_name].append({
@@ -7555,6 +7565,37 @@ class MetricsCollector:
 
     def add_error(self, api_name: str, error_type: str):
         self.errors[api_name][error_type] += 1
+        try:
+            import time as _t
+            rec = self.recent[api_name]
+            rec.append({'type': error_type, 'ts': _t.time()})
+            # Keep only last 10
+            if len(rec) > 10:
+                del rec[:-10]
+        except Exception:
+            pass
+
+    def add_failure(self, api_name: str, *, error_type: str, status: Optional[int] = None,
+                    message: str = '', isbn: Optional[str] = None):
+        try:
+            import time as _t
+            msg = (message or '')
+            if len(msg) > 140:
+                msg = msg[:137] + '...'
+            entry = {
+                'type': error_type,
+                'status': int(status) if status is not None else None,
+                'msg': msg,
+                'isbn': isbn or None,
+                'ts': _t.time(),
+            }
+            lst = self.failures[api_name]
+            lst.append(entry)
+            # Keep last 20
+            if len(lst) > 20:
+                del lst[:-20]
+        except Exception:
+            pass
         
     def get_api_stats(self, api_name: str) -> Dict:
         """Retorna estatísticas para uma API."""
@@ -7574,7 +7615,9 @@ class MetricsCollector:
             'success_count': success_count,
             'success_rate': (success_count / len(recent_metrics)) * 100,
             'avg_response_time': statistics.mean(m['response_time'] for m in recent_metrics),
-            'error_types': dict(self.errors[api_name])
+            'error_types': dict(self.errors[api_name]),
+            'recent_errors': list(self.recent.get(api_name, [])),
+            'recent_failures': list(self.failures.get(api_name, []))
         }
         
     def get_overall_stats(self) -> Dict:

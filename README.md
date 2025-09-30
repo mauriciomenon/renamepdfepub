@@ -40,6 +40,23 @@ python3 start_cli.py algorithms
 python3 run_tests.py
 ```
 
+## Resumo de Comandos (atalhos)
+
+```bash
+# Scan (core canônico)
+python3 start_cli.py scan books -r -t 8 -o out.json
+
+# Launcher CLI unificado
+python3 scripts/launcher_cli.py scan books -r -t 8 -o out.json
+
+# Launchers dedicados
+python3 scripts/launcher_pyqt6.py
+python3 scripts/launcher_streamlit.py
+
+# Normalizar editoras no DB
+python3 scripts/normalize_publishers.py --apply
+```
+
 ## Algoritmos Disponiveis
 
 | Algoritmo | Precisao | Especializacao |
@@ -401,3 +418,19 @@ MIT License - veja LICENSE para detalhes.
 - **Organizacao do Projeto**: [docs/PROJECT_ORGANIZATION.md](docs/PROJECT_ORGANIZATION.md)
 - **Testes**: `python3 run_tests.py`
 - **Issues**: GitHub Issues
+## Qual script usar (resumo direto)
+
+- `python3 start_cli.py scan <diretorio> [opcoes]`
+  - Varre e gera relatórios (core canônico). Exemplos: `-r` (recursivo), `-t N` threads, `-o saida.json`, `--rename`, `--rescan-cache`, `--update-cache --confidence-threshold 0.7`.
+
+- `python3 start_cli.py scan-cycles <diretorio> --cycles N [opcoes]`
+  - Executa varreduras repetidas (útil para acompanhar métricas em tempo real).
+
+- `python3 start_web.py`
+  - Interface Streamlit. Dashboard mostra métricas; “Catálogo (DB)” navega o `metadata_cache.db` (com filtros e ações de manutenção).
+
+- `python3 scripts/normalize_publishers.py --dry-run` (ou `--apply`)
+  - Normaliza nomes de editoras no `metadata_cache.db` (Casa do Código, Manning, OReilly, Novatec, Alta Books, Packt). `--apply` cria backup automático do DB.
+
+- `python3 simple_report_generator.py --json <arquivo.json> [--output out.html]`
+  - Gera HTML a partir de um JSON de relatório existente.
