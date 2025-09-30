@@ -47,6 +47,48 @@ class RenamePDFEPUBInterface:
     def _query_catalog(self, filters: dict, limit: int = 200, offset: int = 0):
         if not self.db_path.exists():
             return []
+
+    # --------------------------- Naming helpers -----------------------------
+    @staticmethod
+    def _clean_string_name(s: str, underscore: bool = False) -> str:
+        import unicodedata
+        if not s:
+            return ''
+        s = unicodedata.normalize('NFKD', s)
+        s = s.encode('ASCII', 'ignore').decode('ASCII')
+        out = ''.join(ch if (ch.isalnum() or ch in (' ', '-', '_')) else ' ' for ch in s)
+        out = ' '.join(out.split())
+        if underscore:
+            out = out.replace(' ', '_')
+        return out.strip()
+
+    @staticmethod
+    def _first_two_authors_str(authors: str) -> str:
+        parts = [a.strip() for a in (authors or '').split(',') if a.strip()]
+        return ', '.join(parts[:2]) if parts else ''
+
+    def _build_name_from_row(self, row: dict, pattern: str, underscore: bool) -> str:
+        title = row.get('Título') or ''
+        if str(title).lower() == 'unknown':
+            title = ''
+        authors = row.get('Autores') or ''
+        if str(authors).lower() == 'unknown':
+            authors = ''
+        publisher = row.get('Editora') or ''
+        if str(publisher).lower() == 'unknown':
+            publisher = ''
+        year = row.get('Ano') or ''
+        if str(year).lower() == 'unknown':
+            year = ''
+        isbn = row.get('ISBN-13') or row.get('ISBN-10') or ''
+        author_disp = self._first_two_authors_str(authors)
+        return pattern.format(
+            title=self._clean_string_name(title, underscore),
+            author=self._clean_string_name(author_disp, underscore),
+            year=self._clean_string_name(year, underscore),
+            publisher=self._clean_string_name(publisher, underscore),
+            isbn=self._clean_string_name(isbn, underscore)
+        ).strip()
         where = []
         params = []
         def like(field, value):
@@ -645,6 +687,25 @@ class RenamePDFEPUBInterface:
                 file_name="catalogo_filtrado.csv",
                 mime="text/csv"
             )
+            # Pré-visualização de renome (lote)
+            with st.expander("Pré-visualizar renome (lote)"):
+                patt = st.text_input("Padrão", value="{title} - {author} - {year}", key="catalog_batch_pattern")
+                und = st.checkbox("Usar underscore", value=False, key="catalog_batch_underscore")
+                try:
+                    preview_rows = []
+                    for r in rows[:500]:
+                        newbase = self._build_name_from_row(r, patt, und)
+                        ext = Path(r.get('Arquivo','')).suffix
+                        preview_rows.append({'Arquivo': r.get('Arquivo',''), 'Proposto': (newbase + ext) if newbase else ''})
+                    prev_csv = self._rows_to_csv(preview_rows)
+                    st.download_button(
+                        label=f"Baixar pré-visualização ({len(preview_rows)} itens)",
+                        data=prev_csv,
+                        file_name="preview_renome.csv",
+                        mime="text/csv"
+                    )
+                except Exception as e:
+                    st.caption(f"Falha na pré-visualização: {e}")
             # Abrir pasta do arquivo (por seleção)
             try:
                 file_choices = [r['Arquivo'] for r in rows if r.get('Arquivo')]
