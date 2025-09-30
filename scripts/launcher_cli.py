@@ -262,6 +262,23 @@ def main():
             cmd.append('--apply')
         sys.exit(run(cmd + extra))
 
+    # db-maintenance
+    dbm = sub.add_parser('db-maintenance', help='DB maintenance: --stats/--vacuum/--backup')
+    dbm.add_argument('--db', default='metadata_cache.db')
+    dbm.add_argument('--stats', action='store_true')
+    dbm.add_argument('--vacuum', action='store_true')
+    dbm.add_argument('--backup', action='store_true')
+    if args.cmd == 'db-maintenance':
+        script = ROOT / 'scripts' / 'db_maintenance.py'
+        cmd = [sys.executable, str(script), '--db', args.db]
+        if args.stats:
+            cmd.append('--stats')
+        if args.vacuum:
+            cmd.append('--vacuum')
+        if args.backup:
+            cmd.append('--backup')
+        sys.exit(run(cmd + extra))
+
     if args.cmd == 'db-gaps':
         import sqlite3
         db = Path(args.db)

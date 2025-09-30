@@ -878,6 +878,34 @@ class RenamePDFEPUBInterface:
             st.write(f"Total de livros: {len(self.get_books_list())}")
             if not self.books_dir.exists():
                 st.warning("Pasta nao encontrada. Ajuste o caminho na barra lateral.")
+            # DB maintenance shortcuts
+            st.subheader("DB Maintenance")
+            col1, col2, col3 = st.columns(3)
+            db_path = self.db_path
+            with col1:
+                if st.button("DB Stats"):
+                    try:
+                        script = self.project_root / 'scripts' / 'db_maintenance.py'
+                        res = subprocess.run([sys.executable, str(script), '--db', str(db_path), '--stats'], capture_output=True, text=True, timeout=30)
+                        st.code((res.stdout or '') + (res.stderr or ''))
+                    except Exception as e:
+                        st.warning(f"Falha: {e}")
+            with col2:
+                if st.button("DB Backup"):
+                    try:
+                        script = self.project_root / 'scripts' / 'db_maintenance.py'
+                        res = subprocess.run([sys.executable, str(script), '--db', str(db_path), '--backup'], capture_output=True, text=True, timeout=30)
+                        st.code((res.stdout or '') + (res.stderr or ''))
+                    except Exception as e:
+                        st.warning(f"Falha: {e}")
+            with col3:
+                if st.button("DB Vacuum"):
+                    try:
+                        script = self.project_root / 'scripts' / 'db_maintenance.py'
+                        res = subprocess.run([sys.executable, str(script), '--db', str(db_path), '--vacuum'], capture_output=True, text=True, timeout=30)
+                        st.code((res.stdout or '') + (res.stderr or ''))
+                    except Exception as e:
+                        st.warning(f"Falha: {e}")
 
     def _run_scan(self, directory: Path, recursive: bool = False, threads: int = 4):
         """Executa varredura de metadados sem renomear e atualiza os relatorios."""
