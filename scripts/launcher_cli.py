@@ -94,6 +94,15 @@ def main():
     sub.add_parser('rescan-cache', help='Reprocess entire cache (core)')
     uc = sub.add_parser('update-cache', help='Update low-confidence cache entries (core)')
     uc.add_argument('--confidence-threshold', type=float, default=0.7)
+    # update-cache-filtered
+    ucf = sub.add_parser('update-cache-filtered', help='Update cache using filters (only-incomplete/low-confidence)')
+    ucf.add_argument('--db', default='metadata_cache.db')
+    grp = ucf.add_mutually_exclusive_group(required=True)
+    grp.add_argument('--only-incomplete', action='store_true')
+    grp.add_argument('--low-confidence', action='store_true')
+    ucf.add_argument('--confidence-threshold', type=float, default=0.7)
+    ucf.add_argument('--limit', type=int, default=500)
+    ucf.add_argument('--dry-run', action='store_true')
 
     # normalize publishers
     npb = sub.add_parser('normalize-publishers', help='Normalize publisher names in DB')
@@ -167,6 +176,21 @@ def main():
 
     if args.cmd == 'update-cache':
         cmd = [sys.executable, str(start_cli), 'scan', '--update-cache', '--confidence-threshold', str(args.confidence_threshold)]
+        sys.exit(run(cmd + extra))
+
+    if args.cmd == 'update-cache-filtered':
+        script = ROOT / 'scripts' / 'update_cache_filtered.py'
+        cmd = [
+            sys.executable, str(script), '--db', args.db,
+            '--confidence-threshold', str(args.confidence_threshold),
+            '--limit', str(args.limit)
+        ]
+        if args.only_incomplete:
+            cmd.append('--only-incomplete')
+        if args.low_confidence:
+            cmd.append('--low-confidence')
+        if args.dry_run:
+            cmd.append('--dry-run')
         sys.exit(run(cmd + extra))
 
     if args.cmd == 'normalize-publishers':

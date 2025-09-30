@@ -776,7 +776,7 @@ class RenamePDFEPUBInterface:
         st.metric(label="Sem ISBN (10/13)", value=missing_isbn)
 
         st.subheader("Ações de recuperação")
-        a1, a2 = st.columns(2)
+        a1, a2, a3 = st.columns(3)
         start_cli = self.project_root / 'start_cli.py'
         with a1:
             if st.button("Tentar completar (update-cache, confiança<0.99)"):
@@ -786,6 +786,13 @@ class RenamePDFEPUBInterface:
             if st.button("Reprocessar tudo (rescan-cache)"):
                 subprocess.Popen([sys.executable, str(start_cli), 'scan', '--rescan-cache'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
                 st.info("Rescan-cache iniciado.")
+        with a3:
+            limit = st.number_input("Limite (apenas mostrados)", min_value=10, max_value=5000, value=500, step=10)
+            if st.button("Atualizar apenas mostrados"):
+                script = self.project_root / 'scripts' / 'update_cache_filtered.py'
+                cmd = [sys.executable, str(script), '--only-incomplete', '--limit', str(int(limit))]
+                subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                st.info("Atualização filtrada iniciada.")
         st.subheader("Exportar incompletos")
         inc_rows = self._query_incomplete(limit=2000)
         if inc_rows:
