@@ -652,6 +652,7 @@ class RenamePDFEPUBInterface:
                     c1, c2, c3 = st.columns([3,1,1])
                     with c1:
                         sel = st.selectbox("Selecionar arquivo:", file_choices)
+                        st.text_input("Caminho (copiar)", value=sel, key="catalog_path_copy", disabled=True)
                     with c2:
                         if st.button("Abrir pasta"):
                             ok = self._open_in_os(sel)
@@ -659,9 +660,13 @@ class RenamePDFEPUBInterface:
                                 st.warning("Não foi possível abrir a pasta. Verifique o caminho.")
                     with c3:
                         # Renomear agora (DB)
+                        patt = st.text_input("Padrão de nome", value="{title} - {author} - {year}")
+                        und = st.checkbox("Usar underscore", value=False)
                         if st.button("Renomear (DB)"):
                             script = self.project_root / 'scripts' / 'rename_from_db.py'
-                            cmd = [sys.executable, str(script), '--file', sel, '--apply']
+                            cmd = [sys.executable, str(script), '--file', sel, '--apply', '--pattern', patt]
+                            if und:
+                                cmd.append('--underscore')
                             try:
                                 subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
                                 st.info("Renomeação iniciada (verifique pasta).")
@@ -670,7 +675,9 @@ class RenamePDFEPUBInterface:
                         # Pré-visualizar novo nome
                         if st.button("Pré-visualizar nome"):
                             script = self.project_root / 'scripts' / 'rename_from_db.py'
-                            cmd = [sys.executable, str(script), '--file', sel]
+                            cmd = [sys.executable, str(script), '--file', sel, '--pattern', patt]
+                            if und:
+                                cmd.append('--underscore')
                             try:
                                 res = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
                                 out = (res.stdout or '') + (res.stderr or '')
@@ -873,6 +880,7 @@ class RenamePDFEPUBInterface:
                     c1, c2, c3, c4 = st.columns([3,1,1,1])
                     with c1:
                         sel = st.selectbox("Selecionar arquivo:", file_choices)
+                        st.text_input("Caminho (copiar)", value=sel, key="gaps_path_copy", disabled=True)
                     with c2:
                         if st.button("Abrir pasta"):
                             ok = self._open_in_os(sel)
@@ -888,9 +896,14 @@ class RenamePDFEPUBInterface:
                         script = self.project_root / 'scripts' / 'rename_from_db.py'
                         b1, b2 = st.columns(2)
                         with b1:
+                            patt2 = st.text_input("Padrão de nome", value="{title} - {author} - {year}", key="gaps_pattern")
+                            und2 = st.checkbox("Usar underscore", value=False, key="gaps_underscore")
                             if st.button("Pré-visualizar nome (DB)"):
                                 try:
-                                    res = subprocess.run([sys.executable, str(script), '--file', sel], capture_output=True, text=True, timeout=30)
+                                    cmd = [sys.executable, str(script), '--file', sel, '--pattern', patt2]
+                                    if und2:
+                                        cmd.append('--underscore')
+                                    res = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
                                     out = (res.stdout or '') + (res.stderr or '')
                                     st.code(out.strip() or '(sem saída)')
                                 except Exception as e:
@@ -898,7 +911,10 @@ class RenamePDFEPUBInterface:
                         with b2:
                             if st.button("Renomear (DB)"):
                                 try:
-                                    subprocess.Popen([sys.executable, str(script), '--file', sel, '--apply'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                                    cmd = [sys.executable, str(script), '--file', sel, '--apply', '--pattern', patt2]
+                                    if und2:
+                                        cmd.append('--underscore')
+                                    subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
                                     st.info("Renomeação iniciada (verifique pasta).")
                                 except Exception as e:
                                     st.warning(f"Falha ao acionar renomeação: {e}")
