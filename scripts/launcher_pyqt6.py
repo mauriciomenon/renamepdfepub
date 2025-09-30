@@ -38,6 +38,7 @@ class Launcher(QWidget):
         tabs = QTabWidget(self)
         tabs.addTab(self._build_scan_tab(), 'Scan')
         tabs.addTab(self._build_maintenance_tab(), 'Maintenance')
+        tabs.addTab(self._build_dbgaps_tab(), 'DB Gaps')
         tabs.addTab(self._build_tools_tab(), 'Tools')
 
         layout = QVBoxLayout()
@@ -127,6 +128,70 @@ class Launcher(QWidget):
         v.addStretch(1)
         return w
 
+    def _build_dbgaps_tab(self):
+        w = QWidget()
+        v = QVBoxLayout(w)
+        # Summary labels
+        self.lbl_total = QLabel('Registros: —')
+        self.lbl_title = QLabel('Sem título: —')
+        self.lbl_auth = QLabel('Sem autores: —')
+        self.lbl_pub = QLabel('Sem editora: —')
+        self.lbl_year = QLabel('Sem ano: —')
+        self.lbl_isbn = QLabel('Sem ISBN: —')
+        btn_refresh = QPushButton('Atualizar contagem')
+        btn_refresh.clicked.connect(self._refresh_dbgaps)
+
+        v.addWidget(self.lbl_total)
+        v.addWidget(self.lbl_title)
+        v.addWidget(self.lbl_auth)
+        v.addWidget(self.lbl_pub)
+        v.addWidget(self.lbl_year)
+        v.addWidget(self.lbl_isbn)
+        v.addWidget(btn_refresh)
+
+        # Export CSV
+        btn_export = QPushButton('Exportar incompletos (CSV)')
+        def _do_export():
+            out, _ = QFileDialog.getSaveFileName(self, 'Salvar CSV', str(ROOT / 'incompletos.csv'))
+            if out:
+                cmd = [
+                    sys.executable, str(ROOT / 'scripts' / 'launcher_cli.py'), 'db-export',
+                    '--only-incomplete', '--limit', '20000', '--output', out
+                ]
+                run_cmd(cmd)
+        btn_export.clicked.connect(_do_export)
+        v.addWidget(btn_export)
+
+        w.setLayout(v)
+        return w
+
+    def _refresh_dbgaps(self):
+        import sqlite3
+        db = ROOT / 'metadata_cache.db'
+        if not db.exists():
+            QMessageBox.information(self, 'Info', 'metadata_cache.db não encontrado')
+            return
+        try:
+            with sqlite3.connect(str(db)) as conn:
+                cur = conn.cursor()
+                def _count(sql: str) -> int:
+                    cur.execute(sql)
+                    return cur.fetchone()[0]
+                total = _count("SELECT COUNT(*) FROM metadata_cache")
+                missing_title = _count("SELECT COUNT(*) FROM metadata_cache WHERE title IS NULL OR title='' OR title='Unknown'")
+                missing_auth = _count("SELECT COUNT(*) FROM metadata_cache WHERE authors IS NULL OR authors='' OR authors='Unknown'")
+                missing_pub = _count("SELECT COUNT(*) FROM metadata_cache WHERE publisher IS NULL OR publisher='' OR publisher='Unknown'")
+                missing_year = _count("SELECT COUNT(*) FROM metadata_cache WHERE published_date IS NULL OR published_date='' OR published_date='Unknown'")
+                missing_isbn = _count("SELECT COUNT(*) FROM metadata_cache WHERE (COALESCE(isbn_13,'')='' AND COALESCE(isbn_10,'')='')")
+            self.lbl_total.setText(f'Registros: {total}')
+            self.lbl_title.setText(f'Sem título: {missing_title}')
+            self.lbl_auth.setText(f'Sem autores: {missing_auth}')
+            self.lbl_pub.setText(f'Sem editora: {missing_pub}')
+            self.lbl_year.setText(f'Sem ano: {missing_year}')
+            self.lbl_isbn.setText(f'Sem ISBN: {missing_isbn}')
+        except Exception as e:
+            QMessageBox.critical(self, 'Erro', str(e))
+
     def _choose_dir(self):
         d = QFileDialog.getExistingDirectory(self, 'Select Directory', self.dir_edit.text())
         if d:
@@ -158,4 +223,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-

@@ -104,6 +104,45 @@ class RenamePDFEPUBInterface:
         except Exception:
             return []
 
+    @staticmethod
+    def _open_in_os(path: str) -> bool:
+        """Abre a pasta do arquivo no SO (local)."""
+        import platform, subprocess
+        try:
+            p = Path(path)
+            if not p.exists():
+                return False
+            system = platform.system().lower()
+            folder = str(p.parent)
+            if 'darwin' in system or 'mac' in system:
+                subprocess.Popen(['open', folder])
+            elif 'windows' in system:
+                subprocess.Popen(['explorer', folder])
+            else:
+                subprocess.Popen(['xdg-open', folder])
+            return True
+        except Exception:
+            return False
+
+    @staticmethod
+    def _open_file_os(path: str) -> bool:
+        """Abre o arquivo no SO (local)."""
+        import platform, subprocess
+        try:
+            p = Path(path)
+            if not p.exists():
+                return False
+            system = platform.system().lower()
+            if 'darwin' in system or 'mac' in system:
+                subprocess.Popen(['open', str(p)])
+            elif 'windows' in system:
+                subprocess.Popen(['explorer', str(p)])
+            else:
+                subprocess.Popen(['xdg-open', str(p)])
+            return True
+        except Exception:
+            return False
+
     def _query_incomplete(self, limit: int = 200):
         """Retorna registros com campos faltantes (para export/inspeção)."""
         if not self.db_path.exists():
@@ -591,6 +630,17 @@ class RenamePDFEPUBInterface:
                 file_name="catalogo_filtrado.csv",
                 mime="text/csv"
             )
+            # Abrir pasta do arquivo (por seleção)
+            try:
+                file_choices = [r['Arquivo'] for r in rows if r.get('Arquivo')]
+                if file_choices:
+                    sel = st.selectbox("Abrir pasta do arquivo:", file_choices)
+                    if st.button("Abrir pasta"):
+                        ok = self._open_in_os(sel)
+                        if not ok:
+                            st.warning("Não foi possível abrir a pasta. Verifique o caminho.")
+            except Exception:
+                pass
         st.subheader("Operações")
         cc1, cc2, cc3 = st.columns(3)
         with cc1:
@@ -746,6 +796,25 @@ class RenamePDFEPUBInterface:
                 file_name="incompletos.csv",
                 mime="text/csv"
             )
+            # Abrir pasta/arquivo
+            try:
+                file_choices = [r['Arquivo'] for r in inc_rows if r.get('Arquivo')]
+                if file_choices:
+                    c1, c2, c3 = st.columns([3,1,1])
+                    with c1:
+                        sel = st.selectbox("Selecionar arquivo:", file_choices)
+                    with c2:
+                        if st.button("Abrir pasta"):
+                            ok = self._open_in_os(sel)
+                            if not ok:
+                                st.warning("Não foi possível abrir a pasta.")
+                    with c3:
+                        if st.button("Abrir arquivo"):
+                            ok = self._open_file_os(sel)
+                            if not ok:
+                                st.warning("Não foi possível abrir o arquivo.")
+            except Exception:
+                pass
         else:
             st.caption("Nenhum registro incompleto encontrado (ou DB ausente)")
 

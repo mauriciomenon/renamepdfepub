@@ -40,12 +40,14 @@ from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional, Set, Tuple, Union
 try:
     from core.metadata_utils import normalize_authors
+    from core.normalization import canonical_publisher
 except ModuleNotFoundError:
     # Fallback when executed as a script (ensure 'src' is on sys.path)
     import sys as _sys
     from pathlib import Path as _Path
     _sys.path.insert(0, str(_Path(__file__).resolve().parents[1]))
     from core.metadata_utils import normalize_authors
+    from core.normalization import canonical_publisher
 from urllib.parse import quote
 
 # Third-party Imports: HTTP and API Related
