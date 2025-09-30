@@ -842,11 +842,11 @@ class FileRenamer(QWidget):
             return
 
         recursive = self.scan_recursive_check.isChecked()
-        extractor = Path(__file__).resolve().parent / "renomeia_livro_renew_v2.py"
-        if not extractor.exists():
-            QMessageBox.warning(self, "Ferramenta ausente", "renomeia_livro_renew_v2.py nao encontrada.")
+        start_cli = Path(__file__).resolve().parents[2] / 'start_cli.py'
+        if not start_cli.exists():
+            QMessageBox.warning(self, "Ferramenta ausente", "start_cli.py nao encontrado.")
             return
-        args = [_sys.executable, str(extractor), directory]
+        args = [_sys.executable, str(start_cli), 'scan', directory]
         if recursive:
             args.append("-r")
         self.status_label.setText("Gerando relatorio da pasta...")

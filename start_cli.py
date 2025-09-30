@@ -117,11 +117,11 @@ Exemplos:
         subprocess.run(cmd)
 
     elif args.command == 'rename-search':
-        # Busca metadados e renomeia (modo completo)
+        # Busca metadados (core) e renomeia (modo completo)
         import subprocess
-        extractor = Path(__file__).parent / 'src' / 'gui' / 'renomeia_livro_renew_v2.py'
+        extractor = Path(__file__).parent / 'src' / 'core' / 'renomeia_livro.py'
         if not extractor.exists():
-            print("[ERROR] src/gui/renomeia_livro_renew_v2.py não encontrado")
+            print("[ERROR] src/core/renomeia_livro.py não encontrado")
             sys.exit(1)
         argv = extras
         if '--rename' not in argv:
