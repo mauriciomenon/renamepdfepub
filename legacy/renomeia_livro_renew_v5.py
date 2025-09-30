@@ -5275,7 +5275,7 @@ class BookMetadataExtractor:
                 <tr>
                     <td>{Path(book['file_path']).name}</td>
                     <td>{book['title']}</td>
-                    <td>{', '.join(book['authors'])}</td>
+                    <td>{', '.join([a if isinstance(a, str) else str(a) for a in book['authors']])}</td>
                     <td>{book['publisher']}</td>
                     <td>{book['isbn_13'] or book['isbn_10']}</td>
                     <td>{book['source']}</td>
@@ -6564,7 +6564,7 @@ class BookMetadataExtractor:
                     <tr>
                         <td>{Path(result.file_path).name}</td>
                         <td>{result.title}</td>
-                        <td>{', '.join(result.authors)}</td>
+                        <td>{', '.join([a if isinstance(a, str) else str(a) for a in result.authors])}</td>
                         <td>{result.isbn_13 or result.isbn_10 or 'N/A'}</td>
                         <td>{result.publisher}</td>
                         <td>{result.source}</td>
@@ -6989,7 +6989,7 @@ class BookMetadataExtractor:
             <tr>
                 <td>{Path(book['file_path']).name}</td>
                 <td>{book['title']}</td>
-                <td>{', '.join(book['authors'])}</td>
+                <td>{', '.join([a if isinstance(a, str) else str(a) for a in book['authors']])}</td>
                 <td>{book['publisher']}</td>
                 <td>{book['isbn_13'] or book['isbn_10']}</td>
                 <td>{book['source']}</td>
@@ -7048,8 +7048,43 @@ class BookMetadataExtractor:
                 # Se precisar truncar, tenta não cortar no meio de uma palavra
                 title = title[:max_title_length].rsplit('_', 1)[0] + '...'
             
-            # Pega no máximo os dois primeiros autores
-            authors = clean_string(', '.join(metadata.authors[:2]))
+            # Pega no máximo os dois primeiros autores (normalizando estruturas)
+            def _norm_authors(vals):
+                res = []
+                if vals is None:
+                    return res
+                if isinstance(vals, (str, int, float)):
+                    return [str(vals)]
+                for v in vals:
+                    if v is None:
+                        continue
+                    if isinstance(v, (str, int, float)):
+                        s = str(v).strip()
+                        if s:
+                            res.append(s)
+                    elif isinstance(v, dict):
+                        name = v.get('name') or v.get('full_name') or ''
+                        if not name:
+                            g = v.get('given') or v.get('first') or ''
+                            f = v.get('family') or v.get('last') or ''
+                            name = f"{g} {f}".strip()
+                        if name:
+                            res.append(str(name))
+                    elif isinstance(v, (list, tuple, set)):
+                        for y in _norm_authors(list(v)):
+                            res.append(y)
+                    else:
+                        s = str(v).strip()
+                        if s:
+                            res.append(s)
+                # dedup preservando ordem
+                seen = set(); out = []
+                for s in res:
+                    if s not in seen:
+                        seen.add(s); out.append(s)
+                return out
+            na = _norm_authors(getattr(metadata, 'authors', []))[:2]
+            authors = clean_string(', '.join(na)) if na else 'Unknown'
             
             # Extrai o ano da data de publicação
             if metadata.published_date and '-' in metadata.published_date:
@@ -8534,3 +8569,14 @@ def main():
         sys.exit(1)
 if __name__ == "__main__":
     main()
+"""
+===============================================================================
+DEPRECATED RUNNER (LEGACY)
+-------------------------------------------------------------------------------
+Este arquivo não é mais o pipeline canônico. O CLI (scan/scan-cycles) agora
+usa o core: `src/core/renomeia_livro.py`.
+
+Mantenha este arquivo apenas como referência. NÃO MODIFIQUE. Qualquer melhoria
+deve ser aplicada no core e, se necessário, portado daqui para lá.
+===============================================================================
+"""

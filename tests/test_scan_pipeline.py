@@ -15,6 +15,7 @@ import time
 import shutil
 import subprocess
 from pathlib import Path
+import pytest
 
 
 def _make_fake_books(tmp: Path) -> None:
@@ -24,9 +25,10 @@ def _make_fake_books(tmp: Path) -> None:
     (tmp / "weird_file_name_without_year.pdf").write_bytes(b"%PDF-1.4\n%EOF\n")
 
 
+@pytest.mark.integration
 def test_scan_and_html_report(tmp_path: Path):
     root = Path(__file__).parent.parent
-    extractor = root / "src" / "gui" / "renomeia_livro_renew_v2.py"
+    extractor = root / "src" / "core" / "renomeia_livro.py"
     try:
         import tqdm  # type: ignore
     except Exception:
@@ -70,6 +72,7 @@ def test_scan_and_html_report(tmp_path: Path):
     assert all(ord(c) < 128 for c in content), "Non-ASCII chars found in HTML"
 
 
+@pytest.mark.integration
 def test_scan_cycles_runs_multiple(tmp_path: Path):
     root = Path(__file__).parent.parent
     cli = root / "start_cli.py"
@@ -93,3 +96,4 @@ def test_scan_cycles_runs_multiple(tmp_path: Path):
     ]
     res = subprocess.run(cmd, capture_output=True, text=True, cwd=root, timeout=60)
     assert res.returncode in (0, 1), "scan-cycles should complete without crashing"
+import pytest

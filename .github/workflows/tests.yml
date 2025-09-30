@@ -21,6 +21,13 @@ jobs:
       - name: Run unit/integration (no slow)
         run: |
           python -m pytest -q -k "not slow"
+      - name: Upload JUnit report (unit)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: junit-unit
+          path: junit-unit.xml
+        continue-on-error: true
 
   perf:
     runs-on: ubuntu-latest
@@ -37,5 +44,35 @@ jobs:
           pip install pytest tqdm
       - name: Run slow tests
         run: |
-          python -m pytest -q -m slow
+          python -m pytest -q -m slow --junitxml=junit-slow.xml
+      - name: Upload JUnit report (slow)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: junit-slow
+          path: junit-slow.xml
+        continue-on-error: true
 
+  integration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt || true
+          pip install pytest tqdm
+      - name: Run integration tests
+        run: |
+          python -m pytest -q -m integration --junitxml=junit-integration.xml
+      - name: Upload JUnit report (integration)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: junit-integration
+          path: junit-integration.xml
+        continue-on-error: true

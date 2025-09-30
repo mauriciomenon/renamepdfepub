@@ -38,6 +38,14 @@ from dataclasses import dataclass, asdict
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional, Set, Tuple, Union
+try:
+    from core.metadata_utils import normalize_authors
+except ModuleNotFoundError:
+    # Fallback when executed as a script (ensure 'src' is on sys.path)
+    import sys as _sys
+    from pathlib import Path as _Path
+    _sys.path.insert(0, str(_Path(__file__).resolve().parents[1]))
+    from core.metadata_utils import normalize_authors
 from urllib.parse import quote
 
 # Third-party Imports: HTTP and API Related
@@ -262,6 +270,8 @@ class BookMetadata:
     file_path: Optional[str] = None
     file_paths: Optional[List[str]] = None  # Nova propriedade para múltiplos arquivos
     formats: Optional[List[str]] = None     # Nova propriedade para formatos
+
+    
     
 class MetadataCache:
     """
@@ -482,7 +492,7 @@ class MetadataCache:
                         metadata.get('isbn_10'),
                         metadata.get('isbn_13'),
                         metadata.get('title'),
-                        ', '.join(metadata.get('authors', [])),
+                        ', '.join(normalize_authors(metadata.get('authors', []))),
                         metadata.get('publisher'),
                         metadata.get('published_date'),
                         metadata.get('confidence_score', 0.0),
@@ -524,7 +534,7 @@ class MetadataCache:
                             WHERE isbn_10 = ? OR isbn_13 = ?
                         """, (
                             metadata.title,
-                            ', '.join(metadata.authors),
+                            ', '.join(normalize_authors(metadata.authors)),
                             metadata.publisher,
                             metadata.published_date,
                             metadata.confidence_score,
@@ -569,7 +579,7 @@ class MetadataCache:
                     WHERE isbn_10 = ? OR isbn_13 = ?
                 """, (
                     metadata.get('title'),
-                    ', '.join(metadata.get('authors', [])),
+                    ', '.join(normalize_authors(metadata.get('authors', []))),
                     metadata.get('publisher'),
                     metadata.get('published_date'),
                     metadata.get('confidence_score', 0.0),
@@ -1809,6 +1819,11 @@ class MetadataFetcher:
         self.validator = MetadataValidator()
         self.metrics = MetricsCollector()
 
+        # Circuit breaker simples por API
+        self._api_failure_counts = Counter()
+        self._api_circuit_until: Dict[str, float] = {}
+        self._api_base_cooldown = defaultdict(lambda: 30.0)
+
         # Configure APIs and confidence scores
         self._configure_apis()
         self._configure_confidence_scores()
@@ -1977,6 +1992,11 @@ class MetadataFetcher:
 
     def _make_request(self, api_name: str, url: str, **kwargs) -> requests.Response:
         """Make HTTP request with error handling and rate limiting."""
+        # Respeita circuito aberto (cooldown)
+        now = time.time()
+        if api_name in self._api_circuit_until and now < self._api_circuit_until[api_name]:
+            raise Exception(f"API {api_name} is currently unhealthy (cooldown)")
+
         if not self._check_api_health(api_name):
             raise Exception(f"API {api_name} is currently unhealthy")
 
@@ -2634,68 +2654,104 @@ class MetadataFetcher:
             return None
 
     def fetch_loc(self, isbn: str) -> Optional[BookMetadata]:
-            """Fetch from Library of Congress com melhor tratamento de XML."""
+            """Library of Congress: tenta JSON por ISBN primeiro; fallback a MARC XML tolerante."""
             try:
+                # 1) JSON por ISBN
+                json_url = f"https://www.loc.gov/books/?fo=json&q=ISBN:{isbn}"
+                try:
+                    resp_json = self._make_request('loc', json_url)
+                    if resp_json.status_code == 200:
+                        data = resp_json.json()
+                        results = data.get('results') or []
+                        if results:
+                            r0 = results[0]
+                            title = (r0.get('title') or '').strip()
+                            creators = r0.get('creator') or r0.get('contributors') or []
+                            if isinstance(creators, str):
+                                authors = [creators]
+                            else:
+                                authors = [c for c in creators if isinstance(c, str)]
+                            publisher = (r0.get('publisher') or 'Unknown').strip()
+                            published_date = (r0.get('date') or 'Unknown').strip()
+                            if title and authors:
+                                return BookMetadata(
+                                    title=title,
+                                    authors=normalize_authors(authors),
+                                    publisher=publisher or 'Unknown',
+                                    published_date=published_date or 'Unknown',
+                                    isbn_13=isbn if len(isbn) == 13 else None,
+                                    isbn_10=isbn if len(isbn) == 10 else None,
+                                    confidence_score=self.confidence_adjustments.get('loc', 0.75),
+                                    source='loc'
+                                )
+                except Exception:
+                    pass
+
+                # 2) Fallback MARC XML (pode falhar para ISBN)
                 url = f"https://lccn.loc.gov/{isbn}/marc21.xml"
                 response = self._make_request('loc', url)
                 
                 if response.status_code == 200:
-                    # Limpa o XML antes de processar
                     xml_text = response.text
                     xml_text = re.sub(r'[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]', '', xml_text)
                     xml_text = re.sub(r'<\?xml[^>]+\?>', '', xml_text)
-                    
                     try:
-                        # Tenta primeiro com namespace
                         root = ET.fromstring(xml_text)
                         ns = {'marc': 'http://www.loc.gov/MARC21/slim'}
-                        
                         title = root.find('.//marc:datafield[@tag="245"]/marc:subfield[@code="a"]', ns)
                         authors = root.findall('.//marc:datafield[@tag="100"]/marc:subfield[@code="a"]', ns)
                         publisher = root.find('.//marc:datafield[@tag="260"]/marc:subfield[@code="b"]', ns)
                         date = root.find('.//marc:datafield[@tag="260"]/marc:subfield[@code="c"]', ns)
-                        
+                        md = {
+                            'title': title.text.strip() if title is not None else '',
+                            'authors': [a.text.strip() for a in authors] if authors else ['Unknown'],
+                            'publisher': publisher.text.strip() if publisher is not None else 'Unknown',
+                            'published_date': date.text.strip() if date is not None else 'Unknown'
+                        }
+                        if not self.validator.validate_metadata(md, 'loc', isbn=isbn):
+                            return None
+                        return BookMetadata(
+                            title=md['title'],
+                            authors=normalize_authors(md['authors']),
+                            publisher=md['publisher'],
+                            published_date=md['published_date'],
+                            isbn_13=isbn if len(isbn) == 13 else None,
+                            isbn_10=isbn if len(isbn) == 10 else None,
+                            confidence_score=self.confidence_adjustments.get('loc', 0.75),
+                            source='loc'
+                        )
                     except ET.ParseError:
-                        if BeautifulSoup is None:
-                            if not self._bs4_missing_logged:
-                                self.logger.warning(
-                                    "Dependência opcional 'beautifulsoup4' não encontrada. Parser tolerante da Library of Congress será ignorado."
-                                )
-                                self._bs4_missing_logged = True
-                            return None
-
                         try:
-                            # Se falhar, tenta parsing mais tolerante com BeautifulSoup
-                            soup = BeautifulSoup(xml_text, 'xml')
+                            from bs4 import BeautifulSoup  # type: ignore
                         except Exception:
+                            raise
+                        soup = BeautifulSoup(xml_text, 'xml')
+                        def sf(tag, code):
+                            field = soup.find('datafield', {'tag': tag})
+                            if not field:
+                                return None
+                            sub = field.find('subfield', {'code': code})
+                            return sub.text.strip() if sub and sub.text else None
+                        title = sf('245', 'a')
+                        author_main = sf('100', 'a')
+                        author_add = sf('700', 'a')
+                        publisher = sf('260', 'b') or sf('264', 'b')
+                        published_date = sf('260', 'c') or sf('264', 'c')
+                        authors = [a for a in [author_main, author_add] if a]
+                        if not title or not authors or not publisher:
                             return None
-
-                        title = soup.find('subfield', {'code': 'a', 'tag': '245'})
-                        authors = soup.find_all('subfield', {'code': 'a', 'tag': '100'})
-                        publisher = soup.find('subfield', {'code': 'b', 'tag': '260'})
-                        date = soup.find('subfield', {'code': 'c', 'tag': '260'})
-                    
-                    metadata_dict = {
-                        'title': title.text.strip() if title is not None else '',
-                        'authors': [a.text.strip() for a in authors] if authors else ['Unknown'],
-                        'publisher': publisher.text.strip() if publisher is not None else 'Unknown',
-                        'published_date': date.text.strip() if date is not None else 'Unknown'
-                    }
-                    
-                    if not self.validator.validate_metadata(metadata_dict, 'loc', isbn=isbn):
-                        return None
-                        
-                    return BookMetadata(
-                        title=metadata_dict['title'],
-                        authors=metadata_dict['authors'],
-                        publisher=metadata_dict['publisher'],
-                        published_date=metadata_dict['published_date'],
-                        isbn_13=isbn if len(isbn) == 13 else None,
-                        isbn_10=isbn if len(isbn) == 10 else None,
-                        confidence_score=self.confidence_adjustments['loc'],
-                        source='loc'
-                    )
-                    
+                        if published_date:
+                            published_date = re.sub(r'[^\d]', '', published_date)
+                        return BookMetadata(
+                            title=title.strip(' /.,'),
+                            authors=normalize_authors([a.strip(' /.,') for a in authors]),
+                            publisher=publisher.strip(' /.,') if publisher else 'Unknown',
+                            published_date=published_date or 'Unknown',
+                            isbn_13=isbn if len(isbn) == 13 else None,
+                            isbn_10=isbn if len(isbn) == 10 else None,
+                            confidence_score=self.confidence_adjustments.get('loc', 0.75),
+                            source='loc'
+                        )
             except Exception as e:
                 self._handle_api_error('loc', e, isbn)
                 return None
@@ -3585,6 +3641,15 @@ class MetadataFetcher:
             # Increase retries and backoff for problematic APIs
             config['retries'] = min(5, config.get('retries', 2) + 1)
             config['backoff'] = min(4.0, config.get('backoff', 1.5) * 1.5)
+
+        # Open circuit with exponential cooldown for repeated failures
+        try:
+            self._api_failure_counts[api_name] += 1
+            factor = min(6, self._api_failure_counts[api_name])
+            cooldown = min(600.0, self._api_base_cooldown[api_name] * (2 ** (factor - 1)))
+            self._api_circuit_until[api_name] = time.time() + cooldown
+        except Exception:
+            pass
 
         # Update error tracking in cache if available
         if hasattr(self, 'cache') and self.cache:
@@ -5275,7 +5340,7 @@ class BookMetadataExtractor:
                 <tr>
                     <td>{Path(book['file_path']).name}</td>
                     <td>{book['title']}</td>
-                    <td>{', '.join(book['authors'])}</td>
+                    <td>{', '.join([a if isinstance(a, str) else str(a) for a in book['authors']])}</td>
                     <td>{book['publisher']}</td>
                     <td>{book['isbn_13'] or book['isbn_10']}</td>
                     <td>{book['source']}</td>
@@ -5349,7 +5414,7 @@ class BookMetadataExtractor:
         """
         # Extrai e limpa os valores
         title = self._clean_filename(metadata.get('title', 'Unknown Title'))[:50]
-        authors = metadata.get('authors', ['Unknown Author'])
+        authors = normalize_authors(metadata.get('authors', ['Unknown Author']))
         author = self._clean_filename(', '.join(authors[:2]))[:30]
         year = metadata.get('published_date', 'Unknown').split('-')[0]
         publisher = self._clean_filename(self.normalize_publisher(metadata.get('publisher', '')))
@@ -5473,7 +5538,10 @@ class BookMetadataExtractor:
                 for idx, book in enumerate(sorted(successful_results, key=lambda x: x.file_path), 1):
                     print(f"\n{idx}. {book.title}")
                     print(f"   Arquivo: {Path(book.file_path).name}")
-                    print(f"   Autores: {', '.join(book.authors)}")
+                    try:
+                        print(f"   Autores: {', '.join(normalize_authors(book.authors))}")
+                    except Exception:
+                        print("   Autores: Unknown")
                     print(f"   Editora: {book.publisher}")
                     print(f"   Data: {book.published_date}")
                     print(f"   ISBN-13: {book.isbn_13 or 'N/A'}")
@@ -5681,6 +5749,7 @@ class BookMetadataExtractor:
                         futures.append((future, group_files))
 
                 # Process results
+                processed_count = 0
                 for future, group_files in futures:
                     try:
                         metadata = future.result()
@@ -5695,8 +5764,61 @@ class BookMetadataExtractor:
                         self.logger.debug(f"Error processing {group_files[0]}: {str(e)}")
                     finally:
                         progress.advance(task)
+                        processed_count += 1
+                        # Exporta métricas vivas a cada 3 arquivos processados
+                        if processed_count % 3 == 0:
+                            try:
+                                self._export_live_stats()
+                            except Exception:
+                                pass
 
         return runtime_stats['successful_results']
+
+    def _export_live_stats(self):
+        """Exporta métricas agregadas para uso no Streamlit (reports/live_api_stats.json)."""
+        try:
+            stats = self.metrics.get_overall_stats()
+            total_all = 0
+            success_all = 0
+            per_api = {}
+            for api, s in stats.items():
+                if not s:
+                    continue
+                total = int(s.get('total_calls', 0))
+                success = int(s.get('success_count', round((s.get('success_rate', 0)/100)*total)))
+                per_api[api] = {
+                    'total': total,
+                    'success': success,
+                    'success_rate': float(s.get('success_rate', 0.0)),
+                    'avg_time': float(s.get('avg_response_time', 0.0)),
+                    'errors': s.get('error_types', {}),
+                }
+                total_all += total
+                success_all += success
+            disabled = [api for api, cfg in self.API_CONFIGS.items() if not cfg.get('enabled', True)]
+            # Circuit detail (tempo restante)
+            now_ts = time.time()
+            open_circuits = [api for api, until in self._api_circuit_until.items() if now_ts < until]
+            circuits_detail = {api: max(0.0, self._api_circuit_until.get(api, 0) - now_ts) for api in open_circuits}
+            payload = {
+                'timestamp': time.time(),
+                'overall': {
+                    'total': total_all,
+                    'success': success_all,
+                    'success_rate': (success_all/total_all*100) if total_all else 0.0,
+                },
+                'per_api': per_api,
+                'disabled_apis': disabled,
+                'open_circuits': sorted(open_circuits),
+                'open_circuits_detail': circuits_detail,
+            }
+            reports = Path('reports')
+            reports.mkdir(exist_ok=True)
+            out = reports / 'live_api_stats.json'
+            with open(out, 'w', encoding='utf-8') as f:
+                json.dump(payload, f, ensure_ascii=False, indent=2)
+        except Exception as e:
+            self.logger.debug(f"live stats export failed: {e}")
 
     def _print_summary(self, runtime_stats: Dict):
         """
@@ -6022,7 +6144,7 @@ class BookMetadataExtractor:
                 if result.publisher:
                     detail_parts.append(f"Publisher: {result.publisher}")
                 if result.authors:
-                    detail_parts.append(f"Authors: {', '.join(result.authors[:2])}")
+                    detail_parts.append(f"Authors: {', '.join(normalize_authors(result.authors)[:2])}")
                 details = " | ".join(detail_parts) if detail_parts else "Metadados recuperados"
             else:
                 status = "[red]✗ failed[/red]"
@@ -6564,7 +6686,7 @@ class BookMetadataExtractor:
                     <tr>
                         <td>{Path(result.file_path).name}</td>
                         <td>{result.title}</td>
-                        <td>{', '.join(result.authors)}</td>
+                        <td>{', '.join(normalize_authors(result.authors))}</td>
                         <td>{result.isbn_13 or result.isbn_10 or 'N/A'}</td>
                         <td>{result.publisher}</td>
                         <td>{result.source}</td>
@@ -6764,7 +6886,7 @@ class BookMetadataExtractor:
                 <tr>
                     <td>{Path(book['file_path']).name}</td>
                     <td>{book['title']}</td>
-                    <td>{', '.join(book['authors'])}</td>
+                    <td>{', '.join([a if isinstance(a, str) else str(a) for a in book['authors']])}</td>
                     <td>{book['isbn_13'] or book['isbn_10'] or 'N/A'}</td>
                     <td>{book['source']}</td>
                 </tr>"""
@@ -6989,7 +7111,7 @@ class BookMetadataExtractor:
             <tr>
                 <td>{Path(book['file_path']).name}</td>
                 <td>{book['title']}</td>
-                <td>{', '.join(book['authors'])}</td>
+                <td>{', '.join([a if isinstance(a, str) else str(a) for a in book['authors']])}</td>
                 <td>{book['publisher']}</td>
                 <td>{book['isbn_13'] or book['isbn_10']}</td>
                 <td>{book['source']}</td>
@@ -7049,7 +7171,7 @@ class BookMetadataExtractor:
                 title = title[:max_title_length].rsplit('_', 1)[0] + '...'
             
             # Pega no máximo os dois primeiros autores
-            authors = clean_string(', '.join(metadata.authors[:2]))
+            authors = clean_string(', '.join(normalize_authors(metadata.authors)[:2]))
             
             # Extrai o ano da data de publicação
             if metadata.published_date and '-' in metadata.published_date:
@@ -7449,6 +7571,7 @@ class MetricsCollector:
         
         return {
             'total_calls': len(recent_metrics),
+            'success_count': success_count,
             'success_rate': (success_count / len(recent_metrics)) * 100,
             'avg_response_time': statistics.mean(m['response_time'] for m in recent_metrics),
             'error_types': dict(self.errors[api_name])
@@ -8473,6 +8596,18 @@ def main():
                        help='Padrão para nomes de arquivo. Placeholders: {title}, {author}, {year}, {publisher}, {isbn}')
     
     args = parser.parse_args()
+
+    # Reduz verbosidade de loggers ruidosos
+    try:
+        for name in ('isbnlib', 'isbnlib.dev'):
+            lg = logging.getLogger(name)
+            lg.setLevel(logging.ERROR)
+            lg.propagate = False
+            if not lg.handlers:
+                lg.addHandler(logging.NullHandler())
+        logging.getLogger('urllib3').setLevel(logging.WARNING)
+    except Exception:
+        pass
     
     try:
         # Inicializa o extrator

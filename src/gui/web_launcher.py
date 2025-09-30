@@ -90,11 +90,12 @@ def run_scan_interactive():
         except Exception:
             threads = 4
 
-        extractor = Path(__file__).parent / 'renomeia_livro_renew_v2.py'
-        if not extractor.exists():
-            print("[ERROR] Ferramenta de varredura nao encontrada")
+        # Usa o CLI canônico (core)
+        start_cli = Path(__file__).parents[2] / 'start_cli.py'
+        if not start_cli.exists():
+            print("[ERROR] start_cli.py nao encontrado no raiz do projeto")
             return
-        cmd = [sys.executable, str(extractor), directory, '-t', str(threads)]
+        cmd = [sys.executable, str(start_cli), 'scan', directory, '-t', str(threads)]
         if recursive:
             cmd.append('-r')
         print("\nExecutando varredura...\n")

@@ -130,3 +130,30 @@ logs/
 
 ## Status
 **ORGANIZACAO CONCLUIDA** - Estrutura profissional e intuitiva implementada.
+
+## Core vs Algorithms
+
+Entrada canônica (Core)
+----------------------
+- CLI `start_cli.py` chama o pipeline do core em `src/core/renomeia_livro.py`
+  nos comandos `scan` e `scan-cycles`.
+- O pipeline gera relatórios HTML/JSON e exporta métricas ao vivo em `reports/`.
+
+Algoritmos (comparação/tuning)
+------------------------------
+- O subcomando `algorithms` utiliza `src/core/advanced_algorithm_comparison.py`
+  para avaliar heurísticas e estratégias — não substitui o fluxo canônico de
+  varredura.
+Deprecated (Legacy) Runners
+---------------------------
+- legacy/renomeia_livro_renew_v2.py
+- legacy/renomeia_livro_renew_v3.py
+- legacy/renomeia_livro_renew_v5.py
+
+Estes arquivos foram mantidos apenas para referência histórica. O pipeline
+canônico encontra-se em `src/core/renomeia_livro.py` e é chamado pelo CLI
+(`start_cli.py`) nos comandos `scan` e `scan-cycles`.
+
+Não modifique os arquivos legacy. Toda melhoria deve ser aplicada no core.
+Se for necessário portar uma solução antiga, copie-a para o core em forma
+modular (utils) e mantenha a documentação atualizada.

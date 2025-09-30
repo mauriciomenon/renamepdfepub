@@ -32,12 +32,16 @@ Exemplos:
     parser.add_argument('command', nargs='?', default='help',
                        choices=['algorithms', 'scan', 'scan-cycles', 'rename-existing', 'rename-search', 'launch', 'help'],
                        help='Comando a executar (default: help)')
+    parser.add_argument('extra', nargs=argparse.REMAINDER,
+                       help='Argumentos adicionais (diretorio, flags, etc.)')
     
     parser.add_argument('--version', '-v', action='version', 
                        version=f'RenamePDFEPUB v{VERSION}')
     
     args = parser.parse_args()
     
+    extras = list(args.extra or [])
+
     if args.command == 'algorithms':
         try:
             from src.core.advanced_algorithm_comparison import main as run_algorithms
@@ -47,29 +51,27 @@ Exemplos:
             print("Verifique se os arquivos estao na estrutura correta")
     
     elif args.command == 'scan':
-        # Varredura de metadados sem renomear por padrão
+        # Usa o pipeline canônico do core
         import subprocess
-        extractor = Path(__file__).parent / 'src' / 'gui' / 'renomeia_livro_renew_v2.py'
+        extractor = Path(__file__).parent / 'src' / 'core' / 'renomeia_livro.py'
         if not extractor.exists():
-            print("[ERROR] src/gui/renomeia_livro_renew_v2.py não encontrado")
+            print("[ERROR] src/core/renomeia_livro.py não encontrado")
             sys.exit(1)
-        # Sem parâmetros adicionais: mostra ajuda do extrator
-        if len(sys.argv) <= 2:
+        if not extras:
             subprocess.run([sys.executable, str(extractor), '--help'])
             return
-        # Encaminha parâmetros (sem --rename, a execução gera apenas relatórios JSON/HTML)
-        cmd = [sys.executable, str(extractor)] + sys.argv[2:]
+        cmd = [sys.executable, str(extractor)] + extras
         subprocess.run(cmd)
 
     elif args.command == 'scan-cycles':
-        # Executa varreduras repetidas por ciclos ou tempo total
+        # Executa varreduras repetidas com o pipeline canônico do core
         import time as _time
         import subprocess
-        extractor = Path(__file__).parent / 'src' / 'gui' / 'renomeia_livro_renew_v2.py'
+        extractor = Path(__file__).parent / 'src' / 'core' / 'renomeia_livro.py'
         if not extractor.exists():
-            print("[ERROR] src/gui/renomeia_livro_renew_v2.py não encontrado")
+            print("[ERROR] src/core/renomeia_livro.py não encontrado")
             sys.exit(1)
-        argv = sys.argv[2:]
+        argv = extras
         # Parâmetros opcionais: --cycles N, --time-seconds S
         def _get_flag(flag):
             if flag in argv:
@@ -80,6 +82,15 @@ Exemplos:
             return None
         cycles = _get_flag('--cycles') or 1
         time_limit = _get_flag('--time-seconds')
+        # Remove flags do controlador antes de repassar ao extrator
+        def _strip_flag_with_value(seq, flag):
+            if flag in seq:
+                i = seq.index(flag)
+                # remove flag e possivel valor seguinte
+                del seq[i:i+2]
+        argv = list(argv)
+        _strip_flag_with_value(argv, '--cycles')
+        _strip_flag_with_value(argv, '--time-seconds')
         start = _time.time()
         i = 0
         while True:
@@ -99,10 +110,10 @@ Exemplos:
         if not renamer.exists():
             print("[ERROR] src/renamepdfepub/renamer.py não encontrado")
             sys.exit(1)
-        if len(sys.argv) <= 2:
+        if not extras:
             print("Uso: python start_cli.py rename-existing --report relatorio.json [--apply] [--copy]")
             return
-        cmd = [sys.executable, str(renamer)] + sys.argv[2:]
+        cmd = [sys.executable, str(renamer)] + extras
         subprocess.run(cmd)
 
     elif args.command == 'rename-search':
@@ -112,7 +123,7 @@ Exemplos:
         if not extractor.exists():
             print("[ERROR] src/gui/renomeia_livro_renew_v2.py não encontrado")
             sys.exit(1)
-        argv = sys.argv[2:]
+        argv = extras
         if '--rename' not in argv:
             argv = argv + ['--rename']
         cmd = [sys.executable, str(extractor)] + argv

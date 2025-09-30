@@ -105,3 +105,12 @@
 
 ---
 Entradas anteriores podem ser consultadas em `RELEASE_NOTES_v0.9.md`.
+## [Unreleased]
+
+- CLI scan/scan-cycles migrou para o pipeline canônico do core (`src/core/renomeia_livro.py`).
+- Marcados como DEPRECATED os runners GUI: v2, v3, v5 em `src/gui/`.
+- Portadas melhorias para o core:
+  - Normalização de autores para evitar joins com estruturas aninhadas.
+  - Library of Congress: busca JSON por ISBN antes do fallback MARC XML tolerante.
+  - Export de métricas em tempo real `reports/live_api_stats.json` consumido pelo Streamlit.
+  - Redução de ruído de logs de bibliotecas externas.

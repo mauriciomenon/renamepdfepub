@@ -1,0 +1,60 @@
+{
+  "timestamp": 1759190122.792191,
+  "overall": {
+    "success": 325,
+    "total": 848,
+    "success_rate": 38.325471698113205
+  },
+  "per_api": {
+    "fetch_google_books": {
+      "success": 0,
+      "total": 43,
+      "success_rate": 0.0,
+      "avg_time": 2.0033077417418013
+    },
+    "fetch_internet_archive": {
+      "success": 1,
+      "total": 42,
+      "success_rate": 2.380952380952381,
+      "avg_time": 0.9453956967308408
+    },
+    "fetch_isbnlib_default": {
+      "success": 0,
+      "total": 42,
+      "success_rate": 0.0,
+      "avg_time": 4.017231032961891
+    },
+    "fetch_isbnlib_editions": {
+      "success": 0,
+      "total": 42,
+      "success_rate": 0.0,
+      "avg_time": 11.800844260624476
+    },
+    "fetch_isbnlib_info": {
+      "success": 160,
+      "total": 203,
+      "success_rate": 78.81773399014779,
+      "avg_time": 2.450937602320328
+    },
+    "fetch_isbnlib_mask": {
+      "success": 27,
+      "total": 70,
+      "success_rate": 38.57142857142858,
+      "avg_time": 3.989289253098624
+    },
+    "fetch_loc": {
+      "success": 0,
+      "total": 203,
+      "success_rate": 0.0,
+      "avg_time": 1.4451580916719484
+    },
+    "fetch_openlibrary": {
+      "success": 137,
+      "total": 203,
+      "success_rate": 67.48768472906403,
+      "avg_time": 0.45799766620391696
+    }
+  },
+  "open_circuits": [],
+  "open_circuits_detail": {}
+}

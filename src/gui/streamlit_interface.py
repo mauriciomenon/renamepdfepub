@@ -21,6 +21,33 @@ class RenamePDFEPUBInterface:
         self.project_root = Path(__file__).parent.parent.parent
         self.books_dir = self.project_root / "books"
         self.reports_dir = self.project_root / "reports"
+        self.live_stats_file = self.reports_dir / "live_api_stats.json"
+        self.default_scan_path = str(self.books_dir)
+
+    def _tail_file(self, path: Path, max_lines: int = 200):
+        try:
+            if not path.exists():
+                return []
+            with open(path, 'r', encoding='utf-8', errors='replace') as f:
+                lines = f.read().splitlines()
+            return lines[-max_lines:]
+        except Exception:
+            return []
+
+    def start_scan_background(self, target_dir: str, recursive: bool = False, extra_args: list = None, command: str = "scan"):
+        try:
+            script = self.project_root / "start_cli.py"
+            args = [sys.executable, str(script), command, target_dir]
+            if recursive:
+                args.append("-r")
+            if extra_args:
+                args += extra_args
+            # inicia em background
+            import subprocess
+            p = subprocess.Popen(args, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            return True, p.pid
+        except Exception as e:
+            return False, str(e)
         
     def get_books_list(self):
         """Lista todos os livros PDF e EPUB"""
@@ -80,6 +107,26 @@ class RenamePDFEPUBInterface:
     def render_dashboard(self):
         """Exibe metricas reais a partir do relatorio em reports/."""
         st.header("Dashboard")
+        with st.expander("Iniciar varredura (background)"):
+            colx1, colx2 = st.columns([3,1])
+            with colx1:
+                target = st.text_input("Diretório a varrer", value=self.default_scan_path)
+            with colx2:
+                recursive = st.checkbox("Recursivo", value=False)
+            mode = st.selectbox("Modo", ["scan", "scan-cycles"], index=0)
+            cycles = 1
+            if mode == "scan-cycles":
+                cycles = st.number_input("Ciclos", min_value=1, max_value=50, value=3)
+            if st.button("Iniciar scan agora"):
+                extra = []
+                if mode == "scan-cycles":
+                    extra = ["--cycles", str(int(cycles))]
+                cmd = mode if mode in ("scan", "scan-cycles") else "scan"
+                ok, info = self.start_scan_background(target, recursive, extra_args=(extra if mode=="scan-cycles" else None), command=cmd)
+                if ok:
+                    st.success(f"Scan iniciado (PID {info}). Acompanhe métricas abaixo.")
+                else:
+                    st.error(f"Falha ao iniciar scan: {info}")
         data = self._load_latest_report()
         if not data:
             st.info("Nenhum relatorio encontrado em reports/. Gere um relatorio para visualizar metricas reais.")
@@ -107,6 +154,93 @@ class RenamePDFEPUBInterface:
             st.subheader("Distribuicao por editora")
             for pub, cnt in list(pub_stats.items())[:15]:
                 st.write(f"- {pub}: {cnt}")
+
+        # Tempo real (se arquivo de métricas estiver disponível)
+        st.subheader("Tempo real - Fontes de metadados")
+        cols = st.columns([1,1,2])
+        with cols[0]:
+            if st.button("Atualizar agora"):
+                st.experimental_rerun()
+        with cols[1]:
+            st.caption("Atualize enquanto a varredura estiver em execucao.")
+
+        live = None
+        try:
+            if self.live_stats_file.exists():
+                import json
+                with open(self.live_stats_file, 'r', encoding='utf-8') as f:
+                    live = json.load(f)
+        except Exception:
+            live = None
+
+        if not live:
+            st.info("Métricas em tempo real indisponíveis. Inicie uma varredura para gerar live_api_stats.json.")
+            return
+
+        overall = live.get("overall") or {}
+        per_api = live.get("per_api") or {}
+        open_circuits = live.get("open_circuits") or []
+        open_detail = live.get("open_circuits_detail") or {}
+
+        c1, c2, c3 = st.columns(3)
+        c1.metric("Chamadas (total)", overall.get("total", 0))
+        c2.metric("Sucessos", overall.get("success", 0))
+        c3.metric("Taxa de sucesso", f"{overall.get('success_rate', 0.0):.1f}%")
+
+        if open_circuits:
+            items = []
+            for api in open_circuits:
+                secs = float(open_detail.get(api, 0.0))
+                items.append(f"{api} (~{int(secs)}s)")
+            st.warning("Circuito aberto: " + ", ".join(items))
+
+        st.write("Fontes")
+        # Tabela simples com os principais campos
+        for api, stats in sorted(per_api.items()):
+            st.write(f"- {api}: {stats.get('success',0)}/{stats.get('total',0)} ({stats.get('success_rate',0.0):.1f}%) - {stats.get('avg_time',0.0):.2f}s")
+
+        # Visualizacao rapida (top 10 por volume de chamadas)
+        if per_api:
+            try:
+                import pandas as pd
+                rows = []
+                for api, s in per_api.items():
+                    rows.append({
+                        'API': api,
+                        'Chamadas': int(s.get('total', 0)),
+                        'Sucesso %': float(s.get('success_rate', 0.0)),
+                        'Tempo Médio (s)': float(s.get('avg_time', 0.0)),
+                    })
+                df = pd.DataFrame(rows)
+                df_sorted = df.sort_values('Chamadas', ascending=False).head(10)
+                col_a, col_b = st.columns(2)
+                with col_a:
+                    st.caption("Top 10 por chamadas")
+                    st.bar_chart(data=df_sorted.set_index('API')[['Chamadas']])
+                with col_b:
+                    st.caption("Taxa de sucesso (%)")
+                    st.bar_chart(data=df_sorted.set_index('API')[['Sucesso %']])
+            except Exception:
+                pass
+
+        # Logs recentes
+        st.subheader("Logs recentes")
+        log_choices = []
+        candidate_logs = [
+            (self.project_root / 'book_metadata.log', 'book_metadata.log'),
+            (self.project_root / 'metadata_fetcher.log', 'metadata_fetcher.log'),
+        ]
+        for p, name in candidate_logs:
+            if p.exists():
+                log_choices.append((name, p))
+        if not log_choices:
+            st.caption("Nenhum log encontrado no diretório do projeto.")
+        else:
+            names = [n for n, _ in log_choices]
+            sel = st.selectbox("Arquivo de log", names)
+            path = next(p for n, p in log_choices if n == sel)
+            tail_lines = self._tail_file(path, max_lines=200)
+            st.code("\n".join(tail_lines) if tail_lines else "(vazio)")
     
     def render_books_section(self):
         """Secao principal: livros"""

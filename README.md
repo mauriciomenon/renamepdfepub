@@ -4,7 +4,7 @@ Sistema automatizado para renomeacao de arquivos PDF e EPUB baseado em extracao 
 
 ## TL;DR - Operacoes Principais
 
-As operações abaixo cobrem varredura (scan) sem renomear, varredura repetida, renomear com base em relatório existente e renomear enquanto busca. Válidas para pastas locais e pastas sincronizadas (OneDrive/Google Drive).
+As operacoes abaixo cobrem varredura (scan) sem renomear, varredura repetida, renomear com base em relatorio existente e renomear enquanto busca. Validas para pastas locais e pastas sincronizadas (OneDrive/Google Drive).
 
 ```bash
 # 0) Instalar dependencias
@@ -13,7 +13,7 @@ pip install -r requirements.txt
 # 1) Scan (gera relatorios JSON/HTML em reports/, nao renomeia)
 python3 start_cli.py scan "/caminho/livros"
 python3 start_cli.py scan "/caminho/livros" -r                # recursivo
-python3 start_cli.py scan "/caminho/livros" -t 8 -o out.json   # threads e saída
+python3 start_cli.py scan "/caminho/livros" -t 8 -o out.json   # threads e saida
 
 # 2) Scan por ciclos/tempo (repeticoes retroalimentadas)
 python3 start_cli.py scan-cycles "/caminho/livros" --cycles 3
@@ -56,33 +56,33 @@ python3 run_tests.py
 
 ```
 renamepdfepub/
-├── start_web.py        # Interface Web Streamlit - PRINCIPAL
-├── start_html.py       # Relatorios HTML - "Pagina Antiga"
-├── start_cli.py        # Interface CLI - Linha de Comando
-├── start_gui.py        # Interface Grafica Desktop
-├── run_tests.py        # Testes automatizados
-│
-├── src/                # Codigo fonte organizado
-│   ├── core/          # Algoritmos e logica principal
-│   ├── cli/           # Interface linha de comando  
-│   └── gui/           # Interfaces graficas (Streamlit, GUI)
-│
-├── docs/               # Documentacao tecnica organizada
-│   ├── structure/     # Documentacao da arquitetura
-│   ├── testing/       # Relatorios e analises de testes
-│   ├── reports/       # Relatorios de implementacao
-│   └── releases/      # Notas de versao
-│
-├── data/               # Dados e resultados organizados
-│   ├── results/       # Resultados de analises
-│   ├── algorithm_results/ # Resultados dos algoritmos
-│   ├── enhanced_results/  # Analises avancadas
-│   └── cache/         # Cache de metadados
-│
-├── utils/             # Utilitarios e ferramentas auxiliares
-├── tests/             # Testes automatizados com pytest
-├── reports/           # Relatorios HTML e performance
-└── logs/              # Arquivos de log centralizados
+-  start_web.py        # Interface Web Streamlit - PRINCIPAL
+-  start_html.py       # Relatorios HTML - "Pagina Antiga"
+-  start_cli.py        # Interface CLI - Linha de Comando
+-  start_gui.py        # Interface Grafica Desktop
+-  run_tests.py        # Testes automatizados
+ 
+-  src/                # Codigo fonte organizado
+    -  core/          # Algoritmos e logica principal
+    -  cli/           # Interface linha de comando  
+    -  gui/           # Interfaces graficas (Streamlit, GUI)
+ 
+-  docs/               # Documentacao tecnica organizada
+    -  structure/     # Documentacao da arquitetura
+    -  testing/       # Relatorios e analises de testes
+    -  reports/       # Relatorios de implementacao
+    -  releases/      # Notas de versao
+ 
+-  data/               # Dados e resultados organizados
+    -  results/       # Resultados de analises
+    -  algorithm_results/ # Resultados dos algoritmos
+    -  enhanced_results/  # Analises avancadas
+    -  cache/         # Cache de metadados
+ 
+-  utils/             # Utilitarios e ferramentas auxiliares
+-  tests/             # Testes automatizados com pytest
+-  reports/           # Relatorios HTML e performance
+-  logs/              # Arquivos de log centralizados
 
 ## Pontos de Entrada
 
@@ -90,7 +90,7 @@ renamepdfepub/
 ```bash
 python3 start_web.py
 ```
-- **Streamlit Dashboard** - Interface web moderna e interativa
+- **Streamlit Dashboard** - Interface web interativa e dinamica
 - Visualizacoes em tempo real
 - Instalacao automatica de dependencias
 - Interface responsiva com widgets
@@ -103,6 +103,79 @@ python3 start_html.py
 - Funciona offline, abre no navegador
 - Relatorios pre-gerados com graficos CSS
 - Ideal para apresentacoes ou compartilhamento
+
+### Marcadores de testes (pytest)
+```bash
+# Unit e integration (sem slow)
+python -m pytest -q -k "not slow"
+
+# Somente testes slow (perf)
+python -m pytest -q -m slow
+
+# Somente testes de integracao
+python -m pytest -q -m integration
+```
+
+### scan-cycles (flags do wrapper)
+- `--cycles N`: numero de varreduras; removido antes de chamar o extrator
+- `--time-seconds S`: tempo maximo; removido antes de chamar o extrator
+- As demais flags (ex.: `-r`, `-t`, `-o`) sao repassadas ao pipeline do core.
+
+## Referencia rapida de comandos e parametros
+
+### CLI principal (`start_cli.py`)
+- Subcomandos:
+  - `algorithms`
+  - `scan <diretorio>` [opcoes do extrator]
+  - `scan-cycles <diretorio> [--cycles N] [--time-seconds S]` [opcoes do extrator]
+  - `rename-existing --report <arquivo.json> [--apply] [--copy] [--pattern PATTERN]`
+  - `rename-search <diretorio> [opcoes do extrator] --rename`
+- Observacoes:
+  - `--cycles` e `--time-seconds` sao flags do wrapper e nao sao repassadas ao extrator.
+  - Exemplo:
+    - `python3 start_cli.py scan-cycles "/caminho/livros" --cycles 3 -r -t 8 -o relatorio.json`
+
+### Pipeline canônico (core) `src/core/renomeia_livro.py`
+- Posicional: `directory`
+- `-r, --recursive` – processa subdiretorios
+- `--subdirs "Dir1,Dir2"` – processa apenas subdiretorios listados
+- `-o, --output <arquivo.json>` – arquivo JSON de saida
+- `-t, --threads <N>` – numero de threads
+- `--rename` – renomeia arquivos apos extrair metadados
+- `-v, --verbose` – logs detalhados
+- `--log-file <arquivo.log>` – caminho do log
+- `-k, --isbndb-key <chave>` – chave ISBNdb opcional
+- `--rescan-cache` – reprocessa todo o cache
+- `--update-cache` – atualiza registros de baixa confianca
+- `--confidence-threshold <0.0-1.0>` – limite de atualizacao (padrao 0.7)
+- Exemplos:
+  - `python3 start_cli.py scan "/caminho/livros" -r -t 8 -o relatorio.json`
+  - `python3 start_cli.py scan "/caminho/livros" --rename`
+
+### Web (`start_web.py`)
+- `--version, -v` – mostra versao
+- `--auto-start` – inicia automaticamente a interface Streamlit
+- `--print-menu` – imprime o menu de opcoes e sai (nao interativo)
+
+### GUI (`start_gui.py`)
+- `--version, -v` – mostra versao
+- `--check-deps` – verifica dependencias
+- `--dir <caminho>` – define diretorio inicial de selecao
+
+### Gerador HTML (`simple_report_generator.py`)
+- `--json <arquivo.json>` – usa um JSON especifico
+- `--output <arquivo.html>` – HTML de saida (padrao `advanced_algorithms_report.html`)
+- Exemplos:
+  - `python3 simple_report_generator.py --json reports/metadata_report_YYYYMMDD_HHMMSS.json`
+  - `python3 simple_report_generator.py --json meu.json --output out.html`
+
+## Pontos de Entrada (sem tom promocional)
+
+- Web dinamica (Streamlit): `python3 start_web.py` (ou `--auto-start`)
+- Relatorios HTML estaticos: `python3 start_html.py`
+- CLI: `python3 start_cli.py <subcomando> [opcoes]`
+- GUI Desktop: `python3 start_gui.py [--dir "/caminho"]`
+
 
 ### 3. Interface CLI
 ```bash
@@ -123,7 +196,7 @@ python3 start_gui.py
 
 ## Diferenca: Streamlit vs HTML
 
-### Interface Streamlit (`start_web.py`) - MODERNA
+### Interface Streamlit (`start_web.py`) - DINAMICA
 - **Interativa**: Widgets, sliders, botoes em tempo real
 - **Dinamica**: Executa algoritmos ao vivo
 - **Requer**: Python rodando, dependencias instaladas

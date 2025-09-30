@@ -31,7 +31,7 @@ def test_years_in_report_are_coherent(tmp_path: Path):
         report_path = candidates[-1]
     else:
         # try to generate a minimal report
-        extractor = root / "src" / "gui" / "renomeia_livro_renew_v2.py"
+        extractor = root / "src" / "core" / "renomeia_livro.py"
         try:
             import tqdm  # type: ignore
         except Exception:

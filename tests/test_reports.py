@@ -45,6 +45,15 @@ def test_html_report_generation():
             cl = content.lower()
             assert "<html" in cl, f"Arquivo {html_file} nao e HTML valido"
             assert "</html>" in cl, f"Arquivo {html_file} nao tem fechamento HTML"
+            # Para o relatorio principal, conferir secoes essenciais
+            if html_file == "advanced_algorithms_report.html":
+                essentials = [
+                    "total de arquivos",
+                    "processados com sucesso",
+                    "falhas",
+                ]
+                for key in essentials:
+                    assert key in cl, f"Secao essencial ausente no HTML: {key}"
 
 def test_performance_data_structure():
     """Testa estrutura dos dados de performance"""

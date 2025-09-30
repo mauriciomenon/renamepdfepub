@@ -290,7 +290,7 @@ class MetadataCache:
                         metadata.get('isbn_10'),
                         metadata.get('isbn_13'),
                         metadata.get('title'),
-                        ', '.join(metadata.get('authors', [])),
+                        ', '.join([a if isinstance(a, str) else str(a) for a in metadata.get('authors', [])]),
                         metadata.get('publisher'),
                         metadata.get('published_date'),
                         metadata.get('confidence_score', 0.0),
@@ -331,7 +331,7 @@ class MetadataCache:
                             WHERE isbn_10 = ? OR isbn_13 = ?
                         """, (
                             metadata.title,
-                            ', '.join(metadata.authors),
+                            ', '.join([a if isinstance(a, str) else str(a) for a in metadata.authors]),
                             metadata.publisher,
                             metadata.published_date,
                             metadata.confidence_score,
@@ -4498,3 +4498,14 @@ Observações:
 
 if __name__ == "__main__":
     main()
+"""
+===============================================================================
+DEPRECATED RUNNER (LEGACY)
+-------------------------------------------------------------------------------
+Este arquivo não é mais o pipeline canônico. O CLI (scan/scan-cycles) agora
+usa o core: `src/core/renomeia_livro.py`.
+
+Mantenha este arquivo apenas como referência. NÃO MODIFIQUE. Qualquer melhoria
+deve ser aplicada no core e, se necessário, portado daqui para lá.
+===============================================================================
+"""

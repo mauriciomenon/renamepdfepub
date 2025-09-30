@@ -1,0 +1,2404 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Book Metadata Extraction Report</title>
+            <style>
+                body {
+                    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+                    line-height: 1.5;
+                    max-width: 1200px;
+                    margin: 0 auto;
+                    padding: 20px;
+                    background: #f8f9fa;
+                }
+                .card {
+                    background: white;
+                    border-radius: 8px;
+                    padding: 20px;
+                    margin-bottom: 20px;
+                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                }
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin: 1em 0;
+                }
+                th, td {
+                    padding: 12px;
+                    border: 1px solid #dee2e6;
+                    text-align: left;
+                }
+                th { background: #f8f9fa; }
+                tr:hover { background: #f8f9fa; }
+                .success { color: #28a745; }
+                .warning { color: #ffc107; }
+                .failure { color: #dc3545; }
+                .chart-container {
+                    height: 400px;
+                    margin: 20px 0;
+                }
+                .file-path {
+                    font-family: monospace;
+                    font-size: 0.9em;
+                }
+                .error-detail {
+                    color: #dc3545;
+                    font-size: 0.9em;
+                }
+                .todo-note {
+                    background: #fff3cd;
+                    border-left: 4px solid #ffc107;
+                    padding: 15px;
+                    margin: 20px 0;
+                    border-radius: 4px;
+                }
+                .tabs {
+                    display: flex;
+                    margin-bottom: 20px;
+                }
+                .tab {
+                    padding: 10px 20px;
+                    cursor: pointer;
+                    border: none;
+                    background: #f8f9fa;
+                    margin-right: 5px;
+                    border-radius: 4px 4px 0 0;
+                }
+                .tab.active {
+                    background: white;
+                    border-bottom: 2px solid #007bff;
+                }
+                .tab-content {
+                    display: none;
+                }
+                .tab-content.active {
+                    display: block;
+                }
+            </style>
+            <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        </head>
+        <body>
+            <h1>Book Metadata Extraction Report</h1>
+            <p>Generated: 2025-09-29 20:46:43</p>
+            
+            <div class="tabs">
+                <button class="tab active" onclick="openTab(event, 'overview')">Overview</button>
+                <button class="tab" onclick="openTab(event, 'api-stats')">API Stats</button>
+                <button class="tab" onclick="openTab(event, 'publishers')">Publishers</button>
+                <button class="tab" onclick="openTab(event, 'results')">Results</button>
+                <button class="tab" onclick="openTab(event, 'failures')">Failed Files</button>
+            </div>
+
+            <div id="overview" class="tab-content active">
+                <div class="card">
+                    <h2>Overview</h2>
+                    <table>
+                        <tr>
+                            <th>Total Files Processed</th>
+                            <td>226</td>
+                        </tr>
+                        <tr>
+                            <th>Successful Extractions</th>
+                            <td class="success">203</td>
+                        </tr>
+                        <tr>
+                            <th>Failed Extractions</th>
+                            <td class="failure">23</td>
+                        </tr>
+                        <tr>
+                            <th>Success Rate</th>
+                            <td>89.8%</td>
+                        </tr>
+                        <tr>
+                            <th>Average Processing Time</th>
+                            <td>9.65s</td>
+                        </tr>
+                    </table>
+                    <div id="summaryChart" class="chart-container"></div>
+                </div>
+            </div>
+
+            <div id="api-stats" class="tab-content">
+                <div class="card">
+                    <h2>API Performance</h2>
+                    <div id="apiChart" class="chart-container"></div>
+                    <table>
+                        <tr>
+                            <th>API Source</th>
+                            <th>Successful Extractions</th>
+                            <th>Success Rate</th>
+                        </tr>
+                        
+            <tr>
+                <td>isbnlib_info</td>
+                <td>166</td>
+                <td>81.8%</td>
+            </tr>
+            
+            <tr>
+                <td>openlibrary</td>
+                <td>5</td>
+                <td>2.5%</td>
+            </tr>
+            
+            <tr>
+                <td>fallback</td>
+                <td>31</td>
+                <td>15.3%</td>
+            </tr>
+            
+            <tr>
+                <td>internet_archive</td>
+                <td>1</td>
+                <td>0.5%</td>
+            </tr>
+            
+                    </table>
+                </div>
+            </div>
+
+            <div id="publishers" class="tab-content">
+                <div class="card">
+                    <h2>Publisher Statistics</h2>
+                    <div id="publisherChart" class="chart-container"></div>
+                    <table>
+                        <tr>
+                            <th>Publisher</th>
+                            <th>Books</th>
+                            <th>Percentage</th>
+                        </tr>
+                        
+            <tr>
+                <td>No Starch Press</td>
+                <td>29</td>
+                <td>14.3%</td>
+            </tr>
+            
+            <tr>
+                <td>Springer Science & Business Media</td>
+                <td>2</td>
+                <td>1.0%</td>
+            </tr>
+            
+            <tr>
+                <td>Manning</td>
+                <td>15</td>
+                <td>7.4%</td>
+            </tr>
+            
+            <tr>
+                <td>Casa do Código</td>
+                <td>4</td>
+                <td>2.0%</td>
+            </tr>
+            
+            <tr>
+                <td>O'Reilly Media</td>
+                <td>29</td>
+                <td>14.3%</td>
+            </tr>
+            
+            <tr>
+                <td>Pearson Professional</td>
+                <td>6</td>
+                <td>3.0%</td>
+            </tr>
+            
+            <tr>
+                <td>Simon and Schuster</td>
+                <td>25</td>
+                <td>12.3%</td>
+            </tr>
+            
+            <tr>
+                <td>Manning Publications Co. LLC</td>
+                <td>2</td>
+                <td>1.0%</td>
+            </tr>
+            
+            <tr>
+                <td>Unknown</td>
+                <td>31</td>
+                <td>15.3%</td>
+            </tr>
+            
+            <tr>
+                <td></td>
+                <td>40</td>
+                <td>19.7%</td>
+            </tr>
+            
+            <tr>
+                <td>John Wiley & Sons</td>
+                <td>1</td>
+                <td>0.5%</td>
+            </tr>
+            
+            <tr>
+                <td>Packt Publishing</td>
+                <td>4</td>
+                <td>2.0%</td>
+            </tr>
+            
+            <tr>
+                <td>Manning Publications</td>
+                <td>10</td>
+                <td>4.9%</td>
+            </tr>
+            
+            <tr>
+                <td>Editora Casa do Código</td>
+                <td>3</td>
+                <td>1.5%</td>
+            </tr>
+            
+            <tr>
+                <td>John Wiley & Sons, Inc.</td>
+                <td>1</td>
+                <td>0.5%</td>
+            </tr>
+            
+            <tr>
+                <td>Springer</td>
+                <td>1</td>
+                <td>0.5%</td>
+            </tr>
+            
+                    </table>
+                </div>
+            </div>
+
+            <div id="results" class="tab-content">
+                <div class="card">
+                    <h2>Successful Results</h2>
+                    <table>
+                        <tr>
+                            <th>Title</th>
+                            <th>Authors</th>
+                            <th>Publisher</th>
+                            <th>ISBN</th>
+                            <th>Confidence</th>
+                            <th>Source</th>
+                        </tr>
+                        
+                <tr>
+                    <td>Hacks, Leaks, And Revelations - The Art Of Analyzing Hacked And Leaked Data</td>
+                    <td>Micah Lee</td>
+                    <td>No Starch Press</td>
+                    <td>9781718503120</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Evading EDR - The Definitive Guide To Defeating Endpoint Detection Systems</td>
+                    <td>Matt Hand</td>
+                    <td>No Starch Press</td>
+                    <td>9781718503342</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Handbook Of Modern Sensors - Physics, Designs, And Applications</td>
+                    <td>Jacob Fraden</td>
+                    <td>Springer Science & Business Media</td>
+                    <td>9781441964663</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Python Workout - 50 Ten-Minute Exercises</td>
+                    <td>Reuven M. Lerner</td>
+                    <td>Manning</td>
+                    <td>9781617295508</td>
+                    <td>1.03</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Kafka Connect e Kafka Streams - Integre suas aplicações ao Kafka usando as melhores práticas</td>
+                    <td>Rodrigo Vieira Pinto</td>
+                    <td>Casa do Código</td>
+                    <td>9788555193781</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Evasive Malware - A Field Guide To Detecting, Analyzing, And Defeating Advanced Threats</td>
+                    <td>Kyle Cucci</td>
+                    <td>No Starch Press</td>
+                    <td>9781718503267</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Hacks, Leaks, And Revelations - The Art Of Analyzing Hacked And Leaked Data</td>
+                    <td>Micah Lee</td>
+                    <td>No Starch Press</td>
+                    <td>9781718503120</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>The Tangled Web - A Guide To Securing Modern Web Applications</td>
+                    <td>Michal Zalewski</td>
+                    <td>No Starch Press</td>
+                    <td>9781593273880</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Learning SQL - Generate, Manipulate, And Retrieve Data</td>
+                    <td>Alan Beaulieu</td>
+                    <td>O'Reilly Media</td>
+                    <td>9781492057611</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Grokking Artificial Intelligence Algorithms - Understand And Apply The Core Algorithms Of Deep Learning And Artificial Intelligence In This Friendly Illustrated Guide Including Exercises And Examples</td>
+                    <td>Rishal Hurbans</td>
+                    <td>Manning</td>
+                    <td>9781617296185</td>
+                    <td>1.03</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Amazon Web Services In Action</td>
+                    <td>Michael Wittig, Andreas Wittig</td>
+                    <td>Pearson Professional</td>
+                    <td>9781617295119</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Analytics Engineering With SQL And DBT - Building Meaningful Data Models At Scale</td>
+                    <td>Rui Machado, Helder Russa</td>
+                    <td>O'Reilly Media</td>
+                    <td>9781098142384</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Hacking APIs - Breaking Web Application Programming Interfaces</td>
+                    <td>Corey J. Ball</td>
+                    <td>No Starch Press</td>
+                    <td>9781718502444</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>The Art Of Mac Malware, Volume 1 - The Guide To Analyzing Malicious Software</td>
+                    <td>Patrick Wardle</td>
+                    <td>No Starch Press</td>
+                    <td>9781718501959</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Build A Frontend Web Framework (From Scratch)</td>
+                    <td>Ángel Sola Orbaiceta</td>
+                    <td>Simon and Schuster</td>
+                    <td>9781633438064</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Data Privacy - A Runbook For Engineers</td>
+                    <td>Nishant Bhajaria</td>
+                    <td>Simon and Schuster</td>
+                    <td>9781617298998</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Computação Evolucionária - Aplique os algoritmos genéticos com Python e Numpy</td>
+                    <td>Eduardo Pereira</td>
+                    <td>Casa do Código</td>
+                    <td>9786586110364</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Microservices In .NET Core - With Examples In Nancy</td>
+                    <td>Christian Horsdal Gammelgaard</td>
+                    <td>Manning</td>
+                    <td>9781617293375</td>
+                    <td>1.03</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Modern C, Third Edition</td>
+                    <td>Jens Gustedt</td>
+                    <td>Manning Publications Co. LLC</td>
+                    <td>9781633437777</td>
+                    <td>0.69</td>
+                    <td>openlibrary</td>
+                </tr>
+                
+                <tr>
+                    <td>The Java Module System</td>
+                    <td>Nicolai Parlog</td>
+                    <td>Pearson Professional</td>
+                    <td>9781617294280</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>ISBN 9781617294310</td>
+                    <td>Unknown</td>
+                    <td>Unknown</td>
+                    <td>9781617294310</td>
+                    <td>0.30</td>
+                    <td>fallback</td>
+                </tr>
+                
+                <tr>
+                    <td>Architecting Data And Machine Learning Platforms - Enable Analytics And Ai-Driven Innovation In The Cloud</td>
+                    <td>Marco Tranquillin, Valliappa Lakshmanan, Firat Tekiner</td>
+                    <td></td>
+                    <td>9781098151614</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>High Performance MySQL - Optimization, Backups, And Replication</td>
+                    <td>Silvia Botros, Jeremy Tinley</td>
+                    <td>O'Reilly Media</td>
+                    <td>9781492080510</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Architecting Data And Machine Learning Platforms - Enable Analytics And Ai-Driven Innovation In The Cloud</td>
+                    <td>Marco Tranquillin, Valliappa Lakshmanan, Firat Tekiner</td>
+                    <td></td>
+                    <td>9781098151614</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Learning Php, MySQL & JavaScript - A Step-By-Step Guide To Creating Dynamic Websites</td>
+                    <td>Nixon, Robin</td>
+                    <td></td>
+                    <td>9781098152352</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>MySQL Cookbook - Solutions For Database Developers And Administrators</td>
+                    <td>Sveta Smirnova, Alkin Tezuysal</td>
+                    <td>O'Reilly Media</td>
+                    <td>9781492093169</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Fuzzy Data Matching With SQL - Enhancing Data Quality And Query Performance</td>
+                    <td>Jim Lehmer</td>
+                    <td></td>
+                    <td>9781098152277</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>ISBN 9781617294310</td>
+                    <td>Unknown</td>
+                    <td>Unknown</td>
+                    <td>9781617294310</td>
+                    <td>0.30</td>
+                    <td>fallback</td>
+                </tr>
+                
+                <tr>
+                    <td>ISBN 9781617294181</td>
+                    <td>Unknown</td>
+                    <td>Unknown</td>
+                    <td>9781617294181</td>
+                    <td>0.30</td>
+                    <td>fallback</td>
+                </tr>
+                
+                <tr>
+                    <td>Probability, Statistics, And Stochastic Processes</td>
+                    <td>Peter Olofsson, Mikael Andersson</td>
+                    <td>John Wiley & Sons</td>
+                    <td>9780470889749</td>
+                    <td>1.03</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Orientação a Objetos: Aprenda seus conceitos e suas aplicabilidades de forma efetiva</td>
+                    <td>Thiago Leite e Carvalho</td>
+                    <td>Casa do Código</td>
+                    <td>9788555192135</td>
+                    <td>0.59</td>
+                    <td>openlibrary</td>
+                </tr>
+                
+                <tr>
+                    <td>Python Object-Oriented Programming - Fourth Edition - Build Robust And Maintainable Object-Oriented Python Applications And Libraries</td>
+                    <td>Steven F. Lott, Dusty Phillips</td>
+                    <td></td>
+                    <td>9781801077262</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Grokking Functional Programming</td>
+                    <td>Michal Plachta</td>
+                    <td>Simon and Schuster</td>
+                    <td>9781617291838</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Building User-Friendly DSLs</td>
+                    <td>Meinte Boersma</td>
+                    <td>Simon and Schuster</td>
+                    <td>9781617296475</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Generative Deep Learning - Teaching Machines To Paint, Write, Compose, And Play</td>
+                    <td>David Foster</td>
+                    <td></td>
+                    <td>9781098134181</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Cloud Native Anti-Patterns - Accelerate Your Cloud Transformation Journey By Learning From Common Mistakes</td>
+                    <td>Gerald Bachlmayr, Aiden Ziegelaar, Alan Blockley, Bojan Zivic</td>
+                    <td>Packt Publishing</td>
+                    <td>9781836200598</td>
+                    <td>1.03</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Fuzzy Data Matching With SQL - Enhancing Data Quality And Query Performance</td>
+                    <td>Jim Lehmer</td>
+                    <td></td>
+                    <td>9781098152277</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Learn C Programming - A Beginners Guide To Learning The Most Powerful And General-Purpose Programming Language With Ease</td>
+                    <td>JEFF. SZUHAY</td>
+                    <td></td>
+                    <td>9781801078450</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Modern C</td>
+                    <td>Jens Gustedt</td>
+                    <td>Manning</td>
+                    <td>9781617295812</td>
+                    <td>1.03</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>CI/CD DESIGN PATTERNS - Design And Implement Ci/Cd Through Tried And Tested</td>
+                    <td></td>
+                    <td></td>
+                    <td>9781835889640</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>ISBN 9781484259702</td>
+                    <td>Unknown</td>
+                    <td>Unknown</td>
+                    <td>9781484259702</td>
+                    <td>0.30</td>
+                    <td>fallback</td>
+                </tr>
+                
+                <tr>
+                    <td>Get Programming With Javascript</td>
+                    <td>John R. Larsen</td>
+                    <td>Manning Publications</td>
+                    <td>9781617293108</td>
+                    <td>1.03</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>ISBN 9781633438460</td>
+                    <td>Unknown</td>
+                    <td>Unknown</td>
+                    <td>9781633438460</td>
+                    <td>0.30</td>
+                    <td>fallback</td>
+                </tr>
+                
+                <tr>
+                    <td>Analytics Engineering With SQL And DBT - Building Meaningful Data Models At Scale</td>
+                    <td>Rui Machado, Helder Russa</td>
+                    <td>O'Reilly Media</td>
+                    <td>9781098142384</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Cloud Native Anti-Patterns - Accelerate Your Cloud Transformation Journey By Learning From Common Mistakes</td>
+                    <td>Gerald Bachlmayr, Aiden Ziegelaar, Alan Blockley, Bojan Zivic</td>
+                    <td>Packt Publishing</td>
+                    <td>9781836200598</td>
+                    <td>1.03</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>The Art Of Cyberwarfare - An Investigator's Guide To Espionage, Ransomware, And Organized Cybercrime</td>
+                    <td>Jon DiMaggio</td>
+                    <td>No Starch Press</td>
+                    <td>9781718502154</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>ISBN 9788594188090</td>
+                    <td>Unknown</td>
+                    <td>Unknown</td>
+                    <td>9788594188090</td>
+                    <td>0.30</td>
+                    <td>fallback</td>
+                </tr>
+                
+                <tr>
+                    <td>Database Internals - A Deep-Dive Into How Distributed Data Systems Work</td>
+                    <td>Alex Petrov</td>
+                    <td>O'Reilly Media</td>
+                    <td>9781492040347</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>CI/CD DESIGN PATTERNS - Design And Implement Ci/Cd Through Tried And Tested</td>
+                    <td></td>
+                    <td></td>
+                    <td>9781835889640</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Black Hat GraphQL - Attacking Next Generation APIs</td>
+                    <td>Nick Aleks, Dolev Farhi</td>
+                    <td>No Starch Press</td>
+                    <td>9781718502857</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Hands-On Large Language Models - Language Understanding And Generation</td>
+                    <td>Jay Alammar, Maarten Grootendorst</td>
+                    <td></td>
+                    <td>9781098150969</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>ISBN 9781617294181</td>
+                    <td>Unknown</td>
+                    <td>Unknown</td>
+                    <td>9781617294181</td>
+                    <td>0.30</td>
+                    <td>fallback</td>
+                </tr>
+                
+                <tr>
+                    <td>High Performance MySQL - Optimization, Backups, And Replication</td>
+                    <td>Silvia Botros, Jeremy Tinley</td>
+                    <td>O'Reilly Media</td>
+                    <td>9781492080510</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>The Developer's Playbook For Large Language Model Security - Building Secure AI Applications</td>
+                    <td>Steve Wilson</td>
+                    <td></td>
+                    <td>9781098162207</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Attacking Network Protocols - A Hacker's Guide To Capture, Analysis, And Exploitation</td>
+                    <td>James Forshaw</td>
+                    <td>No Starch Press</td>
+                    <td>9781593277505</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Build A Website With ChatGPT - No Coding Experience Necessary</td>
+                    <td>Paul McFedries</td>
+                    <td>Simon and Schuster</td>
+                    <td>9781633436961</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Machine Learning Interviews - Kickstart Your Machine Learning Career</td>
+                    <td>Susan Shu Chang</td>
+                    <td></td>
+                    <td>9781098146542</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Cassandra: The Definitive Guide - Distributed Data At Web Scale</td>
+                    <td>Jeff Carpenter, Eben Hewitt</td>
+                    <td>O'Reilly Media</td>
+                    <td>9781098115166</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>The Art Of Unit Testing, Third Edition - With Examples In JavaScript</td>
+                    <td>Roy Osherove, Vladimir Khorikov</td>
+                    <td>Simon and Schuster</td>
+                    <td>9781617297489</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>MySQL - Comece com o principal banco de dados open source do mercado</td>
+                    <td>Vinícius Carvalho</td>
+                    <td>Editora Casa do Código</td>
+                    <td>9788555190803</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>The Design Of Web APIs</td>
+                    <td>Arnaud Lauret</td>
+                    <td>Manning</td>
+                    <td>9781617295102</td>
+                    <td>1.03</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Good Code, Bad Code - Think Like A Software Engineer</td>
+                    <td>Tom Long</td>
+                    <td>Simon and Schuster</td>
+                    <td>9781617298936</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Modern C</td>
+                    <td>Jens Gustedt</td>
+                    <td>Manning</td>
+                    <td>9781617295812</td>
+                    <td>1.03</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Linux Basics For Hackers - Getting Started With Networking, Scripting, And Security In Kali</td>
+                    <td>OccupyTheWeb</td>
+                    <td>No Starch Press</td>
+                    <td>1593278551</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>D3.Js In Action</td>
+                    <td>Elijah Meeks</td>
+                    <td>Manning Publications</td>
+                    <td>9781617292118</td>
+                    <td>1.03</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>SQL Pocket Guide - A Guide To SQL Usage</td>
+                    <td>Alice Zhao</td>
+                    <td>O'Reilly Media</td>
+                    <td>9781492090403</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Penetration Testing - A Hands-On Introduction To Hacking</td>
+                    <td>Georgia Weidman</td>
+                    <td>No Starch Press</td>
+                    <td>9781593275648</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Python Workout - 50 Ten-Minute Exercises</td>
+                    <td>Reuven M. Lerner</td>
+                    <td>Manning</td>
+                    <td>9781617295508</td>
+                    <td>1.03</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>ISBN 9788555191312</td>
+                    <td>Unknown</td>
+                    <td>Unknown</td>
+                    <td>9788555191312</td>
+                    <td>0.30</td>
+                    <td>fallback</td>
+                </tr>
+                
+                <tr>
+                    <td>ISBN 9781617296581</td>
+                    <td>Unknown</td>
+                    <td>Unknown</td>
+                    <td>9781617296581</td>
+                    <td>0.30</td>
+                    <td>fallback</td>
+                </tr>
+                
+                <tr>
+                    <td>Learning Php, MySQL & JavaScript - A Step-By-Step Guide To Creating Dynamic Websites</td>
+                    <td>Nixon, Robin</td>
+                    <td></td>
+                    <td>9781098152352</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Grokking Web Application Security</td>
+                    <td>Malcolm McDonald</td>
+                    <td>Simon and Schuster</td>
+                    <td>9781633438262</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>ISBN 9781617292</td>
+                    <td>Unknown</td>
+                    <td>Unknown</td>
+                    <td>9781617292</td>
+                    <td>0.30</td>
+                    <td>fallback</td>
+                </tr>
+                
+                <tr>
+                    <td>Malware Data Science - Attack Detection And Attribution</td>
+                    <td>Joshua Saxe, Hillary Sanders</td>
+                    <td>No Starch Press</td>
+                    <td>9781593278601</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Single Page Web Applications - JavaScript End-To-End</td>
+                    <td>Michael Mikowski, Josh C. Powell</td>
+                    <td>Manning Publications</td>
+                    <td>9781617290756</td>
+                    <td>1.03</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Learning Snowflake SQL And Scripting - Generate, Retrieve, And Automate Snowflake Data</td>
+                    <td>Alan Beaulieu</td>
+                    <td></td>
+                    <td>9781098140328</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>MongoDB - Powerful And Scalable Data Storage</td>
+                    <td>Shannon Bradshaw, Kristina Chodorow</td>
+                    <td>O'Reilly Media</td>
+                    <td>9781491954461</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Amazon Web Services In Action</td>
+                    <td>Michael Wittig, Andreas Wittig</td>
+                    <td>Pearson Professional</td>
+                    <td>9781617295119</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Linux Basics For Hackers - Getting Started With Networking, Scripting, And Security In Kali</td>
+                    <td>OccupyTheWeb</td>
+                    <td>No Starch Press</td>
+                    <td>1593278551</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>The Ghidra Book - The Definitive Guide</td>
+                    <td>Chris Eagle, Kara Nance</td>
+                    <td>No Starch Press</td>
+                    <td>9781718501034</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>ISBN 9781617295591</td>
+                    <td>Unknown</td>
+                    <td>Unknown</td>
+                    <td>9781617295591</td>
+                    <td>0.30</td>
+                    <td>fallback</td>
+                </tr>
+                
+                <tr>
+                    <td>Serious Cryptography - A Practical Introduction To Modern Encryption</td>
+                    <td>Jean-Philippe Aumasson</td>
+                    <td>No Starch Press</td>
+                    <td>9781593278823</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>ISBN 9781484259702</td>
+                    <td>Unknown</td>
+                    <td>Unknown</td>
+                    <td>9781484259702</td>
+                    <td>0.30</td>
+                    <td>fallback</td>
+                </tr>
+                
+                <tr>
+                    <td>The Smart Money Guide to Real Estate Investing</td>
+                    <td>Gerri Willis, Peter Finch</td>
+                    <td>John Wiley & Sons, Inc.</td>
+                    <td>3175723993</td>
+                    <td>0.36</td>
+                    <td>internet_archive</td>
+                </tr>
+                
+                <tr>
+                    <td>Evading EDR - The Definitive Guide To Defeating Endpoint Detection Systems</td>
+                    <td>Matt Hand</td>
+                    <td>No Starch Press</td>
+                    <td>9781718503342</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>The Design Of Web APIs</td>
+                    <td>Arnaud Lauret</td>
+                    <td>Manning</td>
+                    <td>9781617295102</td>
+                    <td>1.03</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>ISBN 9788555190933</td>
+                    <td>Unknown</td>
+                    <td>Unknown</td>
+                    <td>9788555190933</td>
+                    <td>0.30</td>
+                    <td>fallback</td>
+                </tr>
+                
+                <tr>
+                    <td>Learn Dbatools In A Month Of Lunches - Automating SQL Server Tasks With PowerShell Commands</td>
+                    <td>Chrissy LeMaire, Rob Sewell, Cláudio Silva, Jess Pomfret</td>
+                    <td>Simon and Schuster</td>
+                    <td>9781617296703</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Learning MySQL - Get A Handle On Your Data</td>
+                    <td>Vinicius M. Grippa, Sergey Kuzmichev</td>
+                    <td>O'Reilly Media</td>
+                    <td>9781492085928</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Windows Security Internals - A Deep Dive Into Windows Authentication, Authorization, And Auditing</td>
+                    <td>James Forshaw</td>
+                    <td>No Starch Press</td>
+                    <td>9781718501980</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>ISBN 9788555191923</td>
+                    <td>Unknown</td>
+                    <td>Unknown</td>
+                    <td>9788555191923</td>
+                    <td>0.30</td>
+                    <td>fallback</td>
+                </tr>
+                
+                <tr>
+                    <td>Prompt Engineering For Llms - The Art And Science Of Building Large Language Model-Based Applications</td>
+                    <td>John Berryman, Albert Ziegler</td>
+                    <td></td>
+                    <td>9781098156152</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Grokking Functional Programming</td>
+                    <td>Michal Plachta</td>
+                    <td>Simon and Schuster</td>
+                    <td>9781617291838</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Exploring Cloud Computing</td>
+                    <td>Michael Wittig and Andreas Wittig</td>
+                    <td>Manning Publications</td>
+                    <td>9781617294877</td>
+                    <td>0.69</td>
+                    <td>openlibrary</td>
+                </tr>
+                
+                <tr>
+                    <td>SQL Cookbook - Query Solutions And Techniques For All SQL Users</td>
+                    <td>Anthony Molinaro, Robert de Graaf</td>
+                    <td></td>
+                    <td>9781492077442</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>MySQL Cookbook - Solutions For Database Developers And Administrators</td>
+                    <td>Sveta Smirnova, Alkin Tezuysal</td>
+                    <td>O'Reilly Media</td>
+                    <td>9781492093169</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>ISBN 9781617292</td>
+                    <td>Unknown</td>
+                    <td>Unknown</td>
+                    <td>9781617292</td>
+                    <td>0.30</td>
+                    <td>fallback</td>
+                </tr>
+                
+                <tr>
+                    <td>Machine Learning With Python Cookbook - Practical Solutions From Preprocessing To Deep Learning</td>
+                    <td>Kyle Gallatin, Chris Albon</td>
+                    <td>O'Reilly Media</td>
+                    <td>9781098135720</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>ISBN 9781617295089</td>
+                    <td>Unknown</td>
+                    <td>Unknown</td>
+                    <td>9781617295089</td>
+                    <td>0.30</td>
+                    <td>fallback</td>
+                </tr>
+                
+                <tr>
+                    <td>ISBN 9788572540483</td>
+                    <td>Unknown</td>
+                    <td>Unknown</td>
+                    <td>9788572540483</td>
+                    <td>0.30</td>
+                    <td>fallback</td>
+                </tr>
+                
+                <tr>
+                    <td>ISBN 9781617296581</td>
+                    <td>Unknown</td>
+                    <td>Unknown</td>
+                    <td>9781617296581</td>
+                    <td>0.30</td>
+                    <td>fallback</td>
+                </tr>
+                
+                <tr>
+                    <td>Ethical Hacking - A Hands-On Introduction To Breaking In</td>
+                    <td>Daniel G. Graham</td>
+                    <td>No Starch Press</td>
+                    <td>9781718501874</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>The Art Of Mac Malware, Volume 1 - The Guide To Analyzing Malicious Software</td>
+                    <td>Patrick Wardle</td>
+                    <td>No Starch Press</td>
+                    <td>9781718501959</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Black Hat Go - Go Programming For Hackers And Pentesters</td>
+                    <td>Tom Steele, Chris Patten, Dan Kottmann</td>
+                    <td>No Starch Press</td>
+                    <td>9781593278656</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Modern C, Third Edition</td>
+                    <td>Jens Gustedt</td>
+                    <td>Manning Publications Co. LLC</td>
+                    <td>9781633437777</td>
+                    <td>0.69</td>
+                    <td>openlibrary</td>
+                </tr>
+                
+                <tr>
+                    <td>The Design Of Web APIs</td>
+                    <td>Arnaud Lauret</td>
+                    <td>Manning</td>
+                    <td>9781617295102</td>
+                    <td>1.03</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>The Design Of Web APIs</td>
+                    <td>Arnaud Lauret</td>
+                    <td>Manning</td>
+                    <td>9781617295102</td>
+                    <td>1.03</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Hands-On Large Language Models - Language Understanding And Generation</td>
+                    <td>Jay Alammar, Maarten Grootendorst</td>
+                    <td></td>
+                    <td>9781098150969</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Learning Airtable - Building Database-Driven Applications With No-Code</td>
+                    <td>Elliott Adams</td>
+                    <td></td>
+                    <td>9781098133375</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Learning Snowflake SQL And Scripting - Generate, Retrieve, And Automate Snowflake Data</td>
+                    <td>Alan Beaulieu</td>
+                    <td></td>
+                    <td>9781098140328</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>ISBN 9788555190575</td>
+                    <td>Unknown</td>
+                    <td>Unknown</td>
+                    <td>9788555190575</td>
+                    <td>0.30</td>
+                    <td>fallback</td>
+                </tr>
+                
+                <tr>
+                    <td>The Java Module System</td>
+                    <td>Nicolai Parlog</td>
+                    <td>Pearson Professional</td>
+                    <td>9781617294280</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Black Hat Go - Go Programming For Hackers And Pentesters</td>
+                    <td>Tom Steele, Chris Patten, Dan Kottmann</td>
+                    <td>No Starch Press</td>
+                    <td>9781593278656</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Flask de A a Z - Crie aplicações web mais completas e robustas em Python</td>
+                    <td>Tiago Silva</td>
+                    <td>Casa do Código</td>
+                    <td>9788572540346</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>ISBN 9781617295591</td>
+                    <td>Unknown</td>
+                    <td>Unknown</td>
+                    <td>9781617295591</td>
+                    <td>0.30</td>
+                    <td>fallback</td>
+                </tr>
+                
+                <tr>
+                    <td>Malware Data Science - Attack Detection And Attribution</td>
+                    <td>Joshua Saxe, Hillary Sanders</td>
+                    <td>No Starch Press</td>
+                    <td>9781593278601</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>SQL For Data Analysis - Advanced Techniques For Transforming Data Into Insights</td>
+                    <td>Cathy Tanimura</td>
+                    <td>O'Reilly Media</td>
+                    <td>9781492088783</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>ISBN 9788594188359</td>
+                    <td>Unknown</td>
+                    <td>Unknown</td>
+                    <td>9788594188359</td>
+                    <td>0.30</td>
+                    <td>fallback</td>
+                </tr>
+                
+                <tr>
+                    <td>Learn Computer Forensics - Your One-Stop Guide To Searching, Analyzing, Acquiring, And Securing Digital Evidence</td>
+                    <td>William Oettinger</td>
+                    <td>Packt Publishing</td>
+                    <td>9781803238302</td>
+                    <td>1.03</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Grokking Bitcoin</td>
+                    <td>Kalle Rosenbaum</td>
+                    <td>Manning</td>
+                    <td>9781617294648</td>
+                    <td>1.03</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Real-World Bug Hunting - A Field Guide To Web Hacking</td>
+                    <td>Peter Yaworski</td>
+                    <td>No Starch Press</td>
+                    <td>1593278616</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Prompt Engineering For Generative AI - Future-Proof Inputs For Reliable AI Outputs</td>
+                    <td>James Phoenix, Mike Taylor</td>
+                    <td></td>
+                    <td>9781098153434</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Secrets Of The JavaScript Ninja</td>
+                    <td>John Resig, Bibeault, Josip Maras</td>
+                    <td>Manning Publications</td>
+                    <td>9781617292859</td>
+                    <td>1.03</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Full Stack GraphQL Applications - With React, Node.Js, And Neo4J</td>
+                    <td>William Lyon</td>
+                    <td>Simon and Schuster</td>
+                    <td>9781617297038</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Hands-On Generative AI With Transformers And Diffusion Models</td>
+                    <td>Omar Sanseviero, Pedro Cuenca, Apolinario Passos, Jonathan Whitaker</td>
+                    <td></td>
+                    <td>9781098149246</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Python Object-Oriented Programming - Fourth Edition - Build Robust And Maintainable Object-Oriented Python Applications And Libraries</td>
+                    <td>Steven F. Lott, Dusty Phillips</td>
+                    <td></td>
+                    <td>9781801077262</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Java Coding Problems - Become An Expert Java Programmer By Solving Modern Real-World Problems</td>
+                    <td>Anghel Leonard</td>
+                    <td>Packt Publishing</td>
+                    <td>9781837633944</td>
+                    <td>1.03</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Designing APIs With Swagger And OpenAPI</td>
+                    <td>Joshua S. Ponelat, Lukas L. Rosenstock</td>
+                    <td>Simon and Schuster</td>
+                    <td>9781617296284</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>ISBN 9781617295089</td>
+                    <td>Unknown</td>
+                    <td>Unknown</td>
+                    <td>9781617295089</td>
+                    <td>0.30</td>
+                    <td>fallback</td>
+                </tr>
+                
+                <tr>
+                    <td>The Self-Service Data Roadmap - Democratize Data And Reduce Time To Insight</td>
+                    <td>Sandeep Uttamchandani</td>
+                    <td></td>
+                    <td>9781492075257</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>JavaScript On Things - Hacking Hardware For Web Developers</td>
+                    <td>Lyza Danger Gardner</td>
+                    <td>Manning</td>
+                    <td>9781617293863</td>
+                    <td>1.03</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>SQL Server Advanced Troubleshooting And Performance Tuning - Best Practices And Techniques</td>
+                    <td>Dmitri Korotkevitch</td>
+                    <td>O'Reilly Media</td>
+                    <td>9781098101923</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Database Internals - A Deep-Dive Into How Distributed Data Systems Work</td>
+                    <td>Alex Petrov</td>
+                    <td>O'Reilly Media</td>
+                    <td>9781492040347</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>AI Engineering - Building Applications With Foundation Models</td>
+                    <td>Chip Huyen</td>
+                    <td></td>
+                    <td>9781098166304</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>ISBN 9788555190100</td>
+                    <td>Unknown</td>
+                    <td>Unknown</td>
+                    <td>9788555190100</td>
+                    <td>0.30</td>
+                    <td>fallback</td>
+                </tr>
+                
+                <tr>
+                    <td>ISBN 9781617297014</td>
+                    <td>Unknown</td>
+                    <td>Unknown</td>
+                    <td>9781617297014</td>
+                    <td>0.30</td>
+                    <td>fallback</td>
+                </tr>
+                
+                <tr>
+                    <td>MongoDB - Powerful And Scalable Data Storage</td>
+                    <td>Shannon Bradshaw, Kristina Chodorow</td>
+                    <td>O'Reilly Media</td>
+                    <td>9781491954461</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Build A Website With ChatGPT - No Coding Experience Necessary</td>
+                    <td>Paul McFedries</td>
+                    <td>Simon and Schuster</td>
+                    <td>9781633436961</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Evasive Malware - A Field Guide To Detecting, Analyzing, And Defeating Advanced Threats</td>
+                    <td>Kyle Cucci</td>
+                    <td>No Starch Press</td>
+                    <td>9781718503267</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Microservices In .NET Core - With Examples In Nancy</td>
+                    <td>Christian Horsdal Gammelgaard</td>
+                    <td>Manning</td>
+                    <td>9781617293375</td>
+                    <td>1.03</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Practical Mobile Forensics - Fourth Edition</td>
+                    <td>Rohit Tamma, Oleg Skulkin, Heather Mahalik, Satish Bommisetty</td>
+                    <td></td>
+                    <td>9781838647520</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Selenium WebDriver - Descomplicando testes automatizados com Java</td>
+                    <td>Rafael Peixoto</td>
+                    <td>Editora Casa do Código</td>
+                    <td>9788594188731</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Training Data For Machine Learning - Human Supervision From Annotation To Data Science</td>
+                    <td>Anthony Sarkis</td>
+                    <td>O'Reilly Media</td>
+                    <td>9781492094524</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Natural Language Processing With Transformers, Revised Edition</td>
+                    <td>Lewis Tunstall, Leandro von Werra, Thomas Wolf</td>
+                    <td>O'Reilly Media</td>
+                    <td>9781098136796</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Web Design Playground - HTML And CSS The Interactive Way</td>
+                    <td>Paul McFedries</td>
+                    <td>Manning Publications</td>
+                    <td>9781617294402</td>
+                    <td>1.03</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Learn C Programming - A Beginners Guide To Learning The Most Powerful And General-Purpose Programming Language With Ease</td>
+                    <td>JEFF. SZUHAY</td>
+                    <td></td>
+                    <td>9781801078450</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Learning LangChain - Build AI Applications With LLMs</td>
+                    <td>Mayo Oshin, Nuno Campos</td>
+                    <td>O'Reilly Media</td>
+                    <td>9781098167288</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Build A Frontend Web Framework (From Scratch)</td>
+                    <td>Ángel Sola Orbaiceta</td>
+                    <td>Simon and Schuster</td>
+                    <td>9781633438064</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Get Programming With Javascript</td>
+                    <td>John R. Larsen</td>
+                    <td>Manning Publications</td>
+                    <td>9781617293108</td>
+                    <td>1.03</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Developing Apps With GPT-4 And ChatGPT - Build Intelligent Chatbots, Content Generators, And More</td>
+                    <td>Olivier Caelen, Marie-Alice Blete</td>
+                    <td></td>
+                    <td>9781098168100</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>The Developer's Playbook For Large Language Model Security - Building Secure AI Applications</td>
+                    <td>Steve Wilson</td>
+                    <td></td>
+                    <td>9781098162207</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Machine Learning With Python Cookbook - Practical Solutions From Preprocessing To Deep Learning</td>
+                    <td>Kyle Gallatin, Chris Albon</td>
+                    <td>O'Reilly Media</td>
+                    <td>9781098135720</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>AI Engineering - Building Applications With Foundation Models</td>
+                    <td>Chip Huyen</td>
+                    <td></td>
+                    <td>9781098166304</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Low-Code AI - A Practical Project-Driven Introduction To Machine Learning</td>
+                    <td>Gwendolyn Stripling, Michael Abel</td>
+                    <td>O'Reilly Media</td>
+                    <td>9781098146825</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Efficient MySQL Performance - Best Practices And Techniques</td>
+                    <td>Daniel Nichter</td>
+                    <td>O'Reilly Media</td>
+                    <td>9781098105099</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Efficient MySQL Performance - Best Practices And Techniques</td>
+                    <td>Daniel Nichter</td>
+                    <td>O'Reilly Media</td>
+                    <td>9781098105099</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Hands-On MySQL Administration - Managing MySQL On Premise And On The Cloud</td>
+                    <td>Arunjith Aravindan, Jeyaram Ayyalusamy</td>
+                    <td></td>
+                    <td>9781098155896</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Amazon Web Services In Action</td>
+                    <td>Michael Wittig, Andreas Wittig</td>
+                    <td>Pearson Professional</td>
+                    <td>9781617295119</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Resilient Oracle Pl/SQL: Building Resilient Database Solutions For Continuous Operation</td>
+                    <td>Stephen Morris</td>
+                    <td>O'Reilly Media</td>
+                    <td>9781098134112</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>PostgreSQL: Up And Running - A Practical Guide To The Advanced Open Source Database</td>
+                    <td>Regina O. Obe, Leo S. Hsu</td>
+                    <td></td>
+                    <td>9781491963418</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>D3.Js In Action</td>
+                    <td>Elijah Meeks</td>
+                    <td>Manning Publications</td>
+                    <td>9781617292118</td>
+                    <td>1.03</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Essential TypeScript 5, Third Edition</td>
+                    <td>Adam Freeman</td>
+                    <td>Simon and Schuster</td>
+                    <td>9781633437319</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Grokking Web Application Security</td>
+                    <td>Malcolm McDonald</td>
+                    <td>Simon and Schuster</td>
+                    <td>9781633438262</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Channel Coding Techniques For Wireless Communications</td>
+                    <td>K. Deergha Rao</td>
+                    <td>Springer</td>
+                    <td>9788132222910</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Designing APIs With Swagger And OpenAPI</td>
+                    <td>Joshua S. Ponelat, Lukas L. Rosenstock</td>
+                    <td>Simon and Schuster</td>
+                    <td>9781617296284</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>React In Depth</td>
+                    <td>Morten Barklund</td>
+                    <td>Simon and Schuster</td>
+                    <td>9781633437340</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Secrets Of The JavaScript Ninja</td>
+                    <td>John Resig, Bibeault, Josip Maras</td>
+                    <td>Manning Publications</td>
+                    <td>9781617292859</td>
+                    <td>1.03</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Machine Learning Interviews - Kickstart Your Machine Learning Career</td>
+                    <td>Susan Shu Chang</td>
+                    <td></td>
+                    <td>9781098146542</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>ISBN 9781617299346</td>
+                    <td>Unknown</td>
+                    <td>Unknown</td>
+                    <td>9781617299346</td>
+                    <td>0.30</td>
+                    <td>fallback</td>
+                </tr>
+                
+                <tr>
+                    <td>Grokking Artificial Intelligence Algorithms - Understand And Apply The Core Algorithms Of Deep Learning And Artificial Intelligence In This Friendly Illustrated Guide Including Exercises And Examples</td>
+                    <td>Rishal Hurbans</td>
+                    <td>Manning</td>
+                    <td>9781617296185</td>
+                    <td>1.03</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Good Code, Bad Code - Think Like A Software Engineer</td>
+                    <td>Tom Long</td>
+                    <td>Simon and Schuster</td>
+                    <td>9781617298936</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Hands-On MySQL Administration - Managing MySQL On Premise And On The Cloud</td>
+                    <td>Arunjith Aravindan, Jeyaram Ayyalusamy</td>
+                    <td></td>
+                    <td>9781098155896</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Network Automation Cookbook - Proven And Actionable Recipes To Automate And Manage Network Devices Using Ansible</td>
+                    <td>Karim Okasha</td>
+                    <td></td>
+                    <td>9781789956481</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Learning LangChain - Build AI Applications With LLMs</td>
+                    <td>Mayo Oshin, Nuno Campos</td>
+                    <td>O'Reilly Media</td>
+                    <td>9781098167288</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Sustainable Cloud Development - Optimize Cloud Workloads For Environmental Impact In The GenAI Era</td>
+                    <td>Parth Girish Patel, ISHNEET KAUR. PATEL DUA (PARTH. DAVID, STEVEN.), Steven David</td>
+                    <td></td>
+                    <td>9781836208419</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>React Hooks In Action - With Suspense And Concurrent Mode</td>
+                    <td>John Larsen</td>
+                    <td>Simon and Schuster</td>
+                    <td>9781617297632</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Grokking Bitcoin</td>
+                    <td>Kalle Rosenbaum</td>
+                    <td>Manning</td>
+                    <td>9781617294648</td>
+                    <td>1.03</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>PostgreSQL: Up And Running - A Practical Guide To The Advanced Open Source Database</td>
+                    <td>Regina O. Obe, Leo S. Hsu</td>
+                    <td></td>
+                    <td>9781491963418</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Cassandra: The Definitive Guide - Distributed Data At Web Scale</td>
+                    <td>Jeff Carpenter, Eben Hewitt</td>
+                    <td>O'Reilly Media</td>
+                    <td>9781098115166</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>ISBN 9781617296796</td>
+                    <td>Unknown</td>
+                    <td>Unknown</td>
+                    <td>9781617296796</td>
+                    <td>0.30</td>
+                    <td>fallback</td>
+                </tr>
+                
+                <tr>
+                    <td>Ethical Hacking - A Hands-On Introduction To Breaking In</td>
+                    <td>Daniel G. Graham</td>
+                    <td>No Starch Press</td>
+                    <td>9781718501874</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Essential TypeScript 5, Third Edition</td>
+                    <td>Adam Freeman</td>
+                    <td>Simon and Schuster</td>
+                    <td>9781633437319</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Amazon Web Services In Action</td>
+                    <td>Michael Wittig, Andreas Wittig</td>
+                    <td>Pearson Professional</td>
+                    <td>9781617295119</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>React Quickly, Second Edition</td>
+                    <td>Morten Barklund, Azat Mardan</td>
+                    <td>Simon and Schuster</td>
+                    <td>9781633439290</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>ISBN 9781617299346</td>
+                    <td>Unknown</td>
+                    <td>Unknown</td>
+                    <td>9781617299346</td>
+                    <td>0.30</td>
+                    <td>fallback</td>
+                </tr>
+                
+                <tr>
+                    <td>Data Privacy - A Runbook For Engineers</td>
+                    <td>Nishant Bhajaria</td>
+                    <td>Simon and Schuster</td>
+                    <td>9781617298998</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Learning SQL - Generate, Manipulate, And Retrieve Data</td>
+                    <td>Alan Beaulieu</td>
+                    <td>O'Reilly Media</td>
+                    <td>9781492057611</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Streaming Databases - Building Real-Time, User-Facing Solutions</td>
+                    <td>Hubert Dulay, Ralph Matthias Debusmann</td>
+                    <td></td>
+                    <td>9781098154837</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Hands-On Machine Learning With Scikit-Learn, Keras, And Tensorflow - Concepts, Tools, And Techniques To Build Intelligent Systems</td>
+                    <td>Aurélien Géron</td>
+                    <td></td>
+                    <td>9781098125974</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>The Ghidra Book - The Definitive Guide</td>
+                    <td>Chris Eagle, Kara Nance</td>
+                    <td>No Starch Press</td>
+                    <td>9781718501034</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>The Jamstack Book - Beyond Static Sites With JavaScript, APIs, And Markup</td>
+                    <td>Raymond Camden, Brian Rinaldi</td>
+                    <td>Simon and Schuster</td>
+                    <td>9781617298882</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Learn Dbatools In A Month Of Lunches - Automating SQL Server Tasks With PowerShell Commands</td>
+                    <td>Chrissy LeMaire, Rob Sewell, Cláudio Silva, Jess Pomfret</td>
+                    <td>Simon and Schuster</td>
+                    <td>9781617296703</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Learning MySQL - Get A Handle On Your Data</td>
+                    <td>Vinicius M. Grippa, Sergey Kuzmichev</td>
+                    <td>O'Reilly Media</td>
+                    <td>9781492085928</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>ISBN 9781617294327</td>
+                    <td>Unknown</td>
+                    <td>Unknown</td>
+                    <td>9781617294327</td>
+                    <td>0.30</td>
+                    <td>fallback</td>
+                </tr>
+                
+                <tr>
+                    <td>MySQL - Comece com o principal banco de dados open source do mercado</td>
+                    <td>Vinícius Carvalho</td>
+                    <td>Editora Casa do Código</td>
+                    <td>9788555190803</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>Exploring Cloud Computing</td>
+                    <td>Michael Wittig and Andreas Wittig</td>
+                    <td>Manning Publications</td>
+                    <td>9781617294877</td>
+                    <td>0.69</td>
+                    <td>openlibrary</td>
+                </tr>
+                
+                <tr>
+                    <td>Attacking Network Protocols - A Hacker's Guide To Capture, Analysis, And Exploitation</td>
+                    <td>James Forshaw</td>
+                    <td>No Starch Press</td>
+                    <td>9781593277505</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>The Android Malware Handbook - Detection And Analysis By Human And Machine</td>
+                    <td>Qian Han, Salvador Mandujano, Sebastian Porst, V.S. Subrahmanian, Sai Deep Tetali, Yanhai Xiong</td>
+                    <td>No Starch Press</td>
+                    <td>9781718503304</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>ISBN 9781617296796</td>
+                    <td>Unknown</td>
+                    <td>Unknown</td>
+                    <td>9781617296796</td>
+                    <td>0.30</td>
+                    <td>fallback</td>
+                </tr>
+                
+                <tr>
+                    <td>Flexible Adaptation In Cognitive Radios</td>
+                    <td>Shujun Li, Miecyslaw Kokar</td>
+                    <td>Springer Science & Business Media</td>
+                    <td>9781461409687</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>SQL In A Nutshell - A Desktop Quick Reference</td>
+                    <td>Kevin Kline, Regina O Obe, Leo S Hsu</td>
+                    <td></td>
+                    <td>9781492088868</td>
+                    <td>0.93</td>
+                    <td>isbnlib_info</td>
+                </tr>
+                
+                <tr>
+                    <td>ISBN 9781617297014</td>
+                    <td>Unknown</td>
+                    <td>Unknown</td>
+                    <td>9781617297014</td>
+                    <td>0.30</td>
+                    <td>fallback</td>
+                </tr>
+                
+                <tr>
+                    <td>ISBN 9788555191060</td>
+                    <td>Unknown</td>
+                    <td>Unknown</td>
+                    <td>9788555191060</td>
+                    <td>0.30</td>
+                    <td>fallback</td>
+                </tr>
+                
+                    </table>
+                </div>
+            </div>
+
+            <div id="failures" class="tab-content">
+                <div class="card">
+                    <h2>Failed Files Analysis</h2>
+                    <div class="todo-note">
+                        <strong>TO DO:</strong> Implement aggressive detection methods for these files
+                    </div>
+                    <table>
+                        <tr>
+                            <th>File Path</th>
+                            <th>Status</th>
+                            <th>Extraction Methods</th>
+                            <th>Found ISBNs</th>
+                            <th>Publisher</th>
+                            <th>Errors</th>
+                        </tr>
+                        
+            <tr>
+                <td class="file-path">books/AI_Agents_and_Applications_v7_MEAP.pdf</td>
+                <td>ISBN não encontrado no arquivo</td>
+                <td>PyPDF2</td>
+                <td>None</td>
+                <td>manning</td>
+                <td class="error-detail"></td>
+            </tr>
+            
+            <tr>
+                <td class="file-path">books/AI_Applications_Made_Easy_v5_MEAP.pdf</td>
+                <td>ISBN não encontrado no arquivo</td>
+                <td>PyPDF2</td>
+                <td>None</td>
+                <td>manning</td>
+                <td class="error-detail"></td>
+            </tr>
+            
+            <tr>
+                <td class="file-path">books/A_Damn_Fine_Stable_Diffusion_Book_v6_MEAP.pdf</td>
+                <td>ISBN não encontrado no arquivo</td>
+                <td>PyPDF2</td>
+                <td>None</td>
+                <td>manning</td>
+                <td class="error-detail"></td>
+            </tr>
+            
+            <tr>
+                <td class="file-path">books/Analog and Digital Communications  Hwei P. Hsu.pdf</td>
+                <td>Falha na extração de texto</td>
+                <td>PyPDF2, pdfplumber, pdfminer, OCR (Tesseract)</td>
+                <td>None</td>
+                <td>Unknown</td>
+                <td class="error-detail"></td>
+            </tr>
+            
+            <tr>
+                <td class="file-path">books/Build_Python_Web_Apps_with_Streamlit_v7_MEAP.pdf</td>
+                <td>ISBN não encontrado no arquivo</td>
+                <td>PyPDF2</td>
+                <td>None</td>
+                <td>manning</td>
+                <td class="error-detail"></td>
+            </tr>
+            
+            <tr>
+                <td class="file-path">books/CNH-e.pdf.pdf</td>
+                <td>ISBN não encontrado no arquivo</td>
+                <td>PyPDF2</td>
+                <td>None</td>
+                <td>unknown</td>
+                <td class="error-detail"></td>
+            </tr>
+            
+            <tr>
+                <td class="file-path">books/Communication Systems 4Th Edition Simon Haykin With Solutions Manual.pdf</td>
+                <td>Falha na extração de texto</td>
+                <td>PyPDF2, pdfplumber, pdfminer, OCR (Tesseract)</td>
+                <td>None</td>
+                <td>Unknown</td>
+                <td class="error-detail"></td>
+            </tr>
+            
+            <tr>
+                <td class="file-path">books/Fight_Fraud_with_Machine_Learning_v16_MEAP.pdf</td>
+                <td>ISBN não encontrado no arquivo</td>
+                <td>PyPDF2</td>
+                <td>None</td>
+                <td>manning</td>
+                <td class="error-detail"></td>
+            </tr>
+            
+            <tr>
+                <td class="file-path">books/Fotios Chantzis et al - Practical IoT Hacking (2021).pdf</td>
+                <td>ISBN não encontrado no arquivo</td>
+                <td>PyPDF2</td>
+                <td>None</td>
+                <td>unknown</td>
+                <td class="error-detail"></td>
+            </tr>
+            
+            <tr>
+                <td class="file-path">books/J. Norberto Pires - Industrial Robots Programming (2007).pdf</td>
+                <td>ISBN não encontrado no arquivo</td>
+                <td>PyPDF2</td>
+                <td>None</td>
+                <td>manning</td>
+                <td class="error-detail"></td>
+            </tr>
+            
+            <tr>
+                <td class="file-path">books/Jason Andress - Foundations of Information Security (2019).pdf</td>
+                <td>ISBN não encontrado no arquivo</td>
+                <td>PyPDF2</td>
+                <td>None</td>
+                <td>unknown</td>
+                <td class="error-detail"></td>
+            </tr>
+            
+            <tr>
+                <td class="file-path">books/Little guide to building Large Language Models in 2024.pdf</td>
+                <td>ISBN não encontrado no arquivo</td>
+                <td>PyPDF2</td>
+                <td>None</td>
+                <td>oreilly</td>
+                <td class="error-detail"></td>
+            </tr>
+            
+            <tr>
+                <td class="file-path">books/Maxwell Flitton - Rust Web Programming (2023).pdf</td>
+                <td>ISBN não encontrado no arquivo</td>
+                <td>PyPDF2</td>
+                <td>None</td>
+                <td>manning</td>
+                <td class="error-detail"></td>
+            </tr>
+            
+            <tr>
+                <td class="file-path">books/Nitin Liladhar Rane et al - Large Language Models for Sustainable Urban Development (2025).pdf</td>
+                <td>ISBN não encontrado no arquivo</td>
+                <td>PyPDF2</td>
+                <td>None</td>
+                <td>oreilly</td>
+                <td class="error-detail"></td>
+            </tr>
+            
+            <tr>
+                <td class="file-path">books/OECD - The Governance of Regulators Driving Performance at Mexico's National Hydrocarbons Commission (2017).pdf</td>
+                <td>ISBN não encontrado no arquivo</td>
+                <td>PyPDF2</td>
+                <td>None</td>
+                <td>unknown</td>
+                <td class="error-detail"></td>
+            </tr>
+            
+            <tr>
+                <td class="file-path">books/Python_Workout_Second_Edition_v3_MEAP.pdf</td>
+                <td>ISBN não encontrado no arquivo</td>
+                <td>PyPDF2</td>
+                <td>None</td>
+                <td>manning</td>
+                <td class="error-detail"></td>
+            </tr>
+            
+            <tr>
+                <td class="file-path">books/Reuven Lerner - Python Workout, Second Edition (2025).pdf</td>
+                <td>ISBN não encontrado no arquivo</td>
+                <td>PyPDF2</td>
+                <td>None</td>
+                <td>manning</td>
+                <td class="error-detail"></td>
+            </tr>
+            
+            <tr>
+                <td class="file-path">books/Secrets_of_the_JavaScript_Ninja_Third_E_v8_MEAP.pdf</td>
+                <td>ISBN não encontrado no arquivo</td>
+                <td>PyPDF2</td>
+                <td>None</td>
+                <td>manning</td>
+                <td class="error-detail"></td>
+            </tr>
+            
+            <tr>
+                <td class="file-path">books/Tyler Richards - Getting Started with Streamlit for Data Science (2021).pdf</td>
+                <td>ISBN não encontrado no arquivo</td>
+                <td>PyPDF2</td>
+                <td>None</td>
+                <td>manning</td>
+                <td class="error-detail"></td>
+            </tr>
+            
+            <tr>
+                <td class="file-path">books/c31e9e33-6aa4-411f-a688-f996a0efcbd0.pdf</td>
+                <td>ISBN não encontrado no arquivo</td>
+                <td>PyPDF2</td>
+                <td>None</td>
+                <td>unknown</td>
+                <td class="error-detail"></td>
+            </tr>
+            
+            <tr>
+                <td class="file-path">books/controlando-versoes-com-git-e-github.pdf</td>
+                <td>ISBN não encontrado no arquivo</td>
+                <td>PyPDF2</td>
+                <td>None</td>
+                <td>unknown</td>
+                <td class="error-detail"></td>
+            </tr>
+            
+            <tr>
+                <td class="file-path">books/foundationsofinformationsecurity.pdf</td>
+                <td>ISBN não encontrado no arquivo</td>
+                <td>PyPDF2</td>
+                <td>None</td>
+                <td>unknown</td>
+                <td class="error-detail"></td>
+            </tr>
+            
+            <tr>
+                <td class="file-path">books/unlocked_asa.pdf</td>
+                <td>ISBN não encontrado no arquivo</td>
+                <td>PyPDF2</td>
+                <td>None</td>
+                <td>unknown</td>
+                <td class="error-detail"></td>
+            </tr>
+            
+                    </table>
+                </div>
+            </div>
+
+            <script>
+            function openTab(evt, tabName) {
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("tab-content");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].className = tabcontent[i].className.replace(" active", "");
+                }
+                tablinks = document.getElementsByClassName("tab");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+                document.getElementById(tabName).className += " active";
+                evt.currentTarget.className += " active";
+                
+                // Reflow charts when tab is shown
+                if (tabName === 'overview') {
+                    Plotly.relayout('summaryChart', {});
+                } else if (tabName === 'api-stats') {
+                    Plotly.relayout('apiChart', {});
+                } else if (tabName === 'publishers') {
+                    Plotly.relayout('publisherChart', {});
+                }
+            }
+
+            // Summary Chart
+            const summaryData = [{
+                values: [203, 23],
+                labels: ['Successful', 'Failed'],
+                type: 'pie',
+                marker: {
+                    colors: ['#28a745', '#dc3545']
+                }
+            }];
+            Plotly.newPlot('summaryChart', summaryData);
+
+            // API Performance Chart
+            const apiData = [{
+                x: ["'isbnlib_info'", "'openlibrary'", "'fallback'", "'internet_archive'"],
+                y: [166, 5, 31, 1],
+                type: 'bar',
+                marker: {
+                    color: '#17a2b8'
+                }
+            }];
+            const apiLayout = {
+                title: 'Successful Extractions by API',
+                xaxis: { tickangle: -45 }
+            };
+            Plotly.newPlot('apiChart', apiData, apiLayout);
+
+            // Publisher Chart
+            const publisherData = [{
+                labels: ["'No Starch Press'", "'Springer Science & Business Media'", "'Manning'", "'Casa do Código'", '"O\'Reilly Media"', "'Pearson Professional'", "'Simon and Schuster'", "'Manning Publications Co. LLC'", "'Unknown'", "''", "'John Wiley & Sons'", "'Packt Publishing'", "'Manning Publications'", "'Editora Casa do Código'", "'John Wiley & Sons, Inc.'", "'Springer'"],
+                values: [29, 2, 15, 4, 29, 6, 25, 2, 31, 40, 1, 4, 10, 3, 1, 1],
+                type: 'pie'
+            }];
+            Plotly.newPlot('publisherChart', publisherData);
+            </script>
+        </body>
+        </html>
+        

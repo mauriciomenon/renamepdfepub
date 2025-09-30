@@ -1,3 +1,14 @@
+"""
+===============================================================================
+DEPRECATED RUNNER (LEGACY)
+-------------------------------------------------------------------------------
+Este arquivo não é mais o pipeline canônico. O CLI (scan/scan-cycles) agora
+usa o core: `src/core/renomeia_livro.py`.
+
+Mantenha este arquivo apenas como referência. NÃO MODIFIQUE. Qualquer melhoria
+deve ser aplicada no core e, se necessário, portado daqui para lá.
+===============================================================================
+"""
 # TO DO Remover estas importações
 # from pdfminer.high_level import extract_text as pdfminer_extract
 # import pytesseract
@@ -241,6 +252,44 @@ class MetadataCache:
             metadata: Dicionário com os metadados do livro
         """
         with sqlite3.connect(self.db_path) as conn:
+            # Normaliza autores para string plana antes de persistir
+            def _norm_list(v) -> list:
+                out = []
+                if v is None:
+                    return out
+                if isinstance(v, (str, int, float)):
+                    return [str(v)]
+                for x in v:
+                    if x is None:
+                        continue
+                    if isinstance(x, (str, int, float)):
+                        s = str(x).strip()
+                        if s:
+                            out.append(s)
+                    elif isinstance(x, (list, tuple, set)):
+                        out.extend(_norm_list(list(x)))
+                    elif isinstance(x, dict):
+                        name = x.get('name') or x.get('full_name') or ''
+                        if not name:
+                            g = x.get('given') or x.get('first') or ''
+                            f = x.get('family') or x.get('last') or ''
+                            name = f"{g} {f}".strip()
+                        if name:
+                            out.append(str(name))
+                    else:
+                        s = str(x).strip()
+                        if s:
+                            out.append(s)
+                # dedup preserve order
+                seen = set()
+                res = []
+                for s in out:
+                    if s not in seen:
+                        seen.add(s)
+                        res.append(s)
+                return res
+
+            authors_list = _norm_list(metadata.get('authors', []))
             conn.execute(
                 """INSERT INTO metadata_cache (
                     isbn_10, isbn_13, title, authors, publisher, 
@@ -250,7 +299,7 @@ class MetadataCache:
                     metadata.get('isbn_10'),
                     metadata.get('isbn_13'),
                     metadata.get('title'),
-                    ', '.join(metadata.get('authors', [])),
+                    ', '.join(authors_list),
                     metadata.get('publisher'),
                     metadata.get('published_date'),
                     metadata.get('confidence_score', 0.0),
@@ -280,6 +329,7 @@ class MetadataCache:
                     
                     if metadata and metadata.confidence_score > current_score:
                         # Atualiza o registro se encontrou dados melhores
+                        norm_authors = ', '.join(_norm_list(metadata.authors))
                         conn.execute("""
                             UPDATE metadata_cache
                             SET title = ?, authors = ?, publisher = ?, 
@@ -288,7 +338,7 @@ class MetadataCache:
                             WHERE isbn_10 = ? OR isbn_13 = ?
                         """, (
                             metadata.title,
-                            ', '.join(metadata.authors),
+                            norm_authors,
                             metadata.publisher,
                             metadata.published_date,
                             metadata.confidence_score,
@@ -311,6 +361,7 @@ class MetadataCache:
             Atualiza um registro existente no cache.
             """
             with sqlite3.connect(self.db_path) as conn:
+                authors_list = _norm_list(metadata.get('authors', []))
                 conn.execute("""
                     UPDATE metadata_cache
                     SET title = ?, authors = ?, publisher = ?, 
@@ -319,7 +370,7 @@ class MetadataCache:
                     WHERE isbn_10 = ? OR isbn_13 = ?
                 """, (
                     metadata.get('title'),
-                    ', '.join(metadata.get('authors', [])),
+                    ', '.join(authors_list),
                     metadata.get('publisher'),
                     metadata.get('published_date'),
                     metadata.get('confidence_score', 0.0),
@@ -847,6 +898,13 @@ class MetadataFetcher:
         self.api_success = Counter()
         self.api_total = Counter()
         self.api_times = defaultdict(list)
+
+        # Circuit breaker e deduplicação de erros
+        self._api_failure_counts = Counter()            # falhas por API (janela atual)
+        self._api_circuit_until: Dict[str, float] = {}  # quando o disjuntor fecha novamente
+        self._api_base_cooldown: Dict[str, float] = defaultdict(lambda: 30.0)  # base 30s
+        self._api_isbn_block: Dict[Tuple[str, str], float] = {}  # (api, isbn) -> until_ts
+        self._error_last_log: Dict[Tuple[str, str], float] = {}  # (api, error_name) -> ts
         
         # Configuração de timeouts e retries
         self.session.timeout = (5, 15)
@@ -880,13 +938,60 @@ class MetadataFetcher:
         """Imprime estatísticas atuais das APIs."""
         print("\nEstatísticas em tempo real:")
         print("-" * 40)
+        total_all = 0
+        success_all = 0
+        per_api = {}
         for api, total in sorted(self.api_total.items()):
             if total > 0:
                 success = self.api_success[api]
                 success_rate = (success / total * 100)
                 avg_time = sum(self.api_times[api]) / len(self.api_times[api]) if self.api_times[api] else 0
                 print(f"{api:15}: {success}/{total} ({success_rate:.1f}%) - {avg_time:.2f}s")
+                total_all += total
+                success_all += success
+                per_api[api] = {
+                    'success': int(success),
+                    'total': int(total),
+                    'success_rate': success_rate,
+                    'avg_time': avg_time,
+                }
+        if total_all > 0:
+            print("-" * 40)
+            overall = (success_all / total_all * 100)
+            print(f"TOTAL: {success_all}/{total_all} ({overall:.1f}%)")
+        # Lista APIs com circuito aberto (se houver)
+        now_ts = time.time()
+        open_apis = [api for api, until in self._api_circuit_until.items() if now_ts < until]
+        if open_apis:
+            print(f"Circuito aberto: {', '.join(sorted(open_apis))}")
         print("-" * 40)
+
+        # Exporta estatísticas para consumo externo (Streamlit)
+        try:
+            from pathlib import Path as _Path
+            _Path('reports').mkdir(exist_ok=True)
+            live_file = _Path('reports') / 'live_api_stats.json'
+            circuits_detail = {
+                api: max(0.0, self._api_circuit_until.get(api, 0) - now_ts)
+                for api in open_apis
+            }
+            payload = {
+                'timestamp': time.time(),
+                'overall': {
+                    'success': int(success_all),
+                    'total': int(total_all),
+                    'success_rate': (success_all / total_all * 100) if total_all else 0.0,
+                },
+                'per_api': per_api,
+                'open_circuits': sorted(open_apis),
+                'open_circuits_detail': circuits_detail,
+            }
+            import json as _json
+            with open(live_file, 'w', encoding='utf-8') as f:
+                _json.dump(payload, f, ensure_ascii=False, indent=2)
+        except Exception:
+            # não interrompe o fluxo por erro de escrita de métricas
+            pass
 
     def reset_stats(self):
         """Reseta os contadores de estatísticas."""
@@ -977,9 +1082,23 @@ class MetadataFetcher:
 
         for fetcher, priority in fetchers:
             if fetcher.__name__ not in processed:
+                # Circuit breaker global por API
+                now = time.time()
+                api_name = fetcher.__name__
+                if api_name in self._api_circuit_until and now < self._api_circuit_until[api_name]:
+                    logging.debug(f"{api_name} ignorada (circuito aberto até {self._api_circuit_until[api_name]:.0f}).")
+                    processed.add(api_name)
+                    continue
+
+                # Throttle por par (API, ISBN)
+                if (api_name, isbn) in self._api_isbn_block and now < self._api_isbn_block[(api_name, isbn)]:
+                    logging.debug(f"{api_name} ignorada para ISBN {isbn} (cooldown).")
+                    processed.add(api_name)
+                    continue
+
                 # Determina a configuração de retry baseada na prioridade
-                start_time = time.time()
-                self.api_total[fetcher.__name__] += 1
+                call_start = time.time()
+                self.api_total[api_name] += 1
 
                 if priority >= 8:
                     retry_config = retry_configs['high_priority']
@@ -988,15 +1107,23 @@ class MetadataFetcher:
                 else:
                     retry_config = retry_configs['low_priority']
 
+                success_recorded = False
+                last_elapsed = 0.0
                 for attempt in range(retry_config['max_retries']):
                     try:
                         metadata = fetcher(isbn)
-                        elapsed = time.time() - start_time
-                        self.api_times[fetcher.__name__].append(elapsed)
+                        last_elapsed = time.time() - call_start
                         
                         if metadata:
                             # Ajusta score baseado no desempenho real da API
-                            self.api_success[fetcher.__name__] += 1
+                            if not success_recorded:
+                                self.api_success[api_name] += 1
+                                success_recorded = True
+                            # fecha circuito em caso de sucesso, reduzindo penalidade
+                            if api_name in self._api_circuit_until and now >= self._api_circuit_until[api_name]:
+                                # reseta contador ao recuperar
+                                self._api_failure_counts[api_name] = 0
+                                self._api_circuit_until.pop(api_name, None)
                             base_score = priority / 10
                             adjustment = confidence_adjustments.get(metadata.source, 0.5)
                             metadata.confidence_score = min(1.0, base_score * adjustment)
@@ -1009,19 +1136,22 @@ class MetadataFetcher:
                                 
                             all_results.append(metadata)
                             
-                            if metadata.confidence_score > 0.85:
-                                break
+                            # Conta tempo da chamada (apenas uma vez por API/ISBN)
+                            break
                     except Exception as e:
-                        elapsed = time.time() - start_time
-                        self.api_times[fetcher.__name__].append(elapsed)
+                        last_elapsed = time.time() - call_start
                         last_error = e
-                        self._handle_api_error(fetcher.__name__, e, isbn)
+                        self._handle_api_error(api_name, e, isbn)
                         
                         if attempt < retry_config['max_retries'] - 1:
                             sleep_time = retry_config['retry_delay'] * (retry_config['backoff_factor'] ** attempt)
                             time.sleep(sleep_time)
                             
-                processed.add(fetcher.__name__)
+                # Registra tempo somente uma vez por API/ISBN
+                if last_elapsed > 0:
+                    self.api_times[api_name].append(last_elapsed)
+
+                processed.add(api_name)
 
                 # Imprime estatísticas a cada 5 APIs processadas
                 if len(processed) % 5 == 0:
@@ -1112,13 +1242,87 @@ class MetadataFetcher:
     def fetch_loc(self, isbn: str) -> Optional[BookMetadata]:
         """Busca na API da Library of Congress."""
         try:
-            # URL da API da LoC
+            # 1) Tenta primeiro o endpoint JSON de busca por ISBN (correto para ISBN)
+            json_url = f"https://www.loc.gov/books/?fo=json&q=ISBN:{isbn}"
+            resp_json = self.session.get(json_url, timeout=10)
+            if resp_json.status_code == 200:
+                try:
+                    data = resp_json.json()
+                    results = data.get('results') or []
+                    if results:
+                        r0 = results[0]
+                        title = (r0.get('title') or '').strip()
+                        creators = r0.get('creator') or r0.get('contributors') or []
+                        if isinstance(creators, str):
+                            authors = [creators]
+                        else:
+                            authors = [c for c in creators if isinstance(c, str)]
+                        publisher = (r0.get('publisher') or 'Unknown').strip()
+                        published_date = (r0.get('date') or 'Unknown').strip()
+                        if title and authors:
+                            return BookMetadata(
+                                title=title,
+                                authors=authors if authors else ['Unknown'],
+                                publisher=publisher or 'Unknown',
+                                published_date=published_date or 'Unknown',
+                                isbn_13=isbn if len(isbn) == 13 else None,
+                                isbn_10=isbn if len(isbn) == 10 else None,
+                                confidence_score=0.78,
+                                source='loc'
+                            )
+                except Exception:
+                    # Se JSON falhar, cai para MARC XML
+                    pass
+
+            # 2) Fallback MARC21 XML (este endpoint espera LCCN; pode falhar para ISBN)
             url = f"https://lccn.loc.gov/{isbn}/marc21.xml"
             response = self.session.get(url, timeout=10)
             
             if response.status_code == 200:
-                # Parse do XML
-                root = ET.fromstring(response.content)
+                # Parse do XML com saneamento e fallback tolerante
+                xml_text = response.text
+                # remove caracteres de controle que quebram o parser XML
+                xml_text = re.sub(r'[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]', '', xml_text)
+                xml_text = re.sub(r'<\?xml[^>]*\?>', '', xml_text)
+                
+                root = None
+                ns = {'marc': 'http://www.loc.gov/MARC21/slim'}
+                try:
+                    root = ET.fromstring(xml_text)
+                except ET.ParseError:
+                    # Fallback: tenta BeautifulSoup se disponível
+                    try:
+                        from bs4 import BeautifulSoup  # type: ignore
+                    except Exception:
+                        raise  # repropaga para o handler aplicar circuit breaker
+                    soup = BeautifulSoup(xml_text, 'xml')
+                    # tenta extrair tags básicas de forma tolerante
+                    def sf(tag, code):
+                        field = soup.find('datafield', {'tag': tag})
+                        if not field:
+                            return None
+                        sub = field.find('subfield', {'code': code})
+                        return sub.text.strip() if sub and sub.text else None
+                    title = sf('245', 'a')
+                    author_main = sf('100', 'a')
+                    author_add = sf('700', 'a')
+                    publisher = sf('260', 'b') or sf('264', 'b')
+                    published_date = sf('260', 'c') or sf('264', 'c')
+                    authors = [a for a in [author_main, author_add] if a]
+                    if not title or not authors or not publisher:
+                        return None
+                    if published_date:
+                        published_date = re.sub(r'[^\d]', '', published_date)
+                    return BookMetadata(
+                        title=title.strip(' /.,'),
+                        authors=[a.strip(' /.,') for a in authors],
+                        publisher=publisher.strip(' /.,') if publisher else 'Unknown',
+                        published_date=published_date or 'Unknown',
+                        isbn_13=isbn if len(isbn) == 13 else None,
+                        isbn_10=isbn if len(isbn) == 10 else None,
+                        confidence_score=0.556,
+                        source='loc'
+                    )
                 
                 # Busca os campos MARC relevantes
                 title = None
@@ -1127,25 +1331,25 @@ class MetadataFetcher:
                 published_date = None
                 
                 # Procura no XML os campos MARC21
-                for field in root.findall(".//marc:datafield", {'marc': 'http://www.loc.gov/MARC21/slim'}):
+                for field in root.findall(".//marc:datafield", ns):
                     tag = field.get('tag')
                     
                     if tag == '245':  # Título
-                        title = ' '.join(subfield.text for subfield in field.findall(".//marc:subfield[@code='a']", {'marc': 'http://www.loc.gov/MARC21/slim'}))
+                        title = ' '.join((subfield.text or '') for subfield in field.findall(".//marc:subfield[@code='a']", ns))
                         
                     elif tag == '100':  # Autor principal
-                        author = ' '.join(subfield.text for subfield in field.findall(".//marc:subfield[@code='a']", {'marc': 'http://www.loc.gov/MARC21/slim'}))
+                        author = ' '.join((subfield.text or '') for subfield in field.findall(".//marc:subfield[@code='a']", ns))
                         if author:
                             authors.append(author)
                             
                     elif tag == '700':  # Autores adicionais
-                        author = ' '.join(subfield.text for subfield in field.findall(".//marc:subfield[@code='a']", {'marc': 'http://www.loc.gov/MARC21/slim'}))
+                        author = ' '.join((subfield.text or '') for subfield in field.findall(".//marc:subfield[@code='a']", ns))
                         if author:
                             authors.append(author)
                             
                     elif tag == '260' or tag == '264':  # Publicação
-                        publisher = ' '.join(subfield.text for subfield in field.findall(".//marc:subfield[@code='b']", {'marc': 'http://www.loc.gov/MARC21/slim'}))
-                        published_date = ' '.join(subfield.text for subfield in field.findall(".//marc:subfield[@code='c']", {'marc': 'http://www.loc.gov/MARC21/slim'}))
+                        publisher = ' '.join((subfield.text or '') for subfield in field.findall(".//marc:subfield[@code='b']", ns))
+                        published_date = ' '.join((subfield.text or '') for subfield in field.findall(".//marc:subfield[@code='c']", ns))
                 
                 # Validação mais rigorosa dos dados
                 if not title or not authors or not publisher:
@@ -1171,7 +1375,8 @@ class MetadataFetcher:
                     source='loc'
                 )
         except Exception as e:
-            logging.error(f"Library of Congress API error for ISBN {isbn}: {str(e)}")
+            # Delegar para handler central com deduplicação/circuit breaker
+            self._handle_api_error('loc', e, isbn)
             return None
 
     def fetch_isbnlib_info(self, isbn: str) -> Optional[BookMetadata]:
@@ -1851,21 +2056,83 @@ class MetadataFetcher:
 
     def _handle_api_error(self, api_name: str, error: Exception, isbn: str) -> None:
         """Trata erros de API de forma consistente."""
+        # Deduplicação de logs: só loga o mesmo erro por API a cada 60s
+        err_name = type(error).__name__
+        now = time.time()
+        key = (api_name, err_name)
+        last_log = self._error_last_log.get(key, 0)
+
+        # Circuit breaker: abre após falhas recorrentes
+        def open_circuit_temporarily(api: str):
+            self._api_failure_counts[api] += 1
+            # cooldown exponencial limitado
+            base = self._api_base_cooldown[api]
+            factor = min(6, self._api_failure_counts[api])  # cap exponencial
+            cooldown = min(600.0, base * (2 ** (factor - 1)))
+            self._api_circuit_until[api] = now + cooldown
+
+        # Bloqueia par (api, isbn) por curto período para evitar repetição imediata
+        def block_pair_shortly(api: str, isbn_value: str):
+            self._api_isbn_block[(api, isbn_value)] = now + 120.0  # 2 min
+
         if api_name == 'cbl':
             if 'Connection Error' in str(error):  # 88.9% dos erros
-                logging.warning(f"CBL API connection error for ISBN {isbn}")
+                if now - last_log > 60:
+                    logging.warning(f"CBL API connection error (amostrado) para ISBN {isbn}")
+                    self._error_last_log[key] = now
+                open_circuit_temporarily(api_name)
+                block_pair_shortly(api_name, isbn)
                 return
         elif api_name == 'zbib':
             if 'Connection Error' in str(error):  # 88.9% dos erros
-                logging.warning(f"ZBib connection error for ISBN {isbn}")
+                if now - last_log > 60:
+                    logging.warning(f"ZBib connection error (amostrado) para ISBN {isbn}")
+                    self._error_last_log[key] = now
+                open_circuit_temporarily(api_name)
+                block_pair_shortly(api_name, isbn)
                 return
         elif api_name == 'springer':
             if 'Server Error' in str(error):  # 10% dos erros
-                logging.warning(f"Springer server error for ISBN {isbn}")
+                if now - last_log > 60:
+                    logging.warning(f"Springer server error (amostrado) para ISBN {isbn}")
+                    self._error_last_log[key] = now
+                open_circuit_temporarily(api_name)
+                block_pair_shortly(api_name, isbn)
                 return
-        error_msg = f"{api_name} API error for ISBN {isbn}: {str(error)}"
-        # Log genérico para outros erros
-        logging.error(f"{api_name} API error for ISBN {isbn}: {str(error)}")
+        # Erros ruidosos conhecidos do isbnlib (ex.: thingISBN 403, editions merge)
+        if api_name.startswith('isbnlib'):
+            msg = str(error)
+            if 'thingISBN' in msg or 'librarything.com' in msg or 'ISBNLibHTTPError' in err_name or '403' in msg:
+                if now - last_log > 60:
+                    logging.warning(f"{api_name}: erro de serviço terceiro (amostrado) para ISBN {isbn}: {msg}")
+                    self._error_last_log[key] = now
+                open_circuit_temporarily(api_name)
+                block_pair_shortly(api_name, isbn)
+                return
+            if 'editions' in msg and 'merge' in msg:
+                if now - last_log > 60:
+                    logging.warning(f"{api_name}: falha no serviço 'editions merge' (amostrado) para ISBN {isbn}")
+                    self._error_last_log[key] = now
+                open_circuit_temporarily('isbnlib_editions')
+                block_pair_shortly('isbnlib_editions', isbn)
+                return
+        # Tratamento especial para erros XML da LoC (ParseError típicos: "mismatched tag")
+        if api_name == 'fetch_loc' or api_name == 'loc':
+            msg = str(error)
+            if isinstance(error, ET.ParseError) or 'mismatched tag' in msg or 'XML' in err_name:
+                if now - last_log > 60:
+                    logging.error(f"LoC XML parse error (amostrado) para ISBN {isbn}: {msg}")
+                    self._error_last_log[key] = now
+                open_circuit_temporarily('loc')
+                block_pair_shortly('loc', isbn)
+                return
+
+        # Log genérico para outros erros (amostrado a cada 60s por tipo)
+        if now - last_log > 60:
+            logging.error(f"{api_name} API error for ISBN {isbn}: {str(error)}")
+            self._error_last_log[key] = now
+        open_circuit_temporarily(api_name)
+        block_pair_shortly(api_name, isbn)
         
         if isinstance(error, requests.exceptions.Timeout):
             logging.warning(f"Timeout accessing {api_name}")
@@ -1876,8 +2143,6 @@ class MetadataFetcher:
                 logging.error(f"Timeout while accessing {api_name}")
             else:
                 logging.error(f"Network error with {api_name}: {str(error)}")
-        else:
-            logging.error(error_msg)
 
     def _clean_metadata(self, metadata: BookMetadata) -> BookMetadata:
         """Limpa e normaliza os metadados."""
@@ -2273,6 +2538,67 @@ class BookMetadataExtractor:
             ]
         )
 
+        # Reduz verbosidade de libs de terceiros barulhentas (isbnlib/urllib3)
+        try:
+            _l1 = logging.getLogger('isbnlib')
+            _l1.setLevel(logging.ERROR)
+            _l1.propagate = False
+            if not _l1.handlers:
+                _l1.addHandler(logging.NullHandler())
+            _l2 = logging.getLogger('isbnlib.dev')
+            _l2.setLevel(logging.ERROR)
+            _l2.propagate = False
+            if not _l2.handlers:
+                _l2.addHandler(logging.NullHandler())
+        except Exception:
+            pass
+        try:
+            logging.getLogger('urllib3').setLevel(logging.WARNING)
+        except Exception:
+            pass
+
+    @staticmethod
+    def _normalize_str_list(values) -> List[str]:
+        """Normaliza uma lista potencialmente aninhada para lista de strings."""
+        result: List[str] = []
+        if values is None:
+            return result
+        if isinstance(values, (str, int, float)):
+            return [str(values)]
+        for v in values:
+            if v is None:
+                continue
+            if isinstance(v, (str, int, float)):
+                s = str(v).strip()
+                if s:
+                    result.append(s)
+            elif isinstance(v, dict):
+                # tenta chaves comuns de nomes
+                name = v.get('name') or v.get('full_name')
+                if not name:
+                    given = v.get('given') or v.get('first')
+                    family = v.get('family') or v.get('last')
+                    if given or family:
+                        name = f"{(given or '').strip()} {(family or '').strip()}".strip()
+                if name:
+                    result.append(str(name).strip())
+            elif isinstance(v, (list, tuple, set)):
+                # flattens recursivamente
+                sub = BookMetadataExtractor._normalize_str_list(list(v))
+                result.extend(sub)
+            else:
+                s = str(v).strip()
+                if s:
+                    result.append(s)
+        # Remove duplicados preservando ordem
+        seen = set()
+        uniq = []
+        for s in result:
+            if s not in seen:
+                seen.add(s)
+                uniq.append(s)
+        return uniq
+
     def process_single_file(self, pdf_path: str, runtime_stats: Dict) -> Optional[BookMetadata]:
         start_time = time.time()
         logging.info(f"Processing: {pdf_path}")
@@ -2379,7 +2705,8 @@ class BookMetadataExtractor:
             return s.strip()
         
         title = clean_string(metadata.title)
-        authors = clean_string(', '.join(metadata.authors[:2]))
+        norm_authors = self._normalize_str_list(metadata.authors)[:2]
+        authors = clean_string(', '.join(norm_authors)) if norm_authors else 'Unknown'
         year = metadata.published_date.split('-')[0] if '-' in metadata.published_date else metadata.published_date
         
         max_title_length = 50
@@ -2454,7 +2781,11 @@ class BookMetadataExtractor:
                 for idx, book in enumerate(sorted(successful_results, key=lambda x: x.file_path), 1):
                     print(f"\n{idx}. {book.title}")
                     print(f"   Arquivo: {Path(book.file_path).name}")
-                    print(f"   Autores: {', '.join(book.authors)}")
+                    try:
+                        norm_authors = self._normalize_str_list(book.authors)
+                        print(f"   Autores: {', '.join(norm_authors)}")
+                    except Exception:
+                        print("   Autores: Unknown")
                     print(f"   Editora: {book.publisher}")
                     print(f"   Data: {book.published_date}")
                     print(f"   ISBN-13: {book.isbn_13 or 'N/A'}")
@@ -2643,10 +2974,15 @@ class BookMetadataExtractor:
         result_rows = ""
         for r in results:
             if r is not None:
+                try:
+                    norm_authors = self._normalize_str_list(r.authors)
+                    authors_cell = ', '.join(norm_authors)
+                except Exception:
+                    authors_cell = 'Unknown'
                 result_rows += f"""
                 <tr>
                     <td>{r.title}</td>
-                    <td>{', '.join(r.authors)}</td>
+                    <td>{authors_cell}</td>
                     <td>{r.publisher}</td>
                     <td>{r.isbn_13 or r.isbn_10 or 'N/A'}</td>
                     <td>{r.confidence_score:.2f}</td>

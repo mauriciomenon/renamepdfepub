@@ -35,8 +35,24 @@ Opcoes da interface:
     
     parser.add_argument('--auto-start', action='store_true',
                        help='Iniciar automaticamente interface Streamlit')
+    parser.add_argument('--print-menu', action='store_true',
+                       help='Apenas imprimir o menu e sair')
     
     args = parser.parse_args()
+    
+    if args.print_menu:
+        try:
+            from src.gui.web_launcher import main as web_main
+            print("== MENU PREVIEW ==")
+            print("1. Iniciar Interface Streamlit (recomendado)")
+            print("2. Executar scan de uma pasta (gera JSON/HTML)")
+            print("3. Gerar Relatorio HTML (usar ultimo JSON ou informar outro)")
+            print("4. Executar teste de algoritmos (heuristico)")
+            print("5. Dica sobre relatorios reais")
+            print("0. Sair")
+        except ImportError as e:
+            print(f"[ERROR] Erro ao imprimir menu: {e}")
+        return
     
     if args.auto_start:
         print("Iniciando interface Streamlit automaticamente...")
@@ -45,7 +61,7 @@ Opcoes da interface:
             if install_streamlit():
                 launch_streamlit()
             else:
-                print("[ERROR] Nao foi possível instalar Streamlit")
+                print("[ERROR] Nao foi possivel instalar Streamlit")
         except ImportError as e:
             print(f"[ERROR] Erro ao importar modulos web: {e}")
     else:
