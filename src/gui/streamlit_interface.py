@@ -643,11 +643,24 @@ class RenamePDFEPUBInterface:
             try:
                 file_choices = [r['Arquivo'] for r in rows if r.get('Arquivo')]
                 if file_choices:
-                    sel = st.selectbox("Abrir pasta do arquivo:", file_choices)
-                    if st.button("Abrir pasta"):
-                        ok = self._open_in_os(sel)
-                        if not ok:
-                            st.warning("Não foi possível abrir a pasta. Verifique o caminho.")
+                    c1, c2, c3 = st.columns([3,1,1])
+                    with c1:
+                        sel = st.selectbox("Selecionar arquivo:", file_choices)
+                    with c2:
+                        if st.button("Abrir pasta"):
+                            ok = self._open_in_os(sel)
+                            if not ok:
+                                st.warning("Não foi possível abrir a pasta. Verifique o caminho.")
+                    with c3:
+                        # Renomear agora (DB)
+                        if st.button("Renomear (DB)"):
+                            script = self.project_root / 'scripts' / 'rename_from_db.py'
+                            cmd = [sys.executable, str(script), '--file', sel, '--apply']
+                            try:
+                                subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                                st.info("Renomeação iniciada (verifique pasta).")
+                            except Exception as e:
+                                st.warning(f"Falha ao acionar renomeação: {e}")
             except Exception:
                 pass
         st.subheader("Operações")
