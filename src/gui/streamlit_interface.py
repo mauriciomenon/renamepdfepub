@@ -870,7 +870,7 @@ class RenamePDFEPUBInterface:
             try:
                 file_choices = [r['Arquivo'] for r in inc_rows if r.get('Arquivo')]
                 if file_choices:
-                    c1, c2, c3 = st.columns([3,1,1])
+                    c1, c2, c3, c4 = st.columns([3,1,1,1])
                     with c1:
                         sel = st.selectbox("Selecionar arquivo:", file_choices)
                     with c2:
@@ -883,6 +883,25 @@ class RenamePDFEPUBInterface:
                             ok = self._open_file_os(sel)
                             if not ok:
                                 st.warning("Não foi possível abrir o arquivo.")
+                    with c4:
+                        # Ações de renome
+                        script = self.project_root / 'scripts' / 'rename_from_db.py'
+                        b1, b2 = st.columns(2)
+                        with b1:
+                            if st.button("Pré-visualizar nome (DB)"):
+                                try:
+                                    res = subprocess.run([sys.executable, str(script), '--file', sel], capture_output=True, text=True, timeout=30)
+                                    out = (res.stdout or '') + (res.stderr or '')
+                                    st.code(out.strip() or '(sem saída)')
+                                except Exception as e:
+                                    st.warning(f"Falha na pré-visualização: {e}")
+                        with b2:
+                            if st.button("Renomear (DB)"):
+                                try:
+                                    subprocess.Popen([sys.executable, str(script), '--file', sel, '--apply'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                                    st.info("Renomeação iniciada (verifique pasta).")
+                                except Exception as e:
+                                    st.warning(f"Falha ao acionar renomeação: {e}")
             except Exception:
                 pass
         else:

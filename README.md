@@ -55,6 +55,13 @@ python3 scripts/launcher_streamlit.py
 
 # Normalizar editoras no DB
 python3 scripts/normalize_publishers.py --apply
+
+# Atualização filtrada do cache
+python3 scripts/launcher_cli.py update-cache-filtered --only-incomplete --publisher Manning --year 2020 --limit 500 --dry-run
+
+# Renomear um arquivo com base no DB
+python3 scripts/launcher_cli.py rename-from-db --file "/caminho/arquivo.pdf"  # preview
+python3 scripts/launcher_cli.py rename-from-db --file "/caminho/arquivo.pdf" --apply --pattern "{publisher}_{year}_{title}"
 ```
 
 ## Algoritmos Disponiveis
