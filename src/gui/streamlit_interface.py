@@ -704,6 +704,22 @@ class RenamePDFEPUBInterface:
                         file_name="preview_renome.csv",
                         mime="text/csv"
                     )
+                    # Aplicar a partir de CSV enviado
+                    up = st.file_uploader("Enviar CSV de renome (Arquivo,Proposto)", type=['csv'])
+                    if up is not None:
+                        try:
+                            # Salva temporário em reports/
+                            save_dir = self.reports_dir
+                            save_dir.mkdir(exist_ok=True)
+                            tmp_csv = save_dir / 'apply_batch_renames.csv'
+                            tmp_csv.write_bytes(up.read())
+                            st.success(f"CSV salvo em {tmp_csv}")
+                            if st.button("Aplicar renomes do CSV (em background)"):
+                                script = self.project_root / 'scripts' / 'apply_renames_from_csv.py'
+                                subprocess.Popen([sys.executable, str(script), '--csv', str(tmp_csv), '--apply'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                                st.info("Renomeação em lote iniciada.")
+                        except Exception as e:
+                            st.warning(f"Falha ao processar CSV: {e}")
                 except Exception as e:
                     st.caption(f"Falha na pré-visualização: {e}")
             # Abrir pasta do arquivo (por seleção)

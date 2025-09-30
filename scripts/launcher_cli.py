@@ -250,6 +250,18 @@ def main():
             cmd.append('--underscore')
         sys.exit(run(cmd + extra))
 
+    # rename-apply-csv
+    rac = sub.add_parser('rename-apply-csv', help='Apply batch renames from CSV (Arquivo,Proposto)')
+    rac.add_argument('--csv', required=True)
+    rac.add_argument('--apply', action='store_true')
+    # Wire rename-apply-csv
+    if args.cmd == 'rename-apply-csv':
+        script = ROOT / 'scripts' / 'apply_renames_from_csv.py'
+        cmd = [sys.executable, str(script), '--csv', args.csv]
+        if args.apply:
+            cmd.append('--apply')
+        sys.exit(run(cmd + extra))
+
     if args.cmd == 'db-gaps':
         import sqlite3
         db = Path(args.db)
