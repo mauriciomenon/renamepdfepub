@@ -354,7 +354,38 @@ class RenamePDFEPUBInterface:
         data = self._load_latest_report()
         if not data:
             st.info("Nenhum relatorio encontrado em reports/. Gere um relatorio para visualizar metricas reais.")
-            return
+            # Mesmo sem relatório, mostrar atalhos de geração/relatórios
+        else:
+            # Se existir relatório, oferecer download rápido do último HTML/JSON
+            try:
+                htmls = sorted(self.reports_dir.glob("report_*.html"))
+                jsons = sorted(self.reports_dir.glob("report_*.json"))
+                st.subheader("Relatórios recentes")
+                colh, colj = st.columns(2)
+                with colh:
+                    if htmls:
+                        latest_html = htmls[-1]
+                        st.caption(f"Último HTML: {latest_html.name}")
+                        st.download_button(
+                            label="Baixar HTML",
+                            data=latest_html.read_bytes(),
+                            file_name=latest_html.name,
+                            mime="text/html"
+                        )
+                with colj:
+                    if jsons:
+                        latest_json = jsons[-1]
+                        st.caption(f"Último JSON: {latest_json.name}")
+                        st.download_button(
+                            label="Baixar JSON",
+                            data=latest_json.read_bytes(),
+                            file_name=latest_json.name,
+                            mime="application/json"
+                        )
+            except Exception:
+                pass
+            
+            # Sem retorno antecipado – prossegue com estatísticas do relatório
         # Estrutura esperada: chaves comuns usadas no projeto
         summary = data.get("summary") or {}
         # Metricas basicas
@@ -997,6 +1028,39 @@ class RenamePDFEPUBInterface:
                                     st.warning(f"Falha ao acionar renomeação: {e}")
             except Exception:
                 pass
+            # Pré-visualização de renome (lote)
+            with st.expander("Pré-visualizar renome (lote)"):
+                patt = st.text_input("Padrão", value="{title} - {author} - {year}", key="gaps_batch_pattern")
+                und = st.checkbox("Usar underscore", value=False, key="gaps_batch_underscore2")
+                try:
+                    preview_rows = []
+                    for r in inc_rows[:500]:
+                        newbase = self._build_name_from_row(r, patt, und)
+                        ext = Path(r.get('Arquivo','')).suffix
+                        preview_rows.append({'Arquivo': r.get('Arquivo',''), 'Proposto': (newbase + ext) if newbase else ''})
+                    prev_csv = self._rows_to_csv(preview_rows)
+                    st.download_button(
+                        label=f"Baixar pré-visualização ({len(preview_rows)} itens)",
+                        data=prev_csv,
+                        file_name="preview_renome_incompletos.csv",
+                        mime="text/csv"
+                    )
+                    up = st.file_uploader("Enviar CSV de renome (Arquivo,Proposto)", type=['csv'], key="gaps_upload_csv")
+                    if up is not None:
+                        try:
+                            save_dir = self.reports_dir
+                            save_dir.mkdir(exist_ok=True)
+                            tmp_csv = save_dir / 'apply_batch_renames_incompletos.csv'
+                            tmp_csv.write_bytes(up.read())
+                            st.success(f"CSV salvo em {tmp_csv}")
+                            if st.button("Aplicar renomes do CSV (em background)", key="gaps_apply_csv_btn"):
+                                script = self.project_root / 'scripts' / 'apply_renames_from_csv.py'
+                                subprocess.Popen([sys.executable, str(script), '--csv', str(tmp_csv), '--apply'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                                st.info("Renomeação em lote iniciada.")
+                        except Exception as e:
+                            st.warning(f"Falha ao processar CSV: {e}")
+                except Exception as e:
+                    st.caption(f"Falha na pré-visualização: {e}")
         else:
             st.caption("Nenhum registro incompleto encontrado (ou DB ausente)")
 
