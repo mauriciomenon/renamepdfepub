@@ -722,12 +722,19 @@ class RenamePDFEPUBInterface:
             with st.expander("Pré-visualizar renome (lote)"):
                 patt = st.text_input("Padrão", value="{title} - {author} - {year}", key="catalog_batch_pattern")
                 und = st.checkbox("Usar underscore", value=False, key="catalog_batch_underscore")
+                limit_prev = st.number_input("Limite de pré-visualização", min_value=50, max_value=5000, value=500, step=50, key="catalog_batch_limit")
                 try:
-                    preview_rows = []
-                    for r in rows[:500]:
-                        newbase = self._build_name_from_row(r, patt, und)
-                        ext = Path(r.get('Arquivo','')).suffix
-                        preview_rows.append({'Arquivo': r.get('Arquivo',''), 'Proposto': (newbase + ext) if newbase else ''})
+                    ok_pat, errs, _used = self._validate_pattern(patt)
+                    if not ok_pat:
+                        for e in errs:
+                            st.warning(e)
+                        preview_rows = []
+                    else:
+                        preview_rows = []
+                        for r in rows[: int(limit_prev)]:
+                            newbase = self._build_name_from_row(r, patt, und)
+                            ext = Path(r.get('Arquivo','')).suffix
+                            preview_rows.append({'Arquivo': r.get('Arquivo',''), 'Proposto': (newbase + ext) if newbase else ''})
                     prev_csv = self._rows_to_csv(preview_rows)
                     st.download_button(
                         label=f"Baixar pré-visualização ({len(preview_rows)} itens)",
@@ -735,11 +742,19 @@ class RenamePDFEPUBInterface:
                         file_name="preview_renome.csv",
                         mime="text/csv"
                     )
+                    # Opcional: salvar preview e copiar caminho
+                    if st.checkbox("Salvar preview no projeto", key="catalog_save_preview"):
+                        try:
+                            save_path = self.reports_dir / 'preview_renome_catalog.csv'
+                            save_path.write_text(prev_csv, encoding='utf-8')
+                            st.caption(f"Salvo em: {save_path}")
+                            self._render_copy_button(str(save_path), key="catalog_copy_preview_path")
+                        except Exception as e:
+                            st.warning(f"Falha ao salvar preview: {e}")
                     # Aplicar a partir de CSV enviado
                     up = st.file_uploader("Enviar CSV de renome (Arquivo,Proposto)", type=['csv'])
                     if up is not None:
                         try:
-                            # Salva temporário em reports/
                             save_dir = self.reports_dir
                             save_dir.mkdir(exist_ok=True)
                             tmp_csv = save_dir / 'apply_batch_renames.csv'
@@ -751,8 +766,20 @@ class RenamePDFEPUBInterface:
                                 st.info("Renomeação em lote iniciada.")
                         except Exception as e:
                             st.warning(f"Falha ao processar CSV: {e}")
-                except Exception as e:
-                    st.caption(f"Falha na pré-visualização: {e}")
+                    # Aplicar em lote diretamente (gera CSV temporário internamente)
+                    ok_apply = st.checkbox("Confirmo que revisei o preview e desejo aplicar", key="catalog_confirm_apply")
+                    if st.button("Aplicar renome (lote) agora"):
+                        if not ok_apply:
+                            st.warning("Marque a confirmação antes de aplicar.")
+                        else:
+                            try:
+                                tmp_csv = self.reports_dir / 'apply_batch_renames_catalog.csv'
+                                tmp_csv.write_text(prev_csv, encoding='utf-8')
+                                script = self.project_root / 'scripts' / 'apply_renames_from_csv.py'
+                                subprocess.Popen([sys.executable, str(script), '--csv', str(tmp_csv), '--apply'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                                st.info("Renomeação em lote iniciada.")
+                            except Exception as e:
+                                st.warning(f"Falha ao aplicar em lote: {e}")
             # Abrir pasta do arquivo (por seleção)
             try:
                 file_choices = [r['Arquivo'] for r in rows if r.get('Arquivo')]
