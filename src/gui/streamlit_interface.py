@@ -143,23 +143,32 @@ class RenamePDFEPUBInterface:
         except Exception:
             return False
 
-    def _query_incomplete(self, limit: int = 200):
+    def _query_incomplete(self, limit: int = 200, pub_filter: str = '', year_filter: str = ''):
         """Retorna registros com campos faltantes (para export/inspeção)."""
         if not self.db_path.exists():
             return []
-        sql = (
+        where = (
             "SELECT isbn_13, isbn_10, title, authors, publisher, published_date, "
             "confidence_score, source, file_path, timestamp "
             "FROM metadata_cache WHERE "
             "(title IS NULL OR title='' OR title='Unknown' "
             "OR authors IS NULL OR authors='' OR authors='Unknown' "
             "OR publisher IS NULL OR publisher='' OR publisher='Unknown' "
-            "OR published_date IS NULL OR published_date='' OR published_date='Unknown' "
-            ") ORDER BY timestamp DESC LIMIT ?"
+            "OR published_date IS NULL OR published_date='' OR published_date='Unknown')"
         )
+        filters = []
+        params = []
+        if pub_filter.strip():
+            filters.append("publisher LIKE ?")
+            params.append(f"%{pub_filter.strip()}%")
+        if year_filter.strip():
+            filters.append("published_date LIKE ?")
+            params.append(f"%{year_filter.strip()}%")
+        sql = " ".join([where, ("AND " + " AND ".join(filters)) if filters else "", "ORDER BY timestamp DESC LIMIT ?"]).strip()
+        params.append(int(limit))
         try:
             with self._connect_db() as conn:
-                rows = conn.execute(sql, (int(limit),)).fetchall()
+                rows = conn.execute(sql, params).fetchall()
             out = []
             for r in rows:
                 out.append({
@@ -788,13 +797,23 @@ class RenamePDFEPUBInterface:
                 st.info("Rescan-cache iniciado.")
         with a3:
             limit = st.number_input("Limite (apenas mostrados)", min_value=10, max_value=5000, value=500, step=10)
+            f1, f2 = st.columns(2)
+            with f1:
+                f_pub = st.text_input("Filtro editora contém", value="")
+            with f2:
+                f_year = st.text_input("Filtro ano contém", value="")
             if st.button("Atualizar apenas mostrados"):
                 script = self.project_root / 'scripts' / 'update_cache_filtered.py'
                 cmd = [sys.executable, str(script), '--only-incomplete', '--limit', str(int(limit))]
+                if f_pub.strip():
+                    cmd += ['--publisher', f_pub.strip()]
+                if f_year.strip():
+                    cmd += ['--year', f_year.strip()]
                 subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
                 st.info("Atualização filtrada iniciada.")
         st.subheader("Exportar incompletos")
-        inc_rows = self._query_incomplete(limit=2000)
+        # Export respects the same filters
+        inc_rows = self._query_incomplete(limit=2000, pub_filter=f_pub if 'f_pub' in locals() else '', year_filter=f_year if 'f_year' in locals() else '')
         if inc_rows:
             csv_inc = self._rows_to_csv(inc_rows)
             st.download_button(

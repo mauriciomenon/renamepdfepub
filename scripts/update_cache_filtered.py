@@ -39,7 +39,15 @@ def _import_core():
         return MetadataFetcher, normalize_authors, canonical_publisher
 
 
-def _select_rows(conn: sqlite3.Connection, only_incomplete: bool, low_conf: bool, thr: float, limit: int):
+def _select_rows(conn: sqlite3.Connection,
+                 only_incomplete: bool,
+                 low_conf: bool,
+                 thr: float,
+                 limit: int,
+                 publisher: str | None = None,
+                 year: str | None = None,
+                 title: str | None = None,
+                 author: str | None = None):
     where = []
     if only_incomplete:
         where.append(
@@ -50,15 +58,27 @@ def _select_rows(conn: sqlite3.Connection, only_incomplete: bool, low_conf: bool
         )
     if low_conf:
         where.append("(confidence_score IS NULL OR confidence_score < ?)")
+    params = []
+    if low_conf:
+        params.append(float(thr))
+    # optional LIKE filters
+    def _like(field: str, value: str):
+        where.append(f"{field} LIKE ?")
+        params.append(f"%{value}%")
+    if publisher:
+        _like('publisher', publisher)
+    if year:
+        _like('published_date', year)
+    if title:
+        _like('title', title)
+    if author:
+        _like('authors', author)
     sql = (
         "SELECT rowid, isbn_10, isbn_13, confidence_score "
         "FROM metadata_cache"
     )
-    params = []
     if where:
         sql += " WHERE " + " AND ".join(where)
-        if low_conf:
-            params.append(float(thr))
     sql += " ORDER BY timestamp DESC LIMIT ?"
     params.append(int(limit))
     return conn.execute(sql, params).fetchall()
@@ -71,6 +91,10 @@ def main() -> int:
     grp.add_argument('--only-incomplete', action='store_true', help='Process rows with missing fields')
     grp.add_argument('--low-confidence', action='store_true', help='Process low-confidence rows')
     p.add_argument('--confidence-threshold', type=float, default=0.7, help='Threshold for low-confidence')
+    p.add_argument('--publisher', help='Filter: publisher contains')
+    p.add_argument('--year', help='Filter: published_date contains')
+    p.add_argument('--title', help='Filter: title contains')
+    p.add_argument('--author', help='Filter: authors contains')
     p.add_argument('--limit', type=int, default=500, help='Max rows to process (default: 500)')
     p.add_argument('--dry-run', action='store_true', help='Show what would be updated without writing')
     args = p.parse_args()
@@ -83,7 +107,15 @@ def main() -> int:
     MetadataFetcher, normalize_authors, canonical_publisher = _import_core()
 
     with sqlite3.connect(str(db)) as conn:
-        rows = _select_rows(conn, args.only_incomplete, args.low_confidence, args.confidence_threshold, args.limit)
+        rows = _select_rows(conn,
+                           args.only_incomplete,
+                           args.low_confidence,
+                           args.confidence_threshold,
+                           args.limit,
+                           publisher=args.publisher,
+                           year=args.year,
+                           title=args.title,
+                           author=args.author)
         if not rows:
             print("No rows matched filters.")
             return 0
@@ -138,4 +170,3 @@ def main() -> int:
 
 if __name__ == '__main__':
     sys.exit(main())
-

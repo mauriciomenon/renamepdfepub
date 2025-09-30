@@ -102,6 +102,10 @@ def main():
     grp.add_argument('--low-confidence', action='store_true')
     ucf.add_argument('--confidence-threshold', type=float, default=0.7)
     ucf.add_argument('--limit', type=int, default=500)
+    ucf.add_argument('--publisher')
+    ucf.add_argument('--year')
+    ucf.add_argument('--title')
+    ucf.add_argument('--author')
     ucf.add_argument('--dry-run', action='store_true')
 
     # normalize publishers
@@ -191,6 +195,14 @@ def main():
             cmd.append('--low-confidence')
         if args.dry_run:
             cmd.append('--dry-run')
+        if args.publisher:
+            cmd += ['--publisher', args.publisher]
+        if args.year:
+            cmd += ['--year', args.year]
+        if args.title:
+            cmd += ['--title', args.title]
+        if args.author:
+            cmd += ['--author', args.author]
         sys.exit(run(cmd + extra))
 
     if args.cmd == 'normalize-publishers':
