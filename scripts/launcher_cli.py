@@ -119,6 +119,13 @@ def main():
     sub.add_parser('web', help='Launch web interface (menu)')
     sub.add_parser('gui', help='Launch desktop GUI')
     sub.add_parser('streamlit', help='Launch Streamlit interface directly')
+    # rename-from-db
+    rdb = sub.add_parser('rename-from-db', help='Rename a single file using DB metadata')
+    rdb.add_argument('--db', default='metadata_cache.db')
+    rdb.add_argument('--file', required=True)
+    rdb.add_argument('--pattern', default='{title} - {author} - {year}')
+    rdb.add_argument('--apply', action='store_true')
+    rdb.add_argument('--underscore', action='store_true')
 
     # algorithms
     sub.add_parser('algorithms', help='Run algorithm comparison suite')
@@ -227,6 +234,20 @@ def main():
         cmd = [sys.executable, str(gen), '--json', args.json]
         if args.output:
             cmd += ['--output', args.output]
+        sys.exit(run(cmd + extra))
+
+    if args.cmd == 'rename-from-db':
+        script = ROOT / 'scripts' / 'rename_from_db.py'
+        cmd = [
+            sys.executable, str(script),
+            '--db', args.db,
+            '--file', args.file,
+            '--pattern', args.pattern,
+        ]
+        if args.apply:
+            cmd.append('--apply')
+        if args.underscore:
+            cmd.append('--underscore')
         sys.exit(run(cmd + extra))
 
     if args.cmd == 'db-gaps':

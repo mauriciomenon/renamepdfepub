@@ -143,7 +143,7 @@ class RenamePDFEPUBInterface:
         except Exception:
             return False
 
-    def _query_incomplete(self, limit: int = 200, pub_filter: str = '', year_filter: str = ''):
+    def _query_incomplete(self, limit: int = 200, pub_filter: str = '', year_filter: str = '', title_filter: str = '', author_filter: str = ''):
         """Retorna registros com campos faltantes (para export/inspeção)."""
         if not self.db_path.exists():
             return []
@@ -164,6 +164,12 @@ class RenamePDFEPUBInterface:
         if year_filter.strip():
             filters.append("published_date LIKE ?")
             params.append(f"%{year_filter.strip()}%")
+        if title_filter.strip():
+            filters.append("title LIKE ?")
+            params.append(f"%{title_filter.strip()}%")
+        if author_filter.strip():
+            filters.append("authors LIKE ?")
+            params.append(f"%{author_filter.strip()}%")
         sql = " ".join([where, ("AND " + " AND ".join(filters)) if filters else "", "ORDER BY timestamp DESC LIMIT ?"]).strip()
         params.append(int(limit))
         try:
@@ -661,6 +667,16 @@ class RenamePDFEPUBInterface:
                                 st.info("Renomeação iniciada (verifique pasta).")
                             except Exception as e:
                                 st.warning(f"Falha ao acionar renomeação: {e}")
+                        # Pré-visualizar novo nome
+                        if st.button("Pré-visualizar nome"):
+                            script = self.project_root / 'scripts' / 'rename_from_db.py'
+                            cmd = [sys.executable, str(script), '--file', sel]
+                            try:
+                                res = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+                                out = (res.stdout or '') + (res.stderr or '')
+                                st.code(out.strip() or '(sem saída)')
+                            except Exception as e:
+                                st.warning(f"Falha na pré-visualização: {e}")
             except Exception:
                 pass
         st.subheader("Operações")
@@ -815,6 +831,11 @@ class RenamePDFEPUBInterface:
                 f_pub = st.text_input("Filtro editora contém", value="")
             with f2:
                 f_year = st.text_input("Filtro ano contém", value="")
+            f3, f4 = st.columns(2)
+            with f3:
+                f_title = st.text_input("Filtro título contém", value="")
+            with f4:
+                f_author = st.text_input("Filtro autor contém", value="")
             if st.button("Atualizar apenas mostrados"):
                 script = self.project_root / 'scripts' / 'update_cache_filtered.py'
                 cmd = [sys.executable, str(script), '--only-incomplete', '--limit', str(int(limit))]
@@ -822,11 +843,21 @@ class RenamePDFEPUBInterface:
                     cmd += ['--publisher', f_pub.strip()]
                 if f_year.strip():
                     cmd += ['--year', f_year.strip()]
+                if f_title.strip():
+                    cmd += ['--title', f_title.strip()]
+                if f_author.strip():
+                    cmd += ['--author', f_author.strip()]
                 subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
                 st.info("Atualização filtrada iniciada.")
         st.subheader("Exportar incompletos")
         # Export respects the same filters
-        inc_rows = self._query_incomplete(limit=2000, pub_filter=f_pub if 'f_pub' in locals() else '', year_filter=f_year if 'f_year' in locals() else '')
+        inc_rows = self._query_incomplete(
+            limit=2000,
+            pub_filter=f_pub if 'f_pub' in locals() else '',
+            year_filter=f_year if 'f_year' in locals() else '',
+            title_filter=f_title if 'f_title' in locals() else '',
+            author_filter=f_author if 'f_author' in locals() else ''
+        )
         if inc_rows:
             csv_inc = self._rows_to_csv(inc_rows)
             st.download_button(
