@@ -5127,6 +5127,18 @@ class BookMetadataExtractor:
         processing_times = list(runtime_stats.get('processing_times', {}).values())
         avg_time = statistics.mean(processing_times) if processing_times else 0.0
         
+        # Missing fields breakdown among successful results
+        def _is_missing(v: str) -> bool:
+            return (not v) or (str(v).strip().lower() in ("unknown", "n/a", "na"))
+        missing_fields = {
+            'title': sum(1 for r in successful_results if _is_missing(getattr(r, 'title', ''))),
+            'authors': sum(1 for r in successful_results if not getattr(r, 'authors', []) or _is_missing(','.join(getattr(r, 'authors', [])))),
+            'publisher': sum(1 for r in successful_results if _is_missing(getattr(r, 'publisher', ''))),
+            'year': sum(1 for r in successful_results if _is_missing(getattr(r, 'published_date', ''))),
+            'isbn': sum(1 for r in successful_results if _is_missing(getattr(r, 'isbn_13', '')) and _is_missing(getattr(r, 'isbn_10', ''))),
+        }
+        source_stats = Counter(getattr(r, 'source', 'unknown') or 'unknown' for r in successful_results)
+
         return {
             'summary': {
                 'total_files': total_files,
@@ -5134,7 +5146,9 @@ class BookMetadataExtractor:
                 'failed': failed,
                 'success_rate': success_rate,
                 'average_time': avg_time,
-                'timestamp': datetime.now().isoformat()
+                'timestamp': datetime.now().isoformat(),
+                'missing_fields': missing_fields,
+                'source_stats': dict(source_stats)
             },
             'details': {
                 'successful': [asdict(r) for r in successful_results],
@@ -5204,7 +5218,20 @@ class BookMetadataExtractor:
                             <tr><th>Average Time</th><td>{avg_time:.2f}s</td></tr>
                         </table>
                     </div>
-                    
+
+                    <div>
+                        <h3>Missing Fields (successful)</h3>
+                        <table>
+                            <tr><th>Field</th><th>Missing</th></tr>
+                            {missing_fields_rows}
+                        </table>
+                        <h3>Sources (success)</h3>
+                        <table>
+                            <tr><th>Source</th><th>Success</th></tr>
+                            {source_stats_rows}
+                        </table>
+                    </div>
+
                     <div>
                         <h3>Format Statistics</h3>
                         <table>
@@ -5371,6 +5398,12 @@ class BookMetadataExtractor:
             """)
 
         # Monta HTML final
+        # Compose helper rows for missing fields and source stats
+        mf = data['summary'].get('missing_fields', {}) or {}
+        missing_fields_rows = "\n".join([f"<tr><td>{k}</td><td>{v}</td></tr>" for k,v in mf.items()])
+        ss = data['summary'].get('source_stats', {}) or {}
+        source_stats_rows = "\n".join([f"<tr><td>{k}</td><td>{v}</td></tr>" for k,v in ss.items()])
+
         html_content = html_template.format(
             total_files=data['summary']['total_files'],
             successful=data['summary']['successful'],
@@ -5381,6 +5414,8 @@ class BookMetadataExtractor:
             format_stats='\n'.join(format_stats_rows),
             preprocessor_stats_rows='\n'.join(preprocessor_stats_rows),
             preprocessor_hint_rows='\n'.join(preprocessor_hint_rows),
+            missing_fields_rows=missing_fields_rows,
+            source_stats_rows=source_stats_rows,
             success_rows='\n'.join(success_rows) if success_rows else '<tr><td colspan="7">No successful extractions</td></tr>',
             error_rows='\n'.join(error_rows) if error_rows else '<tr><td colspan="3">No errors reported</td></tr>'
         )
@@ -5595,7 +5630,7 @@ class BookMetadataExtractor:
             self.logger.error(traceback.format_exc())
 
     def process_directory(self, directory_path: str, subdirs: Optional[List[str]] = None, 
-                         recursive: bool = False, max_workers: int = 4) -> List[BookMetadata]:
+                         recursive: bool = False, max_workers: int = 4, limit: Optional[int] = None) -> List[BookMetadata]:
         """
         Process a directory containing book files.
         
@@ -5627,12 +5662,16 @@ class BookMetadataExtractor:
                 'recursive': bool(recursive),
                 'subdirs': ','.join(subdirs) if subdirs else '',
                 'threads': int(max_workers),
-                'pattern': getattr(self, 'file_naming_pattern', '')
+                'pattern': getattr(self, 'file_naming_pattern', ''),
+                'limit': int(limit) if limit else 0
             }
         }
 
         # Find and group files
         file_groups = self._collect_files(directory, subdirs, recursive, runtime_stats)
+        if limit and limit > 0:
+            items = list(file_groups.items())[:int(limit)]
+            file_groups = dict(items)
         if not file_groups:
             self.logger.warning(f"No files found in {directory_path}")
             return []
@@ -7083,7 +7122,9 @@ class BookMetadataExtractor:
                 "successful_extractions": data['summary']['successful'],
                 "failed_extractions": data['summary']['failed'],
                 "success_rate_percentage": round(data['summary']['success_rate'], 2),
-                "average_processing_time": round(data['summary']['average_time'], 2)
+                "average_processing_time": round(data['summary']['average_time'], 2),
+                "missing_fields": data['summary'].get('missing_fields', {}),
+                "source_stats": data['summary'].get('source_stats', {})
             },
             "format_statistics": {
                 fmt: {
@@ -8654,6 +8695,10 @@ def main():
                        type=int,
                        default=4,
                        help='Número de threads para processamento (padrão: %(default)s)')
+    parser.add_argument('--limit',
+                       type=int,
+                       default=0,
+                       help='Limita o processamento aos N primeiros arquivos (teste rápido)')
     parser.add_argument('-k', '--isbndb-key',
                        help='Chave da API ISBNdb (opcional)')
                        
@@ -8737,7 +8782,8 @@ def main():
             args.directory,
             subdirs=subdirs,
             recursive=args.recursive,
-            max_workers=args.threads
+            max_workers=args.threads,
+            limit=args.limit if hasattr(args, 'limit') else None
         )
         
     except KeyboardInterrupt:
