@@ -98,6 +98,7 @@ Exemplos:
             print(f"Iniciando varredura ciclo {i}...")
             subprocess.run([sys.executable, str(extractor)] + argv, check=False)
             if time_limit and (_time.time() - start) >= time_limit:
+                print(f"Encerrando ciclos por limite de tempo ({time_limit}s).")
                 break
             if i >= cycles:
                 break

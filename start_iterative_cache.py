@@ -13,8 +13,10 @@ from pathlib import Path
 from datetime import datetime
 import json
 
-# Adiciona o diretório src ao path para imports
-sys.path.append(str(Path(__file__).parent.parent / "src"))
+# Adiciona o diretório src ao path para imports (corrigido)
+SRC = Path(__file__).parent / "src"
+if str(SRC) not in sys.path:
+    sys.path.insert(0, str(SRC))
 
 from core.iterative_cache_system import (
     IterativeCacheSystem, 
@@ -122,10 +124,10 @@ Exemplos de uso:
             status_action(args, cache_dir)
             
     except KeyboardInterrupt:
-        print("\n⚠  Processamento interrompido pelo usuário")
+        print("\n[WARN] Processamento interrompido pelo usuario")
         sys.exit(1)
     except Exception as e:
-        print(f" Erro: {e}")
+        print(f"[ERROR] {e}")
         if args.verbose:
             import traceback
             traceback.print_exc()
@@ -166,38 +168,38 @@ def run_iterative_processing(args, cache_dir):
     # Cria configuração
     config = create_iteration_config(args)
     
-    print(f"📋 Configuração:")
-    print(f"   • Iterações máximas: {config.max_iterations or 'Ilimitado'}")
-    print(f"   • Tempo máximo: {config.max_time_minutes or 'Ilimitado'} min")
-    print(f"   • Performance alvo: {config.target_performance or 'Não definida'}")
-    print(f"   • Métrica: {config.performance_metric}")
-    print(f"   • Tamanho do lote: {config.batch_size}")
-    print(f"   • Threads: {config.thread_count}")
+    print("Configuracao:")
+    print(f"   - Iteracoes maximas: {config.max_iterations or 'Ilimitado'}")
+    print(f"   - Tempo maximo: {config.max_time_minutes or 'Ilimitado'} min")
+    print(f"   - Performance alvo: {config.target_performance or 'Nao definida'}")
+    print(f"   - Metrica: {config.performance_metric}")
+    print(f"   - Tamanho do lote: {config.batch_size}")
+    print(f"   - Threads: {config.thread_count}")
     print()
     
     # Verifica se há dados para processar
     predictions_count = get_predictions_count(system)
     if predictions_count == 0:
-        print("⚠  Nenhum arquivo encontrado para processar.")
-        print("   Use --add-files ou --add-remote para adicionar arquivos primeiro.")
+        print("[WARN] Nenhum arquivo encontrado para processar.")
+        print("       Use --add-files ou --add-remote para adicionar arquivos primeiro.")
         return
     
-    print(f"📁 Arquivos para processar: {predictions_count}")
+    print(f"Arquivos para processar: {predictions_count}")
     print()
     
     # Executa processamento
     start_time = datetime.now()
-    print(f"⏰ Início: {start_time.strftime('%H:%M:%S')}")
+    print(f"Inicio: {start_time.strftime('%H:%M:%S')}")
     
     try:
         final_stats = system.run_iterative_processing(config)
         
         end_time = datetime.now()
         print()
-        print(" Processamento concluído!")
+        print("Processamento concluido!")
         print("=" * 50)
-        print(f"⏰ Tempo total: {end_time - start_time}")
-        print(f"🔄 Iterações: {final_stats['iterations_completed']}")
+        print(f"Tempo total: {end_time - start_time}")
+        print(f"Iteracoes: {final_stats['iterations_completed']}")
         print(f"📊 Predições totais: {final_stats['total_predictions']}")
         print(f"✨ Alta confiança: {final_stats['high_confidence_predictions']}")
         print(f"🎯 Dados consolidados: {final_stats['consolidated_entries']}")

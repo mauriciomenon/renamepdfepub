@@ -72,6 +72,14 @@ def generate_simple_report():
         report_generator = Path(__file__).parent.parent.parent / "simple_report_generator.py"
         if report_generator.exists():
             subprocess.run([sys.executable, str(report_generator)], check=False)
+            # Tenta abrir o HTML gerado no navegador padrao
+            try:
+                import webbrowser
+                out = Path(__file__).parent.parent.parent / "advanced_algorithms_report.html"
+                if out.exists():
+                    webbrowser.open(out.as_uri())
+            except Exception:
+                pass
         else:
             print("[INFO] Gerador simples nao encontrado no raiz. Consulte a documentacao.")
     except Exception as e:
@@ -147,6 +155,14 @@ def main():
                 # Chama o gerador com --json
                 report_generator = Path(__file__).parent.parent.parent / "simple_report_generator.py"
                 subprocess.run([sys.executable, str(report_generator), "--json", sel], check=False)
+                # Abre o HTML gerado
+                try:
+                    import webbrowser
+                    out = Path(__file__).parent.parent.parent / "advanced_algorithms_report.html"
+                    if out.exists():
+                        webbrowser.open(out.as_uri())
+                except Exception:
+                    pass
             else:
                 generate_simple_report()
             
