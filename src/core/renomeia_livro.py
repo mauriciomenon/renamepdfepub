@@ -11,6 +11,7 @@ import json
 import textwrap
 from rich.console import Console
 from rich.table import Table
+from rich import box
 from rich.progress import Progress, SpinnerColumn, BarColumn, TextColumn
 import logging
 import os
@@ -5620,7 +5621,14 @@ class BookMetadataExtractor:
             'processing_times': {},
             'format_stats': defaultdict(lambda: {'total': 0, 'success': 0, 'failed': 0}),
             'start_time': time.time(),
-            'recovery_stats': {'attempted': 0, 'recovered': 0}
+            'recovery_stats': {'attempted': 0, 'recovered': 0},
+            'run_config': {
+                'directory': str(directory_path),
+                'recursive': bool(recursive),
+                'subdirs': ','.join(subdirs) if subdirs else '',
+                'threads': int(max_workers),
+                'pattern': getattr(self, 'file_naming_pattern', '')
+            }
         }
 
         # Find and group files
@@ -6071,7 +6079,7 @@ class BookMetadataExtractor:
         recovered = recovery_stats.get('recovered', 0)
 
         # Create and configure the main summary table
-        table = Table(title="Processing Summary")
+        table = Table(title="Processing Summary", box=box.SIMPLE, pad_edge=False)
         table.add_column("Category")
         table.add_column("Count", justify="right")
         table.add_column("Percentage", justify="right")
@@ -6088,7 +6096,6 @@ class BookMetadataExtractor:
             table.add_row("Recovered (secondary)", str(recovered), f"{recovered_rate:.1f}%", style="bright_blue")
         table.add_row("Failed", str(failed), f"{failure_rate:.1f}%", style="bright_blue")
 
-        Console().print("\nFormat Statistics:")
         Console().print(table)
 
     def _print_format_statistics_table(self, runtime_stats: Dict) -> None:
@@ -6098,7 +6105,7 @@ class BookMetadataExtractor:
         Args:
             runtime_stats: Dictionary containing format-specific statistics
         """
-        table = Table()
+        table = Table(title="Format Statistics", box=box.SIMPLE, pad_edge=False)
         table.add_column("Format")
         table.add_column("Total", justify="center")
         table.add_column("Success", justify="center")
@@ -6121,7 +6128,6 @@ class BookMetadataExtractor:
             )
 
         Console().print(table)
-        Console().print()
 
     def _print_file_processing_results(self, runtime_stats: Dict) -> None:
         """
@@ -6130,8 +6136,8 @@ class BookMetadataExtractor:
         Args:
             runtime_stats: Dictionary containing per-file processing results and metadata
         """
-        table = Table(show_header=True, title="Sumário de Processamento")
-        table.add_column("Arquivo", no_wrap=True)
+        table = Table(show_header=True, title="Sumário de Processamento (compact)", box=box.SIMPLE, pad_edge=False)
+        table.add_column("Arquivo")
         table.add_column("Status", justify="center")
         table.add_column("Tempo", justify="right")
         table.add_column("Detalhes")
@@ -6141,6 +6147,8 @@ class BookMetadataExtractor:
 
         for file_path in runtime_stats['processed_files']:
             file_name = Path(file_path).name
+            if len(file_name) > 60:
+                file_name = file_name[:57] + "..."
             time_taken = runtime_stats['processing_times'].get(file_path, 0.0)
 
             result = success_index.get(file_path)
@@ -6162,14 +6170,32 @@ class BookMetadataExtractor:
                 error_desc = failure_info.get('error', 'No metadata found')
                 details = f"Erro: {error_desc}"
 
-            table.add_row(
-                file_name,
-                status,
-                f"{time_taken:.2f}s",
-                details
-            )
+            if len(details) > 80:
+                details = details[:77] + "..."
+            table.add_row(file_name, status, f"{time_taken:.2f}s", details)
 
         Console().print(table)
+
+    def _print_source_statistics_table(self, runtime_stats: Dict) -> None:
+        """Print success breakdown by metadata source (API/logic)."""
+        try:
+            from collections import Counter
+            successes = runtime_stats.get('successful_results', [])
+            total_success = len(successes)
+            if total_success == 0:
+                return
+            src_counts = Counter(getattr(r, 'source', 'unknown') or 'unknown' for r in successes)
+            table = Table(title="Source Statistics (success only)", box=box.SIMPLE, pad_edge=False)
+            table.add_column("Source")
+            table.add_column("Success", justify="right")
+            table.add_column("Share", justify="right")
+            for src, cnt in src_counts.most_common():
+                share = (cnt / total_success) * 100.0
+                table.add_row(str(src), str(cnt), f"{share:.1f}%")
+            Console().print(table)
+        except Exception:
+            # non-blocking
+            pass
 
     def _print_report_paths(self, runtime_stats: Dict) -> None:
         """
@@ -6181,16 +6207,15 @@ class BookMetadataExtractor:
             Console().print("Nenhum relatório gerado nesta execução.")
             return
 
-        Console().print("\nArquivos Gerados:")
-        Console().print("-" * 40)
-
+        # Compact listing using a table
+        table = Table(title="Arquivos Gerados", box=box.SIMPLE, pad_edge=False)
+        table.add_column("Tipo", justify="left")
+        table.add_column("Caminho", justify="left")
         for report in reports:
             report_type = report.get('type', 'UNKNOWN')
-            path = report.get('path')
-            if path:
-                Console().print(f"{report_type:<4} {path}")
-            else:
-                Console().print(f"{report_type:<4} caminho não disponível")
+            path = report.get('path', '')
+            table.add_row(str(report_type), str(path))
+        Console().print(table)
 
     def print_final_summary(self, runtime_stats: Dict) -> None:
         """
@@ -6199,8 +6224,20 @@ class BookMetadataExtractor:
         Args:
             runtime_stats: Dictionary containing all processing statistics and results
         """
+        # Optional run configuration
+        run_cfg = runtime_stats.get('run_config')
+        if run_cfg:
+            cfg_table = Table(title="Execução", box=box.SIMPLE, pad_edge=False)
+            cfg_table.add_column("Campo")
+            cfg_table.add_column("Valor")
+            for k in ("directory", "recursive", "subdirs", "threads", "pattern"):
+                if k in run_cfg:
+                    cfg_table.add_row(k, str(run_cfg.get(k)))
+            Console().print(cfg_table)
+
         self._print_processing_summary_table(runtime_stats)
         self._print_format_statistics_table(runtime_stats)
+        self._print_source_statistics_table(runtime_stats)
         self._print_file_processing_results(runtime_stats)
         self._print_report_paths(runtime_stats)
 
