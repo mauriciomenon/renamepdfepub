@@ -5,10 +5,10 @@ Sistema para renomeacao automatica de livros PDF/EPUB
 """
 
 import streamlit as st
-import os
 import sys
 import subprocess
 from pathlib import Path
+from typing import Tuple, List, Set
 
 # Configuracao da pagina
 st.set_page_config(
@@ -47,48 +47,6 @@ class RenamePDFEPUBInterface:
     def _query_catalog(self, filters: dict, limit: int = 200, offset: int = 0):
         if not self.db_path.exists():
             return []
-
-    # --------------------------- Naming helpers -----------------------------
-    @staticmethod
-    def _clean_string_name(s: str, underscore: bool = False) -> str:
-        import unicodedata
-        if not s:
-            return ''
-        s = unicodedata.normalize('NFKD', s)
-        s = s.encode('ASCII', 'ignore').decode('ASCII')
-        out = ''.join(ch if (ch.isalnum() or ch in (' ', '-', '_')) else ' ' for ch in s)
-        out = ' '.join(out.split())
-        if underscore:
-            out = out.replace(' ', '_')
-        return out.strip()
-
-    @staticmethod
-    def _first_two_authors_str(authors: str) -> str:
-        parts = [a.strip() for a in (authors or '').split(',') if a.strip()]
-        return ', '.join(parts[:2]) if parts else ''
-
-    def _build_name_from_row(self, row: dict, pattern: str, underscore: bool) -> str:
-        title = row.get('Título') or ''
-        if str(title).lower() == 'unknown':
-            title = ''
-        authors = row.get('Autores') or ''
-        if str(authors).lower() == 'unknown':
-            authors = ''
-        publisher = row.get('Editora') or ''
-        if str(publisher).lower() == 'unknown':
-            publisher = ''
-        year = row.get('Ano') or ''
-        if str(year).lower() == 'unknown':
-            year = ''
-        isbn = row.get('ISBN-13') or row.get('ISBN-10') or ''
-        author_disp = self._first_two_authors_str(authors)
-        return pattern.format(
-            title=self._clean_string_name(title, underscore),
-            author=self._clean_string_name(author_disp, underscore),
-            year=self._clean_string_name(year, underscore),
-            publisher=self._clean_string_name(publisher, underscore),
-            isbn=self._clean_string_name(isbn, underscore)
-        ).strip()
         where = []
         params = []
         def like(field, value):
@@ -145,6 +103,96 @@ class RenamePDFEPUBInterface:
             return results
         except Exception:
             return []
+
+    # --------------------------- Naming helpers -----------------------------
+    @staticmethod
+    def _clean_string_name(s: str, underscore: bool = False) -> str:
+        import unicodedata
+        if not s:
+            return ''
+        s = unicodedata.normalize('NFKD', s)
+        s = s.encode('ASCII', 'ignore').decode('ASCII')
+        out = ''.join(ch if (ch.isalnum() or ch in (' ', '-', '_')) else ' ' for ch in s)
+        out = ' '.join(out.split())
+        if underscore:
+            out = out.replace(' ', '_')
+        return out.strip()
+
+    @staticmethod
+    def _first_two_authors_str(authors: str) -> str:
+        parts = [a.strip() for a in (authors or '').split(',') if a.strip()]
+        return ', '.join(parts[:2]) if parts else ''
+
+    def _build_name_from_row(self, row: dict, pattern: str, underscore: bool) -> str:
+        title = row.get('Título') or ''
+        if str(title).lower() == 'unknown':
+            title = ''
+        authors = row.get('Autores') or ''
+        if str(authors).lower() == 'unknown':
+            authors = ''
+        publisher = row.get('Editora') or ''
+        if str(publisher).lower() == 'unknown':
+            publisher = ''
+        year = row.get('Ano') or ''
+        if str(year).lower() == 'unknown':
+            year = ''
+        isbn = row.get('ISBN-13') or row.get('ISBN-10') or ''
+        author_disp = self._first_two_authors_str(authors)
+        return pattern.format(
+            title=self._clean_string_name(title, underscore),
+            author=self._clean_string_name(author_disp, underscore),
+            year=self._clean_string_name(year, underscore),
+            publisher=self._clean_string_name(publisher, underscore),
+            isbn=self._clean_string_name(isbn, underscore)
+        ).strip()
+    
+    # --------------------------- Pattern helpers ----------------------------
+    def _validate_pattern(self, pattern: str) -> Tuple[bool, List[str], Set[str]]:
+        """Validate rename pattern placeholders.
+        Allowed placeholders: {title}, {author}, {year}, {publisher}, {isbn}
+        Returns: (ok, errors, used_placeholders)
+        """
+        allowed = {"title", "author", "year", "publisher", "isbn"}
+        used: Set[str] = set()
+        errors: List[str] = []
+        try:
+            import string
+            for literal_text, field_name, format_spec, conversion in string.Formatter().parse(pattern):
+                if field_name is None:
+                    continue
+                # Handle deeply nested braces or empty names defensively
+                field = str(field_name).strip()
+                if not field:
+                    errors.append("Placeholder vazio {} não é permitido.")
+                    continue
+                used.add(field)
+                if field not in allowed:
+                    errors.append(f"Placeholder inválido: {{{field}}}. Permitidos: {{title}}, {{author}}, {{year}}, {{publisher}}, {{isbn}}.")
+        except Exception:
+            errors.append("Padrão inválido (verifique chaves e formato). Use placeholders como {title} e {author}.")
+        return (len(errors) == 0, errors, used)
+
+    def _render_copy_button(self, text: str, key: str = None, label: str = "Copiar caminho"):
+        """Render a clipboard copy button for a given text path."""
+        import html as _html
+        from streamlit.components.v1 import html as _st_html
+        btn_key = key or f"copy_{abs(hash(text))}"
+        if st.button(label, key=btn_key):
+            # Escape for JS string literal
+            safe = _html.escape(text).replace("\\", "\\\\").replace("'", "\\'")
+            _st_html(
+                f"""
+                <script>
+                (function(){{
+                    try {{
+                        navigator.clipboard.writeText('{safe}').then(function(){{}});
+                    }} catch (e) {{}}
+                }})();
+                </script>
+                """,
+                height=0,
+            )
+            st.success("Caminho copiado para a área de transferência.")
 
     @staticmethod
     def _open_in_os(path: str) -> bool:
@@ -366,22 +414,30 @@ class RenamePDFEPUBInterface:
                     if htmls:
                         latest_html = htmls[-1]
                         st.caption(f"Último HTML: {latest_html.name}")
-                        st.download_button(
-                            label="Baixar HTML",
-                            data=latest_html.read_bytes(),
-                            file_name=latest_html.name,
-                            mime="text/html"
-                        )
+                        c1, c2 = st.columns([1,1])
+                        with c1:
+                            st.download_button(
+                                label="Baixar HTML",
+                                data=latest_html.read_bytes(),
+                                file_name=latest_html.name,
+                                mime="text/html"
+                            )
+                        with c2:
+                            self._render_copy_button(str(latest_html), key="dash_copy_html")
                 with colj:
                     if jsons:
                         latest_json = jsons[-1]
                         st.caption(f"Último JSON: {latest_json.name}")
-                        st.download_button(
-                            label="Baixar JSON",
-                            data=latest_json.read_bytes(),
-                            file_name=latest_json.name,
-                            mime="application/json"
-                        )
+                        c1, c2 = st.columns([1,1])
+                        with c1:
+                            st.download_button(
+                                label="Baixar JSON",
+                                data=latest_json.read_bytes(),
+                                file_name=latest_json.name,
+                                mime="application/json"
+                            )
+                        with c2:
+                            self._render_copy_button(str(latest_json), key="dash_copy_json")
             except Exception:
                 pass
             
@@ -721,6 +777,7 @@ class RenamePDFEPUBInterface:
             # Pré-visualização de renome (lote)
             with st.expander("Pré-visualizar renome (lote)"):
                 patt = st.text_input("Padrão", value="{title} - {author} - {year}", key="catalog_batch_pattern")
+                st.caption("Placeholders: {title}, {author}, {year}, {publisher}, {isbn}")
                 und = st.checkbox("Usar underscore", value=False, key="catalog_batch_underscore")
                 limit_prev = st.number_input("Limite de pré-visualização", min_value=50, max_value=5000, value=500, step=50, key="catalog_batch_limit")
                 try:
@@ -780,35 +837,34 @@ class RenamePDFEPUBInterface:
                                 st.info("Renomeação em lote iniciada.")
                             except Exception as e:
                                 st.warning(f"Falha ao aplicar em lote: {e}")
+                except Exception as e:
+                    st.warning(f"Falha na pré-visualização/lote: {e}")
             # Abrir pasta do arquivo (por seleção)
-            try:
-                file_choices = [r['Arquivo'] for r in rows if r.get('Arquivo')]
-                if file_choices:
-                    c1, c2, c3 = st.columns([3,1,1])
-                    with c1:
-                        sel = st.selectbox("Selecionar arquivo:", file_choices)
-                        st.text_input("Caminho (copiar)", value=sel, key="catalog_path_copy", disabled=True)
-                    with c2:
-                        if st.button("Abrir pasta"):
-                            ok = self._open_in_os(sel)
-                            if not ok:
-                                st.warning("Não foi possível abrir a pasta. Verifique o caminho.")
-                    with c3:
-                        # Renomear agora (DB)
-                        patt = st.text_input("Padrão de nome", value="{title} - {author} - {year}")
-                        und = st.checkbox("Usar underscore", value=False)
-                        if st.button("Renomear (DB)"):
-                            script = self.project_root / 'scripts' / 'rename_from_db.py'
-                            cmd = [sys.executable, str(script), '--file', sel, '--apply', '--pattern', patt]
-                            if und:
-                                cmd.append('--underscore')
-                            try:
-                                subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                                st.info("Renomeação iniciada (verifique pasta).")
-                            except Exception as e:
-                                st.warning(f"Falha ao acionar renomeação: {e}")
-                        # Pré-visualizar novo nome
-                        if st.button("Pré-visualizar nome"):
+            file_choices = [r['Arquivo'] for r in rows if r.get('Arquivo')]
+            if file_choices:
+                c1, c2, c3 = st.columns([3,1,1])
+                with c1:
+                    sel = st.selectbox("Selecionar arquivo:", file_choices)
+                    st.text_input("Caminho (copiar)", value=sel, key="catalog_path_copy", disabled=True)
+                with c2:
+                    if st.button("Abrir pasta"):
+                        ok = self._open_in_os(sel)
+                        if not ok:
+                            st.warning("Não foi possível abrir a pasta. Verifique o caminho.")
+                with c3:
+                    # Renomear agora (DB) — controles em uma única linha
+                    colp, colu, colprev, colapply = st.columns([3,1,1,1])
+                    with colp:
+                        patt = st.text_input("Padrão de nome", value="{title} - {author} - {year}", key="catalog_single_pattern")
+                        st.caption("Placeholders: {title}, {author}, {year}, {publisher}, {isbn}")
+                        okp, perrs, _ = self._validate_pattern(patt)
+                        if not okp:
+                            for e in perrs:
+                                st.warning(e)
+                    with colu:
+                        und = st.checkbox("underscore", value=False, key="catalog_single_underscore")
+                    with colprev:
+                        if st.button("Prévia", key="catalog_single_preview"):
                             script = self.project_root / 'scripts' / 'rename_from_db.py'
                             cmd = [sys.executable, str(script), '--file', sel, '--pattern', patt]
                             if und:
@@ -819,8 +875,17 @@ class RenamePDFEPUBInterface:
                                 st.code(out.strip() or '(sem saída)')
                             except Exception as e:
                                 st.warning(f"Falha na pré-visualização: {e}")
-            except Exception:
-                pass
+                    with colapply:
+                        if st.button("Aplicar", key="catalog_single_apply"):
+                            script = self.project_root / 'scripts' / 'rename_from_db.py'
+                            cmd = [sys.executable, str(script), '--file', sel, '--apply', '--pattern', patt]
+                            if und:
+                                cmd.append('--underscore')
+                            try:
+                                subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                                st.info("Renomeação iniciada (verifique pasta).")
+                            except Exception as e:
+                                st.warning(f"Falha ao acionar renomeação: {e}")
         st.subheader("Operações")
         cc1, cc2, cc3 = st.columns(3)
         with cc1:
@@ -1058,10 +1123,19 @@ class RenamePDFEPUBInterface:
                         # Ações de renome
                         script = self.project_root / 'scripts' / 'rename_from_db.py'
                         b1, b2 = st.columns(2)
-                        with b1:
+                        # Controles em uma única linha (padrão/underscore/preview/apply)
+                        colp, colu, colprev, colapply = st.columns([3,1,1,1])
+                        with colp:
                             patt2 = st.text_input("Padrão de nome", value="{title} - {author} - {year}", key="gaps_pattern")
-                            und2 = st.checkbox("Usar underscore", value=False, key="gaps_underscore")
-                            if st.button("Pré-visualizar nome (DB)"):
+                            st.caption("Placeholders: {title}, {author}, {year}, {publisher}, {isbn}")
+                            okp2, perrs2, _ = self._validate_pattern(patt2)
+                            if not okp2:
+                                for e in perrs2:
+                                    st.warning(e)
+                        with colu:
+                            und2 = st.checkbox("underscore", value=False, key="gaps_underscore")
+                        with colprev:
+                            if st.button("Prévia (DB)", key="gaps_preview_btn"):
                                 try:
                                     cmd = [sys.executable, str(script), '--file', sel, '--pattern', patt2]
                                     if und2:
@@ -1071,8 +1145,8 @@ class RenamePDFEPUBInterface:
                                     st.code(out.strip() or '(sem saída)')
                                 except Exception as e:
                                     st.warning(f"Falha na pré-visualização: {e}")
-                        with b2:
-                            if st.button("Renomear (DB)"):
+                        with colapply:
+                            if st.button("Aplicar (DB)", key="gaps_apply_btn"):
                                 try:
                                     cmd = [sys.executable, str(script), '--file', sel, '--apply', '--pattern', patt2]
                                     if und2:
@@ -1086,13 +1160,20 @@ class RenamePDFEPUBInterface:
             # Pré-visualização de renome (lote)
             with st.expander("Pré-visualizar renome (lote)"):
                 patt = st.text_input("Padrão", value="{title} - {author} - {year}", key="gaps_batch_pattern")
+                st.caption("Placeholders: {title}, {author}, {year}, {publisher}, {isbn}")
                 und = st.checkbox("Usar underscore", value=False, key="gaps_batch_underscore2")
                 try:
-                    preview_rows = []
-                    for r in inc_rows[:500]:
-                        newbase = self._build_name_from_row(r, patt, und)
-                        ext = Path(r.get('Arquivo','')).suffix
-                        preview_rows.append({'Arquivo': r.get('Arquivo',''), 'Proposto': (newbase + ext) if newbase else ''})
+                    ok_pat, errs, _used = self._validate_pattern(patt)
+                    if not ok_pat:
+                        for e in errs:
+                            st.warning(e)
+                        preview_rows = []
+                    else:
+                        preview_rows = []
+                        for r in inc_rows[:500]:
+                            newbase = self._build_name_from_row(r, patt, und)
+                            ext = Path(r.get('Arquivo','')).suffix
+                            preview_rows.append({'Arquivo': r.get('Arquivo',''), 'Proposto': (newbase + ext) if newbase else ''})
                     prev_csv = self._rows_to_csv(preview_rows)
                     st.download_button(
                         label=f"Baixar pré-visualização ({len(preview_rows)} itens)",

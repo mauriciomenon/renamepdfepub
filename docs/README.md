@@ -36,3 +36,17 @@ python3 start_gui.py --dir "/caminho/inicial"
 - O Dashboard do Streamlit lê automaticamente o último JSON.
 - A renomeação por relatório usa `src/renamepdfepub/renamer.py`.
 
+## Diretrizes para IAs e Contribuição
+
+Para manter a qualidade e consistência do projeto, consulte:
+- AGENTS (regras para Codex/Copilot e outros): `AGENTS.md`
+- Guia de Contribuição (padrões de código/UX/testes): `CONTRIBUTING.md`
+- Orientações práticas para IAs (checklists): `docs/AI_GUIDELINES.md`
+- Instruções do Copilot (VS Code/GitHub): `.copilot-instructions.md` e `.github/copilot-instructions.md`
+
+Resumo rápido:
+- Sem emojis; linguagem sóbria e profissional; evitar termos promocionais (final/ultra/definitivo/melhorado/refinado/superior).
+- Funções modulares e descritivas; imports no topo; docstrings curtas.
+- Tratamento de erros significativo e logging centralizado (não silenciar exceções).
+- Teste para cada funcionalidade adicionada; validação semântica e de interface.
+- UI responsiva (tarefas longas em background) com feedback claro; preview vs apply sempre que possível.
