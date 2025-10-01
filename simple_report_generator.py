@@ -20,7 +20,7 @@ import argparse
 ROOT = Path(__file__).parent
 REPORTS = ROOT / "reports"
 BOOKS = ROOT / "books"
-DEFAULT_OUT = ROOT / "advanced_algorithms_report.html"
+DEFAULT_OUT = REPORTS / "advanced_algorithms_report.html"
 
 
 def load_latest_report():

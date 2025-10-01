@@ -11,3 +11,8 @@ logs/
 metadata_cache.db
 .pytest_cache/
 .DS_Store
+advanced_algorithms_report.html
+reports/*.html
+reports/*.json
+reports/*_metadata.log
+data/cache/iterative/*.db

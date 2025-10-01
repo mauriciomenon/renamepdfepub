@@ -60,8 +60,21 @@ Exemplos:
         if not extras:
             subprocess.run([sys.executable, str(extractor), '--help'])
             return
+        # Support --open-report flag (handled here; stripped before forwarding)
+        open_report = False
+        if '--open-report' in extras:
+            open_report = True
+            extras = [e for e in extras if e != '--open-report']
         cmd = [sys.executable, str(extractor)] + extras
-        subprocess.run(cmd)
+        res = subprocess.run(cmd)
+        if open_report and res.returncode == 0:
+            try:
+                import webbrowser
+                latest = sorted((Path(__file__).parent / 'reports').glob('report_*.html'))
+                if latest:
+                    webbrowser.open(latest[-1].as_uri())
+            except Exception:
+                pass
 
     elif args.command == 'scan-cycles':
         # Executa varreduras repetidas com o pipeline canônico do core
@@ -72,6 +85,10 @@ Exemplos:
             print("[ERROR] src/core/renomeia_livro.py não encontrado")
             sys.exit(1)
         argv = extras
+        open_report = False
+        if '--open-report' in argv:
+            open_report = True
+            argv = [e for e in argv if e != '--open-report']
         # Parâmetros opcionais: --cycles N, --time-seconds S
         def _get_flag(flag):
             if flag in argv:
@@ -103,6 +120,14 @@ Exemplos:
             if i >= cycles:
                 break
         print("Varreduras concluídas.")
+        if open_report:
+            try:
+                import webbrowser
+                latest = sorted((Path(__file__).parent / 'reports').glob('report_*.html'))
+                if latest:
+                    webbrowser.open(latest[-1].as_uri())
+            except Exception:
+                pass
 
     elif args.command == 'rename-existing':
         # Renomeia a partir de um relatório JSON existente (sem buscar)
@@ -125,10 +150,22 @@ Exemplos:
             print("[ERROR] src/core/renomeia_livro.py não encontrado")
             sys.exit(1)
         argv = extras
+        open_report = False
+        if '--open-report' in argv:
+            open_report = True
+            argv = [e for e in argv if e != '--open-report']
         if '--rename' not in argv:
             argv = argv + ['--rename']
         cmd = [sys.executable, str(extractor)] + argv
-        subprocess.run(cmd)
+        res = subprocess.run(cmd)
+        if open_report and res.returncode == 0:
+            try:
+                import webbrowser
+                latest = sorted((Path(__file__).parent / 'reports').glob('report_*.html'))
+                if latest:
+                    webbrowser.open(latest[-1].as_uri())
+            except Exception:
+                pass
     
     elif args.command == 'launch':
         try:

@@ -53,7 +53,7 @@ def launch_streamlit():
     
     try:
         subprocess.run([
-            sys.executable, "-m", "streamlit", "run", 
+            sys.executable, "-m", "streamlit", "run",
             str(streamlit_file),
             "--server.port=8501",
             "--server.address=localhost",
@@ -63,6 +63,29 @@ def launch_streamlit():
         print("\nInterface encerrada")
     except Exception as e:
         print(f"Erro ao executar Streamlit: {e}")
+
+def launch_streamlit_background():
+    """Inicia Streamlit em background e tenta abrir o navegador automaticamente."""
+    streamlit_file = Path(__file__).parent / "streamlit_interface.py"
+    try:
+        p = subprocess.Popen([
+            sys.executable, "-m", "streamlit", "run",
+            str(streamlit_file),
+            "--server.port=8501",
+            "--server.address=localhost",
+            "--browser.gatherUsageStats=false"
+        ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        # Aguarda um instante e abre o navegador
+        try:
+            import time, webbrowser
+            time.sleep(2)
+            webbrowser.open("http://localhost:8501")
+        except Exception:
+            pass
+        msg = "Streamlit iniciado em background (PID %s). Abra http://localhost:8501 se o navegador nao abrir." % p.pid
+        print(msg)
+    except Exception as e:
+        print(f"Erro ao iniciar Streamlit em background: {e}")
 
 def generate_simple_report():
     """Gera relatorio HTML simples"""
@@ -75,7 +98,7 @@ def generate_simple_report():
             # Tenta abrir o HTML gerado no navegador padrao
             try:
                 import webbrowser
-                out = Path(__file__).parent.parent.parent / "advanced_algorithms_report.html"
+                out = Path(__file__).parent.parent.parent / "reports" / "advanced_algorithms_report.html"
                 if out.exists():
                     webbrowser.open(out.as_uri())
             except Exception:
@@ -110,6 +133,14 @@ def run_scan_interactive():
         result = subprocess.run(cmd)
         if result.returncode == 0:
             print("\n[OK] Varredura concluida. Relatorios gerados em reports/.")
+            # Abrir ultimo HTML
+            try:
+                import webbrowser
+                latest = sorted((Path(__file__).parents[2] / 'reports').glob('report_*.html'))
+                if latest:
+                    webbrowser.open(latest[-1].as_uri())
+            except Exception:
+                pass
         else:
             print("\n[ERROR] Falha na varredura. Verifique os logs.")
     except KeyboardInterrupt:
@@ -130,6 +161,7 @@ def main():
     print("3. Gerar Relatorio HTML (usar ultimo JSON ou informar outro)")
     print("4. Executar teste de algoritmos (heuristico)")
     print("5. Dica sobre relatorios reais")
+    print("6. Iniciar Streamlit em background e abrir navegador")
     print("0. Sair")
     
     try:
@@ -158,7 +190,7 @@ def main():
                 # Abre o HTML gerado
                 try:
                     import webbrowser
-                    out = Path(__file__).parent.parent.parent / "advanced_algorithms_report.html"
+                    out = Path(__file__).parent.parent.parent / "reports" / "advanced_algorithms_report.html"
                     if out.exists():
                         webbrowser.open(out.as_uri())
                 except Exception:
@@ -179,6 +211,11 @@ def main():
                 
         elif choice == "5":
             _hint_real_reports()
+        elif choice == "6":
+            if not install_streamlit():
+                print("[ERROR] Nao foi possivel instalar Streamlit")
+                return
+            launch_streamlit_background()
             
         elif choice == "0":
             print("Ate logo!")
