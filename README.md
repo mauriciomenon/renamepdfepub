@@ -198,6 +198,21 @@ python -m pytest -q -m integration
 - Web dinamica (Streamlit): `python3 start_web.py` (ou `--auto-start`)
 - Relatorios HTML estaticos: `python3 start_html.py`
 - CLI: `python3 start_cli.py <subcomando> [opcoes]`
+
+## Diretrizes e Contribuicao
+
+Consulte as regras e guias do projeto para edicoes por humanos e IAs:
+- Regras para agentes (Codex/Copilot): `AGENTS.md`
+- Guia de contribuicao (estilo, testes, UX): `CONTRIBUTING.md`
+- Checklists praticos para IAs: `docs/AI_GUIDELINES.md`
+- Instrucoes do Copilot (VS Code/GitHub): `.copilot-instructions.md` e `.github/copilot-instructions.md`
+
+Resumo:
+- Sem emojis; linguagem sobria e profissional; evitar termos promocionais.
+- Funcoes modulares e descritivas; imports no topo; docstrings curtas.
+- Tratamento de erro significativo e logging centralizado; sem silenciar excecoes.
+- Teste para cada funcionalidade; validacao semantica e de interface.
+- UI responsiva com tarefas em segundo plano; separar preview de apply.
 - GUI Desktop: `python3 start_gui.py [--dir "/caminho"]`
 
 
