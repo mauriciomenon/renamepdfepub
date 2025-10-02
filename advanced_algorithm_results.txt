@@ -1,67 +1,47 @@
 SISTEMA AVANÇADO DE COMPARAÇÃO DE ALGORITMOS v2.0
 ===========================================================================
-Timestamp: 2025-09-29 20:00:08
+Timestamp: 2025-10-01 23:45:18
 
-Testando 394 livros com 5 algoritmos
+Testando 396 livros com 5 algoritmos
 
 TABELA DE COMPARAÇÃO DETALHADA - 5 ALGORITMOS
 --------------------------------------------------------------------------------------------------------------
 Arquivo                   Titulo Real          Basic   Enhanced Smart   Hybrid  Brazilian Melhor         
 --------------------------------------------------------------------------------------------------------------
-Paul McFedries - Build a  Build a Website wit  1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Parth Girish Patel et al  Sustainable Cloud D  1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Rodrigo Turini - Java 9   Java 9               1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Micah Lee - Hacks, Leaks  Hacks, Leaks, and R  1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Mariot Tsitoara - Beginn  Beginning Git and G  1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Lyza Gardner - JavaScrip  JavaScript on Thing  1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Jean-Philippe Aumasson -  Serious Cryptograph  1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Safari, an O'Reilly Medi  Safari, an O Reilly  1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Malcolm McDonald - Grokk  Grokking Web Applic  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Matt Hand - Evading EDR   Evading EDR          1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Modern_C_Third_Edition.p  Modern_C_Third_Edit  1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Handbook of Modern Senso  Handbook of Modern   1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Fotios Chantzis et al -   Practical IoT Hacki  1.000   1.000   1.000   1.000   1.000   Basic Parser   
-kafka-connect-e-kafka-st  kafka-connect-e-kaf  1.000   1.000   1.000   1.000   1.000   Basic Parser   
-evasivemalware.pdf        evasivemalware       1.000   1.000   1.000   1.000   1.000   Basic Parser   
-AI_Agents_and_Applicatio  AI_Agents_and_Appli  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 efficientmysqlperformanc  efficientmysqlperfo  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Vamsee Puligadda - 500 M  500 Machine Learnin  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Douglas Crockford - How   How JavaScript Work  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 resilientoracleplandsql.  resilientoracleplan  1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Python_Workout.pdf        Python_Workout       1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Ajay Mahajan et al - Clo  Cloud-Native Applic  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 hacksleaksandrevelations  hacksleaksandrevela  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Michal Zalewski - The Ta  The Tangled Web      1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Alan Beaulieu - Learning  Learning SQL         1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Alice Zhao - SQL Pocket   SQL Pocket Guide     1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Exploring_Algorithms.pdf  Exploring_Algorithm  1.000   1.000   1.000   1.000   1.000   Basic Parser   
-AI_Agents_and_Applicatio  AI_Agents_and_Appli  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+Simon_and_Schuster_2022_  Simon_and_Schuster_  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 A_Damn_Fine_Stable_Diffu  A_Damn_Fine_Stable_  1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Cybellium - AWS Certifie  AWS Certified Devel  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 ciandcddesignpatterns.ep  ciandcddesignpatter  1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Rui Pedro Machado et al   Analytics Engineeri  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Lyron Foster - Hacking A  Hacking APIs - A Co  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Arnaud Lauret - The Desi  The Design of Web A  1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Patrick Wardle - The Art  The Art of Mac Malw  1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Ángel Sola Orbaiceta - B  Build a Frontend We  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+Simon_and_Schuster_2024_  Simon_and_Schuster_  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Alex Libby - Practical N  Practical Next.js f  1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Exploring_Security_Priva  Exploring_Security_  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Josip Maras - Secrets of  Secrets of the Java  1.000   1.000   1.000   1.000   1.000   Basic Parser   
-computacao-evolucionaria  computacao-evolucio  1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Mr.Alexei Kireyev - Libe  Liberalization of T  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+No_Starch_Press_2018_Lin  No_Starch_Press_201  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 James Forshaw - Attackin  Attacking Network P  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Robin Nixon - Learning P  Learning PHP, MySQL  1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Peter Kestner - The Art   The Art of Cyber Wa  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Cathy Tanimura - SQL for  SQL for Data Analys  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+OReilly_2022_Training_Da  OReilly_2022_Traini  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Dr. A.P. Siva Kumar et a  Exploring Data Scie  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Aurélien Géron - Hands-O  Hands-On Machine Le  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Thiago Leite e Carvalho   Orientacao a Objeto  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+No Starch Press_2017_Ser  No Starch Press_201  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Seyed Tahaghoghi et al -  Learning MySQL       1.000   1.000   1.000   1.000   1.000   Basic Parser   
+003_D_sample.pdf          003_D_sample         1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Shannon Bradshaw et al -  MongoDB The Definit  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Jason Porter et al - Tes  Testing Java Micros  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Cloud_Native_Application  Cloud_Native_Applic  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Michael Mikowski et al -  Single Page Web App  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Felipe Cardeneti Mendes   Database Performanc  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+No_Starch_Press_2021_Eth  No_Starch_Press_202  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Marco Tranquillin et al   Architecting Data a  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Francisco Martín Rico -   A Concise Introduct  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Adam Freeman - Essential  Essential TypeScrip  1.000   1.000   1.000   1.000   1.000   Basic Parser   
@@ -69,15 +49,20 @@ Reuven M. Lerner - Pytho  Python Workout       1.000   1.000   1.000   1.000   1
 Baron Schwartz et al - H  High Performance My  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Joshua Saxe - Malware Da  Malware Data Scienc  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Build_Python_Web_Apps_wi  Build_Python_Web_Ap  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+Manning_2018_JavaScript_  Manning_2018_JavaSc  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+No_Starch_Press_2019_Rea  No_Starch_Press_201  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 architectingdataandmachi  architectingdataand  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+Simon_and_Schuster_2024_  Simon_and_Schuster_  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 angularforbusiness.epub   angularforbusiness   1.000   1.000   1.000   1.000   1.000   Basic Parser   
 learningphpmysqlandjavas  learningphpmysqland  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Paul DuBois - MySQL Cook  MySQL Cookbook       1.000   1.000   1.000   1.000   1.000   Basic Parser   
-AMC College - Ethical Ha  Ethical Hacking      1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Jim Lehmer - Fuzzy Data   Fuzzy Data Matching  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+2023_Appendix_B._Setting  2023_Appendix_B._Se  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+Simon_and_Schuster_2024_  Simon_and_Schuster_  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 database-drivenwebdevelo  database-drivenwebd  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Probability, Statistics,  Probability, Statis  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 pythonobject-orientedpro  pythonobject-orient  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+001_B_sample.pdf          001_B_sample         1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Daniel Wildt et al - eXt  eXtreme Programming  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Alexis Ahmed - Privilege  Privilege Escalatio  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 jamstackbook.epub         jamstackbook         1.000   1.000   1.000   1.000   1.000   Basic Parser   
@@ -86,7 +71,6 @@ Héla Ben Khalfallah - Cr  Crafting Clean Code  1.000   1.000   1.000   1.000   
 Exploring_Functional_Pro  Exploring_Functiona  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Meinte Boersma - Buildin  Building User-Frien  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 David Foster - Generativ  Generative Deep Lea  1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Rodrigo Turini - Java 9   Java 9               1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Jeff Carpenter et al - C  Cassandra The Defin  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 machine-learning-introdu  machine-learning-in  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 cloudnativeanti-patterns  cloudnativeanti-pat  1.000   1.000   1.000   1.000   1.000   Basic Parser   
@@ -94,9 +78,11 @@ fuzzydatamatchingwithsql  fuzzydatamatchingwi  1.000   1.000   1.000   1.000   1
 controlando-versoes-com-  controlando-versoes  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 learncprogramming.pdf     learncprogramming    1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Charles Bell - MySQL Dat  MySQL Database Serv  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+No Starch Press_2022_The  No Starch Press_202  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Chris Fregly et al - Gen  Generative AI on AW  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Paul McFedries - Web Des  Web Design Playgrou  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Modern_C.pdf              Modern_C             1.000   1.000   1.000   1.000   1.000   Basic Parser   
+Simon_and_Schuster_2024_  Simon_and_Schuster_  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 ciandcddesignpatterns.pd  ciandcddesignpatter  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Micah Lee - Hacks, Leaks  Hacks, Leaks, and R  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Federico Kereki - Master  Mastering JavaScrip  1.000   1.000   1.000   1.000   1.000   Basic Parser   
@@ -106,10 +92,11 @@ Mark Simon - Leveling Up  Leveling Up with SQ  1.000   1.000   1.000   1.000   1
 Olivier Caelen et al - D  Developing Apps wit  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 OECD - The Governance of  The Governance of R  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 John Larsen - Get Progra  Get Programming wit  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+Manning_2020_Python_Work  Manning_2020_Python  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 analyticsengineeringwith  analyticsengineerin  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 architectingdataandmachi  architectingdataand  1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Peter Kestner - The Art   The Art of Cyber Wa  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Gerald Bachlmayr et al -  Cloud Native Anti-P  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+Manning_2017_Learn_Amazo  Manning_2017_Learn_  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 databaseinternals.pdf     databaseinternals    1.000   1.000   1.000   1.000   1.000   Basic Parser   
 foundationsofinformation  foundationsofinform  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 sqlserveradvancedtrouble  sqlserveradvancedtr  1.000   1.000   1.000   1.000   1.000   Basic Parser   
@@ -124,16 +111,16 @@ Isaac Dunlap - Open Sour  Open Source Databas  1.000   1.000   1.000   1.000   1
 attackingnetworkprotocol  attackingnetworkpro  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 developersplaybookforlar  developersplaybookf  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 highperformancemysql.pdf  highperformancemysq  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+OReilly_2020_Learning_SQ  OReilly_2020_Learni  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 fuzzydatamatchingwithsql  fuzzydatamatchingwi  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 machinelearninginterview  machinelearninginte  1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Matt Hand - Evading EDR   Evading EDR          1.000   1.000   1.000   1.000   1.000   Basic Parser   
 cassandra_thedefinitiveg  cassandra_thedefini  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 artofunittesting3e.pdf    artofunittesting3e   1.000   1.000   1.000   1.000   1.000   Basic Parser   
 mysql-comece-com-o-princ  mysql-comece-com-o-  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Hubert Dulay et al - Str  Streaming Databases  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+Springer_2010_Handbook_o  Springer_2010_Handb  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Frank Zammetti - Modern   Modern Full-Stack D  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Minko Gechev - Getting S  Getting Started wit  1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Chris Eagle et al - The   The Ghidra Book      1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Inherently_Secure_API_De  Inherently_Secure_A  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Jon Heller - Pro Oracle   Pro Oracle SQL Deve  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Exploring_Productivity_T  Exploring_Productiv  1.000   1.000   1.000   1.000   1.000   Basic Parser   
@@ -141,11 +128,15 @@ programando-em-go-crie-a  programando-em-go-c  1.000   1.000   1.000   1.000   1
 Exploring_Python_Basics.  Exploring_Python_Ba  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Software_Design_in_Pytho  Software_Design_in_  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 learningunixforosx_2nded  learningunixforosx_  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+002_C_sample.pdf          002_C_sample         1.000   1.000   1.000   1.000   1.000   Basic Parser   
 OccupyTheWeb - Linux Bas  Linux Basics for Ha  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Build_Python_Web_Apps_wi  Build_Python_Web_Ap  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 John Larsen - React Hook  React Hooks in Acti  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+No_Starch_Press_2018_Lin  No_Starch_Press_201  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Scott Meyers - Effective  Effective Modern C   1.000   1.000   1.000   1.000   1.000   Basic Parser   
+2025_Sustainable_Cloud_D  2025_Sustainable_Cl  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Ben McCarty - Cyberjutsu  Cyberjutsu           1.000   1.000   1.000   1.000   1.000   Basic Parser   
+1980_Computacao_Evolucio  1980_Computacao_Evo  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Elijah Meeks et al - D3.  D3.js in Action, Th  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Federico Kereki - Master  Mastering JavaScrip  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Alice Zhao - SQL Pocket   SQL Pocket Guide     1.000   1.000   1.000   1.000   1.000   Basic Parser   
@@ -153,32 +144,32 @@ Dr. Andrew Blyth - Power  PowerShell for Pene  1.000   1.000   1.000   1.000   1
 Reuven M. Lerner - Pytho  Python Workout       1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Marco Tranquillin et al   Architecting Data a  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Exploring_Microservice_D  Exploring_Microserv  1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Jason Andress - Foundati  Foundations of Info  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Sandeep Uttamchandani -   The Self-Service Da  1.000   1.000   1.000   1.000   1.000   Basic Parser   
-OccupyTheWeb - Linux Bas  Linux Basics for Ha  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Joshua S. Ponelat et al   Designing APIs with  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Robin Nixon - Learning P  Learning PHP, MySQL  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 grokkingwebapplicationse  grokkingwebapplicat  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Joshua Saxe - Malware Da  Malware Data Scienc  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Reuven Lerner - Python W  Python Workout, Sec  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 naturallanguageprocessin  naturallanguageproc  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+No_Starch_Press_2024_Eva  No_Starch_Press_202  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Michael Mikowski et al -  Single Page Web App  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 learningsnowflakesqlands  learningsnowflakesq  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Shannon Bradshaw et al -  MongoDB The Definit  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Tyler Richards - Getting  Getting Started wit  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Marc Delisle - Mastering  Mastering Phpmyadmi  1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Patrick Wardle - The Art  The Art of Mac Malw  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 machinelearninginterview  machinelearninginte  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+Casa_do_Codigo_2089_Kafk  Casa_do_Codigo_2089  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Principles_of_Cloud_Desi  Principles_of_Cloud  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 linuxbasicsforhackers.pd  linuxbasicsforhacke  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Marvin-K.-Simon-Mohamed-  Marvin-K.-Simon-Moh  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Isaac Dunlap - Open Sour  Open Source Databas  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Chris Eagle et al - The   The Ghidra Book      1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Jean-Philippe Aumasson -  Serious Cryptograph  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+No_Starch_Press_2023_Eva  No_Starch_Press_202  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Felipe Cruz - Python (20  Python               1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Tom Steele et al - Black  Black Hat Go         1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Kyle Cucci - Evasive Mal  Evasive Malware      1.000   1.000   1.000   1.000   1.000   Basic Parser   
 nosql-como-armazenar-os-  nosql-como-armazena  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+1924_Rodrigo_Turini_Java  1924_Rodrigo_Turini  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Secrets_of_the_JavaScrip  Secrets_of_the_Java  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Regina O. Obe et al - Po  PostgreSQL Up and R  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Barrie Sosinsky - Cloud   Cloud Computing Bib  1.000   1.000   1.000   1.000   1.000   Basic Parser   
@@ -188,9 +179,9 @@ evadingedr.pdf            evadingedr           1.000   1.000   1.000   1.000   1
 CCPS (Center for Chemica  Guidelines for Inhe  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Arunjith Aravindan et al  Hands-On MySQL Admi  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Elliott Adams - Learning  Learning Airtable    1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Michal Zalewski - The Ta  The Tangled Web      1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Chrissy LeMaire et al -   Learn dbatools in a  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 learningmysql.pdf         learningmysql        1.000   1.000   1.000   1.000   1.000   Basic Parser   
+Manning_2018_Microservic  Manning_2018_Micros  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 James Forshaw - Windows   Windows Security In  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 John Berryman et al - Pr  Prompt Engineering   1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Peter Yaworski - Real-Wo  Real-World Bug Hunt  1.000   1.000   1.000   1.000   1.000   Basic Parser   
@@ -201,6 +192,7 @@ functionalprogrammingwit  functionalprogrammi  1.000   1.000   1.000   1.000   1
 Adam Jones - Functional   Functional Programm  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Juntao Qiu - Test-Driven  Test-Driven Develop  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Eduardo Corrêa - Pandas   Pandas Python        1.000   1.000   1.000   1.000   1.000   Basic Parser   
+No_Starch_Press_2020_The  No_Starch_Press_202  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Anthony Molinaro et al -  SQL Cookbook, 2nd E  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 c31e9e33-6aa4-411f-a688-  c31e9e33-6aa4-411f-  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 AI_Applications_Made_Eas  AI_Applications_Mad  1.000   1.000   1.000   1.000   1.000   Basic Parser   
@@ -209,6 +201,7 @@ mysqlcookbook.pdf         mysqlcookbook        1.000   1.000   1.000   1.000   1
 Elijah Meeks et al - D3.  D3.js in Action, Th  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Dr. Pratiyush Guleria -   Basics of Python Pr  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Kyle Gallatin et al - Ma  Machine Learning wi  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+2006_Moby-Dick(A_Norton_  2006_Moby-Dick(A_No  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Jens Gustedt - Modern C,  Modern C, Third Edi  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 sql-uma-abordagem-para-b  sql-uma-abordagem-p  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Kevin Wilson - The Absol  The Absolute Beginn  1.000   1.000   1.000   1.000   1.000   Basic Parser   
@@ -221,29 +214,33 @@ Python_Workout_Second_Ed  Python_Workout_Seco  1.000   1.000   1.000   1.000   1
 rust-concorrencia-e-alta  rust-concorrencia-e  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 David Foster - Generativ  Generative Deep Lea  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Arnaud Lauret - The Desi  The Design of Web A  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+sedandawk.pdf             sedandawk            1.000   1.000   1.000   1.000   1.000   Basic Parser   
 designofwebapisfirstedit  designofwebapisfirs  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Elliott Adams - Learning  Learning Airtable    1.000   1.000   1.000   1.000   1.000   Basic Parser   
 androidmalwarebook.epub   androidmalwarebook   1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Jay Alammar et al - Hand  Hands-On Large Lang  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Dr. Andrew Blyth - Power  PowerShell for Pene  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Srinivas Kalyan Yellanki  Behavioral Intellig  1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Chris Eagle et al - The   The Ghidra Book      1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Tyler Richards - Getting  Getting Started wit  1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Nick Aleks et al - Black  Black Hat GraphQL    1.000   1.000   1.000   1.000   1.000   Basic Parser   
+2025_Ai_Agents_And_Appli  2025_Ai_Agents_And_  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+Ben McCarty - Cyberjutsu  Cyberjutsu           1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Alan Beaulieu - Learning  Learning Snowflake   1.000   1.000   1.000   1.000   1.000   Basic Parser   
 blackhatgo.pdf            blackhatgo           1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Anghel Leonard - Java Co  Java Coding Problem  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+Manning_2018_JavaScript_  Manning_2018_JavaSc  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Exploring_Testing_Java_M  Exploring_Testing_J  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+2016_Ajay_Mahajan_Et_Al_  2016_Ajay_Mahajan_E  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 flask-de-a-a-z--crie-apl  flask-de-a-a-z--cri  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+Patrick Wardle - The Art  The Art of Mac Malw  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Cathy Tanimura - SQL for  SQL for Data Analys  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Gerald Bachlmayr et al -  Cloud Native Anti-P  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 malwaredatascience.pdf    malwaredatascience   1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Kyle Gallatin et al - Ma  Machine Learning wi  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Fotios Chantzis et al -   Practical IoT Hacki  1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Matt Hand - Evading EDR   Evading EDR          1.000   1.000   1.000   1.000   1.000   Basic Parser   
 William Oettinger - Lear  Learn Computer Fore  1.000   1.000   1.000   1.000   1.000   Basic Parser   
-sedandawk.mobi            sedandawk            1.000   1.000   1.000   1.000   1.000   Basic Parser   
-OccupyTheWeb - Linux Bas  Linux Basics for Ha  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+I7xt3yN20DX_Peter_Kestn  I7x t3yN20DX_Peter_  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+No_Starch_Press_2022_The  No_Starch_Press_202  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+No_Starch_Press_2024_Hac  No_Starch_Press_202  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Omar Sanseviero et al -   Hands-On Generative  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Peter Yaworski - Real-Wo  Real-World Bug Hunt  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 James Phoenix et al - Pr  Prompt Engineering   1.000   1.000   1.000   1.000   1.000   Basic Parser   
@@ -256,18 +253,15 @@ Nitin Liladhar Rane et a  Large Language Mode  1.000   1.000   1.000   1.000   1
 guia-front-end-o-caminho  guia-front-end-o-ca  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Patrick Wardle - The Art  The Art of Mac Malw  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 fullstackgraphqlapplicat  fullstackgraphqlapp  1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Ben McCarty - Cyberjutsu  Cyberjutsu           1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Omar Sanseviero et al -   Hands-On Generative  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Ángel Sola Orbaiceta - B  Build a Frontend We  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Felipe Cruz - Python (20  Python               1.000   1.000   1.000   1.000   1.000   Basic Parser   
 James Phoenix et al - Pr  Prompt Engineering   1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Jason Andress - Foundati  Foundations of Info  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Steven F. Lott et al - P  Python Object-Orien  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Anghel Leonard - Java Co  Java Coding Problem  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Joshua S. Ponelat et al   Designing APIs with  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Sandeep Uttamchandani -   The Self-Service Da  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 artofunittesting3e.epub   artofunittesting3e   1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Lyza Gardner - JavaScrip  JavaScript on Thing  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 controlando-versoes-com-  controlando-versoes  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 penetrationtesting.epub   penetrationtesting   1.000   1.000   1.000   1.000   1.000   Basic Parser   
 sqlserveradvancedtrouble  sqlserveradvancedtr  1.000   1.000   1.000   1.000   1.000   Basic Parser   
@@ -279,18 +273,17 @@ Maxwell Flitton - Rust W  Rust Web Programmin  1.000   1.000   1.000   1.000   1
 deixe-seu-codigo-limpo-e  deixe-seu-codigo-li  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Chip Huyen - AI Engineer  AI Engineering       1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Rohit Tamma et al - Prac  Practical Mobile Fo  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+2019_Jason_Andress_Found  2019_Jason_Andress_  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Fight_Fraud_with_Machine  Fight_Fraud_with_Ma  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 mongodbthedefinitiveguid  mongodbthedefinitiv  1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Paul McFedries - Build a  Build a Website wit  1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Peter Yaworski - Real-Wo  Real-World Bug Hunt  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Kyle Cucci - Evasive Mal  Evasive Malware      1.000   1.000   1.000   1.000   1.000   Basic Parser   
 selenium-webdriver-desco  selenium-webdriver-  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Microservices_Stability.  Microservices_Stabi  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Michal Zalewski - The Ta  The Tangled Web      1.000   1.000   1.000   1.000   1.000   Basic Parser   
 unlocked_asa.pdf          unlocked_asa         1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Thiago Leite e Carvalho   Orientacao a Objeto  1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Safari, an O'Reilly Medi  Safari, an O Reilly  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 naturallanguageprocessin  naturallanguageproc  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+Simon_and_Schuster_2021_  Simon_and_Schuster_  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Exploring_Modern_Cryptog  Exploring_Modern_Cr  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Chip Huyen - AI Engineer  AI Engineering       1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Morten Barklund - React   React in Depth       1.000   1.000   1.000   1.000   1.000   Basic Parser   
@@ -300,17 +293,21 @@ Paul McFedries - Web Des  Web Design Playgrou  1.000   1.000   1.000   1.000   1
 Emotional_UX_v3_MEAP.epu  Emotional_UX_v3_MEA  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Kyle Cucci - Evasive Mal  Evasive Malware      1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Reuven Lerner - Python W  Python Workout, Sec  1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Tom Steele et al - Black  Black Hat Go         1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Sazzad M.S. Imran et al   Learn Programming w  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Jeanine Meyer - The Esse  The Essential Guide  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+No_Starch_Press_2023_Eva  No_Starch_Press_202  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+OReilly_2023_Analytics_E  OReilly_2023_Analyt  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 getprogrammingwithjavasc  getprogrammingwithj  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Ronald Steelman - Master  Mastering the Snowf  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Doguhan Uluca - Angular   Angular for Enterpr  1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Dr. Andrew Blyth - Power  PowerShell for Pene  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Olivier Caelen et al - D  Developing Apps wit  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+Manning_2024_Modern_C-_T  Manning_2024_Modern  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+No_Starch_Press_2017_Ser  No_Starch_Press_201  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+Springer_Nature_2024_Beg  Springer_Nature_202  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 buildafrontendframeworkf  buildafrontendframe  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Garima Bajpai et al - CI  CICD Design Pattern  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Steve Wilson - The Devel  The Developer s Pla  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+OReilly_2021_Efficient_M  OReilly_2021_Effici  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 J. Norberto Pires - Indu  Industrial Robots P  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 low-codeai_V4.pdf         low-codeai_V4        1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Mayo Oshin et al - Learn  Learning LangChain   1.000   1.000   1.000   1.000   1.000   Basic Parser   
@@ -318,10 +315,13 @@ postgresql_upandrunning.  postgresql_upandrun  1.000   1.000   1.000   1.000   1
 aiengineering.pdf         aiengineering        1.000   1.000   1.000   1.000   1.000   Basic Parser   
 machinelearningwithpytho  machinelearningwith  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Daniel Nichter - Efficie  Efficient MySQL Per  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+2021_Fotios_Chantzis_Et_  2021_Fotios_Chantzi  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+No_Starch_Press_2011_The  No_Starch_Press_201  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 hands-onmysqladministrat  hands-onmysqladmini  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Fight_Fraud_with_Machine  Fight_Fraud_with_Ma  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+No_Starch_Press_2022_The  No_Starch_Press_202  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Analog and Digital Commu  Analog and Digital   1.000   1.000   1.000   1.000   1.000   Basic Parser   
-efficientmysqlperformanc  efficientmysqlperfo  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+004_E_sample.pdf          004_E_sample         1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Steve Wilson - The Devel  The Developer s Pla  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 masterreactin5days.epub   masterreactin5days   1.000   1.000   1.000   1.000   1.000   Basic Parser   
 resilientoracleplandsql.  resilientoracleplan  1.000   1.000   1.000   1.000   1.000   Basic Parser   
@@ -334,15 +334,14 @@ essentialtypescript5.pdf  essentialtypescript  1.000   1.000   1.000   1.000   1
 Exploring_Deep_Learning_  Exploring_Deep_Lear  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 d3jsinaction2e.pdf        d3jsinaction2e       1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Channel_Coding_Technique  Channel_Coding_Tech  1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Malcolm McDonald - Grokk  Grokking Web Applic  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Eric Sarrion - Master Vu  Master Vue.js in 6   1.000   1.000   1.000   1.000   1.000   Basic Parser   
+No_Starch_Press_2022_Hac  No_Starch_Press_202  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Venkateswara Vadlamani -  PostgreSQL Skills D  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Fotios Chantzis et al -   Practical IoT Hacki  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Anthony Molinaro et al -  SQL Cookbook, 2nd E  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Meinte Boersma - Buildin  Building User-Frien  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Learn_Docker_in_a_Month_  Learn_Docker_in_a_M  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Alex Petrov - Database I  Database Internals   1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Lyron Foster - Hacking A  Hacking APIs - A Co  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Morten Barklund - React   React in Depth       1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Wei-Meng Lee - DuckDB Up  DuckDB Up and Runni  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 designingapiswithswagger  designingapiswithsw  1.000   1.000   1.000   1.000   1.000   Basic Parser   
@@ -356,6 +355,7 @@ Leonardo Soares e Silva   Aprenda a programar  1.000   1.000   1.000   1.000   1
 Arunjith Aravindan et al  Hands-On MySQL Admi  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Alan Beaulieu - Learning  Learning Snowflake   1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Nathan Liefting et al -   Zabbix 5 IT Infrast  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+No_Starch_Press_2021_Eth  No_Starch_Press_202  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Scott Meyers - Effective  Effective Modern C   1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Pasquale De Marco - Linu  Linux Mastery Throu  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 John Berryman et al - Pr  Prompt Engineering   1.000   1.000   1.000   1.000   1.000   Basic Parser   
@@ -363,9 +363,10 @@ Confidence Staveley - AP  API Security for Wh  1.000   1.000   1.000   1.000   1
 Little guide to building  Little guide to bui  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 William Easttom - Modern  Modern Cryptography  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 learninglangchain.pdf     learninglangchain    1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Parth Girish Patel et al  Sustainable Cloud D  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+No_Starch_Press_2011_The  No_Starch_Press_201  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 John Larsen - React Hook  React Hooks in Acti  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Michael G. Solomon - Eth  Ethereum For Dummie  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+000_A_sample.pdf          000_A_sample         1.000   1.000   1.000   1.000   1.000   Basic Parser   
 postgresql_upandrunning.  postgresql_upandrun  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Jeff Carpenter et al - C  Cassandra The Defin  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 AMC College - Ethical Ha  Ethical Hacking      1.000   1.000   1.000   1.000   1.000   Basic Parser   
@@ -378,8 +379,8 @@ Sazzad M.S. Imran et al   Learn Programming w  1.000   1.000   1.000   1.000   1
 learningsql.pdf           learningsql          1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Hubert Dulay et al - Str  Streaming Databases  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Exploring_Cloud_Computin  Exploring_Cloud_Com  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+OReilly_2022_Training_Da  OReilly_2022_Traini  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Kevin Kline et al - SQL   SQL in a Nutshell    1.000   1.000   1.000   1.000   1.000   Basic Parser   
-AMC College - Ethical Ha  Ethical Hacking      1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Jay Alammar et al - Hand  Hands-On Large Lang  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Jason Andress - Foundati  Foundations of Info  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Maxwell Flitton - Rust W  Rust Web Programmin  1.000   1.000   1.000   1.000   1.000   Basic Parser   
@@ -397,7 +398,8 @@ justreact.epub            justreact            1.000   1.000   1.000   1.000   1
 James Forshaw - Attackin  Attacking Network P  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 androidmalwarebook.pdf    androidmalwarebook   1.000   1.000   1.000   1.000   1.000   Basic Parser   
 CNH-e.pdf.pdf             CNH-e.pdf            1.000   1.000   1.000   1.000   1.000   Basic Parser   
-Micah Lee - Hacks, Leaks  Hacks, Leaks, and R  1.000   1.000   1.000   1.000   1.000   Basic Parser   
+public_class_Book_{_List  public_class_Book_   1.000   1.000   1.000   1.000   1.000   Basic Parser   
+2025_Sustainable_Cloud_D  2025_Sustainable_Cl  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Kevin Kline et al - SQL   SQL in a Nutshell    1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Flexible Adaptation in C  Flexible Adaptation  1.000   1.000   1.000   1.000   1.000   Basic Parser   
 Daniel Nichter - Efficie  Efficient MySQL Per  1.000   1.000   1.000   1.000   1.000   Basic Parser   
@@ -408,31 +410,31 @@ SUMÁRIO DOS ALGORITMOS
 
 Basic Parser:
   Accuracy Média: 1.000 (100.0%)
-  Confiança Média: 0.770
+  Confiança Média: 0.740
   Tempo Médio: 0.0001s
   Taxa Sucesso: 1.000 (100.0%)
 
 Enhanced Parser:
   Accuracy Média: 1.000 (100.0%)
-  Confiança Média: 0.804
+  Confiança Média: 0.770
   Tempo Médio: 0.0001s
   Taxa Sucesso: 1.000 (100.0%)
 
 Smart Inferencer:
   Accuracy Média: 1.000 (100.0%)
-  Confiança Média: 0.814
+  Confiança Média: 0.779
   Tempo Médio: 0.0001s
   Taxa Sucesso: 1.000 (100.0%)
 
 Hybrid Orchestrator:
   Accuracy Média: 1.000 (100.0%)
-  Confiança Média: 0.843
-  Tempo Médio: 0.0002s
+  Confiança Média: 0.811
+  Tempo Médio: 0.0003s
   Taxa Sucesso: 1.000 (100.0%)
 
 Brazilian Specialist:
   Accuracy Média: 1.000 (100.0%)
-  Confiança Média: 0.558
+  Confiança Média: 0.540
   Tempo Médio: 0.0001s
   Taxa Sucesso: 1.000 (100.0%)
 
@@ -440,7 +442,7 @@ MELHOR ALGORITMO GERAL: Basic Parser
 Accuracy: 1.000
 
 ANÁLISE DO ALGORITMO BRASILEIRO:
-- Confiança média: 0.558
+- Confiança média: 0.540
 - Especialização em publishers nacionais
 - Detecção de nomes brasileiros
 - Reconhecimento de padrões em português

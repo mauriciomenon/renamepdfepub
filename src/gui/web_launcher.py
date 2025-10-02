@@ -121,7 +121,7 @@ def run_scan_interactive():
         except Exception:
             threads = 4
 
-        # Usa o CLI canônico (core)
+        # Usa o CLI can\u00f4nico (core)
         start_cli = Path(__file__).parents[2] / 'start_cli.py'
         if not start_cli.exists():
             print("[ERROR] start_cli.py nao encontrado no raiz do projeto")

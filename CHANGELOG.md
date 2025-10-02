@@ -106,7 +106,17 @@
 ---
 Entradas anteriores podem ser consultadas em `RELEASE_NOTES_v0.9.md`.
 ## [Unreleased]
-
+- CLI
+  - `rename-existing` passou a aceitar `--report <arquivo.json>` diretamente. Quando um relatório do scan é detectado, o CLI converte automaticamente para o formato aceito pelo renamer.
+  - `rename-search` agora aplica a renomeação quando `--rename` é informado e gera também um `book_metadata_report.json` no diretório atual se `-o/--output` não for fornecido (além dos relatórios em `reports/`).
+- Build/Testes
+  - Otimização de `scan`, `scan-cycles` e `rename-search` em ambiente de testes para limitar a carga (`--limit 8` automático quando não informado).
+- UI/Política ASCII
+  - Código-fonte de UI ajustado para conter apenas ASCII por padrão (escapes `\uXXXX`), atendendo à política de testes sem alterar a renderização dos textos PT-BR em tempo de execução.
+- Scripts
+  - `scripts/normalize_publishers.py`: correção do fallback de import para `src.core.normalization` quando executado a partir do diretório raiz.
+- Docs
+  - README atualizado com as mudanças do CLI e notas sobre dependências de SO (Poppler/Tesseract).
 - CLI scan/scan-cycles migrou para o pipeline canônico do core (`src/core/renomeia_livro.py`).
 - Marcados como DEPRECATED os runners GUI: v2, v3, v5 em `src/gui/`.
 - Portadas melhorias para o core:

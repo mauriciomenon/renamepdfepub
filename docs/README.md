@@ -21,6 +21,7 @@ python3 start_cli.py scan-cycles "/caminho/livros" --time-seconds 120
 python3 start_cli.py rename-existing --report relatorio.json --apply [--copy]
 
 # Renomear fazendo a procura (scan + rename)
+# Observação: gera também book_metadata_report.json no diretório atual se -o não for informado
 python3 start_cli.py rename-search "/caminho/livros" --rename
 
 # Streamlit (dashboard + scan pela barra lateral)
@@ -33,8 +34,10 @@ python3 start_gui.py --dir "/caminho/inicial"
 ## Detalhes
 
 - Os relatórios de scan são salvos em `reports/metadata_report_*.json` e `.html`.
+- Em `rename-search`, se você não passar `-o/--output`, um relatório simples adicional é salvo como `book_metadata_report.json` na pasta atual.
 - O Dashboard do Streamlit lê automaticamente o último JSON.
 - A renomeação por relatório usa `src/renamepdfepub/renamer.py`.
+  - Dica: o CLI aceita `--report <arquivo.json>` diretamente, inclusive um JSON gerado pelo scan; quando detectado, ele converte para o formato esperado pelo renamer automaticamente.
 
 ## Diretrizes para IAs e Contribuição
 
@@ -50,3 +53,12 @@ Resumo rápido:
 - Tratamento de erros significativo e logging centralizado (não silenciar exceções).
 - Teste para cada funcionalidade adicionada; validação semântica e de interface.
 - UI responsiva (tarefas longas em background) com feedback claro; preview vs apply sempre que possível.
+
+## Dependências de SO (OCR/Imagem)
+
+- Para melhor extração em PDFs/EPUBs e suporte a OCR:
+  - macOS: `brew install poppler tesseract`
+  - Debian/Ubuntu: `apt-get install poppler-utils tesseract-ocr`
+  - Windows: instale Tesseract e Poppler e adicione-os ao PATH.
+
+Recomenda-se usar o ambiente virtual do projeto (`.venv`).

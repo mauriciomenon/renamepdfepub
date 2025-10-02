@@ -92,11 +92,11 @@ class RenamePDFEPUBInterface:
                 results.append({
                     'ISBN-13': isbn13 or '',
                     'ISBN-10': isbn10 or '',
-                    'Título': display_title,
+                    'T\u00edtulo': display_title,
                     'Autores': display_authors,
                     'Editora': display_publisher,
                     'Ano': display_year,
-                    'Confiança': conf or 0.0,
+                    'Confian\u00e7a': conf or 0.0,
                     'Fonte': source or '',
                     'Arquivo': fpath or ''
                 })
@@ -124,7 +124,7 @@ class RenamePDFEPUBInterface:
         return ', '.join(parts[:2]) if parts else ''
 
     def _build_name_from_row(self, row: dict, pattern: str, underscore: bool) -> str:
-        title = row.get('Título') or ''
+        title = row.get('T\u00edtulo') or ''
         if str(title).lower() == 'unknown':
             title = ''
         authors = row.get('Autores') or ''
@@ -163,13 +163,13 @@ class RenamePDFEPUBInterface:
                 # Handle deeply nested braces or empty names defensively
                 field = str(field_name).strip()
                 if not field:
-                    errors.append("Placeholder vazio {} não é permitido.")
+                    errors.append("Placeholder vazio {} n\u00e3o \u00e9 permitido.")
                     continue
                 used.add(field)
                 if field not in allowed:
-                    errors.append(f"Placeholder inválido: {{{field}}}. Permitidos: {{title}}, {{author}}, {{year}}, {{publisher}}, {{isbn}}.")
+                    errors.append(f"Placeholder inv\u00e1lido: {{{field}}}. Permitidos: {{title}}, {{author}}, {{year}}, {{publisher}}, {{isbn}}.")
         except Exception:
-            errors.append("Padrão inválido (verifique chaves e formato). Use placeholders como {title} e {author}.")
+            errors.append("Padr\u00e3o inv\u00e1lido (verifique chaves e formato). Use placeholders como {title} e {author}.")
         return (len(errors) == 0, errors, used)
 
     def _render_copy_button(self, text: str, key: str = None, label: str = "Copiar caminho"):
@@ -192,7 +192,7 @@ class RenamePDFEPUBInterface:
                 """,
                 height=0,
             )
-            st.success("Caminho copiado para a área de transferência.")
+            st.success("Caminho copiado para a \u00e1rea de transfer\u00eancia.")
 
     @staticmethod
     def _open_in_os(path: str) -> bool:
@@ -234,7 +234,7 @@ class RenamePDFEPUBInterface:
             return False
 
     def _query_incomplete(self, limit: int = 200, pub_filter: str = '', year_filter: str = '', title_filter: str = '', author_filter: str = ''):
-        """Retorna registros com campos faltantes (para export/inspeção)."""
+        """Retorna registros com campos faltantes (para export/inspe\u00e7\u00e3o)."""
         if not self.db_path.exists():
             return []
         where = (
@@ -270,11 +270,11 @@ class RenamePDFEPUBInterface:
                 out.append({
                     'ISBN-13': r[0] or '',
                     'ISBN-10': r[1] or '',
-                    'Título': '' if not r[2] or str(r[2]).lower() == 'unknown' else r[2],
+                    'T\u00edtulo': '' if not r[2] or str(r[2]).lower() == 'unknown' else r[2],
                     'Autores': '' if not r[3] or str(r[3]).lower() == 'unknown' else r[3],
                     'Editora': self._canonical_publisher(r[4] or ''),
                     'Ano': '' if not r[5] or str(r[5]).lower() == 'unknown' else r[5],
-                    'Confiança': r[6] or 0.0,
+                    'Confian\u00e7a': r[6] or 0.0,
                     'Fonte': r[7] or '',
                     'Arquivo': r[8] or '',
                     'Timestamp': r[9] or 0,
@@ -382,7 +382,7 @@ class RenamePDFEPUBInterface:
         with st.expander("Iniciar varredura (background)"):
             colx1, colx2 = st.columns([3,1])
             with colx1:
-                target = st.text_input("Diretório a varrer", value=self.default_scan_path)
+                target = st.text_input("Diret\u00f3rio a varrer", value=self.default_scan_path)
             with colx2:
                 recursive = st.checkbox("Recursivo", value=False)
             mode = st.selectbox("Modo", ["scan", "scan-cycles"], index=0)
@@ -396,24 +396,24 @@ class RenamePDFEPUBInterface:
                 cmd = mode if mode in ("scan", "scan-cycles") else "scan"
                 ok, info = self.start_scan_background(target, recursive, extra_args=(extra if mode=="scan-cycles" else None), command=cmd)
                 if ok:
-                    st.success(f"Scan iniciado (PID {info}). Acompanhe métricas abaixo.")
+                    st.success(f"Scan iniciado (PID {info}). Acompanhe m\u00e9tricas abaixo.")
                 else:
                     st.error(f"Falha ao iniciar scan: {info}")
         data = self._load_latest_report()
         if not data:
             st.info("Nenhum relatorio encontrado em reports/. Gere um relatorio para visualizar metricas reais.")
-            # Mesmo sem relatório, mostrar atalhos de geração/relatórios
+            # Mesmo sem relat\u00f3rio, mostrar atalhos de gera\u00e7\u00e3o/relat\u00f3rios
         else:
-            # Se existir relatório, oferecer download rápido do último HTML/JSON
+            # Se existir relat\u00f3rio, oferecer download r\u00e1pido do \u00faltimo HTML/JSON
             try:
                 htmls = sorted(self.reports_dir.glob("report_*.html"))
                 jsons = sorted(self.reports_dir.glob("report_*.json"))
-                st.subheader("Relatórios recentes")
+                st.subheader("Relat\u00f3rios recentes")
                 colh, colj = st.columns(2)
                 with colh:
                     if htmls:
                         latest_html = htmls[-1]
-                        st.caption(f"Último HTML: {latest_html.name}")
+                        st.caption(f"\u00daltimo HTML: {latest_html.name}")
                         c1, c2 = st.columns([1,1])
                         with c1:
                             st.download_button(
@@ -427,7 +427,7 @@ class RenamePDFEPUBInterface:
                 with colj:
                     if jsons:
                         latest_json = jsons[-1]
-                        st.caption(f"Último JSON: {latest_json.name}")
+                        st.caption(f"\u00daltimo JSON: {latest_json.name}")
                         c1, c2 = st.columns([1,1])
                         with c1:
                             st.download_button(
@@ -441,7 +441,7 @@ class RenamePDFEPUBInterface:
             except Exception:
                 pass
             
-            # Sem retorno antecipado – prossegue com estatísticas do relatório
+            # Sem retorno antecipado \u2013 prossegue com estat\u00edsticas do relat\u00f3rio
         # Estrutura esperada: chaves comuns usadas no projeto
         summary = data.get("summary") or {}
         # Metricas basicas
@@ -466,7 +466,7 @@ class RenamePDFEPUBInterface:
             for pub, cnt in list(pub_stats.items())[:15]:
                 st.write(f"- {pub}: {cnt}")
 
-        # Tempo real (se arquivo de métricas estiver disponível)
+        # Tempo real (se arquivo de m\u00e9tricas estiver dispon\u00edvel)
         st.subheader("Tempo real - Fontes de metadados")
         cols = st.columns([1,1,2])
         with cols[0]:
@@ -485,7 +485,7 @@ class RenamePDFEPUBInterface:
             live = None
 
         if not live:
-            st.info("Métricas em tempo real indisponíveis. Inicie uma varredura para gerar live_api_stats.json.")
+            st.info("M\u00e9tricas em tempo real indispon\u00edveis. Inicie uma varredura para gerar live_api_stats.json.")
             return
 
         overall = live.get("overall") or {}
@@ -526,7 +526,7 @@ class RenamePDFEPUBInterface:
                         st.write("Recentes:")
                         for r in recents[-10:]:
                             ts = int(r.get('ts', 0))
-                            ts_h = datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S') if ts else '—'
+                            ts_h = datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S') if ts else '\u2014'
                             st.write(f"  - {r.get('type','?')} @ {ts_h}")
                     if rfail:
                         from datetime import datetime
@@ -561,7 +561,7 @@ class RenamePDFEPUBInterface:
                         'API': api,
                         'Chamadas': int(s.get('total', 0)),
                         'Sucesso %': float(s.get('success_rate', 0.0)),
-                        'Tempo Médio (s)': float(s.get('avg_time', 0.0)),
+                        'Tempo M\u00e9dio (s)': float(s.get('avg_time', 0.0)),
                     })
                 df = pd.DataFrame(rows)
                 df_sorted = df.sort_values('Chamadas', ascending=False).head(10)
@@ -586,7 +586,7 @@ class RenamePDFEPUBInterface:
             if p.exists():
                 log_choices.append((name, p))
         if not log_choices:
-            st.caption("Nenhum log encontrado no diretório do projeto.")
+            st.caption("Nenhum log encontrado no diret\u00f3rio do projeto.")
         else:
             names = [n for n, _ in log_choices]
             sel = st.selectbox("Arquivo de log", names)
@@ -727,20 +727,20 @@ class RenamePDFEPUBInterface:
 
     def render_catalog(self):
         """Navegador do banco de dados (metadata_cache.db)."""
-        st.header("Catálogo (DB)")
+        st.header("Cat\u00e1logo (DB)")
         if not self.db_path.exists():
-            st.info("Banco metadata_cache.db não encontrado. Rode uma varredura para gerar dados.")
+            st.info("Banco metadata_cache.db n\u00e3o encontrado. Rode uma varredura para gerar dados.")
             return
         with st.expander("Filtros"):
             c1, c2, c3, c4 = st.columns(4)
             with c1:
-                q_title = st.text_input("Título contém", value="")
+                q_title = st.text_input("T\u00edtulo cont\u00e9m", value="")
             with c2:
-                q_author = st.text_input("Autor contém", value="")
+                q_author = st.text_input("Autor cont\u00e9m", value="")
             with c3:
-                q_publisher = st.text_input("Editora contém", value="")
+                q_publisher = st.text_input("Editora cont\u00e9m", value="")
             with c4:
-                q_year = st.text_input("Ano contém", value="")
+                q_year = st.text_input("Ano cont\u00e9m", value="")
             c5, c6, c7 = st.columns(3)
             with c5:
                 only_isbn = st.checkbox("Somente com ISBN", value=False)
@@ -765,7 +765,7 @@ class RenamePDFEPUBInterface:
                 st.dataframe(df, use_container_width=True, hide_index=True)
             except Exception:
                 for r in rows[:200]:
-                    st.write(f"- {r['Título']} | {r['Autores']} | {r['Editora']} | {r['Ano']} | {r['ISBN-13']}")
+                    st.write(f"- {r['T\u00edtulo']} | {r['Autores']} | {r['Editora']} | {r['Ano']} | {r['ISBN-13']}")
             # Export
             csv_data = self._rows_to_csv(rows)
             st.download_button(
@@ -774,12 +774,12 @@ class RenamePDFEPUBInterface:
                 file_name="catalogo_filtrado.csv",
                 mime="text/csv"
             )
-            # Pré-visualização de renome (lote)
-            with st.expander("Pré-visualizar renome (lote)"):
-                patt = st.text_input("Padrão", value="{title} - {author} - {year}", key="catalog_batch_pattern")
+            # Pr\u00e9-visualiza\u00e7\u00e3o de renome (lote)
+            with st.expander("Pr\u00e9-visualizar renome (lote)"):
+                patt = st.text_input("Padr\u00e3o", value="{title} - {author} - {year}", key="catalog_batch_pattern")
                 st.caption("Placeholders: {title}, {author}, {year}, {publisher}, {isbn}")
                 und = st.checkbox("Usar underscore", value=False, key="catalog_batch_underscore")
-                limit_prev = st.number_input("Limite de pré-visualização", min_value=50, max_value=5000, value=500, step=50, key="catalog_batch_limit")
+                limit_prev = st.number_input("Limite de pr\u00e9-visualiza\u00e7\u00e3o", min_value=50, max_value=5000, value=500, step=50, key="catalog_batch_limit")
                 try:
                     ok_pat, errs, _used = self._validate_pattern(patt)
                     if not ok_pat:
@@ -794,7 +794,7 @@ class RenamePDFEPUBInterface:
                             preview_rows.append({'Arquivo': r.get('Arquivo',''), 'Proposto': (newbase + ext) if newbase else ''})
                     prev_csv = self._rows_to_csv(preview_rows)
                     st.download_button(
-                        label=f"Baixar pré-visualização ({len(preview_rows)} itens)",
+                        label=f"Baixar pr\u00e9-visualiza\u00e7\u00e3o ({len(preview_rows)} itens)",
                         data=prev_csv,
                         file_name="preview_renome.csv",
                         mime="text/csv"
@@ -820,26 +820,26 @@ class RenamePDFEPUBInterface:
                             if st.button("Aplicar renomes do CSV (em background)"):
                                 script = self.project_root / 'scripts' / 'apply_renames_from_csv.py'
                                 subprocess.Popen([sys.executable, str(script), '--csv', str(tmp_csv), '--apply'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                                st.info("Renomeação em lote iniciada.")
+                                st.info("Renomea\u00e7\u00e3o em lote iniciada.")
                         except Exception as e:
                             st.warning(f"Falha ao processar CSV: {e}")
-                    # Aplicar em lote diretamente (gera CSV temporário internamente)
+                    # Aplicar em lote diretamente (gera CSV tempor\u00e1rio internamente)
                     ok_apply = st.checkbox("Confirmo que revisei o preview e desejo aplicar", key="catalog_confirm_apply")
                     if st.button("Aplicar renome (lote) agora"):
                         if not ok_apply:
-                            st.warning("Marque a confirmação antes de aplicar.")
+                            st.warning("Marque a confirma\u00e7\u00e3o antes de aplicar.")
                         else:
                             try:
                                 tmp_csv = self.reports_dir / 'apply_batch_renames_catalog.csv'
                                 tmp_csv.write_text(prev_csv, encoding='utf-8')
                                 script = self.project_root / 'scripts' / 'apply_renames_from_csv.py'
                                 subprocess.Popen([sys.executable, str(script), '--csv', str(tmp_csv), '--apply'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                                st.info("Renomeação em lote iniciada.")
+                                st.info("Renomea\u00e7\u00e3o em lote iniciada.")
                             except Exception as e:
                                 st.warning(f"Falha ao aplicar em lote: {e}")
                 except Exception as e:
-                    st.warning(f"Falha na pré-visualização/lote: {e}")
-            # Abrir pasta do arquivo (por seleção)
+                    st.warning(f"Falha na pr\u00e9-visualiza\u00e7\u00e3o/lote: {e}")
+            # Abrir pasta do arquivo (por sele\u00e7\u00e3o)
             file_choices = [r['Arquivo'] for r in rows if r.get('Arquivo')]
             if file_choices:
                 c1, c2, c3 = st.columns([3,1,1])
@@ -850,12 +850,12 @@ class RenamePDFEPUBInterface:
                     if st.button("Abrir pasta"):
                         ok = self._open_in_os(sel)
                         if not ok:
-                            st.warning("Não foi possível abrir a pasta. Verifique o caminho.")
+                            st.warning("N\u00e3o foi poss\u00edvel abrir a pasta. Verifique o caminho.")
                 with c3:
-                    # Renomear agora (DB) — controles em uma única linha
+                    # Renomear agora (DB) \u2014 controles em uma \u00fanica linha
                     colp, colu, colprev, colapply = st.columns([3,1,1,1])
                     with colp:
-                        patt = st.text_input("Padrão de nome", value="{title} - {author} - {year}", key="catalog_single_pattern")
+                        patt = st.text_input("Padr\u00e3o de nome", value="{title} - {author} - {year}", key="catalog_single_pattern")
                         st.caption("Placeholders: {title}, {author}, {year}, {publisher}, {isbn}")
                         okp, perrs, _ = self._validate_pattern(patt)
                         if not okp:
@@ -864,7 +864,7 @@ class RenamePDFEPUBInterface:
                     with colu:
                         und = st.checkbox("underscore", value=False, key="catalog_single_underscore")
                     with colprev:
-                        if st.button("Prévia", key="catalog_single_preview"):
+                        if st.button("Pr\u00e9via", key="catalog_single_preview"):
                             script = self.project_root / 'scripts' / 'rename_from_db.py'
                             cmd = [sys.executable, str(script), '--file', sel, '--pattern', patt]
                             if und:
@@ -872,9 +872,9 @@ class RenamePDFEPUBInterface:
                             try:
                                 res = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
                                 out = (res.stdout or '') + (res.stderr or '')
-                                st.code(out.strip() or '(sem saída)')
+                                st.code(out.strip() or '(sem sa\u00edda)')
                             except Exception as e:
-                                st.warning(f"Falha na pré-visualização: {e}")
+                                st.warning(f"Falha na pr\u00e9-visualiza\u00e7\u00e3o: {e}")
                     with colapply:
                         if st.button("Aplicar", key="catalog_single_apply"):
                             script = self.project_root / 'scripts' / 'rename_from_db.py'
@@ -883,10 +883,10 @@ class RenamePDFEPUBInterface:
                                 cmd.append('--underscore')
                             try:
                                 subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                                st.info("Renomeação iniciada (verifique pasta).")
+                                st.info("Renomea\u00e7\u00e3o iniciada (verifique pasta).")
                             except Exception as e:
-                                st.warning(f"Falha ao acionar renomeação: {e}")
-        st.subheader("Operações")
+                                st.warning(f"Falha ao acionar renomea\u00e7\u00e3o: {e}")
+        st.subheader("Opera\u00e7\u00f5es")
         cc1, cc2, cc3 = st.columns(3)
         with cc1:
             if st.button("Rescan cache (core)"):
@@ -894,7 +894,7 @@ class RenamePDFEPUBInterface:
                 subprocess.Popen([sys.executable, str(start_cli), 'scan', '--rescan-cache'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
                 st.info("Rescan iniciado em background")
         with cc2:
-            thr = st.number_input("Confiança < para update-cache", min_value=0.0, max_value=1.0, value=0.7, step=0.05)
+            thr = st.number_input("Confian\u00e7a < para update-cache", min_value=0.0, max_value=1.0, value=0.7, step=0.05)
             if st.button("Update cache (core)"):
                 start_cli = self.project_root / 'start_cli.py'
                 subprocess.Popen([sys.executable, str(start_cli), 'scan', '--update-cache', '--confidence-threshold', str(thr)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -914,7 +914,7 @@ class RenamePDFEPUBInterface:
                         conn.commit()
                     st.success(f"Editoras normalizadas: {updated} registros atualizados")
                 except Exception as e:
-                    st.error(f"Falha na normalização: {e}")
+                    st.error(f"Falha na normaliza\u00e7\u00e3o: {e}")
     
     def run(self):
         """Interface principal"""
@@ -940,9 +940,9 @@ class RenamePDFEPUBInterface:
             "Navegacao:",
             [
                 "Dashboard",
-                "Catálogo (DB)",
-                "Scan Avançado",
-                "Operações em Lote",
+                "Cat\u00e1logo (DB)",
+                "Scan Avan\u00e7ado",
+                "Opera\u00e7\u00f5es em Lote",
                 "Processar Livros",
                 "Algoritmos",
                 "Launchers",
@@ -952,11 +952,11 @@ class RenamePDFEPUBInterface:
         
         if page == "Dashboard":
             self.render_dashboard()
-        elif page == "Catálogo (DB)":
+        elif page == "Cat\u00e1logo (DB)":
             self.render_catalog()
-        elif page == "Scan Avançado":
+        elif page == "Scan Avan\u00e7ado":
             self.render_scan_advanced()
-        elif page == "Operações em Lote":
+        elif page == "Opera\u00e7\u00f5es em Lote":
             self.render_batch_ops()
         elif page == "Processar Livros":
             self.render_books_section()
@@ -1022,10 +1022,10 @@ class RenamePDFEPUBInterface:
                 st.error(f"Erro ao executar varredura: {e}")
 
     def render_db_gaps(self):
-        """Resumo de campos faltantes + ações de recuperação"""
-        st.header("Caça-Furos (DB)")
+        """Resumo de campos faltantes + a\u00e7\u00f5es de recupera\u00e7\u00e3o"""
+        st.header("Ca\u00e7a-Furos (DB)")
         if not self.db_path.exists():
-            st.info("Banco metadata_cache.db não encontrado. Rode uma varredura para gerar dados.")
+            st.info("Banco metadata_cache.db n\u00e3o encontrado. Rode uma varredura para gerar dados.")
             return
         try:
             with self._connect_db() as conn:
@@ -1042,19 +1042,19 @@ class RenamePDFEPUBInterface:
             return
         c1, c2, c3, c4, c5 = st.columns(5)
         c1.metric("Registros", total)
-        c2.metric("Sem título", missing_title)
+        c2.metric("Sem t\u00edtulo", missing_title)
         c3.metric("Sem autores", missing_auth)
         c4.metric("Sem editora", missing_pub)
         c5.metric("Sem ano", missing_year)
         st.metric(label="Sem ISBN (10/13)", value=missing_isbn)
 
-        st.subheader("Ações de recuperação")
+        st.subheader("A\u00e7\u00f5es de recupera\u00e7\u00e3o")
         a1, a2, a3 = st.columns(3)
         start_cli = self.project_root / 'start_cli.py'
         with a1:
-            if st.button("Tentar completar (update-cache, confiança<0.99)"):
+            if st.button("Tentar completar (update-cache, confian\u00e7a<0.99)"):
                 subprocess.Popen([sys.executable, str(start_cli), 'scan', '--update-cache', '--confidence-threshold', '0.99'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                st.info("Atualização iniciada. Acompanhe no Dashboard.")
+                st.info("Atualiza\u00e7\u00e3o iniciada. Acompanhe no Dashboard.")
         with a2:
             if st.button("Reprocessar tudo (rescan-cache)"):
                 subprocess.Popen([sys.executable, str(start_cli), 'scan', '--rescan-cache'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -1063,14 +1063,14 @@ class RenamePDFEPUBInterface:
             limit = st.number_input("Limite (apenas mostrados)", min_value=10, max_value=5000, value=500, step=10)
             f1, f2 = st.columns(2)
             with f1:
-                f_pub = st.text_input("Filtro editora contém", value="")
+                f_pub = st.text_input("Filtro editora cont\u00e9m", value="")
             with f2:
-                f_year = st.text_input("Filtro ano contém", value="")
+                f_year = st.text_input("Filtro ano cont\u00e9m", value="")
             f3, f4 = st.columns(2)
             with f3:
-                f_title = st.text_input("Filtro título contém", value="")
+                f_title = st.text_input("Filtro t\u00edtulo cont\u00e9m", value="")
             with f4:
-                f_author = st.text_input("Filtro autor contém", value="")
+                f_author = st.text_input("Filtro autor cont\u00e9m", value="")
             if st.button("Atualizar apenas mostrados"):
                 script = self.project_root / 'scripts' / 'update_cache_filtered.py'
                 cmd = [sys.executable, str(script), '--only-incomplete', '--limit', str(int(limit))]
@@ -1083,7 +1083,7 @@ class RenamePDFEPUBInterface:
                 if f_author.strip():
                     cmd += ['--author', f_author.strip()]
                 subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                st.info("Atualização filtrada iniciada.")
+                st.info("Atualiza\u00e7\u00e3o filtrada iniciada.")
         st.subheader("Exportar incompletos")
         # Export respects the same filters
         inc_rows = self._query_incomplete(
@@ -1113,20 +1113,20 @@ class RenamePDFEPUBInterface:
                         if st.button("Abrir pasta"):
                             ok = self._open_in_os(sel)
                             if not ok:
-                                st.warning("Não foi possível abrir a pasta.")
+                                st.warning("N\u00e3o foi poss\u00edvel abrir a pasta.")
                     with c3:
                         if st.button("Abrir arquivo"):
                             ok = self._open_file_os(sel)
                             if not ok:
-                                st.warning("Não foi possível abrir o arquivo.")
+                                st.warning("N\u00e3o foi poss\u00edvel abrir o arquivo.")
                     with c4:
-                        # Ações de renome
+                        # A\u00e7\u00f5es de renome
                         script = self.project_root / 'scripts' / 'rename_from_db.py'
                         b1, b2 = st.columns(2)
-                        # Controles em uma única linha (padrão/underscore/preview/apply)
+                        # Controles em uma \u00fanica linha (padr\u00e3o/underscore/preview/apply)
                         colp, colu, colprev, colapply = st.columns([3,1,1,1])
                         with colp:
-                            patt2 = st.text_input("Padrão de nome", value="{title} - {author} - {year}", key="gaps_pattern")
+                            patt2 = st.text_input("Padr\u00e3o de nome", value="{title} - {author} - {year}", key="gaps_pattern")
                             st.caption("Placeholders: {title}, {author}, {year}, {publisher}, {isbn}")
                             okp2, perrs2, _ = self._validate_pattern(patt2)
                             if not okp2:
@@ -1135,16 +1135,16 @@ class RenamePDFEPUBInterface:
                         with colu:
                             und2 = st.checkbox("underscore", value=False, key="gaps_underscore")
                         with colprev:
-                            if st.button("Prévia (DB)", key="gaps_preview_btn"):
+                            if st.button("Pr\u00e9via (DB)", key="gaps_preview_btn"):
                                 try:
                                     cmd = [sys.executable, str(script), '--file', sel, '--pattern', patt2]
                                     if und2:
                                         cmd.append('--underscore')
                                     res = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
                                     out = (res.stdout or '') + (res.stderr or '')
-                                    st.code(out.strip() or '(sem saída)')
+                                    st.code(out.strip() or '(sem sa\u00edda)')
                                 except Exception as e:
-                                    st.warning(f"Falha na pré-visualização: {e}")
+                                    st.warning(f"Falha na pr\u00e9-visualiza\u00e7\u00e3o: {e}")
                         with colapply:
                             if st.button("Aplicar (DB)", key="gaps_apply_btn"):
                                 try:
@@ -1152,14 +1152,14 @@ class RenamePDFEPUBInterface:
                                     if und2:
                                         cmd.append('--underscore')
                                     subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                                    st.info("Renomeação iniciada (verifique pasta).")
+                                    st.info("Renomea\u00e7\u00e3o iniciada (verifique pasta).")
                                 except Exception as e:
-                                    st.warning(f"Falha ao acionar renomeação: {e}")
+                                    st.warning(f"Falha ao acionar renomea\u00e7\u00e3o: {e}")
             except Exception:
                 pass
-            # Pré-visualização de renome (lote)
-            with st.expander("Pré-visualizar renome (lote)"):
-                patt = st.text_input("Padrão", value="{title} - {author} - {year}", key="gaps_batch_pattern")
+            # Pr\u00e9-visualiza\u00e7\u00e3o de renome (lote)
+            with st.expander("Pr\u00e9-visualizar renome (lote)"):
+                patt = st.text_input("Padr\u00e3o", value="{title} - {author} - {year}", key="gaps_batch_pattern")
                 st.caption("Placeholders: {title}, {author}, {year}, {publisher}, {isbn}")
                 und = st.checkbox("Usar underscore", value=False, key="gaps_batch_underscore2")
                 try:
@@ -1176,7 +1176,7 @@ class RenamePDFEPUBInterface:
                             preview_rows.append({'Arquivo': r.get('Arquivo',''), 'Proposto': (newbase + ext) if newbase else ''})
                     prev_csv = self._rows_to_csv(preview_rows)
                     st.download_button(
-                        label=f"Baixar pré-visualização ({len(preview_rows)} itens)",
+                        label=f"Baixar pr\u00e9-visualiza\u00e7\u00e3o ({len(preview_rows)} itens)",
                         data=prev_csv,
                         file_name="preview_renome_incompletos.csv",
                         mime="text/csv"
@@ -1192,33 +1192,33 @@ class RenamePDFEPUBInterface:
                             if st.button("Aplicar renomes do CSV (em background)", key="gaps_apply_csv_btn"):
                                 script = self.project_root / 'scripts' / 'apply_renames_from_csv.py'
                                 subprocess.Popen([sys.executable, str(script), '--csv', str(tmp_csv), '--apply'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                                st.info("Renomeação em lote iniciada.")
+                                st.info("Renomea\u00e7\u00e3o em lote iniciada.")
                         except Exception as e:
                             st.warning(f"Falha ao processar CSV: {e}")
                 except Exception as e:
-                    st.caption(f"Falha na pré-visualização: {e}")
+                    st.caption(f"Falha na pr\u00e9-visualiza\u00e7\u00e3o: {e}")
         else:
             st.caption("Nenhum registro incompleto encontrado (ou DB ausente)")
 
     # ----------------------- New advanced/ops pages -------------------------
     def render_scan_advanced(self):
-        st.header("Scan Avançado (Core)")
+        st.header("Scan Avan\u00e7ado (Core)")
         c1, c2, c3 = st.columns(3)
         with c1:
-            directory = st.text_input("Diretório", value=str(self.books_dir))
+            directory = st.text_input("Diret\u00f3rio", value=str(self.books_dir))
             recursive = st.checkbox("Recursivo", value=False)
-            subdirs = st.text_input("Subdirs (sep por vírgula)", value="")
+            subdirs = st.text_input("Subdirs (sep por v\u00edrgula)", value="")
         with c2:
             threads = st.number_input("Threads", min_value=1, max_value=32, value=4)
-            output = st.text_input("JSON de saída (opcional)", value="")
-            rename = st.checkbox("Renomear após scan", value=False)
+            output = st.text_input("JSON de sa\u00edda (opcional)", value="")
+            rename = st.checkbox("Renomear ap\u00f3s scan", value=False)
         with c3:
             cycles = st.number_input("scan-cycles: ciclos", min_value=1, max_value=100, value=3)
             time_secs = st.number_input("scan-cycles: tempo (s)", min_value=0, max_value=36000, value=0)
 
         start_cli = self.project_root / 'start_cli.py'
         if not start_cli.exists():
-            st.error("start_cli.py não encontrado")
+            st.error("start_cli.py n\u00e3o encontrado")
             return
 
         def _args_base():
@@ -1248,34 +1248,34 @@ class RenamePDFEPUBInterface:
                 subprocess.Popen(cyc, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
                 st.info("Scan-cycles iniciado em background")
         with b3:
-            if st.button("Abrir relatório (último)"):
+            if st.button("Abrir relat\u00f3rio (\u00faltimo)"):
                 st.write("Abra a aba Dashboard; ele busca o JSON/HTML mais recente em reports/.")
 
-        st.subheader("Manutenção do Cache")
+        st.subheader("Manuten\u00e7\u00e3o do Cache")
         m1, m2 = st.columns(2)
         with m1:
             if st.button("Rescan-cache (core)"):
                 subprocess.Popen([sys.executable, str(start_cli), 'scan', '--rescan-cache'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
                 st.info("Rescan-cache iniciado.")
         with m2:
-            thr = st.number_input("Update-cache: confiança <", min_value=0.0, max_value=1.0, value=0.7, step=0.05)
+            thr = st.number_input("Update-cache: confian\u00e7a <", min_value=0.0, max_value=1.0, value=0.7, step=0.05)
             if st.button("Update-cache (core)"):
                 subprocess.Popen([sys.executable, str(start_cli), 'scan', '--update-cache', '--confidence-threshold', str(thr)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
                 st.info("Update-cache iniciado.")
 
     def render_batch_ops(self):
-        st.header("Operações em Lote")
-        st.caption("Ações de batch para muitos arquivos/relatórios, sem precisar saber comandos.")
+        st.header("Opera\u00e7\u00f5es em Lote")
+        st.caption("A\u00e7\u00f5es de batch para muitos arquivos/relat\u00f3rios, sem precisar saber comandos.")
         # Rename-existing
         re_col1, re_col2 = st.columns([3,1])
         with re_col1:
-            report_path = st.text_input("Relatório JSON para renomear (rename-existing)", value="")
+            report_path = st.text_input("Relat\u00f3rio JSON para renomear (rename-existing)", value="")
         with re_col2:
             apply = st.checkbox("Aplicar (mover)", value=False)
             copy = st.checkbox("Copiar", value=False)
         if st.button("Executar rename-existing"):
             if not report_path.strip():
-                st.warning("Informe o caminho do relatório JSON.")
+                st.warning("Informe o caminho do relat\u00f3rio JSON.")
             else:
                 cmd = [sys.executable, str(self.project_root / 'start_cli.py'), 'rename-existing', '--report', report_path]
                 if apply:
@@ -1289,7 +1289,7 @@ class RenamePDFEPUBInterface:
         # Rename-search
         rs_col1, rs_col2 = st.columns([3,1])
         with rs_col1:
-            rs_dir = st.text_input("Diretório para rename-search", value=str(self.books_dir))
+            rs_dir = st.text_input("Diret\u00f3rio para rename-search", value=str(self.books_dir))
         with rs_col2:
             rs_rename = st.checkbox("Renomear", value=True)
         if st.button("Executar rename-search"):
@@ -1301,24 +1301,24 @@ class RenamePDFEPUBInterface:
 
         st.markdown("---")
         # Normalizar editoras
-        st.subheader("Normalização de Editoras (DB)")
+        st.subheader("Normaliza\u00e7\u00e3o de Editoras (DB)")
         nb1, nb2 = st.columns(2)
         with nb1:
-            if st.button("Dry-run (mostrar alterações)"):
+            if st.button("Dry-run (mostrar altera\u00e7\u00f5es)"):
                 subprocess.Popen([sys.executable, str(self.project_root / 'scripts' / 'normalize_publishers.py'), '--dry-run'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                st.info("Dry-run iniciado (veja saída no terminal).")
+                st.info("Dry-run iniciado (veja sa\u00edda no terminal).")
         with nb2:
-            if st.button("Aplicar (backup automático)"):
+            if st.button("Aplicar (backup autom\u00e1tico)"):
                 subprocess.Popen([sys.executable, str(self.project_root / 'scripts' / 'normalize_publishers.py'), '--apply'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                st.info("Normalização iniciada.")
+                st.info("Normaliza\u00e7\u00e3o iniciada.")
 
     def render_launchers(self):
         st.header("Launchers")
-        st.caption("Acesso fácil a todas as interfaces e ferramentas.")
+        st.caption("Acesso f\u00e1cil a todas as interfaces e ferramentas.")
         c1, c2, c3 = st.columns(3)
         with c1:
             if st.button("Abrir Streamlit (este)"):
-                st.info("Você já está na interface Streamlit.")
+                st.info("Voc\u00ea j\u00e1 est\u00e1 na interface Streamlit.")
         with c2:
             if st.button("Launcher Web"):
                 subprocess.Popen([sys.executable, str(self.project_root / 'start_web.py')])

@@ -21,9 +21,9 @@ from pathlib import Path
 try:
     from src.core.normalization import canonical_publisher as _canon
 except Exception:
-    # Fallback when executed from project root
+    # Fallback when executed from project root: ensure project root is on sys.path
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-    from core.normalization import canonical_publisher as _canon
+    from src.core.normalization import canonical_publisher as _canon
 
 
 def normalize_name(name: str) -> str:
