@@ -27,3 +27,4 @@ pypdfium2>=1.0.0      # optional: faster PDF rendering if used
 # - Some packages (pdf2image) require system libraries (poppler).
 # - pytesseract requires Tesseract OCR installed on the OS.
 # - If you prefer PyPDF2, pypdf provides the modern package name; older code may still import PyPDF2.
+urllib3>=2.6.0 # not directly required, pinned by Snyk to avoid a vulnerability
