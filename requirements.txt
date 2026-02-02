@@ -5,7 +5,7 @@
 # Core Python dependencies (install into a virtualenv)
 # Use minimum-version constraints (>=) rather than exact pins
 # Adjust these minimums if you know a version constraint that works better for your environment.
-pypdf>=3.0.0          # modern replacement for PyPDF2
+pypdf>=6.6.2          # modern replacement for PyPDF2
 pdfplumber>=0.8.0
 pdfminer.six>=20221105
 pdf2image>=1.16.0
