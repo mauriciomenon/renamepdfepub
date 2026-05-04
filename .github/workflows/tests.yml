@@ -4,6 +4,9 @@ on:
   push:
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   unit:
     runs-on: ubuntu-latest
@@ -28,7 +31,7 @@ jobs:
           printf '%s\n' '%PDF-1.4' > books/sample.pdf
       - name: Run unit/integration (no slow)
         run: |
-          xvfb-run -a python -m pytest -q -k "not slow"
+          xvfb-run -a python -m pytest -q -k "not slow" --junitxml=junit-unit.xml
       - name: Upload JUnit report (unit)
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
